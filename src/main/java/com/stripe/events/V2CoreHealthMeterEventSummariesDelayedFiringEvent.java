@@ -25,6 +25,13 @@ public final class V2CoreHealthMeterEventSummariesDelayedFiringEvent extends Eve
     /** The user impact. */
     @SerializedName("impact")
     Impact impact;
+    /**
+     * The severity of the alert.
+     *
+     * <p>One of {@code critical}, or {@code non_critical}.
+     */
+    @SerializedName("severity")
+    String severity;
     /** The time when impact on the user experience was first detected. */
     @SerializedName("started_at")
     Instant startedAt;

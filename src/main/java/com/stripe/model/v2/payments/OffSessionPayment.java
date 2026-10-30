@@ -162,7 +162,7 @@ public class OffSessionPayment extends StripeObject implements HasId {
 
   /**
    * Status of this OffSessionPayment, one of {@code pending}, {@code pending_retry}, {@code
-   * processing}, {@code failed}, {@code canceled}, {@code requires_capture}, or {@code succeeded}.
+   * processing}, {@code failed}, {@code canceled}, or {@code succeeded}.
    */
   @SerializedName("status")
   String status;

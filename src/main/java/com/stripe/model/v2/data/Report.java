@@ -4,6 +4,7 @@ package com.stripe.model.v2.data;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -54,6 +55,14 @@ public class Report extends StripeObject implements HasId {
   /** Specification of the parameters that the {@code Report} accepts, keyed by parameter name. */
   @SerializedName("parameters")
   Map<String, Report.Parameter> parameters;
+
+  /**
+   * The most recent time through which data is available for this report, not the time the report
+   * definition was updated. Unset if the report has no data-availability policy, or if no freshness
+   * watermark is available yet.
+   */
+  @SerializedName("refreshed_at")
+  Instant refreshedAt;
 
   /**
    * For more details about Parameter, please refer to the <a href="https://docs.stripe.com/api">API

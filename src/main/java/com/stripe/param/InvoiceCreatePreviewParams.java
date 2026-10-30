@@ -1444,27 +1444,30 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
        * {@code al_tin}, {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code
-       * au_arn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin}, {@code bb_tin}, {@code bd_bin},
-       * {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code bj_ifu}, {@code bo_tin}, {@code
-       * br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code
-       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
-       * {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cm_niu}, {@code
-       * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
-       * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code
-       * eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code gn_nif},
-       * {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code
-       * il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn},
-       * {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code
-       * kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat},
-       * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code
-       * my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec},
-       * {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
-       * pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
-       * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
-       * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
-       * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
-       * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or
-       * {@code zw_tin}
+       * au_acn}, {@code au_arn}, {@code au_wpn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin},
+       * {@code bb_tin}, {@code bd_bin}, {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code
+       * bj_ifu}, {@code bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code bw_vat},
+       * {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb},
+       * {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code
+       * ci_vat}, {@code cl_tin}, {@code cm_niu}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+       * {@code cv_nif}, {@code cz_dic}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code
+       * eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code eu_vat}, {@code
+       * fo_vat}, {@code fr_siren}, {@code fr_siret}, {@code fr_spi}, {@code gb_vat}, {@code
+       * ge_vat}, {@code gh_tin}, {@code gi_tin}, {@code gn_nif}, {@code hk_br}, {@code hr_oib},
+       * {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code
+       * is_kt}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code
+       * ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code la_tin},
+       * {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_cf}, {@code
+       * md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mu_vat}, {@code mx_rfc},
+       * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ng_tin}, {@code
+       * no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_bn}, {@code nz_gst}, {@code om_vat},
+       * {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code pt_nif}, {@code py_ruc}, {@code
+       * ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst},
+       * {@code sg_uen}, {@code si_tin}, {@code sm_coe}, {@code sn_ninea}, {@code sr_fin}, {@code
+       * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tt_bir}, {@code tt_vat},
+       * {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code
+       * uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat},
+       * {@code zm_tin}, or {@code zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -1527,27 +1530,30 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
          * {@code al_tin}, {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code
-         * au_arn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin}, {@code bb_tin}, {@code bd_bin},
-         * {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code bj_ifu}, {@code bo_tin}, {@code
-         * br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code
-         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
-         * {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cm_niu}, {@code
-         * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
-         * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat},
-         * {@code eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code
-         * gn_nif}, {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp},
-         * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code
-         * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn},
-         * {@code kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code
-         * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
-         * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
-         * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-         * {@code pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code
-         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code
-         * sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code
-         * tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein},
-         * {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code
-         * za_vat}, {@code zm_tin}, or {@code zw_tin}
+         * au_acn}, {@code au_arn}, {@code au_wpn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin},
+         * {@code bb_tin}, {@code bd_bin}, {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code
+         * bj_ifu}, {@code bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code bw_vat},
+         * {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb},
+         * {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code
+         * ci_vat}, {@code cl_tin}, {@code cm_niu}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+         * {@code cv_nif}, {@code cz_dic}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code
+         * eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code eu_vat}, {@code
+         * fo_vat}, {@code fr_siren}, {@code fr_siret}, {@code fr_spi}, {@code gb_vat}, {@code
+         * ge_vat}, {@code gh_tin}, {@code gi_tin}, {@code gn_nif}, {@code hk_br}, {@code hr_oib},
+         * {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code
+         * is_kt}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn},
+         * {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code
+         * la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_cf},
+         * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mu_vat}, {@code
+         * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ng_tin},
+         * {@code no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_bn}, {@code nz_gst}, {@code
+         * om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code pt_nif}, {@code py_ruc},
+         * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
+         * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sm_coe}, {@code sn_ninea}, {@code
+         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tt_bir},
+         * {@code tt_vat}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code
+         * us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin},
+         * {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
          */
         public Builder setType(InvoiceCreatePreviewParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1583,8 +1589,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("au_abn")
         AU_ABN("au_abn"),
 
+        @SerializedName("au_acn")
+        AU_ACN("au_acn"),
+
         @SerializedName("au_arn")
         AU_ARN("au_arn"),
+
+        @SerializedName("au_wpn")
+        AU_WPN("au_wpn"),
 
         @SerializedName("aw_tin")
         AW_TIN("aw_tin"),
@@ -1625,6 +1637,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("bs_tin")
         BS_TIN("bs_tin"),
 
+        @SerializedName("bw_vat")
+        BW_VAT("bw_vat"),
+
         @SerializedName("by_tin")
         BY_TIN("by_tin"),
 
@@ -1655,6 +1670,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("ch_vat")
         CH_VAT("ch_vat"),
 
+        @SerializedName("ci_vat")
+        CI_VAT("ci_vat"),
+
         @SerializedName("cl_tin")
         CL_TIN("cl_tin"),
 
@@ -1672,6 +1690,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("cv_nif")
         CV_NIF("cv_nif"),
+
+        @SerializedName("cz_dic")
+        CZ_DIC("cz_dic"),
 
         @SerializedName("de_stn")
         DE_STN("de_stn"),
@@ -1700,11 +1721,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("fo_vat")
         FO_VAT("fo_vat"),
 
+        @SerializedName("fr_siren")
+        FR_SIREN("fr_siren"),
+
+        @SerializedName("fr_siret")
+        FR_SIRET("fr_siret"),
+
+        @SerializedName("fr_spi")
+        FR_SPI("fr_spi"),
+
         @SerializedName("gb_vat")
         GB_VAT("gb_vat"),
 
         @SerializedName("ge_vat")
         GE_VAT("ge_vat"),
+
+        @SerializedName("gh_tin")
+        GH_TIN("gh_tin"),
 
         @SerializedName("gi_tin")
         GI_TIN("gi_tin"),
@@ -1732,6 +1765,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("in_gst")
         IN_GST("in_gst"),
+
+        @SerializedName("is_kt")
+        IS_KT("is_kt"),
 
         @SerializedName("is_vat")
         IS_VAT("is_vat"),
@@ -1778,6 +1814,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("ma_vat")
         MA_VAT("ma_vat"),
 
+        @SerializedName("md_cf")
+        MD_CF("md_cf"),
+
         @SerializedName("md_vat")
         MD_VAT("md_vat"),
 
@@ -1789,6 +1828,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("mr_nif")
         MR_NIF("mr_nif"),
+
+        @SerializedName("mu_vat")
+        MU_VAT("mu_vat"),
 
         @SerializedName("mx_rfc")
         MX_RFC("mx_rfc"),
@@ -1802,6 +1844,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("my_sst")
         MY_SST("my_sst"),
 
+        @SerializedName("mz_nuit")
+        MZ_NUIT("mz_nuit"),
+
         @SerializedName("ng_tin")
         NG_TIN("ng_tin"),
 
@@ -1813,6 +1858,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("np_pan")
         NP_PAN("np_pan"),
+
+        @SerializedName("nz_bn")
+        NZ_BN("nz_bn"),
 
         @SerializedName("nz_gst")
         NZ_GST("nz_gst"),
@@ -1828,6 +1876,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("pl_nip")
         PL_NIP("pl_nip"),
+
+        @SerializedName("pt_nif")
+        PT_NIF("pt_nif"),
 
         @SerializedName("py_ruc")
         PY_RUC("py_ruc"),
@@ -1856,6 +1907,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("si_tin")
         SI_TIN("si_tin"),
 
+        @SerializedName("sm_coe")
+        SM_COE("sm_coe"),
+
         @SerializedName("sn_ninea")
         SN_NINEA("sn_ninea"),
 
@@ -1873,6 +1927,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("tr_tin")
         TR_TIN("tr_tin"),
+
+        @SerializedName("tt_bir")
+        TT_BIR("tt_bir"),
+
+        @SerializedName("tt_vat")
+        TT_VAT("tt_vat"),
 
         @SerializedName("tw_vat")
         TW_VAT("tw_vat"),
@@ -4047,6 +4107,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * The subscription's pause behavior and optional resume behavior. You can provide one entry.
+     * Include its {@code key} to update an existing pause schedule. Omit {@code pause_schedules} to
+     * leave the existing schedule unchanged, or pass an empty string ({@code ""}) to clear it.
+     */
+    @SerializedName("pause_schedules")
+    Object pauseSchedules;
+
+    /**
      * List representing phases of the subscription schedule. Each phase can be customized to have
      * different durations, plans, and coupons. If there are multiple phases, the {@code end_date}
      * of one phase will always equal the {@code start_date} of the next phase.
@@ -4073,6 +4141,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         DefaultSettings defaultSettings,
         EndBehavior endBehavior,
         Map<String, Object> extraParams,
+        Object pauseSchedules,
         List<InvoiceCreatePreviewParams.ScheduleDetails.Phase> phases,
         Object prebilling,
         ProrationBehavior prorationBehavior) {
@@ -4083,6 +4152,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       this.defaultSettings = defaultSettings;
       this.endBehavior = endBehavior;
       this.extraParams = extraParams;
+      this.pauseSchedules = pauseSchedules;
       this.phases = phases;
       this.prebilling = prebilling;
       this.prorationBehavior = prorationBehavior;
@@ -4107,6 +4177,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Object pauseSchedules;
+
       private List<InvoiceCreatePreviewParams.ScheduleDetails.Phase> phases;
 
       private Object prebilling;
@@ -4123,6 +4195,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.defaultSettings,
             this.endBehavior,
             this.extraParams,
+            this.pauseSchedules,
             this.phases,
             this.prebilling,
             this.prorationBehavior);
@@ -4266,6 +4339,61 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add an element to `pauseSchedules` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceCreatePreviewParams.ScheduleDetails#pauseSchedules} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addPauseSchedule(
+          InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule element) {
+        if (this.pauseSchedules == null || this.pauseSchedules instanceof EmptyParam) {
+          this.pauseSchedules =
+              new ArrayList<InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule>();
+        }
+        ((List<InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule>) this.pauseSchedules)
+            .add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `pauseSchedules` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceCreatePreviewParams.ScheduleDetails#pauseSchedules} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllPauseSchedule(
+          List<InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule> elements) {
+        if (this.pauseSchedules == null || this.pauseSchedules instanceof EmptyParam) {
+          this.pauseSchedules =
+              new ArrayList<InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule>();
+        }
+        ((List<InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule>) this.pauseSchedules)
+            .addAll(elements);
+        return this;
+      }
+
+      /**
+       * The subscription's pause behavior and optional resume behavior. You can provide one entry.
+       * Include its {@code key} to update an existing pause schedule. Omit {@code pause_schedules}
+       * to leave the existing schedule unchanged, or pass an empty string ({@code ""}) to clear it.
+       */
+      public Builder setPauseSchedules(EmptyParam pauseSchedules) {
+        this.pauseSchedules = pauseSchedules;
+        return this;
+      }
+
+      /**
+       * The subscription's pause behavior and optional resume behavior. You can provide one entry.
+       * Include its {@code key} to update an existing pause schedule. Omit {@code pause_schedules}
+       * to leave the existing schedule unchanged, or pass an empty string ({@code ""}) to clear it.
+       */
+      public Builder setPauseSchedules(
+          List<InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule> pauseSchedules) {
+        this.pauseSchedules = pauseSchedules;
         return this;
       }
 
@@ -11219,6 +11347,1320 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         PhaseEffectiveAt(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PauseSchedule {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** A unique identifier for this pause schedule entry. */
+      @SerializedName("key")
+      String key;
+
+      /** Configuration for when and how the subscription pauses. */
+      @SerializedName("pause")
+      Pause pause;
+
+      /** Configuration for when and how the subscription resumes. */
+      @SerializedName("resume")
+      Object resume;
+
+      private PauseSchedule(
+          Map<String, Object> extraParams, String key, Pause pause, Object resume) {
+        this.extraParams = extraParams;
+        this.key = key;
+        this.pause = pause;
+        this.resume = resume;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String key;
+
+        private Pause pause;
+
+        private Object resume;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule build() {
+          return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule(
+              this.extraParams, this.key, this.pause, this.resume);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** A unique identifier for this pause schedule entry. */
+        public Builder setKey(String key) {
+          this.key = key;
+          return this;
+        }
+
+        /** Configuration for when and how the subscription pauses. */
+        public Builder setPause(
+            InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause pause) {
+          this.pause = pause;
+          return this;
+        }
+
+        /** Configuration for when and how the subscription resumes. */
+        public Builder setResume(
+            InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume resume) {
+          this.resume = resume;
+          return this;
+        }
+
+        /** Configuration for when and how the subscription resumes. */
+        public Builder setResume(EmptyParam resume) {
+          this.resume = resume;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pause {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** When to pause the subscription. */
+        @SerializedName("pause_at")
+        PauseAt pauseAt;
+
+        /** Settings controlling billing behavior during the pause. */
+        @SerializedName("settings")
+        Settings settings;
+
+        private Pause(Map<String, Object> extraParams, PauseAt pauseAt, Settings settings) {
+          this.extraParams = extraParams;
+          this.pauseAt = pauseAt;
+          this.settings = settings;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PauseAt pauseAt;
+
+          private Settings settings;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause build() {
+            return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause(
+                this.extraParams, this.pauseAt, this.settings);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** When to pause the subscription. */
+          public Builder setPauseAt(
+              InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.PauseAt pauseAt) {
+            this.pauseAt = pauseAt;
+            return this;
+          }
+
+          /** Settings controlling billing behavior during the pause. */
+          public Builder setSettings(
+              InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings settings) {
+            this.settings = settings;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PauseAt {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The Unix timestamp at which to pause the subscription. Required when {@code type} is
+           * {@code timestamp}.
+           */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * <strong>Required.</strong> When to pause the subscription. Use {@code now} to pause
+           * immediately or {@code timestamp} to pause at a specific time.
+           */
+          @SerializedName("type")
+          Type type;
+
+          private PauseAt(Map<String, Object> extraParams, Long timestamp, Type type) {
+            this.extraParams = extraParams;
+            this.timestamp = timestamp;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long timestamp;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.PauseAt build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.PauseAt(
+                  this.extraParams, this.timestamp, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.PauseAt#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.PauseAt#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The Unix timestamp at which to pause the subscription. Required when {@code type} is
+             * {@code timestamp}.
+             */
+            public Builder setTimestamp(Long timestamp) {
+              this.timestamp = timestamp;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> When to pause the subscription. Use {@code now} to pause
+             * immediately or {@code timestamp} to pause at a specific time.
+             */
+            public Builder setType(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.PauseAt.Type type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("now")
+            NOW("now"),
+
+            @SerializedName("timestamp")
+            TIMESTAMP("timestamp");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Settings {
+          /** Controls what to bill for when pausing the subscription. */
+          @SerializedName("bill_for")
+          BillFor billFor;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Determines whether to generate an invoice for outstanding amounts when pausing. When
+           * adding a pause schedule, defaults to {@code pending_invoice_item}. On updates, the
+           * existing value is preserved if not provided.
+           */
+          @SerializedName("invoicing_behavior")
+          InvoicingBehavior invoicingBehavior;
+
+          /** The pause type. Currently only {@code subscription} is supported. */
+          @SerializedName("type")
+          Type type;
+
+          private Settings(
+              BillFor billFor,
+              Map<String, Object> extraParams,
+              InvoicingBehavior invoicingBehavior,
+              Type type) {
+            this.billFor = billFor;
+            this.extraParams = extraParams;
+            this.invoicingBehavior = invoicingBehavior;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private BillFor billFor;
+
+            private Map<String, Object> extraParams;
+
+            private InvoicingBehavior invoicingBehavior;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings(
+                  this.billFor, this.extraParams, this.invoicingBehavior, this.type);
+            }
+
+            /** Controls what to bill for when pausing the subscription. */
+            public Builder setBillFor(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor
+                    billFor) {
+              this.billFor = billFor;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Determines whether to generate an invoice for outstanding amounts when pausing. When
+             * adding a pause schedule, defaults to {@code pending_invoice_item}. On updates, the
+             * existing value is preserved if not provided.
+             */
+            public Builder setInvoicingBehavior(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings
+                        .InvoicingBehavior
+                    invoicingBehavior) {
+              this.invoicingBehavior = invoicingBehavior;
+              return this;
+            }
+
+            /** The pause type. Currently only {@code subscription} is supported. */
+            public Builder setType(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.Type type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BillFor {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Controls whether to collect metered usage accrued up to the pause date. */
+            @SerializedName("outstanding_usage_through")
+            OutstandingUsageThrough outstandingUsageThrough;
+
+            /** Controls how unused time on subscription items is credited when pausing. */
+            @SerializedName("unused_time_from")
+            UnusedTimeFrom unusedTimeFrom;
+
+            private BillFor(
+                Map<String, Object> extraParams,
+                OutstandingUsageThrough outstandingUsageThrough,
+                UnusedTimeFrom unusedTimeFrom) {
+              this.extraParams = extraParams;
+              this.outstandingUsageThrough = outstandingUsageThrough;
+              this.unusedTimeFrom = unusedTimeFrom;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private OutstandingUsageThrough outstandingUsageThrough;
+
+              private UnusedTimeFrom unusedTimeFrom;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor
+                  build() {
+                return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings
+                    .BillFor(this.extraParams, this.outstandingUsageThrough, this.unusedTimeFrom);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Controls whether to collect metered usage accrued up to the pause date. */
+              public Builder setOutstandingUsageThrough(
+                  InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor
+                          .OutstandingUsageThrough
+                      outstandingUsageThrough) {
+                this.outstandingUsageThrough = outstandingUsageThrough;
+                return this;
+              }
+
+              /** Controls how unused time on subscription items is credited when pausing. */
+              public Builder setUnusedTimeFrom(
+                  InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor
+                          .UnusedTimeFrom
+                      unusedTimeFrom) {
+                this.unusedTimeFrom = unusedTimeFrom;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class OutstandingUsageThrough {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * Determines whether to collect metered usage accrued up to the pause date. When
+               * adding a pause schedule, defaults to {@code pause_at}. On updates, the existing
+               * value is preserved if not provided.
+               */
+              @SerializedName("type")
+              Type type;
+
+              private OutstandingUsageThrough(Map<String, Object> extraParams, Type type) {
+                this.extraParams = extraParams;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings
+                        .BillFor.OutstandingUsageThrough
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings
+                      .BillFor.OutstandingUsageThrough(this.extraParams, this.type);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor.OutstandingUsageThrough#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor.OutstandingUsageThrough#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Determines whether to collect metered usage accrued up to the pause date. When
+                 * adding a pause schedule, defaults to {@code pause_at}. On updates, the existing
+                 * value is preserved if not provided.
+                 */
+                public Builder setType(
+                    InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor
+                            .OutstandingUsageThrough.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("none")
+                NONE("none"),
+
+                @SerializedName("pause_at")
+                PAUSE_AT("pause_at");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class UnusedTimeFrom {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * Determines which point in the billing period unused time is credited from. When
+               * adding a pause schedule, defaults to {@code pause_at}. On updates, the existing
+               * value is preserved if not provided.
+               */
+              @SerializedName("type")
+              Type type;
+
+              private UnusedTimeFrom(Map<String, Object> extraParams, Type type) {
+                this.extraParams = extraParams;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings
+                        .BillFor.UnusedTimeFrom
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings
+                      .BillFor.UnusedTimeFrom(this.extraParams, this.type);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor.UnusedTimeFrom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor.UnusedTimeFrom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Determines which point in the billing period unused time is credited from. When
+                 * adding a pause schedule, defaults to {@code pause_at}. On updates, the existing
+                 * value is preserved if not provided.
+                 */
+                public Builder setType(
+                    InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Pause.Settings.BillFor
+                            .UnusedTimeFrom.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("item_current_period_start")
+                ITEM_CURRENT_PERIOD_START("item_current_period_start"),
+
+                @SerializedName("none")
+                NONE("none"),
+
+                @SerializedName("pause_at")
+                PAUSE_AT("pause_at");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+          }
+
+          public enum InvoicingBehavior implements ApiRequestParams.EnumParam {
+            @SerializedName("invoice")
+            INVOICE("invoice"),
+
+            @SerializedName("pending_invoice_item")
+            PENDING_INVOICE_ITEM("pending_invoice_item");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            InvoicingBehavior(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("subscription")
+            SUBSCRIPTION("subscription");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Resume {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** When to resume the subscription. */
+        @SerializedName("resume_at")
+        ResumeAt resumeAt;
+
+        /** Settings controlling how the subscription resumes. */
+        @SerializedName("settings")
+        Settings settings;
+
+        private Resume(Map<String, Object> extraParams, ResumeAt resumeAt, Settings settings) {
+          this.extraParams = extraParams;
+          this.resumeAt = resumeAt;
+          this.settings = settings;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ResumeAt resumeAt;
+
+          private Settings settings;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume build() {
+            return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume(
+                this.extraParams, this.resumeAt, this.settings);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** When to resume the subscription. */
+          public Builder setResumeAt(
+              InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt resumeAt) {
+            this.resumeAt = resumeAt;
+            return this;
+          }
+
+          /** Settings controlling how the subscription resumes. */
+          public Builder setSettings(
+              InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings settings) {
+            this.settings = settings;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ResumeAt {
+          /**
+           * The duration after which to resume the subscription. Required when {@code type} is
+           * {@code duration}.
+           */
+          @SerializedName("duration")
+          Duration duration;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The Unix timestamp at which to resume the subscription. Required when {@code type} is
+           * {@code timestamp}.
+           */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * <strong>Required.</strong> When to resume the subscription. Use {@code now} to resume
+           * immediately, {@code duration} to resume after a set duration, or {@code timestamp} to
+           * resume at a specific time.
+           */
+          @SerializedName("type")
+          Type type;
+
+          private ResumeAt(
+              Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
+            this.duration = duration;
+            this.extraParams = extraParams;
+            this.timestamp = timestamp;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Duration duration;
+
+            private Map<String, Object> extraParams;
+
+            private Long timestamp;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt
+                build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt(
+                  this.duration, this.extraParams, this.timestamp, this.type);
+            }
+
+            /**
+             * The duration after which to resume the subscription. Required when {@code type} is
+             * {@code duration}.
+             */
+            public Builder setDuration(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt.Duration
+                    duration) {
+              this.duration = duration;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The Unix timestamp at which to resume the subscription. Required when {@code type} is
+             * {@code timestamp}.
+             */
+            public Builder setTimestamp(Long timestamp) {
+              this.timestamp = timestamp;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> When to resume the subscription. Use {@code now} to resume
+             * immediately, {@code duration} to resume after a set duration, or {@code timestamp} to
+             * resume at a specific time.
+             */
+            public Builder setType(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt.Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Duration {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> The time unit for the resume duration. One of {@code day},
+             * {@code week}, {@code month}, or {@code year}.
+             */
+            @SerializedName("interval")
+            Interval interval;
+
+            /** The number of intervals after which the subscription resumes. */
+            @SerializedName("interval_count")
+            Long intervalCount;
+
+            private Duration(
+                Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+              this.extraParams = extraParams;
+              this.interval = interval;
+              this.intervalCount = intervalCount;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Interval interval;
+
+              private Long intervalCount;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt
+                      .Duration
+                  build() {
+                return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt
+                    .Duration(this.extraParams, this.interval, this.intervalCount);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt.Duration#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt.Duration#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The time unit for the resume duration. One of {@code
+               * day}, {@code week}, {@code month}, or {@code year}.
+               */
+              public Builder setInterval(
+                  InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.ResumeAt.Duration
+                          .Interval
+                      interval) {
+                this.interval = interval;
+                return this;
+              }
+
+              /** The number of intervals after which the subscription resumes. */
+              public Builder setIntervalCount(Long intervalCount) {
+                this.intervalCount = intervalCount;
+                return this;
+              }
+            }
+
+            public enum Interval implements ApiRequestParams.EnumParam {
+              @SerializedName("day")
+              DAY("day"),
+
+              @SerializedName("month")
+              MONTH("month"),
+
+              @SerializedName("week")
+              WEEK("week"),
+
+              @SerializedName("year")
+              YEAR("year");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Interval(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("duration")
+            DURATION("duration"),
+
+            @SerializedName("now")
+            NOW("now"),
+
+            @SerializedName("timestamp")
+            TIMESTAMP("timestamp");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Settings {
+          /**
+           * Controls the billing cycle anchor when the subscription resumes. When adding a pause
+           * schedule, defaults to {@code resume_at}. On updates, the existing value is preserved if
+           * not provided.
+           */
+          @SerializedName("billing_cycle_anchor")
+          BillingCycleAnchor billingCycleAnchor;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Controls whether Stripe attempts payment on the resumption invoice and how payment
+           * affects the subscription's status. When adding a pause schedule, defaults to {@code
+           * resume_on_payment_success}. On updates, the existing value is preserved if not
+           * provided.
+           */
+          @SerializedName("payment_behavior")
+          PaymentBehavior paymentBehavior;
+
+          /**
+           * Determines how to handle prorations when the subscription resumes. When adding a pause
+           * schedule, defaults to {@code create_prorations}. On updates, the existing value is
+           * preserved if not provided.
+           */
+          @SerializedName("proration_behavior")
+          ProrationBehavior prorationBehavior;
+
+          private Settings(
+              BillingCycleAnchor billingCycleAnchor,
+              Map<String, Object> extraParams,
+              PaymentBehavior paymentBehavior,
+              ProrationBehavior prorationBehavior) {
+            this.billingCycleAnchor = billingCycleAnchor;
+            this.extraParams = extraParams;
+            this.paymentBehavior = paymentBehavior;
+            this.prorationBehavior = prorationBehavior;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private BillingCycleAnchor billingCycleAnchor;
+
+            private Map<String, Object> extraParams;
+
+            private PaymentBehavior paymentBehavior;
+
+            private ProrationBehavior prorationBehavior;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings
+                build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings(
+                  this.billingCycleAnchor,
+                  this.extraParams,
+                  this.paymentBehavior,
+                  this.prorationBehavior);
+            }
+
+            /**
+             * Controls the billing cycle anchor when the subscription resumes. When adding a pause
+             * schedule, defaults to {@code resume_at}. On updates, the existing value is preserved
+             * if not provided.
+             */
+            public Builder setBillingCycleAnchor(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings
+                        .BillingCycleAnchor
+                    billingCycleAnchor) {
+              this.billingCycleAnchor = billingCycleAnchor;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Controls whether Stripe attempts payment on the resumption invoice and how payment
+             * affects the subscription's status. When adding a pause schedule, defaults to {@code
+             * resume_on_payment_success}. On updates, the existing value is preserved if not
+             * provided.
+             */
+            public Builder setPaymentBehavior(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings
+                        .PaymentBehavior
+                    paymentBehavior) {
+              this.paymentBehavior = paymentBehavior;
+              return this;
+            }
+
+            /**
+             * Determines how to handle prorations when the subscription resumes. When adding a
+             * pause schedule, defaults to {@code create_prorations}. On updates, the existing value
+             * is preserved if not provided.
+             */
+            public Builder setProrationBehavior(
+                InvoiceCreatePreviewParams.ScheduleDetails.PauseSchedule.Resume.Settings
+                        .ProrationBehavior
+                    prorationBehavior) {
+              this.prorationBehavior = prorationBehavior;
+              return this;
+            }
+          }
+
+          public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+            @SerializedName("resume_at")
+            RESUME_AT("resume_at"),
+
+            @SerializedName("unchanged")
+            UNCHANGED("unchanged");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            BillingCycleAnchor(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum PaymentBehavior implements ApiRequestParams.EnumParam {
+            @SerializedName("resume_on_payment_attempt")
+            RESUME_ON_PAYMENT_ATTEMPT("resume_on_payment_attempt"),
+
+            @SerializedName("resume_on_payment_success")
+            RESUME_ON_PAYMENT_SUCCESS("resume_on_payment_success");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            PaymentBehavior(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+            @SerializedName("always_invoice")
+            ALWAYS_INVOICE("always_invoice"),
+
+            @SerializedName("create_prorations")
+            CREATE_PRORATIONS("create_prorations"),
+
+            @SerializedName("none")
+            NONE("none");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            ProrationBehavior(String value) {
+              this.value = value;
+            }
+          }
         }
       }
     }

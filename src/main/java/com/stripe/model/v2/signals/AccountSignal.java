@@ -88,7 +88,7 @@ public class AccountSignal extends StripeObject implements HasId {
    *
    * <p>One of {@code account_takeover}, {@code customer_risk}, {@code fraudulent_merchant}, {@code
    * fraudulent_website}, {@code merchant_delinquency}, {@code payment_delinquency_exposure}, {@code
-   * user_account_sharing}, {@code user_merchant_fit}, or {@code user_multi_accounting}.
+   * user_account_sharing}, {@code user_affinity}, or {@code user_multi_accounting}.
    */
   @SerializedName("type")
   String type;
@@ -97,9 +97,9 @@ public class AccountSignal extends StripeObject implements HasId {
   @SerializedName("user_account_sharing")
   UserAccountSharing userAccountSharing;
 
-  /** Data for the user-merchant fit signal. Present only when type is user_merchant_fit. */
-  @SerializedName("user_merchant_fit")
-  UserMerchantFit userMerchantFit;
+  /** Data for the user affinity signal. Present only when type is user_affinity. */
+  @SerializedName("user_affinity")
+  UserAffinity userAffinity;
 
   /** Data for the user multi-accounting signal. Present only when type is user_multi_accounting. */
   @SerializedName("user_multi_accounting")
@@ -139,12 +139,60 @@ public class AccountSignal extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerRisk extends StripeObject {
     /**
+     * Supplementary contextual data for the signal, including indicators. Absent when no indicators
+     * are available.
+     */
+    @SerializedName("additional_details")
+    AdditionalDetails additionalDetails;
+
+    /**
      * Categorical assessment of the customer's risk of fraudulent or abusive activity.
      *
      * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
      */
     @SerializedName("risk_level")
     String riskLevel;
+
+    /**
+     * Supplementary contextual data for the signal, including indicators. Absent when no indicators
+     * are available.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdditionalDetails extends StripeObject {
+      /**
+       * Indicators providing risk context. Not all indicators directly contribute to the overall
+       * risk level.
+       */
+      @SerializedName("indicators")
+      List<AccountSignal.CustomerRisk.AdditionalDetails.Indicator> indicators;
+
+      /**
+       * For more details about Indicator, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Indicator extends StripeObject {
+        /**
+         * The name of the customer risk indicator.
+         *
+         * <p>One of {@code card_testing_on_stripe}, {@code customer_recently_created}, {@code
+         * disposable_email_use_on_stripe}, {@code distributed_fraud_on_stripe}, {@code
+         * high_distinct_card_count_on_stripe}, {@code high_distinct_email_count_on_stripe}, {@code
+         * high_distinct_ip_count_on_stripe}, {@code high_distinct_phone_count_on_stripe}, {@code
+         * high_fraudulent_dispute_count_on_stripe}, {@code
+         * high_name_verification_failure_count_on_stripe}, {@code high_refund_count_on_stripe},
+         * {@code low_auth_rate_on_stripe}, {@code new_identity_on_stripe}, {@code
+         * proxy_ip_usage_on_stripe}, {@code shared_browser_fingerprint_many_customers}, or {@code
+         * shared_card_many_customers}.
+         */
+        @SerializedName("indicator")
+        String indicator;
+      }
+    }
   }
 
   /** Data for the fraudulent merchant signal. Present only when type is fraudulent_merchant. */
@@ -403,21 +451,21 @@ public class AccountSignal extends StripeObject implements HasId {
     BigDecimal score;
   }
 
-  /** Data for the user-merchant fit signal. Present only when type is user_merchant_fit. */
+  /** Data for the user affinity signal. Present only when type is user_affinity. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UserMerchantFit extends StripeObject {
+  public static class UserAffinity extends StripeObject {
     /**
-     * Categorical assessment of the user-merchant fit.
+     * Categorical assessment of the user affinity.
      *
      * <p>One of {@code standard}, {@code strong}, {@code unknown}, or {@code very_strong}.
      */
-    @SerializedName("fit_level")
-    String fitLevel;
+    @SerializedName("level")
+    String level;
 
     /**
-     * The specific fit score for the user, between 0.00 and 100.00. Absent when fit_level is
+     * The specific affinity score for the user, between 0.00 and 100.00. Absent when level is
      * unknown.
      */
     @SerializedName("score")

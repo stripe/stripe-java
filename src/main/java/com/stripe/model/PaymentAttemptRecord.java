@@ -1014,6 +1014,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("tamara")
     Tamara tamara;
 
+    @SerializedName("toss_pay")
+    TossPay tossPay;
+
     @SerializedName("twint")
     Twint twint;
 
@@ -3475,7 +3478,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypay extends StripeObject {}
+    public static class Paypay extends StripeObject {
+      /** ID of the multi-use Mandate created by, or used to make, this PayPay payment. */
+      @SerializedName("mandate")
+      String mandate;
+    }
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
@@ -3975,6 +3982,19 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** The Tamara transaction ID associated with this payment. */
       @SerializedName("transaction_id")
       String transactionId;
+    }
+
+    /**
+     * For more details about TossPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TossPay extends StripeObject {
+      /** The buyer identifier provided by NICE for this Toss Pay account, when available. */
+      @SerializedName("buyer_id")
+      String buyerId;
     }
 
     /**

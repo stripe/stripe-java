@@ -4,7 +4,6 @@ package com.stripe.param.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import com.stripe.v2.Amount;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +14,6 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PayoutIntentUpdateParams extends ApiRequestParams {
-  /** The monetary amount to be sent. */
-  @SerializedName("amount")
-  Amount amount;
-
   /** An arbitrary string attached to the PayoutIntent. Often useful for displaying to users. */
   @SerializedName("description")
   Object description;
@@ -32,10 +27,6 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** From which FinancialAccount to pull funds. */
-  @SerializedName("from")
-  From from;
-
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
@@ -44,13 +35,15 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * Details about the OutboundPayment notification settings for recipient. Only applicable to
-   * OutboundPayment.
+   * Recipient notification settings for the PayoutIntent. Only applicable when the PayoutIntent
+   * creates an OutboundPayment.
    */
   @SerializedName("recipient_notification")
   RecipientNotification recipientNotification;
 
-  /** Scheduling options for the payout. If this is nil, we assume immediate execution. */
+  /**
+   * Scheduling options for the payout. If omitted, the payout is scheduled for immediate execution.
+   */
   @SerializedName("schedule_options")
   ScheduleOptions scheduleOptions;
 
@@ -66,19 +59,15 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
   To to;
 
   private PayoutIntentUpdateParams(
-      Amount amount,
       Object description,
       Map<String, Object> extraParams,
-      From from,
       Map<String, String> metadata,
       RecipientNotification recipientNotification,
       ScheduleOptions scheduleOptions,
       Object statementDescriptor,
       To to) {
-    this.amount = amount;
     this.description = description;
     this.extraParams = extraParams;
-    this.from = from;
     this.metadata = metadata;
     this.recipientNotification = recipientNotification;
     this.scheduleOptions = scheduleOptions;
@@ -91,13 +80,9 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Amount amount;
-
     private Object description;
 
     private Map<String, Object> extraParams;
-
-    private From from;
 
     private Map<String, String> metadata;
 
@@ -112,21 +97,13 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PayoutIntentUpdateParams build() {
       return new PayoutIntentUpdateParams(
-          this.amount,
           this.description,
           this.extraParams,
-          this.from,
           this.metadata,
           this.recipientNotification,
           this.scheduleOptions,
           this.statementDescriptor,
           this.to);
-    }
-
-    /** The monetary amount to be sent. */
-    public Builder setAmount(Amount amount) {
-      this.amount = amount;
-      return this;
     }
 
     /** An arbitrary string attached to the PayoutIntent. Often useful for displaying to users. */
@@ -167,12 +144,6 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** From which FinancialAccount to pull funds. */
-    public Builder setFrom(PayoutIntentUpdateParams.From from) {
-      this.from = from;
-      return this;
-    }
-
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
@@ -200,8 +171,8 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Details about the OutboundPayment notification settings for recipient. Only applicable to
-     * OutboundPayment.
+     * Recipient notification settings for the PayoutIntent. Only applicable when the PayoutIntent
+     * creates an OutboundPayment.
      */
     public Builder setRecipientNotification(
         PayoutIntentUpdateParams.RecipientNotification recipientNotification) {
@@ -209,7 +180,10 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Scheduling options for the payout. If this is nil, we assume immediate execution. */
+    /**
+     * Scheduling options for the payout. If omitted, the payout is scheduled for immediate
+     * execution.
+     */
     public Builder setScheduleOptions(PayoutIntentUpdateParams.ScheduleOptions scheduleOptions) {
       this.scheduleOptions = scheduleOptions;
       return this;
@@ -242,101 +216,6 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class From {
-    /** <strong>Required.</strong> The currency of the financial account. */
-    @SerializedName("currency")
-    Object currency;
-
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** <strong>Required.</strong> The FinancialAccount that funds are pulled from. */
-    @SerializedName("financial_account")
-    Object financialAccount;
-
-    private From(Object currency, Map<String, Object> extraParams, Object financialAccount) {
-      this.currency = currency;
-      this.extraParams = extraParams;
-      this.financialAccount = financialAccount;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Object currency;
-
-      private Map<String, Object> extraParams;
-
-      private Object financialAccount;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PayoutIntentUpdateParams.From build() {
-        return new PayoutIntentUpdateParams.From(
-            this.currency, this.extraParams, this.financialAccount);
-      }
-
-      /** <strong>Required.</strong> The currency of the financial account. */
-      public Builder setCurrency(String currency) {
-        this.currency = currency;
-        return this;
-      }
-
-      /** <strong>Required.</strong> The currency of the financial account. */
-      public Builder setCurrency(EmptyParam currency) {
-        this.currency = currency;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PayoutIntentUpdateParams.From#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PayoutIntentUpdateParams.From#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** <strong>Required.</strong> The FinancialAccount that funds are pulled from. */
-      public Builder setFinancialAccount(String financialAccount) {
-        this.financialAccount = financialAccount;
-        return this;
-      }
-
-      /** <strong>Required.</strong> The FinancialAccount that funds are pulled from. */
-      public Builder setFinancialAccount(EmptyParam financialAccount) {
-        this.financialAccount = financialAccount;
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class RecipientNotification {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -349,8 +228,8 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-     * notifications to recipients. Do not send notifications when setting is NONE. Default to
-     * account setting when setting is CONFIGURED or not set.
+     * notifications to recipients. Do not send notifications when {@code setting} is {@code none}.
+     * Use the account setting when {@code setting} is {@code configured} or omitted.
      */
     @SerializedName("setting")
     Setting setting;
@@ -403,8 +282,8 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-       * notifications to recipients. Do not send notifications when setting is NONE. Default to
-       * account setting when setting is CONFIGURED or not set.
+       * notifications to recipients. Do not send notifications when {@code setting} is {@code
+       * none}. Use the account setting when {@code setting} is {@code configured} or omitted.
        */
       public Builder setSetting(PayoutIntentUpdateParams.RecipientNotification.Setting setting) {
         this.setting = setting;
@@ -521,8 +400,9 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The payout method ID. Optional for OutboundPayment if recipient has default payment method.
-     * Required for OutboundTransfer.
+     * The payout method ID for the PayoutIntent. Optional when the PayoutIntent creates an
+     * OutboundPayment and the recipient has a default payout method. Required when the PayoutIntent
+     * creates an OutboundTransfer.
      */
     @SerializedName("payout_method")
     Object payoutMethod;
@@ -531,7 +411,7 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
     @SerializedName("payout_method_options")
     PayoutMethodOptions payoutMethodOptions;
 
-    /** The recipient ID. Only relevant for OutboundPayment. */
+    /** The recipient ID for the PayoutIntent. */
     @SerializedName("recipient")
     Object recipient;
 
@@ -612,8 +492,9 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The payout method ID. Optional for OutboundPayment if recipient has default payment method.
-       * Required for OutboundTransfer.
+       * The payout method ID for the PayoutIntent. Optional when the PayoutIntent creates an
+       * OutboundPayment and the recipient has a default payout method. Required when the
+       * PayoutIntent creates an OutboundTransfer.
        */
       public Builder setPayoutMethod(String payoutMethod) {
         this.payoutMethod = payoutMethod;
@@ -621,8 +502,9 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The payout method ID. Optional for OutboundPayment if recipient has default payment method.
-       * Required for OutboundTransfer.
+       * The payout method ID for the PayoutIntent. Optional when the PayoutIntent creates an
+       * OutboundPayment and the recipient has a default payout method. Required when the
+       * PayoutIntent creates an OutboundTransfer.
        */
       public Builder setPayoutMethod(EmptyParam payoutMethod) {
         this.payoutMethod = payoutMethod;
@@ -636,13 +518,13 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The recipient ID. Only relevant for OutboundPayment. */
+      /** The recipient ID for the PayoutIntent. */
       public Builder setRecipient(String recipient) {
         this.recipient = recipient;
         return this;
       }
 
-      /** The recipient ID. Only relevant for OutboundPayment. */
+      /** The recipient ID for the PayoutIntent. */
       public Builder setRecipient(EmptyParam recipient) {
         this.recipient = recipient;
         return this;
@@ -738,7 +620,7 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
         @SerializedName("preferred_network_options")
         PreferredNetworkOptions preferredNetworkOptions;
 
-        /** <strong>Required.</strong> The preferred networks to use for this PayoutIntent. */
+        /** The preferred networks to use for this PayoutIntent. */
         @SerializedName("preferred_networks")
         List<PayoutIntentUpdateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
             preferredNetworks;
@@ -1092,6 +974,9 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
 
           @SerializedName("rtp")
           RTP("rtp"),
+
+          @SerializedName("sepa")
+          SEPA("sepa"),
 
           @SerializedName("sepa_credit")
           SEPA_CREDIT("sepa_credit"),

@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class TransactionEntryListParams extends ApiRequestParams {
-  /** Set of filters to query TransactionEntries within a range of {@code created} timestamps. */
+  /** Filter for TransactionEntries created within a specified time range. */
   @SerializedName("created")
   Created created;
 
@@ -29,7 +29,11 @@ public class TransactionEntryListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Filter for TransactionEntries belonging to a Transaction. */
+  /**
+   * Filter for TransactionEntries belonging to a specific Transaction. This filter only supports
+   * filtering by a Transaction ID, which appears in each TransactionEntry's {@code transaction}
+   * field.
+   */
   @SerializedName("transaction")
   String transaction;
 
@@ -60,7 +64,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
           this.created, this.extraParams, this.limit, this.transaction);
     }
 
-    /** Set of filters to query TransactionEntries within a range of {@code created} timestamps. */
+    /** Filter for TransactionEntries created within a specified time range. */
     public Builder setCreated(TransactionEntryListParams.Created created) {
       this.created = created;
       return this;
@@ -98,7 +102,11 @@ public class TransactionEntryListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filter for TransactionEntries belonging to a Transaction. */
+    /**
+     * Filter for TransactionEntries belonging to a specific Transaction. This filter only supports
+     * filtering by a Transaction ID, which appears in each TransactionEntry's {@code transaction}
+     * field.
+     */
     public Builder setTransaction(String transaction) {
       this.transaction = transaction;
       return this;
@@ -117,19 +125,19 @@ public class TransactionEntryListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Filter for Transactions created after the specified timestamp. */
+    /** Filter for objects created after the specified timestamp. */
     @SerializedName("gt")
     Instant gt;
 
-    /** Filter for Transactions created at or after the specified timestamp. */
+    /** Filter for objects created at or after the specified timestamp. */
     @SerializedName("gte")
     Instant gte;
 
-    /** Filter for Transactions created before the specified timestamp. */
+    /** Filter for objects created before the specified timestamp. */
     @SerializedName("lt")
     Instant lt;
 
-    /** Filter for Transactions created at or before the specified timestamp. */
+    /** Filter for objects created at or before the specified timestamp. */
     @SerializedName("lte")
     Instant lte;
 
@@ -189,25 +197,25 @@ public class TransactionEntryListParams extends ApiRequestParams {
         return this;
       }
 
-      /** Filter for Transactions created after the specified timestamp. */
+      /** Filter for objects created after the specified timestamp. */
       public Builder setGt(Instant gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Filter for Transactions created at or after the specified timestamp. */
+      /** Filter for objects created at or after the specified timestamp. */
       public Builder setGte(Instant gte) {
         this.gte = gte;
         return this;
       }
 
-      /** Filter for Transactions created before the specified timestamp. */
+      /** Filter for objects created before the specified timestamp. */
       public Builder setLt(Instant lt) {
         this.lt = lt;
         return this;
       }
 
-      /** Filter for Transactions created at or before the specified timestamp. */
+      /** Filter for objects created at or before the specified timestamp. */
       public Builder setLte(Instant lte) {
         this.lte = lte;
         return this;

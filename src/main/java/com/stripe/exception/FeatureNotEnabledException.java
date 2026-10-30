@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** The user attempts to create an outbound flow from a closed Financial Account. */
+/** The account type can't set custom settlement timing. */
 public final class FeatureNotEnabledException extends ApiException {
   private static final long serialVersionUID = 2L;
 

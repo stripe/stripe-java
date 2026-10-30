@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.moneymanagement;
 
+import com.stripe.exception.CapabilityNotEnabledException;
 import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.moneymanagement.OutboundPaymentQuote;
@@ -20,13 +21,13 @@ public final class OutboundPaymentQuoteService extends ApiService {
 
   /** Creates an OutboundPaymentQuote usable in an OutboundPayment. */
   public OutboundPaymentQuote create(OutboundPaymentQuoteCreateParams params)
-      throws StripeException, FeatureNotEnabledException {
+      throws StripeException, CapabilityNotEnabledException, FeatureNotEnabledException {
     return create(params, (RequestOptions) null);
   }
   /** Creates an OutboundPaymentQuote usable in an OutboundPayment. */
   public OutboundPaymentQuote create(
       OutboundPaymentQuoteCreateParams params, RequestOptions options)
-      throws StripeException, FeatureNotEnabledException {
+      throws StripeException, CapabilityNotEnabledException, FeatureNotEnabledException {
     String path = "/v2/money_management/outbound_payment_quotes";
     ApiRequest request =
         new ApiRequest(

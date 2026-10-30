@@ -19,8 +19,10 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
   Amount amount;
 
   /**
-   * Controls whether the intent requires explicit confirmation before transitioning to pending.
-   * Defaults to automatic.
+   * Controls whether the PayoutIntent requires explicit confirmation before transitioning to {@code
+   * pending}. Defaults to {@code automatic}, but regulatory requirements may still require
+   * confirmation. See <a href="https://docs.stripe.com/global-payouts/send-money">Send money with
+   * Global Payouts</a> for details.
    */
   @SerializedName("confirmation_method")
   ConfirmationMethod confirmationMethod;
@@ -50,13 +52,15 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * Details about the OutboundPayment notification settings for recipient. Only applicable to
-   * OutboundPayment.
+   * Recipient notification settings for the PayoutIntent. Only applicable when the PayoutIntent
+   * creates an OutboundPayment.
    */
   @SerializedName("recipient_notification")
   RecipientNotification recipientNotification;
 
-  /** Scheduling options for the payout. If this is nil, we assume immediate execution. */
+  /**
+   * Scheduling options for the payout. If omitted, the payout is scheduled for immediate execution.
+   */
   @SerializedName("schedule_options")
   ScheduleOptions scheduleOptions;
 
@@ -141,8 +145,10 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Controls whether the intent requires explicit confirmation before transitioning to pending.
-     * Defaults to automatic.
+     * Controls whether the PayoutIntent requires explicit confirmation before transitioning to
+     * {@code pending}. Defaults to {@code automatic}, but regulatory requirements may still require
+     * confirmation. See <a href="https://docs.stripe.com/global-payouts/send-money">Send money with
+     * Global Payouts</a> for details.
      */
     public Builder setConfirmationMethod(
         PayoutIntentCreateParams.ConfirmationMethod confirmationMethod) {
@@ -215,8 +221,8 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Details about the OutboundPayment notification settings for recipient. Only applicable to
-     * OutboundPayment.
+     * Recipient notification settings for the PayoutIntent. Only applicable when the PayoutIntent
+     * creates an OutboundPayment.
      */
     public Builder setRecipientNotification(
         PayoutIntentCreateParams.RecipientNotification recipientNotification) {
@@ -224,7 +230,10 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Scheduling options for the payout. If this is nil, we assume immediate execution. */
+    /**
+     * Scheduling options for the payout. If omitted, the payout is scheduled for immediate
+     * execution.
+     */
     public Builder setScheduleOptions(PayoutIntentCreateParams.ScheduleOptions scheduleOptions) {
       this.scheduleOptions = scheduleOptions;
       return this;
@@ -343,8 +352,8 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-     * notifications to recipients. Do not send notifications when setting is NONE. Default to
-     * account setting when setting is CONFIGURED or not set.
+     * notifications to recipients. Do not send notifications when {@code setting} is {@code none}.
+     * Use the account setting when {@code setting} is {@code configured} or omitted.
      */
     @SerializedName("setting")
     Setting setting;
@@ -397,8 +406,8 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-       * notifications to recipients. Do not send notifications when setting is NONE. Default to
-       * account setting when setting is CONFIGURED or not set.
+       * notifications to recipients. Do not send notifications when {@code setting} is {@code
+       * none}. Use the account setting when {@code setting} is {@code configured} or omitted.
        */
       public Builder setSetting(PayoutIntentCreateParams.RecipientNotification.Setting setting) {
         this.setting = setting;
@@ -509,8 +518,9 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The payout method ID. Optional for OutboundPayment if recipient has default payment method.
-     * Required for OutboundTransfer.
+     * The payout method ID for the PayoutIntent. Optional when the PayoutIntent creates an
+     * OutboundPayment and the recipient has a default payout method. Required when the PayoutIntent
+     * creates an OutboundTransfer.
      */
     @SerializedName("payout_method")
     String payoutMethod;
@@ -519,7 +529,7 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
     @SerializedName("payout_method_options")
     PayoutMethodOptions payoutMethodOptions;
 
-    /** The recipient ID. Only relevant for OutboundPayment. */
+    /** The recipient ID for the PayoutIntent. */
     @SerializedName("recipient")
     String recipient;
 
@@ -594,8 +604,9 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The payout method ID. Optional for OutboundPayment if recipient has default payment method.
-       * Required for OutboundTransfer.
+       * The payout method ID for the PayoutIntent. Optional when the PayoutIntent creates an
+       * OutboundPayment and the recipient has a default payout method. Required when the
+       * PayoutIntent creates an OutboundTransfer.
        */
       public Builder setPayoutMethod(String payoutMethod) {
         this.payoutMethod = payoutMethod;
@@ -609,7 +620,7 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The recipient ID. Only relevant for OutboundPayment. */
+      /** The recipient ID for the PayoutIntent. */
       public Builder setRecipient(String recipient) {
         this.recipient = recipient;
         return this;
@@ -705,7 +716,7 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
         @SerializedName("preferred_network_options")
         PreferredNetworkOptions preferredNetworkOptions;
 
-        /** <strong>Required.</strong> The preferred networks to use for this PayoutIntent. */
+        /** The preferred networks to use for this PayoutIntent. */
         @SerializedName("preferred_networks")
         List<PayoutIntentCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
             preferredNetworks;
@@ -1053,6 +1064,9 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
 
           @SerializedName("rtp")
           RTP("rtp"),
+
+          @SerializedName("sepa")
+          SEPA("sepa"),
 
           @SerializedName("sepa_credit")
           SEPA_CREDIT("sepa_credit"),

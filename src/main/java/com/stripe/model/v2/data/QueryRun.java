@@ -16,7 +16,9 @@ import lombok.Setter;
 /**
  * The {@code QueryRun} resource represents an execution of ad-hoc SQL against a dataset. Once
  * created, Stripe processes the query. When the query has finished running, the object provides a
- * reference to the results.
+ * reference to the results. A {@code QueryRun} and its results are retained for 90 days after the
+ * run completes. After that, Stripe deletes them and retrieving the {@code QueryRun} returns a
+ * {@code 404} error.
  */
 @Getter
 @Setter
@@ -93,7 +95,7 @@ public class QueryRun extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Query extends StripeObject {
-    /** Ad-hoc SQL to execute. */
+    /** Ad-hoc SQL to execute. The maximum length is 100,000 characters. */
     @SerializedName("sql")
     String sql;
   }
@@ -254,11 +256,13 @@ public class QueryRun extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ResultOptions extends StripeObject {
     /**
-     * If set, the generated result file is compressed into a ZIP archive before it is stored. This
-     * applies only to downloadable file results.
+     * The compression applied to the generated result file. Defaults to {@code none}. This applies
+     * only to downloadable file results.
+     *
+     * <p>One of {@code none}, or {@code zip}.
      */
-    @SerializedName("compress_file")
-    Boolean compressFile;
+    @SerializedName("compression")
+    String compression;
   }
 
   /** Additional details about the current state of the {@code QueryRun}. */
@@ -275,8 +279,8 @@ public class QueryRun extends StripeObject implements HasId {
     /**
      * Error code categorizing the reason the run failed.
      *
-     * <p>One of {@code file_size_above_limit}, {@code internal_error}, or {@code
-     * query_run_invalid_sql}.
+     * <p>One of {@code execution_failed}, {@code file_size_above_limit}, {@code internal_error},
+     * {@code query_run_invalid_sql}, or {@code resource_limit_exceeded}.
      */
     @SerializedName("code")
     String code;
@@ -284,5 +288,26 @@ public class QueryRun extends StripeObject implements HasId {
     /** Error message with additional details about the failure. */
     @SerializedName("message")
     String message;
+
+    /** Errors found in the submitted SQL. Populated when the failure was caused by invalid SQL. */
+    @SerializedName("query_errors")
+    List<QueryRun.StatusDetails.QueryError> queryErrors;
+
+    /**
+     * For more details about QueryError, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class QueryError extends StripeObject {
+      /** A human-readable description of the error. */
+      @SerializedName("message")
+      String message;
+
+      /** A short identifier categorizing the type of error. */
+      @SerializedName("type")
+      String type;
+    }
   }
 }

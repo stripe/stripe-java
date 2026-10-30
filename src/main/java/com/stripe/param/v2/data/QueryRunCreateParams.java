@@ -28,6 +28,14 @@ public class QueryRunCreateParams extends ApiRequestParams {
   @SerializedName("format")
   Format format;
 
+  /**
+   * Named bind parameters for the query. Keys are parameter names referenced in the SQL (without
+   * any prefix). Omit this field for a non-parameterized query. Values are strings, integers, or
+   * booleans. Fractional numbers, timestamps, and dates should be passed as strings.
+   */
+  @SerializedName("parameters")
+  Map<String, Object> parameters;
+
   /** <strong>Required.</strong> The query to execute. */
   @SerializedName("query")
   Query query;
@@ -40,11 +48,13 @@ public class QueryRunCreateParams extends ApiRequestParams {
       Dataset dataset,
       Map<String, Object> extraParams,
       Format format,
+      Map<String, Object> parameters,
       Query query,
       ResultOptions resultOptions) {
     this.dataset = dataset;
     this.extraParams = extraParams;
     this.format = format;
+    this.parameters = parameters;
     this.query = query;
     this.resultOptions = resultOptions;
   }
@@ -60,6 +70,8 @@ public class QueryRunCreateParams extends ApiRequestParams {
 
     private Format format;
 
+    private Map<String, Object> parameters;
+
     private Query query;
 
     private ResultOptions resultOptions;
@@ -67,7 +79,12 @@ public class QueryRunCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public QueryRunCreateParams build() {
       return new QueryRunCreateParams(
-          this.dataset, this.extraParams, this.format, this.query, this.resultOptions);
+          this.dataset,
+          this.extraParams,
+          this.format,
+          this.parameters,
+          this.query,
+          this.resultOptions);
     }
 
     /** <strong>Required.</strong> The dataset to query. */
@@ -108,6 +125,32 @@ public class QueryRunCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add a key/value pair to `parameters` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * QueryRunCreateParams#parameters} for the field documentation.
+     */
+    public Builder putParameter(String key, Object value) {
+      if (this.parameters == null) {
+        this.parameters = new HashMap<>();
+      }
+      this.parameters.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `parameters` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link QueryRunCreateParams#parameters} for the field documentation.
+     */
+    public Builder putAllParameter(Map<String, Object> map) {
+      if (this.parameters == null) {
+        this.parameters = new HashMap<>();
+      }
+      this.parameters.putAll(map);
+      return this;
+    }
+
     /** <strong>Required.</strong> The query to execute. */
     public Builder setQuery(QueryRunCreateParams.Query query) {
       this.query = query;
@@ -133,7 +176,7 @@ public class QueryRunCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Ad-hoc SQL to execute. */
+    /** Ad-hoc SQL to execute. The maximum length is 100,000 characters. */
     @SerializedName("sql")
     String sql;
 
@@ -182,7 +225,7 @@ public class QueryRunCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Ad-hoc SQL to execute. */
+      /** Ad-hoc SQL to execute. The maximum length is 100,000 characters. */
       public Builder setSql(String sql) {
         this.sql = sql;
         return this;
@@ -194,11 +237,11 @@ public class QueryRunCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class ResultOptions {
     /**
-     * If set, the generated result file is compressed into a ZIP archive before it is stored. This
-     * applies only to downloadable file results.
+     * The compression applied to the generated result file. Defaults to {@code none}. This applies
+     * only to downloadable file results.
      */
-    @SerializedName("compress_file")
-    Boolean compressFile;
+    @SerializedName("compression")
+    Compression compression;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -209,8 +252,8 @@ public class QueryRunCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private ResultOptions(Boolean compressFile, Map<String, Object> extraParams) {
-      this.compressFile = compressFile;
+    private ResultOptions(Compression compression, Map<String, Object> extraParams) {
+      this.compression = compression;
       this.extraParams = extraParams;
     }
 
@@ -219,21 +262,21 @@ public class QueryRunCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Boolean compressFile;
+      private Compression compression;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public QueryRunCreateParams.ResultOptions build() {
-        return new QueryRunCreateParams.ResultOptions(this.compressFile, this.extraParams);
+        return new QueryRunCreateParams.ResultOptions(this.compression, this.extraParams);
       }
 
       /**
-       * If set, the generated result file is compressed into a ZIP archive before it is stored.
-       * This applies only to downloadable file results.
+       * The compression applied to the generated result file. Defaults to {@code none}. This
+       * applies only to downloadable file results.
        */
-      public Builder setCompressFile(Boolean compressFile) {
-        this.compressFile = compressFile;
+      public Builder setCompression(QueryRunCreateParams.ResultOptions.Compression compression) {
+        this.compression = compression;
         return this;
       }
 
@@ -261,6 +304,21 @@ public class QueryRunCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    public enum Compression implements ApiRequestParams.EnumParam {
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("zip")
+      ZIP("zip");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Compression(String value) {
+        this.value = value;
       }
     }
   }

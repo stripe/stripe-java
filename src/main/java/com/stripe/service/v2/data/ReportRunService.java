@@ -46,6 +46,8 @@ public final class ReportRunService extends ApiService {
   /**
    * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
    * ReportRun} has succeeded, the endpoint provides details for how to retrieve the results.
+   * Returns a {@code 404} error if the {@code ReportRun} doesn't exist or its retention period has
+   * ended.
    */
   public ReportRun retrieve(String id, ReportRunRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
@@ -53,6 +55,8 @@ public final class ReportRunService extends ApiService {
   /**
    * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
    * ReportRun} has succeeded, the endpoint provides details for how to retrieve the results.
+   * Returns a {@code 404} error if the {@code ReportRun} doesn't exist or its retention period has
+   * ended.
    */
   public ReportRun retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (ReportRunRetrieveParams) null, options);
@@ -60,6 +64,8 @@ public final class ReportRunService extends ApiService {
   /**
    * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
    * ReportRun} has succeeded, the endpoint provides details for how to retrieve the results.
+   * Returns a {@code 404} error if the {@code ReportRun} doesn't exist or its retention period has
+   * ended.
    */
   public ReportRun retrieve(String id) throws StripeException {
     return retrieve(id, (ReportRunRetrieveParams) null, (RequestOptions) null);
@@ -67,6 +73,8 @@ public final class ReportRunService extends ApiService {
   /**
    * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
    * ReportRun} has succeeded, the endpoint provides details for how to retrieve the results.
+   * Returns a {@code 404} error if the {@code ReportRun} doesn't exist or its retention period has
+   * ended.
    */
   public ReportRun retrieve(String id, ReportRunRetrieveParams params, RequestOptions options)
       throws StripeException {

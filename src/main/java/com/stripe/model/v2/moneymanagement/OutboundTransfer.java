@@ -353,9 +353,9 @@ public class OutboundTransfer extends StripeObject implements HasId {
     /**
      * Possible values are {@code pending}, {@code supported}, and {@code unsupported}. Initially
      * set to {@code pending}, it changes to {@code supported} when the recipient bank provides a
-     * trace ID, or {@code unsupported} if the recipient bank doesn't support it. Note that this
-     * status may not align with the OutboundPayment or OutboundTransfer status and can remain
-     * {@code pending} even after the payment or transfer is posted.
+     * trace ID, or {@code unsupported} if the recipient bank doesn't support it. This status may
+     * not align with the OutboundPayment or OutboundTransfer status and can remain {@code pending}
+     * even after the payment or transfer is posted.
      *
      * <p>One of {@code pending}, {@code supported}, or {@code unsupported}.
      */

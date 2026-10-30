@@ -13,6 +13,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.provisioning.ResourceCreateParams;
 import com.stripe.param.v2.provisioning.ResourceLinkParams;
+import com.stripe.param.v2.provisioning.ResourceRetrieveParams;
 import com.stripe.param.v2.provisioning.ResourceSubmitInformationParams;
 import com.stripe.param.v2.provisioning.ResourceUpdateParams;
 
@@ -55,14 +56,28 @@ public final class ResourceService extends ApiService {
     return this.request(request, Resource.class);
   }
   /** Retrieves a provider resource. */
-  public Resource retrieve(String id) throws StripeException {
-    return retrieve(id, (RequestOptions) null);
+  public Resource retrieve(String id, ResourceRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a provider resource. */
   public Resource retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ResourceRetrieveParams) null, options);
+  }
+  /** Retrieves a provider resource. */
+  public Resource retrieve(String id) throws StripeException {
+    return retrieve(id, (ResourceRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a provider resource. */
+  public Resource retrieve(String id, ResourceRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String path = String.format("/v2/provisioning/resources/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, Resource.class);
   }
   /** Updates a resource's configuration or service. */

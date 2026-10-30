@@ -17,6 +17,10 @@ public final class CoreService extends ApiService {
     return new com.stripe.service.v2.core.AccountLinkService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.AccountSessionService accountSessions() {
+    return new com.stripe.service.v2.core.AccountSessionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.AccountTokenService accountTokens() {
     return new com.stripe.service.v2.core.AccountTokenService(this.getResponseGetter());
   }

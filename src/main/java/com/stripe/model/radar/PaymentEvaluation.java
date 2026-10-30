@@ -843,7 +843,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @SerializedName("bank_initiated_return")
     BankInitiatedReturn bankInitiatedReturn;
 
-    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    /** The likelihood that this {@code PaymentEvaluation} results in an early fraud warning. */
     @SerializedName("early_fraud_warning")
     EarlyFraudWarning earlyFraudWarning;
 

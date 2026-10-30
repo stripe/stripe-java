@@ -22,7 +22,10 @@ public class PayoutIntent extends StripeObject implements HasId {
   Amount amount;
 
   /**
-   * Controls whether the intent requires explicit confirmation before transitioning to pending.
+   * Controls whether the PayoutIntent requires explicit confirmation before transitioning to {@code
+   * pending}. Even when {@code automatic}, regulatory requirements may require confirmation. See <a
+   * href="https://docs.stripe.com/global-payouts/send-money">Send money with Global Payouts</a> for
+   * details.
    *
    * <p>One of {@code automatic}, or {@code manual}.
    */
@@ -76,8 +79,8 @@ public class PayoutIntent extends StripeObject implements HasId {
   Map<String, String> metadata;
 
   /**
-   * Next action required for a PayoutIntent in the requires_action state. Populated when status is
-   * requires_action.
+   * Next action required for a PayoutIntent in the {@code requires_action} state. Populated when
+   * {@code status} is {@code requires_action}.
    */
   @SerializedName("next_action")
   NextAction nextAction;
@@ -92,13 +95,19 @@ public class PayoutIntent extends StripeObject implements HasId {
   String object;
 
   /**
-   * Details about the OutboundPayment notification settings for recipient. Only applicable to
-   * OutboundPayment.
+   * Recipient notification settings for the PayoutIntent. Only applicable when the PayoutIntent
+   * creates an OutboundPayment.
    */
   @SerializedName("recipient_notification")
   RecipientNotification recipientNotification;
 
-  /** Scheduling options for the payout. If this is nil, we assume immediate execution. */
+  /** Recipient verification details for this PayoutIntent. */
+  @SerializedName("recipient_verification")
+  RecipientVerification recipientVerification;
+
+  /**
+   * Scheduling options for the payout. If omitted, the payout is scheduled for immediate execution.
+   */
   @SerializedName("schedule_options")
   ScheduleOptions scheduleOptions;
 
@@ -110,8 +119,7 @@ public class PayoutIntent extends StripeObject implements HasId {
   String statementDescriptor;
 
   /**
-   * Open Enum. Current status of the PayoutIntent: {@code pending}, {@code processing}, {@code
-   * posted}, {@code canceled}, {@code requires_action}.
+   * Current status of the PayoutIntent.
    *
    * <p>One of {@code canceled}, {@code pending}, {@code posted}, {@code processing}, or {@code
    * requires_action}.
@@ -140,8 +148,8 @@ public class PayoutIntent extends StripeObject implements HasId {
     Amount amount;
 
     /**
-     * Details about the network and options associated with this fee. Present when type is
-     * network_fee.
+     * Details about the network and options associated with this fee. Present when {@code type} is
+     * {@code network_fee}.
      */
     @SerializedName("network_fee_details")
     NetworkFeeDetails networkFeeDetails;
@@ -164,8 +172,8 @@ public class PayoutIntent extends StripeObject implements HasId {
     String type;
 
     /**
-     * Details about the network and options associated with this fee. Present when type is
-     * network_fee.
+     * Details about the network and options associated with this fee. Present when {@code type} is
+     * {@code network_fee}.
      */
     @Getter
     @Setter
@@ -269,7 +277,7 @@ public class PayoutIntent extends StripeObject implements HasId {
     @SerializedName("lock_status")
     String lockStatus;
 
-    /** Key: source currency. Value: exchange rate from source currency to to_currency. */
+    /** Maps each source currency to its exchange rate into {@code to_currency}. */
     @SerializedName("rates")
     Map<String, PayoutIntent.FxQuote.Rate> rates;
 
@@ -286,8 +294,8 @@ public class PayoutIntent extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Rate extends StripeObject {
       /**
-       * The exchange rate going from_currency -&gt; to_currency, represented as a decimal string
-       * (e.g., &quot;1.1520&quot;) to preserve the full precision of the rate.
+       * The exchange rate from the source currency to {@code to_currency}, represented as a decimal
+       * string (for example, {@code 1.1520}) to preserve the full precision of the rate.
        */
       @SerializedName("exchange_rate")
       String exchangeRate;
@@ -317,18 +325,21 @@ public class PayoutIntent extends StripeObject implements HasId {
   }
 
   /**
-   * Next action required for a PayoutIntent in the requires_action state. Populated when status is
-   * requires_action.
+   * Next action required for a PayoutIntent in the {@code requires_action} state. Populated when
+   * {@code status} is {@code requires_action}.
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
-    /** Details about a confirmation required. Populated when type is confirm. */
+    /** Details about a confirmation required. Populated when {@code type} is {@code confirm}. */
     @SerializedName("confirm")
     Confirm confirm;
 
-    /** Details about a failure that requires user action. Populated when type is handle_failure. */
+    /**
+     * Details about a failure that requires user action. Populated when {@code type} is {@code
+     * handle_failure}.
+     */
     @SerializedName("handle_failure")
     HandleFailure handleFailure;
 
@@ -340,11 +351,15 @@ public class PayoutIntent extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /** Details about a confirmation required. Populated when type is confirm. */
+    /** Details about a confirmation required. Populated when {@code type} is {@code confirm}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Confirm extends StripeObject {
+      /** The PayoutIntent fields that must be reviewed before confirmation. */
+      @SerializedName("fields_to_review")
+      List<String> fieldsToReview;
+
       /**
        * Open Enum. The reason the PayoutIntent requires confirmation.
        *
@@ -354,7 +369,10 @@ public class PayoutIntent extends StripeObject implements HasId {
       String reason;
     }
 
-    /** Details about a failure that requires user action. Populated when type is handle_failure. */
+    /**
+     * Details about a failure that requires user action. Populated when {@code type} is {@code
+     * handle_failure}.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -363,7 +381,7 @@ public class PayoutIntent extends StripeObject implements HasId {
        * Open Enum. The reason for the failure.
        *
        * <p>One of {@code account_not_configured_as_recipient}, {@code
-       * currency_not_supported_for_financial_account_balance}, {@code currency_required}, {@code
+       * currency_not_supported_for_financial_account_balance}, {@code
        * feature_not_active_for_recipient}, {@code fx_rate_drift_exceeded_after_review}, {@code
        * insufficient_funds}, {@code payout_method_account_type_incorrect}, {@code
        * payout_method_amount_limit_exceeded}, {@code payout_method_canceled_by_customer}, {@code
@@ -371,10 +389,11 @@ public class PayoutIntent extends StripeObject implements HasId {
        * payout_method_declined}, {@code payout_method_does_not_exist}, {@code
        * payout_method_expired}, {@code payout_method_holder_address_incorrect}, {@code
        * payout_method_holder_details_incorrect}, {@code payout_method_holder_name_incorrect},
-       * {@code payout_method_invalid_account_number}, {@code payout_method_restricted}, {@code
-       * payout_method_unsupported}, {@code payout_method_usage_frequency_limit_exceeded}, {@code
-       * recalled}, {@code review_rejected}, {@code to_destination_invalid}, or {@code
-       * unknown_failure}.
+       * {@code payout_method_invalid}, {@code payout_method_invalid_account_number}, {@code
+       * payout_method_restricted}, {@code payout_method_unsupported}, {@code
+       * payout_method_usage_frequency_limit_exceeded}, {@code recalled}, {@code
+       * recipient_capability_not_active}, {@code review_rejected}, {@code to_destination_invalid},
+       * or {@code unknown_failure}.
        */
       @SerializedName("failure_reason")
       String failureReason;
@@ -382,8 +401,8 @@ public class PayoutIntent extends StripeObject implements HasId {
   }
 
   /**
-   * Details about the OutboundPayment notification settings for recipient. Only applicable to
-   * OutboundPayment.
+   * Recipient notification settings for the PayoutIntent. Only applicable when the PayoutIntent
+   * creates an OutboundPayment.
    */
   @Getter
   @Setter
@@ -391,8 +410,8 @@ public class PayoutIntent extends StripeObject implements HasId {
   public static class RecipientNotification extends StripeObject {
     /**
      * Closed Enum. Configuration option to enable or disable notifications to recipients. Do not
-     * send notifications when setting is NONE. Default to account setting when setting is
-     * CONFIGURED or not set.
+     * send notifications when {@code setting} is {@code none}. Use the account setting when {@code
+     * setting} is {@code configured} or omitted.
      *
      * <p>One of {@code configured}, or {@code none}.
      */
@@ -400,7 +419,61 @@ public class PayoutIntent extends StripeObject implements HasId {
     String setting;
   }
 
-  /** Scheduling options for the payout. If this is nil, we assume immediate execution. */
+  /** Recipient verification details for this PayoutIntent. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RecipientVerification extends StripeObject {
+    /**
+     * Closed Enum. The recipient-verification provider's match result.
+     *
+     * <p>One of {@code close_match}, {@code match}, {@code no_match}, or {@code unavailable}.
+     */
+    @SerializedName("match_result")
+    String matchResult;
+
+    /** Details associated with the match result. */
+    @SerializedName("match_result_details")
+    MatchResultDetails matchResultDetails;
+
+    /** Details associated with the match result. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MatchResultDetails extends StripeObject {
+      /**
+       * The business type returned by the recipient-verification provider.
+       *
+       * <p>One of {@code business}, or {@code personal}.
+       */
+      @SerializedName("matched_business_type")
+      String matchedBusinessType;
+
+      /** The account name returned by the recipient-verification provider. */
+      @SerializedName("matched_name")
+      String matchedName;
+
+      /** A message describing the match result. */
+      @SerializedName("message")
+      String message;
+
+      /**
+       * The business type provided for recipient verification.
+       *
+       * <p>One of {@code business}, or {@code personal}.
+       */
+      @SerializedName("provided_business_type")
+      String providedBusinessType;
+
+      /** The name associated with the provided recipient. */
+      @SerializedName("provided_name")
+      String providedName;
+    }
+  }
+
+  /**
+   * Scheduling options for the payout. If omitted, the payout is scheduled for immediate execution.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -462,8 +535,9 @@ public class PayoutIntent extends StripeObject implements HasId {
     String currency;
 
     /**
-     * The payout method ID. Optional for OutboundPayment if recipient has default payment method.
-     * Required for OutboundTransfer.
+     * The payout method ID for the PayoutIntent. Optional when the PayoutIntent creates an
+     * OutboundPayment and the recipient has a default payout method. Required when the PayoutIntent
+     * creates an OutboundTransfer.
      */
     @SerializedName("payout_method")
     String payoutMethod;
@@ -472,7 +546,7 @@ public class PayoutIntent extends StripeObject implements HasId {
     @SerializedName("payout_method_options")
     PayoutMethodOptions payoutMethodOptions;
 
-    /** The recipient ID. Only relevant for OutboundPayment. */
+    /** The recipient ID for the PayoutIntent. */
     @SerializedName("recipient")
     String recipient;
 

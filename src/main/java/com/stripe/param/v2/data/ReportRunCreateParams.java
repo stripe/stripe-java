@@ -230,11 +230,11 @@ public class ReportRunCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class ResultOptions {
     /**
-     * If set, the generated result file is compressed into a ZIP archive before it is stored. This
-     * applies only to downloadable file results.
+     * The compression applied to the generated result file. Defaults to {@code none}. This applies
+     * only to downloadable file results.
      */
-    @SerializedName("compress_file")
-    Boolean compressFile;
+    @SerializedName("compression")
+    Compression compression;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -245,8 +245,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private ResultOptions(Boolean compressFile, Map<String, Object> extraParams) {
-      this.compressFile = compressFile;
+    private ResultOptions(Compression compression, Map<String, Object> extraParams) {
+      this.compression = compression;
       this.extraParams = extraParams;
     }
 
@@ -255,21 +255,21 @@ public class ReportRunCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Boolean compressFile;
+      private Compression compression;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ReportRunCreateParams.ResultOptions build() {
-        return new ReportRunCreateParams.ResultOptions(this.compressFile, this.extraParams);
+        return new ReportRunCreateParams.ResultOptions(this.compression, this.extraParams);
       }
 
       /**
-       * If set, the generated result file is compressed into a ZIP archive before it is stored.
-       * This applies only to downloadable file results.
+       * The compression applied to the generated result file. Defaults to {@code none}. This
+       * applies only to downloadable file results.
        */
-      public Builder setCompressFile(Boolean compressFile) {
-        this.compressFile = compressFile;
+      public Builder setCompression(ReportRunCreateParams.ResultOptions.Compression compression) {
+        this.compression = compression;
         return this;
       }
 
@@ -297,6 +297,21 @@ public class ReportRunCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    public enum Compression implements ApiRequestParams.EnumParam {
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("zip")
+      ZIP("zip");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Compression(String value) {
+        this.value = value;
       }
     }
   }

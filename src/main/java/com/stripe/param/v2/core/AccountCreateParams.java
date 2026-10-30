@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.v2.Amount;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7444,16 +7445,16 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>:
-         * An icon for the merchant. Must be square and at least 128px x 128px.
+         * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: An icon for
+         * the merchant. Must be square and at least 128px x 128px.
          */
         @SerializedName("icon")
         String icon;
 
         /**
-         * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>:
-         * A logo for the merchant that will be used in Checkout instead of the icon and without the
-         * merchant's name next to it if provided. Must be at least 128px x 128px.
+         * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: A logo for
+         * the merchant that will be used in Checkout instead of the icon and without the merchant's
+         * name next to it if provided. Must be at least 128px x 128px.
          */
         @SerializedName("logo")
         String logo;
@@ -7529,8 +7530,8 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file
-           * upload</a>: An icon for the merchant. Must be square and at least 128px x 128px.
+           * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: An icon for
+           * the merchant. Must be square and at least 128px x 128px.
            */
           public Builder setIcon(String icon) {
             this.icon = icon;
@@ -7538,9 +7539,9 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file
-           * upload</a>: A logo for the merchant that will be used in Checkout instead of the icon
-           * and without the merchant's name next to it if provided. Must be at least 128px x 128px.
+           * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: A logo for
+           * the merchant that will be used in Checkout instead of the icon and without the
+           * merchant's name next to it if provided. Must be at least 128px x 128px.
            */
           public Builder setLogo(String logo) {
             this.logo = logo;
@@ -7579,6 +7580,10 @@ public class AccountCreateParams extends ApiRequestParams {
         /** Allow the merchant to process Afterpay/Clearpay payments. */
         @SerializedName("afterpay_clearpay_payments")
         AfterpayClearpayPayments afterpayClearpayPayments;
+
+        /** Allow the merchant to process Alipay payments. */
+        @SerializedName("alipay_payments")
+        AlipayPayments alipayPayments;
 
         /** Allow the merchant to process Alma payments. */
         @SerializedName("alma_payments")
@@ -7734,6 +7739,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("satispay_payments")
         SatispayPayments satispayPayments;
 
+        /** Allow the merchant to process Scalapay payments. */
+        @SerializedName("scalapay_payments")
+        ScalapayPayments scalapayPayments;
+
         /** Allow the merchant to process SEPA bank transfer payments. */
         @SerializedName("sepa_bank_transfer_payments")
         SepaBankTransferPayments sepaBankTransferPayments;
@@ -7758,6 +7767,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("twint_payments")
         TwintPayments twintPayments;
 
+        /** Allow the merchant to process UPI payments. */
+        @SerializedName("upi_payments")
+        UpiPayments upiPayments;
+
         /** Allow the merchant to process US bank transfer payments. */
         @SerializedName("us_bank_transfer_payments")
         UsBankTransferPayments usBankTransferPayments;
@@ -7775,6 +7788,7 @@ public class AccountCreateParams extends ApiRequestParams {
             AcssDebitPayments acssDebitPayments,
             AffirmPayments affirmPayments,
             AfterpayClearpayPayments afterpayClearpayPayments,
+            AlipayPayments alipayPayments,
             AlmaPayments almaPayments,
             AmazonPayPayments amazonPayPayments,
             AuBecsDebitPayments auBecsDebitPayments,
@@ -7812,12 +7826,14 @@ public class AccountCreateParams extends ApiRequestParams {
             RevolutPayPayments revolutPayPayments,
             SamsungPayPayments samsungPayPayments,
             SatispayPayments satispayPayments,
+            ScalapayPayments scalapayPayments,
             SepaBankTransferPayments sepaBankTransferPayments,
             SepaDebitPayments sepaDebitPayments,
             SequraPayments sequraPayments,
             SunbitPayments sunbitPayments,
             SwishPayments swishPayments,
             TwintPayments twintPayments,
+            UpiPayments upiPayments,
             UsBankTransferPayments usBankTransferPayments,
             VippsPayments vippsPayments,
             ZipPayments zipPayments) {
@@ -7825,6 +7841,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.acssDebitPayments = acssDebitPayments;
           this.affirmPayments = affirmPayments;
           this.afterpayClearpayPayments = afterpayClearpayPayments;
+          this.alipayPayments = alipayPayments;
           this.almaPayments = almaPayments;
           this.amazonPayPayments = amazonPayPayments;
           this.auBecsDebitPayments = auBecsDebitPayments;
@@ -7862,12 +7879,14 @@ public class AccountCreateParams extends ApiRequestParams {
           this.revolutPayPayments = revolutPayPayments;
           this.samsungPayPayments = samsungPayPayments;
           this.satispayPayments = satispayPayments;
+          this.scalapayPayments = scalapayPayments;
           this.sepaBankTransferPayments = sepaBankTransferPayments;
           this.sepaDebitPayments = sepaDebitPayments;
           this.sequraPayments = sequraPayments;
           this.sunbitPayments = sunbitPayments;
           this.swishPayments = swishPayments;
           this.twintPayments = twintPayments;
+          this.upiPayments = upiPayments;
           this.usBankTransferPayments = usBankTransferPayments;
           this.vippsPayments = vippsPayments;
           this.zipPayments = zipPayments;
@@ -7885,6 +7904,8 @@ public class AccountCreateParams extends ApiRequestParams {
           private AffirmPayments affirmPayments;
 
           private AfterpayClearpayPayments afterpayClearpayPayments;
+
+          private AlipayPayments alipayPayments;
 
           private AlmaPayments almaPayments;
 
@@ -7960,6 +7981,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private SatispayPayments satispayPayments;
 
+          private ScalapayPayments scalapayPayments;
+
           private SepaBankTransferPayments sepaBankTransferPayments;
 
           private SepaDebitPayments sepaDebitPayments;
@@ -7971,6 +7994,8 @@ public class AccountCreateParams extends ApiRequestParams {
           private SwishPayments swishPayments;
 
           private TwintPayments twintPayments;
+
+          private UpiPayments upiPayments;
 
           private UsBankTransferPayments usBankTransferPayments;
 
@@ -7985,6 +8010,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.acssDebitPayments,
                 this.affirmPayments,
                 this.afterpayClearpayPayments,
+                this.alipayPayments,
                 this.almaPayments,
                 this.amazonPayPayments,
                 this.auBecsDebitPayments,
@@ -8022,12 +8048,14 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.revolutPayPayments,
                 this.samsungPayPayments,
                 this.satispayPayments,
+                this.scalapayPayments,
                 this.sepaBankTransferPayments,
                 this.sepaDebitPayments,
                 this.sequraPayments,
                 this.sunbitPayments,
                 this.swishPayments,
                 this.twintPayments,
+                this.upiPayments,
                 this.usBankTransferPayments,
                 this.vippsPayments,
                 this.zipPayments);
@@ -8062,6 +8090,14 @@ public class AccountCreateParams extends ApiRequestParams {
               AccountCreateParams.Configuration.Merchant.Capabilities.AfterpayClearpayPayments
                   afterpayClearpayPayments) {
             this.afterpayClearpayPayments = afterpayClearpayPayments;
+            return this;
+          }
+
+          /** Allow the merchant to process Alipay payments. */
+          public Builder setAlipayPayments(
+              AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments
+                  alipayPayments) {
+            this.alipayPayments = alipayPayments;
             return this;
           }
 
@@ -8370,6 +8406,14 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
 
+          /** Allow the merchant to process Scalapay payments. */
+          public Builder setScalapayPayments(
+              AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments
+                  scalapayPayments) {
+            this.scalapayPayments = scalapayPayments;
+            return this;
+          }
+
           /** Allow the merchant to process SEPA bank transfer payments. */
           public Builder setSepaBankTransferPayments(
               AccountCreateParams.Configuration.Merchant.Capabilities.SepaBankTransferPayments
@@ -8413,6 +8457,13 @@ public class AccountCreateParams extends ApiRequestParams {
           public Builder setTwintPayments(
               AccountCreateParams.Configuration.Merchant.Capabilities.TwintPayments twintPayments) {
             this.twintPayments = twintPayments;
+            return this;
+          }
+
+          /** Allow the merchant to process UPI payments. */
+          public Builder setUpiPayments(
+              AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments upiPayments) {
+            this.upiPayments = upiPayments;
             return this;
           }
 
@@ -9441,6 +9492,260 @@ public class AccountCreateParams extends ApiRequestParams {
                  * first `put/putAll` call, and subsequent calls add additional key/value pairs to
                  * the original map. See {@link
                  * AccountCreateParams.Configuration.Merchant.Capabilities.AfterpayClearpayPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> To request a protection, pass true. */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AlipayPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * <strong>Required.</strong> To request a new Capability for an account, pass true. There
+           * can be a delay before the requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private AlipayPayments(
+              Map<String, Object> extraParams, Protections protections, Boolean requested) {
+            this.extraParams = extraParams;
+            this.protections = protections;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Protections protections;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments build() {
+              return new AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments(
+                  this.extraParams, this.protections, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+            public Builder setProtections(
+                AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments.Protections
+                    protections) {
+              this.protections = protections;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+              this.extraParams = extraParams;
+              this.pspMigration = pspMigration;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private PspMigration pspMigration;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments
+                      .Protections
+                  build() {
+                return new AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments
+                    .Protections(this.extraParams, this.pspMigration);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+              public Builder setPspMigration(
+                  AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments.Protections
+                          .PspMigration
+                      pspMigration) {
+                this.pspMigration = pspMigration;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> To request a protection, pass true. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments
+                        .Protections.PspMigration
+                    build() {
+                  return new AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments
+                      .Protections.PspMigration(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.AlipayPayments.Protections.PspMigration#extraParams}
                  * for the field documentation.
                  */
                 public Builder putAllExtraParam(Map<String, Object> map) {
@@ -18646,6 +18951,261 @@ public class AccountCreateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
+        public static class ScalapayPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * <strong>Required.</strong> To request a new Capability for an account, pass true. There
+           * can be a delay before the requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private ScalapayPayments(
+              Map<String, Object> extraParams, Protections protections, Boolean requested) {
+            this.extraParams = extraParams;
+            this.protections = protections;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Protections protections;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments
+                build() {
+              return new AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments(
+                  this.extraParams, this.protections, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+            public Builder setProtections(
+                AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments.Protections
+                    protections) {
+              this.protections = protections;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+              this.extraParams = extraParams;
+              this.pspMigration = pspMigration;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private PspMigration pspMigration;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments
+                      .Protections
+                  build() {
+                return new AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments
+                    .Protections(this.extraParams, this.pspMigration);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+              public Builder setPspMigration(
+                  AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments
+                          .Protections.PspMigration
+                      pspMigration) {
+                this.pspMigration = pspMigration;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> To request a protection, pass true. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments
+                        .Protections.PspMigration
+                    build() {
+                  return new AccountCreateParams.Configuration.Merchant.Capabilities
+                      .ScalapayPayments.Protections.PspMigration(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.ScalapayPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> To request a protection, pass true. */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class SepaBankTransferPayments {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -20153,6 +20713,259 @@ public class AccountCreateParams extends ApiRequestParams {
                  * first `put/putAll` call, and subsequent calls add additional key/value pairs to
                  * the original map. See {@link
                  * AccountCreateParams.Configuration.Merchant.Capabilities.TwintPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> To request a protection, pass true. */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class UpiPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * <strong>Required.</strong> To request a new Capability for an account, pass true. There
+           * can be a delay before the requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private UpiPayments(
+              Map<String, Object> extraParams, Protections protections, Boolean requested) {
+            this.extraParams = extraParams;
+            this.protections = protections;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Protections protections;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments build() {
+              return new AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments(
+                  this.extraParams, this.protections, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+            public Builder setProtections(
+                AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments.Protections
+                    protections) {
+              this.protections = protections;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+              this.extraParams = extraParams;
+              this.pspMigration = pspMigration;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private PspMigration pspMigration;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments.Protections
+                  build() {
+                return new AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments
+                    .Protections(this.extraParams, this.pspMigration);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+              public Builder setPspMigration(
+                  AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments.Protections
+                          .PspMigration
+                      pspMigration) {
+                this.pspMigration = pspMigration;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> To request a protection, pass true. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments
+                        .Protections.PspMigration
+                    build() {
+                  return new AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments
+                      .Protections.PspMigration(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.UpiPayments.Protections.PspMigration#extraParams}
                  * for the field documentation.
                  */
                 public Builder putAllExtraParam(Map<String, Object> map) {
@@ -22742,6 +23555,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** Can fund a FinancialAccount. */
+        @SerializedName("inbound_fundings")
+        InboundFundings inboundFundings;
+
         /** Can pull funds from an external source, owned by yourself, to a FinancialAccount. */
         @SerializedName("inbound_transfers")
         InboundTransfers inboundTransfers;
@@ -22767,6 +23584,7 @@ public class AccountCreateParams extends ApiRequestParams {
             BusinessStorage businessStorage,
             ConsumerStorage consumerStorage,
             Map<String, Object> extraParams,
+            InboundFundings inboundFundings,
             InboundTransfers inboundTransfers,
             OutboundPayments outboundPayments,
             OutboundTransfers outboundTransfers,
@@ -22776,6 +23594,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.businessStorage = businessStorage;
           this.consumerStorage = consumerStorage;
           this.extraParams = extraParams;
+          this.inboundFundings = inboundFundings;
           this.inboundTransfers = inboundTransfers;
           this.outboundPayments = outboundPayments;
           this.outboundTransfers = outboundTransfers;
@@ -22796,6 +23615,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private InboundFundings inboundFundings;
+
           private InboundTransfers inboundTransfers;
 
           private OutboundPayments outboundPayments;
@@ -22813,6 +23634,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.businessStorage,
                 this.consumerStorage,
                 this.extraParams,
+                this.inboundFundings,
                 this.inboundTransfers,
                 this.outboundPayments,
                 this.outboundTransfers,
@@ -22871,6 +23693,14 @@ public class AccountCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Can fund a FinancialAccount. */
+          public Builder setInboundFundings(
+              AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                  inboundFundings) {
+            this.inboundFundings = inboundFundings;
             return this;
           }
 
@@ -32025,6 +32855,346 @@ public class AccountCreateParams extends ApiRequestParams {
                       this.requested = requested;
                       return this;
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class InboundFundings {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Can fund a FinancialAccount by paper check. */
+          @SerializedName("paper_checks")
+          PaperChecks paperChecks;
+
+          private InboundFundings(Map<String, Object> extraParams, PaperChecks paperChecks) {
+            this.extraParams = extraParams;
+            this.paperChecks = paperChecks;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private PaperChecks paperChecks;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                build() {
+              return new AccountCreateParams.Configuration.MoneyManager.Capabilities
+                  .InboundFundings(this.extraParams, this.paperChecks);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Can fund a FinancialAccount by paper check. */
+            public Builder setPaperChecks(
+                AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                        .PaperChecks
+                    paperChecks) {
+              this.paperChecks = paperChecks;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PaperChecks {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private PaperChecks(
+                Map<String, Object> extraParams, Protections protections, Boolean requested) {
+              this.extraParams = extraParams;
+              this.protections = protections;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Protections protections;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                      .PaperChecks
+                  build() {
+                return new AccountCreateParams.Configuration.MoneyManager.Capabilities
+                    .InboundFundings.PaperChecks(
+                    this.extraParams, this.protections, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings.PaperChecks#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings.PaperChecks#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
+               */
+              public Builder setProtections(
+                  AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                          .PaperChecks.Protections
+                      protections) {
+                this.protections = protections;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+                this.extraParams = extraParams;
+                this.pspMigration = pspMigration;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private PspMigration pspMigration;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                        .PaperChecks.Protections
+                    build() {
+                  return new AccountCreateParams.Configuration.MoneyManager.Capabilities
+                      .InboundFundings.PaperChecks.Protections(this.extraParams, this.pspMigration);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings.PaperChecks.Protections#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings.PaperChecks.Protections#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+                public Builder setPspMigration(
+                    AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                            .PaperChecks.Protections.PspMigration
+                        pspMigration) {
+                  this.pspMigration = pspMigration;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** <strong>Required.</strong> To request a protection, pass true. */
+                @SerializedName("requested")
+                Boolean requested;
+
+                private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                  this.extraParams = extraParams;
+                  this.requested = requested;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Boolean requested;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings
+                          .PaperChecks.Protections.PspMigration
+                      build() {
+                    return new AccountCreateParams.Configuration.MoneyManager.Capabilities
+                        .InboundFundings.PaperChecks.Protections.PspMigration(
+                        this.extraParams, this.requested);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings.PaperChecks.Protections.PspMigration#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountCreateParams.Configuration.MoneyManager.Capabilities.InboundFundings.PaperChecks.Protections.PspMigration#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** <strong>Required.</strong> To request a protection, pass true. */
+                  public Builder setRequested(Boolean requested) {
+                    this.requested = requested;
+                    return this;
                   }
                 }
               }
@@ -47569,15 +48739,6 @@ public class AccountCreateParams extends ApiRequestParams {
           Fps fps;
 
           /**
-           * Enables this Account to receive OutboundPayments to linked bank accounts over real time
-           * rails.
-           */
-          @SerializedName("instant")
-          com.stripe.param.v2.core.AccountCreateParams.Configuration.Recipient.Capabilities
-                  .BankAccounts.Instant
-              instant;
-
-          /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over local
            * networks.
            */
@@ -47600,10 +48761,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
-           * credit rails.
+           * rails.
            */
-          @SerializedName("sepa_credit")
-          SepaCredit sepaCredit;
+          @SerializedName("sepa")
+          Sepa sepa;
 
           /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
@@ -47618,10 +48779,6 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("swift")
           Swift swift;
 
-          /** Enables this Account to receive OutboundPayments to linked bank accounts over wire. */
-          @SerializedName("wire")
-          Wire wire;
-
           private BankAccounts(
               Ach ach,
               Becs becs,
@@ -47629,30 +48786,24 @@ public class AccountCreateParams extends ApiRequestParams {
               Map<String, Object> extraParams,
               Fedwire fedwire,
               Fps fps,
-              com.stripe.param.v2.core.AccountCreateParams.Configuration.Recipient.Capabilities
-                      .BankAccounts.Instant
-                  instant,
               Local local,
               Npp npp,
               Rtp rtp,
-              SepaCredit sepaCredit,
+              Sepa sepa,
               SepaInstant sepaInstant,
-              Swift swift,
-              Wire wire) {
+              Swift swift) {
             this.ach = ach;
             this.becs = becs;
             this.eft = eft;
             this.extraParams = extraParams;
             this.fedwire = fedwire;
             this.fps = fps;
-            this.instant = instant;
             this.local = local;
             this.npp = npp;
             this.rtp = rtp;
-            this.sepaCredit = sepaCredit;
+            this.sepa = sepa;
             this.sepaInstant = sepaInstant;
             this.swift = swift;
-            this.wire = wire;
           }
 
           public static Builder builder() {
@@ -47672,23 +48823,17 @@ public class AccountCreateParams extends ApiRequestParams {
 
             private Fps fps;
 
-            private com.stripe.param.v2.core.AccountCreateParams.Configuration.Recipient
-                    .Capabilities.BankAccounts.Instant
-                instant;
-
             private Local local;
 
             private Npp npp;
 
             private Rtp rtp;
 
-            private SepaCredit sepaCredit;
+            private Sepa sepa;
 
             private SepaInstant sepaInstant;
 
             private Swift swift;
-
-            private Wire wire;
 
             /** Finalize and obtain parameter instance from this builder. */
             public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts build() {
@@ -47699,14 +48844,12 @@ public class AccountCreateParams extends ApiRequestParams {
                   this.extraParams,
                   this.fedwire,
                   this.fps,
-                  this.instant,
                   this.local,
                   this.npp,
                   this.rtp,
-                  this.sepaCredit,
+                  this.sepa,
                   this.sepaInstant,
-                  this.swift,
-                  this.wire);
+                  this.swift);
             }
 
             /**
@@ -47791,17 +48934,6 @@ public class AccountCreateParams extends ApiRequestParams {
             }
 
             /**
-             * Enables this Account to receive OutboundPayments to linked bank accounts over real
-             * time rails.
-             */
-            public Builder setInstant(
-                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
-                    instant) {
-              this.instant = instant;
-              return this;
-            }
-
-            /**
              * Enables this Account to receive OutboundPayments to linked bank accounts over local
              * networks.
              */
@@ -47833,12 +48965,11 @@ public class AccountCreateParams extends ApiRequestParams {
 
             /**
              * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
-             * credit rails.
+             * rails.
              */
-            public Builder setSepaCredit(
-                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit
-                    sepaCredit) {
-              this.sepaCredit = sepaCredit;
+            public Builder setSepa(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa sepa) {
+              this.sepa = sepa;
               return this;
             }
 
@@ -47859,15 +48990,6 @@ public class AccountCreateParams extends ApiRequestParams {
             public Builder setSwift(
                 AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Swift swift) {
               this.swift = swift;
-              return this;
-            }
-
-            /**
-             * Enables this Account to receive OutboundPayments to linked bank accounts over wire.
-             */
-            public Builder setWire(
-                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire wire) {
-              this.wire = wire;
               return this;
             }
           }
@@ -49164,264 +50286,6 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class Instant {
-            /**
-             * Map of extra parameters for custom features not available in this client library. The
-             * content in this map is not serialized under this field's {@code @SerializedName}
-             * value. Instead, each key/value pair is serialized as if the key is a root-level field
-             * (serialized) name in this param object. Effectively, this map is flattened to its
-             * parent instance.
-             */
-            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-            Map<String, Object> extraParams;
-
-            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * <strong>Required.</strong> To request a new Capability for an account, pass true.
-             * There can be a delay before the requested Capability becomes active.
-             */
-            @SerializedName("requested")
-            Boolean requested;
-
-            private Instant(
-                Map<String, Object> extraParams, Protections protections, Boolean requested) {
-              this.extraParams = extraParams;
-              this.protections = protections;
-              this.requested = requested;
-            }
-
-            public static Builder builder() {
-              return new Builder();
-            }
-
-            public static class Builder {
-              private Map<String, Object> extraParams;
-
-              private Protections protections;
-
-              private Boolean requested;
-
-              /** Finalize and obtain parameter instance from this builder. */
-              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
-                  build() {
-                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                    .Instant(this.extraParams, this.protections, this.requested);
-              }
-
-              /**
-               * Add a key/value pair to `extraParams` map. A map is initialized for the first
-               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant#extraParams}
-               * for the field documentation.
-               */
-              public Builder putExtraParam(String key, Object value) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.put(key, value);
-                return this;
-              }
-
-              /**
-               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant#extraParams}
-               * for the field documentation.
-               */
-              public Builder putAllExtraParam(Map<String, Object> map) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.putAll(map);
-                return this;
-              }
-
-              /**
-               * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
-               */
-              public Builder setProtections(
-                  AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
-                          .Protections
-                      protections) {
-                this.protections = protections;
-                return this;
-              }
-
-              /**
-               * <strong>Required.</strong> To request a new Capability for an account, pass true.
-               * There can be a delay before the requested Capability becomes active.
-               */
-              public Builder setRequested(Boolean requested) {
-                this.requested = requested;
-                return this;
-              }
-            }
-
-            @Getter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections {
-              /**
-               * Map of extra parameters for custom features not available in this client library.
-               * The content in this map is not serialized under this field's
-               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
-               * key is a root-level field (serialized) name in this param object. Effectively, this
-               * map is flattened to its parent instance.
-               */
-              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-              Map<String, Object> extraParams;
-
-              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
-                this.extraParams = extraParams;
-                this.pspMigration = pspMigration;
-              }
-
-              public static Builder builder() {
-                return new Builder();
-              }
-
-              public static class Builder {
-                private Map<String, Object> extraParams;
-
-                private PspMigration pspMigration;
-
-                /** Finalize and obtain parameter instance from this builder. */
-                public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
-                        .Protections
-                    build() {
-                  return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                      .Instant.Protections(this.extraParams, this.pspMigration);
-                }
-
-                /**
-                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                 * original map. See {@link
-                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant.Protections#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putExtraParam(String key, Object value) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.put(key, value);
-                  return this;
-                }
-
-                /**
-                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                 * the original map. See {@link
-                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant.Protections#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putAllExtraParam(Map<String, Object> map) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.putAll(map);
-                  return this;
-                }
-
-                /** <strong>Required.</strong> Parameter to request psp_migration protection. */
-                public Builder setPspMigration(
-                    AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
-                            .Protections.PspMigration
-                        pspMigration) {
-                  this.pspMigration = pspMigration;
-                  return this;
-                }
-              }
-
-              @Getter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration {
-                /**
-                 * Map of extra parameters for custom features not available in this client library.
-                 * The content in this map is not serialized under this field's
-                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                 * the key is a root-level field (serialized) name in this param object.
-                 * Effectively, this map is flattened to its parent instance.
-                 */
-                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                Map<String, Object> extraParams;
-
-                /** <strong>Required.</strong> To request a protection, pass true. */
-                @SerializedName("requested")
-                Boolean requested;
-
-                private PspMigration(Map<String, Object> extraParams, Boolean requested) {
-                  this.extraParams = extraParams;
-                  this.requested = requested;
-                }
-
-                public static Builder builder() {
-                  return new Builder();
-                }
-
-                public static class Builder {
-                  private Map<String, Object> extraParams;
-
-                  private Boolean requested;
-
-                  /** Finalize and obtain parameter instance from this builder. */
-                  public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                          .Instant.Protections.PspMigration
-                      build() {
-                    return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                        .Instant.Protections.PspMigration(this.extraParams, this.requested);
-                  }
-
-                  /**
-                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                   * original map. See {@link
-                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant.Protections.PspMigration#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putExtraParam(String key, Object value) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.put(key, value);
-                    return this;
-                  }
-
-                  /**
-                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                   * the original map. See {@link
-                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant.Protections.PspMigration#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putAllExtraParam(Map<String, Object> map) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.putAll(map);
-                    return this;
-                  }
-
-                  /** <strong>Required.</strong> To request a protection, pass true. */
-                  public Builder setRequested(Boolean requested) {
-                    this.requested = requested;
-                    return this;
-                  }
-                }
-              }
-            }
-          }
-
-          @Getter
-          @EqualsAndHashCode(callSuper = false)
           public static class Local {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -50196,7 +51060,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class SepaCredit {
+          public static class Sepa {
             /**
              * Map of extra parameters for custom features not available in this client library. The
              * content in this map is not serialized under this field's {@code @SerializedName}
@@ -50218,7 +51082,7 @@ public class AccountCreateParams extends ApiRequestParams {
             @SerializedName("requested")
             Boolean requested;
 
-            private SepaCredit(
+            private Sepa(
                 Map<String, Object> extraParams, Protections protections, Boolean requested) {
               this.extraParams = extraParams;
               this.protections = protections;
@@ -50237,18 +51101,17 @@ public class AccountCreateParams extends ApiRequestParams {
               private Boolean requested;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                      .SepaCredit
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa
                   build() {
                 return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                    .SepaCredit(this.extraParams, this.protections, this.requested);
+                    .Sepa(this.extraParams, this.protections, this.requested);
               }
 
               /**
                * Add a key/value pair to `extraParams` map. A map is initialized for the first
                * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit#extraParams}
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa#extraParams}
                * for the field documentation.
                */
               public Builder putExtraParam(String key, Object value) {
@@ -50263,7 +51126,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit#extraParams}
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -50278,7 +51141,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
                */
               public Builder setProtections(
-                  AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit
+                  AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa
                           .Protections
                       protections) {
                 this.protections = protections;
@@ -50327,18 +51190,18 @@ public class AccountCreateParams extends ApiRequestParams {
                 private PspMigration pspMigration;
 
                 /** Finalize and obtain parameter instance from this builder. */
-                public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                        .SepaCredit.Protections
+                public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa
+                        .Protections
                     build() {
                   return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                      .SepaCredit.Protections(this.extraParams, this.pspMigration);
+                      .Sepa.Protections(this.extraParams, this.pspMigration);
                 }
 
                 /**
                  * Add a key/value pair to `extraParams` map. A map is initialized for the first
                  * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                  * original map. See {@link
-                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit.Protections#extraParams}
+                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa.Protections#extraParams}
                  * for the field documentation.
                  */
                 public Builder putExtraParam(String key, Object value) {
@@ -50353,7 +51216,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                  * first `put/putAll` call, and subsequent calls add additional key/value pairs to
                  * the original map. See {@link
-                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit.Protections#extraParams}
+                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa.Protections#extraParams}
                  * for the field documentation.
                  */
                 public Builder putAllExtraParam(Map<String, Object> map) {
@@ -50366,7 +51229,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
                 /** <strong>Required.</strong> Parameter to request psp_migration protection. */
                 public Builder setPspMigration(
-                    AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit
+                    AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa
                             .Protections.PspMigration
                         pspMigration) {
                   this.pspMigration = pspMigration;
@@ -50406,18 +51269,18 @@ public class AccountCreateParams extends ApiRequestParams {
                   private Boolean requested;
 
                   /** Finalize and obtain parameter instance from this builder. */
-                  public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                          .SepaCredit.Protections.PspMigration
+                  public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa
+                          .Protections.PspMigration
                       build() {
                     return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                        .SepaCredit.Protections.PspMigration(this.extraParams, this.requested);
+                        .Sepa.Protections.PspMigration(this.extraParams, this.requested);
                   }
 
                   /**
                    * Add a key/value pair to `extraParams` map. A map is initialized for the first
                    * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                    * original map. See {@link
-                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit.Protections.PspMigration#extraParams}
+                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa.Protections.PspMigration#extraParams}
                    * for the field documentation.
                    */
                   public Builder putExtraParam(String key, Object value) {
@@ -50432,7 +51295,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                    * first `put/putAll` call, and subsequent calls add additional key/value pairs to
                    * the original map. See {@link
-                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit.Protections.PspMigration#extraParams}
+                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa.Protections.PspMigration#extraParams}
                    * for the field documentation.
                    */
                   public Builder putAllExtraParam(Map<String, Object> map) {
@@ -50950,264 +51813,6 @@ public class AccountCreateParams extends ApiRequestParams {
                    * first `put/putAll` call, and subsequent calls add additional key/value pairs to
                    * the original map. See {@link
                    * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Swift.Protections.PspMigration#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putAllExtraParam(Map<String, Object> map) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.putAll(map);
-                    return this;
-                  }
-
-                  /** <strong>Required.</strong> To request a protection, pass true. */
-                  public Builder setRequested(Boolean requested) {
-                    this.requested = requested;
-                    return this;
-                  }
-                }
-              }
-            }
-          }
-
-          @Getter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Wire {
-            /**
-             * Map of extra parameters for custom features not available in this client library. The
-             * content in this map is not serialized under this field's {@code @SerializedName}
-             * value. Instead, each key/value pair is serialized as if the key is a root-level field
-             * (serialized) name in this param object. Effectively, this map is flattened to its
-             * parent instance.
-             */
-            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-            Map<String, Object> extraParams;
-
-            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * <strong>Required.</strong> To request a new Capability for an account, pass true.
-             * There can be a delay before the requested Capability becomes active.
-             */
-            @SerializedName("requested")
-            Boolean requested;
-
-            private Wire(
-                Map<String, Object> extraParams, Protections protections, Boolean requested) {
-              this.extraParams = extraParams;
-              this.protections = protections;
-              this.requested = requested;
-            }
-
-            public static Builder builder() {
-              return new Builder();
-            }
-
-            public static class Builder {
-              private Map<String, Object> extraParams;
-
-              private Protections protections;
-
-              private Boolean requested;
-
-              /** Finalize and obtain parameter instance from this builder. */
-              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire
-                  build() {
-                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                    .Wire(this.extraParams, this.protections, this.requested);
-              }
-
-              /**
-               * Add a key/value pair to `extraParams` map. A map is initialized for the first
-               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire#extraParams}
-               * for the field documentation.
-               */
-              public Builder putExtraParam(String key, Object value) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.put(key, value);
-                return this;
-              }
-
-              /**
-               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire#extraParams}
-               * for the field documentation.
-               */
-              public Builder putAllExtraParam(Map<String, Object> map) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.putAll(map);
-                return this;
-              }
-
-              /**
-               * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
-               */
-              public Builder setProtections(
-                  AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire
-                          .Protections
-                      protections) {
-                this.protections = protections;
-                return this;
-              }
-
-              /**
-               * <strong>Required.</strong> To request a new Capability for an account, pass true.
-               * There can be a delay before the requested Capability becomes active.
-               */
-              public Builder setRequested(Boolean requested) {
-                this.requested = requested;
-                return this;
-              }
-            }
-
-            @Getter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections {
-              /**
-               * Map of extra parameters for custom features not available in this client library.
-               * The content in this map is not serialized under this field's
-               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
-               * key is a root-level field (serialized) name in this param object. Effectively, this
-               * map is flattened to its parent instance.
-               */
-              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-              Map<String, Object> extraParams;
-
-              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
-                this.extraParams = extraParams;
-                this.pspMigration = pspMigration;
-              }
-
-              public static Builder builder() {
-                return new Builder();
-              }
-
-              public static class Builder {
-                private Map<String, Object> extraParams;
-
-                private PspMigration pspMigration;
-
-                /** Finalize and obtain parameter instance from this builder. */
-                public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire
-                        .Protections
-                    build() {
-                  return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                      .Wire.Protections(this.extraParams, this.pspMigration);
-                }
-
-                /**
-                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                 * original map. See {@link
-                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire.Protections#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putExtraParam(String key, Object value) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.put(key, value);
-                  return this;
-                }
-
-                /**
-                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                 * the original map. See {@link
-                 * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire.Protections#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putAllExtraParam(Map<String, Object> map) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.putAll(map);
-                  return this;
-                }
-
-                /** <strong>Required.</strong> Parameter to request psp_migration protection. */
-                public Builder setPspMigration(
-                    AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire
-                            .Protections.PspMigration
-                        pspMigration) {
-                  this.pspMigration = pspMigration;
-                  return this;
-                }
-              }
-
-              @Getter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration {
-                /**
-                 * Map of extra parameters for custom features not available in this client library.
-                 * The content in this map is not serialized under this field's
-                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                 * the key is a root-level field (serialized) name in this param object.
-                 * Effectively, this map is flattened to its parent instance.
-                 */
-                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                Map<String, Object> extraParams;
-
-                /** <strong>Required.</strong> To request a protection, pass true. */
-                @SerializedName("requested")
-                Boolean requested;
-
-                private PspMigration(Map<String, Object> extraParams, Boolean requested) {
-                  this.extraParams = extraParams;
-                  this.requested = requested;
-                }
-
-                public static Builder builder() {
-                  return new Builder();
-                }
-
-                public static class Builder {
-                  private Map<String, Object> extraParams;
-
-                  private Boolean requested;
-
-                  /** Finalize and obtain parameter instance from this builder. */
-                  public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire
-                          .Protections.PspMigration
-                      build() {
-                    return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
-                        .Wire.Protections.PspMigration(this.extraParams, this.requested);
-                  }
-
-                  /**
-                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                   * original map. See {@link
-                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire.Protections.PspMigration#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putExtraParam(String key, Object value) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.put(key, value);
-                    return this;
-                  }
-
-                  /**
-                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                   * the original map. See {@link
-                   * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire.Protections.PspMigration#extraParams}
                    * for the field documentation.
                    */
                   public Builder putAllExtraParam(Map<String, Object> map) {
@@ -53904,7 +54509,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * &amp; time UTC value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        java.time.Instant date;
+        Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -53925,7 +54530,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String userAgent;
 
         private DirectorshipDeclaration(
-            java.time.Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+            Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -53937,7 +54542,7 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private java.time.Instant date;
+          private Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -53955,7 +54560,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * The time marking when the director attestation was made. Represented as a RFC 3339 date
            * &amp; time UTC value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(java.time.Instant date) {
+          public Builder setDate(Instant date) {
             this.date = date;
             return this;
           }
@@ -54013,7 +54618,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        java.time.Instant date;
+        Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -54034,7 +54639,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String userAgent;
 
         private OwnershipDeclaration(
-            java.time.Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+            Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -54046,7 +54651,7 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private java.time.Instant date;
+          private Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -54065,7 +54670,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * 3339 date &amp; time UTC value in millisecond precision, for example:
            * 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(java.time.Instant date) {
+          public Builder setDate(Instant date) {
             this.date = date;
             return this;
           }
@@ -54286,7 +54891,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        java.time.Instant date;
+        Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -54307,7 +54912,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String userAgent;
 
         private RepresentativeDeclaration(
-            java.time.Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+            Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -54319,7 +54924,7 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private java.time.Instant date;
+          private Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -54338,7 +54943,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * 3339 date &amp; time UTC value in millisecond precision, for example:
            * 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(java.time.Instant date) {
+          public Builder setDate(Instant date) {
             this.date = date;
             return this;
           }
@@ -54390,11 +54995,7 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class TermsOfService {
-        /**
-         * Details on the Account's acceptance of the <a
-         * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-         * Agreement</a>.
-         */
+        /** Details on the Account's acceptance of the Stripe Services Agreement. */
         @SerializedName("account")
         Account account;
 
@@ -54479,11 +55080,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.moneyManager);
           }
 
-          /**
-           * Details on the Account's acceptance of the <a
-           * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-           * Agreement</a>.
-           */
+          /** Details on the Account's acceptance of the Stripe Services Agreement. */
           public Builder setAccount(
               AccountCreateParams.Identity.Attestations.TermsOfService.Account account) {
             this.account = account;
@@ -54569,7 +55166,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          java.time.Instant date;
+          Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -54596,10 +55193,7 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private Account(
-              java.time.Instant date,
-              Map<String, Object> extraParams,
-              String ip,
-              String userAgent) {
+              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -54611,7 +55205,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private java.time.Instant date;
+            private Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -54630,7 +55224,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(java.time.Instant date) {
+            public Builder setDate(Instant date) {
               this.date = date;
               return this;
             }
@@ -54979,7 +55573,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              java.time.Instant date;
+              Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -55006,10 +55600,7 @@ public class AccountCreateParams extends ApiRequestParams {
               String userAgent;
 
               private AccountHolder(
-                  java.time.Instant date,
-                  Map<String, Object> extraParams,
-                  String ip,
-                  String userAgent) {
+                  Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -55021,7 +55612,7 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private java.time.Instant date;
+                private Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -55043,7 +55634,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(java.time.Instant date) {
+                public Builder setDate(Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -55241,7 +55832,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                java.time.Instant date;
+                Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -55268,10 +55859,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    java.time.Instant date,
-                    Map<String, Object> extraParams,
-                    String ip,
-                    String userAgent) {
+                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -55283,7 +55871,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private java.time.Instant date;
+                  private Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -55305,7 +55893,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(java.time.Instant date) {
+                  public Builder setDate(Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -55478,7 +56066,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -55505,10 +56093,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -55520,7 +56105,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -55542,7 +56127,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -55606,7 +56191,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -55633,10 +56218,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -55648,7 +56230,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -55670,7 +56252,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -55869,7 +56451,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -55896,10 +56478,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -55911,7 +56490,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -55933,7 +56512,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -55997,7 +56576,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -56024,10 +56603,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -56039,7 +56615,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -56061,7 +56637,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -56125,7 +56701,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -56152,10 +56728,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -56167,7 +56740,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -56189,7 +56762,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -56416,7 +56989,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                java.time.Instant date;
+                Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -56443,10 +57016,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    java.time.Instant date,
-                    Map<String, Object> extraParams,
-                    String ip,
-                    String userAgent) {
+                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -56458,7 +57028,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private java.time.Instant date;
+                  private Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -56480,7 +57050,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(java.time.Instant date) {
+                  public Builder setDate(Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -56678,7 +57248,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -56705,10 +57275,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -56720,7 +57287,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -56742,7 +57309,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -56806,7 +57373,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -56833,10 +57400,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -56848,7 +57412,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -56870,7 +57434,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -56934,7 +57498,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -56961,10 +57525,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -56976,7 +57537,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -56998,7 +57559,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -57172,7 +57733,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -57199,10 +57760,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -57214,7 +57772,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -57236,7 +57794,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -57300,7 +57858,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -57327,10 +57885,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -57342,7 +57897,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -57364,7 +57919,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -57540,7 +58095,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -57567,10 +58122,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -57582,7 +58134,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -57604,7 +58156,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -57668,7 +58220,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -57695,10 +58247,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -57710,7 +58259,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -57732,7 +58281,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -57906,7 +58455,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                java.time.Instant date;
+                Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -57933,10 +58482,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    java.time.Instant date,
-                    Map<String, Object> extraParams,
-                    String ip,
-                    String userAgent) {
+                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -57948,7 +58494,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private java.time.Instant date;
+                  private Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -57970,7 +58516,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(java.time.Instant date) {
+                  public Builder setDate(Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -58168,7 +58714,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -58195,10 +58741,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -58210,7 +58753,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -58232,7 +58775,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -58296,7 +58839,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -58323,10 +58866,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -58338,7 +58878,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -58360,7 +58900,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -58424,7 +58964,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -58451,10 +58991,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -58466,7 +59003,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -58488,7 +59025,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -58554,7 +59091,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              java.time.Instant date;
+              Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -58581,10 +59118,7 @@ public class AccountCreateParams extends ApiRequestParams {
               String userAgent;
 
               private GlobalAccountHolder(
-                  java.time.Instant date,
-                  Map<String, Object> extraParams,
-                  String ip,
-                  String userAgent) {
+                  Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -58596,7 +59130,7 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private java.time.Instant date;
+                private Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -58618,7 +59152,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(java.time.Instant date) {
+                public Builder setDate(Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -58790,7 +59324,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                java.time.Instant date;
+                Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -58817,10 +59351,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    java.time.Instant date,
-                    Map<String, Object> extraParams,
-                    String ip,
-                    String userAgent) {
+                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -58832,7 +59363,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private java.time.Instant date;
+                  private Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -58854,7 +59385,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(java.time.Instant date) {
+                  public Builder setDate(Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -59027,7 +59558,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -59054,10 +59585,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -59069,7 +59597,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -59091,7 +59619,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -59155,7 +59683,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -59182,10 +59710,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -59197,7 +59722,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -59219,7 +59744,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -59451,7 +59976,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              java.time.Instant date;
+              Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -59478,10 +60003,7 @@ public class AccountCreateParams extends ApiRequestParams {
               String userAgent;
 
               private AccountHolder(
-                  java.time.Instant date,
-                  Map<String, Object> extraParams,
-                  String ip,
-                  String userAgent) {
+                  Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -59493,7 +60015,7 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private java.time.Instant date;
+                private Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -59514,7 +60036,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(java.time.Instant date) {
+                public Builder setDate(Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -59688,7 +60210,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                java.time.Instant date;
+                Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -59715,10 +60237,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    java.time.Instant date,
-                    Map<String, Object> extraParams,
-                    String ip,
-                    String userAgent) {
+                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -59730,7 +60249,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private java.time.Instant date;
+                  private Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -59752,7 +60271,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(java.time.Instant date) {
+                  public Builder setDate(Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -59950,7 +60469,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -59977,10 +60496,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -59992,7 +60508,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -60014,7 +60530,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -60078,7 +60594,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -60105,10 +60621,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -60120,7 +60633,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -60142,7 +60655,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -60206,7 +60719,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -60233,10 +60746,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -60248,7 +60758,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -60270,7 +60780,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -60555,7 +61065,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -60582,10 +61092,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -60597,7 +61104,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -60619,7 +61126,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -60683,7 +61190,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -60710,10 +61217,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -60725,7 +61229,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -60747,7 +61251,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -60811,7 +61315,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -60838,10 +61342,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -60853,7 +61354,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -60875,7 +61376,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -60941,7 +61442,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              java.time.Instant date;
+              Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -60968,10 +61469,7 @@ public class AccountCreateParams extends ApiRequestParams {
               String userAgent;
 
               private GlobalAccountHolder(
-                  java.time.Instant date,
-                  Map<String, Object> extraParams,
-                  String ip,
-                  String userAgent) {
+                  Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -60983,7 +61481,7 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private java.time.Instant date;
+                private Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -61005,7 +61503,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(java.time.Instant date) {
+                public Builder setDate(Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -61311,7 +61809,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -61338,10 +61836,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -61353,7 +61848,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -61375,7 +61870,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -61439,7 +61934,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -61466,10 +61961,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -61481,7 +61973,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -61503,7 +61995,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -61567,7 +62059,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -61594,10 +62086,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -61609,7 +62098,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -61631,7 +62120,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -61830,7 +62319,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -61857,10 +62346,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -61872,7 +62358,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -61894,7 +62380,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -61958,7 +62444,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -61985,10 +62471,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -62000,7 +62483,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -62022,7 +62505,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -62086,7 +62569,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  java.time.Instant date;
+                  Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -62113,10 +62596,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      java.time.Instant date,
-                      Map<String, Object> extraParams,
-                      String ip,
-                      String userAgent) {
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -62128,7 +62608,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private java.time.Instant date;
+                    private Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -62150,7 +62630,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(java.time.Instant date) {
+                    public Builder setDate(Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -62218,7 +62698,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          java.time.Instant date;
+          Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -62245,10 +62725,7 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private ConsumerMoneyManager(
-              java.time.Instant date,
-              Map<String, Object> extraParams,
-              String ip,
-              String userAgent) {
+              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -62260,7 +62737,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private java.time.Instant date;
+            private Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -62280,7 +62757,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(java.time.Instant date) {
+            public Builder setDate(Instant date) {
               this.date = date;
               return this;
             }
@@ -62344,7 +62821,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          java.time.Instant date;
+          Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -62371,10 +62848,7 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private ConsumerPrivacyDisclosures(
-              java.time.Instant date,
-              Map<String, Object> extraParams,
-              String ip,
-              String userAgent) {
+              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -62386,7 +62860,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private java.time.Instant date;
+            private Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -62407,7 +62881,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(java.time.Instant date) {
+            public Builder setDate(Instant date) {
               this.date = date;
               return this;
             }
@@ -62471,7 +62945,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          java.time.Instant date;
+          Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -62498,10 +62972,7 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private CryptoMoneyManager(
-              java.time.Instant date,
-              Map<String, Object> extraParams,
-              String ip,
-              String userAgent) {
+              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -62513,7 +62984,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private java.time.Instant date;
+            private Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -62533,7 +63004,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(java.time.Instant date) {
+            public Builder setDate(Instant date) {
               this.date = date;
               return this;
             }
@@ -62597,7 +63068,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          java.time.Instant date;
+          Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -62624,10 +63095,7 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private MoneyManager(
-              java.time.Instant date,
-              Map<String, Object> extraParams,
-              String ip,
-              String userAgent) {
+              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -62639,7 +63107,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private java.time.Instant date;
+            private Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -62658,7 +63126,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(java.time.Instant date) {
+            public Builder setDate(Instant date) {
               this.date = date;
               return this;
             }
@@ -63243,6 +63711,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("administrative")
           ADMINISTRATIVE("administrative"),
 
+          @SerializedName("physical")
+          PHYSICAL("physical"),
+
           @SerializedName("principal_place_of_business")
           PRINCIPAL_PLACE_OF_BUSINESS("principal_place_of_business");
 
@@ -63575,6 +64046,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("proof_of_address")
         ProofOfAddress proofOfAddress;
 
+        /** One or more documents that demonstrate proof of business presence. */
+        @SerializedName("proof_of_business_presence")
+        ProofOfBusinessPresence proofOfBusinessPresence;
+
         /**
          * One or more documents showing the company's proof of registration with the national
          * business registry.
@@ -63596,6 +64071,7 @@ public class AccountCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             PrimaryVerification primaryVerification,
             ProofOfAddress proofOfAddress,
+            ProofOfBusinessPresence proofOfBusinessPresence,
             ProofOfRegistration proofOfRegistration,
             ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership) {
           this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
@@ -63607,6 +64083,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.extraParams = extraParams;
           this.primaryVerification = primaryVerification;
           this.proofOfAddress = proofOfAddress;
+          this.proofOfBusinessPresence = proofOfBusinessPresence;
           this.proofOfRegistration = proofOfRegistration;
           this.proofOfUltimateBeneficialOwnership = proofOfUltimateBeneficialOwnership;
         }
@@ -63634,6 +64111,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private ProofOfAddress proofOfAddress;
 
+          private ProofOfBusinessPresence proofOfBusinessPresence;
+
           private ProofOfRegistration proofOfRegistration;
 
           private ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
@@ -63650,6 +64129,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.extraParams,
                 this.primaryVerification,
                 this.proofOfAddress,
+                this.proofOfBusinessPresence,
                 this.proofOfRegistration,
                 this.proofOfUltimateBeneficialOwnership);
           }
@@ -63757,6 +64237,14 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
 
+          /** One or more documents that demonstrate proof of business presence. */
+          public Builder setProofOfBusinessPresence(
+              AccountCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence
+                  proofOfBusinessPresence) {
+            this.proofOfBusinessPresence = proofOfBusinessPresence;
+            return this;
+          }
+
           /**
            * One or more documents showing the company's proof of registration with the national
            * business registry.
@@ -63793,8 +64281,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -63931,8 +64419,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -64064,8 +64552,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -64202,8 +64690,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -64338,8 +64826,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -64476,8 +64964,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -64611,9 +65099,8 @@ public class AccountCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -64682,8 +65169,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountCreateParams.Identity.BusinessDetails.Documents.PrimaryVerification.FrontBack
@@ -64708,11 +65195,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -64728,11 +65214,11 @@ public class AccountCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * <strong>Required.</strong> A <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-             * representing the front of the verification document. The purpose of the uploaded file
-             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+             * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+             * upload</a> token representing the front of the verification document. The purpose of
+             * the uploaded file should be 'identity_document'. The uploaded file needs to be a
+             * color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less
+             * than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -64763,11 +65249,11 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -64806,11 +65292,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> A <a
-               * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-               * representing the front of the verification document. The purpose of the uploaded
-               * file should be 'identity_document'. The uploaded file needs to be a color image
-               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
-               * in size.
+               * href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+               * the front of the verification document. The purpose of the uploaded file should be
+               * 'identity_document'. The uploaded file needs to be a color image (smaller than
+               * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -64847,8 +65332,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -64967,6 +65452,142 @@ public class AccountCreateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
+        public static class ProofOfBusinessPresence {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> One or more document IDs returned by a <a
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
+           */
+          @SerializedName("files")
+          List<String> files;
+
+          /**
+           * <strong>Required.</strong> The format of the document. Currently supports {@code files}
+           * only.
+           */
+          @SerializedName("type")
+          Type type;
+
+          private ProofOfBusinessPresence(
+              Map<String, Object> extraParams, List<String> files, Type type) {
+            this.extraParams = extraParams;
+            this.files = files;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private List<String> files;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence
+                build() {
+              return new AccountCreateParams.Identity.BusinessDetails.Documents
+                  .ProofOfBusinessPresence(this.extraParams, this.files, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `files` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * AccountCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#files}
+             * for the field documentation.
+             */
+            public Builder addFile(String element) {
+              if (this.files == null) {
+                this.files = new ArrayList<>();
+              }
+              this.files.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `files` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * AccountCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#files}
+             * for the field documentation.
+             */
+            public Builder addAllFile(List<String> elements) {
+              if (this.files == null) {
+                this.files = new ArrayList<>();
+              }
+              this.files.addAll(elements);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The format of the document. Currently supports {@code
+             * files} only.
+             */
+            public Builder setType(
+                AccountCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence.Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("files")
+            FILES("files");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class ProofOfRegistration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -64980,8 +65601,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -65208,8 +65829,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -68139,8 +68760,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -68273,8 +68894,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -68405,9 +69026,8 @@ public class AccountCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -68475,8 +69095,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountCreateParams.Identity.Individual.Documents.PrimaryVerification.FrontBack
@@ -68500,11 +69120,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -68520,11 +69139,11 @@ public class AccountCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * <strong>Required.</strong> A <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-             * representing the front of the verification document. The purpose of the uploaded file
-             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+             * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+             * upload</a> token representing the front of the verification document. The purpose of
+             * the uploaded file should be 'identity_document'. The uploaded file needs to be a
+             * color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less
+             * than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -68554,11 +69173,11 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -68597,11 +69216,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> A <a
-               * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-               * representing the front of the verification document. The purpose of the uploaded
-               * file should be 'identity_document'. The uploaded file needs to be a color image
-               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
-               * in size.
+               * href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+               * the front of the verification document. The purpose of the uploaded file should be
+               * 'identity_document'. The uploaded file needs to be a color image (smaller than
+               * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -68637,9 +69255,8 @@ public class AccountCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -68707,8 +69324,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountCreateParams.Identity.Individual.Documents.SecondaryVerification.FrontBack
@@ -68732,11 +69349,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -68752,11 +69368,11 @@ public class AccountCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * <strong>Required.</strong> A <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-             * representing the front of the verification document. The purpose of the uploaded file
-             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+             * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+             * upload</a> token representing the front of the verification document. The purpose of
+             * the uploaded file should be 'identity_document'. The uploaded file needs to be a
+             * color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less
+             * than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -68787,11 +69403,11 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -68830,11 +69446,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> A <a
-               * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-               * representing the front of the verification document. The purpose of the uploaded
-               * file should be 'identity_document'. The uploaded file needs to be a color image
-               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
-               * in size.
+               * href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+               * the front of the verification document. The purpose of the uploaded file should be
+               * 'identity_document'. The uploaded file needs to be a color image (smaller than
+               * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -68871,8 +69486,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;

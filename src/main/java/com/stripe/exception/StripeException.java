@@ -125,6 +125,9 @@ public abstract class StripeException extends Exception {
       case "cannot_proceed":
         return com.stripe.exception.CannotProceedException.parse(
             body, statusCode, requestId, responseGetter);
+      case "capability_not_enabled":
+        return com.stripe.exception.CapabilityNotEnabledException.parse(
+            body, statusCode, requestId, responseGetter);
       case "controlled_by_alternate_resource":
         return com.stripe.exception.ControlledByAlternateResourceException.parse(
             body, statusCode, requestId, responseGetter);

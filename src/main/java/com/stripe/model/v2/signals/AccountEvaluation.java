@@ -172,9 +172,9 @@ public class AccountEvaluation extends StripeObject implements HasId {
     @SerializedName("user_account_sharing")
     UserAccountSharing userAccountSharing;
 
-    /** User-merchant fit result for the evaluation, when available. */
-    @SerializedName("user_merchant_fit")
-    UserMerchantFit userMerchantFit;
+    /** User affinity result for the evaluation, when available. */
+    @SerializedName("user_affinity")
+    UserAffinity userAffinity;
 
     /** User multi-accounting result for the evaluation, when available. */
     @SerializedName("user_multi_accounting")
@@ -257,31 +257,31 @@ public class AccountEvaluation extends StripeObject implements HasId {
       String signal;
     }
 
-    /** User-merchant fit result for the evaluation, when available. */
+    /** User affinity result for the evaluation, when available. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UserMerchantFit extends StripeObject {
+    public static class UserAffinity extends StripeObject {
       /** Timestamp at which the signal was evaluated. */
       @SerializedName("evaluated_at")
       Instant evaluatedAt;
 
       /**
-       * Categorical assessment of the user-merchant fit.
+       * Categorical assessment of the user affinity.
        *
        * <p>One of {@code standard}, {@code strong}, {@code unknown}, or {@code very_strong}.
        */
-      @SerializedName("fit_level")
-      String fitLevel;
+      @SerializedName("level")
+      String level;
 
       /**
-       * The specific fit score for the user, between 0.00 and 100.00. Absent when fit_level is
+       * The specific affinity score for the user, between 0.00 and 100.00. Absent when level is
        * unknown.
        */
       @SerializedName("score")
       BigDecimal score;
 
-      /** The account signal ID containing the full user-merchant fit signal result. */
+      /** The account signal ID containing the full user affinity signal result. */
       @SerializedName("signal")
       String signal;
     }

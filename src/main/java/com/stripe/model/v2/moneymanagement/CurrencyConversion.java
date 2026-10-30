@@ -11,35 +11,42 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The CurrencyConversion object. Contains details such as the amount debited and credited and the
- * FinancialAccount the CurrencyConversion was performed on.
+ * A Currency Conversion represents a standalone conversion between currencies in a <a
+ * href="https://docs.stripe.com/api/v2/money-management/financial-accounts">Financial Account</a>
+ * or the payments balance.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CurrencyConversion extends StripeObject implements HasId {
-  /** The time the CurrencyConversion was created at. */
+  /** The time the Currency Conversion was created at. */
   @SerializedName("created")
   Instant created;
 
-  /** The exchange rate used when processing the CurrencyConversion. */
+  /** The exchange rate used, excluding applicable fees. */
   @SerializedName("exchange_rate")
   String exchangeRate;
 
-  /** The FinancialAccount the CurrencyConversion was performed on. */
+  /**
+   * The ID of the Financial Account the Currency Conversion was created in. If {@code null}, it was
+   * created in the payments balance.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** The from block containing what was debited. */
+  /** The amount that was debited from the source currency. */
   @SerializedName("from")
   From from;
 
-  /** The id of the CurrencyConversion. */
+  /** The ID of the Currency Conversion. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** If the CurrencyConversion was performed in livemode or not. */
+  /**
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
+   */
   @SerializedName("livemode")
   Boolean livemode;
 
@@ -52,26 +59,26 @@ public class CurrencyConversion extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The to block containing what was credited. */
+  /** The amount that was credited to the destination currency. */
   @SerializedName("to")
   To to;
 
-  /** The from block containing what was debited. */
+  /** The amount that was debited from the source currency. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class From extends StripeObject {
-    /** Amount object. */
+    /** A specific amount. */
     @SerializedName("amount")
     Amount amount;
   }
 
-  /** The to block containing what was credited. */
+  /** The amount that was credited to the destination currency. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class To extends StripeObject {
-    /** Amount object. */
+    /** A specific amount. */
     @SerializedName("amount")
     Amount amount;
   }

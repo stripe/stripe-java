@@ -31,8 +31,8 @@ public class QueryRunRetrieveParams extends ApiRequestParams {
   List<QueryRunRetrieveParams.Include> include;
 
   /**
-   * The maximum number of inline {@code QueryRun} result rows to return. Defaults to 10. Maximum is
-   * 1000.
+   * The maximum number of inline {@code QueryRun} result rows to return. Defaults to 100. Maximum
+   * is 1000.
    */
   @SerializedName("limit")
   Long limit;
@@ -123,7 +123,7 @@ public class QueryRunRetrieveParams extends ApiRequestParams {
     }
 
     /**
-     * The maximum number of inline {@code QueryRun} result rows to return. Defaults to 10. Maximum
+     * The maximum number of inline {@code QueryRun} result rows to return. Defaults to 100. Maximum
      * is 1000.
      */
     public Builder setLimit(Long limit) {

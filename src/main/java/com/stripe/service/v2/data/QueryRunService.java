@@ -41,19 +41,31 @@ public final class QueryRunService extends ApiService {
             options);
     return this.request(request, QueryRun.class);
   }
-  /** Retrieves the status and results of a previously created {@code QueryRun}. */
+  /**
+   * Retrieves the status and results of a previously created {@code QueryRun}. Returns a {@code
+   * 404} error if the {@code QueryRun} doesn't exist or its retention period has ended.
+   */
   public QueryRun retrieve(String id, QueryRunRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieves the status and results of a previously created {@code QueryRun}. */
+  /**
+   * Retrieves the status and results of a previously created {@code QueryRun}. Returns a {@code
+   * 404} error if the {@code QueryRun} doesn't exist or its retention period has ended.
+   */
   public QueryRun retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (QueryRunRetrieveParams) null, options);
   }
-  /** Retrieves the status and results of a previously created {@code QueryRun}. */
+  /**
+   * Retrieves the status and results of a previously created {@code QueryRun}. Returns a {@code
+   * 404} error if the {@code QueryRun} doesn't exist or its retention period has ended.
+   */
   public QueryRun retrieve(String id) throws StripeException {
     return retrieve(id, (QueryRunRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieves the status and results of a previously created {@code QueryRun}. */
+  /**
+   * Retrieves the status and results of a previously created {@code QueryRun}. Returns a {@code
+   * 404} error if the {@code QueryRun} doesn't exist or its retention period has ended.
+   */
   public QueryRun retrieve(String id, QueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/data/query_runs/%s", ApiResource.urlEncodeId(id));

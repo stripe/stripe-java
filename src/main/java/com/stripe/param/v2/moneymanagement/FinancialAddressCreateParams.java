@@ -19,6 +19,9 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName("bank_account")
   BankAccount bankAccount;
 
+  /**
+   * Properties for creating a crypto wallet FinancialAddress. Requires {@code settlement_currency}.
+   */
   @SerializedName("crypto_wallet")
   CryptoWallet cryptoWallet;
 
@@ -38,6 +41,11 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName("financial_account")
   String financialAccount;
 
+  /**
+   * Open Enum. The currency the FinancialAddress settles into the FinancialAccount. Optional for
+   * {@code bank_account}, where it defaults to {@code bank_account.currency}; required for all
+   * other types.
+   */
   @SerializedName("settlement_currency")
   String settlementCurrency;
 
@@ -108,6 +116,10 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Properties for creating a crypto wallet FinancialAddress. Requires {@code
+     * settlement_currency}.
+     */
     public Builder setCryptoWallet(FinancialAddressCreateParams.CryptoWallet cryptoWallet) {
       this.cryptoWallet = cryptoWallet;
       return this;
@@ -148,6 +160,11 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Open Enum. The currency the FinancialAddress settles into the FinancialAccount. Optional for
+     * {@code bank_account}, where it defaults to {@code bank_account.currency}; required for all
+     * other types.
+     */
     public Builder setSettlementCurrency(String settlementCurrency) {
       this.settlementCurrency = settlementCurrency;
       return this;
@@ -166,11 +183,17 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class BankAccount {
-    /** The country for the bank account. Used to select the appropriate rails (e.g. for SEPA). */
+    /**
+     * The country where Stripe provisions the bank account. Each currency supports the country
+     * listed in its description. If omitted, Stripe selects that country.
+     */
     @SerializedName("country")
     String country;
 
-    /** <strong>Required.</strong> The currency of the bank account to provision. */
+    /**
+     * <strong>Required.</strong> The currency of the bank account to provision. Some currencies
+     * require preview or rollout access, as configured for your account.
+     */
     @SerializedName("currency")
     Currency currency;
 
@@ -206,13 +229,19 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
             this.country, this.currency, this.extraParams);
       }
 
-      /** The country for the bank account. Used to select the appropriate rails (e.g. for SEPA). */
+      /**
+       * The country where Stripe provisions the bank account. Each currency supports the country
+       * listed in its description. If omitted, Stripe selects that country.
+       */
       public Builder setCountry(String country) {
         this.country = country;
         return this;
       }
 
-      /** <strong>Required.</strong> The currency of the bank account to provision. */
+      /**
+       * <strong>Required.</strong> The currency of the bank account to provision. Some currencies
+       * require preview or rollout access, as configured for your account.
+       */
       public Builder setCurrency(FinancialAddressCreateParams.BankAccount.Currency currency) {
         this.currency = currency;
         return this;
@@ -267,6 +296,9 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
 
       @SerializedName("ngn")
       NGN("ngn"),
+
+      @SerializedName("pln")
+      PLN("pln"),
 
       @SerializedName("usd")
       USD("usd");

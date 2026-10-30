@@ -554,7 +554,7 @@ public class OutboundPaymentQuoteCreateParams extends ApiRequestParams {
         @SerializedName("preferred_network_options")
         PreferredNetworkOptions preferredNetworkOptions;
 
-        /** <strong>Required.</strong> The preferred networks to use for this OutboundPayment. */
+        /** The preferred networks to use for this OutboundPayment. */
         @SerializedName("preferred_networks")
         List<OutboundPaymentQuoteCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
             preferredNetworks;
@@ -909,6 +909,9 @@ public class OutboundPaymentQuoteCreateParams extends ApiRequestParams {
 
           @SerializedName("rtp")
           RTP("rtp"),
+
+          @SerializedName("sepa")
+          SEPA("sepa"),
 
           @SerializedName("sepa_credit")
           SEPA_CREDIT("sepa_credit"),

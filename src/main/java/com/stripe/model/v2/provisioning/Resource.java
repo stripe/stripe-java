@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,6 +26,14 @@ public class Resource extends StripeObject implements HasId {
    */
   @SerializedName("catalog")
   String catalog;
+
+  /**
+   * Names of the provider-issued configuration entries available for this resource. This is null
+   * unless explicitly included on RetrieveResource and the resource is complete with an available,
+   * unexpired configuration. Values are never exposed through this field.
+   */
+  @SerializedName("configuration")
+  Configuration configuration;
 
   /** Time at which the resource was created. */
   @SerializedName("created")
@@ -91,6 +100,23 @@ public class Resource extends StripeObject implements HasId {
   /** Message supplied by the provider when the resource becomes ready. */
   @SerializedName("user_message")
   UserMessage userMessage;
+
+  /**
+   * Names of the provider-issued configuration entries available for this resource. This is null
+   * unless explicitly included on RetrieveResource and the resource is complete with an available,
+   * unexpired configuration. Values are never exposed through this field.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Configuration extends StripeObject {
+    /**
+     * Exact top-level configuration key names, unique and sorted in ascending lexicographic order.
+     * This array is present and empty when the available configuration has no entries.
+     */
+    @SerializedName("key_names")
+    List<String> keyNames;
+  }
 
   /** Message supplied by the provider when the resource becomes ready. */
   @Getter

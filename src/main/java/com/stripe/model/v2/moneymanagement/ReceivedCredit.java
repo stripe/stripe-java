@@ -18,11 +18,14 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ReceivedCredit extends StripeObject implements HasId {
-  /** The amount and currency of the ReceivedCredit. */
+  /** The amount and currency credited to the FinancialAccount. */
   @SerializedName("amount")
   Amount amount;
 
-  /** The amount and currency of the ReceivedCredit that was received. */
+  /**
+   * The amount and currency Stripe received from the external source, before any conversion or
+   * fees.
+   */
   @SerializedName("amount_received")
   Amount amountReceived;
 
@@ -190,25 +193,19 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BankTransfer extends StripeObject {
-    /** Deprecated. Use {@code originating_bank_account.cpa} instead. */
-    @SerializedName("ca_bank_account")
-    CaBankAccount caBankAccount;
-
-    /** Deprecated. Use {@code originating_bank_account.iban} instead. */
-    @SerializedName("eu_bank_account")
-    EuBankAccount euBankAccount;
-
     /** Financial Address on which funds for ReceivedCredit were received. */
     @SerializedName("financial_address")
     String financialAddress;
 
-    /** Deprecated. Use {@code originating_bank_account.sort_code} instead. */
-    @SerializedName("gb_bank_account")
-    GbBankAccount gbBankAccount;
-
-    /** Deprecated. Use {@code originating_bank_account.clabe} instead. */
-    @SerializedName("mx_bank_account")
-    MxBankAccount mxBankAccount;
+    /**
+     * The money transmission network used to send funds for this ReceivedCredit.
+     *
+     * <p>One of {@code ach}, {@code acss}, {@code bre_b}, {@code chaps}, {@code fedwire}, {@code
+     * fps}, {@code nip}, {@code pix}, {@code rtp}, {@code sepa}, {@code sepa_instant}, {@code
+     * spei}, or {@code swift}.
+     */
+    @SerializedName("network")
+    String network;
 
     /**
      * Network-level detail for the transfer that created this ReceivedCredit. Present only for ACH.
@@ -220,132 +217,9 @@ public class ReceivedCredit extends StripeObject implements HasId {
     @SerializedName("originating_bank_account")
     OriginatingBankAccount originatingBankAccount;
 
-    /** Deprecated. Use {@code originating_bank_account.iban} instead. */
-    @SerializedName("sepa_bank_account")
-    SepaBankAccount sepaBankAccount;
-
     /** Freeform string set by originator of the external ReceivedCredit. */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
-
-    /** Deprecated. Use {@code originating_bank_account.aba} instead. */
-    @SerializedName("us_bank_account")
-    UsBankAccount usBankAccount;
-
-    /** Deprecated. Use {@code originating_bank_account.cpa} instead. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class CaBankAccount extends StripeObject {
-      /** The account holder name of the bank account the transfer was received from. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The bank name the transfer was received from. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /**
-       * The last 4 digits of the account number that originated the transfer. Depending on the
-       * bank, this may instead be the last 4 digits of the return account number.
-       */
-      @SerializedName("last4")
-      String last4;
-
-      /**
-       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-       *
-       * <p>One of {@code acss}, or {@code swift}.
-       */
-      @SerializedName("network")
-      String network;
-    }
-
-    /** Deprecated. Use {@code originating_bank_account.iban} instead. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class EuBankAccount extends StripeObject {
-      /** The account holder name of the bank account the transfer was received from. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The bank name the transfer was received from. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The bic of the account that originated the transfer. */
-      @SerializedName("bic")
-      String bic;
-
-      /** The last 4 digits of the account number that originated the transfer. */
-      @SerializedName("last4")
-      String last4;
-
-      /**
-       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-       *
-       * <p>Equal to {@code sepa}.
-       */
-      @SerializedName("network")
-      String network;
-    }
-
-    /** Deprecated. Use {@code originating_bank_account.sort_code} instead. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class GbBankAccount extends StripeObject {
-      /** The bank name the transfer was received from. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The bank name the transfer was received from. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The last 4 digits of the account number that originated the transfer. */
-      @SerializedName("last4")
-      String last4;
-
-      /**
-       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-       *
-       * <p>One of {@code chaps}, {@code fps}, or {@code swift}.
-       */
-      @SerializedName("network")
-      String network;
-
-      /** The sort code of the account that originated the transfer. */
-      @SerializedName("sort_code")
-      String sortCode;
-    }
-
-    /** Deprecated. Use {@code originating_bank_account.clabe} instead. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class MxBankAccount extends StripeObject {
-      /** The account holder name of the bank account the transfer was received from. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The bank name the transfer was received from. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The last 4 digits of the account number that originated the transfer. */
-      @SerializedName("last4")
-      String last4;
-
-      /**
-       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-       *
-       * <p>Equal to {@code spei}.
-       */
-      @SerializedName("network")
-      String network;
-    }
 
     /**
      * Network-level detail for the transfer that created this ReceivedCredit. Present only for ACH.
@@ -496,14 +370,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
         @SerializedName("last4")
         String last4;
 
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>One of {@code ach}, {@code rtp}, {@code swift}, or {@code us_domestic_wire}.
-         */
-        @SerializedName("network")
-        String network;
-
         /** The routing number of the account that originated the transfer. */
         @SerializedName("routing_number")
         String routingNumber;
@@ -524,14 +390,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The last 4 digits of the account number that originated the transfer. */
         @SerializedName("last4")
         String last4;
-
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>Equal to {@code bre_b}.
-         */
-        @SerializedName("network")
-        String network;
       }
 
       /**
@@ -557,14 +415,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The last 4 digits of the account number that originated the transfer. */
         @SerializedName("last4")
         String last4;
-
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>Equal to {@code spei}.
-         */
-        @SerializedName("network")
-        String network;
       }
 
       /**
@@ -590,14 +440,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The last 4 digits of the account number that originated the transfer. */
         @SerializedName("last4")
         String last4;
-
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>One of {@code acss}, or {@code swift}.
-         */
-        @SerializedName("network")
-        String network;
       }
 
       /**
@@ -627,14 +469,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The IBAN that originated the transfer. */
         @SerializedName("iban")
         String iban;
-
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>One of {@code sepa_credit_transfer}, or {@code swift}.
-         */
-        @SerializedName("network")
-        String network;
       }
 
       /**
@@ -660,14 +494,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The last 4 digits of the account number that originated the transfer. */
         @SerializedName("last4")
         String last4;
-
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>Equal to {@code nip}.
-         */
-        @SerializedName("network")
-        String network;
       }
 
       /**
@@ -689,14 +515,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The Pix BR code of the account that originated the transfer. */
         @SerializedName("br_code")
         String brCode;
-
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>Equal to {@code pix}.
-         */
-        @SerializedName("network")
-        String network;
       }
 
       /**
@@ -723,82 +541,10 @@ public class ReceivedCredit extends StripeObject implements HasId {
         @SerializedName("last4")
         String last4;
 
-        /**
-         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-         *
-         * <p>One of {@code chaps}, {@code fps}, or {@code swift}.
-         */
-        @SerializedName("network")
-        String network;
-
         /** The sort code of the account that originated the transfer. */
         @SerializedName("sort_code")
         String sortCode;
       }
-    }
-
-    /** Deprecated. Use {@code originating_bank_account.iban} instead. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class SepaBankAccount extends StripeObject {
-      /** The account holder name of the bank account the transfer was received from. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The bank name the transfer was received from. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The BIC of the SEPA account. */
-      @SerializedName("bic")
-      String bic;
-
-      /** The origination country of the bank transfer. */
-      @SerializedName("country")
-      String country;
-
-      /** The IBAN that originated the transfer. */
-      @SerializedName("iban")
-      String iban;
-
-      /**
-       * The money transmission network used to send funds for this ReceivedCredit.
-       *
-       * <p>One of {@code sepa_credit_transfer}, or {@code swift}.
-       */
-      @SerializedName("network")
-      String network;
-    }
-
-    /** Deprecated. Use {@code originating_bank_account.aba} instead. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
-      /** The name of the account holder that sent the payment. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The bank name the transfer was received from. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The last 4 digits of the account number that originated the transfer. */
-      @SerializedName("last4")
-      String last4;
-
-      /**
-       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-       *
-       * <p>One of {@code ach}, {@code rtp}, {@code swift}, or {@code us_domestic_wire}.
-       */
-      @SerializedName("network")
-      String network;
-
-      /** The routing number of the account that originated the transfer. */
-      @SerializedName("routing_number")
-      String routingNumber;
     }
   }
 

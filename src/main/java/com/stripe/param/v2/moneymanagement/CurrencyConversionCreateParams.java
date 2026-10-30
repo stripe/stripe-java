@@ -21,21 +21,27 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The FinancialAccount id to create the CurrencyConversion on. */
+  /**
+   * The ID of the Financial Account in which the Currency Conversion should be created. If omitted,
+   * it will be created in the payments balance.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
   /**
-   * <strong>Required.</strong> From amount object indicating the from currency or optional amount.
+   * <strong>Required.</strong> The source currency to debit, optionally including an amount. Either
+   * {@code from} or {@code to} must contain a specific amount (but not both).
    */
   @SerializedName("from")
   From from;
 
-  /** The FX quote to use for the conversion. */
+  /** The ID of the <a href="https://docs.stripe.com/api/fx_quotes">FX Quote</a> to use. */
   @SerializedName("fx_quote")
   String fxQuote;
 
-  /** <strong>Required.</strong> To amount object indicating the to currency or optional amount. */
+  /**
+   * <strong>Required.</strong> The destination currency to credit, optionally including an amount.
+   */
   @SerializedName("to")
   To to;
 
@@ -95,29 +101,33 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The FinancialAccount id to create the CurrencyConversion on. */
+    /**
+     * The ID of the Financial Account in which the Currency Conversion should be created. If
+     * omitted, it will be created in the payments balance.
+     */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
     }
 
     /**
-     * <strong>Required.</strong> From amount object indicating the from currency or optional
-     * amount.
+     * <strong>Required.</strong> The source currency to debit, optionally including an amount.
+     * Either {@code from} or {@code to} must contain a specific amount (but not both).
      */
     public Builder setFrom(CurrencyConversionCreateParams.From from) {
       this.from = from;
       return this;
     }
 
-    /** The FX quote to use for the conversion. */
+    /** The ID of the <a href="https://docs.stripe.com/api/fx_quotes">FX Quote</a> to use. */
     public Builder setFxQuote(String fxQuote) {
       this.fxQuote = fxQuote;
       return this;
     }
 
     /**
-     * <strong>Required.</strong> To amount object indicating the to currency or optional amount.
+     * <strong>Required.</strong> The destination currency to credit, optionally including an
+     * amount.
      */
     public Builder setTo(CurrencyConversionCreateParams.To to) {
       this.to = to;
@@ -128,11 +138,15 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class From {
-    /** Amount object. */
+    /** An amount specified for conversion. */
     @SerializedName("amount")
     Amount amount;
 
-    /** A lowercase alpha3 currency code like &quot;usd&quot;. */
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
     @SerializedName("currency")
     String currency;
 
@@ -168,13 +182,17 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
             this.amount, this.currency, this.extraParams);
       }
 
-      /** Amount object. */
+      /** An amount specified for conversion. */
       public Builder setAmount(Amount amount) {
         this.amount = amount;
         return this;
       }
 
-      /** A lowercase alpha3 currency code like &quot;usd&quot;. */
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
@@ -211,11 +229,15 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class To {
-    /** Amount object. */
+    /** An amount specified for conversion. */
     @SerializedName("amount")
     Amount amount;
 
-    /** A lowercase alpha3 currency code like &quot;usd&quot;. */
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
     @SerializedName("currency")
     String currency;
 
@@ -250,13 +272,17 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
         return new CurrencyConversionCreateParams.To(this.amount, this.currency, this.extraParams);
       }
 
-      /** Amount object. */
+      /** An amount specified for conversion. */
       public Builder setAmount(Amount amount) {
         this.amount = amount;
         return this;
       }
 
-      /** A lowercase alpha3 currency code like &quot;usd&quot;. */
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;

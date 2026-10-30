@@ -27,7 +27,7 @@ public class ReportRunRetrieveParams extends ApiRequestParams {
   List<ReportRunRetrieveParams.Include> include;
 
   /**
-   * The maximum number of inline {@code ReportRun} result rows to return. Defaults to 10. Maximum
+   * The maximum number of inline {@code ReportRun} result rows to return. Defaults to 100. Maximum
    * is 1000.
    */
   @SerializedName("limit")
@@ -119,8 +119,8 @@ public class ReportRunRetrieveParams extends ApiRequestParams {
     }
 
     /**
-     * The maximum number of inline {@code ReportRun} result rows to return. Defaults to 10. Maximum
-     * is 1000.
+     * The maximum number of inline {@code ReportRun} result rows to return. Defaults to 100.
+     * Maximum is 1000.
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;

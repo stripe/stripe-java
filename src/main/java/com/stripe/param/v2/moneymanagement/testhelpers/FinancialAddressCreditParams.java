@@ -130,6 +130,9 @@ public class FinancialAddressCreditParams extends ApiRequestParams {
     @SerializedName("chaps")
     CHAPS("chaps"),
 
+    @SerializedName("fedwire")
+    FEDWIRE("fedwire"),
+
     @SerializedName("fps")
     FPS("fps"),
 
@@ -139,8 +142,8 @@ public class FinancialAddressCreditParams extends ApiRequestParams {
     @SerializedName("rtp")
     RTP("rtp"),
 
-    @SerializedName("sepa_credit_transfer")
-    SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
+    @SerializedName("sepa")
+    SEPA("sepa"),
 
     @SerializedName("swift")
     SWIFT("swift"),

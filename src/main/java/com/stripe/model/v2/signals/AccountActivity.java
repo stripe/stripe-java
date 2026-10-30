@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -69,6 +70,10 @@ public class AccountActivity extends StripeObject implements HasId {
   @SerializedName("credential_change")
   CredentialChange credentialChange;
 
+  /** Details for the custom marketing action. Present only when type is custom_marketing_action. */
+  @SerializedName("custom_marketing_action")
+  CustomMarketingAction customMarketingAction;
+
   /** Unique identifier for the account activity. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -123,13 +128,20 @@ public class AccountActivity extends StripeObject implements HasId {
   RegistrationDecision registrationDecision;
 
   /**
+   * The AccountSignal that prompted this activity, when applicable. This historical reference may
+   * coexist with account_evaluation and remains present after the signal expires.
+   */
+  @SerializedName("triggering_signal")
+  String triggeringSignal;
+
+  /**
    * The type of activity.
    *
    * <p>One of {@code account_restricted}, {@code account_reviewed}, {@code account_suspended},
    * {@code account_takeover_confirmation}, {@code account_takeover_mitigation}, {@code
-   * account_takeover_report}, {@code credential_change}, {@code login_attempt}, {@code
-   * login_decision}, {@code mfa_addition}, {@code mfa_removal}, {@code registration_attempt}, or
-   * {@code registration_decision}.
+   * account_takeover_report}, {@code credential_change}, {@code custom_marketing_action}, {@code
+   * login_attempt}, {@code login_decision}, {@code mfa_addition}, {@code mfa_removal}, {@code
+   * registration_attempt}, or {@code registration_decision}.
    */
   @SerializedName("type")
   String type;
@@ -320,6 +332,28 @@ public class AccountActivity extends StripeObject implements HasId {
     String credentialType;
   }
 
+  /** Details for the custom marketing action. Present only when type is custom_marketing_action. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomMarketingAction extends StripeObject {
+    /** A description of the action. */
+    @SerializedName("description")
+    String description;
+
+    /**
+     * The outcome of the action.
+     *
+     * <p>One of {@code failed}, or {@code succeeded}.
+     */
+    @SerializedName("outcome")
+    String outcome;
+
+    /** Additional user-defined properties of the action. */
+    @SerializedName("properties")
+    Map<String, String> properties;
+  }
+
   /** Details for the login attempt. Present only when type is login_attempt. */
   @Getter
   @Setter
@@ -367,6 +401,10 @@ public class AccountActivity extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class LoginDecision extends StripeObject {
+    /** Multi-factor authentication challenges performed during the login process. */
+    @SerializedName("mfa_challenges")
+    List<AccountActivity.LoginDecision.MfaChallenge> mfaChallenges;
+
     /**
      * The action the merchant took following the evaluation.
      *
@@ -374,6 +412,32 @@ public class AccountActivity extends StripeObject implements HasId {
      */
     @SerializedName("status")
     String status;
+
+    /**
+     * For more details about MfaChallenge, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MfaChallenge extends StripeObject {
+      /**
+       * The authentication method used for the challenge.
+       *
+       * <p>One of {@code authenticator_app}, {@code email}, {@code hardware_key}, {@code other}, or
+       * {@code sms}.
+       */
+      @SerializedName("mfa_type")
+      String mfaType;
+
+      /**
+       * The outcome of the authentication challenge.
+       *
+       * <p>One of {@code failed}, {@code other}, or {@code succeeded}.
+       */
+      @SerializedName("status")
+      String status;
+    }
   }
 
   /** Details for the MFA addition. Present only when type is mfa_addition. */

@@ -31,7 +31,7 @@ public class GbBankAccount extends StripeObject implements HasId {
   /**
    * Closed Enum. The type of the bank account (checking or savings).
    *
-   * <p>One of {@code checking}, {@code futsu}, {@code savings}, or {@code toza}.
+   * <p>One of {@code checking}, or {@code savings}.
    */
   @SerializedName("bank_account_type")
   String bankAccountType;
@@ -51,6 +51,13 @@ public class GbBankAccount extends StripeObject implements HasId {
   /** Creation time. */
   @SerializedName("created")
   Instant created;
+
+  /**
+   * Uniquely identifies this particular bank account. You can use this attribute to check whether
+   * two recipients who've signed up with you are using the same bank account, for example.
+   */
+  @SerializedName("fingerprint")
+  String fingerprint;
 
   /** The ID of the GBBankAccount object. */
   @Getter(onMethod_ = {@Override})

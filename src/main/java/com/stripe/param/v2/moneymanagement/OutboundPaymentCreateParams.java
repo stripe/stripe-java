@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class OutboundPaymentCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The &quot;presentment amount&quot; to be sent to the recipient. */
+  /** <strong>Required.</strong> The requested amount and currency for the OutboundPayment. */
   @SerializedName("amount")
   Amount amount;
 
@@ -62,8 +62,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   RecipientNotification recipientNotification;
 
   /**
-   * The recipient verification id for this OutboundPayment. Only required for countries with
-   * regulatory mandates to verify recipient names before OutboundPayment creation.
+   * The ID of the RecipientVerification for this OutboundPayment. Required where recipient-name
+   * verification is mandated before creating an OutboundPayment.
    */
   @SerializedName("recipient_verification")
   String recipientVerification;
@@ -153,9 +153,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.to);
     }
 
-    /**
-     * <strong>Required.</strong> The &quot;presentment amount&quot; to be sent to the recipient.
-     */
+    /** <strong>Required.</strong> The requested amount and currency for the OutboundPayment. */
     public Builder setAmount(Amount amount) {
       this.amount = amount;
       return this;
@@ -258,8 +256,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient verification id for this OutboundPayment. Only required for countries with
-     * regulatory mandates to verify recipient names before OutboundPayment creation.
+     * The ID of the RecipientVerification for this OutboundPayment. Required where recipient-name
+     * verification is mandated before creating an OutboundPayment.
      */
     public Builder setRecipientVerification(String recipientVerification) {
       this.recipientVerification = recipientVerification;
@@ -651,8 +649,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-     * notifications to recipients. Do not send notifications when setting is NONE. Default to
-     * account setting when setting is CONFIGURED or not set.
+     * notifications to recipients. Do not send notifications when {@code setting} is {@code none}.
+     * Use the account setting when {@code setting} is {@code configured} or omitted.
      */
     @SerializedName("setting")
     Setting setting;
@@ -706,8 +704,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-       * notifications to recipients. Do not send notifications when setting is NONE. Default to
-       * account setting when setting is CONFIGURED or not set.
+       * notifications to recipients. Do not send notifications when {@code setting} is {@code
+       * none}. Use the account setting when {@code setting} is {@code configured} or omitted.
        */
       public Builder setSetting(OutboundPaymentCreateParams.RecipientNotification.Setting setting) {
         this.setting = setting;
@@ -737,10 +735,10 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     /**
      * Describes the currency to send to the recipient. If included, this currency must match a
      * currency supported by the destination. Can be omitted in the following cases: - destination
-     * only supports one currency - destination supports multiple currencies and one of the
-     * currencies matches the FA currency - destination supports multiple currencies and one of the
-     * currencies matches the presentment currency Note - when both FA currency and presentment
-     * currency are supported, we pick the FA currency to minimize FX.
+     * only supports one currency - destination supports multiple currencies and one matches {@code
+     * from.currency} - destination supports multiple currencies and one matches {@code
+     * amount.currency} When both {@code from.currency} and {@code amount.currency} are supported,
+     * Stripe selects {@code from.currency} to minimize currency conversion.
      */
     @SerializedName("currency")
     String currency;
@@ -807,10 +805,10 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       /**
        * Describes the currency to send to the recipient. If included, this currency must match a
        * currency supported by the destination. Can be omitted in the following cases: - destination
-       * only supports one currency - destination supports multiple currencies and one of the
-       * currencies matches the FA currency - destination supports multiple currencies and one of
-       * the currencies matches the presentment currency Note - when both FA currency and
-       * presentment currency are supported, we pick the FA currency to minimize FX.
+       * only supports one currency - destination supports multiple currencies and one matches
+       * {@code from.currency} - destination supports multiple currencies and one matches {@code
+       * amount.currency} When both {@code from.currency} and {@code amount.currency} are supported,
+       * Stripe selects {@code from.currency} to minimize currency conversion.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -952,7 +950,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         @SerializedName("preferred_network_options")
         PreferredNetworkOptions preferredNetworkOptions;
 
-        /** <strong>Required.</strong> The preferred networks to use for this OutboundPayment. */
+        /** The preferred networks to use for this OutboundPayment. */
         @SerializedName("preferred_networks")
         List<OutboundPaymentCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
             preferredNetworks;
@@ -1301,6 +1299,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
           @SerializedName("rtp")
           RTP("rtp"),
+
+          @SerializedName("sepa")
+          SEPA("sepa"),
 
           @SerializedName("sepa_credit")
           SEPA_CREDIT("sepa_credit"),

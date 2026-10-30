@@ -81,6 +81,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("invoice_settings")
   InvoiceSettings invoiceSettings;
 
+  /** Advertising attribution information for this customer. Only one attribution is supported. */
+  @SerializedName("marketing_attributions")
+  List<CustomerCreateParams.MarketingAttribution> marketingAttributions;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -147,6 +151,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       Object individualName,
       String invoicePrefix,
       InvoiceSettings invoiceSettings,
+      List<CustomerCreateParams.MarketingAttribution> marketingAttributions,
       Object metadata,
       String name,
       Long nextInvoiceSequence,
@@ -171,6 +176,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.individualName = individualName;
     this.invoicePrefix = invoicePrefix;
     this.invoiceSettings = invoiceSettings;
+    this.marketingAttributions = marketingAttributions;
     this.metadata = metadata;
     this.name = name;
     this.nextInvoiceSequence = nextInvoiceSequence;
@@ -213,6 +219,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private InvoiceSettings invoiceSettings;
 
+    private List<CustomerCreateParams.MarketingAttribution> marketingAttributions;
+
     private Object metadata;
 
     private String name;
@@ -253,6 +261,7 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.individualName,
           this.invoicePrefix,
           this.invoiceSettings,
+          this.marketingAttributions,
           this.metadata,
           this.name,
           this.nextInvoiceSequence,
@@ -411,6 +420,33 @@ public class CustomerCreateParams extends ApiRequestParams {
     /** Default invoice settings for this customer. */
     public Builder setInvoiceSettings(CustomerCreateParams.InvoiceSettings invoiceSettings) {
       this.invoiceSettings = invoiceSettings;
+      return this;
+    }
+
+    /**
+     * Add an element to `marketingAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link CustomerCreateParams#marketingAttributions} for the field documentation.
+     */
+    public Builder addMarketingAttribution(CustomerCreateParams.MarketingAttribution element) {
+      if (this.marketingAttributions == null) {
+        this.marketingAttributions = new ArrayList<>();
+      }
+      this.marketingAttributions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `marketingAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link CustomerCreateParams#marketingAttributions} for the field documentation.
+     */
+    public Builder addAllMarketingAttribution(
+        List<CustomerCreateParams.MarketingAttribution> elements) {
+      if (this.marketingAttributions == null) {
+        this.marketingAttributions = new ArrayList<>();
+      }
+      this.marketingAttributions.addAll(elements);
       return this;
     }
 
@@ -1325,6 +1361,279 @@ public class CustomerCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class MarketingAttribution {
+    /** Information used when sending conversions to an advertising platform. */
+    @SerializedName("ad_conversion")
+    AdConversion adConversion;
+
+    /** The advertising platform's click identifier. */
+    @SerializedName("click_id")
+    String clickId;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The Unix timestamp when the advertising interaction occurred. */
+    @SerializedName("occurred_at")
+    Long occurredAt;
+
+    /** The advertising group ID from the {@code utm_adgroup} parameter. */
+    @SerializedName("utm_adgroup")
+    String utmAdgroup;
+
+    /** The advertising content identifier from the {@code utm_content} parameter. */
+    @SerializedName("utm_content")
+    String utmContent;
+
+    /** The advertising campaign ID from the {@code utm_id} parameter. */
+    @SerializedName("utm_id")
+    String utmId;
+
+    /** The marketing medium from the {@code utm_medium} parameter. */
+    @SerializedName("utm_medium")
+    String utmMedium;
+
+    /** The referral source from the {@code utm_source} parameter. */
+    @SerializedName("utm_source")
+    String utmSource;
+
+    /** The paid search term from the {@code utm_term} parameter. */
+    @SerializedName("utm_term")
+    String utmTerm;
+
+    private MarketingAttribution(
+        AdConversion adConversion,
+        String clickId,
+        Map<String, Object> extraParams,
+        Long occurredAt,
+        String utmAdgroup,
+        String utmContent,
+        String utmId,
+        String utmMedium,
+        String utmSource,
+        String utmTerm) {
+      this.adConversion = adConversion;
+      this.clickId = clickId;
+      this.extraParams = extraParams;
+      this.occurredAt = occurredAt;
+      this.utmAdgroup = utmAdgroup;
+      this.utmContent = utmContent;
+      this.utmId = utmId;
+      this.utmMedium = utmMedium;
+      this.utmSource = utmSource;
+      this.utmTerm = utmTerm;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AdConversion adConversion;
+
+      private String clickId;
+
+      private Map<String, Object> extraParams;
+
+      private Long occurredAt;
+
+      private String utmAdgroup;
+
+      private String utmContent;
+
+      private String utmId;
+
+      private String utmMedium;
+
+      private String utmSource;
+
+      private String utmTerm;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerCreateParams.MarketingAttribution build() {
+        return new CustomerCreateParams.MarketingAttribution(
+            this.adConversion,
+            this.clickId,
+            this.extraParams,
+            this.occurredAt,
+            this.utmAdgroup,
+            this.utmContent,
+            this.utmId,
+            this.utmMedium,
+            this.utmSource,
+            this.utmTerm);
+      }
+
+      /** Information used when sending conversions to an advertising platform. */
+      public Builder setAdConversion(
+          CustomerCreateParams.MarketingAttribution.AdConversion adConversion) {
+        this.adConversion = adConversion;
+        return this;
+      }
+
+      /** The advertising platform's click identifier. */
+      public Builder setClickId(String clickId) {
+        this.clickId = clickId;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CustomerCreateParams.MarketingAttribution#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CustomerCreateParams.MarketingAttribution#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The Unix timestamp when the advertising interaction occurred. */
+      public Builder setOccurredAt(Long occurredAt) {
+        this.occurredAt = occurredAt;
+        return this;
+      }
+
+      /** The advertising group ID from the {@code utm_adgroup} parameter. */
+      public Builder setUtmAdgroup(String utmAdgroup) {
+        this.utmAdgroup = utmAdgroup;
+        return this;
+      }
+
+      /** The advertising content identifier from the {@code utm_content} parameter. */
+      public Builder setUtmContent(String utmContent) {
+        this.utmContent = utmContent;
+        return this;
+      }
+
+      /** The advertising campaign ID from the {@code utm_id} parameter. */
+      public Builder setUtmId(String utmId) {
+        this.utmId = utmId;
+        return this;
+      }
+
+      /** The marketing medium from the {@code utm_medium} parameter. */
+      public Builder setUtmMedium(String utmMedium) {
+        this.utmMedium = utmMedium;
+        return this;
+      }
+
+      /** The referral source from the {@code utm_source} parameter. */
+      public Builder setUtmSource(String utmSource) {
+        this.utmSource = utmSource;
+        return this;
+      }
+
+      /** The paid search term from the {@code utm_term} parameter. */
+      public Builder setUtmTerm(String utmTerm) {
+        this.utmTerm = utmTerm;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdConversion {
+      /**
+       * <strong>Required.</strong> Whether the customer consented to sending conversion data to an
+       * advertising platform.
+       */
+      @SerializedName("consent_collected")
+      Boolean consentCollected;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AdConversion(Boolean consentCollected, Map<String, Object> extraParams) {
+        this.consentCollected = consentCollected;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean consentCollected;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerCreateParams.MarketingAttribution.AdConversion build() {
+          return new CustomerCreateParams.MarketingAttribution.AdConversion(
+              this.consentCollected, this.extraParams);
+        }
+
+        /**
+         * <strong>Required.</strong> Whether the customer consented to sending conversion data to
+         * an advertising platform.
+         */
+        public Builder setConsentCollected(Boolean consentCollected) {
+          this.consentCollected = consentCollected;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerCreateParams.MarketingAttribution.AdConversion#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerCreateParams.MarketingAttribution.AdConversion#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Shipping {
     /** <strong>Required.</strong> Customer shipping address. */
     @SerializedName("address")
@@ -1724,27 +2033,31 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn}, {@code
-     * al_tin}, {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code au_arn},
-     * {@code aw_tin}, {@code az_tin}, {@code ba_tin}, {@code bb_tin}, {@code bd_bin}, {@code
-     * bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code bj_ifu}, {@code bo_tin}, {@code br_cnpj},
-     * {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-     * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code
-     * ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cm_niu}, {@code cn_tin}, {@code co_nit},
-     * {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code
-     * eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code eu_vat}, {@code fo_vat},
-     * {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code gn_nif}, {@code hk_br}, {@code
-     * hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-     * {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin},
-     * {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code la_tin}, {@code
-     * li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_vat}, {@code me_pib},
-     * {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code
-     * my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_gst},
-     * {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code py_ruc}, {@code
-     * ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst},
-     * {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code
-     * th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat},
-     * {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code
-     * ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
+     * al_tin}, {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code au_acn},
+     * {@code au_arn}, {@code au_wpn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin}, {@code
+     * bb_tin}, {@code bd_bin}, {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code bj_ifu},
+     * {@code bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code bw_vat}, {@code
+     * by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code
+     * ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code ci_vat},
+     * {@code cl_tin}, {@code cm_niu}, {@code cn_tin}, {@code co_nit}, {@code cr_tin}, {@code
+     * cv_nif}, {@code cz_dic}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin},
+     * {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code eu_vat}, {@code fo_vat}, {@code
+     * fr_siren}, {@code fr_siret}, {@code fr_spi}, {@code gb_vat}, {@code ge_vat}, {@code gh_tin},
+     * {@code gi_tin}, {@code gn_nif}, {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code
+     * ic_nif}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_kt}, {@code is_vat},
+     * {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kg_tin},
+     * {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code la_tin}, {@code li_uid}, {@code
+     * li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_cf}, {@code md_vat}, {@code me_pib},
+     * {@code mk_vat}, {@code mr_nif}, {@code mu_vat}, {@code mx_rfc}, {@code my_frp}, {@code
+     * my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ng_tin}, {@code no_vat}, {@code no_voec},
+     * {@code np_pan}, {@code nz_bn}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
+     * ph_tin}, {@code pl_nip}, {@code pt_nif}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib},
+     * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+     * si_tin}, {@code sm_coe}, {@code sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code th_vat},
+     * {@code tj_tin}, {@code tr_tin}, {@code tt_bir}, {@code tt_vat}, {@code tw_vat}, {@code
+     * tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin},
+     * {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
+     * zw_tin}
      */
     @SerializedName("type")
     Type type;
@@ -1804,27 +2117,30 @@ public class CustomerCreateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
        * {@code al_tin}, {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code
-       * au_arn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin}, {@code bb_tin}, {@code bd_bin},
-       * {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code bj_ifu}, {@code bo_tin}, {@code
-       * br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code
-       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
-       * {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cm_niu}, {@code
-       * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
-       * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code
-       * eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code gn_nif},
-       * {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code
-       * il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn},
-       * {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code
-       * kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat},
-       * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code
-       * my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec},
-       * {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
-       * pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
-       * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
-       * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
-       * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
-       * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or
-       * {@code zw_tin}
+       * au_acn}, {@code au_arn}, {@code au_wpn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin},
+       * {@code bb_tin}, {@code bd_bin}, {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code
+       * bj_ifu}, {@code bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code bw_vat},
+       * {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb},
+       * {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code
+       * ci_vat}, {@code cl_tin}, {@code cm_niu}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+       * {@code cv_nif}, {@code cz_dic}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code
+       * eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code eu_vat}, {@code
+       * fo_vat}, {@code fr_siren}, {@code fr_siret}, {@code fr_spi}, {@code gb_vat}, {@code
+       * ge_vat}, {@code gh_tin}, {@code gi_tin}, {@code gn_nif}, {@code hk_br}, {@code hr_oib},
+       * {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code
+       * is_kt}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code
+       * ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code la_tin},
+       * {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_cf}, {@code
+       * md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mu_vat}, {@code mx_rfc},
+       * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ng_tin}, {@code
+       * no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_bn}, {@code nz_gst}, {@code om_vat},
+       * {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code pt_nif}, {@code py_ruc}, {@code
+       * ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst},
+       * {@code sg_uen}, {@code si_tin}, {@code sm_coe}, {@code sn_ninea}, {@code sr_fin}, {@code
+       * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tt_bir}, {@code tt_vat},
+       * {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code
+       * uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat},
+       * {@code zm_tin}, or {@code zw_tin}
        */
       public Builder setType(CustomerCreateParams.TaxIdData.Type type) {
         this.type = type;
@@ -1860,8 +2176,14 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("au_abn")
       AU_ABN("au_abn"),
 
+      @SerializedName("au_acn")
+      AU_ACN("au_acn"),
+
       @SerializedName("au_arn")
       AU_ARN("au_arn"),
+
+      @SerializedName("au_wpn")
+      AU_WPN("au_wpn"),
 
       @SerializedName("aw_tin")
       AW_TIN("aw_tin"),
@@ -1902,6 +2224,9 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("bs_tin")
       BS_TIN("bs_tin"),
 
+      @SerializedName("bw_vat")
+      BW_VAT("bw_vat"),
+
       @SerializedName("by_tin")
       BY_TIN("by_tin"),
 
@@ -1932,6 +2257,9 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("ch_vat")
       CH_VAT("ch_vat"),
 
+      @SerializedName("ci_vat")
+      CI_VAT("ci_vat"),
+
       @SerializedName("cl_tin")
       CL_TIN("cl_tin"),
 
@@ -1949,6 +2277,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("cv_nif")
       CV_NIF("cv_nif"),
+
+      @SerializedName("cz_dic")
+      CZ_DIC("cz_dic"),
 
       @SerializedName("de_stn")
       DE_STN("de_stn"),
@@ -1977,11 +2308,23 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("fo_vat")
       FO_VAT("fo_vat"),
 
+      @SerializedName("fr_siren")
+      FR_SIREN("fr_siren"),
+
+      @SerializedName("fr_siret")
+      FR_SIRET("fr_siret"),
+
+      @SerializedName("fr_spi")
+      FR_SPI("fr_spi"),
+
       @SerializedName("gb_vat")
       GB_VAT("gb_vat"),
 
       @SerializedName("ge_vat")
       GE_VAT("ge_vat"),
+
+      @SerializedName("gh_tin")
+      GH_TIN("gh_tin"),
 
       @SerializedName("gi_tin")
       GI_TIN("gi_tin"),
@@ -2009,6 +2352,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("in_gst")
       IN_GST("in_gst"),
+
+      @SerializedName("is_kt")
+      IS_KT("is_kt"),
 
       @SerializedName("is_vat")
       IS_VAT("is_vat"),
@@ -2055,6 +2401,9 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("ma_vat")
       MA_VAT("ma_vat"),
 
+      @SerializedName("md_cf")
+      MD_CF("md_cf"),
+
       @SerializedName("md_vat")
       MD_VAT("md_vat"),
 
@@ -2066,6 +2415,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("mr_nif")
       MR_NIF("mr_nif"),
+
+      @SerializedName("mu_vat")
+      MU_VAT("mu_vat"),
 
       @SerializedName("mx_rfc")
       MX_RFC("mx_rfc"),
@@ -2079,6 +2431,9 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("my_sst")
       MY_SST("my_sst"),
 
+      @SerializedName("mz_nuit")
+      MZ_NUIT("mz_nuit"),
+
       @SerializedName("ng_tin")
       NG_TIN("ng_tin"),
 
@@ -2090,6 +2445,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("np_pan")
       NP_PAN("np_pan"),
+
+      @SerializedName("nz_bn")
+      NZ_BN("nz_bn"),
 
       @SerializedName("nz_gst")
       NZ_GST("nz_gst"),
@@ -2105,6 +2463,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("pl_nip")
       PL_NIP("pl_nip"),
+
+      @SerializedName("pt_nif")
+      PT_NIF("pt_nif"),
 
       @SerializedName("py_ruc")
       PY_RUC("py_ruc"),
@@ -2133,6 +2494,9 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("si_tin")
       SI_TIN("si_tin"),
 
+      @SerializedName("sm_coe")
+      SM_COE("sm_coe"),
+
       @SerializedName("sn_ninea")
       SN_NINEA("sn_ninea"),
 
@@ -2150,6 +2514,12 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("tr_tin")
       TR_TIN("tr_tin"),
+
+      @SerializedName("tt_bir")
+      TT_BIR("tt_bir"),
+
+      @SerializedName("tt_vat")
+      TT_VAT("tt_vat"),
 
       @SerializedName("tw_vat")
       TW_VAT("tw_vat"),

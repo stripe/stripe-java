@@ -115,6 +115,10 @@ public class Contract extends StripeObject implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
+  /** All terms in display order. Only populated when {@code terms} is included. */
+  @SerializedName("terms")
+  Terms terms;
+
   /** The billing cycle anchor. */
   @Getter
   @Setter
@@ -653,5 +657,15 @@ public class Contract extends StripeObject implements HasId {
     /** The timestamp when the contract ended. */
     @SerializedName("ended_at")
     Instant endedAt;
+  }
+
+  /** All terms in display order. Only populated when {@code terms} is included. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Terms extends StripeObject {
+    /** All terms in display order. */
+    @SerializedName("data")
+    List<ContractTerm> data;
   }
 }

@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class TransactionListParams extends ApiRequestParams {
-  /** Set of filters to query Transactions within a range of {@code created} timestamps. */
+  /** Filter for Transactions created within a specified time range. */
   @SerializedName("created")
   Created created;
 
@@ -25,11 +25,18 @@ public class TransactionListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Filter for Transactions belonging to a FinancialAccount. */
+  /**
+   * Filter for Transactions belonging to a specific FinancialAccount. This filter only supports
+   * filtering by the FinancialAccount's ID.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** Filter for Transactions corresponding to a Flow. */
+  /**
+   * Filter for Transactions created by a specific flow object. This filter only supports filtering
+   * by the flow object's ID, such as {@code ibt_123} for an InboundTransfer. A value that doesn't
+   * match a flow ID returns an empty list.
+   */
   @SerializedName("flow")
   String flow;
 
@@ -71,7 +78,7 @@ public class TransactionListParams extends ApiRequestParams {
           this.created, this.extraParams, this.financialAccount, this.flow, this.limit);
     }
 
-    /** Set of filters to query Transactions within a range of {@code created} timestamps. */
+    /** Filter for Transactions created within a specified time range. */
     public Builder setCreated(TransactionListParams.Created created) {
       this.created = created;
       return this;
@@ -103,13 +110,20 @@ public class TransactionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filter for Transactions belonging to a FinancialAccount. */
+    /**
+     * Filter for Transactions belonging to a specific FinancialAccount. This filter only supports
+     * filtering by the FinancialAccount's ID.
+     */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
     }
 
-    /** Filter for Transactions corresponding to a Flow. */
+    /**
+     * Filter for Transactions created by a specific flow object. This filter only supports
+     * filtering by the flow object's ID, such as {@code ibt_123} for an InboundTransfer. A value
+     * that doesn't match a flow ID returns an empty list.
+     */
     public Builder setFlow(String flow) {
       this.flow = flow;
       return this;
@@ -134,19 +148,19 @@ public class TransactionListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Filter for Transactions created after the specified timestamp. */
+    /** Filter for objects created after the specified timestamp. */
     @SerializedName("gt")
     Instant gt;
 
-    /** Filter for Transactions created at or after the specified timestamp. */
+    /** Filter for objects created at or after the specified timestamp. */
     @SerializedName("gte")
     Instant gte;
 
-    /** Filter for Transactions created before the specified timestamp. */
+    /** Filter for objects created before the specified timestamp. */
     @SerializedName("lt")
     Instant lt;
 
-    /** Filter for Transactions created at or before the specified timestamp. */
+    /** Filter for objects created at or before the specified timestamp. */
     @SerializedName("lte")
     Instant lte;
 
@@ -206,25 +220,25 @@ public class TransactionListParams extends ApiRequestParams {
         return this;
       }
 
-      /** Filter for Transactions created after the specified timestamp. */
+      /** Filter for objects created after the specified timestamp. */
       public Builder setGt(Instant gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Filter for Transactions created at or after the specified timestamp. */
+      /** Filter for objects created at or after the specified timestamp. */
       public Builder setGte(Instant gte) {
         this.gte = gte;
         return this;
       }
 
-      /** Filter for Transactions created before the specified timestamp. */
+      /** Filter for objects created before the specified timestamp. */
       public Builder setLt(Instant lt) {
         this.lt = lt;
         return this;
       }
 
-      /** Filter for Transactions created at or before the specified timestamp. */
+      /** Filter for objects created at or before the specified timestamp. */
       public Builder setLte(Instant lte) {
         this.lte = lte;
         return this;

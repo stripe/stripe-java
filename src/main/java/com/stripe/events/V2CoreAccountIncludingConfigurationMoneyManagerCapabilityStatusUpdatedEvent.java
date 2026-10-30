@@ -36,11 +36,11 @@ public final class V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStat
      * business_storage.outbound.sek}, {@code business_storage.outbound.usd}, {@code
      * business_storage.outbound.usdc}, {@code consumer_storage.inbound.usd}, {@code
      * consumer_storage.inbound.usdc}, {@code consumer_storage.outbound.usd}, {@code
-     * consumer_storage.outbound.usdc}, {@code inbound_transfers.bank_accounts}, {@code
-     * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
-     * outbound_payments.crypto_wallets}, {@code outbound_payments.financial_accounts}, {@code
-     * outbound_payments.offramp.bank_accounts.brl}, {@code
-     * outbound_payments.offramp.bank_accounts.cop}, {@code
+     * consumer_storage.outbound.usdc}, {@code inbound_fundings.paper_checks}, {@code
+     * inbound_transfers.bank_accounts}, {@code outbound_payments.bank_accounts}, {@code
+     * outbound_payments.cards}, {@code outbound_payments.crypto_wallets}, {@code
+     * outbound_payments.financial_accounts}, {@code outbound_payments.offramp.bank_accounts.brl},
+     * {@code outbound_payments.offramp.bank_accounts.cop}, {@code
      * outbound_payments.offramp.bank_accounts.eur}, {@code
      * outbound_payments.offramp.bank_accounts.gbp}, {@code
      * outbound_payments.offramp.bank_accounts.mxn}, {@code

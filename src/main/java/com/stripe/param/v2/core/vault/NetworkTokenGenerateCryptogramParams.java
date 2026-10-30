@@ -77,6 +77,9 @@ public class NetworkTokenGenerateCryptogramParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("dynamic_cvc")
+    DYNAMIC_CVC("dynamic_cvc"),
+
     @SerializedName("token_cryptogram")
     TOKEN_CRYPTOGRAM("token_cryptogram");
 

@@ -39,6 +39,10 @@ public class IntegrationConfiguration extends StripeObject {
   @SerializedName("object")
   String object;
 
+  /** Configuration for Subscriptions automatic tax behavior. */
+  @SerializedName("subscriptions")
+  Subscriptions subscriptions;
+
   /** Configuration for Checkout Sessions automatic tax behavior. */
   @Getter
   @Setter
@@ -60,6 +64,20 @@ public class IntegrationConfiguration extends StripeObject {
   public static class Invoices extends StripeObject {
     /**
      * Controls the default value of automatic_tax[enabled] on new standalone Invoices.
+     *
+     * <p>One of {@code disabled}, or {@code enabled_when_possible}.
+     */
+    @SerializedName("automatic_tax_default_value")
+    String automaticTaxDefaultValue;
+  }
+
+  /** Configuration for Subscriptions automatic tax behavior. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Subscriptions extends StripeObject {
+    /**
+     * Controls the default value of automatic_tax[enabled] on new Subscriptions.
      *
      * <p>One of {@code disabled}, or {@code enabled_when_possible}.
      */

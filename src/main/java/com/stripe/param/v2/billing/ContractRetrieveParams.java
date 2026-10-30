@@ -110,7 +110,10 @@ public class ContractRetrieveParams extends ApiRequestParams {
     PRICING_LINES("pricing_lines"),
 
     @SerializedName("pricing_overrides")
-    PRICING_OVERRIDES("pricing_overrides");
+    PRICING_OVERRIDES("pricing_overrides"),
+
+    @SerializedName("terms")
+    TERMS("terms");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
