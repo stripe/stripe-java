@@ -10,25 +10,28 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * TransactionEntries represent individual money movements across different states within a
- * Transaction.
- */
+/** TransactionEntries model funds moving between availability states for a given Transaction. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class TransactionEntry extends StripeObject implements HasId {
-  /** The delta to the FinancialAccount's balance. */
+  /**
+   * The change to the FinancialAccount's balance that takes effect at this TransactionEntry's
+   * {@code effective_at} timestamp.
+   */
   @SerializedName("balance_impact")
   BalanceImpact balanceImpact;
 
-  /** Time at which the object was created. */
+  /**
+   * Time at which the object was created. Represented as an RFC 3339 timestamp in UTC with
+   * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+   */
   @SerializedName("created")
   Instant created;
 
   /**
-   * Time at which the entry impacted (or will impact if it's in the future) the FinancialAccount
-   * balance.
+   * Time at which the TransactionEntry affects the FinancialAccount balance. This can be in the
+   * past or future.
    */
   @SerializedName("effective_at")
   Instant effectiveAt;
@@ -54,11 +57,11 @@ public class TransactionEntry extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The Transaction that this TransactionEntry belongs to. */
+  /** The ID of the Transaction that this TransactionEntry belongs to. */
   @SerializedName("transaction")
   String transaction;
 
-  /** Details copied from the transaction that this TransactionEntry belongs to. */
+  /** Details copied from the Transaction that this TransactionEntry belongs to. */
   @SerializedName("transaction_details")
   TransactionDetails transactionDetails;
 
@@ -66,32 +69,34 @@ public class TransactionEntry extends StripeObject implements HasId {
   @SerializedName("treasury_transaction_entry")
   String treasuryTransactionEntry;
 
-  /** The delta to the FinancialAccount's balance. */
+  /**
+   * The change to the FinancialAccount's balance that takes effect at this TransactionEntry's
+   * {@code effective_at} timestamp.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BalanceImpact extends StripeObject {
-    /** Impact to the available balance. */
+    /** The change to the available balance. */
     @SerializedName("available")
     Amount available;
 
-    /** Impact to the inbound_pending balance. */
+    /** The change to the {@code inbound_pending} balance. */
     @SerializedName("inbound_pending")
     Amount inboundPending;
 
-    /** Impact to the outbound_pending balance. */
+    /** The change to the {@code outbound_pending} balance. */
     @SerializedName("outbound_pending")
     Amount outboundPending;
   }
 
-  /** Details copied from the transaction that this TransactionEntry belongs to. */
+  /** Details copied from the Transaction that this TransactionEntry belongs to. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransactionDetails extends StripeObject {
     /**
-     * Closed Enum for now, and will be turned into an Open Enum soon. A descriptive category used
-     * to classify the Transaction.
+     * Open Enum. The category of this TransactionEntry's parent Transaction.
      *
      * <p>One of {@code adjustment}, {@code advance}, {@code anticipation_repayment}, {@code
      * balance_transfer}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
@@ -118,15 +123,29 @@ public class TransactionEntry extends StripeObject implements HasId {
     @SerializedName("category")
     String category;
 
-    /** Indicates the FinancialAccount affected by this Transaction. */
+    /** The ID of the FinancialAccount affected by this Transaction. */
     @SerializedName("financial_account")
     String financialAccount;
 
-    /** Details about the Flow object that created the Transaction. */
+    /**
+     * Details about the flow object that created the Transaction this entry belongs to, such as an
+     * InboundTransfer or OutboundPayment. {@code transaction_details.flow.type} identifies the kind
+     * of object. The corresponding field contains its ID, when available: for an InboundTransfer,
+     * {@code transaction_details.flow.inbound_transfer} contains the InboundTransfer's ID. To list
+     * entries for the parent Transaction, pass the TransactionEntry's {@code transaction} ID to the
+     * {@code transaction} parameter on List Transaction Entries.
+     */
     @SerializedName("flow")
     Flow flow;
 
-    /** Details about the Flow object that created the Transaction. */
+    /**
+     * Details about the flow object that created the Transaction this entry belongs to, such as an
+     * InboundTransfer or OutboundPayment. {@code transaction_details.flow.type} identifies the kind
+     * of object. The corresponding field contains its ID, when available: for an InboundTransfer,
+     * {@code transaction_details.flow.inbound_transfer} contains the InboundTransfer's ID. To list
+     * entries for the parent Transaction, pass the TransactionEntry's {@code transaction} ID to the
+     * {@code transaction} parameter on List Transaction Entries.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -151,10 +170,7 @@ public class TransactionEntry extends StripeObject implements HasId {
       @SerializedName("charge")
       String charge;
 
-      /**
-       * In the future, this will be the ID of the currency conversion that created this
-       * Transaction. For now, this field is always null.
-       */
+      /** When available, the ID of the CurrencyConversion that created this Transaction. */
       @SerializedName("currency_conversion")
       String currencyConversion;
 
@@ -170,9 +186,9 @@ public class TransactionEntry extends StripeObject implements HasId {
       @SerializedName("earned_credit")
       String earnedCredit;
 
-      /** If applicable, the ID of the FeeTransaction that created this Transaction. */
-      @SerializedName("fee_transaction")
-      String feeTransaction;
+      /** If applicable, the ID of the FeeBatch that created this Transaction. */
+      @SerializedName("fee_batch")
+      String feeBatch;
 
       /** If applicable, the ID of the InboundTransfer that created this Transaction. */
       @SerializedName("inbound_transfer")
@@ -273,20 +289,20 @@ public class TransactionEntry extends StripeObject implements HasId {
       String treasuryReceivedDebit;
 
       /**
-       * Open Enum. Type of the flow that created the Transaction. The field matching this value
-       * will contain the ID of the flow.
+       * Open Enum. The type of flow that created the Transaction. When available, the flow's ID is
+       * provided in the corresponding field.
        *
        * <p>One of {@code adjustment}, {@code application_fee}, {@code application_fee_refund},
        * {@code charge}, {@code currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code
-       * earned_credit}, {@code fee_transaction}, {@code inbound_transfer}, {@code
-       * issuing_authorization}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
-       * outbound_payment}, {@code outbound_transfer}, {@code payout}, {@code received_credit},
-       * {@code received_debit}, {@code refund}, {@code reserve_hold}, {@code reserve_release},
-       * {@code tax_fund}, {@code topup}, {@code transfer}, {@code transfer_reversal}, {@code
-       * treasury_credit_reversal}, {@code treasury_debit_reversal}, {@code
-       * treasury_inbound_transfer}, {@code treasury_issuing_authorization}, {@code treasury_other},
-       * {@code treasury_outbound_payment}, {@code treasury_outbound_transfer}, {@code
-       * treasury_received_credit}, or {@code treasury_received_debit}.
+       * earned_credit}, {@code fee_batch}, {@code inbound_transfer}, {@code issuing_authorization},
+       * {@code issuing_dispute}, {@code issuing_transaction}, {@code outbound_payment}, {@code
+       * outbound_transfer}, {@code payout}, {@code received_credit}, {@code received_debit}, {@code
+       * refund}, {@code reserve_hold}, {@code reserve_release}, {@code tax_fund}, {@code topup},
+       * {@code transfer}, {@code transfer_reversal}, {@code treasury_credit_reversal}, {@code
+       * treasury_debit_reversal}, {@code treasury_inbound_transfer}, {@code
+       * treasury_issuing_authorization}, {@code treasury_other}, {@code treasury_outbound_payment},
+       * {@code treasury_outbound_transfer}, {@code treasury_received_credit}, or {@code
+       * treasury_received_debit}.
        */
       @SerializedName("type")
       String type;

@@ -120,6 +120,10 @@ public class Schema extends StripeObject implements HasId {
       /** The identifier of the referenced schema. */
       @SerializedName("schema")
       String schema;
+
+      /** The name of the referenced schema. */
+      @SerializedName("schema_name")
+      String schemaName;
     }
 
     /**
@@ -137,6 +141,10 @@ public class Schema extends StripeObject implements HasId {
       /** The identifier of the referenced schema. */
       @SerializedName("schema")
       String schema;
+
+      /** The name of the referenced schema. */
+      @SerializedName("schema_name")
+      String schemaName;
     }
   }
 

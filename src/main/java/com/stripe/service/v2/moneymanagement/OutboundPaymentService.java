@@ -4,6 +4,7 @@ package com.stripe.service.v2.moneymanagement;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.AlreadyCanceledException;
 import com.stripe.exception.BlockedByStripeException;
+import com.stripe.exception.CapabilityNotEnabledException;
 import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.InsufficientFundsException;
 import com.stripe.exception.NotCancelableException;
@@ -56,13 +57,15 @@ public final class OutboundPaymentService extends ApiService {
   /** Creates an OutboundPayment. */
   public OutboundPayment create(OutboundPaymentCreateParams params)
       throws StripeException, BlockedByStripeException, InsufficientFundsException,
-          FeatureNotEnabledException, QuotaExceededException, RecipientNotNotifiableException {
+          CapabilityNotEnabledException, QuotaExceededException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     return create(params, (RequestOptions) null);
   }
   /** Creates an OutboundPayment. */
   public OutboundPayment create(OutboundPaymentCreateParams params, RequestOptions options)
       throws StripeException, BlockedByStripeException, InsufficientFundsException,
-          FeatureNotEnabledException, QuotaExceededException, RecipientNotNotifiableException {
+          CapabilityNotEnabledException, QuotaExceededException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     String path = "/v2/money_management/outbound_payments";
     ApiRequest request =
         new ApiRequest(

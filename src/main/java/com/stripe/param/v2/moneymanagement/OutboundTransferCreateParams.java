@@ -895,6 +895,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           @SerializedName("rtp")
           RTP("rtp"),
 
+          @SerializedName("sepa")
+          SEPA("sepa"),
+
           @SerializedName("sepa_credit")
           SEPA_CREDIT("sepa_credit"),
 

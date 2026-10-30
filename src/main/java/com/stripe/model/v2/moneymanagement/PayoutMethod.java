@@ -196,6 +196,13 @@ public class PayoutMethod extends StripeObject implements HasId {
     @SerializedName("financial_connections_account")
     String financialConnectionsAccount;
 
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether
+     * two recipients who've signed up with you are using the same bank account, for example.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
     /** The last 4 digits of the account number. */
     @SerializedName("last4")
     String last4;

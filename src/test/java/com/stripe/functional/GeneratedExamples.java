@@ -25179,6 +25179,96 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2BillingContractsTermGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/contracts/contract_id_123/terms",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.billing.ContractTerm>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.billing.contract_term\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"ad_hoc_product\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.billing.contracts.TermListContractTermsParams params =
+        com.stripe.param.v2.billing.contracts.TermListContractTermsParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.billing.ContractTerm>
+        stripeCollection =
+            client.v2().billing().contracts().terms().listContractTerms("contract_id_123", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/contracts/contract_id_123/terms",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2BillingContractsTermGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/contracts/contract_id_123/terms/id_123",
+        null,
+        null,
+        com.stripe.model.v2.billing.ContractTerm.class,
+        "{\"object\":\"v2.billing.contract_term\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"ad_hoc_product\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.billing.ContractTerm contractTerm =
+        client.v2().billing().contracts().terms().retrieveContractTerm("contract_id_123", "id_123");
+    assertNotNull(contractTerm);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/contracts/contract_id_123/terms/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2BillingContractsTermsQuantityChangeGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/contracts/contract_id_123/terms/term_123/quantity_changes",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.billing.ContractTermQuantityChange>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.billing.contract_term_quantity_change\",\"contract\":\"contract\",\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"livemode\":true,\"quantity\":\"856669432.6666666\",\"term\":\"term\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.billing.contracts.terms.QuantityChangeListContractTermQuantityChangesParams
+        params =
+            com.stripe.param.v2.billing.contracts.terms
+                .QuantityChangeListContractTermQuantityChangesParams.builder()
+                .build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.billing.ContractTermQuantityChange>
+        stripeCollection =
+            client
+                .v2()
+                .billing()
+                .contracts()
+                .terms()
+                .quantityChanges()
+                .listContractTermQuantityChanges("contract_id_123", "term_123", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/contracts/contract_id_123/terms/term_123/quantity_changes",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2BillingCustomPricingUnitGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -27829,6 +27919,61 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreAccountPost4Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/id_123/reject",
+        null,
+        null,
+        com.stripe.model.v2.core.Account.class,
+        "{\"object\":\"v2.core.account\",\"applied_configurations\":[\"money_manager\"],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.AccountRejectParams params =
+        com.stripe.param.v2.core.AccountRejectParams.builder()
+            .setReason(
+                com.stripe.param.v2.core.AccountRejectParams.Reason.FRAUD_NO_INTENT_TO_FULFILL)
+            .build();
+
+    com.stripe.model.v2.core.Account account =
+        client.v2().core().accounts().reject("id_123", params);
+    assertNotNull(account);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/id_123/reject",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreAccountPost5Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/id_123/unreject",
+        null,
+        null,
+        com.stripe.model.v2.core.Account.class,
+        "{\"object\":\"v2.core.account\",\"applied_configurations\":[\"money_manager\"],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.AccountUnrejectParams params =
+        com.stripe.param.v2.core.AccountUnrejectParams.builder().build();
+
+    com.stripe.model.v2.core.Account account =
+        client.v2().core().accounts().unreject("id_123", params);
+    assertNotNull(account);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/id_123/unreject",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2CoreAccountsPersonGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -28133,6 +28278,232 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v2/core/account_links",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreAccountSessionPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_sessions",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountSession.class,
+        "{\"object\":\"v2.core.account_session\",\"account\":\"account\",\"client_secret\":\"client_secret\",\"components\":{\"account_management\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"account_onboarding\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"agentic_commerce_settings\":{\"enabled\":true,\"scopes\":{}},\"app_install\":{\"enabled\":true,\"scopes\":{\"allowed_stripe_app_ids\":[\"allowed_stripe_app_ids\"]}},\"app_viewport\":{\"enabled\":true,\"scopes\":{\"allowed_stripe_app_ids\":[\"allowed_stripe_app_ids\"]}},\"balance_report\":{\"enabled\":true,\"scopes\":{}},\"balances\":{\"enabled\":true,\"scopes\":{\"create_payout_schedule\":\"enabled\",\"create_standard_payouts\":\"disabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"bills\":{\"enabled\":true,\"scopes\":{\"create_outbound_payments\":\"enabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_bills\":\"disabled\"}},\"capital_financing\":{\"enabled\":true,\"scopes\":{}},\"capital_financing_application\":{\"enabled\":true,\"scopes\":{}},\"capital_financing_promotion\":{\"enabled\":true,\"scopes\":{}},\"check_scanning\":{\"enabled\":true,\"scopes\":{\"create_us_paper_check_on_application\":\"disabled\"}},\"disputes_list\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"documents\":{\"enabled\":true,\"scopes\":{}},\"export_tax_transactions\":{\"enabled\":true,\"scopes\":{}},\"financial_account_rewards\":{\"enabled\":true,\"scopes\":{}},\"financial_accounts\":{\"enabled\":true,\"scopes\":{\"create_outbound_payments\":\"enabled\",\"create_payout_schedule\":\"enabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_bills\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_payout_methods\":\"enabled\"}},\"financial_accounts_transactions\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\"}},\"instant_payouts_promotion\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"invoice_history\":{\"enabled\":true,\"scopes\":{}},\"issuing_card\":{\"enabled\":true,\"scopes\":{\"manage_issuing_cardholders\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_issuing_spending_controls\":\"disabled\"}},\"issuing_cards_list\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_issuing_cardholders\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_issuing_spending_controls\":\"disabled\"}},\"network_cost_passthrough_report\":{\"enabled\":true,\"scopes\":{}},\"notification_banner\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"payment_details\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payment_disputes\":{\"enabled\":true,\"scopes\":{\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payment_method_settings\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\"}},\"payments\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payout_details\":{\"enabled\":true,\"scopes\":{}},\"payout_reconciliation_report\":{\"enabled\":true,\"scopes\":{}},\"payouts\":{\"enabled\":true,\"scopes\":{\"create_payout_schedule\":\"enabled\",\"create_standard_payouts\":\"disabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"payouts_list\":{\"enabled\":true,\"scopes\":{}},\"product_tax_code_selector\":{\"enabled\":true,\"scopes\":{}},\"reporting_chart\":{\"enabled\":true,\"scopes\":{}},\"tax_registrations\":{\"enabled\":true,\"scopes\":{}},\"tax_settings\":{\"enabled\":true,\"scopes\":{}},\"tax_threshold_monitoring\":{\"enabled\":true,\"scopes\":{}},\"terminal_hardware_orders\":{\"enabled\":true,\"scopes\":{}},\"terminal_hardware_shop\":{\"enabled\":true,\"scopes\":{}}},\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.AccountSessionCreateParams params =
+        com.stripe.param.v2.core.AccountSessionCreateParams.builder()
+            .setAccount("account")
+            .setComponents(
+                com.stripe.param.v2.core.AccountSessionCreateParams.Components.builder()
+                    .setAccountManagement(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .AccountManagement.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setAccountOnboarding(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .AccountOnboarding.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setAgenticCommerceSettings(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .AgenticCommerceSettings.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setAppInstall(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.AppInstall
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setAppViewport(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.AppViewport
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setBalanceReport(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.BalanceReport
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setBalances(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.Balances
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setBills(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.Bills
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setCapitalFinancing(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .CapitalFinancing.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setCapitalFinancingApplication(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .CapitalFinancingApplication.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setCapitalFinancingPromotion(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .CapitalFinancingPromotion.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setCheckScanning(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.CheckScanning
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setDisputesList(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.DisputesList
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setDocuments(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.Documents
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setExportTaxTransactions(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .ExportTaxTransactions.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setFinancialAccountRewards(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .FinancialAccountRewards.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setFinancialAccounts(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .FinancialAccounts.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setFinancialAccountsTransactions(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .FinancialAccountsTransactions.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setInstantPayoutsPromotion(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .InstantPayoutsPromotion.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setInvoiceHistory(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .InvoiceHistory.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setIssuingCard(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.IssuingCard
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setIssuingCardsList(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .IssuingCardsList.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setNetworkCostPassthroughReport(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .NetworkCostPassthroughReport.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setNotificationBanner(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .NotificationBanner.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPaymentDetails(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .PaymentDetails.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPaymentDisputes(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .PaymentDisputes.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPaymentMethodSettings(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .PaymentMethodSettings.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPayments(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.Payments
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPayoutDetails(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.PayoutDetails
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPayoutReconciliationReport(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .PayoutReconciliationReport.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPayouts(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.Payouts
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setPayoutsList(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.PayoutsList
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setProductTaxCodeSelector(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .ProductTaxCodeSelector.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setReportingChart(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .ReportingChart.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setTaxRegistrations(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .TaxRegistrations.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setTaxSettings(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components.TaxSettings
+                            .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setTaxThresholdMonitoring(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .TaxThresholdMonitoring.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setTerminalHardwareOrders(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .TerminalHardwareOrders.builder()
+                            .setEnabled(true)
+                            .build())
+                    .setTerminalHardwareShop(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .TerminalHardwareShop.builder()
+                            .setEnabled(true)
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.v2.core.AccountSession accountSession =
+        client.v2().core().accountSessions().create(params);
+    assertNotNull(accountSession);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_sessions",
         params.toMap(),
         null);
   }
@@ -28931,7 +29302,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.core.vault.GbBankAccount>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"toza\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.vault.GbBankAccountListParams params =
@@ -28957,7 +29328,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.vault.GbBankAccount.class,
-        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"toza\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
+        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.vault.GbBankAccountCreateParams params =
@@ -28985,7 +29356,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.vault.GbBankAccount.class,
-        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"toza\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
+        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.vault.GbBankAccount gbBankAccount =
@@ -29008,7 +29379,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.vault.GbBankAccount.class,
-        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"toza\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
+        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.vault.GbBankAccount gbBankAccount =
@@ -29018,6 +29389,29 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v2/core/vault/gb_bank_accounts/id_123/archive",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2CoreVaultGbBankAccountPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/gb_bank_accounts/id_123/unarchive",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.GbBankAccount.class,
+        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.vault.GbBankAccount gbBankAccount =
+        client.v2().core().vault().gbBankAccounts().unarchive("id_123");
+    assertNotNull(gbBankAccount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/gb_bank_accounts/id_123/unarchive",
         null,
         null);
   }
@@ -29307,6 +29701,29 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreVaultUsBankAccountPost6Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/unarchive",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.UsBankAccount.class,
+        "{\"object\":\"v2.core.vault.us_bank_account\",\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"],\"verification\":{\"status\":\"verification_failed\"}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.vault.UsBankAccount usBankAccount =
+        client.v2().core().vault().usBankAccounts().unarchive("id_123");
+    assertNotNull(usBankAccount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/unarchive",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2DataAnalyticsMetricQueryPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -29482,7 +29899,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.data.ReportRun.class,
-        "{\"object\":\"v2.data.report_run\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"parameters\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"report\":\"report\",\"status\":\"running\"}");
+        "{\"object\":\"v2.data.report_run\",\"created\":\"1970-01-12T21:42:34.472Z\",\"format\":\"csv\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"parameters\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"report\":\"report\",\"status\":\"running\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.data.ReportRunCreateParams params =
@@ -29530,7 +29947,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.data.ReportRun.class,
-        "{\"object\":\"v2.data.report_run\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"parameters\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"report\":\"report\",\"status\":\"running\"}");
+        "{\"object\":\"v2.data.report_run\",\"created\":\"1970-01-12T21:42:34.472Z\",\"format\":\"csv\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"parameters\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"report\":\"report\",\"status\":\"running\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.data.ReportRunRetrieveParams params =
@@ -29609,7 +30026,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         new TypeToken<
             com.stripe.model.v2.StripeCollection<com.stripe.model.v2.data.Schema>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.data.schema\",\"columns\":[{\"description\":\"description\",\"foreign_keys_from\":[{\"column\":\"column\",\"schema\":\"schema\"}],\"foreign_keys_to\":[{\"column\":\"column\",\"schema\":\"schema\"}],\"is_primary_key\":true,\"name\":\"name\",\"type\":\"bigint\"}],\"dataset\":\"analytical\",\"description\":\"description\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"refreshed_at\":\"1970-01-01T11:25:45.896Z\",\"relevant_reports\":[{\"description\":\"description\",\"id\":\"obj_123\",\"name\":\"name\"}]}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.data.schema\",\"columns\":[{\"description\":\"description\",\"foreign_keys_from\":[{\"column\":\"column\",\"schema\":\"schema\",\"schema_name\":\"schema_name\"}],\"foreign_keys_to\":[{\"column\":\"column\",\"schema\":\"schema\",\"schema_name\":\"schema_name\"}],\"is_primary_key\":true,\"name\":\"name\",\"type\":\"bigint\"}],\"dataset\":\"analytical\",\"description\":\"description\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"refreshed_at\":\"1970-01-01T11:25:45.896Z\",\"relevant_reports\":[{\"description\":\"description\",\"id\":\"obj_123\",\"name\":\"name\"}]}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.data.SchemaListParams params =
@@ -29631,7 +30048,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.data.Schema.class,
-        "{\"object\":\"v2.data.schema\",\"columns\":[{\"description\":\"description\",\"foreign_keys_from\":[{\"column\":\"column\",\"schema\":\"schema\"}],\"foreign_keys_to\":[{\"column\":\"column\",\"schema\":\"schema\"}],\"is_primary_key\":true,\"name\":\"name\",\"type\":\"bigint\"}],\"dataset\":\"analytical\",\"description\":\"description\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"refreshed_at\":\"1970-01-01T11:25:45.896Z\",\"relevant_reports\":[{\"description\":\"description\",\"id\":\"obj_123\",\"name\":\"name\"}]}");
+        "{\"object\":\"v2.data.schema\",\"columns\":[{\"description\":\"description\",\"foreign_keys_from\":[{\"column\":\"column\",\"schema\":\"schema\",\"schema_name\":\"schema_name\"}],\"foreign_keys_to\":[{\"column\":\"column\",\"schema\":\"schema\",\"schema_name\":\"schema_name\"}],\"is_primary_key\":true,\"name\":\"name\",\"type\":\"bigint\"}],\"dataset\":\"analytical\",\"description\":\"description\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"refreshed_at\":\"1970-01-01T11:25:45.896Z\",\"relevant_reports\":[{\"description\":\"description\",\"id\":\"obj_123\",\"name\":\"name\"}]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.data.Schema schema = client.v2().data().schemas().retrieve("id_123");
@@ -30513,7 +30930,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.FinancialAddress>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"type\":\"bank_account\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"settlement_currency\":\"usd\",\"status\":\"failed\",\"type\":\"bank_account\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAddressListParams params =
@@ -30539,7 +30956,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAddress.class,
-        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"type\":\"bank_account\"}");
+        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"settlement_currency\":\"usd\",\"status\":\"failed\",\"type\":\"bank_account\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams params =
@@ -30569,7 +30986,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAddress.class,
-        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"type\":\"bank_account\"}");
+        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"settlement_currency\":\"usd\",\"status\":\"failed\",\"type\":\"bank_account\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.FinancialAddress financialAddress =
@@ -30579,6 +30996,163 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/money_management/financial_addresses/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFundingIntentGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/funding_intents",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.FundingIntent>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.money_management.funding_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"status_transitions\":{},\"to\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"type\":\"check\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FundingIntentListParams params =
+        com.stripe.param.v2.moneymanagement.FundingIntentListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.FundingIntent>
+        stripeCollection = client.v2().moneyManagement().fundingIntents().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/funding_intents",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFundingIntentPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FundingIntent.class,
+        "{\"object\":\"v2.money_management.funding_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"status_transitions\":{},\"to\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"type\":\"check\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FundingIntentCreateParams params =
+        com.stripe.param.v2.moneymanagement.FundingIntentCreateParams.builder()
+            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setTo(
+                com.stripe.param.v2.moneymanagement.FundingIntentCreateParams.To.builder()
+                    .setCurrency("usd")
+                    .setFinancialAccount("financial_account")
+                    .build())
+            .setType(com.stripe.param.v2.moneymanagement.FundingIntentCreateParams.Type.CHECK)
+            .build();
+
+    com.stripe.model.v2.moneymanagement.FundingIntent fundingIntent =
+        client.v2().moneyManagement().fundingIntents().create(params);
+    assertNotNull(fundingIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFundingIntentGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/funding_intents/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FundingIntent.class,
+        "{\"object\":\"v2.money_management.funding_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"status_transitions\":{},\"to\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"type\":\"check\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.FundingIntent fundingIntent =
+        client.v2().moneyManagement().fundingIntents().retrieve("id_123");
+    assertNotNull(fundingIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/funding_intents/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFundingIntentPost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FundingIntent.class,
+        "{\"object\":\"v2.money_management.funding_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"status_transitions\":{},\"to\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"type\":\"check\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FundingIntentUpdateParams params =
+        com.stripe.param.v2.moneymanagement.FundingIntentUpdateParams.builder().build();
+
+    com.stripe.model.v2.moneymanagement.FundingIntent fundingIntent =
+        client.v2().moneyManagement().fundingIntents().update("id_123", params);
+    assertNotNull(fundingIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents/id_123",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFundingIntentPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents/id_123/cancel",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FundingIntent.class,
+        "{\"object\":\"v2.money_management.funding_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"status_transitions\":{},\"to\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"type\":\"check\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.FundingIntent fundingIntent =
+        client.v2().moneyManagement().fundingIntents().cancel("id_123");
+    assertNotNull(fundingIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents/id_123/cancel",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFundingIntentPost4Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents/id_123/confirm",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FundingIntent.class,
+        "{\"object\":\"v2.money_management.funding_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"status_transitions\":{},\"to\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"type\":\"check\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.FundingIntent fundingIntent =
+        client.v2().moneyManagement().fundingIntents().confirm("id_123");
+    assertNotNull(fundingIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents/id_123/confirm",
         null,
         null);
   }
@@ -30622,6 +31196,57 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/money_management/funding_sessions",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementInboundFundingGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_fundings",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.InboundFunding>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.money_management.inbound_funding\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"payment_method\":{\"type\":\"type\"}},\"history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"type\":\"check_failed\"}],\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"financial_account\":\"financial_account\"}}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.InboundFundingListParams params =
+        com.stripe.param.v2.moneymanagement.InboundFundingListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.InboundFunding>
+        stripeCollection = client.v2().moneyManagement().inboundFundings().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_fundings",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementInboundFundingGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_fundings/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.InboundFunding.class,
+        "{\"object\":\"v2.money_management.inbound_funding\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"payment_method\":{\"type\":\"type\"}},\"history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"type\":\"check_failed\"}],\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"financial_account\":\"financial_account\"}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.InboundFunding inboundFunding =
+        client.v2().moneyManagement().inboundFundings().retrieve("id_123");
+    assertNotNull(inboundFunding);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_fundings/id_123",
+        null,
         null);
   }
 
@@ -30829,7 +31454,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.OutboundPayment>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentListParams params =
@@ -30855,7 +31480,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPayment.class,
-        "{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}");
+        "{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams params =
@@ -30903,7 +31528,7 @@ class GeneratedExamples extends BaseStripeTest {
                                     .addPreferredNetwork(
                                         com.stripe.param.v2.moneymanagement
                                             .OutboundPaymentCreateParams.To.PayoutMethodOptions
-                                            .BankAccount.PreferredNetwork.SEPA_CREDIT)
+                                            .BankAccount.PreferredNetwork.FEDWIRE)
                                     .build())
                             .build())
                     .setRecipient("recipient")
@@ -30930,7 +31555,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPayment.class,
-        "{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}");
+        "{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundPayment outboundPayment =
@@ -30953,7 +31578,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPayment.class,
-        "{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}");
+        "{\"object\":\"v2.money_management.outbound_payment\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundPayment outboundPayment =
@@ -31024,7 +31649,7 @@ class GeneratedExamples extends BaseStripeTest {
                                     .addPreferredNetwork(
                                         com.stripe.param.v2.moneymanagement
                                             .OutboundPaymentQuoteCreateParams.To.PayoutMethodOptions
-                                            .BankAccount.PreferredNetwork.SEPA_CREDIT)
+                                            .BankAccount.PreferredNetwork.FEDWIRE)
                                     .build())
                             .build())
                     .setRecipient("recipient")
@@ -31076,7 +31701,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.OutboundSetupIntent>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"payout_method\":{\"object\":\"v2.money_management.payout_method\",\"archived\":true,\"available_payout_speeds\":[\"standard\"],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"restricted\":true,\"type\":\"apple_pay\",\"usage_status\":{\"payments\":\"invalid\",\"transfers\":\"invalid\"}},\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundSetupIntentListParams params =
@@ -31102,7 +31727,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundSetupIntent.class,
-        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"payout_method\":{\"object\":\"v2.money_management.payout_method\",\"archived\":true,\"available_payout_speeds\":[\"standard\"],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"restricted\":true,\"type\":\"apple_pay\",\"usage_status\":{\"payments\":\"invalid\",\"transfers\":\"invalid\"}},\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
+        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams params =
@@ -31128,7 +31753,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundSetupIntent.class,
-        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"payout_method\":{\"object\":\"v2.money_management.payout_method\",\"archived\":true,\"available_payout_speeds\":[\"standard\"],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"restricted\":true,\"type\":\"apple_pay\",\"usage_status\":{\"payments\":\"invalid\",\"transfers\":\"invalid\"}},\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
+        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundSetupIntent outboundSetupIntent =
@@ -31151,7 +31776,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundSetupIntent.class,
-        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"payout_method\":{\"object\":\"v2.money_management.payout_method\",\"archived\":true,\"available_payout_speeds\":[\"standard\"],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"restricted\":true,\"type\":\"apple_pay\",\"usage_status\":{\"payments\":\"invalid\",\"transfers\":\"invalid\"}},\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
+        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundSetupIntentUpdateParams params =
@@ -31177,7 +31802,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundSetupIntent.class,
-        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"payout_method\":{\"object\":\"v2.money_management.payout_method\",\"archived\":true,\"available_payout_speeds\":[\"standard\"],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"restricted\":true,\"type\":\"apple_pay\",\"usage_status\":{\"payments\":\"invalid\",\"transfers\":\"invalid\"}},\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
+        "{\"object\":\"v2.money_management.outbound_setup_intent\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"requires_payout_method\",\"usage_intent\":\"payment\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundSetupIntent outboundSetupIntent =
@@ -31264,7 +31889,7 @@ class GeneratedExamples extends BaseStripeTest {
                                     .addPreferredNetwork(
                                         com.stripe.param.v2.moneymanagement
                                             .OutboundTransferCreateParams.To.PayoutMethodOptions
-                                            .BankAccount.PreferredNetwork.SEPA_CREDIT)
+                                            .BankAccount.PreferredNetwork.FEDWIRE)
                                     .build())
                             .build())
                     .build())
@@ -31338,7 +31963,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.PayoutIntent>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.PayoutIntentListParams params =
@@ -31364,7 +31989,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.PayoutIntent.class,
-        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams params =
@@ -31412,7 +32037,7 @@ class GeneratedExamples extends BaseStripeTest {
                                     .addPreferredNetwork(
                                         com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams
                                             .To.PayoutMethodOptions.BankAccount.PreferredNetwork
-                                            .SEPA_CREDIT)
+                                            .FEDWIRE)
                                     .build())
                             .build())
                     .setRecipient("recipient")
@@ -31439,7 +32064,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.PayoutIntent.class,
-        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
@@ -31462,7 +32087,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.PayoutIntent.class,
-        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.PayoutIntentUpdateParams params =
@@ -31488,7 +32113,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.PayoutIntent.class,
-        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
@@ -31511,7 +32136,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.PayoutIntent.class,
-        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
@@ -31530,20 +32155,43 @@ class GeneratedExamples extends BaseStripeTest {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/payout_intents/id_123/fx_quote",
+        "/v2/money_management/payout_intents/id_123/refresh_fx_quote",
         null,
         null,
         com.stripe.model.v2.moneymanagement.PayoutIntent.class,
-        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
-        client.v2().moneyManagement().payoutIntents().fxQuote("id_123");
+        client.v2().moneyManagement().payoutIntents().refreshFxQuote("id_123");
     assertNotNull(payoutIntent);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/payout_intents/id_123/fx_quote",
+        "/v2/money_management/payout_intents/id_123/refresh_fx_quote",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementPayoutIntentPost6Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents/id_123/refresh_recipient_verification",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.PayoutIntent.class,
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"confirmation_method\":\"manual\",\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
+        client.v2().moneyManagement().payoutIntents().refreshRecipientVerification("id_123");
+    assertNotNull(payoutIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents/id_123/refresh_recipient_verification",
         null,
         null);
   }
@@ -31881,7 +32529,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.RecipientVerification.class,
-        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"status\":\"acknowledged\"}");
+        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"payout_method\":\"payout_method\",\"status\":\"acknowledged\",\"verification_type\":\"confirmation_of_payee\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.RecipientVerificationCreateParams params =
@@ -31909,7 +32557,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.RecipientVerification.class,
-        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"status\":\"acknowledged\"}");
+        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"payout_method\":\"payout_method\",\"status\":\"acknowledged\",\"verification_type\":\"confirmation_of_payee\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.RecipientVerification recipientVerification =
@@ -31932,7 +32580,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.RecipientVerification.class,
-        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"status\":\"acknowledged\"}");
+        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"payout_method\":\"payout_method\",\"status\":\"acknowledged\",\"verification_type\":\"confirmation_of_payee\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.RecipientVerification recipientVerification =
@@ -31942,6 +32590,482 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v2/money_management/recipient_verifications/id_123/acknowledge",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.RewardProgram>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.money_management.reward_program\",\"created\":\"1970-01-12T21:42:34.472Z\",\"fulfilled_by\":\"application\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"status\":\"active\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.RewardProgramListParams params =
+        com.stripe.param.v2.moneymanagement.RewardProgramListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.RewardProgram>
+        stripeCollection = client.v2().moneyManagement().rewardPrograms().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgram.class,
+        "{\"object\":\"v2.money_management.reward_program\",\"created\":\"1970-01-12T21:42:34.472Z\",\"fulfilled_by\":\"application\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.RewardProgramCreateParams params =
+        com.stripe.param.v2.moneymanagement.RewardProgramCreateParams.builder()
+            .setFulfilledBy(
+                com.stripe.param.v2.moneymanagement.RewardProgramCreateParams.FulfilledBy
+                    .APPLICATION)
+            .setName("name")
+            .build();
+
+    com.stripe.model.v2.moneymanagement.RewardProgram rewardProgram =
+        client.v2().moneyManagement().rewardPrograms().create(params);
+    assertNotNull(rewardProgram);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgram.class,
+        "{\"object\":\"v2.money_management.reward_program\",\"created\":\"1970-01-12T21:42:34.472Z\",\"fulfilled_by\":\"application\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgram rewardProgram =
+        client.v2().moneyManagement().rewardPrograms().retrieve("id_123");
+    assertNotNull(rewardProgram);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramPost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgram.class,
+        "{\"object\":\"v2.money_management.reward_program\",\"created\":\"1970-01-12T21:42:34.472Z\",\"fulfilled_by\":\"application\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.RewardProgramUpdateParams params =
+        com.stripe.param.v2.moneymanagement.RewardProgramUpdateParams.builder().build();
+
+    com.stripe.model.v2.moneymanagement.RewardProgram rewardProgram =
+        client.v2().moneyManagement().rewardPrograms().update("id_123", params);
+    assertNotNull(rewardProgram);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/id_123",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/id_123/activate",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgram.class,
+        "{\"object\":\"v2.money_management.reward_program\",\"created\":\"1970-01-12T21:42:34.472Z\",\"fulfilled_by\":\"application\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgram rewardProgram =
+        client.v2().moneyManagement().rewardPrograms().activate("id_123");
+    assertNotNull(rewardProgram);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/id_123/activate",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramPost4Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/id_123/deactivate",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgram.class,
+        "{\"object\":\"v2.money_management.reward_program\",\"created\":\"1970-01-12T21:42:34.472Z\",\"fulfilled_by\":\"application\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgram rewardProgram =
+        client.v2().moneyManagement().rewardPrograms().deactivate("id_123");
+    assertNotNull(rewardProgram);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/id_123/deactivate",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramsRuleGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.RewardProgramRule>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.money_management.reward_program_rule\",\"condition\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"reward\":{\"cashback\":{\"rate\":\"2328725.3333333335\"}},\"reward_program\":\"reward_program\",\"status\":\"active\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.rewardprograms.RuleListParams params =
+        com.stripe.param.v2.moneymanagement.rewardprograms.RuleListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.RewardProgramRule>
+        stripeCollection =
+            client
+                .v2()
+                .moneyManagement()
+                .rewardPrograms()
+                .rules()
+                .list("reward_program_id_123", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramsRulePostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramRule.class,
+        "{\"object\":\"v2.money_management.reward_program_rule\",\"condition\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"reward\":{\"cashback\":{\"rate\":\"2328725.3333333335\"}},\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.rewardprograms.RuleCreateParams params =
+        com.stripe.param.v2.moneymanagement.rewardprograms.RuleCreateParams.builder()
+            .setName("name")
+            .setReward(
+                com.stripe.param.v2.moneymanagement.rewardprograms.RuleCreateParams.Reward.builder()
+                    .setCashback(
+                        com.stripe.param.v2.moneymanagement.rewardprograms.RuleCreateParams.Reward
+                            .Cashback.builder()
+                            .setRate(new BigDecimal("2328725.3333333335"))
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.v2.moneymanagement.RewardProgramRule rewardProgramRule =
+        client
+            .v2()
+            .moneyManagement()
+            .rewardPrograms()
+            .rules()
+            .create("reward_program_id_123", params);
+    assertNotNull(rewardProgramRule);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramsRuleGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramRule.class,
+        "{\"object\":\"v2.money_management.reward_program_rule\",\"condition\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"reward\":{\"cashback\":{\"rate\":\"2328725.3333333335\"}},\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgramRule rewardProgramRule =
+        client
+            .v2()
+            .moneyManagement()
+            .rewardPrograms()
+            .rules()
+            .retrieve("reward_program_id_123", "id_123");
+    assertNotNull(rewardProgramRule);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramsRulePost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramRule.class,
+        "{\"object\":\"v2.money_management.reward_program_rule\",\"condition\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"reward\":{\"cashback\":{\"rate\":\"2328725.3333333335\"}},\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.rewardprograms.RuleUpdateParams params =
+        com.stripe.param.v2.moneymanagement.rewardprograms.RuleUpdateParams.builder().build();
+
+    com.stripe.model.v2.moneymanagement.RewardProgramRule rewardProgramRule =
+        client
+            .v2()
+            .moneyManagement()
+            .rewardPrograms()
+            .rules()
+            .update("reward_program_id_123", "id_123", params);
+    assertNotNull(rewardProgramRule);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramsRulePost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123/activate",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramRule.class,
+        "{\"object\":\"v2.money_management.reward_program_rule\",\"condition\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"reward\":{\"cashback\":{\"rate\":\"2328725.3333333335\"}},\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgramRule rewardProgramRule =
+        client
+            .v2()
+            .moneyManagement()
+            .rewardPrograms()
+            .rules()
+            .activate("reward_program_id_123", "id_123");
+    assertNotNull(rewardProgramRule);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123/activate",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramsRulePost4Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123/deactivate",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramRule.class,
+        "{\"object\":\"v2.money_management.reward_program_rule\",\"condition\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"name\":\"name\",\"reward\":{\"cashback\":{\"rate\":\"2328725.3333333335\"}},\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgramRule rewardProgramRule =
+        client
+            .v2()
+            .moneyManagement()
+            .rewardPrograms()
+            .rules()
+            .deactivate("reward_program_id_123", "id_123");
+    assertNotNull(rewardProgramRule);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_programs/reward_program_id_123/rules/id_123/deactivate",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramEnrollmentGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_program_enrollments",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.RewardProgramEnrollment>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.money_management.reward_program_enrollment\",\"account\":\"account\",\"card_spend\":{\"issuer_program\":\"issuer_program\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"reward_program\":\"reward_program\",\"status\":\"active\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.RewardProgramEnrollmentListParams params =
+        com.stripe.param.v2.moneymanagement.RewardProgramEnrollmentListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<
+            com.stripe.model.v2.moneymanagement.RewardProgramEnrollment>
+        stripeCollection = client.v2().moneyManagement().rewardProgramEnrollments().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_program_enrollments",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramEnrollmentPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_program_enrollments",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramEnrollment.class,
+        "{\"object\":\"v2.money_management.reward_program_enrollment\",\"account\":\"account\",\"card_spend\":{\"issuer_program\":\"issuer_program\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.RewardProgramEnrollmentCreateParams params =
+        com.stripe.param.v2.moneymanagement.RewardProgramEnrollmentCreateParams.builder()
+            .setAccount("account")
+            .setCardSpend(
+                com.stripe.param.v2.moneymanagement.RewardProgramEnrollmentCreateParams.CardSpend
+                    .builder()
+                    .setIssuerProgram("issuer_program")
+                    .build())
+            .setRewardProgram("reward_program")
+            .build();
+
+    com.stripe.model.v2.moneymanagement.RewardProgramEnrollment rewardProgramEnrollment =
+        client.v2().moneyManagement().rewardProgramEnrollments().create(params);
+    assertNotNull(rewardProgramEnrollment);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_program_enrollments",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramEnrollmentGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_program_enrollments/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramEnrollment.class,
+        "{\"object\":\"v2.money_management.reward_program_enrollment\",\"account\":\"account\",\"card_spend\":{\"issuer_program\":\"issuer_program\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgramEnrollment rewardProgramEnrollment =
+        client.v2().moneyManagement().rewardProgramEnrollments().retrieve("id_123");
+    assertNotNull(rewardProgramEnrollment);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/reward_program_enrollments/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramEnrollmentPost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_program_enrollments/id_123/activate",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramEnrollment.class,
+        "{\"object\":\"v2.money_management.reward_program_enrollment\",\"account\":\"account\",\"card_spend\":{\"issuer_program\":\"issuer_program\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgramEnrollment rewardProgramEnrollment =
+        client.v2().moneyManagement().rewardProgramEnrollments().activate("id_123");
+    assertNotNull(rewardProgramEnrollment);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_program_enrollments/id_123/activate",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementRewardProgramEnrollmentPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_program_enrollments/id_123/deactivate",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.RewardProgramEnrollment.class,
+        "{\"object\":\"v2.money_management.reward_program_enrollment\",\"account\":\"account\",\"card_spend\":{\"issuer_program\":\"issuer_program\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"reward_program\":\"reward_program\",\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.RewardProgramEnrollment rewardProgramEnrollment =
+        client.v2().moneyManagement().rewardProgramEnrollments().deactivate("id_123");
+    assertNotNull(rewardProgramEnrollment);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/reward_program_enrollments/id_123/deactivate",
         null,
         null);
   }
@@ -31995,7 +33119,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setNetwork(
                 com.stripe.param.v2.moneymanagement.testhelpers.FinancialAddressCreditParams.Network
-                    .ACH)
+                    .FEDWIRE)
             .build();
 
     com.stripe.model.v2.moneymanagement.FinancialAddressCreditSimulation
@@ -32416,7 +33540,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.payments.OffSessionPayment>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"requires_capture\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"paused\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.payments.OffSessionPaymentListParams params =
@@ -32442,7 +33566,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"requires_capture\"}");
+        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"paused\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.payments.OffSessionPaymentCreateParams params =
@@ -32473,7 +33597,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"requires_capture\"}");
+        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"paused\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
@@ -32496,7 +33620,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"requires_capture\"}");
+        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"paused\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
@@ -32519,7 +33643,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"requires_capture\"}");
+        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"paused\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
@@ -32542,7 +33666,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"requires_capture\"}");
+        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"paused\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
@@ -33273,14 +34397,17 @@ class GeneratedExamples extends BaseStripeTest {
         "{\"object\":\"v2.provisioning.resource\",\"created\":\"1970-01-12T21:42:34.472Z\",\"environment\":\"prod\",\"id\":\"obj_123\",\"livemode\":true,\"provider\":\"provider\",\"service_ref\":\"service_ref\",\"status\":\"complete\"}");
     StripeClient client = new StripeClient(networkSpy);
 
+    com.stripe.param.v2.provisioning.ResourceRetrieveParams params =
+        com.stripe.param.v2.provisioning.ResourceRetrieveParams.builder().build();
+
     com.stripe.model.v2.provisioning.Resource resource =
-        client.v2().provisioning().resources().retrieve("id_123");
+        client.v2().provisioning().resources().retrieve("id_123", params);
     assertNotNull(resource);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/provisioning/resources/id_123",
-        null,
+        params.toMap(),
         null);
   }
 
@@ -33535,68 +34662,44 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2RiskInquiryGetServices() throws StripeException {
+  public void testV2RiskFormGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
-        "/v2/risk/inquiries",
+        "/v2/risk/forms/id_123",
         null,
         null,
-        new TypeToken<
-            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.risk.Inquiry>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.risk.inquiry\",\"closed_at\":\"1970-01-06T13:53:35.258Z\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"opened_at\":\"1970-01-18T22:56:33.737Z\",\"status\":\"closed\",\"type\":\"appeal\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        com.stripe.model.v2.risk.Form.class,
+        "{\"object\":\"v2.risk.form\",\"closed_at\":\"1970-01-06T13:53:35.258Z\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"opened_at\":\"1970-01-18T22:56:33.737Z\",\"status\":\"closed\",\"type\":\"appeal\"}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.risk.InquiryListParams params =
-        com.stripe.param.v2.risk.InquiryListParams.builder().build();
-
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.risk.Inquiry> stripeCollection =
-        client.v2().risk().inquiries().list(params);
-    assertNotNull(stripeCollection);
+    com.stripe.model.v2.risk.Form form = client.v2().risk().forms().retrieve("id_123");
+    assertNotNull(form);
     verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/risk/inquiries", params.toMap(), null);
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/risk/forms/id_123", null, null);
   }
 
   @Test
-  public void testV2RiskInquiryGet2Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/risk/inquiries/id_123",
-        null,
-        null,
-        com.stripe.model.v2.risk.Inquiry.class,
-        "{\"object\":\"v2.risk.inquiry\",\"closed_at\":\"1970-01-06T13:53:35.258Z\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"opened_at\":\"1970-01-18T22:56:33.737Z\",\"status\":\"closed\",\"type\":\"appeal\"}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.risk.Inquiry inquiry = client.v2().risk().inquiries().retrieve("id_123");
-    assertNotNull(inquiry);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/risk/inquiries/id_123", null, null);
-  }
-
-  @Test
-  public void testV2RiskInquiryPostServices() throws StripeException {
+  public void testV2RiskFormPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/risk/inquiries/id_123",
+        "/v2/risk/forms/id_123",
         null,
         null,
-        com.stripe.model.v2.risk.Inquiry.class,
-        "{\"object\":\"v2.risk.inquiry\",\"closed_at\":\"1970-01-06T13:53:35.258Z\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"opened_at\":\"1970-01-18T22:56:33.737Z\",\"status\":\"closed\",\"type\":\"appeal\"}");
+        com.stripe.model.v2.risk.Form.class,
+        "{\"object\":\"v2.risk.form\",\"closed_at\":\"1970-01-06T13:53:35.258Z\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"opened_at\":\"1970-01-18T22:56:33.737Z\",\"status\":\"closed\",\"type\":\"appeal\"}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.risk.InquiryUpdateParams params =
-        com.stripe.param.v2.risk.InquiryUpdateParams.builder().build();
+    com.stripe.param.v2.risk.FormUpdateParams params =
+        com.stripe.param.v2.risk.FormUpdateParams.builder().build();
 
-    com.stripe.model.v2.risk.Inquiry inquiry =
-        client.v2().risk().inquiries().update("id_123", params);
-    assertNotNull(inquiry);
+    com.stripe.model.v2.risk.Form form = client.v2().risk().forms().update("id_123", params);
+    assertNotNull(form);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/risk/inquiries/id_123",
+        "/v2/risk/forms/id_123",
         params.toMap(),
         null);
   }
@@ -33610,13 +34713,12 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountActivity.class,
-        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"registration_decision\"}");
+        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"mfa_addition\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.AccountActivityCreateParams params =
         com.stripe.param.v2.signals.AccountActivityCreateParams.builder()
-            .setType(
-                com.stripe.param.v2.signals.AccountActivityCreateParams.Type.REGISTRATION_DECISION)
+            .setType(com.stripe.param.v2.signals.AccountActivityCreateParams.Type.MFA_ADDITION)
             .build();
 
     com.stripe.model.v2.signals.AccountActivity accountActivity =
@@ -33662,7 +34764,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountActivity.class,
-        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"registration_decision\"}");
+        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"mfa_addition\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.signals.AccountActivity accountActivity =
@@ -33945,7 +35047,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.IntegrationConfiguration.class,
-        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"invoices\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true}");
+        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"invoices\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true,\"subscriptions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.tax.IntegrationConfiguration integrationConfiguration =
@@ -33968,7 +35070,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.IntegrationConfiguration.class,
-        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"invoices\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true}");
+        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"invoices\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true,\"subscriptions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.tax.IntegrationConfigurationUpdateParams params =
@@ -34180,7 +35282,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.RecipientVerification.class,
-        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"status\":\"acknowledged\"}");
+        "{\"object\":\"v2.money_management.recipient_verification\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"match_result\":\"unavailable\",\"match_result_details\":{\"message\":\"message\",\"provided_name\":\"provided_name\"},\"payout_method\":\"payout_method\",\"status\":\"acknowledged\",\"verification_type\":\"confirmation_of_payee\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.testhelpers.MoneyManagementRecipientVerificationsParams params =
@@ -34321,6 +35423,43 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCapabilityNotEnabledErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents",
+        null,
+        null,
+        "{\"error\":{\"type\":\"capability_not_enabled\",\"code\":\"outbound_flow_from_closed_financial_account_not_supported\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FundingIntentCreateParams params =
+        com.stripe.param.v2.moneymanagement.FundingIntentCreateParams.builder()
+            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setTo(
+                com.stripe.param.v2.moneymanagement.FundingIntentCreateParams.To.builder()
+                    .setCurrency("usd")
+                    .setFinancialAccount("financial_account")
+                    .build())
+            .setType(com.stripe.param.v2.moneymanagement.FundingIntentCreateParams.Type.CHECK)
+            .build();
+
+    try {
+      client.v2().moneyManagement().fundingIntents().create(params);
+    } catch (CapabilityNotEnabledException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_intents",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testControlledByAlternateResourceErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,
@@ -34354,7 +35493,7 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/money_management/currency_conversions",
         null,
         null,
-        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"outbound_flow_from_closed_financial_account_unsupported\"}}",
+        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"funding_intent_settlement_timing_not_available_for_account_type\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
@@ -34703,7 +35842,7 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/vault/gb_bank_accounts",
         null,
         null,
-        "{\"error\":{\"type\":\"quota_exceeded\",\"code\":\"archived_payout_method_card\"}}",
+        "{\"error\":{\"type\":\"quota_exceeded\",\"code\":\"limit_gb_bank_account\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 

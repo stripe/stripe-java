@@ -17004,12 +17004,23 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /**
+         * The merchant of record for this account funding transaction. Can only be set when
+         * creating a PaymentIntent.
+         */
+        @SerializedName("merchant_of_record")
+        MerchantOfRecord merchantOfRecord;
+
         /** Inline identity details for the sender of this account funding transaction. */
         @SerializedName("sender_details")
         Object senderDetails;
 
-        private AccountFunding(Map<String, Object> extraParams, Object senderDetails) {
+        private AccountFunding(
+            Map<String, Object> extraParams,
+            MerchantOfRecord merchantOfRecord,
+            Object senderDetails) {
           this.extraParams = extraParams;
+          this.merchantOfRecord = merchantOfRecord;
           this.senderDetails = senderDetails;
         }
 
@@ -17020,12 +17031,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private MerchantOfRecord merchantOfRecord;
+
           private Object senderDetails;
 
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentUpdateParams.PaymentDetails.MoneyServices.AccountFunding build() {
             return new PaymentIntentUpdateParams.PaymentDetails.MoneyServices.AccountFunding(
-                this.extraParams, this.senderDetails);
+                this.extraParams, this.merchantOfRecord, this.senderDetails);
           }
 
           /**
@@ -17055,6 +17068,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The merchant of record for this account funding transaction. Can only be set when
+           * creating a PaymentIntent.
+           */
+          public Builder setMerchantOfRecord(
+              PaymentIntentUpdateParams.PaymentDetails.MoneyServices.AccountFunding.MerchantOfRecord
+                  merchantOfRecord) {
+            this.merchantOfRecord = merchantOfRecord;
             return this;
           }
 
@@ -17569,6 +17593,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
                 return this;
               }
             }
+          }
+        }
+
+        public enum MerchantOfRecord implements ApiRequestParams.EnumParam {
+          @SerializedName("stripe")
+          STRIPE("stripe");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          MerchantOfRecord(String value) {
+            this.value = value;
           }
         }
       }
@@ -18969,6 +19005,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Tamara tamara;
 
     /**
+     * If this is a {@code toss_pay} PaymentMethod, this hash contains details about the Toss Pay
+     * payment method.
+     */
+    @SerializedName("toss_pay")
+    TossPay tossPay;
+
+    /**
      * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
      */
     @SerializedName("twint")
@@ -19087,6 +19130,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Sunbit sunbit,
         Swish swish,
         Tamara tamara,
+        TossPay tossPay,
         Twint twint,
         Type type,
         Upi upi,
@@ -19163,6 +19207,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.sunbit = sunbit;
       this.swish = swish;
       this.tamara = tamara;
+      this.tossPay = tossPay;
       this.twint = twint;
       this.type = type;
       this.upi = upi;
@@ -19315,6 +19360,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Tamara tamara;
 
+      private TossPay tossPay;
+
       private Twint twint;
 
       private Type type;
@@ -19401,6 +19448,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.sunbit,
             this.swish,
             this.tamara,
+            this.tossPay,
             this.twint,
             this.type,
             this.upi,
@@ -20081,6 +20129,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setTamara(PaymentIntentUpdateParams.PaymentMethodData.Tamara tamara) {
         this.tamara = tamara;
+        return this;
+      }
+
+      /**
+       * If this is a {@code toss_pay} PaymentMethod, this hash contains details about the Toss Pay
+       * payment method.
+       */
+      public Builder setTossPay(PaymentIntentUpdateParams.PaymentMethodData.TossPay tossPay) {
+        this.tossPay = tossPay;
         return this;
       }
 
@@ -22425,6 +22482,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         @SerializedName("cimb")
         CIMB("cimb"),
+
+        @SerializedName("mandiri")
+        MANDIRI("mandiri"),
 
         @SerializedName("permata")
         PERMATA("permata");
@@ -25464,6 +25524,64 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class TossPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TossPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.TossPay build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.TossPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.TossPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.TossPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Twint {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -25767,6 +25885,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("account_type")
       AccountType accountType;
 
+      /** An external token used to create a payment method. */
+      @SerializedName("external_token")
+      ExternalToken externalToken;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -25788,12 +25910,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           AccountHolderType accountHolderType,
           Object accountNumber,
           AccountType accountType,
+          ExternalToken externalToken,
           Map<String, Object> extraParams,
           Object financialConnectionsAccount,
           Object routingNumber) {
         this.accountHolderType = accountHolderType;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
+        this.externalToken = externalToken;
         this.extraParams = extraParams;
         this.financialConnectionsAccount = financialConnectionsAccount;
         this.routingNumber = routingNumber;
@@ -25810,6 +25934,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private AccountType accountType;
 
+        private ExternalToken externalToken;
+
         private Map<String, Object> extraParams;
 
         private Object financialConnectionsAccount;
@@ -25822,6 +25948,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.accountHolderType,
               this.accountNumber,
               this.accountType,
+              this.externalToken,
               this.extraParams,
               this.financialConnectionsAccount,
               this.routingNumber);
@@ -25851,6 +25978,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setAccountType(
             PaymentIntentUpdateParams.PaymentMethodData.UsBankAccount.AccountType accountType) {
           this.accountType = accountType;
+          return this;
+        }
+
+        /** An external token used to create a payment method. */
+        public Builder setExternalToken(
+            PaymentIntentUpdateParams.PaymentMethodData.UsBankAccount.ExternalToken externalToken) {
+          this.externalToken = externalToken;
           return this;
         }
 
@@ -25904,6 +26038,114 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setRoutingNumber(EmptyParam routingNumber) {
           this.routingNumber = routingNumber;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ExternalToken {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The Plaid processor token to use for this bank account. */
+        @SerializedName("plaid_processor_token")
+        Object plaidProcessorToken;
+
+        /** <strong>Required.</strong> The type of external token. */
+        @SerializedName("type")
+        Type type;
+
+        private ExternalToken(
+            Map<String, Object> extraParams, Object plaidProcessorToken, Type type) {
+          this.extraParams = extraParams;
+          this.plaidProcessorToken = plaidProcessorToken;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object plaidProcessorToken;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodData.UsBankAccount.ExternalToken build() {
+            return new PaymentIntentUpdateParams.PaymentMethodData.UsBankAccount.ExternalToken(
+                this.extraParams, this.plaidProcessorToken, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodData.UsBankAccount.ExternalToken#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodData.UsBankAccount.ExternalToken#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The Plaid processor token to use for this bank account. */
+          public Builder setPlaidProcessorToken(String plaidProcessorToken) {
+            this.plaidProcessorToken = plaidProcessorToken;
+            return this;
+          }
+
+          /** The Plaid processor token to use for this bank account. */
+          public Builder setPlaidProcessorToken(EmptyParam plaidProcessorToken) {
+            this.plaidProcessorToken = plaidProcessorToken;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The type of external token. */
+          public Builder setType(
+              PaymentIntentUpdateParams.PaymentMethodData.UsBankAccount.ExternalToken.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("plaid_processor_token")
+          PLAID_PROCESSOR_TOKEN("plaid_processor_token");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -26316,6 +26558,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("tamara")
       TAMARA("tamara"),
+
+      @SerializedName("toss_pay")
+      TOSS_PAY("toss_pay"),
 
       @SerializedName("twint")
       TWINT("twint"),
@@ -26795,6 +27040,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object swish;
 
     /**
+     * If this is a {@code toss_pay} PaymentMethod, this sub-hash contains details about the Toss
+     * Pay payment method options.
+     */
+    @SerializedName("toss_pay")
+    Object tossPay;
+
+    /**
      * If this is a {@code twint} PaymentMethod, this sub-hash contains details about the TWINT
      * payment method options.
      */
@@ -26901,6 +27153,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object stripeBalance,
         Object sunbit,
         Object swish,
+        Object tossPay,
         Object twint,
         Object upi,
         Object usBankAccount,
@@ -26971,6 +27224,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.stripeBalance = stripeBalance;
       this.sunbit = sunbit;
       this.swish = swish;
+      this.tossPay = tossPay;
       this.twint = twint;
       this.upi = upi;
       this.usBankAccount = usBankAccount;
@@ -27112,6 +27366,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Object swish;
 
+      private Object tossPay;
+
       private Object twint;
 
       private Object upi;
@@ -27191,6 +27447,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.stripeBalance,
             this.sunbit,
             this.swish,
+            this.tossPay,
             this.twint,
             this.upi,
             this.usBankAccount,
@@ -28372,6 +28629,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSwish(EmptyParam swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a {@code toss_pay} PaymentMethod, this sub-hash contains details about the Toss
+       * Pay payment method options.
+       */
+      public Builder setTossPay(PaymentIntentUpdateParams.PaymentMethodOptions.TossPay tossPay) {
+        this.tossPay = tossPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code toss_pay} PaymentMethod, this sub-hash contains details about the Toss
+       * Pay payment method options.
+       */
+      public Builder setTossPay(EmptyParam tossPay) {
+        this.tossPay = tossPay;
         return this;
       }
 
@@ -54413,6 +54688,158 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class TossPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private TossPay(
+          Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodOptions.TossPay build() {
+          return new PaymentIntentUpdateParams.PaymentMethodOptions.TossPay(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.TossPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.TossPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.TossPay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Twint {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -57707,6 +58134,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
 
+    @SerializedName("toss_pay")
+    TOSS_PAY("toss_pay"),
+
     @SerializedName("touch_n_go")
     TOUCH_N_GO("touch_n_go"),
 
@@ -57949,6 +58379,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("tamara")
     TAMARA("tamara"),
+
+    @SerializedName("toss_pay")
+    TOSS_PAY("toss_pay"),
 
     @SerializedName("twint")
     TWINT("twint"),

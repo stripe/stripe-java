@@ -9,6 +9,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CardUpdateOnAccountParams;
 import com.stripe.param.CardUpdateOnCustomerParams;
 import java.util.List;
@@ -578,5 +579,15 @@ public class Card extends ApiResource
      */
     @SerializedName("status")
     String status;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(account, responseGetter);
+    trySetResponseGetter(benefits, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(networks, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
   }
 }

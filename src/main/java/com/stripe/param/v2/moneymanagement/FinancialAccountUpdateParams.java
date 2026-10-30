@@ -15,8 +15,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAccountUpdateParams extends ApiRequestParams {
   /**
-   * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
-   * in the Stripe Dashboard and embedded components.
+   * A descriptive name for the FinancialAccount, up to 50 characters long. This name appears in the
+   * Stripe Dashboard and embedded components.
    */
   @SerializedName("display_name")
   Object displayName;
@@ -37,7 +37,10 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   @SerializedName("forwarding_settings")
   ForwardingSettings forwardingSettings;
 
-  /** Metadata associated with the FinancialAccount. */
+  /**
+   * Set of key-value pairs that you can attach to the FinancialAccount. Individual keys can be
+   * unset by posting null to them.
+   */
   @SerializedName("metadata")
   Map<String, Object> metadata;
 
@@ -80,8 +83,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
-     * in the Stripe Dashboard and embedded components.
+     * A descriptive name for the FinancialAccount, up to 50 characters long. This name appears in
+     * the Stripe Dashboard and embedded components.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
@@ -89,8 +92,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
-     * in the Stripe Dashboard and embedded components.
+     * A descriptive name for the FinancialAccount, up to 50 characters long. This name appears in
+     * the Stripe Dashboard and embedded components.
      */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;
@@ -196,11 +199,17 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The address to send forwarded payments to. */
+    /**
+     * ID of the FinancialAccount that supplies funds to cover negative balances during or after
+     * this FinancialAccount's closure.
+     */
     @SerializedName("payment_method")
     Object paymentMethod;
 
-    /** The address to send forwarded payouts to. */
+    /**
+     * ID of the FinancialAccount that receives funds forwarded from this FinancialAccount when it
+     * closes.
+     */
     @SerializedName("payout_method")
     Object payoutMethod;
 
@@ -269,25 +278,37 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The address to send forwarded payments to. */
+      /**
+       * ID of the FinancialAccount that supplies funds to cover negative balances during or after
+       * this FinancialAccount's closure.
+       */
       public Builder setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
         return this;
       }
 
-      /** The address to send forwarded payments to. */
+      /**
+       * ID of the FinancialAccount that supplies funds to cover negative balances during or after
+       * this FinancialAccount's closure.
+       */
       public Builder setPaymentMethod(EmptyParam paymentMethod) {
         this.paymentMethod = paymentMethod;
         return this;
       }
 
-      /** The address to send forwarded payouts to. */
+      /**
+       * ID of the FinancialAccount that receives funds forwarded from this FinancialAccount when it
+       * closes.
+       */
       public Builder setPayoutMethod(String payoutMethod) {
         this.payoutMethod = payoutMethod;
         return this;
       }
 
-      /** The address to send forwarded payouts to. */
+      /**
+       * ID of the FinancialAccount that receives funds forwarded from this FinancialAccount when it
+       * closes.
+       */
       public Builder setPayoutMethod(EmptyParam payoutMethod) {
         this.payoutMethod = payoutMethod;
         return this;

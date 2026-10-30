@@ -249,7 +249,7 @@ public class PaymentPlan extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("invoice_details")
     InvoiceDetails invoiceDetails;
 
-    /** The type of object this plan collects against. Currently always {@code invoice_details}. */
+    /** The type of object this plan collects against. This is always {@code invoice_details}. */
     @SerializedName("type")
     String type;
 
@@ -327,7 +327,7 @@ public class PaymentPlan extends ApiResource implements HasId, MetadataStore<Pay
     @SerializedName("amounts_due")
     AmountsDue amountsDue;
 
-    /** The type of schedule. Currently always {@code amounts_due}. */
+    /** The type of schedule. This is always {@code amounts_due}. */
     @SerializedName("type")
     String type;
 

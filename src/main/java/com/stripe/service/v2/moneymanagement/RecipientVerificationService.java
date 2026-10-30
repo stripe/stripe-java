@@ -55,15 +55,13 @@ public final class RecipientVerificationService extends ApiService {
     return this.request(request, RecipientVerification.class);
   }
   /**
-   * Acknowledges an existing RecipientVerification. Only RecipientVerification awaiting
-   * acknowledgement can be acknowledged.
+   * Acknowledges an existing RecipientVerification in the {@code awaiting_acknowledgement} state.
    */
   public RecipientVerification acknowledge(String id) throws StripeException {
     return acknowledge(id, (RequestOptions) null);
   }
   /**
-   * Acknowledges an existing RecipientVerification. Only RecipientVerification awaiting
-   * acknowledgement can be acknowledged.
+   * Acknowledges an existing RecipientVerification in the {@code awaiting_acknowledgement} state.
    */
   public RecipientVerification acknowledge(String id, RequestOptions options)
       throws StripeException {

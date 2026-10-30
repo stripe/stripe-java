@@ -57,19 +57,19 @@ public final class TransactionService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, Transaction.class);
   }
-  /** Updates the description of an existing Transaction. */
+  /** Updates an existing Transaction. You can update its description and metadata. */
   public Transaction update(String id, TransactionUpdateParams params) throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Updates the description of an existing Transaction. */
+  /** Updates an existing Transaction. You can update its description and metadata. */
   public Transaction update(String id, RequestOptions options) throws StripeException {
     return update(id, (TransactionUpdateParams) null, options);
   }
-  /** Updates the description of an existing Transaction. */
+  /** Updates an existing Transaction. You can update its description and metadata. */
   public Transaction update(String id) throws StripeException {
     return update(id, (TransactionUpdateParams) null, (RequestOptions) null);
   }
-  /** Updates the description of an existing Transaction. */
+  /** Updates an existing Transaction. You can update its description and metadata. */
   public Transaction update(String id, TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =

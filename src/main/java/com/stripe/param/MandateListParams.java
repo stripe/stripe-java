@@ -50,7 +50,9 @@ public class MandateListParams extends ApiRequestParams {
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
-  /** <strong>Required.</strong> */
+  /**
+   * <strong>Required.</strong> The ID of the payment method whose mandates you want to retrieve.
+   */
   @SerializedName("payment_method")
   String paymentMethod;
 
@@ -206,7 +208,9 @@ public class MandateListParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> The ID of the payment method whose mandates you want to retrieve.
+     */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;

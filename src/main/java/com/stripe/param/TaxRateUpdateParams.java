@@ -347,8 +347,14 @@ public class TaxRateUpdateParams extends ApiRequestParams {
   }
 
   public enum TaxType implements ApiRequestParams.EnumParam {
+    @SerializedName("admissions_tax")
+    ADMISSIONS_TAX("admissions_tax"),
+
     @SerializedName("amusement_tax")
     AMUSEMENT_TAX("amusement_tax"),
+
+    @SerializedName("attendance_tax")
+    ATTENDANCE_TAX("attendance_tax"),
 
     @SerializedName("communications_tax")
     COMMUNICATIONS_TAX("communications_tax"),
@@ -356,8 +362,20 @@ public class TaxRateUpdateParams extends ApiRequestParams {
     @SerializedName("digital_excise_tax")
     DIGITAL_EXCISE_TAX("digital_excise_tax"),
 
+    @SerializedName("entertainment_tax")
+    ENTERTAINMENT_TAX("entertainment_tax"),
+
+    @SerializedName("get_fund")
+    GET_FUND("get_fund"),
+
+    @SerializedName("gross_receipts_tax")
+    GROSS_RECEIPTS_TAX("gross_receipts_tax"),
+
     @SerializedName("gst")
     GST("gst"),
+
+    @SerializedName("hospitality_tax")
+    HOSPITALITY_TAX("hospitality_tax"),
 
     @SerializedName("hst")
     HST("hst"),
@@ -371,8 +389,14 @@ public class TaxRateUpdateParams extends ApiRequestParams {
     @SerializedName("lease_tax")
     LEASE_TAX("lease_tax"),
 
+    @SerializedName("luxury_tax")
+    LUXURY_TAX("luxury_tax"),
+
     @SerializedName("mass_transit_parking_tax")
     MASS_TRANSIT_PARKING_TAX("mass_transit_parking_tax"),
+
+    @SerializedName("nhil")
+    NHIL("nhil"),
 
     @SerializedName("parking_tax")
     PARKING_TAX("parking_tax"),
@@ -382,6 +406,9 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
     @SerializedName("qst")
     QST("qst"),
+
+    @SerializedName("resort_tax")
+    RESORT_TAX("resort_tax"),
 
     @SerializedName("retail_delivery_fee")
     RETAIL_DELIVERY_FEE("retail_delivery_fee"),
@@ -394,6 +421,9 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
     @SerializedName("service_tax")
     SERVICE_TAX("service_tax"),
+
+    @SerializedName("tourism_tax")
+    TOURISM_TAX("tourism_tax"),
 
     @SerializedName("utility_users_tax")
     UTILITY_USERS_TAX("utility_users_tax"),

@@ -16,7 +16,9 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.core.AccountCloseParams;
 import com.stripe.param.v2.core.AccountCreateParams;
 import com.stripe.param.v2.core.AccountListParams;
+import com.stripe.param.v2.core.AccountRejectParams;
 import com.stripe.param.v2.core.AccountRetrieveParams;
+import com.stripe.param.v2.core.AccountUnrejectParams;
 import com.stripe.param.v2.core.AccountUpdateParams;
 
 public final class AccountService extends ApiService {
@@ -184,6 +186,63 @@ public final class AccountService extends ApiService {
   public Account close(String id, AccountCloseParams params, RequestOptions options)
       throws StripeException, RateLimitException {
     String path = String.format("/v2/core/accounts/%s/close", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Account.class);
+  }
+  /** Rejects an Account and prevents it from operating across its configurations. */
+  public Account reject(String id, AccountRejectParams params)
+      throws StripeException, RateLimitException {
+    return reject(id, params, (RequestOptions) null);
+  }
+  /** Rejects an Account and prevents it from operating across its configurations. */
+  public Account reject(String id, AccountRejectParams params, RequestOptions options)
+      throws StripeException, RateLimitException {
+    String path = String.format("/v2/core/accounts/%s/reject", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Account.class);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id, AccountUnrejectParams params)
+      throws StripeException, RateLimitException {
+    return unreject(id, params, (RequestOptions) null);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id, RequestOptions options)
+      throws StripeException, RateLimitException {
+    return unreject(id, (AccountUnrejectParams) null, options);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id) throws StripeException, RateLimitException {
+    return unreject(id, (AccountUnrejectParams) null, (RequestOptions) null);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id, AccountUnrejectParams params, RequestOptions options)
+      throws StripeException, RateLimitException {
+    String path = String.format("/v2/core/accounts/%s/unreject", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

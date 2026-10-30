@@ -45,6 +45,13 @@ public class UsBankAccount extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
+  /**
+   * Same as {@code fingerprint}, but uniquely identifies the bank account using its {@code
+   * fedwire_routing_number} instead of its {@code routing_number}.
+   */
+  @SerializedName("fedwire_fingerprint")
+  String fedwireFingerprint;
+
   /** The fedwire routing number of the bank account. */
   @SerializedName("fedwire_routing_number")
   String fedwireRoutingNumber;
@@ -52,6 +59,13 @@ public class UsBankAccount extends StripeObject implements HasId {
   /** The ID of the Financial Connections Account used to create the bank account. */
   @SerializedName("financial_connections_account")
   String financialConnectionsAccount;
+
+  /**
+   * Uniquely identifies this particular bank account. You can use this attribute to check whether
+   * two recipients who've signed up with you are using the same bank account, for example.
+   */
+  @SerializedName("fingerprint")
+  String fingerprint;
 
   /** The ID of the USBankAccount object. */
   @Getter(onMethod_ = {@Override})

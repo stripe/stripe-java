@@ -160,7 +160,7 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Schedule {
     /**
-     * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least 2
+     * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least two
      * installment entries.
      */
     @SerializedName("amounts_due")
@@ -175,7 +175,7 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The schedule type. Currently only 'amounts_due' is supported. */
+    /** <strong>Required.</strong> The schedule type. It only supports 'amounts_due'. */
     @SerializedName("type")
     Type type;
 
@@ -202,7 +202,7 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least 2
+       * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least two
        * installment entries.
        */
       public Builder setAmountsDue(PaymentPlanUpdateParams.Schedule.AmountsDue amountsDue) {
@@ -236,9 +236,7 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> The schedule type. Currently only 'amounts_due' is supported.
-       */
+      /** <strong>Required.</strong> The schedule type. It only supports 'amounts_due'. */
       public Builder setType(PaymentPlanUpdateParams.Schedule.Type type) {
         this.type = type;
         return this;
@@ -249,7 +247,7 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class AmountsDue {
       /**
-       * <strong>Required.</strong> The list of installment entries. Must contain at least 2
+       * <strong>Required.</strong> The list of installment entries. Must contain at least two
        * entries.
        */
       @SerializedName("amounts")

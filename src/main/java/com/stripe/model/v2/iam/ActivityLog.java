@@ -395,10 +395,6 @@ public class ActivityLog extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UserAccess extends StripeObject {
-      /** Authentication details for the user access action. */
-      @SerializedName("authentication")
-      Authentication authentication;
-
       /** Dashboard client details for the user access action. */
       @SerializedName("dashboard_client")
       DashboardClient dashboardClient;
@@ -419,10 +415,6 @@ public class ActivityLog extends StripeObject implements HasId {
       @SerializedName("roles")
       List<String> roles;
 
-      /** Session fingerprint for the user access action. */
-      @SerializedName("session_fingerprint")
-      String sessionFingerprint;
-
       /**
        * Surface where the user access action started.
        *
@@ -431,83 +423,14 @@ public class ActivityLog extends StripeObject implements HasId {
       @SerializedName("surface")
       String surface;
 
-      /** Authentication details for the user access action. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Authentication extends StripeObject {
-        /** Primary authentication factor. */
-        @SerializedName("primary_factor")
-        PrimaryFactor primaryFactor;
-
-        /** Secondary authentication factors. */
-        @SerializedName("secondary_factors")
-        List<ActivityLog.Details.UserAccess.Authentication.SecondaryFactor> secondaryFactors;
-
-        /** Primary authentication factor. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class PrimaryFactor extends StripeObject {
-          /** SSO provider for the authentication factor. */
-          @SerializedName("sso_provider")
-          String ssoProvider;
-
-          /**
-           * Type of authentication factor.
-           *
-           * <p>One of {@code backup_code}, {@code email_code}, {@code oauth}, {@code passkey},
-           * {@code password}, {@code phone_code}, {@code saml}, {@code sms}, {@code totp}, or
-           * {@code web_authn}.
-           */
-          @SerializedName("type")
-          String type;
-        }
-
-        /**
-         * For more details about SecondaryFactor, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class SecondaryFactor extends StripeObject {
-          /** SSO provider for the authentication factor. */
-          @SerializedName("sso_provider")
-          String ssoProvider;
-
-          /**
-           * Type of authentication factor.
-           *
-           * <p>One of {@code backup_code}, {@code email_code}, {@code oauth}, {@code passkey},
-           * {@code password}, {@code phone_code}, {@code saml}, {@code sms}, {@code totp}, or
-           * {@code web_authn}.
-           */
-          @SerializedName("type")
-          String type;
-        }
-      }
-
       /** Dashboard client details for the user access action. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class DashboardClient extends StripeObject {
-        /** Browser used for the user access action. */
-        @SerializedName("browser")
-        String browser;
-
-        /** Browser version used for the user access action. */
-        @SerializedName("browser_version")
-        String browserVersion;
-
-        /** Device type used for the user access action. */
-        @SerializedName("device_type")
-        String deviceType;
-
-        /** Operating system used for the user access action. */
-        @SerializedName("os")
-        String os;
+        /** User-Agent header for the user access action. */
+        @SerializedName("user_agent")
+        String userAgent;
       }
 
       /** Network details for the user access action. */
@@ -537,14 +460,6 @@ public class ActivityLog extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Risk extends StripeObject {
-        /**
-         * Risk level for the user access action.
-         *
-         * <p>One of {@code high}, {@code low}, or {@code medium}.
-         */
-        @SerializedName("level")
-        String level;
-
         /** Risk signals for the user access action. */
         @SerializedName("signals")
         List<ActivityLog.Details.UserAccess.Risk.Signal> signals;

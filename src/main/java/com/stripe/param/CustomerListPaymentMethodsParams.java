@@ -432,6 +432,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("tamara")
     TAMARA("tamara"),
 
+    @SerializedName("toss_pay")
+    TOSS_PAY("toss_pay"),
+
     @SerializedName("twint")
     TWINT("twint"),
 

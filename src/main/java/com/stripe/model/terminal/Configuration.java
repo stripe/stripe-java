@@ -89,6 +89,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("stripe_s710")
   StripeS710 stripeS710;
 
+  @SerializedName("stripe_t600")
+  StripeT600 stripeT600;
+
   @SerializedName("tipping")
   Tipping tipping;
 
@@ -448,6 +451,39 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StripeS710 extends StripeObject {
+    /** A File ID representing an image to display on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about StripeT600, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeT600 extends StripeObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1323,6 +1359,7 @@ public class Configuration extends ApiResource implements HasId {
     trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(stripeS710, responseGetter);
+    trySetResponseGetter(stripeT600, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneM425, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);

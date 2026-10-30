@@ -15,8 +15,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class PaymentPlanCreateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> The invoice(s) this payment plan collects on. Currently must contain
-   * exactly one invoice entry.
+   * <strong>Required.</strong> The invoices this payment plan collects on. It must contain exactly
+   * one invoice entry.
    */
   @SerializedName("collects_on")
   List<PaymentPlanCreateParams.CollectsOn> collectsOn;
@@ -215,7 +215,7 @@ public class PaymentPlanCreateParams extends ApiRequestParams {
     InvoiceDetails invoiceDetails;
 
     /**
-     * <strong>Required.</strong> The type of object this plan collects on. Currently always {@code
+     * <strong>Required.</strong> The type of object this plan collects on. This is always {@code
      * invoice_details}.
      */
     @SerializedName("type")
@@ -278,8 +278,8 @@ public class PaymentPlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The type of object this plan collects on. Currently always
-       * {@code invoice_details}.
+       * <strong>Required.</strong> The type of object this plan collects on. This is always {@code
+       * invoice_details}.
        */
       public Builder setType(PaymentPlanCreateParams.CollectsOn.Type type) {
         this.type = type;
@@ -376,7 +376,7 @@ public class PaymentPlanCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Schedule {
     /**
-     * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least 2
+     * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least two
      * installment entries.
      */
     @SerializedName("amounts_due")
@@ -391,7 +391,7 @@ public class PaymentPlanCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The schedule type. Currently only 'amounts_due' is supported. */
+    /** <strong>Required.</strong> The schedule type. It only supports 'amounts_due'. */
     @SerializedName("type")
     Type type;
 
@@ -418,7 +418,7 @@ public class PaymentPlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least 2
+       * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least two
        * installment entries.
        */
       public Builder setAmountsDue(PaymentPlanCreateParams.Schedule.AmountsDue amountsDue) {
@@ -452,9 +452,7 @@ public class PaymentPlanCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> The schedule type. Currently only 'amounts_due' is supported.
-       */
+      /** <strong>Required.</strong> The schedule type. It only supports 'amounts_due'. */
       public Builder setType(PaymentPlanCreateParams.Schedule.Type type) {
         this.type = type;
         return this;
@@ -465,7 +463,7 @@ public class PaymentPlanCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class AmountsDue {
       /**
-       * <strong>Required.</strong> The list of installment entries. Must contain at least 2
+       * <strong>Required.</strong> The list of installment entries. Must contain at least two
        * entries.
        */
       @SerializedName("amounts")

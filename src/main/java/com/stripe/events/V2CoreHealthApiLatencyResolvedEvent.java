@@ -30,6 +30,13 @@ public final class V2CoreHealthApiLatencyResolvedEvent extends Event {
     /** The time when the user experience has returned to expected levels. */
     @SerializedName("resolved_at")
     Instant resolvedAt;
+    /**
+     * The severity of the alert.
+     *
+     * <p>One of {@code critical}, or {@code non_critical}.
+     */
+    @SerializedName("severity")
+    String severity;
     /** The time when impact on the user experience was first detected. */
     @SerializedName("started_at")
     Instant startedAt;

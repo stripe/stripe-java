@@ -94,7 +94,10 @@ public class FinancialAddress extends StripeObject implements HasId {
     @SerializedName("clabe")
     Clabe clabe;
 
-    /** The country of the bank account. */
+    /**
+     * The country of the bank account. Always included in the response, but null while the bank
+     * account is pending and its country is not yet known.
+     */
     @SerializedName("country")
     String country;
 
@@ -135,17 +138,17 @@ public class FinancialAddress extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Aba extends StripeObject {
-      /** The address of the account holder. */
-      @SerializedName("account_holder_address")
-      AccountHolderAddress accountHolderAddress;
-
       /** The name of the account holder. */
       @SerializedName("account_holder_name")
       String accountHolderName;
 
-      /** The full account number. */
+      /** The full account number. Empty while the bank account is pending allocation. */
       @SerializedName("account_number")
       String accountNumber;
+
+      /** The address of the account holder. */
+      @SerializedName("address")
+      Address address;
 
       /** The name of the bank. */
       @SerializedName("bank_name")
@@ -155,10 +158,6 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("bic")
       String bic;
 
-      /** The last four digits of the account number. */
-      @SerializedName("last4")
-      String last4;
-
       /** The ABA routing number. */
       @SerializedName("routing_number")
       String routingNumber;
@@ -167,7 +166,7 @@ public class FinancialAddress extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class AccountHolderAddress extends StripeObject {
+      public static class Address extends StripeObject {
         /** City. */
         @SerializedName("city")
         String city;
@@ -274,17 +273,13 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("bic")
       String bic;
 
-      /** The country of the bank account. */
-      @SerializedName("country")
-      String country;
-
-      /** The full IBAN. */
+      /** The full IBAN. Empty while the bank account is pending allocation. */
       @SerializedName("iban")
       String iban;
 
-      /** The last four digits of the IBAN. */
-      @SerializedName("last4")
-      String last4;
+      /** The payment reference for this bank account. */
+      @SerializedName("reference")
+      String reference;
     }
 
     /** NIP bank account details (Nigeria). */
@@ -332,7 +327,7 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("account_holder_name")
       String accountHolderName;
 
-      /** The full account number. */
+      /** The full account number. Empty while the bank account is pending allocation. */
       @SerializedName("account_number")
       String accountNumber;
 
@@ -343,10 +338,6 @@ public class FinancialAddress extends StripeObject implements HasId {
       /** The full IBAN. */
       @SerializedName("iban")
       String iban;
-
-      /** The last four digits of the account number. */
-      @SerializedName("last4")
-      String last4;
 
       /** The sort code. */
       @SerializedName("sort_code")

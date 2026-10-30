@@ -121,7 +121,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     optsBuilder.setStripeRequestTrigger("event=" + id);
 
     if (context != null) {
-      optsBuilder.setStripeAccount(context);
+      optsBuilder.setStripeContext(context);
     }
 
     RequestOptions opts = optsBuilder.build();

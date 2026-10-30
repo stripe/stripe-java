@@ -2,6 +2,7 @@
 package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.CapabilityNotEnabledException;
 import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.FxQuoteNeedsRefreshException;
 import com.stripe.exception.NotCancelableException;
@@ -52,12 +53,14 @@ public final class PayoutIntentService extends ApiService {
   }
   /** Creates a PayoutIntent. */
   public PayoutIntent create(PayoutIntentCreateParams params)
-      throws StripeException, FeatureNotEnabledException, RecipientNotNotifiableException {
+      throws StripeException, CapabilityNotEnabledException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     return create(params, (RequestOptions) null);
   }
   /** Creates a PayoutIntent. */
   public PayoutIntent create(PayoutIntentCreateParams params, RequestOptions options)
-      throws StripeException, FeatureNotEnabledException, RecipientNotNotifiableException {
+      throws StripeException, CapabilityNotEnabledException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     String path = "/v2/money_management/payout_intents";
     ApiRequest request =
         new ApiRequest(
@@ -80,36 +83,28 @@ public final class PayoutIntentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, PayoutIntent.class);
   }
-  /**
-   * Updates a PayoutIntent. Only pending or requires_action PayoutIntents that are editable can be
-   * updated.
-   */
+  /** Updates an editable PayoutIntent in the {@code pending} or {@code requires_action} state. */
   public PayoutIntent update(String id, PayoutIntentUpdateParams params)
-      throws StripeException, FeatureNotEnabledException, RecipientNotNotifiableException {
+      throws StripeException, CapabilityNotEnabledException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     return update(id, params, (RequestOptions) null);
   }
-  /**
-   * Updates a PayoutIntent. Only pending or requires_action PayoutIntents that are editable can be
-   * updated.
-   */
+  /** Updates an editable PayoutIntent in the {@code pending} or {@code requires_action} state. */
   public PayoutIntent update(String id, RequestOptions options)
-      throws StripeException, FeatureNotEnabledException, RecipientNotNotifiableException {
+      throws StripeException, CapabilityNotEnabledException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     return update(id, (PayoutIntentUpdateParams) null, options);
   }
-  /**
-   * Updates a PayoutIntent. Only pending or requires_action PayoutIntents that are editable can be
-   * updated.
-   */
+  /** Updates an editable PayoutIntent in the {@code pending} or {@code requires_action} state. */
   public PayoutIntent update(String id)
-      throws StripeException, FeatureNotEnabledException, RecipientNotNotifiableException {
+      throws StripeException, CapabilityNotEnabledException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     return update(id, (PayoutIntentUpdateParams) null, (RequestOptions) null);
   }
-  /**
-   * Updates a PayoutIntent. Only pending or requires_action PayoutIntents that are editable can be
-   * updated.
-   */
+  /** Updates an editable PayoutIntent in the {@code pending} or {@code requires_action} state. */
   public PayoutIntent update(String id, PayoutIntentUpdateParams params, RequestOptions options)
-      throws StripeException, FeatureNotEnabledException, RecipientNotNotifiableException {
+      throws StripeException, CapabilityNotEnabledException, RecipientNotNotifiableException,
+          FeatureNotEnabledException {
     String path =
         String.format("/v2/money_management/payout_intents/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
@@ -122,15 +117,15 @@ public final class PayoutIntentService extends ApiService {
     return this.request(request, PayoutIntent.class);
   }
   /**
-   * Cancels a PayoutIntent. Only pending PayoutIntents, processing PayoutIntents with cancelable
-   * OutboundPayment/Transfer, or requires_action PayoutIntents can be canceled.
+   * Cancels a PayoutIntent in the {@code pending} or {@code requires_action} state, or a {@code
+   * processing} PayoutIntent with a cancelable OutboundPayment.
    */
   public PayoutIntent cancel(String id) throws StripeException, NotCancelableException {
     return cancel(id, (RequestOptions) null);
   }
   /**
-   * Cancels a PayoutIntent. Only pending PayoutIntents, processing PayoutIntents with cancelable
-   * OutboundPayment/Transfer, or requires_action PayoutIntents can be canceled.
+   * Cancels a PayoutIntent in the {@code pending} or {@code requires_action} state, or a {@code
+   * processing} PayoutIntent with a cancelable OutboundPayment.
    */
   public PayoutIntent cancel(String id, RequestOptions options)
       throws StripeException, NotCancelableException {
@@ -140,11 +135,17 @@ public final class PayoutIntentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, PayoutIntent.class);
   }
-  /** Confirms a PayoutIntent that is in the requires_action state, transitioning it to pending. */
+  /**
+   * Confirms a PayoutIntent in the {@code requires_action} state, transitioning it to {@code
+   * pending}.
+   */
   public PayoutIntent confirm(String id) throws StripeException, FxQuoteNeedsRefreshException {
     return confirm(id, (RequestOptions) null);
   }
-  /** Confirms a PayoutIntent that is in the requires_action state, transitioning it to pending. */
+  /**
+   * Confirms a PayoutIntent in the {@code requires_action} state, transitioning it to {@code
+   * pending}.
+   */
   public PayoutIntent confirm(String id, RequestOptions options)
       throws StripeException, FxQuoteNeedsRefreshException {
     String path =
@@ -154,15 +155,30 @@ public final class PayoutIntentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, PayoutIntent.class);
   }
-  /** Refreshes FX quote for a PayoutIntent. */
-  public PayoutIntent fxQuote(String id) throws StripeException {
-    return fxQuote(id, (RequestOptions) null);
+  /** Refreshes the FX quote for a PayoutIntent. */
+  public PayoutIntent refreshFxQuote(String id) throws StripeException {
+    return refreshFxQuote(id, (RequestOptions) null);
   }
-  /** Refreshes FX quote for a PayoutIntent. */
-  public PayoutIntent fxQuote(String id, RequestOptions options) throws StripeException {
+  /** Refreshes the FX quote for a PayoutIntent. */
+  public PayoutIntent refreshFxQuote(String id, RequestOptions options) throws StripeException {
     String path =
         String.format(
-            "/v2/money_management/payout_intents/%s/fx_quote", ApiResource.urlEncodeId(id));
+            "/v2/money_management/payout_intents/%s/refresh_fx_quote", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, PayoutIntent.class);
+  }
+  /** Refreshes the recipient verification for a PayoutIntent. */
+  public PayoutIntent refreshRecipientVerification(String id) throws StripeException {
+    return refreshRecipientVerification(id, (RequestOptions) null);
+  }
+  /** Refreshes the recipient verification for a PayoutIntent. */
+  public PayoutIntent refreshRecipientVerification(String id, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v2/money_management/payout_intents/%s/refresh_recipient_verification",
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, PayoutIntent.class);

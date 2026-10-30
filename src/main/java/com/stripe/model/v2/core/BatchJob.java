@@ -109,6 +109,49 @@ public class BatchJob extends StripeObject implements HasId {
       /** Details about the {@code batch_job} failure. */
       @SerializedName("error")
       String error;
+
+      /**
+       * The partial output file details, containing everything processed before the {@code
+       * batch_job} failed. Absent for jobs that failed before producing any output.
+       */
+      @SerializedName("partial_output_file")
+      PartialOutputFile partialOutputFile;
+
+      /**
+       * The partial output file details, containing everything processed before the {@code
+       * batch_job} failed. Absent for jobs that failed before producing any output.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PartialOutputFile extends StripeObject {
+        /** The content type of the file. */
+        @SerializedName("content_type")
+        String contentType;
+
+        /** A pre-signed URL that allows secure, time-limited access to download the file. */
+        @SerializedName("download_url")
+        DownloadUrl downloadUrl;
+
+        /** The total size of the file in bytes. */
+        @SerializedName("size")
+        @JsonAdapter(StringInt64TypeAdapter.class)
+        Long size;
+
+        /** A pre-signed URL that allows secure, time-limited access to download the file. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DownloadUrl extends StripeObject {
+          /** The time that the URL expires. */
+          @SerializedName("expires_at")
+          Instant expiresAt;
+
+          /** The URL that can be used for accessing the file. */
+          @SerializedName("url")
+          String url;
+        }
+      }
     }
 
     /** Additional details for the {@code CANCELED} status of the {@code batch_job}. */

@@ -163,6 +163,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** Advertising attribution information for this customer. */
+  @SerializedName("marketing_attributions")
+  List<Customer.MarketingAttribution> marketingAttributions;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -963,6 +967,63 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
        */
       @SerializedName("template")
       String template;
+    }
+  }
+
+  /**
+   * For more details about MarketingAttribution, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MarketingAttribution extends StripeObject {
+    @SerializedName("ad_conversion")
+    AdConversion adConversion;
+
+    /** The advertising platform's click identifier. */
+    @SerializedName("click_id")
+    String clickId;
+
+    /** The Unix timestamp when the advertising interaction occurred. */
+    @SerializedName("occurred_at")
+    Long occurredAt;
+
+    /** The advertising group ID from the {@code utm_adgroup} parameter. */
+    @SerializedName("utm_adgroup")
+    String utmAdgroup;
+
+    /** The advertising content identifier from the {@code utm_content} parameter. */
+    @SerializedName("utm_content")
+    String utmContent;
+
+    /** The advertising campaign ID from the {@code utm_id} parameter. */
+    @SerializedName("utm_id")
+    String utmId;
+
+    /** The marketing medium from the {@code utm_medium} parameter. */
+    @SerializedName("utm_medium")
+    String utmMedium;
+
+    /** The referral source from the {@code utm_source} parameter. */
+    @SerializedName("utm_source")
+    String utmSource;
+
+    /** The paid search term from the {@code utm_term} parameter. */
+    @SerializedName("utm_term")
+    String utmTerm;
+
+    /**
+     * For more details about AdConversion, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdConversion extends StripeObject {
+      /** Whether the customer consented to sending conversion data to an advertising platform. */
+      @SerializedName("consent_collected")
+      Boolean consentCollected;
     }
   }
 

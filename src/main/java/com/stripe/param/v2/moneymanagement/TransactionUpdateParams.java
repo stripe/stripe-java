@@ -12,7 +12,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class TransactionUpdateParams extends ApiRequestParams {
-  /** Description of this Transaction, up to 100 characters. */
+  /**
+   * A description of the Transaction, up to 100 characters. Pass {@code null} to clear the
+   * description, or omit this parameter to leave it unchanged.
+   */
   @SerializedName("description")
   Object description;
 
@@ -55,13 +58,19 @@ public class TransactionUpdateParams extends ApiRequestParams {
       return new TransactionUpdateParams(this.description, this.extraParams, this.metadata);
     }
 
-    /** Description of this Transaction, up to 100 characters. */
+    /**
+     * A description of the Transaction, up to 100 characters. Pass {@code null} to clear the
+     * description, or omit this parameter to leave it unchanged.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
-    /** Description of this Transaction, up to 100 characters. */
+    /**
+     * A description of the Transaction, up to 100 characters. Pass {@code null} to clear the
+     * description, or omit this parameter to leave it unchanged.
+     */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;

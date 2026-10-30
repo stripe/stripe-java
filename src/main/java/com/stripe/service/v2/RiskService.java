@@ -9,7 +9,7 @@ public final class RiskService extends ApiService {
     super(responseGetter);
   }
 
-  public com.stripe.service.v2.risk.InquiryService inquiries() {
-    return new com.stripe.service.v2.risk.InquiryService(this.getResponseGetter());
+  public com.stripe.service.v2.risk.FormService forms() {
+    return new com.stripe.service.v2.risk.FormService(this.getResponseGetter());
   }
 }

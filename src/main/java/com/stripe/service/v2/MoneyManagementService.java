@@ -36,8 +36,17 @@ public final class MoneyManagementService extends ApiService {
         this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.FundingIntentService fundingIntents() {
+    return new com.stripe.service.v2.moneymanagement.FundingIntentService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.FundingSessionService fundingSessions() {
     return new com.stripe.service.v2.moneymanagement.FundingSessionService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.InboundFundingService inboundFundings() {
+    return new com.stripe.service.v2.moneymanagement.InboundFundingService(
         this.getResponseGetter());
   }
 
@@ -104,6 +113,16 @@ public final class MoneyManagementService extends ApiService {
       recipientVerifications() {
     return new com.stripe.service.v2.moneymanagement.RecipientVerificationService(
         this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.RewardProgramEnrollmentService
+      rewardProgramEnrollments() {
+    return new com.stripe.service.v2.moneymanagement.RewardProgramEnrollmentService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.RewardProgramService rewardPrograms() {
+    return new com.stripe.service.v2.moneymanagement.RewardProgramService(this.getResponseGetter());
   }
 
   public com.stripe.service.v2.moneymanagement.TestHelperService testHelpers() {

@@ -16,7 +16,9 @@ import lombok.Setter;
 /**
  * The {@code ReportRun} resource represents an instance of a {@code Report} generated with specific
  * parameter values. Once the object is created, Stripe begins processing the report. When the
- * report has finished running, it provides a reference to the results.
+ * report has finished running, it provides a reference to the results. A {@code ReportRun} and its
+ * results are retained for 90 days after the run completes. After that, Stripe deletes them and
+ * retrieving the {@code ReportRun} returns a {@code 404} error.
  */
 @Getter
 @Setter
@@ -25,6 +27,14 @@ public class ReportRun extends StripeObject implements HasId {
   /** Time at which the {@code ReportRun} was created. */
   @SerializedName("created")
   Instant created;
+
+  /**
+   * The file format of the result.
+   *
+   * <p>Equal to {@code csv}.
+   */
+  @SerializedName("format")
+  String format;
 
   /** The unique identifier of the {@code ReportRun}. */
   @Getter(onMethod_ = {@Override})
@@ -69,8 +79,8 @@ public class ReportRun extends StripeObject implements HasId {
   ResultOptions resultOptions;
 
   /**
-   * The fully-resolved SQL that was executed. Only present when requested via {@code
-   * include[0]=sql}.
+   * The fully-resolved SQL that was executed, or an explanatory message when the SQL cannot be
+   * exposed. Only present when requested via {@code include[0]=sql}.
    */
   @SerializedName("sql")
   String sql;
@@ -243,11 +253,13 @@ public class ReportRun extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ResultOptions extends StripeObject {
     /**
-     * If set, the generated result file is compressed into a ZIP archive before it is stored. This
-     * applies only to downloadable file results.
+     * The compression applied to the generated result file. Defaults to {@code none}. This applies
+     * only to downloadable file results.
+     *
+     * <p>One of {@code none}, or {@code zip}.
      */
-    @SerializedName("compress_file")
-    Boolean compressFile;
+    @SerializedName("compression")
+    String compression;
   }
 
   /** Additional details about the current state of the {@code ReportRun}. */
@@ -264,8 +276,8 @@ public class ReportRun extends StripeObject implements HasId {
     /**
      * Error code categorizing the reason the run failed.
      *
-     * <p>One of {@code file_size_above_limit}, {@code internal_error}, or {@code
-     * query_run_invalid_sql}.
+     * <p>One of {@code execution_failed}, {@code file_size_above_limit}, {@code internal_error},
+     * {@code query_run_invalid_sql}, or {@code resource_limit_exceeded}.
      */
     @SerializedName("code")
     String code;
@@ -273,5 +285,26 @@ public class ReportRun extends StripeObject implements HasId {
     /** Error message with additional details about the failure. */
     @SerializedName("message")
     String message;
+
+    /** Errors found in the submitted SQL. Populated when the failure was caused by invalid SQL. */
+    @SerializedName("query_errors")
+    List<ReportRun.StatusDetails.QueryError> queryErrors;
+
+    /**
+     * For more details about QueryError, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class QueryError extends StripeObject {
+      /** A human-readable description of the error. */
+      @SerializedName("message")
+      String message;
+
+      /** A short identifier categorizing the type of error. */
+      @SerializedName("type")
+      String type;
+    }
   }
 }

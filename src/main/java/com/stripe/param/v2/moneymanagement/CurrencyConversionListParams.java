@@ -20,11 +20,11 @@ public class CurrencyConversionListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The ID of the FinancialAccount to filter by. */
+  /** The ID of the Financial Account for which conversions should be listed. */
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** The page limit. */
+  /** The maximum number of Currency Conversions to return. */
   @SerializedName("limit")
   Long limit;
 
@@ -77,13 +77,13 @@ public class CurrencyConversionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the FinancialAccount to filter by. */
+    /** The ID of the Financial Account for which conversions should be listed. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
     }
 
-    /** The page limit. */
+    /** The maximum number of Currency Conversions to return. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;

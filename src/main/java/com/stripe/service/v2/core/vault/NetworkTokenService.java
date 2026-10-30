@@ -23,13 +23,13 @@ public final class NetworkTokenService extends ApiService {
     super(responseGetter);
   }
 
-  /** Create or Return a Network Token Using Raw Card Data. */
+  /** Creates a Network Token from raw card data. */
   public NetworkToken create(NetworkTokenCreateParams params)
       throws StripeException, CannotProceedException, BlockedByStripeException,
           MerchantNotGatedException {
     return create(params, (RequestOptions) null);
   }
-  /** Create or Return a Network Token Using Raw Card Data. */
+  /** Creates a Network Token from raw card data. */
   public NetworkToken create(NetworkTokenCreateParams params, RequestOptions options)
       throws StripeException, CannotProceedException, BlockedByStripeException,
           MerchantNotGatedException {
@@ -43,12 +43,12 @@ public final class NetworkTokenService extends ApiService {
             options);
     return this.request(request, NetworkToken.class);
   }
-  /** Creates or returns a Network Token from an existing card reference. */
+  /** Creates a Network Token from an existing card reference. */
   public NetworkToken createFromCredential(NetworkTokenCreateFromCredentialParams params)
       throws StripeException, CannotProceedException, BlockedByStripeException {
     return createFromCredential(params, (RequestOptions) null);
   }
-  /** Creates or returns a Network Token from an existing card reference. */
+  /** Creates a Network Token from an existing card reference. */
   public NetworkToken createFromCredential(
       NetworkTokenCreateFromCredentialParams params, RequestOptions options)
       throws StripeException, CannotProceedException, BlockedByStripeException {
@@ -78,7 +78,8 @@ public final class NetworkTokenService extends ApiService {
    * The cryptogram is returned only in this response and is never persisted.
    */
   public NetworkToken generateCryptogram(String id, NetworkTokenGenerateCryptogramParams params)
-      throws StripeException, RateLimitException, CannotProceedException {
+      throws StripeException, RateLimitException, CannotProceedException,
+          MerchantNotGatedException {
     return generateCryptogram(id, params, (RequestOptions) null);
   }
   /**
@@ -86,7 +87,8 @@ public final class NetworkTokenService extends ApiService {
    * The cryptogram is returned only in this response and is never persisted.
    */
   public NetworkToken generateCryptogram(String id, RequestOptions options)
-      throws StripeException, RateLimitException, CannotProceedException {
+      throws StripeException, RateLimitException, CannotProceedException,
+          MerchantNotGatedException {
     return generateCryptogram(id, (NetworkTokenGenerateCryptogramParams) null, options);
   }
   /**
@@ -94,7 +96,8 @@ public final class NetworkTokenService extends ApiService {
    * The cryptogram is returned only in this response and is never persisted.
    */
   public NetworkToken generateCryptogram(String id)
-      throws StripeException, RateLimitException, CannotProceedException {
+      throws StripeException, RateLimitException, CannotProceedException,
+          MerchantNotGatedException {
     return generateCryptogram(
         id, (NetworkTokenGenerateCryptogramParams) null, (RequestOptions) null);
   }
@@ -104,7 +107,8 @@ public final class NetworkTokenService extends ApiService {
    */
   public NetworkToken generateCryptogram(
       String id, NetworkTokenGenerateCryptogramParams params, RequestOptions options)
-      throws StripeException, RateLimitException, CannotProceedException {
+      throws StripeException, RateLimitException, CannotProceedException,
+          MerchantNotGatedException {
     String path =
         String.format(
             "/v2/core/vault/network_tokens/%s/generate_cryptogram", ApiResource.urlEncodeId(id));

@@ -14,9 +14,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class RecipientVerification extends StripeObject implements HasId {
-  /** The OBP/OBT ID that consumed this verification, present if one is successfully created. */
+  /** The resource that consumed this verification. */
   @SerializedName("consumed_by")
-  String consumedBy;
+  ConsumedBy consumedBy;
 
   /**
    * Time at which the RecipientVerification was created. Represented as a RFC 3339 date &amp; time
@@ -26,9 +26,9 @@ public class RecipientVerification extends StripeObject implements HasId {
   Instant created;
 
   /**
-   * Time at which the RecipientVerification expires, 5 minutes after the creation. Represented as a
-   * RFC 3339 date &amp; time UTC value in millisecond precision, for example:
-   * 2022-09-18T13:22:18.123Z.
+   * Time at which the RecipientVerification expires, 5 minutes after the creation. Only applicable
+   * for Verification of Payee (VoP) verifications. Represented as a RFC 3339 date &amp; time UTC
+   * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
    */
   @SerializedName("expires_at")
   Instant expiresAt;
@@ -67,9 +67,16 @@ public class RecipientVerification extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** ID of the payout method that was verified. */
+  @SerializedName("payout_method")
+  String payoutMethod;
+
+  /** ID of the recipient account. Omitted for same-entity payouts. */
+  @SerializedName("recipient")
+  String recipient;
+
   /**
-   * Closed Enum. Current status of the RecipientVerification: {@code verified}, {@code consumed},
-   * {@code expired}, {@code awaiting_acknowledgement}, {@code acknowledged}.
+   * Current status of the recipient verification.
    *
    * <p>One of {@code acknowledged}, {@code awaiting_acknowledgement}, {@code consumed}, {@code
    * expired}, or {@code verified}.
@@ -81,11 +88,51 @@ public class RecipientVerification extends StripeObject implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
+  /**
+   * Open Enum. The type of verification performed: {@code verification_of_payee}, {@code
+   * confirmation_of_payee}.
+   *
+   * <p>One of {@code confirmation_of_payee}, or {@code verification_of_payee}.
+   */
+  @SerializedName("verification_type")
+  String verificationType;
+
+  /** The resource that consumed this verification. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ConsumedBy extends StripeObject {
+    /** The ID of the OutboundPayment that consumed the RecipientVerification. */
+    @SerializedName("outbound_payment")
+    String outboundPayment;
+
+    /** The ID of the OutboundTransfer that consumed the RecipientVerification. */
+    @SerializedName("outbound_transfer")
+    String outboundTransfer;
+
+    /**
+     * The type of resource that consumed the RecipientVerification.
+     *
+     * <p>One of {@code outbound_payment}, or {@code outbound_transfer}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
   /** Details for the match result. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class MatchResultDetails extends StripeObject {
+    /**
+     * The business type matched by the provider. Only present for Confirmation of Payee (CoP)
+     * verifications.
+     *
+     * <p>One of {@code business}, or {@code personal}.
+     */
+    @SerializedName("matched_business_type")
+    String matchedBusinessType;
+
     /**
      * The account name associated with the bank account as provided by the VoP provider, only
      * present if there is a match or close match.
@@ -96,6 +143,15 @@ public class RecipientVerification extends StripeObject implements HasId {
     /** A message describing the match result. */
     @SerializedName("message")
     String message;
+
+    /**
+     * The business type provided by the user. Only present for Confirmation of Payee (CoP)
+     * verifications.
+     *
+     * <p>One of {@code business}, or {@code personal}.
+     */
+    @SerializedName("provided_business_type")
+    String providedBusinessType;
 
     /** The name associated with the provided recipient. */
     @SerializedName("provided_name")

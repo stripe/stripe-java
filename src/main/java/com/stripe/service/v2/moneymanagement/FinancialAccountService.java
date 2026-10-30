@@ -26,20 +26,20 @@ public final class FinancialAccountService extends ApiService {
     super(responseGetter);
   }
 
-  /** Lists FinancialAccounts in this account. */
+  /** Returns a list of FinancialAccounts in your account that match the provided filters. */
   public StripeCollection<FinancialAccount> list(FinancialAccountListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Lists FinancialAccounts in this account. */
+  /** Returns a list of FinancialAccounts in your account that match the provided filters. */
   public StripeCollection<FinancialAccount> list(RequestOptions options) throws StripeException {
     return list((FinancialAccountListParams) null, options);
   }
-  /** Lists FinancialAccounts in this account. */
+  /** Returns a list of FinancialAccounts in your account that match the provided filters. */
   public StripeCollection<FinancialAccount> list() throws StripeException {
     return list((FinancialAccountListParams) null, (RequestOptions) null);
   }
-  /** Lists FinancialAccounts in this account. */
+  /** Returns a list of FinancialAccounts in your account that match the provided filters. */
   public StripeCollection<FinancialAccount> list(
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
     String path = "/v2/money_management/financial_accounts";
@@ -98,20 +98,20 @@ public final class FinancialAccountService extends ApiService {
             options);
     return this.request(request, FinancialAccount.class);
   }
-  /** Updates an existing FinancialAccount. */
+  /** Updates an existing FinancialAccount using the provided parameters. */
   public FinancialAccount update(String id, FinancialAccountUpdateParams params)
       throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Updates an existing FinancialAccount. */
+  /** Updates an existing FinancialAccount using the provided parameters. */
   public FinancialAccount update(String id, RequestOptions options) throws StripeException {
     return update(id, (FinancialAccountUpdateParams) null, options);
   }
-  /** Updates an existing FinancialAccount. */
+  /** Updates an existing FinancialAccount using the provided parameters. */
   public FinancialAccount update(String id) throws StripeException {
     return update(id, (FinancialAccountUpdateParams) null, (RequestOptions) null);
   }
-  /** Updates an existing FinancialAccount. */
+  /** Updates an existing FinancialAccount using the provided parameters. */
   public FinancialAccount update(
       String id, FinancialAccountUpdateParams params, RequestOptions options)
       throws StripeException {
@@ -126,21 +126,29 @@ public final class FinancialAccountService extends ApiService {
             options);
     return this.request(request, FinancialAccount.class);
   }
-  /** Closes a FinancialAccount with or without forwarding settings. */
+  /**
+   * Closes a FinancialAccount. You must provide forwarding settings if it has a non-zero balance.
+   */
   public FinancialAccount close(String id, FinancialAccountCloseParams params)
       throws StripeException, NonZeroBalanceException {
     return close(id, params, (RequestOptions) null);
   }
-  /** Closes a FinancialAccount with or without forwarding settings. */
+  /**
+   * Closes a FinancialAccount. You must provide forwarding settings if it has a non-zero balance.
+   */
   public FinancialAccount close(String id, RequestOptions options)
       throws StripeException, NonZeroBalanceException {
     return close(id, (FinancialAccountCloseParams) null, options);
   }
-  /** Closes a FinancialAccount with or without forwarding settings. */
+  /**
+   * Closes a FinancialAccount. You must provide forwarding settings if it has a non-zero balance.
+   */
   public FinancialAccount close(String id) throws StripeException, NonZeroBalanceException {
     return close(id, (FinancialAccountCloseParams) null, (RequestOptions) null);
   }
-  /** Closes a FinancialAccount with or without forwarding settings. */
+  /**
+   * Closes a FinancialAccount. You must provide forwarding settings if it has a non-zero balance.
+   */
   public FinancialAccount close(
       String id, FinancialAccountCloseParams params, RequestOptions options)
       throws StripeException, NonZeroBalanceException {

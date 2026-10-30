@@ -110,4 +110,18 @@ public final class GbBankAccountService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, GbBankAccount.class);
   }
+  /** Unarchive a GBBankAccount object. */
+  public GbBankAccount unarchive(String id)
+      throws StripeException, ControlledByAlternateResourceException {
+    return unarchive(id, (RequestOptions) null);
+  }
+  /** Unarchive a GBBankAccount object. */
+  public GbBankAccount unarchive(String id, RequestOptions options)
+      throws StripeException, ControlledByAlternateResourceException {
+    String path =
+        String.format("/v2/core/vault/gb_bank_accounts/%s/unarchive", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, GbBankAccount.class);
+  }
 }
