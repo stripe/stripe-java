@@ -7,6 +7,90 @@ Instead, edit a corresponding `.change.md` file and run `hark build`.
 
 > This changelog only covers the **private preview** releases. Each release builds on the most recent GA release; see those notes in [the GA changelog](https://github.com/stripe/stripe-java/blob/master/CHANGELOG.md).
 
+## <a id="34-2-0-alpha-1"></a>34.2.0-alpha.1 - 2026-10-30
+This release changes the pinned API version to `2026-10-28.preview`.
+
+* ⚠️ [#2320](https://github.com/stripe/stripe-java/pull/2320) Update generated code
+  * Add support for new resources `v2.billing.ContractTermQuantityChange`, `v2.billing.ContractTerm`, `v2.core.AccountSession`, `v2.moneymanagement.FundingIntent`, `v2.moneymanagement.InboundFunding`, `v2.moneymanagement.RewardProgramEnrollment`, `v2.moneymanagement.RewardProgramRule`, `v2.moneymanagement.RewardProgram`, and `v2.risk.Form`
+  * ⚠️ Remove support for resource `v2.risk.Inquiry`
+  * Add support for `retrieve` and `update` methods on resource `v2.risk.Form`
+  * Add support for `activate`, `create`, `deactivate`, `list`, and `retrieve` methods on resource `v2.moneymanagement.RewardProgramEnrollment`
+  * Add support for `activate`, `create`, `deactivate`, `list`, `retrieve`, and `update` methods on resources `v2.moneymanagement.RewardProgramRule` and `v2.moneymanagement.RewardProgram`
+  * Add support for `list` and `retrieve` methods on resource `v2.moneymanagement.InboundFunding`
+  * Add support for `cancel`, `confirm`, `create`, `list`, `retrieve`, and `update` methods on resource `v2.moneymanagement.FundingIntent`
+  * Add support for `create` method on resource `v2.core.AccountSession`
+  * Add support for `list_contract_terms` and `retrieve_contract_term` methods on resource `v2.billing.ContractTerm`
+  * ⚠️ Remove support for `list`, `retrieve`, and `update` methods on resource `v2.risk.Inquiry`
+  * ⚠️ Remove support for `fx_quote` method on resource `v2.moneymanagement.PayoutIntent`
+  * Add support for `reject` and `unreject` methods on resource `v2.core.Account`
+  * Add support for `billingGroup` on `billing.Alert.spend_threshold.filters`, `billing.AlertCreateParams.spend_threshold.filters`, `billing.AlertNotificationListParams`, `billing.AlertNotification`, and `billing.AlertTriggered.group_by`
+  * Add support for `tossPay` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `PaymentAttemptRecord.payment_method_details`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodCreateParams`, `PaymentMethod`, `PaymentRecord.payment_method_details`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Add support for `mandate` on `Charge.payment_method_details.paypay`, `PaymentAttemptRecord.payment_method_details.paypay`, `PaymentRecord.payment_method_details.paypay`, `Subscription.payment_settings`, `SubscriptionCreateParams.payment_settings`, and `SubscriptionUpdateParams.payment_settings`
+  * Add support for `automaticPassThroughFee` on `checkout.SessionCreateParams` and `checkout.Session`
+  * Add support for `paypay` on `checkout.Session.payment_method_options` and `checkout.SessionCreateParams.payment_method_options`
+  * Change `checkout.SessionCreateParams.marketing_attributions[].adConversion` to be optional
+  * Add support for `adjustableQuantity` on `checkout.Session.items[].subscription.items[]`
+  * Add support for `marketingAttributions` on `CustomerCreateParams` and `Customer`
+  * Add support for `merchantOfRecord` on `PaymentIntent.payment_details.money_services.account_funding`, `PaymentIntentConfirmParams.payment_details.money_services.account_funding`, `PaymentIntentCreateParams.payment_details.money_services.account_funding`, and `PaymentIntentUpdateParams.payment_details.money_services.account_funding`
+  * Add support for `paymentMethodData` and `paymentMethodOptions` on `RefundCreateParams`
+  * Add support for new value `toss_pay` on enum `SetupIntentConfirmParams.allowedPaymentMethodTypes`
+  * Add support for `debitBehavior` on `Subscription.payment_settings.payment_method_options.sepa_debit`, `SubscriptionCreateParams.payment_settings.payment_method_options.sepa_debit`, and `SubscriptionUpdateParams.payment_settings.payment_method_options.sepa_debit`
+  * Add support for `terms` on `v2.billing.ContractCancelParams`, `v2.billing.ContractCreateParams`, and `v2.billing.Contract`
+  * Add support for `rejection` on `v2.core.Account`
+  * Add support for `alipayPayments`, `scalapayPayments`, and `upiPayments` on `v2.core.Account.configuration.merchant.capabilities`, `v2.core.AccountCreateParams.configuration.merchant.capabilities`, and `v2.core.AccountUpdateParams.configuration.merchant.capabilities`
+  * Add support for `inboundFundings` on `v2.core.Account.configuration.money_manager.capabilities`, `v2.core.AccountCreateParams.configuration.money_manager.capabilities`, and `v2.core.AccountUpdateParams.configuration.money_manager.capabilities`
+  * ⚠️ Remove support for `instant` and `sepaCredit` on `v2.core.Account.configuration.recipient.capabilities.bank_accounts`, `v2.core.AccountCreateParams.configuration.recipient.capabilities.bank_accounts`, and `v2.core.AccountUpdateParams.configuration.recipient.capabilities.bank_accounts`
+  * Add support for `compression` on `v2.data.QueryRun.result_options`, `v2.data.QueryRunCreateParams.result_options`, `v2.data.ReportRun.result_options`, and `v2.data.ReportRunCreateParams.result_options`
+  * ⚠️ Remove support for `compressFile` on `v2.data.QueryRun.result_options`, `v2.data.QueryRunCreateParams.result_options`, `v2.data.ReportRun.result_options`, and `v2.data.ReportRunCreateParams.result_options`
+  * Add support for `queryErrors` on `v2.data.QueryRun.status_details` and `v2.data.ReportRun.status_details`
+  * Add support for `format` on `v2.data.ReportRun`
+  * Add support for `refreshedAt` on `v2.data.Report`
+  * Add support for `schemaName` on `v2.data.Schema.columns[].foreign_keys_from[]` and `v2.data.Schema.columns[].foreign_keys_to[]`
+  * ⚠️ Remove support for `authentication` and `sessionFingerprint` on `v2.iam.ActivityLog.details.user_access`
+  * Add support for `userAgent` on `v2.iam.ActivityLog.details.user_access.dashboard_client`
+  * ⚠️ Remove support for `browserVersion`, `browser`, `deviceType`, and `os` on `v2.iam.ActivityLog.details.user_access.dashboard_client`
+  * ⚠️ Remove support for `level` on `v2.iam.ActivityLog.details.user_access.risk`
+  * Add support for `reference` on `v2.moneymanagement.FinancialAddress.bank_account.iban`
+  * Add support for `bankAccount`, `card`, `cryptoWallet`, `status`, and `type` on `v2.moneymanagement.OutboundPayment.tracking_details`
+  * Add support for `recipientVerification` on `v2.moneymanagement.PayoutIntent`
+  * Add support for `fieldsToReview` on `v2.moneymanagement.PayoutIntent.next_action.confirm`
+  * ⚠️ Remove support for `caBankAccount`, `euBankAccount`, and `mxBankAccount` on `v2.moneymanagement.ReceivedCredit.bank_transfer`
+  * ⚠️ Remove support for `network` on `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.aba`, `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.bre_b`, `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.clabe`, `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.cpa`, `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.iban`, `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.nip`, `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.pix`, and `v2.moneymanagement.ReceivedCredit.bank_transfer.originating_bank_account.sort_code`
+  * Add support for `payoutMethod`, `recipient`, and `verificationType` on `v2.moneymanagement.RecipientVerification`
+  * ⚠️ Change type of `v2.moneymanagement.RecipientVerification.consumedBy` from `string` to `an object`
+  * Add support for `matchedBusinessType` and `providedBusinessType` on `v2.moneymanagement.RecipientVerification.match_result_details`
+  * Add support for `configuration` on `v2.provisioning.Resource`
+  * Add support for `customMarketingAction` and `triggeringSignal` on `v2.signals.AccountActivityCreateParams` and `v2.signals.AccountActivity`
+  * Add support for `mfaChallenges` on `v2.signals.AccountActivity.login_decision` and `v2.signals.AccountActivityCreateParams.login_decision`
+  * Add support for `userAffinity` on `v2.signals.AccountEvaluation.evaluated_signals` and `v2.signals.AccountSignal`
+  * ⚠️ Remove support for `userMerchantFit` on `v2.signals.AccountEvaluation.evaluated_signals` and `v2.signals.AccountSignal`
+  * Add support for `additionalDetails` on `v2.signals.AccountSignal.customer_risk`
+  * Add support for `subscriptions` on `v2.tax.IntegrationConfigurationUpdateParams` and `v2.tax.IntegrationConfiguration`
+  * ⚠️ Add support for new value `user_affinity` on enum `v2.signals.AccountSignalListParams.type`
+  * ⚠️ Remove support for value `user_merchant_fit` from enum `v2.signals.AccountSignalListParams.type`
+  * Add support for new value `custom_marketing_action` on enums `v2.signals.AccountActivityCreateParams.type` and `v2.signals.AccountEvaluationCreateParams.account_activity_details.data.type`
+  * ⚠️ Add support for new value `user_affinity` on enum `v2.signals.AccountEvaluationCreateParams.requestedSignals`
+  * ⚠️ Remove support for value `user_merchant_fit` from enum `v2.signals.AccountEvaluationCreateParams.requestedSignals`
+  * Add support for `include` on `v2.provisioning.ResourceRetrieveParams`
+  * Add support for new value `sepa` on enums `v2.moneymanagement.OutboundPaymentCreateParams.to.payout_method_options.bank_account.preferredNetworks`, `v2.moneymanagement.OutboundPaymentQuoteCreateParams.to.payout_method_options.bank_account.preferredNetworks`, `v2.moneymanagement.OutboundTransferCreateParams.to.payout_method_options.bank_account.preferredNetworks`, `v2.moneymanagement.PayoutIntentCreateParams.to.payout_method_options.bank_account.preferredNetworks`, and `v2.moneymanagement.PayoutIntentUpdateParams.to.payout_method_options.bank_account.preferredNetworks`
+  * Change `v2.moneymanagement.OutboundPaymentCreateParams.to.payout_method_options.bank_account.preferredNetworks`, `v2.moneymanagement.OutboundPaymentQuoteCreateParams.to.payout_method_options.bank_account.preferredNetworks`, `v2.moneymanagement.PayoutIntentCreateParams.to.payout_method_options.bank_account.preferredNetworks`, and `v2.moneymanagement.PayoutIntentUpdateParams.to.payout_method_options.bank_account.preferredNetworks` to be optional
+  * ⚠️ Remove support for `amount` and `from` on `v2.moneymanagement.PayoutIntentUpdateParams`
+  * Add support for new value `pln` on enum `v2.moneymanagement.FinancialAddressCreateParams.bank_account.currency`
+  * Add support for `parameters` on `v2.data.QueryRunCreateParams`
+  * Add support for new value `dynamic_cvc` on enum `v2.core.vault.NetworkTokenGenerateCryptogramParams.type`
+  * ⚠️ Add support for new value `user_affinity` on enum `v2.core.AccountEvaluationCreateParams.signals`
+  * ⚠️ Remove support for value `user_merchant_fit` from enum `v2.core.AccountEvaluationCreateParams.signals`
+  * Add support for new value `terms` on enums `v2.billing.ContractActivateParams.include`, `v2.billing.ContractCancelParams.include`, `v2.billing.ContractCreateParams.include`, `v2.billing.ContractListParams.include`, `v2.billing.ContractRetrieveParams.include`, and `v2.billing.ContractUpdateParams.include`
+  * Add support for `actions` on `v2.billing.ContractUpdateParams`
+  * Add support for new values `alipay_payments`, `scalapay_payments`, and `upi_payments` on enum `EventsV2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEvent.updatedCapability`
+  * Add support for new value `inbound_fundings.paper_checks` on enum `EventsV2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEvent.updatedCapability`
+  * Add support for `severity` on `EventsV2CoreHealthApiErrorFiringEvent`, `EventsV2CoreHealthApiErrorResolvedEvent`, `EventsV2CoreHealthApiLatencyFiringEvent`, `EventsV2CoreHealthApiLatencyResolvedEvent`, `EventsV2CoreHealthAuthorizationRateDropFiringEvent`, `EventsV2CoreHealthAuthorizationRateDropResolvedEvent`, `EventsV2CoreHealthElementsErrorFiringEvent`, `EventsV2CoreHealthElementsErrorResolvedEvent`, `EventsV2CoreHealthFraudRateIncreasedEvent`, `EventsV2CoreHealthInvoiceCountDroppedFiringEvent`, `EventsV2CoreHealthInvoiceCountDroppedResolvedEvent`, `EventsV2CoreHealthIssuingAuthorizationRequestErrorsFiringEvent`, `EventsV2CoreHealthIssuingAuthorizationRequestErrorsResolvedEvent`, `EventsV2CoreHealthIssuingAuthorizationRequestTimeoutFiringEvent`, `EventsV2CoreHealthIssuingAuthorizationRequestTimeoutResolvedEvent`, `EventsV2CoreHealthMeterEventSummariesDelayedFiringEvent`, `EventsV2CoreHealthMeterEventSummariesDelayedResolvedEvent`, `EventsV2CoreHealthMetronomeNotificationLatencyFiringEvent`, `EventsV2CoreHealthMetronomeNotificationLatencyResolvedEvent`, `EventsV2CoreHealthPaymentMethodErrorFiringEvent`, `EventsV2CoreHealthPaymentMethodErrorResolvedEvent`, `EventsV2CoreHealthSepaDebitDelayedFiringEvent`, `EventsV2CoreHealthSepaDebitDelayedResolvedEvent`, `EventsV2CoreHealthTrafficVolumeDropFiringEvent`, `EventsV2CoreHealthTrafficVolumeDropResolvedEvent`, `EventsV2CoreHealthWebhookLatencyFiringEvent`, and `EventsV2CoreHealthWebhookLatencyResolvedEvent`
+  * Add support for event notifications `V2BillingContractTermCreatedEvent`, `V2BillingContractTermDeletedEvent`, and `V2BillingContractTermUpdatedEvent` with related object `v2.billing.ContractTerm`
+  * Add support for event notifications `V2MoneyManagementFundingIntentCanceledEvent`, `V2MoneyManagementFundingIntentCreatedEvent`, `V2MoneyManagementFundingIntentProcessingEvent`, `V2MoneyManagementFundingIntentRequiresActionEvent`, `V2MoneyManagementFundingIntentRequiresConfirmationEvent`, `V2MoneyManagementFundingIntentSucceededEvent`, `V2MoneyManagementFundingIntentUpdatedEvent`, and `V2MoneyManagementFundingIntentValidatingEvent` with related object `v2.moneymanagement.FundingIntent`
+  * Add support for event notifications `V2MoneyManagementInboundFundingAvailableEvent`, `V2MoneyManagementInboundFundingCheckFailedEvent`, `V2MoneyManagementInboundFundingCheckProcessingEvent`, `V2MoneyManagementInboundFundingCheckQueuedEvent`, `V2MoneyManagementInboundFundingCheckReturnedEvent`, `V2MoneyManagementInboundFundingCheckSucceededEvent`, `V2MoneyManagementInboundFundingCreatedEvent`, and `V2MoneyManagementInboundFundingUpdatedEvent` with related object `v2.moneymanagement.InboundFunding`
+  * Add support for event notifications `V2MoneyManagementRewardProgramRewardEarnedEvent` and `V2MoneyManagementRewardProgramRewardReversedEvent` with related object `v2.moneymanagement.RewardProgram`
+  * ⚠️ Remove support for event notifications `V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEvent` and `V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEvent` with related object `v2.payments.OffSessionPayment`
+
 ## <a id="34-1-0-alpha-4"></a>34.1.0-alpha.4 - 2026-10-21
 * ⚠️ [#2317](https://github.com/stripe/stripe-java/pull/2317) Update generated code
   * Add support for new resources `risk.Form` and `v2.data.SearchResultList`
