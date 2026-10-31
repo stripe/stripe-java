@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 public class StripeSearchResultTest extends BaseStripeTest {
@@ -35,18 +36,90 @@ public class StripeSearchResultTest extends BaseStripeTest {
       super(getter);
     }
 
+    StripeSearchResult<SearchableModel> searchRequest(ApiRequest request) throws StripeException {
+      return this.requestV2Search(
+          request, new TypeToken<StripeSearchResult<SearchableModel>>() {}.getType());
+    }
+
     StripeSearchResult<SearchableModel> search(Map<String, Object> params, RequestOptions options)
         throws StripeException {
-      return this.getResponseGetter()
-          .request(
+      return this.requestV2Search(
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              "/v2/widgets/search",
+              params,
+              options),
+          new TypeToken<StripeSearchResult<SearchableModel>>() {}.getType());
+    }
+  }
+
+  @Test
+  public void searchHelperPreparesOneRequestAndPreservesMetadata() throws Exception {
+    for (String path :
+        Arrays.asList(
+            "/v2/widgets/search",
+            "/v2/widgets/search?page=2&limit=2",
+            "/v2/widgets/search?page=2")) {
+      StripeResponseGetter getter = Mockito.mock(StripeResponseGetter.class);
+      SearchService service = new SearchService(getter);
+      Map<String, Object> params = new HashMap<>();
+      params.put("limit", 9L);
+      params.put("query", "widgets");
+      RequestOptions options = RequestOptions.builder().setStripeContext("ctx_123").build();
+      ApiRequest original =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options)
+              .addUsage("original_usage");
+      service.searchRequest(original);
+      ArgumentCaptor<ApiRequest> captured = ArgumentCaptor.forClass(ApiRequest.class);
+      Mockito.verify(getter, Mockito.times(1)).request(captured.capture(), Mockito.any());
+      ApiRequest prepared = captured.getValue();
+      assertEquals(path.contains("?") ? path : path + "?limit=9", prepared.getPath());
+      assertEquals(Collections.singletonMap("query", "widgets"), prepared.getParams());
+      assertEquals(BaseAddress.API, prepared.getBaseAddress());
+      assertEquals(original.getMethod(), prepared.getMethod());
+      assertEquals(options, prepared.getOptions());
+      assertEquals(Arrays.asList("original_usage", "stripe_client"), prepared.getUsage());
+      assertEquals(9L, params.get("limit"));
+      assertEquals(path, original.getPath());
+      verifyNoMoreInteractions(getter);
+    }
+  }
+
+  @Test
+  public void searchHelperSupportsAbsentParamsAndLimit() throws Exception {
+    for (Map<String, Object> params :
+        Arrays.<Map<String, Object>>asList(null, Collections.singletonMap("query", "widgets"))) {
+      StripeResponseGetter getter = Mockito.mock(StripeResponseGetter.class);
+      new SearchService(getter)
+          .searchRequest(
               new ApiRequest(
                   BaseAddress.API,
                   ApiResource.RequestMethod.POST,
                   "/v2/widgets/search",
                   params,
-                  options),
-              new TypeToken<StripeSearchResult<SearchableModel>>() {}.getType());
+                  null));
+      ArgumentCaptor<ApiRequest> captured = ArgumentCaptor.forClass(ApiRequest.class);
+      Mockito.verify(getter).request(captured.capture(), Mockito.any());
+      assertEquals("/v2/widgets/search", captured.getValue().getPath());
+      assertEquals(params, captured.getValue().getParams());
+      verifyNoMoreInteractions(getter);
     }
+  }
+
+  @Test
+  public void ordinaryCustomSearchRequestKeepsLimitInBody() {
+    Map<String, Object> params = Collections.singletonMap("limit", 2L);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            "/v2/data/operations/search",
+            params,
+            null);
+    assertEquals("/v2/data/operations/search", request.getPath());
+    assertEquals(params, request.getParams());
+    assertEquals(params, request.addUsage("stripe_client").getParams());
   }
 
   @Test
