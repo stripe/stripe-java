@@ -25,22 +25,19 @@ public abstract class ApiService {
   }
 
   /**
-   * V2 search uses POST but sends limit in the URL query rather than the JSON body. Add it only to
-   * the initial URL; page URLs already contain their pagination parameters. Delegate to the
-   * ordinary request path exactly once.
+   * V2 search uses POST but sends limit in the URL query rather than the JSON body. Rebuild the
+   * initial query from params; pagination uses the ordinary request path.
    */
   @SuppressWarnings("TypeParameterUnusedInFormals")
   protected <T extends StripeObject> T requestV2Search(ApiRequest request, Type typeToken)
       throws StripeException {
-    String path = request.getPath();
+    String path = request.getPath().split("\\?", 2)[0];
     Map<String, Object> params = request.getParams();
     if (params != null) {
       params = new HashMap<>(params);
       if (params.containsKey("limit")) {
         Object limit = params.remove("limit");
-        if (!path.contains("?")) {
-          path += "?limit=" + ApiResource.urlEncode(String.valueOf(limit));
-        }
+        path += "?limit=" + ApiResource.urlEncode(String.valueOf(limit));
       }
     }
     ApiRequest prepared =

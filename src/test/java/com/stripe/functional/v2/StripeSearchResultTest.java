@@ -74,7 +74,7 @@ public class StripeSearchResultTest extends BaseStripeTest {
       ArgumentCaptor<ApiRequest> captured = ArgumentCaptor.forClass(ApiRequest.class);
       Mockito.verify(getter, Mockito.times(1)).request(captured.capture(), Mockito.any());
       ApiRequest prepared = captured.getValue();
-      assertEquals(path.contains("?") ? path : path + "?limit=9", prepared.getPath());
+      assertEquals("/v2/widgets/search?limit=9", prepared.getPath());
       assertEquals(Collections.singletonMap("query", "widgets"), prepared.getParams());
       assertEquals(BaseAddress.API, prepared.getBaseAddress());
       assertEquals(original.getMethod(), prepared.getMethod());
@@ -96,7 +96,7 @@ public class StripeSearchResultTest extends BaseStripeTest {
               new ApiRequest(
                   BaseAddress.API,
                   ApiResource.RequestMethod.POST,
-                  "/v2/widgets/search",
+                  "/v2/widgets/search?limit=2&unused=value",
                   params,
                   null));
       ArgumentCaptor<ApiRequest> captured = ArgumentCaptor.forClass(ApiRequest.class);
