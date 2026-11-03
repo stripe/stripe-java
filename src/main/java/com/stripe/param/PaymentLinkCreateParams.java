@@ -5030,7 +5030,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   public static class PaymentIntentData {
     /** Controls when the funds will be captured from the customer's account. */
     @SerializedName("capture_method")
-    CaptureMethod captureMethod;
+    ApiRequestParams.EnumParam captureMethod;
 
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
@@ -5110,7 +5110,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     String transferGroup;
 
     private PaymentIntentData(
-        CaptureMethod captureMethod,
+        ApiRequestParams.EnumParam captureMethod,
         String description,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
@@ -5133,7 +5133,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private CaptureMethod captureMethod;
+      private ApiRequestParams.EnumParam captureMethod;
 
       private String description;
 
@@ -5165,6 +5165,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       /** Controls when the funds will be captured from the customer's account. */
       public Builder setCaptureMethod(
           PaymentLinkCreateParams.PaymentIntentData.CaptureMethod captureMethod) {
+        this.captureMethod = captureMethod;
+        return this;
+      }
+
+      /** Controls when the funds will be captured from the customer's account. */
+      public Builder setCaptureMethod(EmptyParam captureMethod) {
         this.captureMethod = captureMethod;
         return this;
       }

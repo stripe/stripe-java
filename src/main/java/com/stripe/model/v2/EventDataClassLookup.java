@@ -115,6 +115,7 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.core.account_person_token", com.stripe.model.v2.core.AccountPersonToken.class);
     classLookup.put("v2.core.account_token", com.stripe.model.v2.core.AccountToken.class);
+    classLookup.put("v2.core.claimable_sandbox", com.stripe.model.v2.core.ClaimableSandbox.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
 
@@ -256,6 +257,8 @@ public final class EventDataClassLookup {
         com.stripe.events.V1CheckoutSessionAsyncPaymentSucceededEvent.class);
     eventClassLookup.put(
         "v1.checkout.session.completed", com.stripe.events.V1CheckoutSessionCompletedEvent.class);
+    eventClassLookup.put(
+        "v1.checkout.session.created", com.stripe.events.V1CheckoutSessionCreatedEvent.class);
     eventClassLookup.put(
         "v1.checkout.session.expired", com.stripe.events.V1CheckoutSessionExpiredEvent.class);
     eventClassLookup.put(
@@ -522,9 +525,6 @@ public final class EventDataClassLookup {
         "v1.issuing_authorization.created",
         com.stripe.events.V1IssuingAuthorizationCreatedEvent.class);
     eventClassLookup.put(
-        "v1.issuing_authorization.request",
-        com.stripe.events.V1IssuingAuthorizationRequestEvent.class);
-    eventClassLookup.put(
         "v1.issuing_authorization.updated",
         com.stripe.events.V1IssuingAuthorizationUpdatedEvent.class);
     eventClassLookup.put(
@@ -594,7 +594,11 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v1.payment_intent.succeeded", com.stripe.events.V1PaymentIntentSucceededEvent.class);
     eventClassLookup.put(
+        "v1.payment_link.activated", com.stripe.events.V1PaymentLinkActivatedEvent.class);
+    eventClassLookup.put(
         "v1.payment_link.created", com.stripe.events.V1PaymentLinkCreatedEvent.class);
+    eventClassLookup.put(
+        "v1.payment_link.deactivated", com.stripe.events.V1PaymentLinkDeactivatedEvent.class);
     eventClassLookup.put(
         "v1.payment_link.updated", com.stripe.events.V1PaymentLinkUpdatedEvent.class);
     eventClassLookup.put(
@@ -813,6 +817,21 @@ public final class EventDataClassLookup {
         "v2.core.account_person.deleted", com.stripe.events.V2CoreAccountPersonDeletedEvent.class);
     eventClassLookup.put(
         "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.claimed",
+        com.stripe.events.V2CoreClaimableSandboxClaimedEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.created",
+        com.stripe.events.V2CoreClaimableSandboxCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expired",
+        com.stripe.events.V2CoreClaimableSandboxExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expiring",
+        com.stripe.events.V2CoreClaimableSandboxExpiringEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.updated",
+        com.stripe.events.V2CoreClaimableSandboxUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
     eventClassLookup.put(

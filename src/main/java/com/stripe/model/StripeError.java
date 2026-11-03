@@ -61,8 +61,9 @@ public class StripeError extends StripeObject {
    * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_retryable_upstream_error},
    * {@code forwarding_api_upstream_connection_error}, {@code
    * forwarding_api_upstream_connection_timeout}, {@code forwarding_api_upstream_error}, {@code
-   * idempotency_key_in_use}, {@code incorrect_address}, {@code incorrect_cvc}, {@code
-   * incorrect_number}, {@code incorrect_postal_code}, {@code incorrect_zip}, {@code
+   * idempotency_key_in_use}, {@code inactive_api_operation_confirmation_required}, {@code
+   * incorrect_address}, {@code incorrect_cvc}, {@code incorrect_number}, {@code
+   * incorrect_postal_code}, {@code incorrect_zip}, {@code
    * india_recurring_payment_mandate_canceled}, {@code instant_payouts_config_disabled}, {@code
    * instant_payouts_currency_disabled}, {@code instant_payouts_limit_exceeded}, {@code
    * instant_payouts_unsupported}, {@code insufficient_funds}, {@code intent_invalid_state}, {@code

@@ -1412,16 +1412,37 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Es extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
       /**
        * Type of registration in ES.
        *
-       * <p>One of {@code ioss}, {@code oss_non_union}, {@code oss_union}, or {@code standard}.
+       * <p>One of {@code igic}, {@code ioss}, {@code oss_non_union}, {@code oss_union}, or {@code
+       * standard}.
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a

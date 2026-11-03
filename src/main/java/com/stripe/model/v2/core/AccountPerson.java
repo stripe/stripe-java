@@ -531,21 +531,42 @@ public class AccountPerson extends StripeObject implements HasId {
     /**
      * The ID number type of an individual.
      *
-     * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_cuil}, {@code ar_dni}, {@code at_stn},
-     * {@code az_tin}, {@code bd_brc}, {@code bd_etin}, {@code bd_nid}, {@code be_nrn}, {@code
-     * bg_ucn}, {@code bn_nric}, {@code br_cpf}, {@code ca_sin}, {@code ch_oasi}, {@code cl_rut},
-     * {@code cn_pp}, {@code co_nuip}, {@code cr_ci}, {@code cr_cpf}, {@code cr_dimex}, {@code
-     * cr_nite}, {@code cy_tic}, {@code cz_rc}, {@code de_stn}, {@code dk_cpr}, {@code do_cie},
-     * {@code do_rcn}, {@code ec_ci}, {@code ee_ik}, {@code es_nif}, {@code fi_hetu}, {@code
-     * fr_nir}, {@code gb_nino}, {@code gr_afm}, {@code gt_nit}, {@code hk_id}, {@code hr_oib},
-     * {@code hu_ad}, {@code id_nik}, {@code ie_ppsn}, {@code is_kt}, {@code it_cf}, {@code jp_inc},
-     * {@code ke_pin}, {@code kz_iin}, {@code li_peid}, {@code lt_ak}, {@code lu_nif}, {@code
-     * lv_pk}, {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code ng_nin}, {@code nl_bsn},
-     * {@code no_nin}, {@code nz_ird}, {@code pe_dni}, {@code pk_cnic}, {@code pk_snic}, {@code
-     * pl_pesel}, {@code pt_nif}, {@code ro_cnp}, {@code sa_tin}, {@code se_pin}, {@code sg_fin},
-     * {@code sg_nric}, {@code sk_dic}, {@code th_lc}, {@code th_pin}, {@code tr_tin}, {@code
-     * us_itin}, {@code us_itin_last_4}, {@code us_ssn}, {@code us_ssn_last_4}, {@code uy_dni}, or
-     * {@code za_id}.
+     * <p>One of {@code ae_eid}, {@code ae_pp}, {@code al_pp}, {@code am_pp}, {@code ao_nif}, {@code
+     * ar_cuil}, {@code ar_dni}, {@code ar_pp}, {@code at_pp}, {@code at_stn}, {@code au_pp}, {@code
+     * az_pin}, {@code az_pp}, {@code az_tin}, {@code bd_brc}, {@code bd_etin}, {@code bd_nid},
+     * {@code bd_pp}, {@code be_nrn}, {@code be_pp}, {@code bg_pp}, {@code bg_ucn}, {@code bh_pp},
+     * {@code bj_pp}, {@code bn_nric}, {@code bo_pp}, {@code br_cpf}, {@code br_pp}, {@code br_rg},
+     * {@code bs_pp}, {@code bs_tin}, {@code by_pp}, {@code ca_pp}, {@code ca_sin}, {@code ch_oasi},
+     * {@code ch_pp}, {@code ci_pp}, {@code cl_pp}, {@code cl_rut}, {@code cm_pp}, {@code cn_pp},
+     * {@code co_nuip}, {@code co_pp}, {@code cr_ci}, {@code cr_cpf}, {@code cr_dimex}, {@code
+     * cr_nite}, {@code cr_pp}, {@code cy_pp}, {@code cy_tic}, {@code cz_dic}, {@code cz_pp}, {@code
+     * cz_rc}, {@code de_pp}, {@code de_stn}, {@code dk_cpr}, {@code dk_pp}, {@code do_cie}, {@code
+     * do_pp}, {@code do_rcn}, {@code dz_pp}, {@code ec_ci}, {@code ec_pp}, {@code ee_ik}, {@code
+     * ee_pp}, {@code eg_pp}, {@code es_nif}, {@code es_pp}, {@code et_tin}, {@code fi_hetu}, {@code
+     * fi_pp}, {@code fr_nir}, {@code fr_pp}, {@code fr_spi}, {@code ga_nif}, {@code gb_nino},
+     * {@code gb_pp}, {@code ge_pp}, {@code gh_pp}, {@code gr_afm}, {@code gr_pp}, {@code gt_cui},
+     * {@code gt_nit}, {@code gt_pp}, {@code hk_id}, {@code hk_pp}, {@code hn_dni}, {@code hn_pp},
+     * {@code hr_oib}, {@code hr_pp}, {@code ht_pp}, {@code hu_ad}, {@code hu_pp}, {@code id_nik},
+     * {@code id_pp}, {@code ie_pp}, {@code ie_ppsn}, {@code il_pp}, {@code in_pan}, {@code in_pp},
+     * {@code iq_pp}, {@code is_kt}, {@code is_pp}, {@code it_cf}, {@code it_pp}, {@code je_pp},
+     * {@code jm_pp}, {@code jo_pp}, {@code jp_inc}, {@code jp_pp}, {@code ke_pin}, {@code ke_pp},
+     * {@code kr_pp}, {@code kw_pp}, {@code kz_iin}, {@code kz_pp}, {@code lb_pp}, {@code li_peid},
+     * {@code li_pp}, {@code lk_pp}, {@code lt_ak}, {@code lt_pp}, {@code lu_nif}, {@code lu_pp},
+     * {@code lv_pk}, {@code lv_pp}, {@code ma_pp}, {@code md_cf}, {@code md_pp}, {@code mg_nif},
+     * {@code mk_pin}, {@code mk_pp}, {@code mm_pp}, {@code mn_pp}, {@code mt_pp}, {@code mu_pp},
+     * {@code mx_curp}, {@code mx_pp}, {@code mx_rfc}, {@code my_nric}, {@code my_pp}, {@code
+     * mz_nuit}, {@code ng_nin}, {@code ng_pp}, {@code nl_bsn}, {@code nl_pp}, {@code no_nin},
+     * {@code no_pp}, {@code np_pp}, {@code nz_ird}, {@code nz_pp}, {@code pa_pp}, {@code pe_dni},
+     * {@code pe_pp}, {@code ph_pp}, {@code pk_cnic}, {@code pk_pp}, {@code pk_snic}, {@code
+     * pl_pesel}, {@code pl_pp}, {@code pr_pp}, {@code ps_pp}, {@code pt_nif}, {@code pt_pp}, {@code
+     * py_ci}, {@code py_pp}, {@code ro_cnp}, {@code ro_pp}, {@code rs_pp}, {@code ru_pp}, {@code
+     * rw_tin}, {@code sa_pp}, {@code sa_ptin}, {@code sa_tin}, {@code se_pin}, {@code se_pp},
+     * {@code sg_fin}, {@code sg_nric}, {@code sg_pp}, {@code si_pp}, {@code si_ptin}, {@code
+     * sk_dic}, {@code sk_pp}, {@code sv_pp}, {@code th_lc}, {@code th_pin}, {@code th_pp}, {@code
+     * tn_pp}, {@code tr_pp}, {@code tr_tin}, {@code tt_bir}, {@code tw_pp}, {@code ua_pp}, {@code
+     * ug_pp}, {@code us_itin}, {@code us_itin_last_4}, {@code us_pp}, {@code us_ssn}, {@code
+     * us_ssn_last_4}, {@code uy_dni}, {@code uy_pp}, {@code uz_pp}, {@code uz_tin}, {@code ve_pp},
+     * {@code vn_pp}, {@code za_id}, or {@code za_pp}.
      */
     @SerializedName("type")
     String type;

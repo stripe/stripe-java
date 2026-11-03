@@ -129,6 +129,9 @@ public final class EventNotificationClassLookup {
         "v1.checkout.session.completed",
         com.stripe.events.V1CheckoutSessionCompletedEventNotification.class);
     eventClassLookup.put(
+        "v1.checkout.session.created",
+        com.stripe.events.V1CheckoutSessionCreatedEventNotification.class);
+    eventClassLookup.put(
         "v1.checkout.session.expired",
         com.stripe.events.V1CheckoutSessionExpiredEventNotification.class);
     eventClassLookup.put(
@@ -446,9 +449,6 @@ public final class EventNotificationClassLookup {
         "v1.issuing_authorization.created",
         com.stripe.events.V1IssuingAuthorizationCreatedEventNotification.class);
     eventClassLookup.put(
-        "v1.issuing_authorization.request",
-        com.stripe.events.V1IssuingAuthorizationRequestEventNotification.class);
-    eventClassLookup.put(
         "v1.issuing_authorization.updated",
         com.stripe.events.V1IssuingAuthorizationUpdatedEventNotification.class);
     eventClassLookup.put(
@@ -531,7 +531,13 @@ public final class EventNotificationClassLookup {
         "v1.payment_intent.succeeded",
         com.stripe.events.V1PaymentIntentSucceededEventNotification.class);
     eventClassLookup.put(
+        "v1.payment_link.activated",
+        com.stripe.events.V1PaymentLinkActivatedEventNotification.class);
+    eventClassLookup.put(
         "v1.payment_link.created", com.stripe.events.V1PaymentLinkCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.payment_link.deactivated",
+        com.stripe.events.V1PaymentLinkDeactivatedEventNotification.class);
     eventClassLookup.put(
         "v1.payment_link.updated", com.stripe.events.V1PaymentLinkUpdatedEventNotification.class);
     eventClassLookup.put(
@@ -808,6 +814,21 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.core.account_person.updated",
         com.stripe.events.V2CoreAccountPersonUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.claimed",
+        com.stripe.events.V2CoreClaimableSandboxClaimedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.created",
+        com.stripe.events.V2CoreClaimableSandboxCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expired",
+        com.stripe.events.V2CoreClaimableSandboxExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expiring",
+        com.stripe.events.V2CoreClaimableSandboxExpiringEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.updated",
+        com.stripe.events.V2CoreClaimableSandboxUpdatedEventNotification.class);
     eventClassLookup.put(
         "v2.core.event_destination.ping",
         com.stripe.events.V2CoreEventDestinationPingEventNotification.class);
