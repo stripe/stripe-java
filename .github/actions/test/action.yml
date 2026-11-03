@@ -1,0 +1,129 @@
+name: Test
+description: Start stripe-mock, then run the test suite on a Java runtime. Shared by CI and Canary CI; expects the repository to be checked out.
+
+inputs:
+  java-version:
+    description: Java version to run the tests on.
+    required: true
+  canary_channel:
+    description: >-
+      Canary channel (ga, beta, or private-preview) whose specs and fixtures
+      stripe-mock should serve. Empty uses the OPENAPI_VERSION release.
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+    - name: Resolve stripe-mock OpenAPI inputs
+      id: openapi
+      shell: bash
+      env:
+        CANARY_CHANNEL: ${{ inputs.canary_channel }}
+      run: |
+        set -euo pipefail
+
+        if [[ -z "$CANARY_CHANNEL" ]]; then
+          echo "version=$(< OPENAPI_VERSION)" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+
+        case "$CANARY_CHANNEL" in
+          ga)
+            spec_name=spec3.sdk.json
+            fixtures_name=fixtures3.json
+            beta=false
+            ;;
+          beta)
+            spec_name=spec3.beta.sdk.json
+            fixtures_name=fixtures3.beta.json
+            beta=true
+            ;;
+          private-preview)
+            spec_name=spec3.private_preview.sdk.json
+            fixtures_name=fixtures3.private_preview.json
+            beta=true
+            ;;
+          *)
+            echo "::error::Unsupported canary channel: $CANARY_CHANNEL"
+            exit 1
+            ;;
+        esac
+
+        canary_dir="$GITHUB_WORKSPACE/.stripe-mock-canary"
+        mkdir -p "$canary_dir"
+
+        spec_path="$canary_dir/$spec_name"
+        fixtures_path="$canary_dir/$fixtures_name"
+        canary_base="https://raw.githubusercontent.com/stripe/openapi/master/openapi/canary/$CANARY_CHANNEL"
+        curl_options=(
+          --retry 3
+          --retry-all-errors
+          --fail
+          --silent
+          --show-error
+        )
+
+        curl "${curl_options[@]}" "$canary_base/$spec_name" -o "$spec_path"
+        curl "${curl_options[@]}" "$canary_base/$fixtures_name" -o "$fixtures_path"
+
+        {
+          echo "spec_path=$spec_path"
+          echo "fixtures_path=$fixtures_path"
+          echo "beta=$beta"
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Setup Test Java Runtime
+      id: setup-test-jre
+      uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+      with:
+        java-version: ${{ inputs.java-version }}
+        architecture: x64
+        distribution: zulu
+
+    - name: Set Test Java Runtime Environment variable
+      shell: bash
+      run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
+      env:
+        JRE_PATH: ${{ steps.setup-test-jre.outputs.path }}
+
+    # our gradle version wants java 17, so any other test version needs a separate setup
+    - name: Setup Gradle JDK
+      if: ${{ inputs.java-version != '17' }}
+      uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+      with:
+        java-version: "17"
+        architecture: x64
+        distribution: zulu
+
+    - name: Tweak gradle.properties for Java 8
+      if: ${{ inputs.java-version == '8' }}
+      shell: bash
+      run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
+
+    - name: Display version
+      shell: bash
+      run: |
+        ./gradlew --version
+        echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
+
+    - uses: stripe/openapi/actions/stripe-mock@master
+      with:
+        openapi_version: ${{ steps.openapi.outputs.version }}
+        spec_path: ${{ steps.openapi.outputs.spec_path }}
+        fixtures: ${{ steps.openapi.outputs.fixtures_path }}
+        beta: ${{ steps.openapi.outputs.beta }}
+        # Used to determine if stripe-mock runs in beta mode. Canary runs set `beta`
+        # explicitly instead, so pass a base that never implies beta (it has no "b").
+        base: ${{ inputs.canary_channel != '' && 'canary' || github.base_ref == 'private-preview' && 'beta' || github.ref_name == 'private-preview' && 'beta' || contains(github.ref_name, '-alpha.') && 'beta' || github.base_ref || github.ref_name }}
+
+    # Steps without an explicit shell used to run under PowerShell on Windows.
+    - name: Run test suite
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: just test
+    - name: Run test suite
+      if: runner.os != 'Windows'
+      shell: bash
+      run: just test
