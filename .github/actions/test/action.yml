@@ -82,12 +82,6 @@ runs:
         architecture: x64
         distribution: zulu
 
-    - name: Set Test Java Runtime Environment variable
-      shell: bash
-      run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
-      env:
-        JRE_PATH: ${{ steps.setup-test-jre.outputs.path }}
-
     # our gradle version wants java 17, so any other test version needs a separate setup
     - name: Setup Gradle JDK
       if: ${{ inputs.java-version != '17' }}
@@ -107,6 +101,8 @@ runs:
       run: |
         ./gradlew --version
         echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
+      env:
+        JAVA_TEST_HOME: ${{ steps.setup-test-jre.outputs.path }}
 
     - uses: stripe/openapi/actions/stripe-mock@master
       with:
@@ -123,7 +119,11 @@ runs:
       if: runner.os == 'Windows'
       shell: pwsh
       run: just test
+      env:
+        JAVA_TEST_HOME: ${{ steps.setup-test-jre.outputs.path }}
     - name: Run test suite
       if: runner.os != 'Windows'
       shell: bash
       run: just test
+      env:
+        JAVA_TEST_HOME: ${{ steps.setup-test-jre.outputs.path }}

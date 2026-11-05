@@ -14,16 +14,14 @@ runs:
         architecture: x64
         distribution: zulu
 
-    - name: Set Test Java Runtime Environment variable
-      shell: bash
-      run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
-      env:
-        JRE_PATH: ${{ steps.setup-jre.outputs.path }}
-
     - name: Spotless
       shell: bash
       run: just format-check
+      env:
+        JAVA_TEST_HOME: ${{ steps.setup-jre.outputs.path }}
 
     - name: Build artifacts
       shell: bash
       run: ./gradlew assemble javadoc
+      env:
+        JAVA_TEST_HOME: ${{ steps.setup-jre.outputs.path }}
