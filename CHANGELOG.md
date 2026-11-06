@@ -7,6 +7,56 @@ Instead, edit a corresponding `.change.md` file and run `hark build`.
 
 > This changelog only covers the **private preview** releases. Each release builds on the most recent GA release; see those notes in [the GA changelog](https://github.com/stripe/stripe-java/blob/master/CHANGELOG.md).
 
+## <a id="34-2-0-alpha-2"></a>34.2.0-alpha.2 - 2026-11-05
+* ⚠️ [#2325](https://github.com/stripe/stripe-java/pull/2325) Update generated code
+  * Add support for new resources `tax.Certificate`, `tax.FormCorrection`, `v2.extend.ObjectDefinitionVersion`, and `v2.extend.ObjectDefinition`
+  * Add support for `create`, `delete`, `list`, and `retrieve` methods on resource `tax.Certificate`
+  * Add support for `create` method on resource `tax.Form`
+  * Add support for `list` and `retrieve` methods on resources `v2.extend.ObjectDefinitionVersion` and `v2.extend.ObjectDefinition`
+  * Add support for `bills`, `financialAccountRewards`, `financialAccountsTransactions`, `financialAccounts`, `networkCostPassthroughReport`, and `recipientsList` on `AccountSessionCreateParams.components`
+  * Add support for `businessProfileManagement` on `AccountSessionCreateParams.components`, `v2.core.AccountSession.components`, and `v2.core.AccountSessionCreateParams.components`
+  * Add support for `exportTaxTransactions`, `productTaxCodeSelector`, and `taxThresholdMonitoring` on `AccountSession.components`
+  * Add support for `aeonPay`, `auPay`, `dbarai`, and `merpay` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `PaymentAttemptRecord.payment_method_details`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentMethodCreateParams`, `PaymentMethod`, `PaymentRecord.payment_method_details`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Add support for `fundingSources` on `Charge.payment_method_details.card.wallet.link` and `Charge.payment_method_details.link`
+  * Add support for `fleet` on `Charge.payment_method_details.card_present`, `ConfirmationToken.payment_method_preview.card.generated_from.payment_method_details.card_present`, `PaymentAttemptRecord.payment_method_details.card_present`, `PaymentMethod.card.generated_from.payment_method_details.card_present`, and `PaymentRecord.payment_method_details.card_present`
+  * Add support for `fingerprint` on `Charge.payment_method_details.paypay`, `PaymentAttemptRecord.payment_method_details.paypay`, `PaymentRecord.payment_method_details.paypay`, and `SetupAttempt.payment_method_details.paypay`
+  * Add support for `customPaymentMethodOptions` on `checkout.SessionCreateParams`
+  * Add support for new value `tamara` on enum `checkout.SessionCreateParams.allowedPaymentMethodTypes`
+  * Add support for new value `tamara` on enum `checkout.SessionCreateParams.excludedPaymentMethodTypes`
+  * Add support for `stripeBalance` on `checkout.Session.payment_method_options` and `checkout.SessionCreateParams.payment_method_options`
+  * Add support for new value `buyer_choice` on enum `checkout.SessionCreateParams.payment_method_options.acss_debit.mandate_options.transactionType`
+  * Add support for new value `instant` on enums `InvoiceCreateParams.payment_settings.payment_method_options.bacs_debit.verificationMethod`, `InvoiceUpdateParams.payment_settings.payment_method_options.bacs_debit.verificationMethod`, `PaymentIntentConfirmParams.payment_method_options.bacs_debit.verificationMethod`, `PaymentIntentCreateParams.payment_method_options.bacs_debit.verificationMethod`, `PaymentIntentUpdateParams.payment_method_options.bacs_debit.verificationMethod`, `SetupIntentConfirmParams.payment_method_options.bacs_debit.verificationMethod`, `SetupIntentCreateParams.payment_method_options.bacs_debit.verificationMethod`, `SetupIntentUpdateParams.payment_method_options.bacs_debit.verificationMethod`, `SubscriptionCreateParams.payment_settings.payment_method_options.bacs_debit.verificationMethod`, `SubscriptionUpdateParams.payment_settings.payment_method_options.bacs_debit.verificationMethod`, and `checkout.SessionCreateParams.payment_method_options.bacs_debit.verificationMethod`
+  * Add support for `setupFutureUsage` on `checkout.Session.payment_method_options.paypay` and `checkout.SessionCreateParams.payment_method_options.paypay`
+  * Add support for new values `aeon_pay`, `au_pay`, `dbarai`, and `merpay` on enums `ConfirmationTokenCreateParams.payment_method_data.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for new values `aeon_pay`, `au_pay`, `dbarai`, and `merpay` on enums `CustomerListPaymentMethodsParams.type`, `PaymentMethodCreateParams.type`, and `PaymentMethodListParams.type`
+  * Add support for `reasonDetails` and `reason` on `CustomerTaxExemptionCreateParams` and `CustomerTaxExemption`
+  * Add support for `taxCodeGroup` on `CustomerTaxExemption.us` and `CustomerTaxExemptionCreateParams.us`
+  * Add support for `targetDate` on `Invoice.payment_settings.payment_method_options.sepa_debit`, `InvoiceCreateParams.payment_settings.payment_method_options.sepa_debit`, and `InvoiceUpdateParams.payment_settings.payment_method_options.sepa_debit`
+  * Add support for `paymentMethodDetails` on `PaymentAttemptRecordReportAuthenticatedParams`
+  * Change type of `PaymentAttemptRecordReportGuaranteedParams.payment_method_details.type` and `PaymentRecordReportPaymentAttemptGuaranteedParams.payment_method_details.type` from `literal('card')` to `enum('card'|'us_bank_account')`
+  * Add support for `disputeDetails` on `PaymentAttemptRecord` and `PaymentRecord`
+  * Add support for new values `aeon_pay`, `au_pay`, `dbarai`, and `merpay` on enums `PaymentIntentConfirmParams.allowedPaymentMethodTypes`, `PaymentIntentCreateParams.allowedPaymentMethodTypes`, `PaymentIntentUpdateParams.allowedPaymentMethodTypes`, `SetupIntentConfirmParams.allowedPaymentMethodTypes`, `SetupIntentCreateParams.allowedPaymentMethodTypes`, and `SetupIntentUpdateParams.allowedPaymentMethodTypes`
+  * Add support for `evCharging` and `fleetData` on `PaymentIntentAmountDetailsLineItem.payment_method_options.card_present`, `PaymentIntentCaptureParams.amount_details.line_items[].payment_method_options.card_present`, `PaymentIntentConfirmParams.amount_details.line_items[].payment_method_options.card_present`, `PaymentIntentCreateParams.amount_details.line_items[].payment_method_options.card_present`, `PaymentIntentDecrementAuthorizationParams.amount_details.line_items[].payment_method_options.card_present`, `PaymentIntentIncrementAuthorizationParams.amount_details.line_items[].payment_method_options.card_present`, and `PaymentIntentUpdateParams.amount_details.line_items[].payment_method_options.card_present`
+  * Add support for new values `aeon_pay`, `au_pay`, `dbarai`, and `merpay` on enums `PaymentIntentConfirmParams.excludedPaymentMethodTypes`, `PaymentIntentCreateParams.excludedPaymentMethodTypes`, `PaymentIntentUpdateParams.excludedPaymentMethodTypes`, `SetupIntentCreateParams.excludedPaymentMethodTypes`, and `SetupIntentUpdateParams.excludedPaymentMethodTypes`
+  * Add support for `financialConnections` on `PaymentIntent.payment_method_options.bacs_debit`, `PaymentIntentConfirmParams.payment_method_options.bacs_debit`, `PaymentIntentCreateParams.payment_method_options.bacs_debit`, and `PaymentIntentUpdateParams.payment_method_options.bacs_debit`
+  * ⚠️ Remove support for value `on_session` from enums `PaymentIntentConfirmParams.payment_method_options.paypay.setupFutureUsage`, `PaymentIntentCreateParams.payment_method_options.paypay.setupFutureUsage`, and `PaymentIntentUpdateParams.payment_method_options.paypay.setupFutureUsage`
+  * Add support for `paymentDetails` on `PaymentIntent.payment_method_options.card_present` and `PaymentIntent.payment_method_options.card`
+  * Add support for new value `tamara` on enums `PaymentLinkCreateParams.paymentMethodTypes` and `PaymentLinkUpdateParams.paymentMethodTypes`
+  * Add support for `rakutenPay` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
+  * Add support for `sepaDebit` on `radar.PaymentEvaluation.payment_details.money_movement_details` and `radar.PaymentEvaluationCreateParams.payment_details.money_movement_details`
+  * Add support for new value `sepa_debit` on enum `radar.PaymentEvaluationCreateParams.payment_details.money_movement_details.moneyMovementType`
+  * Add support for `cardTesting` on `radar.PaymentEvaluation.signals`
+  * Add support for `paymentMethod` on `RefundCreateParams`
+  * Add support for new values `aeon_pay`, `au_pay`, `dbarai`, and `merpay` on enum `RefundCreateParams.payment_method_data.type`
+  * Add support for `paymentRecord` on `Refund`
+  * Add support for `bizum` and `upi` on `Refund.destination_details`
+  * Add support for `taxInvoiceMonth` on `reporting.ReportRun.parameters`
+  * Add support for `radarOptions` on `SetupIntentConfirmParams`, `SetupIntentCreateParams`, and `SetupIntent`
+  * Add support for `billingGroup` on `SubscriptionCreateParams`, `SubscriptionListParams`, `SubscriptionUpdateParams`, and `Subscription`
+  * Add support for `networkDetails` on `treasury.InboundTransfer.failure_details`, `treasury.OutboundPayment.returned_details`, and `treasury.OutboundTransfer.returned_details`
+  * Add support for event notification `V2ExtendObjectDefinitionCreatedEvent` with related object `v2.extend.ObjectDefinition`
+  * Add support for event notification `V2ExtendObjectDefinitionVersionCreatedEvent` with related object `v2.extend.ObjectDefinitionVersion`
+
 ## <a id="34-2-0-alpha-1"></a>34.2.0-alpha.1 - 2026-10-30
 This release changes the pinned API version to `2026-10-28.preview`.
 

@@ -3,6 +3,7 @@ title: Update generated code
 pr_url: https://github.com/stripe/stripe-java/pull/2325
 semver_level: major
 is_stripe_api_change: true
+released_in_version: 34.2.0-alpha.2
 ---
 
 * Add support for new resources `tax.Certificate`, `tax.FormCorrection`, `v2.extend.ObjectDefinitionVersion`, and `v2.extend.ObjectDefinition`
