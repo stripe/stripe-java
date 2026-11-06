@@ -9,6 +9,10 @@ public final class ExtendService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.v2.extend.ObjectDefinitionService objectDefinitions() {
+    return new com.stripe.service.v2.extend.ObjectDefinitionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.extend.WorkflowRunService workflowRuns() {
     return new com.stripe.service.v2.extend.WorkflowRunService(this.getResponseGetter());
   }

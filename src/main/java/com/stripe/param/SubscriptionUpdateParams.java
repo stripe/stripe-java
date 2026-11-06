@@ -59,6 +59,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   BillingCycleAnchor billingCycleAnchor;
 
   /**
+   * The Billing Group which controls the timing of recurring invoice generation for this
+   * subscription. If unset, the subscription will bill according to its own configured schedule and
+   * create its own invoices. If set, this subscription will be billed by the cadence instead,
+   * potentially sharing invoices with the other subscriptions linked to that Cadence.
+   */
+  @SerializedName("billing_group")
+  Object billingGroup;
+
+  /**
    * An array of billing schedules, which allow you to bill customers in advance for multiple
    * service periods. Requires flexible billing mode and API version 2026-05-27.dahlia or later.
    * Learn more about <a
@@ -299,6 +308,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       Object billingCadence,
       BillingCycleAnchor billingCycleAnchor,
+      Object billingGroup,
       Object billingSchedules,
       Object billingThresholds,
       Object cancelAt,
@@ -335,6 +345,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.billingCadence = billingCadence;
     this.billingCycleAnchor = billingCycleAnchor;
+    this.billingGroup = billingGroup;
     this.billingSchedules = billingSchedules;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
@@ -382,6 +393,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private Object billingCadence;
 
     private BillingCycleAnchor billingCycleAnchor;
+
+    private Object billingGroup;
 
     private Object billingSchedules;
 
@@ -453,6 +466,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.automaticTax,
           this.billingCadence,
           this.billingCycleAnchor,
+          this.billingGroup,
           this.billingSchedules,
           this.billingThresholds,
           this.cancelAt,
@@ -578,6 +592,28 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     public Builder setBillingCycleAnchor(
         SubscriptionUpdateParams.BillingCycleAnchor billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
+      return this;
+    }
+
+    /**
+     * The Billing Group which controls the timing of recurring invoice generation for this
+     * subscription. If unset, the subscription will bill according to its own configured schedule
+     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
+     * potentially sharing invoices with the other subscriptions linked to that Cadence.
+     */
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
+      return this;
+    }
+
+    /**
+     * The Billing Group which controls the timing of recurring invoice generation for this
+     * subscription. If unset, the subscription will bill according to its own configured schedule
+     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
+     * potentially sharing invoices with the other subscriptions linked to that Cadence.
+     */
+    public Builder setBillingGroup(EmptyParam billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 
@@ -7739,6 +7775,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         public enum VerificationMethod implements ApiRequestParams.EnumParam {
           @SerializedName("automatic")
           AUTOMATIC("automatic"),
+
+          @SerializedName("instant")
+          INSTANT("instant"),
 
           @SerializedName("payer_name_verification")
           PAYER_NAME_VERIFICATION("payer_name_verification");

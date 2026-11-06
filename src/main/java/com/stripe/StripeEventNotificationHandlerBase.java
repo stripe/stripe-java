@@ -416,6 +416,8 @@ import com.stripe.events.V2DataReportingQueryRunFailedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunSucceededEventNotification;
 import com.stripe.events.V2DataReportingQueryRunUpdatedEventNotification;
 import com.stripe.events.V2ExtendExtensionRunFailedEventNotification;
+import com.stripe.events.V2ExtendObjectDefinitionCreatedEventNotification;
+import com.stripe.events.V2ExtendObjectDefinitionVersionCreatedEventNotification;
 import com.stripe.events.V2ExtendWorkflowRunFailedEventNotification;
 import com.stripe.events.V2ExtendWorkflowRunStartedEventNotification;
 import com.stripe.events.V2ExtendWorkflowRunSucceededEventNotification;
@@ -3220,6 +3222,18 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2ExtendExtensionRunFailed(
       EventNotificationCallback<V2ExtendExtensionRunFailedEventNotification> callback) {
     this.register("v2.extend.extension_run.failed", callback);
+    return self();
+  }
+
+  public T onV2ExtendObjectDefinitionCreated(
+      EventNotificationCallback<V2ExtendObjectDefinitionCreatedEventNotification> callback) {
+    this.register("v2.extend.object_definition.created", callback);
+    return self();
+  }
+
+  public T onV2ExtendObjectDefinitionVersionCreated(
+      EventNotificationCallback<V2ExtendObjectDefinitionVersionCreatedEventNotification> callback) {
+    this.register("v2.extend.object_definition_version.created", callback);
     return self();
   }
 

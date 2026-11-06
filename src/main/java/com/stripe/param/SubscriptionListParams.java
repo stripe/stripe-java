@@ -17,9 +17,18 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
-  /** Filter for subscriptions that have the specified billing cadence. */
+  /**
+   * The Billing Cadence which controls the timing of recurring invoice generation for this
+   * subscription. If unset, the subscription will bill according to its own configured schedule and
+   * create its own invoices. If set, this subscription will be billed by the cadence instead,
+   * potentially sharing invoices with the other subscriptions linked to that Cadence.
+   */
   @SerializedName("billing_cadence")
   String billingCadence;
+
+  /** Filter for subscriptions that have the specified billing group. */
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * The collection method of the subscriptions to retrieve. Either {@code charge_automatically} or
@@ -121,6 +130,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   private SubscriptionListParams(
       AutomaticTax automaticTax,
       String billingCadence,
+      String billingGroup,
       CollectionMethod collectionMethod,
       Object created,
       Object currentPeriodEnd,
@@ -138,6 +148,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       String testClock) {
     this.automaticTax = automaticTax;
     this.billingCadence = billingCadence;
+    this.billingGroup = billingGroup;
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.currentPeriodEnd = currentPeriodEnd;
@@ -163,6 +174,8 @@ public class SubscriptionListParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private String billingCadence;
+
+    private String billingGroup;
 
     private CollectionMethod collectionMethod;
 
@@ -199,6 +212,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       return new SubscriptionListParams(
           this.automaticTax,
           this.billingCadence,
+          this.billingGroup,
           this.collectionMethod,
           this.created,
           this.currentPeriodEnd,
@@ -222,9 +236,20 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filter for subscriptions that have the specified billing cadence. */
+    /**
+     * The Billing Cadence which controls the timing of recurring invoice generation for this
+     * subscription. If unset, the subscription will bill according to its own configured schedule
+     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
+     * potentially sharing invoices with the other subscriptions linked to that Cadence.
+     */
     public Builder setBillingCadence(String billingCadence) {
       this.billingCadence = billingCadence;
+      return this;
+    }
+
+    /** Filter for subscriptions that have the specified billing group. */
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 

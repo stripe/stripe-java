@@ -87,6 +87,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   @SerializedName("description")
   String description;
 
+  /** Summary information about disputes associated with this Payment Attempt Record. */
+  @SerializedName("dispute_details")
+  DisputeDetails disputeDetails;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -782,6 +786,70 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     String phone;
   }
 
+  /** Total funds withdrawn and reinstated across the disputes on this payment. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class DisputeDetails extends StripeObject {
+    /**
+     * Total amounts reinstated across all disputes, keyed by currency, with each value containing
+     * the total for that currency. Withdrawals are not subtracted from these totals.
+     */
+    @SerializedName("reinstated")
+    Map<String, PaymentAttemptRecord.DisputeDetails.Reinstated> reinstated;
+
+    /**
+     * Total amounts withdrawn across all disputes, keyed by currency, with each value containing
+     * the total for that currency. Reinstatements are not subtracted from these totals.
+     */
+    @SerializedName("withdrawn")
+    Map<String, PaymentAttemptRecord.DisputeDetails.Withdrawn> withdrawn;
+
+    /** A representation of an amount of money, consisting of an amount and a currency. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Reinstated extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A positive integer representing the amount in the currency's <a
+       * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
+       * 100} can represent 1 USD or 100 JPY.
+       */
+      @SerializedName("value")
+      Long value;
+    }
+
+    /** A representation of an amount of money, consisting of an amount and a currency. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Withdrawn extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A positive integer representing the amount in the currency's <a
+       * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
+       * 100} can represent 1 USD or 100 JPY.
+       */
+      @SerializedName("value")
+      Long value;
+    }
+  }
+
   /** Details about the Payment Method used in this payment attempt. */
   @Getter
   @Setter
@@ -795,6 +863,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
 
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
+
+    @SerializedName("aeon_pay")
+    AeonPay aeonPay;
 
     @SerializedName("affirm")
     Affirm affirm;
@@ -813,6 +884,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
 
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
+
+    @SerializedName("au_pay")
+    AuPay auPay;
 
     @SerializedName("bacs_debit")
     BacsDebit bacsDebit;
@@ -863,6 +937,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
+    @SerializedName("dbarai")
+    Dbarai dbarai;
+
     @SerializedName("eps")
     Eps eps;
 
@@ -910,6 +987,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
 
     @SerializedName("mb_way")
     MbWay mbWay;
+
+    @SerializedName("merpay")
+    Merpay merpay;
 
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
@@ -1154,6 +1234,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about AeonPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AeonPay extends StripeObject {}
+
+    /**
      * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1367,6 +1456,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("mandate")
       String mandate;
     }
+
+    /**
+     * For more details about AuPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuPay extends StripeObject {}
 
     /**
      * For more details about BacsDebit, please refer to the <a
@@ -2018,6 +2116,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("fingerprint")
       String fingerprint;
 
+      @SerializedName("fleet")
+      Fleet fleet;
+
       /**
        * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
        * unknown}.
@@ -2142,6 +2243,54 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
 
       @SerializedName("wallet")
       Wallet wallet;
+
+      /**
+       * For more details about Fleet, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fleet extends StripeObject {
+        /** Fleet prompts and values collected for this transaction. */
+        @SerializedName("transaction_data")
+        List<PaymentAttemptRecord.PaymentMethodDetails.CardPresent.Fleet.TransactionDatum>
+            transactionData;
+
+        /**
+         * For more details about TransactionDatum, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TransactionDatum extends StripeObject {
+          /**
+           * The prompt that the Terminal SDK displays to collect this Fleet value.
+           *
+           * <p>One of {@code additional_fleet_data_1}, {@code additional_fleet_data_2}, {@code
+           * driver_id}, {@code employee_number}, {@code entered_data_alphanumeric}, {@code
+           * entered_data_numeric}, {@code generic_id}, {@code invoice_number}, {@code odometer},
+           * {@code postal_code}, {@code reefer_hours}, {@code replacement_car}, {@code
+           * trailer_number}, {@code trip_number}, {@code unit_number}, {@code vehicle_id}, {@code
+           * vehicle_tag}, or {@code work_order}.
+           */
+          @SerializedName("prompt")
+          String prompt;
+
+          /**
+           * Whether the collected value is printed on the receipt.
+           *
+           * <p>One of {@code omit}, or {@code print}.
+           */
+          @SerializedName("receipt_behavior")
+          String receiptBehavior;
+
+          /** The value collected for this Fleet prompt. */
+          @SerializedName("value")
+          String value;
+        }
+      }
 
       /**
        * For more details about Multicapture, please refer to the <a
@@ -2386,6 +2535,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance extends StripeObject {}
+
+    /**
+     * For more details about Dbarai, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dbarai extends StripeObject {}
 
     /**
      * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
@@ -3137,6 +3295,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     public static class MbWay extends StripeObject {}
 
     /**
+     * For more details about Merpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merpay extends StripeObject {}
+
+    /**
      * For more details about Mobilepay, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -3479,6 +3646,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paypay extends StripeObject {
+      /**
+       * Uniquely identifies this particular PayPay account. You can use this attribute to check
+       * whether two PayPay accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
       /** ID of the multi-use Mandate created by, or used to make, this PayPay payment. */
       @SerializedName("mandate")
       String mandate;
@@ -4275,6 +4449,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     trySetResponseGetter(amountRefunded, responseGetter);
     trySetResponseGetter(amountRequested, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
+    trySetResponseGetter(disputeDetails, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
     trySetResponseGetter(processorDetails, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);

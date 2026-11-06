@@ -75,6 +75,18 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /**
+   * The reason the customer is exempt.
+   *
+   * <p>One of {@code direct_pay_permit}, {@code legacy_contract}, or {@code other}.
+   */
+  @SerializedName("reason")
+  String reason;
+
+  /** Additional details about the exemption reason. */
+  @SerializedName("reason_details")
+  ReasonDetails reasonDetails;
+
   @SerializedName("us")
   Us us;
 
@@ -259,6 +271,31 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about ReasonDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReasonDetails extends StripeObject {
+    @SerializedName("other")
+    Other other;
+
+    /**
+     * For more details about Other, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Other extends StripeObject {
+      /** A free-text description of the exemption reason. */
+      @SerializedName("reason_text")
+      String reasonText;
+    }
+  }
+
+  /**
    * For more details about Us, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -269,6 +306,15 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
     /** Two-letter US state code (ISO 3166-2). */
     @SerializedName("state")
     String state;
+
+    /**
+     * The group of tax codes this exemption applies to. Exemptions created without one have {@code
+     * all}.
+     *
+     * <p>One of {@code all}, or {@code saas}.
+     */
+    @SerializedName("tax_code_group")
+    String taxCodeGroup;
   }
 
   @Override
@@ -276,6 +322,7 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(ca, responseGetter);
     trySetResponseGetter(es, responseGetter);
+    trySetResponseGetter(reasonDetails, responseGetter);
     trySetResponseGetter(us, responseGetter);
   }
 }

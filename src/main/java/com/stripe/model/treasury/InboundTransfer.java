@@ -351,6 +351,40 @@ public class InboundTransfer extends ApiResource implements HasId {
      */
     @SerializedName("code")
     String code;
+
+    /** Money movement network-specific details regarding the failure. */
+    @SerializedName("network_details")
+    NetworkDetails networkDetails;
+
+    /**
+     * For more details about NetworkDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkDetails extends StripeObject {
+      /** ACH return details. */
+      @SerializedName("ach")
+      Ach ach;
+
+      /**
+       * For more details about Ach, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ach extends StripeObject {
+        /** NACHA ACH return code. */
+        @SerializedName("return_code")
+        String returnCode;
+
+        /** NACHA ACH return reason. */
+        @SerializedName("return_reason")
+        String returnReason;
+      }
+    }
   }
 
   /**

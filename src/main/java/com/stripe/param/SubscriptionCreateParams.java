@@ -72,6 +72,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("billing_cycle_anchor_config")
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
+  /**
+   * The Billing Group which controls the timing of recurring invoice generation for this
+   * subscription. If unset, the subscription will bill according to its own configured schedule and
+   * create its own invoices. If set, this subscription will be billed by the cadence instead,
+   * potentially sharing invoices with the other subscriptions linked to that Cadence.
+   */
+  @SerializedName("billing_group")
+  String billingGroup;
+
   /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
   @SerializedName("billing_mode")
   BillingMode billingMode;
@@ -310,6 +319,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       String billingCadence,
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
+      String billingGroup,
       BillingMode billingMode,
       List<SubscriptionCreateParams.BillingSchedule> billingSchedules,
       Object billingThresholds,
@@ -349,6 +359,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.billingCadence = billingCadence;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+    this.billingGroup = billingGroup;
     this.billingMode = billingMode;
     this.billingSchedules = billingSchedules;
     this.billingThresholds = billingThresholds;
@@ -401,6 +412,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Long billingCycleAnchor;
 
     private BillingCycleAnchorConfig billingCycleAnchorConfig;
+
+    private String billingGroup;
 
     private BillingMode billingMode;
 
@@ -476,6 +489,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.billingCadence,
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
+          this.billingGroup,
           this.billingMode,
           this.billingSchedules,
           this.billingThresholds,
@@ -609,6 +623,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     public Builder setBillingCycleAnchorConfig(
         SubscriptionCreateParams.BillingCycleAnchorConfig billingCycleAnchorConfig) {
       this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+      return this;
+    }
+
+    /**
+     * The Billing Group which controls the timing of recurring invoice generation for this
+     * subscription. If unset, the subscription will bill according to its own configured schedule
+     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
+     * potentially sharing invoices with the other subscriptions linked to that Cadence.
+     */
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 
@@ -7396,6 +7421,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         public enum VerificationMethod implements ApiRequestParams.EnumParam {
           @SerializedName("automatic")
           AUTOMATIC("automatic"),
+
+          @SerializedName("instant")
+          INSTANT("instant"),
 
           @SerializedName("payer_name_verification")
           PAYER_NAME_VERIFICATION("payer_name_verification");

@@ -236,6 +236,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  /** Options to configure Radar. */
+  @SerializedName("radar_options")
+  RadarOptions radarOptions;
+
   /**
    * Redaction status of this SetupIntent. If the SetupIntent isn't redacted, this field is null.
    */
@@ -1103,7 +1107,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
-      /** The timestamp when the microdeposits are expected to land. */
+      /**
+       * The timestamp when the microdeposits are expected to land. Null for instant microdeposits.
+       */
       @SerializedName("arrival_date")
       Long arrivalDate;
 
@@ -1915,6 +1921,30 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
+   * For more details about RadarOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RadarOptions extends StripeObject {
+    /**
+     * The value you provided for whether this transaction starts a free trial. This is null if you
+     * haven't explicitly set it.
+     */
+    @SerializedName("is_free_trial_transaction")
+    Boolean isFreeTrialTransaction;
+
+    /**
+     * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
+     * the browser metadata and device details that help Radar make more accurate predictions on
+     * your payments.
+     */
+    @SerializedName("session")
+    String session;
+  }
+
+  /**
    * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1995,6 +2025,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(radarOptions, responseGetter);
     trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(setupDetails, responseGetter);
     trySetResponseGetter(singleUseMandate, responseGetter);

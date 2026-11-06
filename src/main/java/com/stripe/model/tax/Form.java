@@ -13,6 +13,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.tax.FormCreateParams;
 import com.stripe.param.tax.FormListParams;
 import com.stripe.param.tax.FormPdfParams;
 import com.stripe.param.tax.FormRetrieveParams;
@@ -132,6 +133,54 @@ public class Form extends ApiResource implements HasId {
 
   public void setCorrectedByObject(Form expandableObject) {
     this.correctedBy = new ExpandableField<Form>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/tax/forms/%s/corrections", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, FormCorrection.class);
+  }
+
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(FormCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(FormCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/tax/forms/%s/corrections", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, FormCorrection.class);
   }
 
   /**

@@ -2850,6 +2850,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           @SerializedName("commodity_code")
           Object commodityCode;
 
+          /** EV charging data for this line item. */
+          @SerializedName("ev_charging")
+          EvCharging evCharging;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2860,9 +2864,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private CardPresent(Object commodityCode, Map<String, Object> extraParams) {
+          /** Fleet data for this line item. */
+          @SerializedName("fleet_data")
+          FleetData fleetData;
+
+          private CardPresent(
+              Object commodityCode,
+              EvCharging evCharging,
+              Map<String, Object> extraParams,
+              FleetData fleetData) {
             this.commodityCode = commodityCode;
+            this.evCharging = evCharging;
             this.extraParams = extraParams;
+            this.fleetData = fleetData;
           }
 
           public static Builder builder() {
@@ -2872,13 +2886,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object commodityCode;
 
+            private EvCharging evCharging;
+
             private Map<String, Object> extraParams;
+
+            private FleetData fleetData;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
                 build() {
               return new PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions
-                  .CardPresent(this.commodityCode, this.extraParams);
+                  .CardPresent(
+                  this.commodityCode, this.evCharging, this.extraParams, this.fleetData);
             }
 
             /**
@@ -2896,6 +2915,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
              */
             public Builder setCommodityCode(EmptyParam commodityCode) {
               this.commodityCode = commodityCode;
+              return this;
+            }
+
+            /** EV charging data for this line item. */
+            public Builder setEvCharging(
+                PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
+                        .EvCharging
+                    evCharging) {
+              this.evCharging = evCharging;
               return this;
             }
 
@@ -2927,6 +2955,913 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               }
               this.extraParams.putAll(map);
               return this;
+            }
+
+            /** Fleet data for this line item. */
+            public Builder setFleetData(
+                PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
+                        .FleetData
+                    fleetData) {
+              this.fleetData = fleetData;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class EvCharging {
+            /** The carbon footprint avoided by the charging session, in grams of CO2. */
+            @SerializedName("carbon_footprint_avoided_grams_co2")
+            Long carbonFootprintAvoidedGramsCo2;
+
+            /**
+             * <strong>Required.</strong> The time the charging session ended, measured in seconds
+             * since the Unix epoch.
+             */
+            @SerializedName("charging_ended_at")
+            Long chargingEndedAt;
+
+            /**
+             * <strong>Required.</strong> The power output capacity of the charging station, in
+             * kilowatts (kW).
+             */
+            @SerializedName("charging_power_output_capacity_kw")
+            Long chargingPowerOutputCapacityKw;
+
+            /**
+             * <strong>Required.</strong> The time the charging session started, measured in seconds
+             * since the Unix epoch.
+             */
+            @SerializedName("charging_started_at")
+            Long chargingStartedAt;
+
+            /** <strong>Required.</strong> The type of connector used for the charging session. */
+            @SerializedName("connector_type")
+            ConnectorType connectorType;
+
+            /**
+             * The estimated distance in kilometers or miles added to the vehicle during the
+             * charging session.
+             */
+            @SerializedName("estimated_range_added")
+            Long estimatedRangeAdded;
+
+            /**
+             * The estimated distance in kilometers or miles remaining in the vehicle after the
+             * charging session.
+             */
+            @SerializedName("estimated_range_left")
+            Long estimatedRangeLeft;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> The maximum power dispensed during the charging session,
+             * in kilowatts (kW).
+             */
+            @SerializedName("maximum_power_dispensed_kw")
+            Long maximumPowerDispensedKw;
+
+            private EvCharging(
+                Long carbonFootprintAvoidedGramsCo2,
+                Long chargingEndedAt,
+                Long chargingPowerOutputCapacityKw,
+                Long chargingStartedAt,
+                ConnectorType connectorType,
+                Long estimatedRangeAdded,
+                Long estimatedRangeLeft,
+                Map<String, Object> extraParams,
+                Long maximumPowerDispensedKw) {
+              this.carbonFootprintAvoidedGramsCo2 = carbonFootprintAvoidedGramsCo2;
+              this.chargingEndedAt = chargingEndedAt;
+              this.chargingPowerOutputCapacityKw = chargingPowerOutputCapacityKw;
+              this.chargingStartedAt = chargingStartedAt;
+              this.connectorType = connectorType;
+              this.estimatedRangeAdded = estimatedRangeAdded;
+              this.estimatedRangeLeft = estimatedRangeLeft;
+              this.extraParams = extraParams;
+              this.maximumPowerDispensedKw = maximumPowerDispensedKw;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long carbonFootprintAvoidedGramsCo2;
+
+              private Long chargingEndedAt;
+
+              private Long chargingPowerOutputCapacityKw;
+
+              private Long chargingStartedAt;
+
+              private ConnectorType connectorType;
+
+              private Long estimatedRangeAdded;
+
+              private Long estimatedRangeLeft;
+
+              private Map<String, Object> extraParams;
+
+              private Long maximumPowerDispensedKw;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions
+                      .CardPresent.EvCharging
+                  build() {
+                return new PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions
+                    .CardPresent.EvCharging(
+                    this.carbonFootprintAvoidedGramsCo2,
+                    this.chargingEndedAt,
+                    this.chargingPowerOutputCapacityKw,
+                    this.chargingStartedAt,
+                    this.connectorType,
+                    this.estimatedRangeAdded,
+                    this.estimatedRangeLeft,
+                    this.extraParams,
+                    this.maximumPowerDispensedKw);
+              }
+
+              /** The carbon footprint avoided by the charging session, in grams of CO2. */
+              public Builder setCarbonFootprintAvoidedGramsCo2(
+                  Long carbonFootprintAvoidedGramsCo2) {
+                this.carbonFootprintAvoidedGramsCo2 = carbonFootprintAvoidedGramsCo2;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The time the charging session ended, measured in seconds
+               * since the Unix epoch.
+               */
+              public Builder setChargingEndedAt(Long chargingEndedAt) {
+                this.chargingEndedAt = chargingEndedAt;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The power output capacity of the charging station, in
+               * kilowatts (kW).
+               */
+              public Builder setChargingPowerOutputCapacityKw(Long chargingPowerOutputCapacityKw) {
+                this.chargingPowerOutputCapacityKw = chargingPowerOutputCapacityKw;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The time the charging session started, measured in
+               * seconds since the Unix epoch.
+               */
+              public Builder setChargingStartedAt(Long chargingStartedAt) {
+                this.chargingStartedAt = chargingStartedAt;
+                return this;
+              }
+
+              /** <strong>Required.</strong> The type of connector used for the charging session. */
+              public Builder setConnectorType(
+                  PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
+                          .EvCharging.ConnectorType
+                      connectorType) {
+                this.connectorType = connectorType;
+                return this;
+              }
+
+              /**
+               * The estimated distance in kilometers or miles added to the vehicle during the
+               * charging session.
+               */
+              public Builder setEstimatedRangeAdded(Long estimatedRangeAdded) {
+                this.estimatedRangeAdded = estimatedRangeAdded;
+                return this;
+              }
+
+              /**
+               * The estimated distance in kilometers or miles remaining in the vehicle after the
+               * charging session.
+               */
+              public Builder setEstimatedRangeLeft(Long estimatedRangeLeft) {
+                this.estimatedRangeLeft = estimatedRangeLeft;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent.EvCharging#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent.EvCharging#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The maximum power dispensed during the charging session,
+               * in kilowatts (kW).
+               */
+              public Builder setMaximumPowerDispensedKw(Long maximumPowerDispensedKw) {
+                this.maximumPowerDispensedKw = maximumPowerDispensedKw;
+                return this;
+              }
+            }
+
+            public enum ConnectorType implements ApiRequestParams.EnumParam {
+              @SerializedName("ac_gb_t")
+              AC_GB_T("ac_gb_t"),
+
+              @SerializedName("ac_j1772")
+              AC_J1772("ac_j1772"),
+
+              @SerializedName("ac_mennekes")
+              AC_MENNEKES("ac_mennekes"),
+
+              @SerializedName("dc_ccs1")
+              DC_CCS1("dc_ccs1"),
+
+              @SerializedName("dc_ccs2")
+              DC_CCS2("dc_ccs2"),
+
+              @SerializedName("dc_chademo")
+              DC_CHADEMO("dc_chademo"),
+
+              @SerializedName("dc_gb_t")
+              DC_GB_T("dc_gb_t"),
+
+              @SerializedName("dc_mcs")
+              DC_MCS("dc_mcs"),
+
+              @SerializedName("nacs")
+              NACS("nacs");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              ConnectorType(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FleetData {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> The type of product being purchased at this line item. */
+            @SerializedName("product_type")
+            ProductType productType;
+
+            /** The type of service received at the acceptor location. */
+            @SerializedName("service_type")
+            ServiceType serviceType;
+
+            private FleetData(
+                Map<String, Object> extraParams, ProductType productType, ServiceType serviceType) {
+              this.extraParams = extraParams;
+              this.productType = productType;
+              this.serviceType = serviceType;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private ProductType productType;
+
+              private ServiceType serviceType;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions
+                      .CardPresent.FleetData
+                  build() {
+                return new PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions
+                    .CardPresent.FleetData(this.extraParams, this.productType, this.serviceType);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent.FleetData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent.FleetData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The type of product being purchased at this line item.
+               */
+              public Builder setProductType(
+                  PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
+                          .FleetData.ProductType
+                      productType) {
+                this.productType = productType;
+                return this;
+              }
+
+              /** The type of service received at the acceptor location. */
+              public Builder setServiceType(
+                  PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
+                          .FleetData.ServiceType
+                      serviceType) {
+                this.serviceType = serviceType;
+                return this;
+              }
+            }
+
+            public enum ProductType implements ApiRequestParams.EnumParam {
+              @SerializedName("additive_dosage")
+              ADDITIVE_DOSAGE("additive_dosage"),
+
+              @SerializedName("additized_diesel_2")
+              ADDITIZED_DIESEL_2("additized_diesel_2"),
+
+              @SerializedName("additized_diesel_3")
+              ADDITIZED_DIESEL_3("additized_diesel_3"),
+
+              @SerializedName("air_conditioning_service")
+              AIR_CONDITIONING_SERVICE("air_conditioning_service"),
+
+              @SerializedName("air_filter")
+              AIR_FILTER("air_filter"),
+
+              @SerializedName("alcohol")
+              ALCOHOL("alcohol"),
+
+              @SerializedName("antifreeze")
+              ANTIFREEZE("antifreeze"),
+
+              @SerializedName("automotive_merchandise")
+              AUTOMOTIVE_MERCHANDISE("automotive_merchandise"),
+
+              @SerializedName("aviation_fuel_premium")
+              AVIATION_FUEL_PREMIUM("aviation_fuel_premium"),
+
+              @SerializedName("aviation_fuel_regular")
+              AVIATION_FUEL_REGULAR("aviation_fuel_regular"),
+
+              @SerializedName("batteries")
+              BATTERIES("batteries"),
+
+              @SerializedName("biodiesel_b1")
+              BIODIESEL_B1("biodiesel_b1"),
+
+              @SerializedName("biodiesel_b10")
+              BIODIESEL_B10("biodiesel_b10"),
+
+              @SerializedName("biodiesel_b100")
+              BIODIESEL_B100("biodiesel_b100"),
+
+              @SerializedName("biodiesel_b11")
+              BIODIESEL_B11("biodiesel_b11"),
+
+              @SerializedName("biodiesel_b15")
+              BIODIESEL_B15("biodiesel_b15"),
+
+              @SerializedName("biodiesel_b2")
+              BIODIESEL_B2("biodiesel_b2"),
+
+              @SerializedName("biodiesel_b20")
+              BIODIESEL_B20("biodiesel_b20"),
+
+              @SerializedName("biodiesel_b5")
+              BIODIESEL_B5("biodiesel_b5"),
+
+              @SerializedName("biodiesel_b75")
+              BIODIESEL_B75("biodiesel_b75"),
+
+              @SerializedName("biodiesel_b99")
+              BIODIESEL_B99("biodiesel_b99"),
+
+              @SerializedName("blended_diesel_1_and_2")
+              BLENDED_DIESEL_1_AND_2("blended_diesel_1_and_2"),
+
+              @SerializedName("body_work")
+              BODY_WORK("body_work"),
+
+              @SerializedName("brake_fluid")
+              BRAKE_FLUID("brake_fluid"),
+
+              @SerializedName("brake_service")
+              BRAKE_SERVICE("brake_service"),
+
+              @SerializedName("car_care_detailing")
+              CAR_CARE_DETAILING("car_care_detailing"),
+
+              @SerializedName("car_wash")
+              CAR_WASH("car_wash"),
+
+              @SerializedName("compressed_natural_gas")
+              COMPRESSED_NATURAL_GAS("compressed_natural_gas"),
+
+              @SerializedName("def_at_pump")
+              DEF_AT_PUMP("def_at_pump"),
+
+              @SerializedName("deli")
+              DELI("deli"),
+
+              @SerializedName("e85")
+              E85("e85"),
+
+              @SerializedName("engine_service")
+              ENGINE_SERVICE("engine_service"),
+
+              @SerializedName("ethanol_e16_to_e84")
+              ETHANOL_E16_TO_E84("ethanol_e16_to_e84"),
+
+              @SerializedName("ev_battery_exchanges")
+              EV_BATTERY_EXCHANGES("ev_battery_exchanges"),
+
+              @SerializedName("ev_charging_fee")
+              EV_CHARGING_FEE("ev_charging_fee"),
+
+              @SerializedName("evc_level_1")
+              EVC_LEVEL_1("evc_level_1"),
+
+              @SerializedName("evc_level_2")
+              EVC_LEVEL_2("evc_level_2"),
+
+              @SerializedName("evc_level_3")
+              EVC_LEVEL_3("evc_level_3"),
+
+              @SerializedName("evc_level_4")
+              EVC_LEVEL_4("evc_level_4"),
+
+              @SerializedName("evc_level_5")
+              EVC_LEVEL_5("evc_level_5"),
+
+              @SerializedName("exhaust_service")
+              EXHAUST_SERVICE("exhaust_service"),
+
+              @SerializedName("federal_tire_excise_tax")
+              FEDERAL_TIRE_EXCISE_TAX("federal_tire_excise_tax"),
+
+              @SerializedName("food_service")
+              FOOD_SERVICE("food_service"),
+
+              @SerializedName("fuel_additive_treatment")
+              FUEL_ADDITIVE_TREATMENT("fuel_additive_treatment"),
+
+              @SerializedName("fuel_system")
+              FUEL_SYSTEM("fuel_system"),
+
+              @SerializedName("green_gasoline_mid_plus")
+              GREEN_GASOLINE_MID_PLUS("green_gasoline_mid_plus"),
+
+              @SerializedName("green_gasoline_premium_super")
+              GREEN_GASOLINE_PREMIUM_SUPER("green_gasoline_premium_super"),
+
+              @SerializedName("green_gasoline_regular")
+              GREEN_GASOLINE_REGULAR("green_gasoline_regular"),
+
+              @SerializedName("grocery")
+              GROCERY("grocery"),
+
+              @SerializedName("heating_oil")
+              HEATING_OIL("heating_oil"),
+
+              @SerializedName("hoses")
+              HOSES("hoses"),
+
+              @SerializedName("hydrogen_h35")
+              HYDROGEN_H35("hydrogen_h35"),
+
+              @SerializedName("hydrogen_h70")
+              HYDROGEN_H70("hydrogen_h70"),
+
+              @SerializedName("inspection")
+              INSPECTION("inspection"),
+
+              @SerializedName("kerosene_low_sulfur")
+              KEROSENE_LOW_SULFUR("kerosene_low_sulfur"),
+
+              @SerializedName("kerosene_low_sulfur_non_taxable")
+              KEROSENE_LOW_SULFUR_NON_TAXABLE("kerosene_low_sulfur_non_taxable"),
+
+              @SerializedName("kerosene_ultra_low_sulfur")
+              KEROSENE_ULTRA_LOW_SULFUR("kerosene_ultra_low_sulfur"),
+
+              @SerializedName("kerosene_ultra_low_sulfur_non_taxable")
+              KEROSENE_ULTRA_LOW_SULFUR_NON_TAXABLE("kerosene_ultra_low_sulfur_non_taxable"),
+
+              @SerializedName("labor")
+              LABOR("labor"),
+
+              @SerializedName("lamps")
+              LAMPS("lamps"),
+
+              @SerializedName("liquid_natural_gas")
+              LIQUID_NATURAL_GAS("liquid_natural_gas"),
+
+              @SerializedName("liquid_propane_gas")
+              LIQUID_PROPANE_GAS("liquid_propane_gas"),
+
+              @SerializedName("lodging")
+              LODGING("lodging"),
+
+              @SerializedName("low_octane_unleaded")
+              LOW_OCTANE_UNLEADED("low_octane_unleaded"),
+
+              @SerializedName("lube")
+              LUBE("lube"),
+
+              @SerializedName("marine_diesel")
+              MARINE_DIESEL("marine_diesel"),
+
+              @SerializedName("marine_fuel")
+              MARINE_FUEL("marine_fuel"),
+
+              @SerializedName("marine_fuel_1")
+              MARINE_FUEL_1("marine_fuel_1"),
+
+              @SerializedName("marine_fuel_2")
+              MARINE_FUEL_2("marine_fuel_2"),
+
+              @SerializedName("marine_fuel_3")
+              MARINE_FUEL_3("marine_fuel_3"),
+
+              @SerializedName("marine_fuel_4")
+              MARINE_FUEL_4("marine_fuel_4"),
+
+              @SerializedName("marine_fuel_5")
+              MARINE_FUEL_5("marine_fuel_5"),
+
+              @SerializedName("marine_other")
+              MARINE_OTHER("marine_other"),
+
+              @SerializedName("merchandise")
+              MERCHANDISE("merchandise"),
+
+              @SerializedName("mid_plus")
+              MID_PLUS("mid_plus"),
+
+              @SerializedName("mid_plus_2")
+              MID_PLUS_2("mid_plus_2"),
+
+              @SerializedName("mid_plus_2_10")
+              MID_PLUS_2_10("mid_plus_2_10"),
+
+              @SerializedName("mid_plus_2_e15")
+              MID_PLUS_2_E15("mid_plus_2_e15"),
+
+              @SerializedName("mid_plus_2_reformulated")
+              MID_PLUS_2_REFORMULATED("mid_plus_2_reformulated"),
+
+              @SerializedName("mid_plus_e10")
+              MID_PLUS_E10("mid_plus_e10"),
+
+              @SerializedName("mid_plus_e15")
+              MID_PLUS_E15("mid_plus_e15"),
+
+              @SerializedName("mid_plus_ethanol")
+              MID_PLUS_ETHANOL("mid_plus_ethanol"),
+
+              @SerializedName("mid_plus_reformulated")
+              MID_PLUS_REFORMULATED("mid_plus_reformulated"),
+
+              @SerializedName("miscellaneous_aviation_products_services")
+              MISCELLANEOUS_AVIATION_PRODUCTS_SERVICES("miscellaneous_aviation_products_services"),
+
+              @SerializedName("miscellaneous_fuel")
+              MISCELLANEOUS_FUEL("miscellaneous_fuel"),
+
+              @SerializedName("miscellaneous_marine_products_services")
+              MISCELLANEOUS_MARINE_PRODUCTS_SERVICES("miscellaneous_marine_products_services"),
+
+              @SerializedName("miscellaneous_vehicle_products_services")
+              MISCELLANEOUS_VEHICLE_PRODUCTS_SERVICES("miscellaneous_vehicle_products_services"),
+
+              @SerializedName("motor_oil")
+              MOTOR_OIL("motor_oil"),
+
+              @SerializedName("off_road_b1")
+              OFF_ROAD_B1("off_road_b1"),
+
+              @SerializedName("off_road_b10")
+              OFF_ROAD_B10("off_road_b10"),
+
+              @SerializedName("off_road_b100")
+              OFF_ROAD_B100("off_road_b100"),
+
+              @SerializedName("off_road_b11")
+              OFF_ROAD_B11("off_road_b11"),
+
+              @SerializedName("off_road_b15")
+              OFF_ROAD_B15("off_road_b15"),
+
+              @SerializedName("off_road_b2")
+              OFF_ROAD_B2("off_road_b2"),
+
+              @SerializedName("off_road_b20")
+              OFF_ROAD_B20("off_road_b20"),
+
+              @SerializedName("off_road_b5")
+              OFF_ROAD_B5("off_road_b5"),
+
+              @SerializedName("off_road_b75")
+              OFF_ROAD_B75("off_road_b75"),
+
+              @SerializedName("off_road_b99")
+              OFF_ROAD_B99("off_road_b99"),
+
+              @SerializedName("off_road_biodiesel")
+              OFF_ROAD_BIODIESEL("off_road_biodiesel"),
+
+              @SerializedName("off_road_diesel_1")
+              OFF_ROAD_DIESEL_1("off_road_diesel_1"),
+
+              @SerializedName("off_road_diesel_2")
+              OFF_ROAD_DIESEL_2("off_road_diesel_2"),
+
+              @SerializedName("off_road_mid_plus")
+              OFF_ROAD_MID_PLUS("off_road_mid_plus"),
+
+              @SerializedName("off_road_mid_plus_2")
+              OFF_ROAD_MID_PLUS_2("off_road_mid_plus_2"),
+
+              @SerializedName("off_road_premium_diesel_1")
+              OFF_ROAD_PREMIUM_DIESEL_1("off_road_premium_diesel_1"),
+
+              @SerializedName("off_road_premium_diesel_2")
+              OFF_ROAD_PREMIUM_DIESEL_2("off_road_premium_diesel_2"),
+
+              @SerializedName("off_road_premium_super")
+              OFF_ROAD_PREMIUM_SUPER("off_road_premium_super"),
+
+              @SerializedName("off_road_premium_super_2")
+              OFF_ROAD_PREMIUM_SUPER_2("off_road_premium_super_2"),
+
+              @SerializedName("off_road_regular")
+              OFF_ROAD_REGULAR("off_road_regular"),
+
+              @SerializedName("off_road_renewable_diesel_b6_to_b20")
+              OFF_ROAD_RENEWABLE_DIESEL_B6_TO_B20("off_road_renewable_diesel_b6_to_b20"),
+
+              @SerializedName("off_road_renewable_diesel_r95")
+              OFF_ROAD_RENEWABLE_DIESEL_R95("off_road_renewable_diesel_r95"),
+
+              @SerializedName("oil_change")
+              OIL_CHANGE("oil_change"),
+
+              @SerializedName("oil_filter")
+              OIL_FILTER("oil_filter"),
+
+              @SerializedName("other_lubricants")
+              OTHER_LUBRICANTS("other_lubricants"),
+
+              @SerializedName("packaged_beverage")
+              PACKAGED_BEVERAGE("packaged_beverage"),
+
+              @SerializedName("premium_diesel")
+              PREMIUM_DIESEL("premium_diesel"),
+
+              @SerializedName("premium_diesel_2")
+              PREMIUM_DIESEL_2("premium_diesel_2"),
+
+              @SerializedName("premium_diesel_b20_plus")
+              PREMIUM_DIESEL_B20_PLUS("premium_diesel_b20_plus"),
+
+              @SerializedName("premium_diesel_under_b20")
+              PREMIUM_DIESEL_UNDER_B20("premium_diesel_under_b20"),
+
+              @SerializedName("premium_super")
+              PREMIUM_SUPER("premium_super"),
+
+              @SerializedName("premium_super_2")
+              PREMIUM_SUPER_2("premium_super_2"),
+
+              @SerializedName("premium_super_2_10")
+              PREMIUM_SUPER_2_10("premium_super_2_10"),
+
+              @SerializedName("premium_super_2_e15")
+              PREMIUM_SUPER_2_E15("premium_super_2_e15"),
+
+              @SerializedName("premium_super_2_reformulated")
+              PREMIUM_SUPER_2_REFORMULATED("premium_super_2_reformulated"),
+
+              @SerializedName("premium_super_e10")
+              PREMIUM_SUPER_E10("premium_super_e10"),
+
+              @SerializedName("premium_super_e15")
+              PREMIUM_SUPER_E15("premium_super_e15"),
+
+              @SerializedName("premium_super_ethanol")
+              PREMIUM_SUPER_ETHANOL("premium_super_ethanol"),
+
+              @SerializedName("premium_super_reformulated")
+              PREMIUM_SUPER_REFORMULATED("premium_super_reformulated"),
+
+              @SerializedName("preventative_maintenance")
+              PREVENTATIVE_MAINTENANCE("preventative_maintenance"),
+
+              @SerializedName("racing_fuel")
+              RACING_FUEL("racing_fuel"),
+
+              @SerializedName("recreational_fuel_90_octane")
+              RECREATIONAL_FUEL_90_OCTANE("recreational_fuel_90_octane"),
+
+              @SerializedName("regular")
+              REGULAR("regular"),
+
+              @SerializedName("regular_diesel")
+              REGULAR_DIESEL("regular_diesel"),
+
+              @SerializedName("regular_diesel_2")
+              REGULAR_DIESEL_2("regular_diesel_2"),
+
+              @SerializedName("regular_e10")
+              REGULAR_E10("regular_e10"),
+
+              @SerializedName("regular_e15")
+              REGULAR_E15("regular_e15"),
+
+              @SerializedName("regular_ethanol")
+              REGULAR_ETHANOL("regular_ethanol"),
+
+              @SerializedName("regular_reformulated")
+              REGULAR_REFORMULATED("regular_reformulated"),
+
+              @SerializedName("renewable_diesel_b6_to_b20")
+              RENEWABLE_DIESEL_B6_TO_B20("renewable_diesel_b6_to_b20"),
+
+              @SerializedName("renewable_diesel_r95")
+              RENEWABLE_DIESEL_R95("renewable_diesel_r95"),
+
+              @SerializedName("repairs")
+              REPAIRS("repairs"),
+
+              @SerializedName("road_service")
+              ROAD_SERVICE("road_service"),
+
+              @SerializedName("rv_dump_fee")
+              RV_DUMP_FEE("rv_dump_fee"),
+
+              @SerializedName("scales")
+              SCALES("scales"),
+
+              @SerializedName("self_service_car_wash")
+              SELF_SERVICE_CAR_WASH("self_service_car_wash"),
+
+              @SerializedName("service_package")
+              SERVICE_PACKAGE("service_package"),
+
+              @SerializedName("shower")
+              SHOWER("shower"),
+
+              @SerializedName("store_service")
+              STORE_SERVICE("store_service"),
+
+              @SerializedName("synthetic_oil")
+              SYNTHETIC_OIL("synthetic_oil"),
+
+              @SerializedName("tire_related")
+              TIRE_RELATED("tire_related"),
+
+              @SerializedName("tire_repair")
+              TIRE_REPAIR("tire_repair"),
+
+              @SerializedName("tire_rotation")
+              TIRE_ROTATION("tire_rotation"),
+
+              @SerializedName("tires")
+              TIRES("tires"),
+
+              @SerializedName("tobacco")
+              TOBACCO("tobacco"),
+
+              @SerializedName("toll_payments")
+              TOLL_PAYMENTS("toll_payments"),
+
+              @SerializedName("towing")
+              TOWING("towing"),
+
+              @SerializedName("trailer_wash")
+              TRAILER_WASH("trailer_wash"),
+
+              @SerializedName("transmission_service")
+              TRANSMISSION_SERVICE("transmission_service"),
+
+              @SerializedName("truck_tank_cleaning")
+              TRUCK_TANK_CLEANING("truck_tank_cleaning"),
+
+              @SerializedName("vehicle_accessories")
+              VEHICLE_ACCESSORIES("vehicle_accessories"),
+
+              @SerializedName("vehicle_glass")
+              VEHICLE_GLASS("vehicle_glass"),
+
+              @SerializedName("vehicle_parking")
+              VEHICLE_PARKING("vehicle_parking"),
+
+              @SerializedName("vehicle_parts")
+              VEHICLE_PARTS("vehicle_parts"),
+
+              @SerializedName("vehicle_prep")
+              VEHICLE_PREP("vehicle_prep"),
+
+              @SerializedName("vehicle_rental")
+              VEHICLE_RENTAL("vehicle_rental"),
+
+              @SerializedName("vehicle_work_order")
+              VEHICLE_WORK_ORDER("vehicle_work_order"),
+
+              @SerializedName("wash_out")
+              WASH_OUT("wash_out"),
+
+              @SerializedName("washer_fluid")
+              WASHER_FLUID("washer_fluid"),
+
+              @SerializedName("white_gas")
+              WHITE_GAS("white_gas"),
+
+              @SerializedName("wipers")
+              WIPERS("wipers");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              ProductType(String value) {
+                this.value = value;
+              }
+            }
+
+            public enum ServiceType implements ApiRequestParams.EnumParam {
+              @SerializedName("full_service")
+              FULL_SERVICE("full_service"),
+
+              @SerializedName("high_speed_diesel")
+              HIGH_SPEED_DIESEL("high_speed_diesel"),
+
+              @SerializedName("non_fuel_only")
+              NON_FUEL_ONLY("non_fuel_only"),
+
+              @SerializedName("self_service")
+              SELF_SERVICE("self_service");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              ServiceType(String value) {
+                this.value = value;
+              }
             }
           }
         }
@@ -18531,6 +19466,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     AcssDebit acssDebit;
 
     /**
+     * If this is a {@code aeon_pay} PaymentMethod, this hash contains details about the AEON Pay
+     * payment method.
+     */
+    @SerializedName("aeon_pay")
+    AeonPay aeonPay;
+
+    /**
      * If this is an {@code affirm} PaymentMethod, this hash contains details about the Affirm
      * payment method.
      */
@@ -18579,6 +19521,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
+
+    /**
+     * If this is a {@code au_pay} PaymentMethod, this hash contains details about the au PAY
+     * payment method.
+     */
+    @SerializedName("au_pay")
+    AuPay auPay;
 
     /**
      * If this is a {@code bacs_debit} PaymentMethod, this hash contains details about the Bacs
@@ -18656,6 +19605,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
+
+    /**
+     * If this is a {@code dbarai} PaymentMethod, this hash contains details about the d-Barai
+     * payment method.
+     */
+    @SerializedName("dbarai")
+    Dbarai dbarai;
 
     /**
      * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
@@ -18776,6 +19732,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("mb_way")
     MbWay mbWay;
+
+    /**
+     * If this is a {@code merpay} PaymentMethod, this hash contains details about the Merpay
+     * payment method.
+     */
+    @SerializedName("merpay")
+    Merpay merpay;
 
     /**
      * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -19062,6 +20025,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private PaymentMethodData(
         AcssDebit acssDebit,
+        AeonPay aeonPay,
         Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
@@ -19069,6 +20033,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Alma alma,
         AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
+        AuPay auPay,
         BacsDebit bacsDebit,
         Bancontact bancontact,
         Billie billie,
@@ -19080,6 +20045,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Cashapp cashapp,
         Crypto crypto,
         CustomerBalance customerBalance,
+        Dbarai dbarai,
         Eps eps,
         Map<String, Object> extraParams,
         Fpx fpx,
@@ -19097,6 +20063,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         KrCard krCard,
         Link link,
         MbWay mbWay,
+        Merpay merpay,
         Map<String, String> metadata,
         Mobilepay mobilepay,
         Multibanco multibanco,
@@ -19139,6 +20106,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         WechatPay wechatPay,
         Zip zip) {
       this.acssDebit = acssDebit;
+      this.aeonPay = aeonPay;
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
@@ -19146,6 +20114,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.alma = alma;
       this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
+      this.auPay = auPay;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billie = billie;
@@ -19157,6 +20126,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.cashapp = cashapp;
       this.crypto = crypto;
       this.customerBalance = customerBalance;
+      this.dbarai = dbarai;
       this.eps = eps;
       this.extraParams = extraParams;
       this.fpx = fpx;
@@ -19174,6 +20144,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.krCard = krCard;
       this.link = link;
       this.mbWay = mbWay;
+      this.merpay = merpay;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
@@ -19224,6 +20195,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     public static class Builder {
       private AcssDebit acssDebit;
 
+      private AeonPay aeonPay;
+
       private Affirm affirm;
 
       private AfterpayClearpay afterpayClearpay;
@@ -19237,6 +20210,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       private AmazonPay amazonPay;
 
       private AuBecsDebit auBecsDebit;
+
+      private AuPay auPay;
 
       private BacsDebit bacsDebit;
 
@@ -19259,6 +20234,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       private Crypto crypto;
 
       private CustomerBalance customerBalance;
+
+      private Dbarai dbarai;
 
       private Eps eps;
 
@@ -19293,6 +20270,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       private Link link;
 
       private MbWay mbWay;
+
+      private Merpay merpay;
 
       private Map<String, String> metadata;
 
@@ -19380,6 +20359,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public PaymentIntentUpdateParams.PaymentMethodData build() {
         return new PaymentIntentUpdateParams.PaymentMethodData(
             this.acssDebit,
+            this.aeonPay,
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
@@ -19387,6 +20367,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.alma,
             this.amazonPay,
             this.auBecsDebit,
+            this.auPay,
             this.bacsDebit,
             this.bancontact,
             this.billie,
@@ -19398,6 +20379,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.cashapp,
             this.crypto,
             this.customerBalance,
+            this.dbarai,
             this.eps,
             this.extraParams,
             this.fpx,
@@ -19415,6 +20397,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.krCard,
             this.link,
             this.mbWay,
+            this.merpay,
             this.metadata,
             this.mobilepay,
             this.multibanco,
@@ -19464,6 +20447,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setAcssDebit(PaymentIntentUpdateParams.PaymentMethodData.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code aeon_pay} PaymentMethod, this hash contains details about the AEON Pay
+       * payment method.
+       */
+      public Builder setAeonPay(PaymentIntentUpdateParams.PaymentMethodData.AeonPay aeonPay) {
+        this.aeonPay = aeonPay;
         return this;
       }
 
@@ -19531,6 +20523,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public Builder setAuBecsDebit(
           PaymentIntentUpdateParams.PaymentMethodData.AuBecsDebit auBecsDebit) {
         this.auBecsDebit = auBecsDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code au_pay} PaymentMethod, this hash contains details about the au PAY
+       * payment method.
+       */
+      public Builder setAuPay(PaymentIntentUpdateParams.PaymentMethodData.AuPay auPay) {
+        this.auPay = auPay;
         return this;
       }
 
@@ -19634,6 +20635,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public Builder setCustomerBalance(
           PaymentIntentUpdateParams.PaymentMethodData.CustomerBalance customerBalance) {
         this.customerBalance = customerBalance;
+        return this;
+      }
+
+      /**
+       * If this is a {@code dbarai} PaymentMethod, this hash contains details about the d-Barai
+       * payment method.
+       */
+      public Builder setDbarai(PaymentIntentUpdateParams.PaymentMethodData.Dbarai dbarai) {
+        this.dbarai = dbarai;
         return this;
       }
 
@@ -19807,6 +20817,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setMbWay(PaymentIntentUpdateParams.PaymentMethodData.MbWay mbWay) {
         this.mbWay = mbWay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code merpay} PaymentMethod, this hash contains details about the Merpay
+       * payment method.
+       */
+      public Builder setMerpay(PaymentIntentUpdateParams.PaymentMethodData.Merpay merpay) {
+        this.merpay = merpay;
         return this;
       }
 
@@ -20329,6 +21348,64 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class AeonPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AeonPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.AeonPay build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.AeonPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.AeonPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.AeonPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Affirm {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -20703,6 +21780,64 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.AuBecsDebit#extraParams} for
          * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AuPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.AuPay build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.AuPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.AuPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.AuPay#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -21728,6 +22863,64 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.CustomerBalance#extraParams}
          * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dbarai {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Dbarai(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.Dbarai build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.Dbarai(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Dbarai#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Dbarai#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -23150,6 +24343,64 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.MbWay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Merpay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.Merpay build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.Merpay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Merpay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Merpay#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -26376,6 +27627,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
 
+      @SerializedName("aeon_pay")
+      AEON_PAY("aeon_pay"),
+
       @SerializedName("affirm")
       AFFIRM("affirm"),
 
@@ -26393,6 +27647,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),
+
+      @SerializedName("au_pay")
+      AU_PAY("au_pay"),
 
       @SerializedName("bacs_debit")
       BACS_DEBIT("bacs_debit"),
@@ -26423,6 +27680,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
+
+      @SerializedName("dbarai")
+      DBARAI("dbarai"),
 
       @SerializedName("eps")
       EPS("eps"),
@@ -26468,6 +27728,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("mb_way")
       MB_WAY("mb_way"),
+
+      @SerializedName("merpay")
+      MERPAY("merpay"),
 
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),
@@ -30364,6 +31627,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Additional fields for Financial Connections session creation. */
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /** Additional fields for Mandate creation. */
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
@@ -30407,11 +31674,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private BacsDebit(
           Map<String, Object> extraParams,
+          FinancialConnections financialConnections,
           MandateOptions mandateOptions,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object targetDate,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
+        this.financialConnections = financialConnections;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
         this.targetDate = targetDate;
@@ -30425,6 +31694,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private FinancialConnections financialConnections;
+
         private MandateOptions mandateOptions;
 
         private ApiRequestParams.EnumParam setupFutureUsage;
@@ -30437,6 +31708,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit(
               this.extraParams,
+              this.financialConnections,
               this.mandateOptions,
               this.setupFutureUsage,
               this.targetDate,
@@ -30468,6 +31740,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Financial Connections session creation. */
+        public Builder setFinancialConnections(
+            PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections
+                financialConnections) {
+          this.financialConnections = financialConnections;
           return this;
         }
 
@@ -30564,6 +31844,97 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
                 verificationMethod) {
           this.verificationMethod = verificationMethod;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * For webview integrations only. Upon completing OAuth login in the native browser, the
+         * user will be redirected to this URL to return to your app.
+         */
+        @SerializedName("return_url")
+        Object returnUrl;
+
+        private FinancialConnections(Map<String, Object> extraParams, Object returnUrl) {
+          this.extraParams = extraParams;
+          this.returnUrl = returnUrl;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object returnUrl;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections
+              build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit
+                .FinancialConnections(this.extraParams, this.returnUrl);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * For webview integrations only. Upon completing OAuth login in the native browser, the
+           * user will be redirected to this URL to return to your app.
+           */
+          public Builder setReturnUrl(String returnUrl) {
+            this.returnUrl = returnUrl;
+            return this;
+          }
+
+          /**
+           * For webview integrations only. Upon completing OAuth login in the native browser, the
+           * user will be redirected to this URL to return to your app.
+           */
+          public Builder setReturnUrl(EmptyParam returnUrl) {
+            this.returnUrl = returnUrl;
+            return this;
+          }
         }
       }
 
@@ -30681,6 +32052,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public enum VerificationMethod implements ApiRequestParams.EnumParam {
         @SerializedName("automatic")
         AUTOMATIC("automatic"),
+
+        @SerializedName("instant")
+        INSTANT("instant"),
 
         @SerializedName("payer_name_verification")
         PAYER_NAME_VERIFICATION("payer_name_verification");
@@ -50922,10 +52296,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         NONE("none"),
 
         @SerializedName("off_session")
-        OFF_SESSION("off_session"),
-
-        @SerializedName("on_session")
-        ON_SESSION("on_session");
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -57858,6 +59229,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
 
+    @SerializedName("aeon_pay")
+    AEON_PAY("aeon_pay"),
+
     @SerializedName("affirm")
     AFFIRM("affirm"),
 
@@ -57875,6 +59249,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("au_pay")
+    AU_PAY("au_pay"),
 
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
@@ -57923,6 +59300,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("dbarai")
+    DBARAI("dbarai"),
 
     @SerializedName("demo_pay")
     DEMO_PAY("demo_pay"),
@@ -58001,6 +59381,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("mb_way")
     MB_WAY("mb_way"),
+
+    @SerializedName("merpay")
+    MERPAY("merpay"),
 
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
@@ -58197,6 +59580,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
 
+    @SerializedName("aeon_pay")
+    AEON_PAY("aeon_pay"),
+
     @SerializedName("affirm")
     AFFIRM("affirm"),
 
@@ -58214,6 +59600,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("au_pay")
+    AU_PAY("au_pay"),
 
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
@@ -58247,6 +59636,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("dbarai")
+    DBARAI("dbarai"),
 
     @SerializedName("eps")
     EPS("eps"),
@@ -58289,6 +59681,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("mb_way")
     MB_WAY("mb_way"),
+
+    @SerializedName("merpay")
+    MERPAY("merpay"),
 
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),

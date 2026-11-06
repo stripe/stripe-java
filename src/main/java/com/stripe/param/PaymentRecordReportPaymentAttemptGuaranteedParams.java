@@ -609,7 +609,10 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
 
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("card")
-      CARD("card");
+      CARD("card"),
+
+      @SerializedName("us_bank_account")
+      US_BANK_ACCOUNT("us_bank_account");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

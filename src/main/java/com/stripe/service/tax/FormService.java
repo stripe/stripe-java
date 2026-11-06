@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.tax.Form;
+import com.stripe.model.tax.FormCorrection;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -12,6 +13,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.tax.FormCreateParams;
 import com.stripe.param.tax.FormListParams;
 import com.stripe.param.tax.FormPdfParams;
 import com.stripe.param.tax.FormRetrieveParams;
@@ -85,6 +87,43 @@ public final class FormService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, Form.class);
+  }
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(String id, FormCreateParams params) throws StripeException {
+    return create(id, params, (RequestOptions) null);
+  }
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(String id, RequestOptions options) throws StripeException {
+    return create(id, (FormCreateParams) null, options);
+  }
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(String id) throws StripeException {
+    return create(id, (FormCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Creates a correction for a filed tax form. Supply either payee details or numerical values for
+   * the tax form type. Created correction forms are not filed automatically.
+   */
+  public FormCorrection create(String id, FormCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax/forms/%s/corrections", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, FormCorrection.class);
   }
   /** Download the PDF for a tax form. */
   public InputStream pdf(String id, FormPdfParams params) throws StripeException {
