@@ -1190,6 +1190,12 @@ public final class EventNotificationClassLookup {
         "v2.extend.extension_run.failed",
         com.stripe.events.V2ExtendExtensionRunFailedEventNotification.class);
     eventClassLookup.put(
+        "v2.extend.object_definition.created",
+        com.stripe.events.V2ExtendObjectDefinitionCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.extend.object_definition_version.created",
+        com.stripe.events.V2ExtendObjectDefinitionVersionCreatedEventNotification.class);
+    eventClassLookup.put(
         "v2.extend.workflow_run.failed",
         com.stripe.events.V2ExtendWorkflowRunFailedEventNotification.class);
     eventClassLookup.put(

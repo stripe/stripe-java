@@ -17,6 +17,10 @@ public final class TaxService extends ApiService {
     return new com.stripe.service.tax.CalculationService(this.getResponseGetter());
   }
 
+  public com.stripe.service.tax.CertificateService certificates() {
+    return new com.stripe.service.tax.CertificateService(this.getResponseGetter());
+  }
+
   public com.stripe.service.tax.FormService forms() {
     return new com.stripe.service.tax.FormService(this.getResponseGetter());
   }

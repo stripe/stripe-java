@@ -3588,7 +3588,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
-      /** The timestamp when the microdeposits are expected to land. */
+      /**
+       * The timestamp when the microdeposits are expected to land. Null for instant microdeposits.
+       */
       @SerializedName("arrival_date")
       Long arrivalDate;
 
@@ -6080,6 +6082,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -6117,6 +6122,18 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("verification_method")
       String verificationMethod;
+
+      /**
+       * For more details about FinancialConnections, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections extends StripeObject {
+        @SerializedName("return_url")
+        String returnUrl;
+      }
 
       /**
        * For more details about MandateOptions, please refer to the <a
@@ -6424,6 +6441,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("network")
       String network;
+
+      @SerializedName("payment_details")
+      PaymentDetails paymentDetails;
 
       /**
        * Indicates whether Stripe may synchronously request a real-time card account update for this
@@ -6763,6 +6783,49 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
 
       /**
+       * For more details about PaymentDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentDetails extends StripeObject {
+        @SerializedName("money_services")
+        MoneyServices moneyServices;
+
+        /**
+         * For more details about MoneyServices, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MoneyServices extends StripeObject {
+          @SerializedName("account_funding")
+          AccountFunding accountFunding;
+
+          /**
+           * For more details about AccountFunding, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class AccountFunding extends StripeObject {
+            /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             *
+             * <p>One of {@code blockchain_native}, {@code nft}, {@code other_non_fiat}, or {@code
+             * stablecoin}.
+             */
+            @SerializedName("digital_asset_category")
+            String digitalAssetCategory;
+          }
+        }
+      }
+
+      /**
        * For more details about StatementDetails, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -6854,6 +6917,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Fleet prompting data for this payment. */
       @SerializedName("fleet")
       Fleet fleet;
+
+      @SerializedName("payment_details")
+      PaymentDetails paymentDetails;
 
       /**
        * Request ability to capture this payment beyond the standard <a
@@ -7015,6 +7081,49 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           /** The value collected for this Fleet prompt. */
           @SerializedName("value")
           String value;
+        }
+      }
+
+      /**
+       * For more details about PaymentDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentDetails extends StripeObject {
+        @SerializedName("money_services")
+        MoneyServices moneyServices;
+
+        /**
+         * For more details about MoneyServices, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MoneyServices extends StripeObject {
+          @SerializedName("account_funding")
+          AccountFunding accountFunding;
+
+          /**
+           * For more details about AccountFunding, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class AccountFunding extends StripeObject {
+            /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             *
+             * <p>One of {@code blockchain_native}, {@code nft}, {@code other_non_fiat}, or {@code
+             * stablecoin}.
+             */
+            @SerializedName("digital_asset_category")
+            String digitalAssetCategory;
+          }
         }
       }
 
@@ -8412,7 +8521,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;

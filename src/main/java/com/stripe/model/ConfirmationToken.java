@@ -277,6 +277,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("aeon_pay")
+    AeonPay aeonPay;
+
     @SerializedName("affirm")
     Affirm affirm;
 
@@ -305,6 +308,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
+
+    @SerializedName("au_pay")
+    AuPay auPay;
 
     @SerializedName("bacs_debit")
     BacsDebit bacsDebit;
@@ -357,6 +363,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
+    @SerializedName("dbarai")
+    Dbarai dbarai;
+
     @SerializedName("eps")
     Eps eps;
 
@@ -404,6 +413,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
     @SerializedName("mb_way")
     MbWay mbWay;
+
+    @SerializedName("merpay")
+    Merpay merpay;
 
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
@@ -506,21 +518,22 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * name matching this value. It contains additional information specific to the PaymentMethod
      * type.
      *
-     * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay},
-     * {@code alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code
-     * bancontact}, {@code billie}, {@code bizum}, {@code blik}, {@code boleto}, {@code card},
-     * {@code card_present}, {@code carecredit}, {@code cashapp}, {@code crypto}, {@code custom},
-     * {@code customer_balance}, {@code eps}, {@code fpx}, {@code getflex}, {@code gift_card},
-     * {@code giropay}, {@code gopay}, {@code grabpay}, {@code id_bank_transfer}, {@code ideal},
-     * {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card},
-     * {@code link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code naver_pay},
-     * {@code nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco},
-     * {@code paynow}, {@code paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code
-     * promptpay}, {@code qris}, {@code rakuten_pay}, {@code rechnung}, {@code revolut_pay}, {@code
-     * samsung_pay}, {@code satispay}, {@code scalapay}, {@code sepa_debit}, {@code sequra}, {@code
-     * sezzle}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code
-     * swish}, {@code tamara}, {@code toss_pay}, {@code twint}, {@code upi}, {@code
-     * us_bank_account}, {@code vipps}, {@code wechat_pay}, or {@code zip}.
+     * <p>One of {@code acss_debit}, {@code aeon_pay}, {@code affirm}, {@code afterpay_clearpay},
+     * {@code alipay}, {@code alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code au_pay},
+     * {@code bacs_debit}, {@code bancontact}, {@code billie}, {@code bizum}, {@code blik}, {@code
+     * boleto}, {@code card}, {@code card_present}, {@code carecredit}, {@code cashapp}, {@code
+     * crypto}, {@code custom}, {@code customer_balance}, {@code dbarai}, {@code eps}, {@code fpx},
+     * {@code getflex}, {@code gift_card}, {@code giropay}, {@code gopay}, {@code grabpay}, {@code
+     * id_bank_transfer}, {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna},
+     * {@code konbini}, {@code kr_card}, {@code link}, {@code mb_way}, {@code merpay}, {@code
+     * mobilepay}, {@code multibanco}, {@code naver_pay}, {@code nz_bank_account}, {@code oxxo},
+     * {@code p24}, {@code pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code
+     * paypay}, {@code payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code rakuten_pay},
+     * {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code
+     * scalapay}, {@code sepa_debit}, {@code sequra}, {@code sezzle}, {@code shopeepay}, {@code
+     * sofort}, {@code stripe_balance}, {@code sunbit}, {@code swish}, {@code tamara}, {@code
+     * toss_pay}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code vipps}, {@code
+     * wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -595,6 +608,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about AeonPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AeonPay extends StripeObject {}
+
+    /**
      * For more details about Affirm, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -662,6 +684,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("last4")
       String last4;
     }
+
+    /**
+     * For more details about AuPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuPay extends StripeObject {}
 
     /**
      * For more details about BacsDebit, please refer to the <a
@@ -1082,6 +1113,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
             @SerializedName("fingerprint")
             String fingerprint;
 
+            @SerializedName("fleet")
+            Fleet fleet;
+
             /**
              * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
              * unknown}.
@@ -1208,6 +1242,56 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
             @SerializedName("wallet")
             Wallet wallet;
+
+            /**
+             * For more details about Fleet, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Fleet extends StripeObject {
+              /** Fleet prompts and values collected for this transaction. */
+              @SerializedName("transaction_data")
+              List<
+                      ConfirmationToken.PaymentMethodPreview.Card.GeneratedFrom.PaymentMethodDetails
+                          .CardPresent.Fleet.TransactionDatum>
+                  transactionData;
+
+              /**
+               * For more details about TransactionDatum, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class TransactionDatum extends StripeObject {
+                /**
+                 * The prompt that the Terminal SDK displays to collect this Fleet value.
+                 *
+                 * <p>One of {@code additional_fleet_data_1}, {@code additional_fleet_data_2},
+                 * {@code driver_id}, {@code employee_number}, {@code entered_data_alphanumeric},
+                 * {@code entered_data_numeric}, {@code generic_id}, {@code invoice_number}, {@code
+                 * odometer}, {@code postal_code}, {@code reefer_hours}, {@code replacement_car},
+                 * {@code trailer_number}, {@code trip_number}, {@code unit_number}, {@code
+                 * vehicle_id}, {@code vehicle_tag}, or {@code work_order}.
+                 */
+                @SerializedName("prompt")
+                String prompt;
+
+                /**
+                 * Whether the collected value is printed on the receipt.
+                 *
+                 * <p>One of {@code omit}, or {@code print}.
+                 */
+                @SerializedName("receipt_behavior")
+                String receiptBehavior;
+
+                /** The value collected for this Fleet prompt. */
+                @SerializedName("value")
+                String value;
+              }
+            }
 
             /**
              * For more details about Multicapture, please refer to the <a
@@ -1781,6 +1865,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
     public static class CustomerBalance extends StripeObject {}
 
     /**
+     * For more details about Dbarai, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dbarai extends StripeObject {}
+
+    /**
      * For more details about Eps, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -2177,6 +2270,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class MbWay extends StripeObject {}
+
+    /**
+     * For more details about Merpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merpay extends StripeObject {}
 
     /**
      * For more details about Mobilepay, please refer to the <a

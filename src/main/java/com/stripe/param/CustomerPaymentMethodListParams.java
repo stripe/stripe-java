@@ -243,6 +243,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
 
+    @SerializedName("aeon_pay")
+    AEON_PAY("aeon_pay"),
+
     @SerializedName("affirm")
     AFFIRM("affirm"),
 
@@ -260,6 +263,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("au_pay")
+    AU_PAY("au_pay"),
 
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
@@ -296,6 +302,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("dbarai")
+    DBARAI("dbarai"),
 
     @SerializedName("eps")
     EPS("eps"),
@@ -341,6 +350,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("mb_way")
     MB_WAY("mb_way"),
+
+    @SerializedName("merpay")
+    MERPAY("merpay"),
 
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),

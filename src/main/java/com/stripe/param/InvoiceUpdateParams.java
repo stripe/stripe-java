@@ -3076,6 +3076,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           @SerializedName("automatic")
           AUTOMATIC("automatic"),
 
+          @SerializedName("instant")
+          INSTANT("instant"),
+
           @SerializedName("payer_name_verification")
           PAYER_NAME_VERIFICATION("payer_name_verification");
 
@@ -5095,8 +5098,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private SepaDebit(Map<String, Object> extraParams) {
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        @SerializedName("target_date")
+        Object targetDate;
+
+        private SepaDebit(Map<String, Object> extraParams, Object targetDate) {
           this.extraParams = extraParams;
+          this.targetDate = targetDate;
         }
 
         public static Builder builder() {
@@ -5106,10 +5118,12 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private Object targetDate;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit build() {
             return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit(
-                this.extraParams);
+                this.extraParams, this.targetDate);
           }
 
           /**
@@ -5139,6 +5153,26 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          public Builder setTargetDate(String targetDate) {
+            this.targetDate = targetDate;
+            return this;
+          }
+
+          /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          public Builder setTargetDate(EmptyParam targetDate) {
+            this.targetDate = targetDate;
             return this;
           }
         }

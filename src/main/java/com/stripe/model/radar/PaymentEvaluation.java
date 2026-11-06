@@ -89,10 +89,10 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   PaymentDetails paymentDetails;
 
   /**
-   * Recommended action based on the score of the {@code fraudulent_payment} signal. Possible values
-   * are {@code block}, {@code continue} and {@code request_three_d_secure}.
+   * Recommended action for this payment based on its evaluated signals and rules.
    *
-   * <p>One of {@code block}, {@code continue}, {@code request_three_d_secure}, or {@code reroute}.
+   * <p>One of {@code block}, {@code continue}, {@code continue_with_manual_review}, {@code
+   * request_three_d_secure}, or {@code reroute}.
    */
   @SerializedName("recommended_action")
   String recommendedAction;
@@ -597,10 +597,14 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       /**
        * Describes the type of money movement.
        *
-       * <p>One of {@code card}, or {@code us_bank_account}.
+       * <p>One of {@code card}, {@code sepa_debit}, or {@code us_bank_account}.
        */
       @SerializedName("money_movement_type")
       String moneyMovementType;
+
+      /** Describes SEPA debit money movement details. */
+      @SerializedName("sepa_debit")
+      SepaDebit sepaDebit;
 
       /** Describes US bank account money movement details. */
       @SerializedName("us_bank_account")
@@ -627,6 +631,16 @@ public class PaymentEvaluation extends ApiResource implements HasId {
          */
         @SerializedName("payment_type")
         String paymentType;
+      }
+
+      /** Money movement details for a SEPA debit payment. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SepaDebit extends StripeObject {
+        /** Creditor identifier used for the intended debit. */
+        @SerializedName("creditor_id")
+        String creditorId;
       }
 
       /** Money movement details for a US bank account payment. */
@@ -843,6 +857,10 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @SerializedName("bank_initiated_return")
     BankInitiatedReturn bankInitiatedReturn;
 
+    /** The likelihood that this {@code PaymentEvaluation} is part of a card testing attack. */
+    @SerializedName("card_testing")
+    CardTesting cardTesting;
+
     /** The likelihood that this {@code PaymentEvaluation} results in an early fraud warning. */
     @SerializedName("early_fraud_warning")
     EarlyFraudWarning earlyFraudWarning;
@@ -863,6 +881,33 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BankInitiatedReturn extends StripeObject {
+      /** The time when this signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Long evaluatedAt;
+
+      /**
+       * Risk level of this signal, based on the score.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * Numeric score for this signal, returned with two decimal places. Possible values for
+       * evaluated payments are between 0 and 100, where higher scores indicate a higher likelihood
+       * of the signal being true.
+       */
+      @SerializedName("score")
+      BigDecimal score;
+    }
+
+    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardTesting extends StripeObject {
       /** The time when this signal was evaluated. */
       @SerializedName("evaluated_at")
       Long evaluatedAt;

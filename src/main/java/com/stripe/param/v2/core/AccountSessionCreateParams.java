@@ -141,6 +141,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("bills")
     Bills bills;
 
+    /** Settings for the Business Profile Management embedded component. */
+    @SerializedName("business_profile_management")
+    BusinessProfileManagement businessProfileManagement;
+
     /** Settings for the Capital Financing embedded component. */
     @SerializedName("capital_financing")
     CapitalFinancing capitalFinancing;
@@ -283,6 +287,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         BalanceReport balanceReport,
         Balances balances,
         Bills bills,
+        BusinessProfileManagement businessProfileManagement,
         CapitalFinancing capitalFinancing,
         CapitalFinancingApplication capitalFinancingApplication,
         CapitalFinancingPromotion capitalFinancingPromotion,
@@ -323,6 +328,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.balanceReport = balanceReport;
       this.balances = balances;
       this.bills = bills;
+      this.businessProfileManagement = businessProfileManagement;
       this.capitalFinancing = capitalFinancing;
       this.capitalFinancingApplication = capitalFinancingApplication;
       this.capitalFinancingPromotion = capitalFinancingPromotion;
@@ -377,6 +383,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       private Balances balances;
 
       private Bills bills;
+
+      private BusinessProfileManagement businessProfileManagement;
 
       private CapitalFinancing capitalFinancing;
 
@@ -453,6 +461,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.balanceReport,
             this.balances,
             this.bills,
+            this.businessProfileManagement,
             this.capitalFinancing,
             this.capitalFinancingApplication,
             this.capitalFinancingPromotion,
@@ -536,6 +545,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       /** Settings for the Bills embedded component. */
       public Builder setBills(AccountSessionCreateParams.Components.Bills bills) {
         this.bills = bills;
+        return this;
+      }
+
+      /** Settings for the Business Profile Management embedded component. */
+      public Builder setBusinessProfileManagement(
+          AccountSessionCreateParams.Components.BusinessProfileManagement
+              businessProfileManagement) {
+        this.businessProfileManagement = businessProfileManagement;
         return this;
       }
 
@@ -1347,6 +1364,80 @@ public class AccountSessionCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountSessionCreateParams.Components.Bills#extraParams} for the field
          * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BusinessProfileManagement {
+      /** <strong>Required.</strong> Whether this embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private BusinessProfileManagement(Boolean enabled, Map<String, Object> extraParams) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.BusinessProfileManagement build() {
+          return new AccountSessionCreateParams.Components.BusinessProfileManagement(
+              this.enabled, this.extraParams);
+        }
+
+        /** <strong>Required.</strong> Whether this embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountSessionCreateParams.Components.BusinessProfileManagement#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountSessionCreateParams.Components.BusinessProfileManagement#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

@@ -3211,7 +3211,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class SepaDebit extends StripeObject {}
+      public static class SepaDebit extends StripeObject {
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        @SerializedName("target_date")
+        String targetDate;
+      }
 
       /**
        * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API

@@ -28291,7 +28291,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.AccountSession.class,
-        "{\"object\":\"v2.core.account_session\",\"account\":\"account\",\"client_secret\":\"client_secret\",\"components\":{\"account_management\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"account_onboarding\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"agentic_commerce_settings\":{\"enabled\":true,\"scopes\":{}},\"app_install\":{\"enabled\":true,\"scopes\":{\"allowed_stripe_app_ids\":[\"allowed_stripe_app_ids\"]}},\"app_viewport\":{\"enabled\":true,\"scopes\":{\"allowed_stripe_app_ids\":[\"allowed_stripe_app_ids\"]}},\"balance_report\":{\"enabled\":true,\"scopes\":{}},\"balances\":{\"enabled\":true,\"scopes\":{\"create_payout_schedule\":\"enabled\",\"create_standard_payouts\":\"disabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"bills\":{\"enabled\":true,\"scopes\":{\"create_outbound_payments\":\"enabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_bills\":\"disabled\"}},\"capital_financing\":{\"enabled\":true,\"scopes\":{}},\"capital_financing_application\":{\"enabled\":true,\"scopes\":{}},\"capital_financing_promotion\":{\"enabled\":true,\"scopes\":{}},\"check_scanning\":{\"enabled\":true,\"scopes\":{\"create_us_paper_check_on_application\":\"disabled\"}},\"disputes_list\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"documents\":{\"enabled\":true,\"scopes\":{}},\"export_tax_transactions\":{\"enabled\":true,\"scopes\":{}},\"financial_account_rewards\":{\"enabled\":true,\"scopes\":{}},\"financial_accounts\":{\"enabled\":true,\"scopes\":{\"create_outbound_payments\":\"enabled\",\"create_payout_schedule\":\"enabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_bills\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_payout_methods\":\"enabled\"}},\"financial_accounts_transactions\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\"}},\"instant_payouts_promotion\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"invoice_history\":{\"enabled\":true,\"scopes\":{}},\"issuing_card\":{\"enabled\":true,\"scopes\":{\"manage_issuing_cardholders\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_issuing_spending_controls\":\"disabled\"}},\"issuing_cards_list\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_issuing_cardholders\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_issuing_spending_controls\":\"disabled\"}},\"network_cost_passthrough_report\":{\"enabled\":true,\"scopes\":{}},\"notification_banner\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"payment_details\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payment_disputes\":{\"enabled\":true,\"scopes\":{\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payment_method_settings\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\"}},\"payments\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payout_details\":{\"enabled\":true,\"scopes\":{}},\"payout_reconciliation_report\":{\"enabled\":true,\"scopes\":{}},\"payouts\":{\"enabled\":true,\"scopes\":{\"create_payout_schedule\":\"enabled\",\"create_standard_payouts\":\"disabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"payouts_list\":{\"enabled\":true,\"scopes\":{}},\"product_tax_code_selector\":{\"enabled\":true,\"scopes\":{}},\"reporting_chart\":{\"enabled\":true,\"scopes\":{}},\"tax_registrations\":{\"enabled\":true,\"scopes\":{}},\"tax_settings\":{\"enabled\":true,\"scopes\":{}},\"tax_threshold_monitoring\":{\"enabled\":true,\"scopes\":{}},\"terminal_hardware_orders\":{\"enabled\":true,\"scopes\":{}},\"terminal_hardware_shop\":{\"enabled\":true,\"scopes\":{}}},\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true}");
+        "{\"object\":\"v2.core.account_session\",\"account\":\"account\",\"client_secret\":\"client_secret\",\"components\":{\"account_management\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"account_onboarding\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"agentic_commerce_settings\":{\"enabled\":true,\"scopes\":{}},\"app_install\":{\"enabled\":true,\"scopes\":{\"allowed_stripe_app_ids\":[\"allowed_stripe_app_ids\"]}},\"app_viewport\":{\"enabled\":true,\"scopes\":{\"allowed_stripe_app_ids\":[\"allowed_stripe_app_ids\"]}},\"balance_report\":{\"enabled\":true,\"scopes\":{}},\"balances\":{\"enabled\":true,\"scopes\":{\"create_payout_schedule\":\"enabled\",\"create_standard_payouts\":\"disabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"bills\":{\"enabled\":true,\"scopes\":{\"create_outbound_payments\":\"enabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_bills\":\"disabled\"}},\"business_profile_management\":{\"enabled\":true,\"scopes\":{}},\"capital_financing\":{\"enabled\":true,\"scopes\":{}},\"capital_financing_application\":{\"enabled\":true,\"scopes\":{}},\"capital_financing_promotion\":{\"enabled\":true,\"scopes\":{}},\"check_scanning\":{\"enabled\":true,\"scopes\":{\"create_us_paper_check_on_application\":\"disabled\"}},\"disputes_list\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"documents\":{\"enabled\":true,\"scopes\":{}},\"export_tax_transactions\":{\"enabled\":true,\"scopes\":{}},\"financial_account_rewards\":{\"enabled\":true,\"scopes\":{}},\"financial_accounts\":{\"enabled\":true,\"scopes\":{\"create_outbound_payments\":\"enabled\",\"create_payout_schedule\":\"enabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_bills\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_payout_methods\":\"enabled\"}},\"financial_accounts_transactions\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\"}},\"instant_payouts_promotion\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"invoice_history\":{\"enabled\":true,\"scopes\":{}},\"issuing_card\":{\"enabled\":true,\"scopes\":{\"manage_issuing_cardholders\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_issuing_spending_controls\":\"disabled\"}},\"issuing_cards_list\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_issuing_cardholders\":\"disabled\",\"manage_issuing_cards\":\"disabled\",\"manage_issuing_disputes\":\"disabled\",\"manage_issuing_spending_controls\":\"disabled\"}},\"network_cost_passthrough_report\":{\"enabled\":true,\"scopes\":{}},\"notification_banner\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"payment_details\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payment_disputes\":{\"enabled\":true,\"scopes\":{\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payment_method_settings\":{\"enabled\":true,\"scopes\":{\"disable_stripe_user_authentication\":\"enabled\"}},\"payments\":{\"enabled\":true,\"scopes\":{\"capture_payments\":\"disabled\",\"manage_destination_on_behalf_of_charges\":\"enabled\",\"manage_payment_disputes\":\"disabled\",\"manage_refund_payments\":\"disabled\",\"manage_smart_disputes\":\"enabled\"}},\"payout_details\":{\"enabled\":true,\"scopes\":{}},\"payout_reconciliation_report\":{\"enabled\":true,\"scopes\":{}},\"payouts\":{\"enabled\":true,\"scopes\":{\"create_payout_schedule\":\"enabled\",\"create_standard_payouts\":\"disabled\",\"disable_stripe_user_authentication\":\"enabled\",\"manage_payout_methods\":\"enabled\"}},\"payouts_list\":{\"enabled\":true,\"scopes\":{}},\"product_tax_code_selector\":{\"enabled\":true,\"scopes\":{}},\"reporting_chart\":{\"enabled\":true,\"scopes\":{}},\"tax_registrations\":{\"enabled\":true,\"scopes\":{}},\"tax_settings\":{\"enabled\":true,\"scopes\":{}},\"tax_threshold_monitoring\":{\"enabled\":true,\"scopes\":{}},\"terminal_hardware_orders\":{\"enabled\":true,\"scopes\":{}},\"terminal_hardware_shop\":{\"enabled\":true,\"scopes\":{}}},\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.AccountSessionCreateParams params =
@@ -28337,6 +28337,11 @@ class GeneratedExamples extends BaseStripeTest {
                     .setBills(
                         com.stripe.param.v2.core.AccountSessionCreateParams.Components.Bills
                             .builder()
+                            .setEnabled(true)
+                            .build())
+                    .setBusinessProfileManagement(
+                        com.stripe.param.v2.core.AccountSessionCreateParams.Components
+                            .BusinessProfileManagement.builder()
                             .setEnabled(true)
                             .build())
                     .setCapitalFinancing(
@@ -29760,7 +29765,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2DataOperationPostServices() throws StripeException {
+  public void testV2DataOperationSearchPostRequiredServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
@@ -29768,11 +29773,42 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.data.SearchResultList.class,
-        "{\"object\":\"v2.data.search_result_list\",\"data\":[{\"description\":\"description\",\"execution_spec\":{\"execution_url\":\"execution_url\",\"http_method\":\"GET\",\"id\":\"obj_123\"},\"id\":\"obj_123\",\"name\":\"name\",\"object_type\":\"object_type\",\"reference_url\":\"reference_url\",\"refreshed_at\":\"1970-01-01T11:25:45.896Z\",\"relevance_score\":\"1104594632\"}],\"livemode\":true}");
+        "{\"object\":\"v2.data.search_result_list\",\"context\":{\"business_concepts\":[{\"definition\":\"definition\",\"term\":\"term\"}],\"domain\":\"domain\",\"guidance\":\"guidance\"},\"data\":[{\"description\":\"description\",\"execution_spec\":{\"execution_url\":\"execution_url\",\"http_method\":\"GET\",\"id\":\"obj_123\"},\"extended_description\":\"extended_description\",\"id\":\"obj_123\",\"name\":\"name\",\"object_type\":\"object_type\",\"reference_url\":\"reference_url\",\"refreshed_at\":\"1970-01-01T11:25:45.896Z\",\"relevance_score\":\"1104594632\"}],\"livemode\":true,\"next_page_url\":\"next_page_url\",\"previous_page_url\":\"previous_page_url\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.data.OperationSearchParams params =
         com.stripe.param.v2.data.OperationSearchParams.builder().setQuery("query").build();
+
+    com.stripe.model.v2.data.SearchResultList searchResultList =
+        client.v2().data().operations().search(params);
+    assertNotNull(searchResultList);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/data/operations/search",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2DataOperationSearchPostAllServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/data/operations/search",
+        null,
+        null,
+        com.stripe.model.v2.data.SearchResultList.class,
+        "{\"object\":\"v2.data.search_result_list\",\"context\":{\"business_concepts\":[{\"definition\":\"definition\",\"term\":\"term\"}],\"domain\":\"domain\",\"guidance\":\"guidance\"},\"data\":[{\"description\":\"description\",\"execution_spec\":{\"execution_url\":\"execution_url\",\"http_method\":\"GET\",\"id\":\"obj_123\"},\"extended_description\":\"extended_description\",\"id\":\"obj_123\",\"name\":\"name\",\"object_type\":\"object_type\",\"reference_url\":\"reference_url\",\"refreshed_at\":\"1970-01-01T11:25:45.896Z\",\"relevance_score\":\"1104594632\"}],\"livemode\":true,\"next_page_url\":\"next_page_url\",\"previous_page_url\":\"previous_page_url\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.data.OperationSearchParams params =
+        com.stripe.param.v2.data.OperationSearchParams.builder()
+            .addCatalog(com.stripe.param.v2.data.OperationSearchParams.Catalog.SCHEMAS)
+            .setLimit(102976443L)
+            .setPage("page")
+            .setQuery("query")
+            .build();
 
     com.stripe.model.v2.data.SearchResultList searchResultList =
         client.v2().data().operations().search(params);
@@ -30055,6 +30091,119 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(schema);
     verifyRequest(
         BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/data/schemas/id_123", null, null);
+  }
+
+  @Test
+  public void testV2ExtendObjectDefinitionGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.extend.ObjectDefinition>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.extend.object_definition\",\"api_name_plural\":\"api_name_plural\",\"api_name_singular\":\"api_name_singular\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.extend.ObjectDefinitionListParams params =
+        com.stripe.param.v2.extend.ObjectDefinitionListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.extend.ObjectDefinition>
+        stripeCollection = client.v2().extend().objectDefinitions().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2ExtendObjectDefinitionGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions/id_123",
+        null,
+        null,
+        com.stripe.model.v2.extend.ObjectDefinition.class,
+        "{\"object\":\"v2.extend.object_definition\",\"api_name_plural\":\"api_name_plural\",\"api_name_singular\":\"api_name_singular\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.extend.ObjectDefinition objectDefinition =
+        client.v2().extend().objectDefinitions().retrieve("id_123");
+    assertNotNull(objectDefinition);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2ExtendObjectDefinitionsVersionGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions/object_definition_id_123/versions",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.extend.ObjectDefinitionVersion>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.extend.object_definition_version\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name_plural\":\"display_name_plural\",\"display_name_singular\":\"display_name_singular\",\"id\":\"obj_123\",\"livemode\":true,\"object_definition\":\"object_definition\",\"parent_details\":{\"api_name_plural\":\"api_name_plural\",\"api_name_singular\":\"api_name_singular\",\"id\":\"obj_123\"},\"properties\":{\"key\":{\"type\":\"array\"}},\"version\":\"version\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.extend.objectdefinitions.VersionListParams params =
+        com.stripe.param.v2.extend.objectdefinitions.VersionListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.extend.ObjectDefinitionVersion>
+        stripeCollection =
+            client
+                .v2()
+                .extend()
+                .objectDefinitions()
+                .versions()
+                .list("object_definition_id_123", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions/object_definition_id_123/versions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2ExtendObjectDefinitionsVersionGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions/object_definition_id_123/versions/id_123",
+        null,
+        null,
+        com.stripe.model.v2.extend.ObjectDefinitionVersion.class,
+        "{\"object\":\"v2.extend.object_definition_version\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name_plural\":\"display_name_plural\",\"display_name_singular\":\"display_name_singular\",\"id\":\"obj_123\",\"livemode\":true,\"object_definition\":\"object_definition\",\"parent_details\":{\"api_name_plural\":\"api_name_plural\",\"api_name_singular\":\"api_name_singular\",\"id\":\"obj_123\"},\"properties\":{\"key\":{\"type\":\"array\"}},\"version\":\"version\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.extend.ObjectDefinitionVersion objectDefinitionVersion =
+        client
+            .v2()
+            .extend()
+            .objectDefinitions()
+            .versions()
+            .retrieve("object_definition_id_123", "id_123");
+    assertNotNull(objectDefinitionVersion);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/extend/object_definitions/object_definition_id_123/versions/id_123",
+        null,
+        null);
   }
 
   @Test
@@ -35239,7 +35388,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2TaxOperationPostServices() throws StripeException {
+  public void testV2TaxOperationResolveAddressPostRequiredServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
@@ -35247,7 +35396,38 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.OperationsResolveAddressResult.class,
-        "{\"object\":\"v2.tax.operations_resolve_address_result\",\"address\":{},\"livemode\":true,\"precision\":\"none\",\"precision_details\":{\"issues\":[{\"code\":\"required_for_improved_precision\",\"field\":\"country\"}]}}");
+        "{\"object\":\"v2.tax.operations_resolve_address_result\",\"address\":{\"city\":\"city\",\"country\":\"country\",\"line1\":\"line1\",\"postal_code\":\"postal_code\",\"state\":\"state\"},\"livemode\":true,\"precision\":\"none\",\"precision_details\":{\"issues\":[{\"code\":\"required_for_improved_precision\",\"field\":\"country\"}]}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.tax.OperationResolveAddressParams params =
+        com.stripe.param.v2.tax.OperationResolveAddressParams.builder()
+            .setAddress(
+                com.stripe.param.v2.tax.OperationResolveAddressParams.Address.builder()
+                    .setCountry("country")
+                    .build())
+            .build();
+
+    com.stripe.model.v2.tax.OperationsResolveAddressResult operationsResolveAddressResult =
+        client.v2().tax().operations().resolveAddress(params);
+    assertNotNull(operationsResolveAddressResult);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/tax/operations/resolve_address",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2TaxOperationResolveAddressPostAllServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/tax/operations/resolve_address",
+        null,
+        null,
+        com.stripe.model.v2.tax.OperationsResolveAddressResult.class,
+        "{\"object\":\"v2.tax.operations_resolve_address_result\",\"address\":{\"city\":\"city\",\"country\":\"country\",\"line1\":\"line1\",\"postal_code\":\"postal_code\",\"state\":\"state\"},\"livemode\":true,\"precision\":\"none\",\"precision_details\":{\"issues\":[{\"code\":\"required_for_improved_precision\",\"field\":\"country\"}]}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.tax.OperationResolveAddressParams params =

@@ -590,6 +590,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     AcssDebit acssDebit;
 
     /**
+     * If this is a {@code aeon_pay} PaymentMethod, this hash contains details about the AEON Pay
+     * payment method.
+     */
+    @SerializedName("aeon_pay")
+    AeonPay aeonPay;
+
+    /**
      * If this is an {@code affirm} PaymentMethod, this hash contains details about the Affirm
      * payment method.
      */
@@ -638,6 +645,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
+
+    /**
+     * If this is a {@code au_pay} PaymentMethod, this hash contains details about the au PAY
+     * payment method.
+     */
+    @SerializedName("au_pay")
+    AuPay auPay;
 
     /**
      * If this is a {@code bacs_debit} PaymentMethod, this hash contains details about the Bacs
@@ -715,6 +729,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
+
+    /**
+     * If this is a {@code dbarai} PaymentMethod, this hash contains details about the d-Barai
+     * payment method.
+     */
+    @SerializedName("dbarai")
+    Dbarai dbarai;
 
     /**
      * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
@@ -835,6 +856,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("mb_way")
     MbWay mbWay;
+
+    /**
+     * If this is a {@code merpay} PaymentMethod, this hash contains details about the Merpay
+     * payment method.
+     */
+    @SerializedName("merpay")
+    Merpay merpay;
 
     /**
      * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -1121,6 +1149,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     private PaymentMethodData(
         AcssDebit acssDebit,
+        AeonPay aeonPay,
         Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
@@ -1128,6 +1157,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Alma alma,
         AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
+        AuPay auPay,
         BacsDebit bacsDebit,
         Bancontact bancontact,
         Billie billie,
@@ -1139,6 +1169,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Cashapp cashapp,
         Crypto crypto,
         CustomerBalance customerBalance,
+        Dbarai dbarai,
         Eps eps,
         Map<String, Object> extraParams,
         Fpx fpx,
@@ -1156,6 +1187,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         KrCard krCard,
         Link link,
         MbWay mbWay,
+        Merpay merpay,
         Map<String, String> metadata,
         Mobilepay mobilepay,
         Multibanco multibanco,
@@ -1198,6 +1230,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         WechatPay wechatPay,
         Zip zip) {
       this.acssDebit = acssDebit;
+      this.aeonPay = aeonPay;
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
@@ -1205,6 +1238,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.alma = alma;
       this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
+      this.auPay = auPay;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billie = billie;
@@ -1216,6 +1250,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.cashapp = cashapp;
       this.crypto = crypto;
       this.customerBalance = customerBalance;
+      this.dbarai = dbarai;
       this.eps = eps;
       this.extraParams = extraParams;
       this.fpx = fpx;
@@ -1233,6 +1268,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.krCard = krCard;
       this.link = link;
       this.mbWay = mbWay;
+      this.merpay = merpay;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
@@ -1283,6 +1319,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     public static class Builder {
       private AcssDebit acssDebit;
 
+      private AeonPay aeonPay;
+
       private Affirm affirm;
 
       private AfterpayClearpay afterpayClearpay;
@@ -1296,6 +1334,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private AmazonPay amazonPay;
 
       private AuBecsDebit auBecsDebit;
+
+      private AuPay auPay;
 
       private BacsDebit bacsDebit;
 
@@ -1318,6 +1358,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private Crypto crypto;
 
       private CustomerBalance customerBalance;
+
+      private Dbarai dbarai;
 
       private Eps eps;
 
@@ -1352,6 +1394,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private Link link;
 
       private MbWay mbWay;
+
+      private Merpay merpay;
 
       private Map<String, String> metadata;
 
@@ -1439,6 +1483,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public SetupIntentUpdateParams.PaymentMethodData build() {
         return new SetupIntentUpdateParams.PaymentMethodData(
             this.acssDebit,
+            this.aeonPay,
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
@@ -1446,6 +1491,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.alma,
             this.amazonPay,
             this.auBecsDebit,
+            this.auPay,
             this.bacsDebit,
             this.bancontact,
             this.billie,
@@ -1457,6 +1503,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.cashapp,
             this.crypto,
             this.customerBalance,
+            this.dbarai,
             this.eps,
             this.extraParams,
             this.fpx,
@@ -1474,6 +1521,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.krCard,
             this.link,
             this.mbWay,
+            this.merpay,
             this.metadata,
             this.mobilepay,
             this.multibanco,
@@ -1523,6 +1571,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setAcssDebit(SetupIntentUpdateParams.PaymentMethodData.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code aeon_pay} PaymentMethod, this hash contains details about the AEON Pay
+       * payment method.
+       */
+      public Builder setAeonPay(SetupIntentUpdateParams.PaymentMethodData.AeonPay aeonPay) {
+        this.aeonPay = aeonPay;
         return this;
       }
 
@@ -1590,6 +1647,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setAuBecsDebit(
           SetupIntentUpdateParams.PaymentMethodData.AuBecsDebit auBecsDebit) {
         this.auBecsDebit = auBecsDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code au_pay} PaymentMethod, this hash contains details about the au PAY
+       * payment method.
+       */
+      public Builder setAuPay(SetupIntentUpdateParams.PaymentMethodData.AuPay auPay) {
+        this.auPay = auPay;
         return this;
       }
 
@@ -1693,6 +1759,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setCustomerBalance(
           SetupIntentUpdateParams.PaymentMethodData.CustomerBalance customerBalance) {
         this.customerBalance = customerBalance;
+        return this;
+      }
+
+      /**
+       * If this is a {@code dbarai} PaymentMethod, this hash contains details about the d-Barai
+       * payment method.
+       */
+      public Builder setDbarai(SetupIntentUpdateParams.PaymentMethodData.Dbarai dbarai) {
+        this.dbarai = dbarai;
         return this;
       }
 
@@ -1866,6 +1941,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setMbWay(SetupIntentUpdateParams.PaymentMethodData.MbWay mbWay) {
         this.mbWay = mbWay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code merpay} PaymentMethod, this hash contains details about the Merpay
+       * payment method.
+       */
+      public Builder setMerpay(SetupIntentUpdateParams.PaymentMethodData.Merpay merpay) {
+        this.merpay = merpay;
         return this;
       }
 
@@ -2387,6 +2471,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class AeonPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AeonPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.AeonPay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.AeonPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.AeonPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.AeonPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Affirm {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2761,6 +2903,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.AuBecsDebit#extraParams} for
          * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AuPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.AuPay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.AuPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.AuPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.AuPay#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -3785,6 +3985,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.CustomerBalance#extraParams}
          * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dbarai {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Dbarai(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Dbarai build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Dbarai(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Dbarai#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Dbarai#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -5206,6 +5464,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.MbWay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Merpay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Merpay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Merpay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Merpay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Merpay#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -8430,6 +8746,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
 
+      @SerializedName("aeon_pay")
+      AEON_PAY("aeon_pay"),
+
       @SerializedName("affirm")
       AFFIRM("affirm"),
 
@@ -8447,6 +8766,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),
+
+      @SerializedName("au_pay")
+      AU_PAY("au_pay"),
 
       @SerializedName("bacs_debit")
       BACS_DEBIT("bacs_debit"),
@@ -8477,6 +8799,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
+
+      @SerializedName("dbarai")
+      DBARAI("dbarai"),
 
       @SerializedName("eps")
       EPS("eps"),
@@ -8522,6 +8847,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("mb_way")
       MB_WAY("mb_way"),
+
+      @SerializedName("merpay")
+      MERPAY("merpay"),
 
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),
@@ -9683,6 +10011,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public enum VerificationMethod implements ApiRequestParams.EnumParam {
         @SerializedName("automatic")
         AUTOMATIC("automatic"),
+
+        @SerializedName("instant")
+        INSTANT("instant"),
 
         @SerializedName("payer_name_verification")
         PAYER_NAME_VERIFICATION("payer_name_verification");
@@ -14851,6 +15182,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
 
+    @SerializedName("aeon_pay")
+    AEON_PAY("aeon_pay"),
+
     @SerializedName("affirm")
     AFFIRM("affirm"),
 
@@ -14868,6 +15202,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("au_pay")
+    AU_PAY("au_pay"),
 
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
@@ -14916,6 +15253,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("dbarai")
+    DBARAI("dbarai"),
 
     @SerializedName("demo_pay")
     DEMO_PAY("demo_pay"),
@@ -14994,6 +15334,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("mb_way")
     MB_WAY("mb_way"),
+
+    @SerializedName("merpay")
+    MERPAY("merpay"),
 
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
@@ -15172,6 +15515,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
 
+    @SerializedName("aeon_pay")
+    AEON_PAY("aeon_pay"),
+
     @SerializedName("affirm")
     AFFIRM("affirm"),
 
@@ -15189,6 +15535,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("au_pay")
+    AU_PAY("au_pay"),
 
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
@@ -15222,6 +15571,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("dbarai")
+    DBARAI("dbarai"),
 
     @SerializedName("eps")
     EPS("eps"),
@@ -15264,6 +15616,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("mb_way")
     MB_WAY("mb_way"),
+
+    @SerializedName("merpay")
+    MERPAY("merpay"),
 
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),

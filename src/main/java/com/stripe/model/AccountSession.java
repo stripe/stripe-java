@@ -193,6 +193,9 @@ public class AccountSession extends ApiResource {
     @SerializedName("documents")
     Documents documents;
 
+    @SerializedName("export_tax_transactions")
+    ExportTaxTransactions exportTaxTransactions;
+
     @SerializedName("financial_account")
     FinancialAccount financialAccount;
 
@@ -267,6 +270,9 @@ public class AccountSession extends ApiResource {
     @SerializedName("payouts_list")
     PayoutsList payoutsList;
 
+    @SerializedName("product_tax_code_selector")
+    ProductTaxCodeSelector productTaxCodeSelector;
+
     /**
      * Configuration for the <a
      * href="https://stripe.com/connect/supported-embedded-components/recipients-list/">recipients
@@ -283,6 +289,9 @@ public class AccountSession extends ApiResource {
 
     @SerializedName("tax_settings")
     TaxSettings taxSettings;
+
+    @SerializedName("tax_threshold_monitoring")
+    TaxThresholdMonitoring taxThresholdMonitoring;
 
     @SerializedName("terminal_hardware_orders")
     TerminalHardwareOrders terminalHardwareOrders;
@@ -757,6 +766,31 @@ public class AccountSession extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Documents extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about ExportTaxTransactions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ExportTaxTransactions extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1548,6 +1582,31 @@ public class AccountSession extends ApiResource {
     }
 
     /**
+     * For more details about ProductTaxCodeSelector, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ProductTaxCodeSelector extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
      * For more details about RecipientsList, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1642,6 +1701,31 @@ public class AccountSession extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxSettings extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about TaxThresholdMonitoring, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxThresholdMonitoring extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;

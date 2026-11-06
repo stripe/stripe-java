@@ -201,6 +201,11 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.data.reporting.query_run", com.stripe.model.v2.data.reporting.QueryRun.class);
 
+    classLookup.put(
+        "v2.extend.object_definition", com.stripe.model.v2.extend.ObjectDefinition.class);
+    classLookup.put(
+        "v2.extend.object_definition_version",
+        com.stripe.model.v2.extend.ObjectDefinitionVersion.class);
     classLookup.put("v2.extend.workflow", com.stripe.model.v2.extend.Workflow.class);
     classLookup.put("v2.extend.workflow_run", com.stripe.model.v2.extend.WorkflowRun.class);
 
@@ -1361,6 +1366,12 @@ public final class EventDataClassLookup {
         com.stripe.events.V2DataReportingQueryRunUpdatedEvent.class);
     eventClassLookup.put(
         "v2.extend.extension_run.failed", com.stripe.events.V2ExtendExtensionRunFailedEvent.class);
+    eventClassLookup.put(
+        "v2.extend.object_definition.created",
+        com.stripe.events.V2ExtendObjectDefinitionCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.extend.object_definition_version.created",
+        com.stripe.events.V2ExtendObjectDefinitionVersionCreatedEvent.class);
     eventClassLookup.put(
         "v2.extend.workflow_run.failed", com.stripe.events.V2ExtendWorkflowRunFailedEvent.class);
     eventClassLookup.put(

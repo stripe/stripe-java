@@ -282,7 +282,9 @@ public final class EventDataClassLookup {
     classLookup.put("tax.association", com.stripe.model.tax.Association.class);
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
     classLookup.put("tax.calculation_line_item", com.stripe.model.tax.CalculationLineItem.class);
+    classLookup.put("tax.certificate", com.stripe.model.tax.Certificate.class);
     classLookup.put("tax.form", com.stripe.model.tax.Form.class);
+    classLookup.put("tax.form_correction", com.stripe.model.tax.FormCorrection.class);
     classLookup.put("tax.location", com.stripe.model.tax.Location.class);
     classLookup.put("tax.registration", com.stripe.model.tax.Registration.class);
     classLookup.put("tax.settings", com.stripe.model.tax.Settings.class);

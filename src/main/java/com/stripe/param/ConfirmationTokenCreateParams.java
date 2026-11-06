@@ -222,6 +222,13 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     AcssDebit acssDebit;
 
     /**
+     * If this is a {@code aeon_pay} PaymentMethod, this hash contains details about the AEON Pay
+     * payment method.
+     */
+    @SerializedName("aeon_pay")
+    AeonPay aeonPay;
+
+    /**
      * If this is an {@code affirm} PaymentMethod, this hash contains details about the Affirm
      * payment method.
      */
@@ -270,6 +277,13 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
      */
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
+
+    /**
+     * If this is a {@code au_pay} PaymentMethod, this hash contains details about the au PAY
+     * payment method.
+     */
+    @SerializedName("au_pay")
+    AuPay auPay;
 
     /**
      * If this is a {@code bacs_debit} PaymentMethod, this hash contains details about the Bacs
@@ -347,6 +361,13 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
      */
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
+
+    /**
+     * If this is a {@code dbarai} PaymentMethod, this hash contains details about the d-Barai
+     * payment method.
+     */
+    @SerializedName("dbarai")
+    Dbarai dbarai;
 
     /**
      * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
@@ -467,6 +488,13 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
      */
     @SerializedName("mb_way")
     MbWay mbWay;
+
+    /**
+     * If this is a {@code merpay} PaymentMethod, this hash contains details about the Merpay
+     * payment method.
+     */
+    @SerializedName("merpay")
+    Merpay merpay;
 
     /**
      * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -753,6 +781,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
     private PaymentMethodData(
         AcssDebit acssDebit,
+        AeonPay aeonPay,
         Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
@@ -760,6 +789,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         Alma alma,
         AmazonPay amazonPay,
         AuBecsDebit auBecsDebit,
+        AuPay auPay,
         BacsDebit bacsDebit,
         Bancontact bancontact,
         Billie billie,
@@ -771,6 +801,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         Cashapp cashapp,
         Crypto crypto,
         CustomerBalance customerBalance,
+        Dbarai dbarai,
         Eps eps,
         Map<String, Object> extraParams,
         Fpx fpx,
@@ -788,6 +819,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         KrCard krCard,
         Link link,
         MbWay mbWay,
+        Merpay merpay,
         Map<String, String> metadata,
         Mobilepay mobilepay,
         Multibanco multibanco,
@@ -830,6 +862,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         WechatPay wechatPay,
         Zip zip) {
       this.acssDebit = acssDebit;
+      this.aeonPay = aeonPay;
       this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
@@ -837,6 +870,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       this.alma = alma;
       this.amazonPay = amazonPay;
       this.auBecsDebit = auBecsDebit;
+      this.auPay = auPay;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billie = billie;
@@ -848,6 +882,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       this.cashapp = cashapp;
       this.crypto = crypto;
       this.customerBalance = customerBalance;
+      this.dbarai = dbarai;
       this.eps = eps;
       this.extraParams = extraParams;
       this.fpx = fpx;
@@ -865,6 +900,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       this.krCard = krCard;
       this.link = link;
       this.mbWay = mbWay;
+      this.merpay = merpay;
       this.metadata = metadata;
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
@@ -915,6 +951,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     public static class Builder {
       private AcssDebit acssDebit;
 
+      private AeonPay aeonPay;
+
       private Affirm affirm;
 
       private AfterpayClearpay afterpayClearpay;
@@ -928,6 +966,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       private AmazonPay amazonPay;
 
       private AuBecsDebit auBecsDebit;
+
+      private AuPay auPay;
 
       private BacsDebit bacsDebit;
 
@@ -950,6 +990,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       private Crypto crypto;
 
       private CustomerBalance customerBalance;
+
+      private Dbarai dbarai;
 
       private Eps eps;
 
@@ -984,6 +1026,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       private Link link;
 
       private MbWay mbWay;
+
+      private Merpay merpay;
 
       private Map<String, String> metadata;
 
@@ -1071,6 +1115,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       public ConfirmationTokenCreateParams.PaymentMethodData build() {
         return new ConfirmationTokenCreateParams.PaymentMethodData(
             this.acssDebit,
+            this.aeonPay,
             this.affirm,
             this.afterpayClearpay,
             this.alipay,
@@ -1078,6 +1123,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
             this.alma,
             this.amazonPay,
             this.auBecsDebit,
+            this.auPay,
             this.bacsDebit,
             this.bancontact,
             this.billie,
@@ -1089,6 +1135,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
             this.cashapp,
             this.crypto,
             this.customerBalance,
+            this.dbarai,
             this.eps,
             this.extraParams,
             this.fpx,
@@ -1106,6 +1153,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
             this.krCard,
             this.link,
             this.mbWay,
+            this.merpay,
             this.metadata,
             this.mobilepay,
             this.multibanco,
@@ -1156,6 +1204,15 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       public Builder setAcssDebit(
           ConfirmationTokenCreateParams.PaymentMethodData.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code aeon_pay} PaymentMethod, this hash contains details about the AEON Pay
+       * payment method.
+       */
+      public Builder setAeonPay(ConfirmationTokenCreateParams.PaymentMethodData.AeonPay aeonPay) {
+        this.aeonPay = aeonPay;
         return this;
       }
 
@@ -1224,6 +1281,15 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       public Builder setAuBecsDebit(
           ConfirmationTokenCreateParams.PaymentMethodData.AuBecsDebit auBecsDebit) {
         this.auBecsDebit = auBecsDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code au_pay} PaymentMethod, this hash contains details about the au PAY
+       * payment method.
+       */
+      public Builder setAuPay(ConfirmationTokenCreateParams.PaymentMethodData.AuPay auPay) {
+        this.auPay = auPay;
         return this;
       }
 
@@ -1328,6 +1394,15 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       public Builder setCustomerBalance(
           ConfirmationTokenCreateParams.PaymentMethodData.CustomerBalance customerBalance) {
         this.customerBalance = customerBalance;
+        return this;
+      }
+
+      /**
+       * If this is a {@code dbarai} PaymentMethod, this hash contains details about the d-Barai
+       * payment method.
+       */
+      public Builder setDbarai(ConfirmationTokenCreateParams.PaymentMethodData.Dbarai dbarai) {
+        this.dbarai = dbarai;
         return this;
       }
 
@@ -1503,6 +1578,15 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
        */
       public Builder setMbWay(ConfirmationTokenCreateParams.PaymentMethodData.MbWay mbWay) {
         this.mbWay = mbWay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code merpay} PaymentMethod, this hash contains details about the Merpay
+       * payment method.
+       */
+      public Builder setMerpay(ConfirmationTokenCreateParams.PaymentMethodData.Merpay merpay) {
+        this.merpay = merpay;
         return this;
       }
 
@@ -2011,6 +2095,64 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class AeonPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AeonPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfirmationTokenCreateParams.PaymentMethodData.AeonPay build() {
+          return new ConfirmationTokenCreateParams.PaymentMethodData.AeonPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.AeonPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.AeonPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Affirm {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2376,6 +2518,64 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.AuBecsDebit#extraParams}
          * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AuPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfirmationTokenCreateParams.PaymentMethodData.AuPay build() {
+          return new ConfirmationTokenCreateParams.PaymentMethodData.AuPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.AuPay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.AuPay#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -3334,6 +3534,64 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
          * map. See {@link
          * ConfirmationTokenCreateParams.PaymentMethodData.CustomerBalance#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dbarai {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Dbarai(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfirmationTokenCreateParams.PaymentMethodData.Dbarai build() {
+          return new ConfirmationTokenCreateParams.PaymentMethodData.Dbarai(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.Dbarai#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.Dbarai#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -4759,6 +5017,64 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.MbWay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Merpay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfirmationTokenCreateParams.PaymentMethodData.Merpay build() {
+          return new ConfirmationTokenCreateParams.PaymentMethodData.Merpay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.Merpay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.Merpay#extraParams} for
          * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -7886,6 +8202,9 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
 
+      @SerializedName("aeon_pay")
+      AEON_PAY("aeon_pay"),
+
       @SerializedName("affirm")
       AFFIRM("affirm"),
 
@@ -7903,6 +8222,9 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),
+
+      @SerializedName("au_pay")
+      AU_PAY("au_pay"),
 
       @SerializedName("bacs_debit")
       BACS_DEBIT("bacs_debit"),
@@ -7933,6 +8255,9 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
+
+      @SerializedName("dbarai")
+      DBARAI("dbarai"),
 
       @SerializedName("eps")
       EPS("eps"),
@@ -7978,6 +8303,9 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("mb_way")
       MB_WAY("mb_way"),
+
+      @SerializedName("merpay")
+      MERPAY("merpay"),
 
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),

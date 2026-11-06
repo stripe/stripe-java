@@ -73,6 +73,10 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName("payment_intent")
   String paymentIntent;
 
+  /** The ID of a PaymentMethod that will receive the refund. */
+  @SerializedName("payment_method")
+  String paymentMethod;
+
   /** Used to create the PaymentMethod that will receive the refund. */
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
@@ -126,6 +130,7 @@ public class RefundCreateParams extends ApiRequestParams {
       Origin origin,
       String paymentAttemptRecord,
       String paymentIntent,
+      String paymentMethod,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       String paymentRecord,
@@ -143,6 +148,7 @@ public class RefundCreateParams extends ApiRequestParams {
     this.origin = origin;
     this.paymentAttemptRecord = paymentAttemptRecord;
     this.paymentIntent = paymentIntent;
+    this.paymentMethod = paymentMethod;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentRecord = paymentRecord;
@@ -178,6 +184,8 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private String paymentIntent;
 
+    private String paymentMethod;
+
     private PaymentMethodData paymentMethodData;
 
     private PaymentMethodOptions paymentMethodOptions;
@@ -204,6 +212,7 @@ public class RefundCreateParams extends ApiRequestParams {
           this.origin,
           this.paymentAttemptRecord,
           this.paymentIntent,
+          this.paymentMethod,
           this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentRecord,
@@ -365,6 +374,12 @@ public class RefundCreateParams extends ApiRequestParams {
     /** The identifier of the PaymentIntent to refund. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
+      return this;
+    }
+
+    /** The ID of a PaymentMethod that will receive the refund. */
+    public Builder setPaymentMethod(String paymentMethod) {
+      this.paymentMethod = paymentMethod;
       return this;
     }
 
@@ -587,6 +602,9 @@ public class RefundCreateParams extends ApiRequestParams {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
 
+      @SerializedName("aeon_pay")
+      AEON_PAY("aeon_pay"),
+
       @SerializedName("affirm")
       AFFIRM("affirm"),
 
@@ -604,6 +622,9 @@ public class RefundCreateParams extends ApiRequestParams {
 
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),
+
+      @SerializedName("au_pay")
+      AU_PAY("au_pay"),
 
       @SerializedName("bacs_debit")
       BACS_DEBIT("bacs_debit"),
@@ -640,6 +661,9 @@ public class RefundCreateParams extends ApiRequestParams {
 
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
+
+      @SerializedName("dbarai")
+      DBARAI("dbarai"),
 
       @SerializedName("eps")
       EPS("eps"),
@@ -685,6 +709,9 @@ public class RefundCreateParams extends ApiRequestParams {
 
       @SerializedName("mb_way")
       MB_WAY("mb_way"),
+
+      @SerializedName("merpay")
+      MERPAY("merpay"),
 
       @SerializedName("mobilepay")
       MOBILEPAY("mobilepay"),

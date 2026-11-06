@@ -49,6 +49,14 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The reason the customer is exempt. Required when {@code us.tax_code_group} is {@code saas}. */
+  @SerializedName("reason")
+  Reason reason;
+
+  /** Additional details about the exemption reason. */
+  @SerializedName("reason_details")
+  ReasonDetails reasonDetails;
+
   /** US-specific exemption details. Required when country is US; must be absent otherwise. */
   @SerializedName("us")
   Us us;
@@ -61,6 +69,8 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
       List<String> expand,
       String expirationDate,
       Map<String, Object> extraParams,
+      Reason reason,
+      ReasonDetails reasonDetails,
       Us us) {
     this.ca = ca;
     this.country = country;
@@ -69,6 +79,8 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.expirationDate = expirationDate;
     this.extraParams = extraParams;
+    this.reason = reason;
+    this.reasonDetails = reasonDetails;
     this.us = us;
   }
 
@@ -91,6 +103,10 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Reason reason;
+
+    private ReasonDetails reasonDetails;
+
     private Us us;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -103,6 +119,8 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
           this.expand,
           this.expirationDate,
           this.extraParams,
+          this.reason,
+          this.reasonDetails,
           this.us);
     }
 
@@ -188,6 +206,20 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The reason the customer is exempt. Required when {@code us.tax_code_group} is {@code saas}.
+     */
+    public Builder setReason(CustomerTaxExemptionCreateParams.Reason reason) {
+      this.reason = reason;
+      return this;
+    }
+
+    /** Additional details about the exemption reason. */
+    public Builder setReasonDetails(CustomerTaxExemptionCreateParams.ReasonDetails reasonDetails) {
+      this.reasonDetails = reasonDetails;
       return this;
     }
 
@@ -376,6 +408,154 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class ReasonDetails {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Details for the {@code other} exemption reason. */
+    @SerializedName("other")
+    Other other;
+
+    private ReasonDetails(Map<String, Object> extraParams, Other other) {
+      this.extraParams = extraParams;
+      this.other = other;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Other other;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerTaxExemptionCreateParams.ReasonDetails build() {
+        return new CustomerTaxExemptionCreateParams.ReasonDetails(this.extraParams, this.other);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CustomerTaxExemptionCreateParams.ReasonDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CustomerTaxExemptionCreateParams.ReasonDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Details for the {@code other} exemption reason. */
+      public Builder setOther(CustomerTaxExemptionCreateParams.ReasonDetails.Other other) {
+        this.other = other;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Other {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> A free-text description of the exemption reason. Maximum 5000
+       * characters.
+       */
+      @SerializedName("reason_text")
+      String reasonText;
+
+      private Other(Map<String, Object> extraParams, String reasonText) {
+        this.extraParams = extraParams;
+        this.reasonText = reasonText;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String reasonText;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerTaxExemptionCreateParams.ReasonDetails.Other build() {
+          return new CustomerTaxExemptionCreateParams.ReasonDetails.Other(
+              this.extraParams, this.reasonText);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerTaxExemptionCreateParams.ReasonDetails.Other#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerTaxExemptionCreateParams.ReasonDetails.Other#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> A free-text description of the exemption reason. Maximum 5000
+         * characters.
+         */
+        public Builder setReasonText(String reasonText) {
+          this.reasonText = reasonText;
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Us {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -390,9 +570,17 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
     @SerializedName("state")
     String state;
 
-    private Us(Map<String, Object> extraParams, String state) {
+    /**
+     * The group of tax codes this exemption applies to. Defaults to {@code all}. {@code saas} is
+     * only available when {@code state} is {@code CA}.
+     */
+    @SerializedName("tax_code_group")
+    TaxCodeGroup taxCodeGroup;
+
+    private Us(Map<String, Object> extraParams, String state, TaxCodeGroup taxCodeGroup) {
       this.extraParams = extraParams;
       this.state = state;
+      this.taxCodeGroup = taxCodeGroup;
     }
 
     public static Builder builder() {
@@ -404,9 +592,12 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
 
       private String state;
 
+      private TaxCodeGroup taxCodeGroup;
+
       /** Finalize and obtain parameter instance from this builder. */
       public CustomerTaxExemptionCreateParams.Us build() {
-        return new CustomerTaxExemptionCreateParams.Us(this.extraParams, this.state);
+        return new CustomerTaxExemptionCreateParams.Us(
+            this.extraParams, this.state, this.taxCodeGroup);
       }
 
       /**
@@ -440,6 +631,49 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
         this.state = state;
         return this;
       }
+
+      /**
+       * The group of tax codes this exemption applies to. Defaults to {@code all}. {@code saas} is
+       * only available when {@code state} is {@code CA}.
+       */
+      public Builder setTaxCodeGroup(
+          CustomerTaxExemptionCreateParams.Us.TaxCodeGroup taxCodeGroup) {
+        this.taxCodeGroup = taxCodeGroup;
+        return this;
+      }
+    }
+
+    public enum TaxCodeGroup implements ApiRequestParams.EnumParam {
+      @SerializedName("all")
+      ALL("all"),
+
+      @SerializedName("saas")
+      SAAS("saas");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxCodeGroup(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  public enum Reason implements ApiRequestParams.EnumParam {
+    @SerializedName("direct_pay_permit")
+    DIRECT_PAY_PERMIT("direct_pay_permit"),
+
+    @SerializedName("legacy_contract")
+    LEGACY_CONTRACT("legacy_contract"),
+
+    @SerializedName("other")
+    OTHER("other");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Reason(String value) {
+      this.value = value;
     }
   }
 }

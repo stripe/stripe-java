@@ -99,6 +99,10 @@ public class AccountSession extends StripeObject implements HasId {
     @SerializedName("bills")
     Bills bills;
 
+    /** Settings for the Business Profile Management embedded component. */
+    @SerializedName("business_profile_management")
+    BusinessProfileManagement businessProfileManagement;
+
     /** Settings for the Capital Financing embedded component. */
     @SerializedName("capital_financing")
     CapitalFinancing capitalFinancing;
@@ -486,6 +490,26 @@ public class AccountSession extends StripeObject implements HasId {
         @SerializedName("manage_bills")
         String manageBills;
       }
+    }
+
+    /** Settings for the Business Profile Management embedded component. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BusinessProfileManagement extends StripeObject {
+      /** Whether this embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /** The scopes available to this embedded component. */
+      @SerializedName("scopes")
+      Scopes scopes;
+
+      /** The scopes available to this embedded component. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Scopes extends StripeObject {}
     }
 
     /** Settings for the Capital Financing embedded component. */

@@ -460,6 +460,15 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   Qris qris;
 
   /**
+   * Rakuten Pay is a single-use payment method that requires customers to authenticate their
+   * payment. Customers pay by being redirected from your website or app, authorizing the payment
+   * with Rakuten Pay, then returning to your website or app. You get immediate notification of
+   * whether the payment succeeded or failed.
+   */
+  @SerializedName("rakuten_pay")
+  RakutenPay rakutenPay;
+
+  /**
    * Revolut Pay, developed by Revolut, a global finance app, is a digital wallet payment method.
    * Revolut Pay uses the customer’s stored balance or cards to fund the payment, and offers the
    * option for non-Revolut customers to save their details after their first purchase.
@@ -664,6 +673,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
       Pix pix,
       Promptpay promptpay,
       Qris qris,
+      RakutenPay rakutenPay,
       RevolutPay revolutPay,
       SamsungPay samsungPay,
       Satispay satispay,
@@ -735,6 +745,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     this.pix = pix;
     this.promptpay = promptpay;
     this.qris = qris;
+    this.rakutenPay = rakutenPay;
     this.revolutPay = revolutPay;
     this.samsungPay = samsungPay;
     this.satispay = satispay;
@@ -868,6 +879,8 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
 
     private Qris qris;
 
+    private RakutenPay rakutenPay;
+
     private RevolutPay revolutPay;
 
     private SamsungPay samsungPay;
@@ -958,6 +971,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
           this.pix,
           this.promptpay,
           this.qris,
+          this.rakutenPay,
           this.revolutPay,
           this.samsungPay,
           this.satispay,
@@ -1574,6 +1588,17 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
      */
     public Builder setQris(PaymentMethodConfigurationCreateParams.Qris qris) {
       this.qris = qris;
+      return this;
+    }
+
+    /**
+     * Rakuten Pay is a single-use payment method that requires customers to authenticate their
+     * payment. Customers pay by being redirected from your website or app, authorizing the payment
+     * with Rakuten Pay, then returning to your website or app. You get immediate notification of
+     * whether the payment succeeded or failed.
+     */
+    public Builder setRakutenPay(PaymentMethodConfigurationCreateParams.RakutenPay rakutenPay) {
+      this.rakutenPay = rakutenPay;
       return this;
     }
 
@@ -10183,6 +10208,172 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationCreateParams.Qris.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RakutenPay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private RakutenPay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationCreateParams.RakutenPay build() {
+        return new PaymentMethodConfigurationCreateParams.RakutenPay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationCreateParams.RakutenPay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationCreateParams.RakutenPay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationCreateParams.RakutenPay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationCreateParams.RakutenPay.DisplayPreference build() {
+          return new PaymentMethodConfigurationCreateParams.RakutenPay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.RakutenPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.RakutenPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationCreateParams.RakutenPay.DisplayPreference.Preference
+                preference) {
           this.preference = preference;
           return this;
         }
