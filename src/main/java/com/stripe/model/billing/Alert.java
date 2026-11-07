@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -324,7 +325,7 @@ public class Alert extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UsageThreshold extends StripeObject {
+  public static class UsageThreshold extends StripeObject implements StripeActiveObject {
     /**
      * The filters allow limiting the scope of this usage alert. You can only specify up to one
      * filter at this time.
@@ -378,7 +379,7 @@ public class Alert extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Filter extends StripeObject {
+    public static class Filter extends StripeObject implements StripeActiveObject {
       /** Limit the scope of the alert to this customer ID. */
       @SerializedName("customer")
       @Getter(lombok.AccessLevel.NONE)
@@ -405,6 +406,16 @@ public class Alert extends ApiResource implements HasId {
       public void setCustomerObject(Customer expandableObject) {
         this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(customer, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(meter, responseGetter);
     }
   }
 

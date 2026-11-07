@@ -142,7 +142,7 @@ public class Mandate extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomerAcceptance extends StripeObject {
+  public static class CustomerAcceptance extends StripeObject implements StripeActiveObject {
     /** The time that the customer accepts the mandate. */
     @SerializedName("accepted_at")
     Long acceptedAt;
@@ -187,6 +187,12 @@ public class Mandate extends ApiResource implements HasId {
       @SerializedName("user_agent")
       String userAgent;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(offline, responseGetter);
+      trySetResponseGetter(online, responseGetter);
+    }
   }
 
   /**
@@ -213,7 +219,7 @@ public class Mandate extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodDetails extends StripeObject {
+  public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
@@ -416,7 +422,7 @@ public class Mandate extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
+    public static class Card extends StripeObject implements StripeActiveObject {
       @SerializedName("india")
       India india;
 
@@ -438,6 +444,11 @@ public class Mandate extends ApiResource implements HasId {
          */
         @SerializedName("inactive_reason")
         String inactiveReason;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(india, responseGetter);
       }
     }
 
@@ -723,6 +734,31 @@ public class Mandate extends ApiResource implements HasId {
        */
       @SerializedName("collection_method")
       String collectionMethod;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(acssDebit, responseGetter);
+      trySetResponseGetter(amazonPay, responseGetter);
+      trySetResponseGetter(auBecsDebit, responseGetter);
+      trySetResponseGetter(bacsDebit, responseGetter);
+      trySetResponseGetter(blik, responseGetter);
+      trySetResponseGetter(card, responseGetter);
+      trySetResponseGetter(cashapp, responseGetter);
+      trySetResponseGetter(kakaoPay, responseGetter);
+      trySetResponseGetter(klarna, responseGetter);
+      trySetResponseGetter(krCard, responseGetter);
+      trySetResponseGetter(link, responseGetter);
+      trySetResponseGetter(naverPay, responseGetter);
+      trySetResponseGetter(nzBankAccount, responseGetter);
+      trySetResponseGetter(paypal, responseGetter);
+      trySetResponseGetter(payto, responseGetter);
+      trySetResponseGetter(pix, responseGetter);
+      trySetResponseGetter(revolutPay, responseGetter);
+      trySetResponseGetter(sepaDebit, responseGetter);
+      trySetResponseGetter(twint, responseGetter);
+      trySetResponseGetter(upi, responseGetter);
+      trySetResponseGetter(usBankAccount, responseGetter);
     }
   }
 

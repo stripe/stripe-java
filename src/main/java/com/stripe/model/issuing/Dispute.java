@@ -8,6 +8,7 @@ import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.File;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -418,7 +419,7 @@ public class Dispute extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Evidence extends StripeObject {
+  public static class Evidence extends StripeObject implements StripeActiveObject {
     @SerializedName("canceled")
     Canceled canceled;
 
@@ -460,7 +461,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Canceled extends StripeObject {
+    public static class Canceled extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -535,6 +536,11 @@ public class Dispute extends ApiResource
         this.additionalDocumentation =
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+      }
     }
 
     /**
@@ -544,7 +550,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Duplicate extends StripeObject {
+    public static class Duplicate extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -667,6 +673,14 @@ public class Dispute extends ApiResource
       public void setCheckImageObject(File expandableObject) {
         this.checkImage = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+        trySetResponseGetter(cardStatement, responseGetter);
+        trySetResponseGetter(cashReceipt, responseGetter);
+        trySetResponseGetter(checkImage, responseGetter);
+      }
     }
 
     /**
@@ -676,7 +690,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Fraudulent extends StripeObject {
+    public static class Fraudulent extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -711,6 +725,11 @@ public class Dispute extends ApiResource
         this.additionalDocumentation =
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+      }
     }
 
     /**
@@ -720,7 +739,8 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class MerchandiseNotAsDescribed extends StripeObject {
+    public static class MerchandiseNotAsDescribed extends StripeObject
+        implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -775,6 +795,11 @@ public class Dispute extends ApiResource
         this.additionalDocumentation =
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+      }
     }
 
     /**
@@ -784,7 +809,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class NoValidAuthorization extends StripeObject {
+    public static class NoValidAuthorization extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -819,6 +844,11 @@ public class Dispute extends ApiResource
         this.additionalDocumentation =
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+      }
     }
 
     /**
@@ -828,7 +858,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class NotReceived extends StripeObject {
+    public static class NotReceived extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -879,6 +909,11 @@ public class Dispute extends ApiResource
         this.additionalDocumentation =
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+      }
     }
 
     /**
@@ -888,7 +923,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Other extends StripeObject {
+    public static class Other extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -935,6 +970,11 @@ public class Dispute extends ApiResource
         this.additionalDocumentation =
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+      }
     }
 
     /**
@@ -944,7 +984,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ServiceNotAsDescribed extends StripeObject {
+    public static class ServiceNotAsDescribed extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
        * documentation supporting the dispute.
@@ -991,6 +1031,23 @@ public class Dispute extends ApiResource
         this.additionalDocumentation =
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(additionalDocumentation, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(canceled, responseGetter);
+      trySetResponseGetter(duplicate, responseGetter);
+      trySetResponseGetter(fraudulent, responseGetter);
+      trySetResponseGetter(merchandiseNotAsDescribed, responseGetter);
+      trySetResponseGetter(noValidAuthorization, responseGetter);
+      trySetResponseGetter(notReceived, responseGetter);
+      trySetResponseGetter(other, responseGetter);
+      trySetResponseGetter(serviceNotAsDescribed, responseGetter);
     }
   }
 

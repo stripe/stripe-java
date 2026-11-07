@@ -415,7 +415,7 @@ public class Dispute extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Evidence extends StripeObject {
+  public static class Evidence extends StripeObject implements StripeActiveObject {
     /**
      * Any server or activity logs showing proof that the customer accessed or downloaded the
      * purchased digital product. This information should include IP addresses, corresponding
@@ -792,7 +792,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Appeal extends StripeObject {
+    public static class Appeal extends StripeObject implements StripeActiveObject {
       @SerializedName("card")
       Card card;
 
@@ -816,6 +816,11 @@ public class Dispute extends ApiResource
         @SerializedName("supporting_files")
         List<String> supportingFiles;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(card, responseGetter);
+      }
     }
 
     /**
@@ -825,7 +830,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class EnhancedEvidence extends StripeObject {
+    public static class EnhancedEvidence extends StripeObject implements StripeActiveObject {
       @SerializedName("mastercard_compliance")
       MastercardCompliance mastercardCompliance;
 
@@ -858,7 +863,8 @@ public class Dispute extends ApiResource
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class VisaCompellingEvidence3 extends StripeObject {
+      public static class VisaCompellingEvidence3 extends StripeObject
+          implements StripeActiveObject {
         /** Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission. */
         @SerializedName("disputed_transaction")
         DisputedTransaction disputedTransaction;
@@ -878,7 +884,7 @@ public class Dispute extends ApiResource
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class DisputedTransaction extends StripeObject {
+        public static class DisputedTransaction extends StripeObject implements StripeActiveObject {
           /**
            * User Account ID used to log into business platform. Must be recognizable by the user.
            */
@@ -964,6 +970,11 @@ public class Dispute extends ApiResource
             @SerializedName("state")
             String state;
           }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
 
         /**
@@ -973,7 +984,8 @@ public class Dispute extends ApiResource
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class PriorUndisputedTransaction extends StripeObject {
+        public static class PriorUndisputedTransaction extends StripeObject
+            implements StripeActiveObject {
           /** Stripe charge ID for the Visa Compelling Evidence 3.0 eligible prior charge. */
           @SerializedName("charge")
           String charge;
@@ -1055,6 +1067,16 @@ public class Dispute extends ApiResource
             @SerializedName("state")
             String state;
           }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(disputedTransaction, responseGetter);
         }
       }
 
@@ -1076,6 +1098,28 @@ public class Dispute extends ApiResource
         @SerializedName("fee_acknowledged")
         Boolean feeAcknowledged;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mastercardCompliance, responseGetter);
+        trySetResponseGetter(visaCompellingEvidence3, responseGetter);
+        trySetResponseGetter(visaCompliance, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(appeal, responseGetter);
+      trySetResponseGetter(cancellationPolicy, responseGetter);
+      trySetResponseGetter(customerCommunication, responseGetter);
+      trySetResponseGetter(customerSignature, responseGetter);
+      trySetResponseGetter(duplicateChargeDocumentation, responseGetter);
+      trySetResponseGetter(enhancedEvidence, responseGetter);
+      trySetResponseGetter(receipt, responseGetter);
+      trySetResponseGetter(refundPolicy, responseGetter);
+      trySetResponseGetter(serviceDocumentation, responseGetter);
+      trySetResponseGetter(shippingDocumentation, responseGetter);
+      trySetResponseGetter(uncategorizedFile, responseGetter);
     }
   }
 
@@ -1086,7 +1130,7 @@ public class Dispute extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class EvidenceDetails extends StripeObject {
+  public static class EvidenceDetails extends StripeObject implements StripeActiveObject {
     /**
      * Date by which evidence must be submitted in order to successfully challenge dispute. Will be
      * 0 if the customer's bank or credit card company doesn't allow a response for this particular
@@ -1132,7 +1176,7 @@ public class Dispute extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class EnhancedEligibility extends StripeObject {
+    public static class EnhancedEligibility extends StripeObject implements StripeActiveObject {
       @SerializedName("mastercard_compliance")
       MastercardCompliance mastercardCompliance;
 
@@ -1199,6 +1243,18 @@ public class Dispute extends ApiResource
         @SerializedName("status")
         String status;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mastercardCompliance, responseGetter);
+        trySetResponseGetter(visaCompellingEvidence3, responseGetter);
+        trySetResponseGetter(visaCompliance, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(enhancedEligibility, responseGetter);
     }
   }
 
@@ -1209,7 +1265,7 @@ public class Dispute extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodDetails extends StripeObject {
+  public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
@@ -1324,6 +1380,14 @@ public class Dispute extends ApiResource
       /** The reason for the dispute as defined by PayPal. */
       @SerializedName("reason_code")
       String reasonCode;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(amazonPay, responseGetter);
+      trySetResponseGetter(card, responseGetter);
+      trySetResponseGetter(klarna, responseGetter);
+      trySetResponseGetter(paypal, responseGetter);
     }
   }
 

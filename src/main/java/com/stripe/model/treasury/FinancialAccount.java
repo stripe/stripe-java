@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -486,7 +487,7 @@ public class FinancialAccount extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FinancialAddress extends StripeObject {
+  public static class FinancialAddress extends StripeObject implements StripeActiveObject {
     /** ABA Records contain U.S. bank account details per the ABA format. */
     @SerializedName("aba")
     Aba aba;
@@ -528,6 +529,11 @@ public class FinancialAccount extends ApiResource
       @SerializedName("routing_number")
       String routingNumber;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(aba, responseGetter);
+    }
   }
 
   /** Restrictions that a Connect Platform has placed on this FinancialAccount. */
@@ -559,7 +565,7 @@ public class FinancialAccount extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
+  public static class StatusDetails extends StripeObject implements StripeActiveObject {
     /** Details related to the closure of this FinancialAccount. */
     @SerializedName("closed")
     Closed closed;
@@ -575,6 +581,11 @@ public class FinancialAccount extends ApiResource
       /** The array that contains reasons for a FinancialAccount closure. */
       @SerializedName("reasons")
       List<String> reasons;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(closed, responseGetter);
     }
   }
 

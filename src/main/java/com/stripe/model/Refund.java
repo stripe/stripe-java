@@ -647,7 +647,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DestinationDetails extends StripeObject {
+  public static class DestinationDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("affirm")
     Affirm affirm;
 
@@ -1300,6 +1300,46 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(affirm, responseGetter);
+      trySetResponseGetter(afterpayClearpay, responseGetter);
+      trySetResponseGetter(alipay, responseGetter);
+      trySetResponseGetter(alma, responseGetter);
+      trySetResponseGetter(amazonPay, responseGetter);
+      trySetResponseGetter(auBankTransfer, responseGetter);
+      trySetResponseGetter(blik, responseGetter);
+      trySetResponseGetter(brBankTransfer, responseGetter);
+      trySetResponseGetter(card, responseGetter);
+      trySetResponseGetter(cashapp, responseGetter);
+      trySetResponseGetter(crypto, responseGetter);
+      trySetResponseGetter(customerCashBalance, responseGetter);
+      trySetResponseGetter(eps, responseGetter);
+      trySetResponseGetter(euBankTransfer, responseGetter);
+      trySetResponseGetter(gbBankTransfer, responseGetter);
+      trySetResponseGetter(giropay, responseGetter);
+      trySetResponseGetter(grabpay, responseGetter);
+      trySetResponseGetter(jpBankTransfer, responseGetter);
+      trySetResponseGetter(klarna, responseGetter);
+      trySetResponseGetter(mbWay, responseGetter);
+      trySetResponseGetter(multibanco, responseGetter);
+      trySetResponseGetter(mxBankTransfer, responseGetter);
+      trySetResponseGetter(nzBankTransfer, responseGetter);
+      trySetResponseGetter(p24, responseGetter);
+      trySetResponseGetter(paynow, responseGetter);
+      trySetResponseGetter(paypal, responseGetter);
+      trySetResponseGetter(pix, responseGetter);
+      trySetResponseGetter(revolut, responseGetter);
+      trySetResponseGetter(scalapay, responseGetter);
+      trySetResponseGetter(sofort, responseGetter);
+      trySetResponseGetter(swish, responseGetter);
+      trySetResponseGetter(thBankTransfer, responseGetter);
+      trySetResponseGetter(twint, responseGetter);
+      trySetResponseGetter(usBankTransfer, responseGetter);
+      trySetResponseGetter(wechatPay, responseGetter);
+      trySetResponseGetter(zip, responseGetter);
+    }
   }
 
   /**
@@ -1309,7 +1349,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NextAction extends StripeObject {
+  public static class NextAction extends StripeObject implements StripeActiveObject {
     @SerializedName("display_details")
     DisplayDetails displayDetails;
 
@@ -1324,7 +1364,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DisplayDetails extends StripeObject {
+    public static class DisplayDetails extends StripeObject implements StripeActiveObject {
       @SerializedName("email_sent")
       EmailSent emailSent;
 
@@ -1348,6 +1388,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
         @SerializedName("email_sent_to")
         String emailSentTo;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(emailSent, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayDetails, responseGetter);
     }
   }
 

@@ -2,6 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class LineItem extends StripeObject implements HasId {
+public class LineItem extends StripeObject implements HasId, StripeActiveObject {
   @SerializedName("adjustable_quantity")
   AdjustableQuantity adjustableQuantity;
 
@@ -108,7 +109,7 @@ public class LineItem extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Discount extends StripeObject {
+  public static class Discount extends StripeObject implements StripeActiveObject {
     /** The amount discounted. */
     @SerializedName("amount")
     Long amount;
@@ -124,6 +125,11 @@ public class LineItem extends StripeObject implements HasId {
      */
     @SerializedName("discount")
     com.stripe.model.Discount discount;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -133,7 +139,7 @@ public class LineItem extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Tax extends StripeObject {
+  public static class Tax extends StripeObject implements StripeActiveObject {
     /** Amount of tax applied for this rate. */
     @SerializedName("amount")
     Long amount;
@@ -166,5 +172,16 @@ public class LineItem extends StripeObject implements HasId {
     /** The amount on which tax is calculated, in cents (or local equivalent). */
     @SerializedName("taxable_amount")
     Long taxableAmount;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(rate, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(adjustableQuantity, responseGetter);
+    trySetResponseGetter(price, responseGetter);
   }
 }

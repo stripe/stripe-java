@@ -3,7 +3,9 @@ package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -108,7 +110,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxBreakdown extends StripeObject {
+  public static class TaxBreakdown extends StripeObject implements StripeActiveObject {
     /**
      * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>.
@@ -227,6 +229,12 @@ public class CalculationLineItem extends StripeObject implements HasId {
        */
       @SerializedName("tax_type")
       String taxType;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(jurisdiction, responseGetter);
+      trySetResponseGetter(taxRateDetails, responseGetter);
     }
   }
 }

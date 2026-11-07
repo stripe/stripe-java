@@ -462,7 +462,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CurrencyOption extends StripeObject {
+  public static class CurrencyOption extends StripeObject implements StripeActiveObject {
     /**
      * When set, provides configuration for the amount to be adjusted by the customer during
      * Checkout Sessions and Payment Links.
@@ -557,6 +557,11 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
       /** Up to and including to this quantity will be contained in the tier. */
       @SerializedName("up_to")
       Long upTo;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(customUnitAmount, responseGetter);
     }
   }
 

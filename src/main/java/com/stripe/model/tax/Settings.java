@@ -4,6 +4,7 @@ package com.stripe.model.tax;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -190,9 +191,14 @@ public class Settings extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class HeadOffice extends StripeObject {
+  public static class HeadOffice extends StripeObject implements StripeActiveObject {
     @SerializedName("address")
     Address address;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   /**
@@ -202,7 +208,7 @@ public class Settings extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
+  public static class StatusDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("active")
     Active active;
 
@@ -234,6 +240,12 @@ public class Settings extends ApiResource {
        */
       @SerializedName("missing_fields")
       List<String> missingFields;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(active, responseGetter);
+      trySetResponseGetter(pending, responseGetter);
     }
   }
 

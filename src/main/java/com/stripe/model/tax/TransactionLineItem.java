@@ -3,7 +3,9 @@ package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class TransactionLineItem extends StripeObject implements HasId {
+public class TransactionLineItem extends StripeObject implements HasId, StripeActiveObject {
   /**
    * The line item amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
    * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
@@ -110,5 +112,10 @@ public class TransactionLineItem extends StripeObject implements HasId {
     /** The {@code id} of the line item to reverse in the original transaction. */
     @SerializedName("original_line_item")
     String originalLineItem;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(reversal, responseGetter);
   }
 }

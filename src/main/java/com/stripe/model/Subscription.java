@@ -1450,7 +1450,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticTax extends StripeObject {
+  public static class AutomaticTax extends StripeObject implements StripeActiveObject {
     /**
      * If Stripe disabled automatic tax, this enum describes why.
      *
@@ -1478,7 +1478,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Liability extends StripeObject {
+    public static class Liability extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -1510,6 +1510,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(liability, responseGetter);
     }
   }
 
@@ -1546,7 +1556,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingMode extends StripeObject {
+  public static class BillingMode extends StripeObject implements StripeActiveObject {
     /** Configure behavior for flexible billing mode. */
     @SerializedName("flexible")
     Flexible flexible;
@@ -1579,13 +1589,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @SerializedName("proration_discounts")
       String prorationDiscounts;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(flexible, responseGetter);
+    }
   }
 
   /** Sets the billing schedule for the subscription. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingSchedule extends StripeObject {
+  public static class BillingSchedule extends StripeObject implements StripeActiveObject {
     /** Specifies which subscription items the billing schedule applies to. */
     @SerializedName("applies_to")
     List<Subscription.BillingSchedule.AppliesTo> appliesTo;
@@ -1602,7 +1617,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AppliesTo extends StripeObject {
+    public static class AppliesTo extends StripeObject implements StripeActiveObject {
       /** The billing schedule will apply to the subscription item with the given price ID. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -1634,13 +1649,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(price, responseGetter);
+      }
     }
 
     /** Specifies the end of billing period. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillUntil extends StripeObject {
+    public static class BillUntil extends StripeObject implements StripeActiveObject {
       /** The timestamp the billing schedule will apply until. */
       @SerializedName("computed_timestamp")
       Long computedTimestamp;
@@ -1683,6 +1703,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @SerializedName("interval_count")
         Long intervalCount;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(duration, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(billUntil, responseGetter);
     }
   }
 
@@ -1715,7 +1745,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CancellationDetails extends StripeObject {
+  public static class CancellationDetails extends StripeObject implements StripeActiveObject {
     /**
      * Additional comments about why the user canceled the subscription, if the subscription was
      * canceled explicitly by the user.
@@ -1770,6 +1800,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       this.feedbackOption =
           new ExpandableField<FeedbackOption>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(feedbackOption, responseGetter);
+    }
   }
 
   /**
@@ -1779,7 +1814,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InvoiceSettings extends StripeObject {
+  public static class InvoiceSettings extends StripeObject implements StripeActiveObject {
     /**
      * The account tax IDs associated with the subscription. Will be set on invoices generated by
      * the subscription.
@@ -1870,7 +1905,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Issuer extends StripeObject {
+    public static class Issuer extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -1902,6 +1937,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(issuer, responseGetter);
     }
   }
 
@@ -1950,7 +1995,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentSettings extends StripeObject {
+  public static class PaymentSettings extends StripeObject implements StripeActiveObject {
     /** Payment-method-specific configuration to provide to invoices created by the subscription. */
     @SerializedName("payment_method_options")
     PaymentMethodOptions paymentMethodOptions;
@@ -1981,7 +2026,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentMethodOptions extends StripeObject {
+    public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
       /**
        * This sub-hash contains details about the Canadian pre-authorized debit payment method
        * options to pass to invoices created by the subscription.
@@ -2073,7 +2118,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class AcssDebit extends StripeObject {
+      public static class AcssDebit extends StripeObject implements StripeActiveObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2100,6 +2145,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
            */
           @SerializedName("transaction_type")
           String transactionType;
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(mandateOptions, responseGetter);
         }
       }
 
@@ -2128,7 +2178,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Billie extends StripeObject {
+      public static class Billie extends StripeObject implements StripeActiveObject {
         @SerializedName("company_details")
         CompanyDetails companyDetails;
 
@@ -2139,7 +2189,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class CompanyDetails extends StripeObject {
+        public static class CompanyDetails extends StripeObject implements StripeActiveObject {
           @SerializedName("registered_address")
           RegisteredAddress registeredAddress;
 
@@ -2198,6 +2248,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             @SerializedName("state")
             String state;
           }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(registeredAddress, responseGetter);
+          }
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(companyDetails, responseGetter);
         }
       }
 
@@ -2208,7 +2268,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Blik extends StripeObject {
+      public static class Blik extends StripeObject implements StripeActiveObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2227,6 +2287,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("expires_at")
           Long expiresAt;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(mandateOptions, responseGetter);
+        }
       }
 
       /**
@@ -2236,7 +2301,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Card extends StripeObject {
+      public static class Card extends StripeObject implements StripeActiveObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2289,6 +2354,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("description")
           String description;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(mandateOptions, responseGetter);
+        }
       }
 
       /**
@@ -2298,7 +2368,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CustomerBalance extends StripeObject {
+      public static class CustomerBalance extends StripeObject implements StripeActiveObject {
         @SerializedName("bank_transfer")
         BankTransfer bankTransfer;
 
@@ -2318,7 +2388,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class BankTransfer extends StripeObject {
+        public static class BankTransfer extends StripeObject implements StripeActiveObject {
           @SerializedName("eu_bank_transfer")
           EuBankTransfer euBankTransfer;
 
@@ -2347,6 +2417,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             @SerializedName("country")
             String country;
           }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(euBankTransfer, responseGetter);
+          }
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(bankTransfer, responseGetter);
         }
       }
 
@@ -2366,7 +2446,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Payto extends StripeObject {
+      public static class Payto extends StripeObject implements StripeActiveObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2404,6 +2484,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("purpose")
           String purpose;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(mandateOptions, responseGetter);
+        }
       }
 
       /**
@@ -2413,7 +2498,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Pix extends StripeObject {
+      public static class Pix extends StripeObject implements StripeActiveObject {
         /**
          * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
          * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
@@ -2460,6 +2545,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("payment_schedule")
           String paymentSchedule;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(mandateOptions, responseGetter);
+        }
       }
 
       /**
@@ -2478,7 +2568,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Upi extends StripeObject {
+      public static class Upi extends StripeObject implements StripeActiveObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2513,6 +2603,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("end_date")
           Long endDate;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(mandateOptions, responseGetter);
+        }
       }
 
       /**
@@ -2522,7 +2617,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class UsBankAccount extends StripeObject {
+      public static class UsBankAccount extends StripeObject implements StripeActiveObject {
         @SerializedName("financial_connections")
         FinancialConnections financialConnections;
 
@@ -2541,7 +2636,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class FinancialConnections extends StripeObject {
+        public static class FinancialConnections extends StripeObject
+            implements StripeActiveObject {
           @SerializedName("filters")
           Filters filters;
 
@@ -2571,8 +2667,39 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             @SerializedName("account_subcategories")
             List<String> accountSubcategories;
           }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(filters, responseGetter);
+          }
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(financialConnections, responseGetter);
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(acssDebit, responseGetter);
+        trySetResponseGetter(bancontact, responseGetter);
+        trySetResponseGetter(billie, responseGetter);
+        trySetResponseGetter(blik, responseGetter);
+        trySetResponseGetter(card, responseGetter);
+        trySetResponseGetter(customerBalance, responseGetter);
+        trySetResponseGetter(konbini, responseGetter);
+        trySetResponseGetter(payto, responseGetter);
+        trySetResponseGetter(pix, responseGetter);
+        trySetResponseGetter(sepaDebit, responseGetter);
+        trySetResponseGetter(upi, responseGetter);
+        trySetResponseGetter(usBankAccount, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paymentMethodOptions, responseGetter);
     }
   }
 
@@ -2609,7 +2736,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PendingUpdate extends StripeObject {
+  public static class PendingUpdate extends StripeObject implements StripeActiveObject {
     /**
      * If the update is applied, determines the date of the first full invoice, and, for plans with
      * {@code month} or {@code year} intervals, the day of the month for subsequent invoices. The
@@ -2718,6 +2845,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
                   .collect(Collectors.toList())
               : null;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -2737,7 +2869,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
+  public static class StatusDetails extends StripeObject implements StripeActiveObject {
     /** Indicates when and why the subscription transitioned to the paused status. */
     @SerializedName("paused")
     Paused paused;
@@ -2746,7 +2878,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paused extends StripeObject {
+    public static class Paused extends StripeObject implements StripeActiveObject {
       /** Information on the {@code type=subscription} pause. */
       @SerializedName("subscription")
       InnerSubscription subscription;
@@ -2779,6 +2911,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(subscription, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paused, responseGetter);
     }
   }
 
@@ -2789,7 +2931,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
+  public static class TransferData extends StripeObject implements StripeActiveObject {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
      * the percentage of the subscription invoice total that will be transferred to the destination
@@ -2821,13 +2963,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(destination, responseGetter);
+    }
   }
 
   /** Configures how this subscription behaves during the trial period. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TrialSettings extends StripeObject {
+  public static class TrialSettings extends StripeObject implements StripeActiveObject {
     /** Defines how a subscription behaves when a trial ends. */
     @SerializedName("end_behavior")
     EndBehavior endBehavior;
@@ -2854,6 +3001,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
        */
       @SerializedName("missing_payment_method")
       String missingPaymentMethod;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(endBehavior, responseGetter);
     }
   }
 

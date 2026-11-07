@@ -370,7 +370,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AmazonPay extends StripeObject {
+  public static class AmazonPay extends StripeObject implements StripeActiveObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -398,13 +398,18 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       @SerializedName("error_message")
       String errorMessage;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(statusDetails, responseGetter);
+    }
   }
 
   /** Indicates the status of a specific payment method on a payment method domain. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ApplePay extends StripeObject {
+  public static class ApplePay extends StripeObject implements StripeActiveObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -432,13 +437,18 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       @SerializedName("error_message")
       String errorMessage;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(statusDetails, responseGetter);
+    }
   }
 
   /** Indicates the status of a specific payment method on a payment method domain. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class GooglePay extends StripeObject {
+  public static class GooglePay extends StripeObject implements StripeActiveObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -466,13 +476,18 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       @SerializedName("error_message")
       String errorMessage;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(statusDetails, responseGetter);
+    }
   }
 
   /** Indicates the status of a specific payment method on a payment method domain. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Klarna extends StripeObject {
+  public static class Klarna extends StripeObject implements StripeActiveObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -500,13 +515,18 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       @SerializedName("error_message")
       String errorMessage;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(statusDetails, responseGetter);
+    }
   }
 
   /** Indicates the status of a specific payment method on a payment method domain. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Link extends StripeObject {
+  public static class Link extends StripeObject implements StripeActiveObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -534,13 +554,18 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       @SerializedName("error_message")
       String errorMessage;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(statusDetails, responseGetter);
+    }
   }
 
   /** Indicates the status of a specific payment method on a payment method domain. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Paypal extends StripeObject {
+  public static class Paypal extends StripeObject implements StripeActiveObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -567,6 +592,11 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       /** The error message associated with the status of the payment method on the domain. */
       @SerializedName("error_message")
       String errorMessage;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(statusDetails, responseGetter);
     }
   }
 

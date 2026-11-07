@@ -2,7 +2,9 @@
 package com.stripe.model.treasury;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class FinancialAccountFeatures extends StripeObject {
+public class FinancialAccountFeatures extends StripeObject implements StripeActiveObject {
   /** Toggle settings for enabling/disabling a feature. */
   @SerializedName("card_issuing")
   CardIssuing cardIssuing;
@@ -169,7 +171,7 @@ public class FinancialAccountFeatures extends StripeObject {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FinancialAddresses extends StripeObject {
+  public static class FinancialAddresses extends StripeObject implements StripeActiveObject {
     /** Toggle settings for enabling/disabling the ABA address feature. */
     @SerializedName("aba")
     Aba aba;
@@ -229,13 +231,18 @@ public class FinancialAccountFeatures extends StripeObject {
         String restriction;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(aba, responseGetter);
+    }
   }
 
   /** InboundTransfers contains inbound transfers features for a FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InboundTransfers extends StripeObject {
+  public static class InboundTransfers extends StripeObject implements StripeActiveObject {
     /** Toggle settings for enabling/disabling an inbound ACH specific feature. */
     @SerializedName("ach")
     Ach ach;
@@ -294,6 +301,11 @@ public class FinancialAccountFeatures extends StripeObject {
         @SerializedName("restriction")
         String restriction;
       }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(ach, responseGetter);
     }
   }
 
@@ -357,7 +369,7 @@ public class FinancialAccountFeatures extends StripeObject {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class OutboundPayments extends StripeObject {
+  public static class OutboundPayments extends StripeObject implements StripeActiveObject {
     /** Toggle settings for enabling/disabling an outbound ACH specific feature. */
     @SerializedName("ach")
     Ach ach;
@@ -477,13 +489,19 @@ public class FinancialAccountFeatures extends StripeObject {
         String restriction;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(ach, responseGetter);
+      trySetResponseGetter(usDomesticWire, responseGetter);
+    }
   }
 
   /** OutboundTransfers contains outbound transfers features for a FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class OutboundTransfers extends StripeObject {
+  public static class OutboundTransfers extends StripeObject implements StripeActiveObject {
     /** Toggle settings for enabling/disabling an outbound ACH specific feature. */
     @SerializedName("ach")
     Ach ach;
@@ -603,5 +621,22 @@ public class FinancialAccountFeatures extends StripeObject {
         String restriction;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(ach, responseGetter);
+      trySetResponseGetter(usDomesticWire, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(cardIssuing, responseGetter);
+    trySetResponseGetter(depositInsurance, responseGetter);
+    trySetResponseGetter(financialAddresses, responseGetter);
+    trySetResponseGetter(inboundTransfers, responseGetter);
+    trySetResponseGetter(intraStripeFlows, responseGetter);
+    trySetResponseGetter(outboundPayments, responseGetter);
+    trySetResponseGetter(outboundTransfers, responseGetter);
   }
 }

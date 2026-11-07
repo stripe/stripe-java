@@ -3,6 +3,7 @@ package com.stripe.model.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -94,7 +95,7 @@ public class OnboardingLink extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class LinkOptions extends StripeObject {
+  public static class LinkOptions extends StripeObject implements StripeActiveObject {
     /** The options associated with the Apple Terms and Conditions link type. */
     @SerializedName("apple_terms_and_conditions")
     AppleTermsAndConditions appleTermsAndConditions;
@@ -111,6 +112,11 @@ public class OnboardingLink extends ApiResource {
       /** The business name of the merchant accepting Apple's Terms and Conditions. */
       @SerializedName("merchant_display_name")
       String merchantDisplayName;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(appleTermsAndConditions, responseGetter);
     }
   }
 

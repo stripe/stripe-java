@@ -390,7 +390,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject {
+  public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
     /**
      * If this top-up is to be used with a {@code us_bank_account} payment method, this sub-hash
      * contains configuration for it.
@@ -413,6 +413,11 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
        */
       @SerializedName("network")
       String network;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(usBankAccount, responseGetter);
     }
   }
 

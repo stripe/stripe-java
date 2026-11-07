@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -115,7 +116,7 @@ public class CreditBalanceSummary extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Balance extends StripeObject {
+  public static class Balance extends StripeObject implements StripeActiveObject {
     @SerializedName("available_balance")
     AvailableBalance availableBalance;
 
@@ -129,7 +130,7 @@ public class CreditBalanceSummary extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AvailableBalance extends StripeObject {
+    public static class AvailableBalance extends StripeObject implements StripeActiveObject {
       /** The monetary amount. */
       @SerializedName("monetary")
       Monetary monetary;
@@ -161,6 +162,11 @@ public class CreditBalanceSummary extends ApiResource {
         /** A positive integer representing the amount. */
         @SerializedName("value")
         Long value;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(monetary, responseGetter);
       }
     }
 
@@ -171,7 +177,7 @@ public class CreditBalanceSummary extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class LedgerBalance extends StripeObject {
+    public static class LedgerBalance extends StripeObject implements StripeActiveObject {
       /** The monetary amount. */
       @SerializedName("monetary")
       Monetary monetary;
@@ -204,6 +210,17 @@ public class CreditBalanceSummary extends ApiResource {
         @SerializedName("value")
         Long value;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(monetary, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(availableBalance, responseGetter);
+      trySetResponseGetter(ledgerBalance, responseGetter);
     }
   }
 

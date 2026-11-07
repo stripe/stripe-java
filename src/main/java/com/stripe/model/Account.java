@@ -838,7 +838,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BusinessProfile extends StripeObject {
+  public static class BusinessProfile extends StripeObject implements StripeActiveObject {
     /** The applicant's gross annual revenue for its preceding fiscal year. */
     @SerializedName("annual_revenue")
     AnnualRevenue annualRevenue;
@@ -956,6 +956,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("currency")
       String currency;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(annualRevenue, responseGetter);
+      trySetResponseGetter(monthlyEstimatedRevenue, responseGetter);
+      trySetResponseGetter(supportAddress, responseGetter);
     }
   }
 
@@ -1601,7 +1608,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Company extends StripeObject {
+  public static class Company extends StripeObject implements StripeActiveObject {
     @SerializedName("address")
     Address address;
 
@@ -1948,7 +1955,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Verification extends StripeObject {
+    public static class Verification extends StripeObject implements StripeActiveObject {
       @SerializedName("document")
       Document document;
 
@@ -1959,7 +1966,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Document extends StripeObject {
+      public static class Document extends StripeObject implements StripeActiveObject {
         /**
          * The back of a document returned by a <a
          * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
@@ -2033,7 +2040,33 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         public void setFrontObject(File expandableObject) {
           this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(back, responseGetter);
+          trySetResponseGetter(front, responseGetter);
+        }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(document, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(addressKana, responseGetter);
+      trySetResponseGetter(addressKanji, responseGetter);
+      trySetResponseGetter(administrativeAddress, responseGetter);
+      trySetResponseGetter(directorshipDeclaration, responseGetter);
+      trySetResponseGetter(ownershipDeclaration, responseGetter);
+      trySetResponseGetter(physicalAddress, responseGetter);
+      trySetResponseGetter(principalPlaceOfBusiness, responseGetter);
+      trySetResponseGetter(registrationDate, responseGetter);
+      trySetResponseGetter(representativeDeclaration, responseGetter);
+      trySetResponseGetter(verification, responseGetter);
     }
   }
 
@@ -2044,7 +2077,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Controller extends StripeObject {
+  public static class Controller extends StripeObject implements StripeActiveObject {
     @SerializedName("fees")
     Fees fees;
 
@@ -2134,6 +2167,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("type")
       String type;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(fees, responseGetter);
+      trySetResponseGetter(losses, responseGetter);
+      trySetResponseGetter(stripeDashboard, responseGetter);
     }
   }
 
@@ -2541,7 +2581,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Settings extends StripeObject {
+  public static class Settings extends StripeObject implements StripeActiveObject {
     @SerializedName("bacs_debit_payments")
     BacsDebitPayments bacsDebitPayments;
 
@@ -2610,7 +2650,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Branding extends StripeObject {
+    public static class Branding extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) An icon for
        * the account. Must be square and at least 128px x 128px.
@@ -2673,6 +2713,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       public void setLogoObject(File expandableObject) {
         this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(icon, responseGetter);
+        trySetResponseGetter(logo, responseGetter);
+      }
     }
 
     /**
@@ -2682,7 +2728,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CardIssuing extends StripeObject {
+    public static class CardIssuing extends StripeObject implements StripeActiveObject {
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
@@ -2712,6 +2758,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         @SerializedName("user_agent")
         String userAgent;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(tosAcceptance, responseGetter);
+      }
     }
 
     /**
@@ -2721,7 +2772,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CardPayments extends StripeObject {
+    public static class CardPayments extends StripeObject implements StripeActiveObject {
       @SerializedName("decline_on")
       DeclineOn declineOn;
 
@@ -2776,6 +2827,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
          */
         @SerializedName("cvc_failure")
         Boolean cvcFailure;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(declineOn, responseGetter);
       }
     }
 
@@ -2934,7 +2990,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payouts extends StripeObject {
+    public static class Payouts extends StripeObject implements StripeActiveObject {
       /**
        * A Boolean indicating if Stripe should try to reclaim negative balances from an attached
        * bank account. See <a href="https://stripe.com/connect/account-balances">Understanding
@@ -3004,6 +3060,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         @SerializedName("weekly_payout_days")
         List<String> weeklyPayoutDays;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(schedule, responseGetter);
+      }
     }
 
     /**
@@ -3013,7 +3074,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaypayPayments extends StripeObject {
+    public static class PaypayPayments extends StripeObject implements StripeActiveObject {
       /** Additional files that are required to support the onboarding process of your business. */
       @SerializedName("additional_files")
       List<String> additionalFiles;
@@ -3037,7 +3098,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Site extends StripeObject {
+      public static class Site extends StripeObject implements StripeActiveObject {
         @SerializedName("accessible")
         Accessible accessible;
 
@@ -3093,6 +3154,18 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
           @SerializedName("payment_flow_file")
           String paymentFlowFile;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(accessible, responseGetter);
+          trySetResponseGetter(inDevelopment, responseGetter);
+          trySetResponseGetter(restricted, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(site, responseGetter);
       }
     }
 
@@ -3116,7 +3189,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Treasury extends StripeObject {
+    public static class Treasury extends StripeObject implements StripeActiveObject {
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
@@ -3146,6 +3219,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         @SerializedName("user_agent")
         String userAgent;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(tosAcceptance, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(bacsDebitPayments, responseGetter);
+      trySetResponseGetter(branding, responseGetter);
+      trySetResponseGetter(cardIssuing, responseGetter);
+      trySetResponseGetter(cardPayments, responseGetter);
+      trySetResponseGetter(dashboard, responseGetter);
+      trySetResponseGetter(invoices, responseGetter);
+      trySetResponseGetter(payments, responseGetter);
+      trySetResponseGetter(payouts, responseGetter);
+      trySetResponseGetter(paypayPayments, responseGetter);
+      trySetResponseGetter(sepaDebitPayments, responseGetter);
+      trySetResponseGetter(treasury, responseGetter);
     }
   }
 

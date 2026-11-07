@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -186,7 +187,7 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AfterExpiration extends StripeObject {
+  public static class AfterExpiration extends StripeObject implements StripeActiveObject {
     /** Configuration for authenticating the customer after the session expires. */
     @SerializedName("customer_login")
     CustomerLogin customerLogin;
@@ -211,6 +212,11 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("expires_at")
       Long expiresAt;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(customerLogin, responseGetter);
+    }
   }
 
   /**
@@ -220,7 +226,7 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Flow extends StripeObject {
+  public static class Flow extends StripeObject implements StripeActiveObject {
     @SerializedName("after_completion")
     AfterCompletion afterCompletion;
 
@@ -261,7 +267,7 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AfterCompletion extends StripeObject {
+    public static class AfterCompletion extends StripeObject implements StripeActiveObject {
       /** Configuration when {@code after_completion.type=hosted_confirmation}. */
       @SerializedName("hosted_confirmation")
       HostedConfirmation hostedConfirmation;
@@ -303,6 +309,12 @@ public class Session extends ApiResource implements HasId {
         @SerializedName("return_url")
         String returnUrl;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(hostedConfirmation, responseGetter);
+        trySetResponseGetter(redirect, responseGetter);
+      }
     }
 
     /**
@@ -321,7 +333,7 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SubscriptionCancel extends StripeObject {
+    public static class SubscriptionCancel extends StripeObject implements StripeActiveObject {
       /** Specify a retention strategy to be used in the cancellation flow. */
       @SerializedName("retention")
       Retention retention;
@@ -337,7 +349,7 @@ public class Session extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Retention extends StripeObject {
+      public static class Retention extends StripeObject implements StripeActiveObject {
         /** Configuration when {@code retention.type=coupon_offer}. */
         @SerializedName("coupon_offer")
         CouponOffer couponOffer;
@@ -362,6 +374,16 @@ public class Session extends ApiResource implements HasId {
           @SerializedName("coupon")
           String coupon;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(couponOffer, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(retention, responseGetter);
       }
     }
 
@@ -465,6 +487,16 @@ public class Session extends ApiResource implements HasId {
         @SerializedName("quantity")
         Long quantity;
       }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(afterCompletion, responseGetter);
+      trySetResponseGetter(customerUpdate, responseGetter);
+      trySetResponseGetter(subscriptionCancel, responseGetter);
+      trySetResponseGetter(subscriptionPause, responseGetter);
+      trySetResponseGetter(subscriptionUpdate, responseGetter);
+      trySetResponseGetter(subscriptionUpdateConfirm, responseGetter);
     }
   }
 

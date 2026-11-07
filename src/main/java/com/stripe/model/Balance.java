@@ -142,7 +142,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Available extends StripeObject {
+  public static class Available extends StripeObject implements StripeActiveObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -186,6 +186,11 @@ public class Balance extends ApiResource {
        */
       @SerializedName("fpx")
       Long fpx;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(sourceTypes, responseGetter);
     }
   }
 
@@ -196,7 +201,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ConnectReserved extends StripeObject {
+  public static class ConnectReserved extends StripeObject implements StripeActiveObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -241,6 +246,11 @@ public class Balance extends ApiResource {
       @SerializedName("fpx")
       Long fpx;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(sourceTypes, responseGetter);
+    }
   }
 
   /**
@@ -250,7 +260,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InstantAvailable extends StripeObject {
+  public static class InstantAvailable extends StripeObject implements StripeActiveObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -277,7 +287,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class NetAvailable extends StripeObject {
+    public static class NetAvailable extends StripeObject implements StripeActiveObject {
       /** Net balance amount, subtracting fees from platform-set pricing. */
       @SerializedName("amount")
       Long amount;
@@ -318,6 +328,11 @@ public class Balance extends ApiResource {
         @SerializedName("fpx")
         Long fpx;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(sourceTypes, responseGetter);
+      }
     }
 
     /**
@@ -349,6 +364,11 @@ public class Balance extends ApiResource {
       @SerializedName("fpx")
       Long fpx;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(sourceTypes, responseGetter);
+    }
   }
 
   /**
@@ -370,7 +390,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Available extends StripeObject {
+    public static class Available extends StripeObject implements StripeActiveObject {
       /** Balance amount. */
       @SerializedName("amount")
       Long amount;
@@ -415,6 +435,11 @@ public class Balance extends ApiResource {
         @SerializedName("fpx")
         Long fpx;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(sourceTypes, responseGetter);
+      }
     }
   }
 
@@ -425,7 +450,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Pending extends StripeObject {
+  public static class Pending extends StripeObject implements StripeActiveObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -470,6 +495,11 @@ public class Balance extends ApiResource {
       @SerializedName("fpx")
       Long fpx;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(sourceTypes, responseGetter);
+    }
   }
 
   /**
@@ -495,7 +525,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Available extends StripeObject {
+    public static class Available extends StripeObject implements StripeActiveObject {
       /** Balance amount. */
       @SerializedName("amount")
       Long amount;
@@ -540,6 +570,11 @@ public class Balance extends ApiResource {
         @SerializedName("fpx")
         Long fpx;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(sourceTypes, responseGetter);
+      }
     }
 
     /**
@@ -549,7 +584,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pending extends StripeObject {
+    public static class Pending extends StripeObject implements StripeActiveObject {
       /** Balance amount. */
       @SerializedName("amount")
       Long amount;
@@ -593,6 +628,11 @@ public class Balance extends ApiResource {
          */
         @SerializedName("fpx")
         Long fpx;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(sourceTypes, responseGetter);
       }
     }
   }
