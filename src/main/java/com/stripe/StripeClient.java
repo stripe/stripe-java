@@ -75,46 +75,16 @@ public class StripeClient {
 
     StripeResponseGetter responseGetter = this.getResponseGetter();
 
-    // We can only create a new client for LiveStripeResponseGetter because it's the only class with
-    // `getOptions()`. If we add that method to the interface in a later major, we could remove this
-    // check.
+    // We can only create a new client for LiveStripeResponseGetter, since it's the only
+    // StripeResponseGetter implementation that supports withStripeContext today.
     if (!(responseGetter instanceof LiveStripeResponseGetter)) {
       throw new IllegalStateException(
           "Cannot create a client with custom context for non-Live response getters");
     }
 
-    LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
-
-    // Create a new LiveStripeResponseGetter with updated context, reusing the HTTP client
-    LiveStripeResponseGetter newResponseGetter =
-        liveGetter.withNewOptions(
-            options -> {
-              if (options instanceof ClientStripeResponseGetterOptions) {
-                return ((ClientStripeResponseGetterOptions) options)
-                    .toBuilder()
-                    .stripeAccount(null)
-                    .stripeContext(contextString)
-                    .build();
-              }
-
-              return new ClientStripeResponseGetterOptions(
-                  options.getAuthenticator(),
-                  options.getClientId(),
-                  options.getConnectTimeout(),
-                  options.getReadTimeout(),
-                  options.getMaxNetworkRetries(),
-                  options.getConnectionProxy(),
-                  options.getProxyCredential(),
-                  options.getApiBase(),
-                  options.getFilesBase(),
-                  options.getConnectBase(),
-                  options.getMeterEventsBase(),
-                  null,
-                  contextString);
-            });
-
-    // Create and return a new StripeClient with the new response getter
-    return new StripeClient(newResponseGetter);
+    // Create a new LiveStripeResponseGetter with updated context, reusing the HTTP client, and
+    // return a new StripeClient wrapping it.
+    return new StripeClient(responseGetter.withStripeContext(contextString));
   }
 
   /**
