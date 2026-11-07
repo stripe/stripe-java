@@ -934,6 +934,9 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(shippingRate, responseGetter);
+      if (taxes != null) {
+        taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -1039,8 +1042,20 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerBalanceTransaction, responseGetter);
+    if (discountAmounts != null) {
+      discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(lines, responseGetter);
+    if (pretaxCreditAmounts != null) {
+      pretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (refunds != null) {
+      refunds.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(shippingCost, responseGetter);
+    if (totalTaxes != null) {
+      totalTaxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

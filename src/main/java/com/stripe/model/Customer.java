@@ -961,6 +961,9 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (customFields != null) {
+        customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(defaultPaymentMethod, responseGetter);
       trySetResponseGetter(renderingOptions, responseGetter);
     }

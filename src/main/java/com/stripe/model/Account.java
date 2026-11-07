@@ -2184,7 +2184,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FutureRequirements extends StripeObject {
+  public static class FutureRequirements extends StripeObject implements StripeActiveObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -2365,6 +2365,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("requirement")
       String requirement;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (alternatives != null) {
+        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (errors != null) {
+        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /**
@@ -2391,7 +2401,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Requirements extends StripeObject {
+  public static class Requirements extends StripeObject implements StripeActiveObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -2571,6 +2581,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("requirement")
       String requirement;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (alternatives != null) {
+        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (errors != null) {
+        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -2866,7 +2886,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Invoices extends StripeObject {
+    public static class Invoices extends StripeObject implements StripeActiveObject {
       /**
        * The list of default Account Tax IDs to automatically include on invoices. Account Tax IDs
        * get added when an invoice is finalized.
@@ -2928,6 +2948,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
                     .map(x -> new ExpandableField<TaxId>(x.getId(), x))
                     .collect(Collectors.toList())
                 : null;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (defaultAccountTaxIds != null) {
+          defaultAccountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 

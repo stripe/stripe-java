@@ -421,7 +421,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CancellationReason extends StripeObject {
+      public static class CancellationReason extends StripeObject implements StripeActiveObject {
         /** Whether the feature is enabled. */
         @SerializedName("enabled")
         Boolean enabled;
@@ -477,6 +477,13 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
                       .collect(Collectors.toList())
                   : null;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (feedbackOptions != null) {
+            feedbackOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
+        }
       }
 
       @Override
@@ -510,7 +517,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Duration extends StripeObject {
+      public static class Duration extends StripeObject implements StripeActiveObject {
         /** The preset pause durations customers can choose from. */
         @SerializedName("interval_options")
         List<Configuration.Features.SubscriptionPause.Duration.IntervalOption> intervalOptions;
@@ -543,6 +550,13 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
           /** The number of intervals in the pause duration. The maximum duration is three years. */
           @SerializedName("interval_count")
           Long intervalCount;
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (intervalOptions != null) {
+            intervalOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
         }
       }
 
@@ -663,7 +677,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ScheduleAtPeriodEnd extends StripeObject {
+      public static class ScheduleAtPeriodEnd extends StripeObject implements StripeActiveObject {
         /**
          * List of conditions. When any condition is true, an update will be scheduled at the end of
          * the current period.
@@ -687,10 +701,20 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
           @SerializedName("type")
           String type;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (conditions != null) {
+            conditions.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
+        }
       }
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (products != null) {
+          products.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(scheduleAtPeriodEnd, responseGetter);
       }
     }

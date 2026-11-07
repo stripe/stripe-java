@@ -562,6 +562,9 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(customUnitAmount, responseGetter);
+      if (tiers != null) {
+        tiers.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -690,6 +693,9 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     trySetResponseGetter(customUnitAmount, responseGetter);
     trySetResponseGetter(product, responseGetter);
     trySetResponseGetter(recurring, responseGetter);
+    if (tiers != null) {
+      tiers.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(transformQuantity, responseGetter);
   }
 }

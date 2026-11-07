@@ -594,6 +594,9 @@ public class FinancialAccount extends ApiResource
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(balance, responseGetter);
     trySetResponseGetter(features, responseGetter);
+    if (financialAddresses != null) {
+      financialAddresses.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(platformRestrictions, responseGetter);
     trySetResponseGetter(statusDetails, responseGetter);
   }

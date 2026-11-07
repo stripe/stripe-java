@@ -61,7 +61,7 @@ public class FundingInstructions extends StripeObject implements StripeActiveObj
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BankTransfer extends StripeObject {
+  public static class BankTransfer extends StripeObject implements StripeActiveObject {
     /** The country of the bank account to fund. */
     @SerializedName("country")
     String country;
@@ -351,6 +351,13 @@ public class FundingInstructions extends StripeObject implements StripeActiveObj
         trySetResponseGetter(spei, responseGetter);
         trySetResponseGetter(swift, responseGetter);
         trySetResponseGetter(zengin, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (financialAddresses != null) {
+        financialAddresses.forEach(x -> trySetResponseGetter(x, responseGetter));
       }
     }
   }

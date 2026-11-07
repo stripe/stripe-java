@@ -227,6 +227,9 @@ public class CreditBalanceSummary extends ApiResource {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (balances != null) {
+      balances.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(customer, responseGetter);
   }
 }

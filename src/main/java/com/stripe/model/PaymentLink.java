@@ -722,7 +722,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Dropdown extends StripeObject {
+    public static class Dropdown extends StripeObject implements StripeActiveObject {
       /** The value that pre-fills on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
@@ -750,6 +750,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
          */
         @SerializedName("value")
         String value;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (options != null) {
+          options.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 
@@ -1099,6 +1106,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (customFields != null) {
+          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(issuer, responseGetter);
         trySetResponseGetter(renderingOptions, responseGetter);
       }
@@ -1645,6 +1658,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (customFields != null) {
+          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(issuer, responseGetter);
       }
     }
@@ -1754,17 +1773,26 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
+    if (customFields != null) {
+      customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
+    if (optionalItems != null) {
+      optionalItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(paymentIntentData, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(restrictions, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
+    if (shippingOptions != null) {
+      shippingOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(subscriptionData, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(transferData, responseGetter);

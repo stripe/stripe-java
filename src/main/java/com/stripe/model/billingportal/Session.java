@@ -420,7 +420,8 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SubscriptionUpdateConfirm extends StripeObject {
+    public static class SubscriptionUpdateConfirm extends StripeObject
+        implements StripeActiveObject {
       /** The coupon or promotion code to apply to this subscription update. */
       @SerializedName("discounts")
       List<Session.Flow.SubscriptionUpdateConfirm.Discount> discounts;
@@ -486,6 +487,16 @@ public class Session extends ApiResource implements HasId {
          */
         @SerializedName("quantity")
         Long quantity;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (items != null) {
+          items.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 

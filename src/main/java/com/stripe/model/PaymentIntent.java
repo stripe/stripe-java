@@ -2042,7 +2042,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DisplayBankTransferInstructions extends StripeObject {
+    public static class DisplayBankTransferInstructions extends StripeObject
+        implements StripeActiveObject {
       /** The remaining amount that needs to be transferred to complete the payment. */
       @SerializedName("amount_remaining")
       Long amountRemaining;
@@ -2353,6 +2354,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           trySetResponseGetter(spei, responseGetter);
           trySetResponseGetter(swift, responseGetter);
           trySetResponseGetter(zengin, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (financialAddresses != null) {
+          financialAddresses.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
       }
     }
@@ -4037,6 +4045,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
         @Override
         public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (availablePlans != null) {
+            availablePlans.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
           trySetResponseGetter(plan, responseGetter);
         }
       }

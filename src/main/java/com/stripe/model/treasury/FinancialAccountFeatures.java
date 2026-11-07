@@ -59,7 +59,7 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CardIssuing extends StripeObject {
+  public static class CardIssuing extends StripeObject implements StripeActiveObject {
     /** Whether the FinancialAccount should have the Feature. */
     @SerializedName("requested")
     Boolean requested;
@@ -109,13 +109,20 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
       @SerializedName("restriction")
       String restriction;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (statusDetails != null) {
+        statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /** Toggle settings for enabling/disabling a feature. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DepositInsurance extends StripeObject {
+  public static class DepositInsurance extends StripeObject implements StripeActiveObject {
     /** Whether the FinancialAccount should have the Feature. */
     @SerializedName("requested")
     Boolean requested;
@@ -165,6 +172,13 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
       @SerializedName("restriction")
       String restriction;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (statusDetails != null) {
+        statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /** Settings related to Financial Addresses features on a Financial Account. */
@@ -180,7 +194,7 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Aba extends StripeObject {
+    public static class Aba extends StripeObject implements StripeActiveObject {
       /** Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
@@ -230,6 +244,13 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
         @SerializedName("restriction")
         String restriction;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (statusDetails != null) {
+          statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     @Override
@@ -251,7 +272,7 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ach extends StripeObject {
+    public static class Ach extends StripeObject implements StripeActiveObject {
       /** Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
@@ -301,6 +322,13 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
         @SerializedName("restriction")
         String restriction;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (statusDetails != null) {
+          statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     @Override
@@ -313,7 +341,7 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class IntraStripeFlows extends StripeObject {
+  public static class IntraStripeFlows extends StripeObject implements StripeActiveObject {
     /** Whether the FinancialAccount should have the Feature. */
     @SerializedName("requested")
     Boolean requested;
@@ -363,6 +391,13 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
       @SerializedName("restriction")
       String restriction;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (statusDetails != null) {
+        statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /** Settings related to Outbound Payments features on a Financial Account. */
@@ -382,7 +417,7 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ach extends StripeObject {
+    public static class Ach extends StripeObject implements StripeActiveObject {
       /** Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
@@ -432,13 +467,20 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
         @SerializedName("restriction")
         String restriction;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (statusDetails != null) {
+          statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsDomesticWire extends StripeObject {
+    public static class UsDomesticWire extends StripeObject implements StripeActiveObject {
       /** Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
@@ -488,6 +530,13 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
         @SerializedName("restriction")
         String restriction;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (statusDetails != null) {
+          statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     @Override
@@ -514,7 +563,7 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ach extends StripeObject {
+    public static class Ach extends StripeObject implements StripeActiveObject {
       /** Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
@@ -564,13 +613,20 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
         @SerializedName("restriction")
         String restriction;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (statusDetails != null) {
+          statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsDomesticWire extends StripeObject {
+    public static class UsDomesticWire extends StripeObject implements StripeActiveObject {
       /** Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
@@ -619,6 +675,13 @@ public class FinancialAccountFeatures extends StripeObject implements StripeActi
          */
         @SerializedName("restriction")
         String restriction;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (statusDetails != null) {
+          statusDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 

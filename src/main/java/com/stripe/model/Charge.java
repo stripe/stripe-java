@@ -926,7 +926,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Level3 extends StripeObject {
+  public static class Level3 extends StripeObject implements StripeActiveObject {
     @SerializedName("customer_reference")
     String customerReference;
 
@@ -970,6 +970,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       @SerializedName("unit_cost")
       Long unitCost;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (lineItems != null) {
+        lineItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 

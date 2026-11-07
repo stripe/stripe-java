@@ -886,7 +886,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CollectInputs extends StripeObject {
+    public static class CollectInputs extends StripeObject implements StripeActiveObject {
       /** List of inputs to be collected. */
       @SerializedName("inputs")
       List<Reader.Action.CollectInputs.Input> inputs;
@@ -1009,7 +1009,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Selection extends StripeObject implements HasId {
+        public static class Selection extends StripeObject implements HasId, StripeActiveObject {
           /** List of possible choices to be selected. */
           @SerializedName("choices")
           List<Reader.Action.CollectInputs.Input.Selection.Choice> choices;
@@ -1040,6 +1040,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             /** The text to be selected. Maximum 30 characters. */
             @SerializedName("text")
             String text;
+          }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            if (choices != null) {
+              choices.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
           }
         }
 
@@ -1094,6 +1101,16 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           trySetResponseGetter(selection, responseGetter);
           trySetResponseGetter(signature, responseGetter);
           trySetResponseGetter(text, responseGetter);
+          if (toggles != null) {
+            toggles.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (inputs != null) {
+          inputs.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
       }
     }
@@ -1594,7 +1611,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Cart extends StripeObject {
+      public static class Cart extends StripeObject implements StripeActiveObject {
         /**
          * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
          * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
@@ -1640,6 +1657,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           /** The quantity of the line item. */
           @SerializedName("quantity")
           Long quantity;
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (lineItems != null) {
+            lineItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
         }
       }
 

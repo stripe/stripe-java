@@ -871,6 +871,9 @@ public class Account extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(accountHolder, responseGetter);
+    if (accountNumbers != null) {
+      accountNumbers.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(balance, responseGetter);
     trySetResponseGetter(balanceRefresh, responseGetter);
     trySetResponseGetter(ownership, responseGetter);

@@ -152,4 +152,12 @@ public class Association extends ApiResource implements HasId {
       trySetResponseGetter(errored, responseGetter);
     }
   }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    if (taxTransactionAttempts != null) {
+      taxTransactionAttempts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+  }
 }

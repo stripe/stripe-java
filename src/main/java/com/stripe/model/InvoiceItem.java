@@ -781,6 +781,9 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(creditedItems, responseGetter);
+      if (discountAmounts != null) {
+        discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -788,11 +791,20 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(invoice, responseGetter);
+    if (invoicingRules != null) {
+      invoicingRules.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(prorationDetails, responseGetter);
+    if (taxRates != null) {
+      taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(testClock, responseGetter);
   }
 }

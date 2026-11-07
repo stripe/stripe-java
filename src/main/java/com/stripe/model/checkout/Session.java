@@ -1379,7 +1379,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Dropdown extends StripeObject {
+    public static class Dropdown extends StripeObject implements StripeActiveObject {
       /** The value that pre-fills on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
@@ -1411,6 +1411,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("value")
         String value;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (options != null) {
+          options.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 
@@ -1683,6 +1690,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(address, responseGetter);
+      if (taxIds != null) {
+        taxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -1936,6 +1946,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (customFields != null) {
+          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(issuer, responseGetter);
         trySetResponseGetter(renderingOptions, responseGetter);
       }
@@ -4746,6 +4762,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(shippingRate, responseGetter);
+      if (taxes != null) {
+        taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -4843,7 +4862,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Breakdown extends StripeObject {
+    public static class Breakdown extends StripeObject implements StripeActiveObject {
       /** The aggregated discounts. */
       @SerializedName("discounts")
       List<Session.TotalDetails.Breakdown.Discount> discounts;
@@ -4929,6 +4948,16 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
           trySetResponseGetter(rate, responseGetter);
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (taxes != null) {
+          taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     @Override
@@ -4982,14 +5011,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(consent, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
     trySetResponseGetter(currencyConversion, responseGetter);
+    if (customFields != null) {
+      customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nameCollection, responseGetter);
+    if (optionalItems != null) {
+      optionalItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentLink, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
@@ -5001,6 +5039,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
+    if (shippingOptions != null) {
+      shippingOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);

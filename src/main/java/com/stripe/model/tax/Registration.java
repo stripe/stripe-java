@@ -3398,7 +3398,7 @@ public class Registration extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StateSalesTax extends StripeObject {
+      public static class StateSalesTax extends StripeObject implements StripeActiveObject {
         /** Elections for the state sales tax registration. */
         @SerializedName("elections")
         List<Registration.CountryOptions.Us.StateSalesTax.Election> elections;
@@ -3426,6 +3426,13 @@ public class Registration extends ApiResource implements HasId {
            */
           @SerializedName("type")
           String type;
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (elections != null) {
+            elections.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
         }
       }
 

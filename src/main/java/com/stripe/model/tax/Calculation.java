@@ -364,6 +364,9 @@ public class Calculation extends ApiResource implements HasId {
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(address, responseGetter);
+      if (taxIds != null) {
+        taxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -430,7 +433,7 @@ public class Calculation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShippingCost extends StripeObject {
+  public static class ShippingCost extends StripeObject implements StripeActiveObject {
     /**
      * The shipping amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
@@ -606,6 +609,13 @@ public class Calculation extends ApiResource implements HasId {
         trySetResponseGetter(taxRateDetails, responseGetter);
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (taxBreakdown != null) {
+        taxBreakdown.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /**
@@ -752,5 +762,8 @@ public class Calculation extends ApiResource implements HasId {
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(shipFromDetails, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
+    if (taxBreakdown != null) {
+      taxBreakdown.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

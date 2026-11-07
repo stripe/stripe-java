@@ -1342,6 +1342,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (items != null) {
+        items.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(shipping, responseGetter);
     }
   }

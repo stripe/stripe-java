@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CreditNoteLineItem extends StripeObject implements HasId {
+public class CreditNoteLineItem extends StripeObject implements HasId, StripeActiveObject {
   /**
    * The integer amount in cents (or local equivalent) representing the gross amount being credited
    * for this line item, excluding (exclusive) tax and discounts.
@@ -319,6 +319,22 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(taxRateDetails, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    if (discountAmounts != null) {
+      discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (pretaxCreditAmounts != null) {
+      pretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (taxRates != null) {
+      taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (taxes != null) {
+      taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
   }
 }

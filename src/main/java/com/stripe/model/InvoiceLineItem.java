@@ -757,9 +757,21 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (discountAmounts != null) {
+      discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
+    if (pretaxCreditAmounts != null) {
+      pretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
+    if (taxes != null) {
+      taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

@@ -496,6 +496,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(beneficiary, responseGetter);
+    if (deliveryDetails != null) {
+      deliveryDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(product, responseGetter);
   }
 }

@@ -3123,6 +3123,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(shippingRate, responseGetter);
+      if (taxes != null) {
+        taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -3193,7 +3196,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ThresholdReason extends StripeObject {
+  public static class ThresholdReason extends StripeObject implements StripeActiveObject {
     /** The total invoice amount threshold boundary if it triggered the threshold invoice. */
     @SerializedName("amount_gte")
     Long amountGte;
@@ -3217,6 +3220,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       /** The quantity threshold boundary that applied to the given line item. */
       @SerializedName("usage_gte")
       Long usageGte;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (itemReasons != null) {
+        itemReasons.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -3441,14 +3451,29 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (accountTaxIds != null) {
+      accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(confirmationSecret, responseGetter);
+    if (customFields != null) {
+      customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerAddress, responseGetter);
     trySetResponseGetter(customerShipping, responseGetter);
+    if (customerTaxIds != null) {
+      customerTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
+    if (defaultTaxRates != null) {
+      defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(fromInvoice, responseGetter);
     trySetResponseGetter(issuer, responseGetter);
     trySetResponseGetter(lastFinalizationError, responseGetter);
@@ -3465,5 +3490,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(thresholdReason, responseGetter);
+    if (totalDiscountAmounts != null) {
+      totalDiscountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (totalPretaxCreditAmounts != null) {
+      totalPretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (totalTaxes != null) {
+      totalTaxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

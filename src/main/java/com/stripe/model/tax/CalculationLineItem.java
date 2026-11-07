@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CalculationLineItem extends StripeObject implements HasId {
+public class CalculationLineItem extends StripeObject implements HasId, StripeActiveObject {
   /**
    * The line item amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
    * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
@@ -235,6 +235,13 @@ public class CalculationLineItem extends StripeObject implements HasId {
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(jurisdiction, responseGetter);
       trySetResponseGetter(taxRateDetails, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    if (taxBreakdown != null) {
+      taxBreakdown.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
   }
 }

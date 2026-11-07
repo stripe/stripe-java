@@ -664,7 +664,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SpendingControls extends StripeObject {
+  public static class SpendingControls extends StripeObject implements StripeActiveObject {
     /**
      * Array of card presence statuses from which authorizations will be allowed. Possible options
      * are {@code present}, {@code not_present}. All other statuses will be blocked. Cannot be set
@@ -762,6 +762,13 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("interval")
       String interval;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (spendingLimits != null) {
+        spendingLimits.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 

@@ -733,7 +733,7 @@ public class Transaction extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Flight extends StripeObject {
+    public static class Flight extends StripeObject implements StripeActiveObject {
       /** The time that the flight departed. */
       @SerializedName("departure_at")
       Long departureAt;
@@ -785,6 +785,13 @@ public class Transaction extends ApiResource
         /** Whether a stopover is allowed on this flight. */
         @SerializedName("stopover_allowed")
         Boolean stopoverAllowed;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (segments != null) {
+          segments.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 
@@ -881,6 +888,9 @@ public class Transaction extends ApiResource
       trySetResponseGetter(flight, responseGetter);
       trySetResponseGetter(fuel, responseGetter);
       trySetResponseGetter(lodging, responseGetter);
+      if (receipt != null) {
+        receipt.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 

@@ -367,6 +367,9 @@ public class Balance extends ApiResource {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (netAvailable != null) {
+        netAvailable.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(sourceTypes, responseGetter);
     }
   }
@@ -378,7 +381,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Issuing extends StripeObject {
+  public static class Issuing extends StripeObject implements StripeActiveObject {
     /** Funds that are available for use. */
     @SerializedName("available")
     List<Balance.Issuing.Available> available;
@@ -439,6 +442,13 @@ public class Balance extends ApiResource {
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
         trySetResponseGetter(sourceTypes, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (available != null) {
+        available.forEach(x -> trySetResponseGetter(x, responseGetter));
       }
     }
   }
@@ -509,7 +519,8 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RefundAndDisputePrefunding extends StripeObject {
+  public static class RefundAndDisputePrefunding extends StripeObject
+      implements StripeActiveObject {
     /** Funds that are available for use. */
     @SerializedName("available")
     List<Balance.RefundAndDisputePrefunding.Available> available;
@@ -635,12 +646,34 @@ public class Balance extends ApiResource {
         trySetResponseGetter(sourceTypes, responseGetter);
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (available != null) {
+        available.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (pending != null) {
+        pending.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (available != null) {
+      available.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (connectReserved != null) {
+      connectReserved.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (instantAvailable != null) {
+      instantAvailable.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(issuing, responseGetter);
+    if (pending != null) {
+      pending.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(refundAndDisputePrefunding, responseGetter);
   }
 }

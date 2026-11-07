@@ -182,6 +182,12 @@ public class LineItem extends StripeObject implements HasId, StripeActiveObject 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     trySetResponseGetter(adjustableQuantity, responseGetter);
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(price, responseGetter);
+    if (taxes != null) {
+      taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

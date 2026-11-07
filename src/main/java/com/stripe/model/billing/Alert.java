@@ -415,6 +415,9 @@ public class Alert extends ApiResource implements HasId {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (filters != null) {
+        filters.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(meter, responseGetter);
     }
   }

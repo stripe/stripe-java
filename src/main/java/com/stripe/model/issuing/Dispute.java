@@ -1077,6 +1077,9 @@ public class Dispute extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (balanceTransactions != null) {
+      balanceTransactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(evidence, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
     trySetResponseGetter(treasury, responseGetter);

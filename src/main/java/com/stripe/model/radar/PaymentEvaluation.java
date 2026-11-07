@@ -835,6 +835,9 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(clientDeviceMetadataDetails, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
+    if (events != null) {
+      events.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);
     trySetResponseGetter(signals, responseGetter);

@@ -10,6 +10,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.climate.ProductListParams;
 import com.stripe.param.climate.ProductRetrieveParams;
 import java.math.BigDecimal;
@@ -171,5 +172,13 @@ public class Product extends ApiResource implements HasId {
      */
     @SerializedName("amount_total")
     Long amountTotal;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    if (suppliers != null) {
+      suppliers.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

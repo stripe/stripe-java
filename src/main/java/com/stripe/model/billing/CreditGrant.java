@@ -466,7 +466,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Scope extends StripeObject {
+    public static class Scope extends StripeObject implements StripeActiveObject {
       /**
        * The price type that credit grants can apply to. We currently only support the {@code
        * metered} price type. This refers to prices that have a <a
@@ -499,6 +499,13 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
         @Getter(onMethod_ = {@Override})
         @SerializedName("id")
         String id;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (prices != null) {
+          prices.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 

@@ -1091,7 +1091,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Breakdown extends StripeObject {
+        public static class Breakdown extends StripeObject implements StripeActiveObject {
           /** The aggregated discounts. */
           @SerializedName("discounts")
           List<Quote.Computed.Recurring.TotalDetails.Breakdown.Discount> discounts;
@@ -1179,6 +1179,16 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
               trySetResponseGetter(rate, responseGetter);
             }
           }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            if (discounts != null) {
+              discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
+            if (taxes != null) {
+              taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
+          }
         }
 
         @Override
@@ -1250,7 +1260,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Breakdown extends StripeObject {
+        public static class Breakdown extends StripeObject implements StripeActiveObject {
           /** The aggregated discounts. */
           @SerializedName("discounts")
           List<Quote.Computed.Upfront.TotalDetails.Breakdown.Discount> discounts;
@@ -1336,6 +1346,16 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             @Override
             public void setResponseGetter(StripeResponseGetter responseGetter) {
               trySetResponseGetter(rate, responseGetter);
+            }
+          }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            if (discounts != null) {
+              discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
+            if (taxes != null) {
+              taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
             }
           }
         }
@@ -1497,6 +1517,9 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (customFields != null) {
+        customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(issuer, responseGetter);
     }
   }
@@ -1644,7 +1667,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Breakdown extends StripeObject {
+    public static class Breakdown extends StripeObject implements StripeActiveObject {
       /** The aggregated discounts. */
       @SerializedName("discounts")
       List<Quote.TotalDetails.Breakdown.Discount> discounts;
@@ -1730,6 +1753,16 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           trySetResponseGetter(rate, responseGetter);
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (taxes != null) {
+          taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     @Override
@@ -1798,6 +1831,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(computed, responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    if (defaultTaxRates != null) {
+      defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(fromQuote, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(invoiceSettings, responseGetter);

@@ -1001,6 +1001,12 @@ public class SubscriptionSchedule extends ApiResource
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (customFields != null) {
+          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(issuer, responseGetter);
       }
     }
@@ -1772,8 +1778,14 @@ public class SubscriptionSchedule extends ApiResource
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(period, responseGetter);
         trySetResponseGetter(price, responseGetter);
+        if (taxRates != null) {
+          taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 
@@ -2122,6 +2134,12 @@ public class SubscriptionSchedule extends ApiResource
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (customFields != null) {
+          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(issuer, responseGetter);
       }
     }
@@ -2319,8 +2337,14 @@ public class SubscriptionSchedule extends ApiResource
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
         trySetResponseGetter(billingThresholds, responseGetter);
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
         trySetResponseGetter(plan, responseGetter);
         trySetResponseGetter(price, responseGetter);
+        if (taxRates != null) {
+          taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 
@@ -2372,10 +2396,22 @@ public class SubscriptionSchedule extends ApiResource
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (addInvoiceItems != null) {
+        addInvoiceItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(automaticTax, responseGetter);
       trySetResponseGetter(billingThresholds, responseGetter);
       trySetResponseGetter(defaultPaymentMethod, responseGetter);
+      if (defaultTaxRates != null) {
+        defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (discounts != null) {
+        discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(invoiceSettings, responseGetter);
+      if (items != null) {
+        items.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(onBehalfOf, responseGetter);
       trySetResponseGetter(transferData, responseGetter);
     }
@@ -2389,6 +2425,12 @@ public class SubscriptionSchedule extends ApiResource
     trySetResponseGetter(currentPhase, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);
+    if (pauseSchedules != null) {
+      pauseSchedules.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (phases != null) {
+      phases.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }

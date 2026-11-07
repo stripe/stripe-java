@@ -1712,6 +1712,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (appliesTo != null) {
+        appliesTo.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(billUntil, responseGetter);
     }
   }
@@ -1946,6 +1949,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (accountTaxIds != null) {
+        accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (customFields != null) {
+        customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
       trySetResponseGetter(issuer, responseGetter);
     }
   }
@@ -2849,6 +2858,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(discount, responseGetter);
+      if (discounts != null) {
+        discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (subscriptionItems != null) {
+        subscriptionItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -3016,11 +3031,20 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(billingCycleAnchorConfig, responseGetter);
     trySetResponseGetter(billingMode, responseGetter);
+    if (billingSchedules != null) {
+      billingSchedules.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(billingThresholds, responseGetter);
     trySetResponseGetter(cancellationDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
+    if (defaultTaxRates != null) {
+      defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(items, responseGetter);
     trySetResponseGetter(latestInvoice, responseGetter);

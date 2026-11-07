@@ -463,7 +463,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FutureRequirements extends StripeObject {
+  public static class FutureRequirements extends StripeObject implements StripeActiveObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -625,6 +625,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       @SerializedName("requirement")
       String requirement;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (alternatives != null) {
+        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (errors != null) {
+        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /**
@@ -688,7 +698,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Requirements extends StripeObject {
+  public static class Requirements extends StripeObject implements StripeActiveObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -845,6 +855,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        */
       @SerializedName("requirement")
       String requirement;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (alternatives != null) {
+        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (errors != null) {
+        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 

@@ -1077,6 +1077,9 @@ public class Dispute extends ApiResource
         @Override
         public void setResponseGetter(StripeResponseGetter responseGetter) {
           trySetResponseGetter(disputedTransaction, responseGetter);
+          if (priorUndisputedTransactions != null) {
+            priorUndisputedTransactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
         }
       }
 
@@ -1394,6 +1397,9 @@ public class Dispute extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (balanceTransactions != null) {
+      balanceTransactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(charge, responseGetter);
     trySetResponseGetter(evidence, responseGetter);
     trySetResponseGetter(evidenceDetails, responseGetter);
