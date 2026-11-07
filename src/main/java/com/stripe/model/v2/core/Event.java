@@ -126,10 +126,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
 
     RequestOptions opts = optsBuilder.build();
 
-    // Scope the getter used for this request to the event's own context, clearing any
-    // stripe_account the original client happened to be configured with. The returned object is
-    // deserialized with this scoped getter too, so a later no-options request it makes (e.g. a
-    // mutation) also uses the event's context rather than the original client's default.
+    // Scope the getter used for this request to the event's own context.
     StripeResponseGetter scopedResponseGetter = this.responseGetter.withStripeContext(context);
 
     return scopedResponseGetter.request(
