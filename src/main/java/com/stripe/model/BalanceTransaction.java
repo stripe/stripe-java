@@ -344,6 +344,9 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (feeDetails != null) {
+      feeDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(source, responseGetter);
   }
 }

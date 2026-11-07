@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -459,7 +460,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class LifecycleControls extends StripeObject {
+  public static class LifecycleControls extends StripeObject implements StripeActiveObject {
     @SerializedName("cancel_after")
     CancelAfter cancelAfter;
 
@@ -479,6 +480,11 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       @SerializedName("payment_count")
       Long paymentCount;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(cancelAfter, responseGetter);
+    }
   }
 
   /**
@@ -488,7 +494,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Shipping extends StripeObject {
+  public static class Shipping extends StripeObject implements StripeActiveObject {
     @SerializedName("address")
     Address address;
 
@@ -596,7 +602,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AddressValidation extends StripeObject {
+    public static class AddressValidation extends StripeObject implements StripeActiveObject {
       /**
        * The address validation capabilities to use.
        *
@@ -618,6 +624,11 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("result")
       String result;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(normalizedAddress, responseGetter);
+      }
     }
 
     /**
@@ -637,6 +648,13 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       @SerializedName("eori_number")
       String eoriNumber;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(addressValidation, responseGetter);
+      trySetResponseGetter(customs, responseGetter);
+    }
   }
 
   /**
@@ -646,7 +664,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SpendingControls extends StripeObject {
+  public static class SpendingControls extends StripeObject implements StripeActiveObject {
     /**
      * Array of card presence statuses from which authorizations will be allowed. Possible options
      * are {@code present}, {@code not_present}. All other statuses will be blocked. Cannot be set
@@ -745,6 +763,13 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       @SerializedName("interval")
       String interval;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (spendingLimits != null) {
+        spendingLimits.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /**
@@ -754,7 +779,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Wallets extends StripeObject {
+  public static class Wallets extends StripeObject implements StripeActiveObject {
     @SerializedName("apple_pay")
     ApplePay applePay;
 
@@ -807,6 +832,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("ineligible_reason")
       String ineligibleReason;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(applePay, responseGetter);
+      trySetResponseGetter(googlePay, responseGetter);
     }
   }
 

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.net.ApiRequest;
@@ -236,7 +237,7 @@ public class TransactionEntry extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FlowDetails extends StripeObject {
+  public static class FlowDetails extends StripeObject implements StripeActiveObject {
     /**
      * Legacy CreditReversals are part of the v1 version of Treasury for platforms and do not
      * support many of the features introduced in <a
@@ -386,6 +387,18 @@ public class TransactionEntry extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditReversal, responseGetter);
+      trySetResponseGetter(debitReversal, responseGetter);
+      trySetResponseGetter(inboundTransfer, responseGetter);
+      trySetResponseGetter(issuingAuthorization, responseGetter);
+      trySetResponseGetter(outboundPayment, responseGetter);
+      trySetResponseGetter(outboundTransfer, responseGetter);
+      trySetResponseGetter(receivedCredit, responseGetter);
+      trySetResponseGetter(receivedDebit, responseGetter);
+    }
   }
 
   @Override

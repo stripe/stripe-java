@@ -880,7 +880,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingDetails extends StripeObject {
+  public static class BillingDetails extends StripeObject implements StripeActiveObject {
     /** Billing address. */
     @SerializedName("address")
     Address address;
@@ -903,6 +903,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("tax_id")
     String taxId;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   /**
@@ -951,7 +956,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Card extends StripeObject {
+  public static class Card extends StripeObject implements StripeActiveObject {
     /**
      * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code discover},
      * {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
@@ -1093,7 +1098,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class GeneratedFrom extends StripeObject {
+    public static class GeneratedFrom extends StripeObject implements StripeActiveObject {
       /** The charge that created this object. */
       @SerializedName("charge")
       String charge;
@@ -1134,7 +1139,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class PaymentMethodDetails extends StripeObject {
+      public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
         @SerializedName("card_present")
         CardPresent cardPresent;
 
@@ -1152,7 +1157,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class CardPresent extends StripeObject {
+        public static class CardPresent extends StripeObject implements StripeActiveObject {
           /** The authorized amount. */
           @SerializedName("amount_authorized")
           Long amountAuthorized;
@@ -1443,7 +1448,25 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             @SerializedName("type")
             String type;
           }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(offline, responseGetter);
+            trySetResponseGetter(receipt, responseGetter);
+            trySetResponseGetter(wallet, responseGetter);
+          }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(cardPresent, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(paymentMethodDetails, responseGetter);
+        trySetResponseGetter(setupAttempt, responseGetter);
       }
     }
 
@@ -1491,7 +1514,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Wallet extends StripeObject {
+    public static class Wallet extends StripeObject implements StripeActiveObject {
       @SerializedName("amex_express_checkout")
       AmexExpressCheckout amexExpressCheckout;
 
@@ -1569,7 +1592,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Masterpass extends StripeObject {
+      public static class Masterpass extends StripeObject implements StripeActiveObject {
         /**
          * Owner's verified billing address. Values are verified or provided by the wallet directly
          * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -1597,6 +1620,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("shipping_address")
         Address shippingAddress;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(billingAddress, responseGetter);
+          trySetResponseGetter(shippingAddress, responseGetter);
+        }
       }
 
       /**
@@ -1615,7 +1644,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class VisaCheckout extends StripeObject {
+      public static class VisaCheckout extends StripeObject implements StripeActiveObject {
         /**
          * Owner's verified billing address. Values are verified or provided by the wallet directly
          * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -1643,7 +1672,33 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("shipping_address")
         Address shippingAddress;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(billingAddress, responseGetter);
+          trySetResponseGetter(shippingAddress, responseGetter);
+        }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(amexExpressCheckout, responseGetter);
+        trySetResponseGetter(applePay, responseGetter);
+        trySetResponseGetter(googlePay, responseGetter);
+        trySetResponseGetter(link, responseGetter);
+        trySetResponseGetter(masterpass, responseGetter);
+        trySetResponseGetter(samsungPay, responseGetter);
+        trySetResponseGetter(visaCheckout, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(checks, responseGetter);
+      trySetResponseGetter(generatedFrom, responseGetter);
+      trySetResponseGetter(networks, responseGetter);
+      trySetResponseGetter(threeDSecureUsage, responseGetter);
+      trySetResponseGetter(wallet, responseGetter);
     }
   }
 
@@ -1654,7 +1709,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CardPresent extends StripeObject {
+  public static class CardPresent extends StripeObject implements StripeActiveObject {
     /**
      * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code discover},
      * {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
@@ -1822,6 +1877,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("type")
       String type;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(networks, responseGetter);
+      trySetResponseGetter(offline, responseGetter);
+      trySetResponseGetter(wallet, responseGetter);
+    }
   }
 
   /**
@@ -1857,7 +1919,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Custom extends StripeObject {
+  public static class Custom extends StripeObject implements StripeActiveObject {
     /** Display name of the Dashboard-only CustomPaymentMethodType. */
     @SerializedName("display_name")
     String displayName;
@@ -1885,6 +1947,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       /** URL of the Dashboard-only CustomPaymentMethodType logo. */
       @SerializedName("url")
       String url;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(logo, responseGetter);
     }
   }
 
@@ -2003,7 +2070,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InteracPresent extends StripeObject {
+  public static class InteracPresent extends StripeObject implements StripeActiveObject {
     /** Card brand. Can be {@code interac}, {@code mastercard} or {@code visa}. */
     @SerializedName("brand")
     String brand;
@@ -2116,6 +2183,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("preferred")
       String preferred;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(networks, responseGetter);
+    }
   }
 
   /**
@@ -2134,7 +2206,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Klarna extends StripeObject {
+  public static class Klarna extends StripeObject implements StripeActiveObject {
     /** The customer's date of birth, if provided. */
     @SerializedName("dob")
     Dob dob;
@@ -2158,6 +2230,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       /** The four-digit year of birth. */
       @SerializedName("year")
       Long year;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(dob, responseGetter);
     }
   }
 
@@ -2501,7 +2578,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SepaDebit extends StripeObject {
+  public static class SepaDebit extends StripeObject implements StripeActiveObject {
     /** Bank code of bank associated with the bank account. */
     @SerializedName("bank_code")
     String bankCode;
@@ -2536,7 +2613,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class GeneratedFrom extends StripeObject {
+    public static class GeneratedFrom extends StripeObject implements StripeActiveObject {
       /** The ID of the Charge that generated this PaymentMethod, if any. */
       @SerializedName("charge")
       @Getter(lombok.AccessLevel.NONE)
@@ -2585,6 +2662,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         this.setupAttempt =
             new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(charge, responseGetter);
+        trySetResponseGetter(setupAttempt, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(generatedFrom, responseGetter);
     }
   }
 
@@ -2657,7 +2745,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UsBankAccount extends StripeObject {
+  public static class UsBankAccount extends StripeObject implements StripeActiveObject {
     /**
      * Account holder type: individual or company.
      *
@@ -2729,7 +2817,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class StatusDetails extends StripeObject {
+    public static class StatusDetails extends StripeObject implements StripeActiveObject {
       @SerializedName("blocked")
       Blocked blocked;
 
@@ -2761,6 +2849,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("reason")
         String reason;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(blocked, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(networks, responseGetter);
+      trySetResponseGetter(statusDetails, responseGetter);
     }
   }
 

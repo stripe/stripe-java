@@ -2,6 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class FundingInstructions extends StripeObject {
+public class FundingInstructions extends StripeObject implements StripeActiveObject {
   @SerializedName("bank_transfer")
   BankTransfer bankTransfer;
 
@@ -60,7 +61,7 @@ public class FundingInstructions extends StripeObject {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BankTransfer extends StripeObject {
+  public static class BankTransfer extends StripeObject implements StripeActiveObject {
     /** The country of the bank account to fund. */
     @SerializedName("country")
     String country;
@@ -81,7 +82,7 @@ public class FundingInstructions extends StripeObject {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class FinancialAddress extends StripeObject {
+    public static class FinancialAddress extends StripeObject implements StripeActiveObject {
       /** ABA Records contain U.S. bank account details per the ABA format. */
       @SerializedName("aba")
       Aba aba;
@@ -123,7 +124,7 @@ public class FundingInstructions extends StripeObject {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Aba extends StripeObject {
+      public static class Aba extends StripeObject implements StripeActiveObject {
         @SerializedName("account_holder_address")
         Address accountHolderAddress;
 
@@ -149,13 +150,19 @@ public class FundingInstructions extends StripeObject {
         /** The ABA routing number. */
         @SerializedName("routing_number")
         String routingNumber;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(accountHolderAddress, responseGetter);
+          trySetResponseGetter(bankAddress, responseGetter);
+        }
       }
 
       /** Iban Records contain E.U. bank account details per the SEPA format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Iban extends StripeObject {
+      public static class Iban extends StripeObject implements StripeActiveObject {
         @SerializedName("account_holder_address")
         Address accountHolderAddress;
 
@@ -180,13 +187,19 @@ public class FundingInstructions extends StripeObject {
         /** The IBAN of the account. */
         @SerializedName("iban")
         String iban;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(accountHolderAddress, responseGetter);
+          trySetResponseGetter(bankAddress, responseGetter);
+        }
       }
 
       /** Sort Code Records contain U.K. bank account details per the sort code format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class SortCode extends StripeObject {
+      public static class SortCode extends StripeObject implements StripeActiveObject {
         @SerializedName("account_holder_address")
         Address accountHolderAddress;
 
@@ -204,13 +217,19 @@ public class FundingInstructions extends StripeObject {
         /** The six-digit sort code. */
         @SerializedName("sort_code")
         String sortCode;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(accountHolderAddress, responseGetter);
+          trySetResponseGetter(bankAddress, responseGetter);
+        }
       }
 
       /** SPEI Records contain Mexico bank account details per the SPEI format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Spei extends StripeObject {
+      public static class Spei extends StripeObject implements StripeActiveObject {
         @SerializedName("account_holder_address")
         Address accountHolderAddress;
 
@@ -232,13 +251,19 @@ public class FundingInstructions extends StripeObject {
         /** The CLABE number. */
         @SerializedName("clabe")
         String clabe;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(accountHolderAddress, responseGetter);
+          trySetResponseGetter(bankAddress, responseGetter);
+        }
       }
 
       /** SWIFT Records contain U.S. bank account details per the SWIFT format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Swift extends StripeObject {
+      public static class Swift extends StripeObject implements StripeActiveObject {
         @SerializedName("account_holder_address")
         Address accountHolderAddress;
 
@@ -264,13 +289,19 @@ public class FundingInstructions extends StripeObject {
         /** The SWIFT code. */
         @SerializedName("swift_code")
         String swiftCode;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(accountHolderAddress, responseGetter);
+          trySetResponseGetter(bankAddress, responseGetter);
+        }
       }
 
       /** Zengin Records contain Japan bank account details per the Zengin format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Zengin extends StripeObject {
+      public static class Zengin extends StripeObject implements StripeActiveObject {
         @SerializedName("account_holder_address")
         Address accountHolderAddress;
 
@@ -304,7 +335,35 @@ public class FundingInstructions extends StripeObject {
         /** The branch name of the account. */
         @SerializedName("branch_name")
         String branchName;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(accountHolderAddress, responseGetter);
+          trySetResponseGetter(bankAddress, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(aba, responseGetter);
+        trySetResponseGetter(iban, responseGetter);
+        trySetResponseGetter(sortCode, responseGetter);
+        trySetResponseGetter(spei, responseGetter);
+        trySetResponseGetter(swift, responseGetter);
+        trySetResponseGetter(zengin, responseGetter);
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (financialAddresses != null) {
+        financialAddresses.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(bankTransfer, responseGetter);
   }
 }

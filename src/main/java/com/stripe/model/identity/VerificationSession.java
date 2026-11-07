@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -714,7 +715,7 @@ public class VerificationSession extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Options extends StripeObject {
+  public static class Options extends StripeObject implements StripeActiveObject {
     @SerializedName("document")
     Document document;
 
@@ -830,6 +831,15 @@ public class VerificationSession extends ApiResource
       @SerializedName("require_verification")
       Boolean requireVerification;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(document, responseGetter);
+      trySetResponseGetter(email, responseGetter);
+      trySetResponseGetter(idNumber, responseGetter);
+      trySetResponseGetter(matching, responseGetter);
+      trySetResponseGetter(phone, responseGetter);
+    }
   }
 
   /**
@@ -890,7 +900,7 @@ public class VerificationSession extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerifiedOutputs extends StripeObject {
+  public static class VerifiedOutputs extends StripeObject implements StripeActiveObject {
     /** The user's verified address. */
     @SerializedName("address")
     Address address;
@@ -959,6 +969,12 @@ public class VerificationSession extends ApiResource
       /** The four-digit year. */
       @SerializedName("year")
       Long year;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(dob, responseGetter);
     }
   }
 

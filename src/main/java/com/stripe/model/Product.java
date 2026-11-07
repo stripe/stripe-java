@@ -538,6 +538,9 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(defaultPrice, responseGetter);
+    if (marketingFeatures != null) {
+      marketingFeatures.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(packageDimensions, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
     trySetResponseGetter(taxDetails, responseGetter);

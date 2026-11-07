@@ -2,6 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SourceMandateNotification extends StripeObject implements HasId {
+public class SourceMandateNotification extends StripeObject implements HasId, StripeActiveObject {
   @SerializedName("acss_debit")
   AcssDebit acssDebit;
 
@@ -136,5 +137,13 @@ public class SourceMandateNotification extends StripeObject implements HasId {
     /** Mandate reference associated with the debit. */
     @SerializedName("mandate_reference")
     String mandateReference;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(acssDebit, responseGetter);
+    trySetResponseGetter(bacsDebit, responseGetter);
+    trySetResponseGetter(sepaDebit, responseGetter);
+    trySetResponseGetter(source, responseGetter);
   }
 }

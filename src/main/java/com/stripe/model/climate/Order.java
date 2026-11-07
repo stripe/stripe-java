@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -434,7 +435,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DeliveryDetail extends StripeObject {
+  public static class DeliveryDetail extends StripeObject implements StripeActiveObject {
     /** Time at which the delivery occurred. Measured in seconds since the Unix epoch. */
     @SerializedName("delivered_at")
     Long deliveredAt;
@@ -483,12 +484,21 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       @SerializedName("region")
       String region;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(location, responseGetter);
+      trySetResponseGetter(supplier, responseGetter);
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(beneficiary, responseGetter);
+    if (deliveryDetails != null) {
+      deliveryDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(product, responseGetter);
   }
 }

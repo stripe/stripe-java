@@ -7,6 +7,7 @@ import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -642,7 +643,7 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Fleet extends StripeObject {
+  public static class Fleet extends StripeObject implements StripeActiveObject {
     /**
      * Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary
      * depending on the configuration of your physical fleet cards. Typical points of sale support
@@ -724,7 +725,7 @@ public class Authorization extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ReportedBreakdown extends StripeObject {
+    public static class ReportedBreakdown extends StripeObject implements StripeActiveObject {
       /** Breakdown of fuel portion of the purchase. */
       @SerializedName("fuel")
       Fuel fuel;
@@ -790,6 +791,19 @@ public class Authorization extends ApiResource
         @SerializedName("national_amount_decimal")
         BigDecimal nationalAmountDecimal;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(fuel, responseGetter);
+        trySetResponseGetter(nonFuel, responseGetter);
+        trySetResponseGetter(tax, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(cardholderPromptData, responseGetter);
+      trySetResponseGetter(reportedBreakdown, responseGetter);
     }
   }
 
@@ -972,7 +986,7 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PendingRequest extends StripeObject {
+  public static class PendingRequest extends StripeObject implements StripeActiveObject {
     /**
      * The additional amount Stripe will hold if the authorization is approved, in the card's <a
      * href="https://docs.stripe.com/api#issuing_authorization_object-pending-request-currency">currency</a>
@@ -1041,6 +1055,11 @@ public class Authorization extends ApiResource
       @SerializedName("cashback_amount")
       Long cashbackAmount;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(amountDetails, responseGetter);
+    }
   }
 
   /**
@@ -1050,7 +1069,7 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RequestHistory extends StripeObject {
+  public static class RequestHistory extends StripeObject implements StripeActiveObject {
     /**
      * The {@code pending_request.amount} at the time of the request, presented in your card's
      * currency and in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
@@ -1164,6 +1183,11 @@ public class Authorization extends ApiResource
       @SerializedName("cashback_amount")
       Long cashbackAmount;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(amountDetails, responseGetter);
+    }
   }
 
   /**
@@ -1205,7 +1229,7 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerificationData extends StripeObject {
+  public static class VerificationData extends StripeObject implements StripeActiveObject {
     /**
      * Whether the cardholder provided an address first line and if it matched the cardholder’s
      * {@code billing.address.line1}.
@@ -1294,6 +1318,12 @@ public class Authorization extends ApiResource
        */
       @SerializedName("result")
       String result;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(authenticationExemption, responseGetter);
+      trySetResponseGetter(threeDSecure, responseGetter);
     }
   }
 
@@ -1642,14 +1672,26 @@ public class Authorization extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
+    if (balanceTransactions != null) {
+      balanceTransactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
     trySetResponseGetter(fleet, responseGetter);
+    if (fraudChallenges != null) {
+      fraudChallenges.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(fuel, responseGetter);
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);
+    if (requestHistory != null) {
+      requestHistory.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(token, responseGetter);
+    if (transactions != null) {
+      transactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(treasury, responseGetter);
     trySetResponseGetter(verificationData, responseGetter);
   }

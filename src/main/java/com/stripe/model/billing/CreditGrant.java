@@ -7,6 +7,7 @@ import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiRequest;
@@ -407,7 +408,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Amount extends StripeObject {
+  public static class Amount extends StripeObject implements StripeActiveObject {
     /** The monetary amount. */
     @SerializedName("monetary")
     Monetary monetary;
@@ -440,6 +441,11 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
       @SerializedName("value")
       Long value;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(monetary, responseGetter);
+    }
   }
 
   /**
@@ -449,7 +455,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ApplicabilityConfig extends StripeObject {
+  public static class ApplicabilityConfig extends StripeObject implements StripeActiveObject {
     @SerializedName("scope")
     Scope scope;
 
@@ -460,7 +466,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Scope extends StripeObject {
+    public static class Scope extends StripeObject implements StripeActiveObject {
       /**
        * The price type that credit grants can apply to. We currently only support the {@code
        * metered} price type. This refers to prices that have a <a
@@ -494,6 +500,18 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
         @SerializedName("id")
         String id;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (prices != null) {
+          prices.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(scope, responseGetter);
     }
   }
 

@@ -135,7 +135,7 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject {
+  public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
     @SerializedName("card")
     Card card;
 
@@ -221,6 +221,14 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
        */
       @SerializedName("sold_by")
       String soldBy;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(card, responseGetter);
+      trySetResponseGetter(cardPresent, responseGetter);
+      trySetResponseGetter(klarna, responseGetter);
+      trySetResponseGetter(paypal, responseGetter);
     }
   }
 

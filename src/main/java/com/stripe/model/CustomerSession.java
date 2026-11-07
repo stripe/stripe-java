@@ -148,7 +148,7 @@ public class CustomerSession extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Components extends StripeObject {
+  public static class Components extends StripeObject implements StripeActiveObject {
     /** This hash contains whether the active entitlements is enabled. */
     @SerializedName("active_entitlements")
     ActiveEntitlements activeEntitlements;
@@ -214,7 +214,7 @@ public class CustomerSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CustomerSheet extends StripeObject {
+    public static class CustomerSheet extends StripeObject implements StripeActiveObject {
       /** Whether the customer sheet is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -257,6 +257,11 @@ public class CustomerSession extends ApiResource {
         @SerializedName("payment_method_remove")
         String paymentMethodRemove;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(features, responseGetter);
+      }
     }
 
     /**
@@ -266,7 +271,7 @@ public class CustomerSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class MobilePaymentElement extends StripeObject {
+    public static class MobilePaymentElement extends StripeObject implements StripeActiveObject {
       /** Whether the mobile payment element is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -346,13 +351,18 @@ public class CustomerSession extends ApiResource {
         @SerializedName("payment_method_save_allow_redisplay_override")
         String paymentMethodSaveAllowRedisplayOverride;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(features, responseGetter);
+      }
     }
 
     /** This hash contains whether the Payment Element is enabled and the features it supports. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentElement extends StripeObject {
+    public static class PaymentElement extends StripeObject implements StripeActiveObject {
       /** Whether the Payment Element is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -443,6 +453,11 @@ public class CustomerSession extends ApiResource {
         @SerializedName("payment_method_save_usage")
         String paymentMethodSaveUsage;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(features, responseGetter);
+      }
     }
 
     /** This hash contains whether the pricing table is enabled. */
@@ -453,6 +468,17 @@ public class CustomerSession extends ApiResource {
       /** Whether the pricing table is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(activeEntitlements, responseGetter);
+      trySetResponseGetter(buyButton, responseGetter);
+      trySetResponseGetter(customerPortal, responseGetter);
+      trySetResponseGetter(customerSheet, responseGetter);
+      trySetResponseGetter(mobilePaymentElement, responseGetter);
+      trySetResponseGetter(paymentElement, responseGetter);
+      trySetResponseGetter(pricingTable, responseGetter);
     }
   }
 

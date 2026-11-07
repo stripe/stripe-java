@@ -433,7 +433,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AcssDebit extends StripeObject {
+  public static class AcssDebit extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -474,6 +474,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -484,7 +489,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Affirm extends StripeObject {
+  public static class Affirm extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -525,6 +530,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -535,7 +545,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AfterpayClearpay extends StripeObject {
+  public static class AfterpayClearpay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -576,6 +586,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -586,7 +601,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Alipay extends StripeObject {
+  public static class Alipay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -627,6 +642,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -637,7 +657,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Alma extends StripeObject {
+  public static class Alma extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -678,6 +698,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -688,7 +713,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AmazonPay extends StripeObject {
+  public static class AmazonPay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -729,6 +754,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -739,7 +769,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ApplePay extends StripeObject {
+  public static class ApplePay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -780,6 +810,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -790,7 +825,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AuBecsDebit extends StripeObject {
+  public static class AuBecsDebit extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -831,6 +866,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -841,7 +881,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BacsDebit extends StripeObject {
+  public static class BacsDebit extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -882,6 +922,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -892,7 +937,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Bancontact extends StripeObject {
+  public static class Bancontact extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -933,6 +978,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -943,7 +993,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Billie extends StripeObject {
+  public static class Billie extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -984,6 +1034,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -994,7 +1049,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Bizum extends StripeObject {
+  public static class Bizum extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1035,6 +1090,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1045,7 +1105,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Blik extends StripeObject {
+  public static class Blik extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1086,6 +1146,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1096,7 +1161,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Boleto extends StripeObject {
+  public static class Boleto extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1137,6 +1202,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1147,7 +1217,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Card extends StripeObject {
+  public static class Card extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1188,6 +1258,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1198,7 +1273,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CartesBancaires extends StripeObject {
+  public static class CartesBancaires extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1239,6 +1314,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1249,7 +1329,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Cashapp extends StripeObject {
+  public static class Cashapp extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1290,6 +1370,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1300,7 +1385,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Crypto extends StripeObject {
+  public static class Crypto extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1341,6 +1426,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1351,7 +1441,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomerBalance extends StripeObject {
+  public static class CustomerBalance extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1392,6 +1482,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1402,7 +1497,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Eps extends StripeObject {
+  public static class Eps extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1443,6 +1538,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1453,7 +1553,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Fpx extends StripeObject {
+  public static class Fpx extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1494,6 +1594,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1504,7 +1609,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Giropay extends StripeObject {
+  public static class Giropay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1545,6 +1650,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1555,7 +1665,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class GooglePay extends StripeObject {
+  public static class GooglePay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1596,6 +1706,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1606,7 +1721,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Grabpay extends StripeObject {
+  public static class Grabpay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1647,6 +1762,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1657,7 +1777,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Ideal extends StripeObject {
+  public static class Ideal extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1698,6 +1818,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1708,7 +1833,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Jcb extends StripeObject {
+  public static class Jcb extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1749,6 +1874,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1759,7 +1889,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class KakaoPay extends StripeObject {
+  public static class KakaoPay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1800,6 +1930,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1810,7 +1945,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Klarna extends StripeObject {
+  public static class Klarna extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1851,6 +1986,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1861,7 +2001,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Konbini extends StripeObject {
+  public static class Konbini extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1902,6 +2042,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1912,7 +2057,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class KrCard extends StripeObject {
+  public static class KrCard extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1953,6 +2098,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -1963,7 +2113,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Link extends StripeObject {
+  public static class Link extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2004,6 +2154,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2014,7 +2169,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class MbWay extends StripeObject {
+  public static class MbWay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2055,6 +2210,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2065,7 +2225,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Mobilepay extends StripeObject {
+  public static class Mobilepay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2106,6 +2266,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2116,7 +2281,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Multibanco extends StripeObject {
+  public static class Multibanco extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2157,6 +2322,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2167,7 +2337,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NaverPay extends StripeObject {
+  public static class NaverPay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2208,6 +2378,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2218,7 +2393,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NzBankAccount extends StripeObject {
+  public static class NzBankAccount extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2259,6 +2434,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2269,7 +2449,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Oxxo extends StripeObject {
+  public static class Oxxo extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2310,6 +2490,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2320,7 +2505,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class P24 extends StripeObject {
+  public static class P24 extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2361,6 +2546,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2371,7 +2561,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PayByBank extends StripeObject {
+  public static class PayByBank extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2412,6 +2602,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2422,7 +2617,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Payco extends StripeObject {
+  public static class Payco extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2463,6 +2658,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2473,7 +2673,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Paynow extends StripeObject {
+  public static class Paynow extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2514,6 +2714,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2524,7 +2729,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Paypal extends StripeObject {
+  public static class Paypal extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2565,6 +2770,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2575,7 +2785,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Paypay extends StripeObject {
+  public static class Paypay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2616,6 +2826,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2626,7 +2841,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Payto extends StripeObject {
+  public static class Payto extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2667,6 +2882,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2677,7 +2897,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Pix extends StripeObject {
+  public static class Pix extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2718,6 +2938,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2728,7 +2953,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Promptpay extends StripeObject {
+  public static class Promptpay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2769,6 +2994,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2779,7 +3009,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RevolutPay extends StripeObject {
+  public static class RevolutPay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2820,6 +3050,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2830,7 +3065,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SamsungPay extends StripeObject {
+  public static class SamsungPay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2871,6 +3106,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2881,7 +3121,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Satispay extends StripeObject {
+  public static class Satispay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2922,6 +3162,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2932,7 +3177,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Scalapay extends StripeObject {
+  public static class Scalapay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2973,6 +3218,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -2983,7 +3233,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SepaDebit extends StripeObject {
+  public static class SepaDebit extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3024,6 +3274,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3034,7 +3289,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Sequra extends StripeObject {
+  public static class Sequra extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3075,6 +3330,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3085,7 +3345,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Sofort extends StripeObject {
+  public static class Sofort extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3126,6 +3386,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3136,7 +3401,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Sunbit extends StripeObject {
+  public static class Sunbit extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3177,6 +3442,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3187,7 +3457,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Swish extends StripeObject {
+  public static class Swish extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3228,6 +3498,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3238,7 +3513,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Twint extends StripeObject {
+  public static class Twint extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3279,6 +3554,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3289,7 +3569,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Upi extends StripeObject {
+  public static class Upi extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3330,6 +3610,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3340,7 +3625,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UsBankAccount extends StripeObject {
+  public static class UsBankAccount extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3381,6 +3666,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 
@@ -3391,7 +3681,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class WechatPay extends StripeObject {
+  public static class WechatPay extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3433,6 +3723,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
+    }
   }
 
   /**
@@ -3442,7 +3737,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Zip extends StripeObject {
+  public static class Zip extends StripeObject implements StripeActiveObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3483,6 +3778,11 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
        */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(displayPreference, responseGetter);
     }
   }
 

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -520,7 +521,7 @@ public class Account extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AccountHolder extends StripeObject {
+  public static class AccountHolder extends StripeObject implements StripeActiveObject {
     /**
      * The ID of the Stripe account that this account belongs to. Only available when {@code
      * account_holder.type} is {@code account}.
@@ -586,6 +587,12 @@ public class Account extends ApiResource implements HasId {
     public void setCustomerObject(Customer expandableObject) {
       this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(account, responseGetter);
+      trySetResponseGetter(customer, responseGetter);
+    }
   }
 
   /**
@@ -628,7 +635,7 @@ public class Account extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Balance extends StripeObject {
+  public static class Balance extends StripeObject implements StripeActiveObject {
     /**
      * The time that the external institution calculated this balance. Measured in seconds since the
      * Unix epoch.
@@ -708,6 +715,12 @@ public class Account extends ApiResource implements HasId {
       @SerializedName("used")
       Map<String, Long> used;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(cash, responseGetter);
+      trySetResponseGetter(credit, responseGetter);
+    }
   }
 
   /**
@@ -779,7 +792,7 @@ public class Account extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
+  public static class StatusDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("active")
     Active active;
 
@@ -810,6 +823,11 @@ public class Account extends ApiResource implements HasId {
       /** When the Account is expected to become inactive, if applicable. */
       @SerializedName("expected_deactivation_date")
       Long expectedDeactivationDate;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(active, responseGetter);
     }
   }
 
@@ -853,6 +871,9 @@ public class Account extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(accountHolder, responseGetter);
+    if (accountNumbers != null) {
+      accountNumbers.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(balance, responseGetter);
     trySetResponseGetter(balanceRefresh, responseGetter);
     trySetResponseGetter(ownership, responseGetter);

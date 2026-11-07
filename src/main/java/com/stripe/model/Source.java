@@ -1008,7 +1008,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Owner extends StripeObject {
+  public static class Owner extends StripeObject implements StripeActiveObject {
     /** Owner's address. */
     @SerializedName("address")
     Address address;
@@ -1056,6 +1056,12 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
      */
     @SerializedName("verified_phone")
     String verifiedPhone;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(verifiedAddress, responseGetter);
+    }
   }
 
   /**
@@ -1268,7 +1274,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SourceOrder extends StripeObject {
+  public static class SourceOrder extends StripeObject implements StripeActiveObject {
     /**
      * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
      * Japanese Yen being a zero-decimal currency) representing the total amount for the order.
@@ -1332,6 +1338,14 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
       /** The type of this order item. Must be {@code sku}, {@code tax}, or {@code shipping}. */
       @SerializedName("type")
       String type;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (items != null) {
+        items.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      trySetResponseGetter(shipping, responseGetter);
     }
   }
 

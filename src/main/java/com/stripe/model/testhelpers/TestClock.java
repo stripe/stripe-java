@@ -4,6 +4,7 @@ package com.stripe.model.testhelpers;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -270,7 +271,7 @@ public class TestClock extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
+  public static class StatusDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("advancing")
     Advancing advancing;
 
@@ -285,6 +286,11 @@ public class TestClock extends ApiResource implements HasId {
       /** The {@code frozen_time} that the Test Clock is advancing towards. */
       @SerializedName("target_frozen_time")
       Long targetFrozenTime;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(advancing, responseGetter);
     }
   }
 

@@ -4,6 +4,7 @@ package com.stripe.model.tax;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -254,7 +255,7 @@ public class Registration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CountryOptions extends StripeObject {
+  public static class CountryOptions extends StripeObject implements StripeActiveObject {
     @SerializedName("ae")
     Ae ae;
 
@@ -577,7 +578,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ae extends StripeObject {
+    public static class Ae extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -604,6 +605,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -665,7 +671,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class At extends StripeObject {
+    public static class At extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -693,6 +699,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -702,7 +713,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Au extends StripeObject {
+    public static class Au extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -729,6 +740,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -824,7 +840,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Be extends StripeObject {
+    public static class Be extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -852,6 +868,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -878,7 +899,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Bg extends StripeObject {
+    public static class Bg extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -905,6 +926,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1000,7 +1026,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ca extends StripeObject {
+    public static class Ca extends StripeObject implements StripeActiveObject {
       @SerializedName("province_standard")
       ProvinceStandard provinceStandard;
 
@@ -1026,6 +1052,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("province")
         String province;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(provinceStandard, responseGetter);
       }
     }
 
@@ -1053,7 +1084,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ch extends StripeObject {
+    public static class Ch extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1080,6 +1111,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1192,7 +1228,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Cy extends StripeObject {
+    public static class Cy extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1219,6 +1255,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1229,7 +1270,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Cz extends StripeObject {
+    public static class Cz extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1256,6 +1297,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1266,7 +1312,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class De extends StripeObject {
+    public static class De extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1294,6 +1340,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -1303,7 +1354,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Dk extends StripeObject {
+    public static class Dk extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1330,6 +1381,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1357,7 +1413,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ee extends StripeObject {
+    public static class Ee extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1384,6 +1440,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1411,7 +1472,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Es extends StripeObject {
+    public static class Es extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1439,6 +1500,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -1465,7 +1531,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Fi extends StripeObject {
+    public static class Fi extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1492,6 +1558,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1502,7 +1573,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Fr extends StripeObject {
+    public static class Fr extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1530,6 +1601,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -1539,7 +1615,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Gb extends StripeObject {
+    public static class Gb extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1566,6 +1642,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1627,7 +1708,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Gr extends StripeObject {
+    public static class Gr extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1654,6 +1735,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1664,7 +1750,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Hr extends StripeObject {
+    public static class Hr extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1692,6 +1778,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -1701,7 +1792,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Hu extends StripeObject {
+    public static class Hu extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1728,6 +1819,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1755,7 +1851,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ie extends StripeObject {
+    public static class Ie extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1782,6 +1878,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -1826,7 +1927,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class It extends StripeObject {
+    public static class It extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1854,6 +1955,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -1863,7 +1969,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Jp extends StripeObject {
+    public static class Jp extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -1890,6 +1996,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2019,7 +2130,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Lt extends StripeObject {
+    public static class Lt extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2046,6 +2157,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2056,7 +2172,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Lu extends StripeObject {
+    public static class Lu extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2084,6 +2200,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -2093,7 +2214,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Lv extends StripeObject {
+    public static class Lv extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2120,6 +2241,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2215,7 +2341,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Mt extends StripeObject {
+    public static class Mt extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2242,6 +2368,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2320,7 +2451,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Nl extends StripeObject {
+    public static class Nl extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2348,6 +2479,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -2357,7 +2493,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class No extends StripeObject {
+    public static class No extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2385,6 +2521,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -2411,7 +2552,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Nz extends StripeObject {
+    public static class Nz extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2438,6 +2579,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2499,7 +2645,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pl extends StripeObject {
+    public static class Pl extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2526,6 +2672,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2536,7 +2687,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pt extends StripeObject {
+    public static class Pt extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2564,6 +2715,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -2573,7 +2729,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ro extends StripeObject {
+    public static class Ro extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2600,6 +2756,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2661,7 +2822,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Se extends StripeObject {
+    public static class Se extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2689,6 +2850,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -2698,7 +2864,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Sg extends StripeObject {
+    public static class Sg extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2726,6 +2892,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -2735,7 +2906,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Si extends StripeObject {
+    public static class Si extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2763,6 +2934,11 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
+      }
     }
 
     /**
@@ -2772,7 +2948,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Sk extends StripeObject {
+    public static class Sk extends StripeObject implements StripeActiveObject {
       @SerializedName("standard")
       Standard standard;
 
@@ -2799,6 +2975,11 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(standard, responseGetter);
       }
     }
 
@@ -2962,7 +3143,7 @@ public class Registration extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Us extends StripeObject {
+    public static class Us extends StripeObject implements StripeActiveObject {
       @SerializedName("admissions_tax")
       AdmissionsTax admissionsTax;
 
@@ -3217,7 +3398,7 @@ public class Registration extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StateSalesTax extends StripeObject {
+      public static class StateSalesTax extends StripeObject implements StripeActiveObject {
         /** Elections for the state sales tax registration. */
         @SerializedName("elections")
         List<Registration.CountryOptions.Us.StateSalesTax.Election> elections;
@@ -3245,6 +3426,13 @@ public class Registration extends ApiResource implements HasId {
            */
           @SerializedName("type")
           String type;
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (elections != null) {
+            elections.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
         }
       }
 
@@ -3280,6 +3468,24 @@ public class Registration extends ApiResource implements HasId {
          */
         @SerializedName("jurisdiction")
         String jurisdiction;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(admissionsTax, responseGetter);
+        trySetResponseGetter(attendanceTax, responseGetter);
+        trySetResponseGetter(entertainmentTax, responseGetter);
+        trySetResponseGetter(grossReceiptsTax, responseGetter);
+        trySetResponseGetter(hospitalityTax, responseGetter);
+        trySetResponseGetter(localAmusementTax, responseGetter);
+        trySetResponseGetter(localLeaseTax, responseGetter);
+        trySetResponseGetter(luxuryTax, responseGetter);
+        trySetResponseGetter(massTransitParkingTax, responseGetter);
+        trySetResponseGetter(parkingTax, responseGetter);
+        trySetResponseGetter(resortTax, responseGetter);
+        trySetResponseGetter(stateSalesTax, responseGetter);
+        trySetResponseGetter(tourismTax, responseGetter);
+        trySetResponseGetter(utilityUsersTax, responseGetter);
       }
     }
 
@@ -3383,6 +3589,115 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(ae, responseGetter);
+      trySetResponseGetter(al, responseGetter);
+      trySetResponseGetter(am, responseGetter);
+      trySetResponseGetter(ao, responseGetter);
+      trySetResponseGetter(at, responseGetter);
+      trySetResponseGetter(au, responseGetter);
+      trySetResponseGetter(aw, responseGetter);
+      trySetResponseGetter(az, responseGetter);
+      trySetResponseGetter(ba, responseGetter);
+      trySetResponseGetter(bb, responseGetter);
+      trySetResponseGetter(bd, responseGetter);
+      trySetResponseGetter(be, responseGetter);
+      trySetResponseGetter(bf, responseGetter);
+      trySetResponseGetter(bg, responseGetter);
+      trySetResponseGetter(bh, responseGetter);
+      trySetResponseGetter(bj, responseGetter);
+      trySetResponseGetter(bs, responseGetter);
+      trySetResponseGetter(bw, responseGetter);
+      trySetResponseGetter(by, responseGetter);
+      trySetResponseGetter(ca, responseGetter);
+      trySetResponseGetter(cd, responseGetter);
+      trySetResponseGetter(ch, responseGetter);
+      trySetResponseGetter(ci, responseGetter);
+      trySetResponseGetter(cl, responseGetter);
+      trySetResponseGetter(cm, responseGetter);
+      trySetResponseGetter(co, responseGetter);
+      trySetResponseGetter(cr, responseGetter);
+      trySetResponseGetter(cv, responseGetter);
+      trySetResponseGetter(cy, responseGetter);
+      trySetResponseGetter(cz, responseGetter);
+      trySetResponseGetter(de, responseGetter);
+      trySetResponseGetter(dk, responseGetter);
+      trySetResponseGetter(ec, responseGetter);
+      trySetResponseGetter(ee, responseGetter);
+      trySetResponseGetter(eg, responseGetter);
+      trySetResponseGetter(es, responseGetter);
+      trySetResponseGetter(et, responseGetter);
+      trySetResponseGetter(fi, responseGetter);
+      trySetResponseGetter(fr, responseGetter);
+      trySetResponseGetter(gb, responseGetter);
+      trySetResponseGetter(ge, responseGetter);
+      trySetResponseGetter(gh, responseGetter);
+      trySetResponseGetter(gn, responseGetter);
+      trySetResponseGetter(gr, responseGetter);
+      trySetResponseGetter(hr, responseGetter);
+      trySetResponseGetter(hu, responseGetter);
+      trySetResponseGetter(id, responseGetter);
+      trySetResponseGetter(ie, responseGetter);
+      trySetResponseGetter(in, responseGetter);
+      trySetResponseGetter(is, responseGetter);
+      trySetResponseGetter(it, responseGetter);
+      trySetResponseGetter(jp, responseGetter);
+      trySetResponseGetter(ke, responseGetter);
+      trySetResponseGetter(kg, responseGetter);
+      trySetResponseGetter(kh, responseGetter);
+      trySetResponseGetter(kr, responseGetter);
+      trySetResponseGetter(kz, responseGetter);
+      trySetResponseGetter(la, responseGetter);
+      trySetResponseGetter(lk, responseGetter);
+      trySetResponseGetter(lt, responseGetter);
+      trySetResponseGetter(lu, responseGetter);
+      trySetResponseGetter(lv, responseGetter);
+      trySetResponseGetter(ma, responseGetter);
+      trySetResponseGetter(md, responseGetter);
+      trySetResponseGetter(me, responseGetter);
+      trySetResponseGetter(mk, responseGetter);
+      trySetResponseGetter(mr, responseGetter);
+      trySetResponseGetter(mt, responseGetter);
+      trySetResponseGetter(mu, responseGetter);
+      trySetResponseGetter(mx, responseGetter);
+      trySetResponseGetter(my, responseGetter);
+      trySetResponseGetter(ng, responseGetter);
+      trySetResponseGetter(nl, responseGetter);
+      trySetResponseGetter(no, responseGetter);
+      trySetResponseGetter(np, responseGetter);
+      trySetResponseGetter(nz, responseGetter);
+      trySetResponseGetter(om, responseGetter);
+      trySetResponseGetter(pe, responseGetter);
+      trySetResponseGetter(ph, responseGetter);
+      trySetResponseGetter(pl, responseGetter);
+      trySetResponseGetter(pt, responseGetter);
+      trySetResponseGetter(ro, responseGetter);
+      trySetResponseGetter(rs, responseGetter);
+      trySetResponseGetter(ru, responseGetter);
+      trySetResponseGetter(sa, responseGetter);
+      trySetResponseGetter(se, responseGetter);
+      trySetResponseGetter(sg, responseGetter);
+      trySetResponseGetter(si, responseGetter);
+      trySetResponseGetter(sk, responseGetter);
+      trySetResponseGetter(sn, responseGetter);
+      trySetResponseGetter(sr, responseGetter);
+      trySetResponseGetter(th, responseGetter);
+      trySetResponseGetter(tj, responseGetter);
+      trySetResponseGetter(tr, responseGetter);
+      trySetResponseGetter(tw, responseGetter);
+      trySetResponseGetter(tz, responseGetter);
+      trySetResponseGetter(ua, responseGetter);
+      trySetResponseGetter(ug, responseGetter);
+      trySetResponseGetter(us, responseGetter);
+      trySetResponseGetter(uy, responseGetter);
+      trySetResponseGetter(uz, responseGetter);
+      trySetResponseGetter(vn, responseGetter);
+      trySetResponseGetter(za, responseGetter);
+      trySetResponseGetter(zm, responseGetter);
+      trySetResponseGetter(zw, responseGetter);
     }
   }
 

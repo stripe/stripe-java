@@ -4,6 +4,7 @@ package com.stripe.model.forwarding;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -222,7 +223,7 @@ public class Request extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RequestDetails extends StripeObject {
+  public static class RequestDetails extends StripeObject implements StripeActiveObject {
     /** The body payload to send to the destination endpoint. */
     @SerializedName("body")
     String body;
@@ -255,13 +256,20 @@ public class Request extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (headers != null) {
+        headers.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /** Details about the response from the destination endpoint. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ResponseDetails extends StripeObject {
+  public static class ResponseDetails extends StripeObject implements StripeActiveObject {
     /** The response body from the destination endpoint to Stripe. */
     @SerializedName("body")
     String body;
@@ -286,6 +294,13 @@ public class Request extends ApiResource implements HasId {
       /** The header value. */
       @SerializedName("value")
       String value;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (headers != null) {
+        headers.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 

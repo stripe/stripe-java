@@ -10,6 +10,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.climate.SupplierListParams;
 import com.stripe.param.climate.SupplierRetrieveParams;
 import java.math.BigDecimal;
@@ -161,5 +162,13 @@ public class Supplier extends ApiResource implements HasId {
     /** The state/county/province/region where the supplier is located. */
     @SerializedName("region")
     String region;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    if (locations != null) {
+      locations.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

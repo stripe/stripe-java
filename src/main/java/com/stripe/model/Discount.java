@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiResource;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Discount extends StripeObject implements HasId {
+public class Discount extends StripeObject implements HasId, StripeActiveObject {
   /**
    * The Checkout session that this coupon is applied to, if it is applied to a particular session
    * in payment mode. Not present for subscription mode.
@@ -149,7 +150,7 @@ public class Discount extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Source extends StripeObject {
+  public static class Source extends StripeObject implements StripeActiveObject {
     /** The coupon that was redeemed to create this discount. */
     @SerializedName("coupon")
     @Getter(lombok.AccessLevel.NONE)
@@ -181,5 +182,17 @@ public class Discount extends StripeObject implements HasId {
     public void setCouponObject(Coupon expandableObject) {
       this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(coupon, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(promotionCode, responseGetter);
+    trySetResponseGetter(source, responseGetter);
   }
 }

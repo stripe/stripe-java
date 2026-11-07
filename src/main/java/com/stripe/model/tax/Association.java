@@ -4,12 +4,14 @@ package com.stripe.model.tax;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.AssociationFindParams;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +99,7 @@ public class Association extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxTransactionAttempt extends StripeObject {
+  public static class TaxTransactionAttempt extends StripeObject implements StripeActiveObject {
     @SerializedName("committed")
     Committed committed;
 
@@ -142,6 +144,20 @@ public class Association extends ApiResource implements HasId {
        */
       @SerializedName("reason")
       String reason;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(committed, responseGetter);
+      trySetResponseGetter(errored, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    if (taxTransactionAttempts != null) {
+      taxTransactionAttempts.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
   }
 }

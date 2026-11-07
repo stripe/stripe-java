@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.PaymentMethod;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -525,7 +526,7 @@ public class Authentication extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Channel extends StripeObject {
+  public static class Channel extends StripeObject implements StripeActiveObject {
     /** Contains details on the browser for a standalone 3DS Authentication. */
     @SerializedName("browser")
     Browser browser;
@@ -609,13 +610,19 @@ public class Authentication extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(browser, responseGetter);
+      trySetResponseGetter(threeRI, responseGetter);
+    }
   }
 
   /** Contains details of the flow preference used for a standalone 3DS Authentication. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FlowPreference extends StripeObject {
+  public static class FlowPreference extends StripeObject implements StripeActiveObject {
     @SerializedName("challenge")
     Challenge challenge;
 
@@ -683,13 +690,20 @@ public class Authentication extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(challenge, responseGetter);
+      trySetResponseGetter(dataShare, responseGetter);
+      trySetResponseGetter(frictionless, responseGetter);
+    }
   }
 
   /** Contains information about the future authorisations related to this authentication. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FutureUsage extends StripeObject {
+  public static class FutureUsage extends StripeObject implements StripeActiveObject {
     /** Details about installment payments. */
     @SerializedName("installment")
     Installment installment;
@@ -710,7 +724,7 @@ public class Authentication extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Installment extends StripeObject {
+    public static class Installment extends StripeObject implements StripeActiveObject {
       /**
        * A non-negative integer representing the amount in the <a
        * href="https://stripe.com/currencies#zero-decimal">smallest currency unit</a>.
@@ -749,13 +763,18 @@ public class Authentication extends ApiResource implements HasId {
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(expiry, responseGetter);
+      }
     }
 
     /** Details about recurring payments. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Recurring extends StripeObject {
+    public static class Recurring extends StripeObject implements StripeActiveObject {
       /**
        * A non-negative integer representing the amount in the <a
        * href="https://stripe.com/currencies#zero-decimal">smallest currency unit</a>.
@@ -790,6 +809,17 @@ public class Authentication extends ApiResource implements HasId {
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(expiry, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(installment, responseGetter);
+      trySetResponseGetter(recurring, responseGetter);
     }
   }
 
@@ -797,7 +827,7 @@ public class Authentication extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class OutcomeDetails extends StripeObject {
+  public static class OutcomeDetails extends StripeObject implements StripeActiveObject {
     /**
      * Universally unique transaction identifier assigned by the issuer to identify the transaction.
      */
@@ -881,7 +911,7 @@ public class Authentication extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class NetworkDetails extends StripeObject {
+    public static class NetworkDetails extends StripeObject implements StripeActiveObject {
       /** Contains details for Cartes Bancaires specific fields in the authentication outcomes. */
       @SerializedName("cartes_bancaires")
       CartesBancaires cartesBancaires;
@@ -914,6 +944,16 @@ public class Authentication extends ApiResource implements HasId {
         @SerializedName("cb_score")
         String cbScore;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(cartesBancaires, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(networkDetails, responseGetter);
     }
   }
 

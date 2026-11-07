@@ -530,7 +530,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Parent extends StripeObject {
+  public static class Parent extends StripeObject implements StripeActiveObject {
     /** Details about the subscription that generated this invoice item. */
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
@@ -558,6 +558,11 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       /** The subscription item that generated this invoice item. */
       @SerializedName("subscription_item")
       String subscriptionItem;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(subscriptionDetails, responseGetter);
     }
   }
 
@@ -588,7 +593,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Pricing extends StripeObject {
+  public static class Pricing extends StripeObject implements StripeActiveObject {
     @SerializedName("price_details")
     PriceDetails priceDetails;
 
@@ -614,7 +619,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PriceDetails extends StripeObject {
+    public static class PriceDetails extends StripeObject implements StripeActiveObject {
       /** The ID of the price this item is associated with. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -642,6 +647,16 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(price, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(priceDetails, responseGetter);
     }
   }
 
@@ -652,7 +667,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ProrationDetails extends StripeObject {
+  public static class ProrationDetails extends StripeObject implements StripeActiveObject {
     /**
      * For a credit proration, links to the debit that the credit applies to. The reference is to an
      * invoice item if the debit was pending when the credit was created, and to invoice line items
@@ -675,7 +690,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CreditedItems extends StripeObject {
+    public static class CreditedItems extends StripeObject implements StripeActiveObject {
       /**
        * When {@code type} is {@code invoice_item}, the invoice item id for the debited invoice item
        * corresponding to this credit proration.
@@ -714,6 +729,11 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
         @SerializedName("invoice_line_items")
         List<String> invoiceLineItems;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(invoiceLineItemDetails, responseGetter);
+      }
     }
 
     /**
@@ -723,7 +743,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DiscountAmount extends StripeObject {
+    public static class DiscountAmount extends StripeObject implements StripeActiveObject {
       /** The amount, in cents (or local equivalent), of the discount. */
       @SerializedName("amount")
       Long amount;
@@ -751,6 +771,19 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       public void setDiscountObject(Discount expandableObject) {
         this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(discount, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditedItems, responseGetter);
+      if (discountAmounts != null) {
+        discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -758,11 +791,20 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(invoice, responseGetter);
+    if (invoicingRules != null) {
+      invoicingRules.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(prorationDetails, responseGetter);
+    if (taxRates != null) {
+      taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(testClock, responseGetter);
   }
 }

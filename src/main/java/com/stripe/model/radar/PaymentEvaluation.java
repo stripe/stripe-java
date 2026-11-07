@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.PaymentMethod;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -192,7 +193,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Event extends StripeObject {
+  public static class Event extends StripeObject implements StripeActiveObject {
     /** Dispute opened event details attached to this payment evaluation. */
     @SerializedName("dispute_opened")
     DisputeOpened disputeOpened;
@@ -310,7 +311,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UserInterventionRaised extends StripeObject {
+    public static class UserInterventionRaised extends StripeObject implements StripeActiveObject {
       /** User intervention raised custom event details attached to this payment evaluation. */
       @SerializedName("custom")
       Custom custom;
@@ -339,6 +340,11 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(custom, responseGetter);
+      }
     }
 
     /** User Intervention Resolved Event details attached to this payment evaluation. */
@@ -358,13 +364,22 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       @SerializedName("outcome")
       String outcome;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(disputeOpened, responseGetter);
+      trySetResponseGetter(earlyFraudWarningReceived, responseGetter);
+      trySetResponseGetter(refunded, responseGetter);
+      trySetResponseGetter(userInterventionRaised, responseGetter);
+      trySetResponseGetter(userInterventionResolved, responseGetter);
+    }
   }
 
   /** Outcome details for this payment evaluation. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Outcome extends StripeObject {
+  public static class Outcome extends StripeObject implements StripeActiveObject {
     /** Details of a merchant_blocked outcome attached to this payment evaluation. */
     @SerializedName("merchant_blocked")
     MerchantBlocked merchantBlocked;
@@ -409,7 +424,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Rejected extends StripeObject {
+    public static class Rejected extends StripeObject implements StripeActiveObject {
       /** Details of an rejected card outcome attached to this payment evaluation. */
       @SerializedName("card")
       Card card;
@@ -455,13 +470,18 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         @SerializedName("reason")
         String reason;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(card, responseGetter);
+      }
     }
 
     /** Details of a succeeded outcome attached to this payment evaluation. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Succeeded extends StripeObject {
+    public static class Succeeded extends StripeObject implements StripeActiveObject {
       /** Details of an succeeded card outcome attached to this payment evaluation. */
       @SerializedName("card")
       Card card;
@@ -496,6 +516,18 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         @SerializedName("cvc_check")
         String cvcCheck;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(card, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(merchantBlocked, responseGetter);
+      trySetResponseGetter(rejected, responseGetter);
+      trySetResponseGetter(succeeded, responseGetter);
     }
   }
 
@@ -503,7 +535,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentDetails extends StripeObject {
+  public static class PaymentDetails extends StripeObject implements StripeActiveObject {
     /**
      * Amount intended to be collected by this payment. A positive integer representing how much to
      * charge in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
@@ -548,7 +580,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class MoneyMovementDetails extends StripeObject {
+    public static class MoneyMovementDetails extends StripeObject implements StripeActiveObject {
       /** Describes card money movement details. */
       @SerializedName("card")
       Card card;
@@ -583,13 +615,18 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         @SerializedName("payment_type")
         String paymentType;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(card, responseGetter);
+      }
     }
 
     /** Payment method details attached to this payment evaluation. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentMethodDetails extends StripeObject {
+    public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
       /** Billing information associated with the payment evaluation. */
       @SerializedName("billing_details")
       BillingDetails billingDetails;
@@ -623,7 +660,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class BillingDetails extends StripeObject {
+      public static class BillingDetails extends StripeObject implements StripeActiveObject {
         /** Address data. */
         @SerializedName("address")
         Address address;
@@ -639,6 +676,17 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         /** Billing phone number (including extension). */
         @SerializedName("phone")
         String phone;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(address, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(billingDetails, responseGetter);
+        trySetResponseGetter(paymentMethod, responseGetter);
       }
     }
 
@@ -646,7 +694,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ShippingDetails extends StripeObject {
+    public static class ShippingDetails extends StripeObject implements StripeActiveObject {
       /** Address data. */
       @SerializedName("address")
       Address address;
@@ -658,6 +706,18 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       /** Shipping phone number. */
       @SerializedName("phone")
       String phone;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(moneyMovementDetails, responseGetter);
+      trySetResponseGetter(paymentMethodDetails, responseGetter);
+      trySetResponseGetter(shippingDetails, responseGetter);
     }
   }
 
@@ -665,7 +725,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Signals extends StripeObject {
+  public static class Signals extends StripeObject implements StripeActiveObject {
     /** The likelihood that this {@code PaymentEvaluation} results in an early fraud warning. */
     @SerializedName("early_fraud_warning")
     EarlyFraudWarning earlyFraudWarning;
@@ -761,6 +821,13 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       @SerializedName("score")
       BigDecimal score;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(earlyFraudWarning, responseGetter);
+      trySetResponseGetter(fraudulentDispute, responseGetter);
+      trySetResponseGetter(fraudulentPayment, responseGetter);
+    }
   }
 
   @Override
@@ -768,6 +835,9 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(clientDeviceMetadataDetails, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
+    if (events != null) {
+      events.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);
     trySetResponseGetter(signals, responseGetter);

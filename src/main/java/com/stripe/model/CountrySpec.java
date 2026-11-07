@@ -149,7 +149,7 @@ public class CountrySpec extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerificationFields extends StripeObject {
+  public static class VerificationFields extends StripeObject implements StripeActiveObject {
     @SerializedName("company")
     Company company;
 
@@ -188,6 +188,12 @@ public class CountrySpec extends ApiResource implements HasId {
       /** Fields which every account must eventually provide. */
       @SerializedName("minimum")
       List<String> minimum;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(company, responseGetter);
+      trySetResponseGetter(individual, responseGetter);
     }
   }
 

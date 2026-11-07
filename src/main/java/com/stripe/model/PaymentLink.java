@@ -495,7 +495,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AfterCompletion extends StripeObject {
+  public static class AfterCompletion extends StripeObject implements StripeActiveObject {
     @SerializedName("hosted_confirmation")
     HostedConfirmation hostedConfirmation;
 
@@ -535,6 +535,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("url")
       String url;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(hostedConfirmation, responseGetter);
+      trySetResponseGetter(redirect, responseGetter);
+    }
   }
 
   /**
@@ -544,7 +550,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticTax extends StripeObject {
+  public static class AutomaticTax extends StripeObject implements StripeActiveObject {
     /** If {@code true}, tax will be calculated automatically using the customer's location. */
     @SerializedName("enabled")
     Boolean enabled;
@@ -564,7 +570,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Liability extends StripeObject {
+    public static class Liability extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -596,6 +602,16 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(liability, responseGetter);
     }
   }
 
@@ -606,7 +622,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ConsentCollection extends StripeObject {
+  public static class ConsentCollection extends StripeObject implements StripeActiveObject {
     /** Settings related to the payment method reuse text shown in the Checkout UI. */
     @SerializedName("payment_method_reuse_agreement")
     PaymentMethodReuseAgreement paymentMethodReuseAgreement;
@@ -650,6 +666,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("position")
       String position;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paymentMethodReuseAgreement, responseGetter);
+    }
   }
 
   /**
@@ -659,7 +680,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomField extends StripeObject {
+  public static class CustomField extends StripeObject implements StripeActiveObject {
     @SerializedName("dropdown")
     Dropdown dropdown;
 
@@ -701,7 +722,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Dropdown extends StripeObject {
+    public static class Dropdown extends StripeObject implements StripeActiveObject {
       /** The value that pre-fills on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
@@ -729,6 +750,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
          */
         @SerializedName("value")
         String value;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (options != null) {
+          options.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 
@@ -794,6 +822,14 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("minimum_length")
       Long minimumLength;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(dropdown, responseGetter);
+      trySetResponseGetter(label, responseGetter);
+      trySetResponseGetter(numeric, responseGetter);
+      trySetResponseGetter(text, responseGetter);
+    }
   }
 
   /**
@@ -803,7 +839,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomText extends StripeObject {
+  public static class CustomText extends StripeObject implements StripeActiveObject {
     /** Custom text that should be displayed after the payment confirmation button. */
     @SerializedName("after_submit")
     AfterSubmit afterSubmit;
@@ -873,6 +909,14 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("message")
       String message;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(afterSubmit, responseGetter);
+      trySetResponseGetter(shippingAddress, responseGetter);
+      trySetResponseGetter(submit, responseGetter);
+      trySetResponseGetter(termsOfServiceAcceptance, responseGetter);
+    }
   }
 
   /**
@@ -882,7 +926,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InvoiceCreation extends StripeObject {
+  public static class InvoiceCreation extends StripeObject implements StripeActiveObject {
     /** Enable creating an invoice on successful payment. */
     @SerializedName("enabled")
     Boolean enabled;
@@ -898,7 +942,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class InvoiceData extends StripeObject {
+    public static class InvoiceData extends StripeObject implements StripeActiveObject {
       /** The account tax IDs associated with the invoice. */
       @SerializedName("account_tax_ids")
       List<ExpandableField<TaxId>> accountTaxIds;
@@ -1002,7 +1046,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Issuer extends StripeObject {
+      public static class Issuer extends StripeObject implements StripeActiveObject {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
         @Getter(lombok.AccessLevel.NONE)
@@ -1034,6 +1078,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         public void setAccountObject(Account expandableObject) {
           this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(account, responseGetter);
+        }
       }
 
       /**
@@ -1054,6 +1103,23 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         @SerializedName("template")
         String template;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (customFields != null) {
+          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        trySetResponseGetter(issuer, responseGetter);
+        trySetResponseGetter(renderingOptions, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(invoiceData, responseGetter);
     }
   }
 
@@ -1081,7 +1147,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NameCollection extends StripeObject {
+  public static class NameCollection extends StripeObject implements StripeActiveObject {
     @SerializedName("business")
     Business business;
 
@@ -1127,6 +1193,12 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("optional")
       Boolean optional;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(business, responseGetter);
+      trySetResponseGetter(individual, responseGetter);
+    }
   }
 
   /**
@@ -1136,7 +1208,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class OptionalItem extends StripeObject {
+  public static class OptionalItem extends StripeObject implements StripeActiveObject {
     @SerializedName("adjustable_quantity")
     AdjustableQuantity adjustableQuantity;
 
@@ -1172,6 +1244,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
        */
       @SerializedName("minimum")
       Long minimum;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(adjustableQuantity, responseGetter);
     }
   }
 
@@ -1243,7 +1320,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject {
+  public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
     /** Configuration for {@code card} payment methods. */
     @SerializedName("card")
     Card card;
@@ -1255,7 +1332,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
+    public static class Card extends StripeObject implements StripeActiveObject {
       /**
        * Restrictions to apply to the card payment method. For example, you can block specific card
        * brands.
@@ -1278,6 +1355,16 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         @SerializedName("brands_blocked")
         List<String> brandsBlocked;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(restrictions, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(card, responseGetter);
     }
   }
 
@@ -1301,7 +1388,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Restrictions extends StripeObject {
+  public static class Restrictions extends StripeObject implements StripeActiveObject {
     @SerializedName("completed_sessions")
     CompletedSessions completedSessions;
 
@@ -1326,6 +1413,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
        */
       @SerializedName("limit")
       Long limit;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(completedSessions, responseGetter);
     }
   }
 
@@ -1353,7 +1445,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShippingOption extends StripeObject {
+  public static class ShippingOption extends StripeObject implements StripeActiveObject {
     /** A non-negative integer in cents representing how much to charge. */
     @SerializedName("shipping_amount")
     Long shippingAmount;
@@ -1382,6 +1474,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       this.shippingRate =
           new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(shippingRate, responseGetter);
+    }
   }
 
   /**
@@ -1391,7 +1488,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SubscriptionData extends StripeObject {
+  public static class SubscriptionData extends StripeObject implements StripeActiveObject {
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
      * optionally store an explanation of the subscription for rendering in Stripe surfaces and
@@ -1429,7 +1526,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class InvoiceSettings extends StripeObject {
+    public static class InvoiceSettings extends StripeObject implements StripeActiveObject {
       /**
        * The account tax IDs associated with the subscription. Will be set on invoices generated by
        * the subscription.
@@ -1520,7 +1617,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Issuer extends StripeObject {
+      public static class Issuer extends StripeObject implements StripeActiveObject {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
         @Getter(lombok.AccessLevel.NONE)
@@ -1552,6 +1649,22 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         public void setAccountObject(Account expandableObject) {
           this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(account, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (customFields != null) {
+          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        trySetResponseGetter(issuer, responseGetter);
       }
     }
 
@@ -1559,7 +1672,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TrialSettings extends StripeObject {
+    public static class TrialSettings extends StripeObject implements StripeActiveObject {
       /** Defines how a subscription behaves when a free trial ends. */
       @SerializedName("end_behavior")
       EndBehavior endBehavior;
@@ -1578,6 +1691,17 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         @SerializedName("missing_payment_method")
         String missingPaymentMethod;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(endBehavior, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(invoiceSettings, responseGetter);
+      trySetResponseGetter(trialSettings, responseGetter);
     }
   }
 
@@ -1604,7 +1728,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
+  public static class TransferData extends StripeObject implements StripeActiveObject {
     /**
      * The amount in cents (or local equivalent) that will be transferred to the destination
      * account. By default, the entire amount is transferred to the destination.
@@ -1635,6 +1759,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(destination, responseGetter);
+    }
   }
 
   @Override
@@ -1644,17 +1773,26 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
+    if (customFields != null) {
+      customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
+    if (optionalItems != null) {
+      optionalItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(paymentIntentData, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(restrictions, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
+    if (shippingOptions != null) {
+      shippingOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(subscriptionData, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
