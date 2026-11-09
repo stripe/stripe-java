@@ -109,6 +109,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * or <a
    * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
+   * For subscriptions created by Checkout Sessions with Managed Payments enabled, you can't update
+   * this field directly through the API. Customers can update it through the Customer Portal.
    */
   @SerializedName("default_payment_method")
   Object defaultPaymentMethod;
@@ -669,6 +671,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
      * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
+     * For subscriptions created by Checkout Sessions with Managed Payments enabled, you can't
+     * update this field directly through the API. Customers can update it through the Customer
+     * Portal.
      */
     public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
@@ -682,6 +687,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
      * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
+     * For subscriptions created by Checkout Sessions with Managed Payments enabled, you can't
+     * update this field directly through the API. Customers can update it through the Customer
+     * Portal.
      */
     public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
@@ -7467,8 +7475,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Pix {
         /**
-         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-         * Defaults to 86400 seconds.
+         * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+         * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
          */
         @SerializedName("expires_after_seconds")
         Long expiresAfterSeconds;
@@ -7514,8 +7522,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-           * Defaults to 86400 seconds.
+           * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+           * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
            */
           public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
             this.expiresAfterSeconds = expiresAfterSeconds;
@@ -8679,6 +8687,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
+
+      @SerializedName("sequra")
+      SEQURA("sequra"),
 
       @SerializedName("sofort")
       SOFORT("sofort"),

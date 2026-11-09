@@ -27,7 +27,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Use <a
+ * Legacy InboundTransfers are part of the v1 version of Treasury for platforms and do not support
+ * many of the features introduced in <a href="https://docs.stripe.com/treasury/connect">Treasury
+ * for platforms v2</a>. Use <a
+ * href="https://docs.stripe.com/api/v2/money-management/inbound-transfers">Inbound Transfers</a>
+ * instead of building a new v1 integration.
+ *
+ * <p>Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
  * to add funds to your <a
  * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> via a PaymentMethod

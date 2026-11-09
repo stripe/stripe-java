@@ -1,0 +1,184 @@
+// File generated from our OpenAPI spec
+package com.stripe.param.v2.moneymanagement;
+
+import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+@Getter
+@EqualsAndHashCode(callSuper = false)
+public class FinancialAccountListParams extends ApiRequestParams {
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /** Additional fields to include in the response. */
+  @SerializedName("include")
+  List<FinancialAccountListParams.Include> include;
+
+  /** The page limit. */
+  @SerializedName("limit")
+  Long limit;
+
+  /**
+   * Return FinancialAccounts whose {@code status} matches any of the provided values. If omitted,
+   * closed FinancialAccounts are not returned.
+   */
+  @SerializedName("statuses")
+  List<FinancialAccountListParams.Status> statuses;
+
+  private FinancialAccountListParams(
+      Map<String, Object> extraParams,
+      List<FinancialAccountListParams.Include> include,
+      Long limit,
+      List<FinancialAccountListParams.Status> statuses) {
+    this.extraParams = extraParams;
+    this.include = include;
+    this.limit = limit;
+    this.statuses = statuses;
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static class Builder {
+    private Map<String, Object> extraParams;
+
+    private List<FinancialAccountListParams.Include> include;
+
+    private Long limit;
+
+    private List<FinancialAccountListParams.Status> statuses;
+
+    /** Finalize and obtain parameter instance from this builder. */
+    public FinancialAccountListParams build() {
+      return new FinancialAccountListParams(
+          this.extraParams, this.include, this.limit, this.statuses);
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * FinancialAccountListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link FinancialAccountListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#include} for the field documentation.
+     */
+    public Builder addInclude(FinancialAccountListParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<FinancialAccountListParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
+      return this;
+    }
+
+    /** The page limit. */
+    public Builder setLimit(Long limit) {
+      this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Add an element to `statuses` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#statuses} for the field documentation.
+     */
+    public Builder addStatus(FinancialAccountListParams.Status element) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `statuses` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#statuses} for the field documentation.
+     */
+    public Builder addAllStatus(List<FinancialAccountListParams.Status> elements) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.addAll(elements);
+      return this;
+    }
+  }
+
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("storage.deposit_insurance_eligibility")
+    STORAGE__DEPOSIT_INSURANCE_ELIGIBILITY("storage.deposit_insurance_eligibility");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Include(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("closed")
+    CLOSED("closed"),
+
+    @SerializedName("open")
+    OPEN("open"),
+
+    @SerializedName("pending")
+    PENDING("pending");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
+    }
+  }
+}

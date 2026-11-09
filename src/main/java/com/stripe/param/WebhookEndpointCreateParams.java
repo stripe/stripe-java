@@ -666,7 +666,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2026_08_26_DAHLIA("2026-08-26.dahlia"),
 
     @SerializedName("2026-09-30.endive")
-    VERSION_2026_09_30_ENDIVE("2026-09-30.endive");
+    VERSION_2026_09_30_ENDIVE("2026-09-30.endive"),
+
+    @SerializedName("2026-10-28.endive")
+    VERSION_2026_10_28_ENDIVE("2026-10-28.endive");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -1381,6 +1384,30 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("test_helpers.test_clock.ready")
     TEST_HELPERS__TEST_CLOCK__READY("test_helpers.test_clock.ready"),
+
+    @SerializedName("three_d_secure.authentication.canceled")
+    THREE_D_SECURE__AUTHENTICATION__CANCELED("three_d_secure.authentication.canceled"),
+
+    @SerializedName("three_d_secure.authentication.challenge_started")
+    THREE_D_SECURE__AUTHENTICATION__CHALLENGE_STARTED(
+        "three_d_secure.authentication.challenge_started"),
+
+    @SerializedName("three_d_secure.authentication.errored")
+    THREE_D_SECURE__AUTHENTICATION__ERRORED("three_d_secure.authentication.errored"),
+
+    @SerializedName("three_d_secure.authentication.failed")
+    THREE_D_SECURE__AUTHENTICATION__FAILED("three_d_secure.authentication.failed"),
+
+    @SerializedName("three_d_secure.authentication.requires_challenge")
+    THREE_D_SECURE__AUTHENTICATION__REQUIRES_CHALLENGE(
+        "three_d_secure.authentication.requires_challenge"),
+
+    @SerializedName("three_d_secure.authentication.requires_submission")
+    THREE_D_SECURE__AUTHENTICATION__REQUIRES_SUBMISSION(
+        "three_d_secure.authentication.requires_submission"),
+
+    @SerializedName("three_d_secure.authentication.succeeded")
+    THREE_D_SECURE__AUTHENTICATION__SUCCEEDED("three_d_secure.authentication.succeeded"),
 
     @SerializedName("topup.canceled")
     TOPUP__CANCELED("topup.canceled"),

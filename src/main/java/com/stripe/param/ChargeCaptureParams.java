@@ -43,7 +43,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
   /**
    * The email address to send this charge's receipt to. This will override the previously-specified
-   * email address for this charge, if one was set. Receipts will not be sent in test mode.
+   * email address for this charge, if one was set. Receipts are only sent for payments in live
+   * mode.
    */
   @SerializedName("receipt_email")
   String receiptEmail;
@@ -226,8 +227,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
     /**
      * The email address to send this charge's receipt to. This will override the
-     * previously-specified email address for this charge, if one was set. Receipts will not be sent
-     * in test mode.
+     * previously-specified email address for this charge, if one was set. Receipts are only sent
+     * for payments in live mode.
      */
     public Builder setReceiptEmail(String receiptEmail) {
       this.receiptEmail = receiptEmail;

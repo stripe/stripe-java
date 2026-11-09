@@ -20,7 +20,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Transactions represent changes to a <a
+ * Legacy Transactions are part of the v1 version of Treasury for platforms and do not support many
+ * of the features introduced in <a href="https://docs.stripe.com/treasury/connect">Treasury for
+ * platforms v2</a>. Use <a
+ * href="https://docs.stripe.com/api/v2/money-management/transactions">Transactions</a> instead of
+ * building a new v1 integration.
+ *
+ * <p>Transactions represent changes to a <a
  * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount's</a> balance.
  */
 @Getter
@@ -211,7 +217,13 @@ public class Transaction extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class FlowDetails extends StripeObject {
     /**
-     * You can reverse some <a
+     * Legacy CreditReversals are part of the v1 version of Treasury for platforms and do not
+     * support many of the features introduced in <a
+     * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+     * href="https://docs.stripe.com/api/v2/money-management/received-credits?api-version=preview">Received
+     * Credits</a> instead of building a new v1 integration.
+     *
+     * <p>You can reverse some <a
      * href="https://docs.stripe.com/api#received_credits">ReceivedCredits</a> depending on their
      * network and source flow. Reversing a ReceivedCredit leads to the creation of a new object
      * known as a CreditReversal.
@@ -220,15 +232,26 @@ public class Transaction extends ApiResource implements HasId {
     CreditReversal creditReversal;
 
     /**
-     * You can reverse some <a href="https://docs.stripe.com/api#received_debits">ReceivedDebits</a>
-     * depending on their network and source flow. Reversing a ReceivedDebit leads to the creation
-     * of a new object known as a DebitReversal.
+     * Legacy DebitReversals are part of the v1 version of Treasury for platforms and do not support
+     * many of the features introduced in <a
+     * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>.
+     *
+     * <p>You can reverse some <a
+     * href="https://docs.stripe.com/api#received_debits">ReceivedDebits</a> depending on their
+     * network and source flow. Reversing a ReceivedDebit leads to the creation of a new object
+     * known as a DebitReversal.
      */
     @SerializedName("debit_reversal")
     DebitReversal debitReversal;
 
     /**
-     * Use <a
+     * Legacy InboundTransfers are part of the v1 version of Treasury for platforms and do not
+     * support many of the features introduced in <a
+     * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+     * href="https://docs.stripe.com/api/v2/money-management/inbound-transfers">Inbound
+     * Transfers</a> instead of building a new v1 integration.
+     *
+     * <p>Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
      * to add funds to your <a
      * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> via a
@@ -254,7 +277,13 @@ public class Transaction extends ApiResource implements HasId {
     Authorization issuingAuthorization;
 
     /**
-     * Use <a
+     * Legacy OutboundPayments are part of the v1 version of Treasury for platforms and do not
+     * support many of the features introduced in <a
+     * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+     * href="https://docs.stripe.com/api/v2/money-management/outbound-payments">Outbound
+     * Payments</a> instead of building a new v1 integration.
+     *
+     * <p>Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a>
      * to send funds to another party's external bank account or <a
      * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a>. To send money to
@@ -273,7 +302,13 @@ public class Transaction extends ApiResource implements HasId {
     OutboundPayment outboundPayment;
 
     /**
-     * Use <a
+     * Legacy OutboundTransfers are part of the v1 version of Treasury for platforms and do not
+     * support many of the features introduced in <a
+     * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+     * href="https://docs.stripe.com/api/v2/money-management/outbound-transfers?api-version=preview">Outbound
+     * Transfers</a> instead of building a new v1 integration.
+     *
+     * <p>Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
      * to transfer funds from a <a
      * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> to a PaymentMethod
@@ -294,7 +329,13 @@ public class Transaction extends ApiResource implements HasId {
     OutboundTransfer outboundTransfer;
 
     /**
-     * ReceivedCredits represent funds sent to a <a
+     * Legacy ReceivedCredits are part of the v1 version of Treasury for platforms and do not
+     * support many of the features introduced in <a
+     * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+     * href="https://docs.stripe.com/api/v2/money-management/received-credits?api-version=preview">Received
+     * Credits</a> instead of building a new v1 integration.
+     *
+     * <p>ReceivedCredits represent funds sent to a <a
      * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> (for example, via
      * ACH or wire). These money movements are not initiated from the FinancialAccount.
      */
@@ -302,7 +343,13 @@ public class Transaction extends ApiResource implements HasId {
     ReceivedCredit receivedCredit;
 
     /**
-     * ReceivedDebits represent funds pulled from a <a
+     * Legacy ReceivedDebits are part of the v1 version of Treasury for platforms and do not support
+     * many of the features introduced in <a
+     * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+     * href="https://docs.stripe.com/api/v2/money-management/received-debits?api-version=preview">Received
+     * Debits</a> instead of building a new v1 integration.
+     *
+     * <p>ReceivedDebits represent funds pulled from a <a
      * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a>. These are not
      * initiated from the FinancialAccount.
      */

@@ -18,8 +18,9 @@ public class InstallCreateParams extends ApiRequestParams {
   String app;
 
   /**
-   * The distribution channel to install from. Defaults to {@code public}. A private app must be
-   * installed on {@code private_test} or {@code private_live}, matching the mode of the API key.
+   * The distribution channel to install from. Defaults to {@code public}, which only app developers
+   * and embedding platforms can use. An account installing its own private app must pass {@code
+   * private_test} or {@code private_live}, matching the mode of the API key.
    */
   @SerializedName("channel")
   Channel channel;
@@ -103,8 +104,9 @@ public class InstallCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The distribution channel to install from. Defaults to {@code public}. A private app must be
-     * installed on {@code private_test} or {@code private_live}, matching the mode of the API key.
+     * The distribution channel to install from. Defaults to {@code public}, which only app
+     * developers and embedding platforms can use. An account installing its own private app must
+     * pass {@code private_test} or {@code private_live}, matching the mode of the API key.
      */
     public Builder setChannel(InstallCreateParams.Channel channel) {
       this.channel = channel;

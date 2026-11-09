@@ -480,6 +480,10 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
+      /** A location where the business has a meaningful physical operating presence. */
+      @SerializedName("physical_address")
+      PhysicalAddress physicalAddress;
+
       /** The primary location where the business conducts operations. */
       @SerializedName("principal_place_of_business")
       PrincipalPlaceOfBusiness principalPlaceOfBusiness;
@@ -557,6 +561,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Boolean ownershipDeclarationShownAndSigned,
           ApiRequestParams.EnumParam ownershipExemptionReason,
           String phone,
+          PhysicalAddress physicalAddress,
           PrincipalPlaceOfBusiness principalPlaceOfBusiness,
           Object registrationDate,
           String registrationNumber,
@@ -584,6 +589,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
         this.ownershipExemptionReason = ownershipExemptionReason;
         this.phone = phone;
+        this.physicalAddress = physicalAddress;
         this.principalPlaceOfBusiness = principalPlaceOfBusiness;
         this.registrationDate = registrationDate;
         this.registrationNumber = registrationNumber;
@@ -636,6 +642,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private String phone;
 
+        private PhysicalAddress physicalAddress;
+
         private PrincipalPlaceOfBusiness principalPlaceOfBusiness;
 
         private Object registrationDate;
@@ -675,6 +683,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.ownershipDeclarationShownAndSigned,
               this.ownershipExemptionReason,
               this.phone,
+              this.physicalAddress,
               this.principalPlaceOfBusiness,
               this.registrationDate,
               this.registrationNumber,
@@ -867,6 +876,13 @@ public class TokenCreateParams extends ApiRequestParams {
         /** The company's phone number (used for verification). */
         public Builder setPhone(String phone) {
           this.phone = phone;
+          return this;
+        }
+
+        /** A location where the business has a meaningful physical operating presence. */
+        public Builder setPhysicalAddress(
+            TokenCreateParams.Account.Company.PhysicalAddress physicalAddress) {
+          this.physicalAddress = physicalAddress;
           return this;
         }
 
@@ -1839,6 +1855,169 @@ public class TokenCreateParams extends ApiRequestParams {
           /** The user agent of the browser from which the beneficial owner attestation was made. */
           public Builder setUserAgent(String userAgent) {
             this.userAgent = userAgent;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PhysicalAddress {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
+        @SerializedName("state")
+        String state;
+
+        private PhysicalAddress(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TokenCreateParams.Account.Company.PhysicalAddress build() {
+            return new TokenCreateParams.Account.Company.PhysicalAddress(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          /** City, district, suburb, town, or village. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.PhysicalAddress#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.PhysicalAddress#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Address line 1, such as the street, PO Box, or company name. */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Address line 2, such as the apartment, suite, unit, or building. */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** ZIP or postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
+          public Builder setState(String state) {
+            this.state = state;
             return this;
           }
         }

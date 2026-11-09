@@ -78,6 +78,15 @@ public class Dispute extends ApiResource
   String id;
 
   /**
+   * Intended submission method for the dispute.
+   *
+   * <p>One of {@code manual}, {@code prefer_manual}, {@code prefer_smart_disputes}, or {@code
+   * smart_disputes}.
+   */
+  @SerializedName("intended_submission_method")
+  String intendedSubmissionMethod;
+
+  /**
    * If true, it's still possible to refund the disputed payment. After the payment has been fully
    * refunded, no further funds are withdrawn from your Stripe account as a result of this dispute.
    */
@@ -136,10 +145,12 @@ public class Dispute extends ApiResource
   /**
    * The current status of a dispute. Possible values include:{@code warning_needs_response}, {@code
    * warning_under_review}, {@code warning_closed}, {@code needs_response}, {@code under_review},
-   * {@code won}, {@code lost}, or {@code prevented}.
+   * {@code appeal_needs_response}, {@code appeal_under_review}, {@code won}, {@code lost}, or
+   * {@code prevented}.
    *
-   * <p>One of {@code lost}, {@code needs_response}, {@code prevented}, {@code under_review}, {@code
-   * warning_closed}, {@code warning_needs_response}, {@code warning_under_review}, or {@code won}.
+   * <p>One of {@code appeal_needs_response}, {@code appeal_under_review}, {@code lost}, {@code
+   * needs_response}, {@code prevented}, {@code under_review}, {@code warning_closed}, {@code
+   * warning_needs_response}, {@code warning_under_review}, or {@code won}.
    */
   @SerializedName("status")
   String status;
@@ -412,6 +423,10 @@ public class Dispute extends ApiResource
      */
     @SerializedName("access_activity_log")
     String accessActivityLog;
+
+    /** Appeal evidence submitted during the appeal stage. */
+    @SerializedName("appeal")
+    Appeal appeal;
 
     /** The billing address provided by the customer. */
     @SerializedName("billing_address")
@@ -771,6 +786,39 @@ public class Dispute extends ApiResource
     }
 
     /**
+     * For more details about Appeal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Appeal extends StripeObject {
+      @SerializedName("card")
+      Card card;
+
+      /**
+       * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        /** The reason for filing the appeal. */
+        @SerializedName("reason_for_filing")
+        String reasonForFiling;
+
+        /**
+         * One or more document IDs returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code dispute_evidence} to support the appeal.
+         */
+        @SerializedName("supporting_files")
+        List<String> supportingFiles;
+      }
+    }
+
+    /**
      * For more details about EnhancedEvidence, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1068,6 +1116,14 @@ public class Dispute extends ApiResource
      */
     @SerializedName("submission_count")
     Long submissionCount;
+
+    /**
+     * Whether the dispute was submitted manually, with Smart Disputes, or not submitted.
+     *
+     * <p>One of {@code manual}, {@code not_submitted}, or {@code smart_disputes}.
+     */
+    @SerializedName("submission_method")
+    String submissionMethod;
 
     /**
      * For more details about EnhancedEligibility, please refer to the <a

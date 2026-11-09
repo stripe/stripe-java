@@ -37,6 +37,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId {
+  /** Behavior after the portal session expires. */
+  @SerializedName("after_expiration")
+  AfterExpiration afterExpiration;
+
   /** The configuration used by this session, describing the features available. */
   @SerializedName("configuration")
   @Getter(lombok.AccessLevel.NONE)
@@ -176,6 +180,40 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about AfterExpiration, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AfterExpiration extends StripeObject {
+    /** Configuration for authenticating the customer after the session expires. */
+    @SerializedName("customer_login")
+    CustomerLogin customerLogin;
+
+    /**
+     * The behavior to apply when the session expires.
+     *
+     * <p>Equal to {@code customer_login}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about CustomerLogin, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerLogin extends StripeObject {
+      /** The time after which the customer can no longer recover this session. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+    }
+  }
+
+  /**
    * For more details about Flow, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -194,6 +232,10 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
+    /** Configuration when {@code flow.type=subscription_pause}. */
+    @SerializedName("subscription_pause")
+    SubscriptionPause subscriptionPause;
+
     /** Configuration when {@code flow.type=subscription_update}. */
     @SerializedName("subscription_update")
     SubscriptionUpdate subscriptionUpdate;
@@ -206,7 +248,8 @@ public class Session extends ApiResource implements HasId {
      * Type of flow that the customer will go through.
      *
      * <p>One of {@code customer_update}, {@code payment_method_update}, {@code
-     * subscription_cancel}, {@code subscription_update}, or {@code subscription_update_confirm}.
+     * subscription_cancel}, {@code subscription_pause}, {@code subscription_update}, or {@code
+     * subscription_update_confirm}.
      */
     @SerializedName("type")
     String type;
@@ -323,6 +366,19 @@ public class Session extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about SubscriptionPause, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionPause extends StripeObject {
+      /** The ID of the subscription to be paused. */
+      @SerializedName("subscription")
+      String subscription;
+    }
+
+    /**
      * For more details about SubscriptionUpdate, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -415,6 +471,7 @@ public class Session extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(configuration, responseGetter);
     trySetResponseGetter(flow, responseGetter);
   }

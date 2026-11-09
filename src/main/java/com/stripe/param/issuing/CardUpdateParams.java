@@ -32,6 +32,13 @@ public class CardUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * The new financial account ID the card will be associated with. This field allows a card to be
+   * reassigned to a different financial account.
+   */
+  @SerializedName("financial_account")
+  Object financialAccount;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -72,6 +79,7 @@ public class CardUpdateParams extends ApiRequestParams {
       CancellationReason cancellationReason,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object financialAccount,
       Object metadata,
       Object personalizationDesign,
       Pin pin,
@@ -81,6 +89,7 @@ public class CardUpdateParams extends ApiRequestParams {
     this.cancellationReason = cancellationReason;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.financialAccount = financialAccount;
     this.metadata = metadata;
     this.personalizationDesign = personalizationDesign;
     this.pin = pin;
@@ -100,6 +109,8 @@ public class CardUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Object financialAccount;
+
     private Object metadata;
 
     private Object personalizationDesign;
@@ -118,6 +129,7 @@ public class CardUpdateParams extends ApiRequestParams {
           this.cancellationReason,
           this.expand,
           this.extraParams,
+          this.financialAccount,
           this.metadata,
           this.personalizationDesign,
           this.pin,
@@ -181,6 +193,24 @@ public class CardUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The new financial account ID the card will be associated with. This field allows a card to be
+     * reassigned to a different financial account.
+     */
+    public Builder setFinancialAccount(String financialAccount) {
+      this.financialAccount = financialAccount;
+      return this;
+    }
+
+    /**
+     * The new financial account ID the card will be associated with. This field allows a card to be
+     * reassigned to a different financial account.
+     */
+    public Builder setFinancialAccount(EmptyParam financialAccount) {
+      this.financialAccount = financialAccount;
       return this;
     }
 

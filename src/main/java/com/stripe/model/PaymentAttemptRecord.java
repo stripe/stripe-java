@@ -1246,6 +1246,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("network_transaction_id")
       String networkTransactionId;
 
+      /**
+       * The transaction type that was passed for an off-session, Merchant-Initiated transaction,
+       * one of {@code recurring} or {@code unscheduled}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
@@ -1821,8 +1828,8 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
-       * or {@code usdt}.
+       * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp},
+       * {@code usdsui}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;

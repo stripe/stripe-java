@@ -1898,16 +1898,16 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>:
-         * An icon for the merchant. Must be square and at least 128px x 128px.
+         * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: An icon for
+         * the merchant. Must be square and at least 128px x 128px.
          */
         @SerializedName("icon")
         String icon;
 
         /**
-         * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>:
-         * A logo for the merchant that will be used in Checkout instead of the icon and without the
-         * merchant's name next to it if provided. Must be at least 128px x 128px.
+         * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: A logo for
+         * the merchant that will be used in Checkout instead of the icon and without the merchant's
+         * name next to it if provided. Must be at least 128px x 128px.
          */
         @SerializedName("logo")
         String logo;
@@ -1983,8 +1983,8 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file
-           * upload</a>: An icon for the merchant. Must be square and at least 128px x 128px.
+           * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: An icon for
+           * the merchant. Must be square and at least 128px x 128px.
            */
           public Builder setIcon(String icon) {
             this.icon = icon;
@@ -1992,9 +1992,9 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file
-           * upload</a>: A logo for the merchant that will be used in Checkout instead of the icon
-           * and without the merchant's name next to it if provided. Must be at least 128px x 128px.
+           * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: A logo for
+           * the merchant that will be used in Checkout instead of the icon and without the
+           * merchant's name next to it if provided. Must be at least 128px x 128px.
            */
           public Builder setLogo(String logo) {
             this.logo = logo;
@@ -8149,6 +8149,14 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Capabilities {
+        /** Capabilities that enable OutboundPayments to a bank account linked to this Account. */
+        @SerializedName("bank_accounts")
+        BankAccounts bankAccounts;
+
+        /** Capabilities that enable OutboundPayments to a card linked to this Account. */
+        @SerializedName("cards")
+        Cards cards;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -8163,7 +8171,13 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
 
-        private Capabilities(Map<String, Object> extraParams, StripeBalance stripeBalance) {
+        private Capabilities(
+            BankAccounts bankAccounts,
+            Cards cards,
+            Map<String, Object> extraParams,
+            StripeBalance stripeBalance) {
+          this.bankAccounts = bankAccounts;
+          this.cards = cards;
           this.extraParams = extraParams;
           this.stripeBalance = stripeBalance;
         }
@@ -8173,6 +8187,10 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private BankAccounts bankAccounts;
+
+          private Cards cards;
+
           private Map<String, Object> extraParams;
 
           private StripeBalance stripeBalance;
@@ -8180,7 +8198,21 @@ public class AccountCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountCreateParams.Configuration.Recipient.Capabilities build() {
             return new AccountCreateParams.Configuration.Recipient.Capabilities(
-                this.extraParams, this.stripeBalance);
+                this.bankAccounts, this.cards, this.extraParams, this.stripeBalance);
+          }
+
+          /** Capabilities that enable OutboundPayments to a bank account linked to this Account. */
+          public Builder setBankAccounts(
+              AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts bankAccounts) {
+            this.bankAccounts = bankAccounts;
+            return this;
+          }
+
+          /** Capabilities that enable OutboundPayments to a card linked to this Account. */
+          public Builder setCards(
+              AccountCreateParams.Configuration.Recipient.Capabilities.Cards cards) {
+            this.cards = cards;
+            return this;
           }
 
           /**
@@ -8219,6 +8251,877 @@ public class AccountCreateParams extends ApiRequestParams {
                   stripeBalance) {
             this.stripeBalance = stripeBalance;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BankAccounts {
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over ACH
+           * rails.
+           */
+          @SerializedName("ach")
+          Ach ach;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over Fedwire
+           * or CHIPS.
+           */
+          @SerializedName("fedwire")
+          Fedwire fedwire;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over FPS
+           * rails.
+           */
+          @SerializedName("fps")
+          Fps fps;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over local
+           * networks.
+           */
+          @SerializedName("local")
+          Local local;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over RTP
+           * rails.
+           */
+          @SerializedName("rtp")
+          Rtp rtp;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+           * rails.
+           */
+          @SerializedName("sepa")
+          Sepa sepa;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SWIFT.
+           */
+          @SerializedName("swift")
+          Swift swift;
+
+          private BankAccounts(
+              Ach ach,
+              Map<String, Object> extraParams,
+              Fedwire fedwire,
+              Fps fps,
+              Local local,
+              Rtp rtp,
+              Sepa sepa,
+              Swift swift) {
+            this.ach = ach;
+            this.extraParams = extraParams;
+            this.fedwire = fedwire;
+            this.fps = fps;
+            this.local = local;
+            this.rtp = rtp;
+            this.sepa = sepa;
+            this.swift = swift;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Ach ach;
+
+            private Map<String, Object> extraParams;
+
+            private Fedwire fedwire;
+
+            private Fps fps;
+
+            private Local local;
+
+            private Rtp rtp;
+
+            private Sepa sepa;
+
+            private Swift swift;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts build() {
+              return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts(
+                  this.ach,
+                  this.extraParams,
+                  this.fedwire,
+                  this.fps,
+                  this.local,
+                  this.rtp,
+                  this.sepa,
+                  this.swift);
+            }
+
+            /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over ACH
+             * rails.
+             */
+            public Builder setAch(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Ach ach) {
+              this.ach = ach;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over Fedwire
+             * or CHIPS.
+             */
+            public Builder setFedwire(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fedwire
+                    fedwire) {
+              this.fedwire = fedwire;
+              return this;
+            }
+
+            /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over FPS
+             * rails.
+             */
+            public Builder setFps(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fps fps) {
+              this.fps = fps;
+              return this;
+            }
+
+            /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over local
+             * networks.
+             */
+            public Builder setLocal(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Local local) {
+              this.local = local;
+              return this;
+            }
+
+            /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over RTP
+             * rails.
+             */
+            public Builder setRtp(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Rtp rtp) {
+              this.rtp = rtp;
+              return this;
+            }
+
+            /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+             * rails.
+             */
+            public Builder setSepa(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa sepa) {
+              this.sepa = sepa;
+              return this;
+            }
+
+            /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over SWIFT.
+             */
+            public Builder setSwift(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Swift swift) {
+              this.swift = swift;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Ach(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Ach
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Ach(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Ach#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Ach#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Fedwire {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Fedwire(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fedwire
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Fedwire(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fedwire#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fedwire#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Fps {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Fps(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fps
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Fps(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fps#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Fps#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Local {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Local(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Local
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Local(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Local#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Local#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Rtp {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Rtp(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Rtp
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Rtp(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Rtp#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Rtp#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Sepa {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Sepa(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Sepa(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Sepa#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Swift {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Swift(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Swift
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Swift(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Swift#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Swift#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Cards {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> To request a new Capability for an account, pass true. There
+           * can be a delay before the requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private Cards(Map<String, Object> extraParams, Boolean requested) {
+            this.extraParams = extraParams;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Recipient.Capabilities.Cards build() {
+              return new AccountCreateParams.Configuration.Recipient.Capabilities.Cards(
+                  this.extraParams, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Recipient.Capabilities.Cards#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Recipient.Capabilities.Cards#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
           }
         }
 
@@ -9850,11 +10753,7 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class TermsOfService {
-        /**
-         * Details on the Account's acceptance of the <a
-         * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-         * Agreement</a>.
-         */
+        /** Details on the Account's acceptance of the Stripe Services Agreement. */
         @SerializedName("account")
         Account account;
 
@@ -9888,11 +10787,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.account, this.extraParams);
           }
 
-          /**
-           * Details on the Account's acceptance of the <a
-           * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-           * Agreement</a>.
-           */
+          /** Details on the Account's acceptance of the Stripe Services Agreement. */
           public Builder setAccount(
               AccountCreateParams.Identity.Attestations.TermsOfService.Account account) {
             this.account = account;
@@ -11109,8 +12004,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -11247,8 +12142,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -11380,8 +12275,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -11518,8 +12413,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -11654,8 +12549,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -11792,8 +12687,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -11927,9 +12822,8 @@ public class AccountCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -11998,8 +12892,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountCreateParams.Identity.BusinessDetails.Documents.PrimaryVerification.FrontBack
@@ -12024,11 +12918,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -12044,11 +12937,11 @@ public class AccountCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * <strong>Required.</strong> A <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-             * representing the front of the verification document. The purpose of the uploaded file
-             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+             * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+             * upload</a> token representing the front of the verification document. The purpose of
+             * the uploaded file should be 'identity_document'. The uploaded file needs to be a
+             * color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less
+             * than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -12079,11 +12972,11 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -12122,11 +13015,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> A <a
-               * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-               * representing the front of the verification document. The purpose of the uploaded
-               * file should be 'identity_document'. The uploaded file needs to be a color image
-               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
-               * in size.
+               * href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+               * the front of the verification document. The purpose of the uploaded file should be
+               * 'identity_document'. The uploaded file needs to be a color image (smaller than
+               * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -12163,8 +13055,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -12296,8 +13188,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -12524,8 +13416,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -15377,8 +16269,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -15511,8 +16403,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -15643,9 +16535,8 @@ public class AccountCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -15713,8 +16604,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountCreateParams.Identity.Individual.Documents.PrimaryVerification.FrontBack
@@ -15738,11 +16629,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -15758,11 +16648,11 @@ public class AccountCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * <strong>Required.</strong> A <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-             * representing the front of the verification document. The purpose of the uploaded file
-             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+             * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+             * upload</a> token representing the front of the verification document. The purpose of
+             * the uploaded file should be 'identity_document'. The uploaded file needs to be a
+             * color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less
+             * than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -15792,11 +16682,11 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -15835,11 +16725,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> A <a
-               * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-               * representing the front of the verification document. The purpose of the uploaded
-               * file should be 'identity_document'. The uploaded file needs to be a color image
-               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
-               * in size.
+               * href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+               * the front of the verification document. The purpose of the uploaded file should be
+               * 'identity_document'. The uploaded file needs to be a color image (smaller than
+               * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -15875,9 +16764,8 @@ public class AccountCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -15945,8 +16833,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountCreateParams.Identity.Individual.Documents.SecondaryVerification.FrontBack
@@ -15970,11 +16858,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -15990,11 +16877,11 @@ public class AccountCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * <strong>Required.</strong> A <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-             * representing the front of the verification document. The purpose of the uploaded file
-             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+             * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+             * upload</a> token representing the front of the verification document. The purpose of
+             * the uploaded file should be 'identity_document'. The uploaded file needs to be a
+             * color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less
+             * than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -16025,11 +16912,11 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -16068,11 +16955,10 @@ public class AccountCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> A <a
-               * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-               * representing the front of the verification document. The purpose of the uploaded
-               * file should be 'identity_document'. The uploaded file needs to be a color image
-               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
-               * in size.
+               * href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+               * the front of the verification document. The purpose of the uploaded file should be
+               * 'identity_document'. The uploaded file needs to be a color image (smaller than
+               * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -16109,8 +16995,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;

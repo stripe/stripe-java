@@ -93,8 +93,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-   * SetupIntent. To unset this field to null, pass in an empty string.
+   * The ID of a PaymentMethod to attach to this SetupIntent. To unset this field to null, pass in
+   * an empty string.
    */
   @SerializedName("payment_method")
   Object paymentMethod;
@@ -510,8 +510,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-     * SetupIntent. To unset this field to null, pass in an empty string.
+     * The ID of a PaymentMethod to attach to this SetupIntent. To unset this field to null, pass in
+     * an empty string.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -519,8 +519,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-     * SetupIntent. To unset this field to null, pass in an empty string.
+     * The ID of a PaymentMethod to attach to this SetupIntent. To unset this field to null, pass in
+     * an empty string.
      */
     public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -8424,6 +8424,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("request_three_d_secure")
       RequestThreeDSecure requestThreeDSecure;
 
+      /** Set to indicate the future transaction type usage for the card being set up. */
+      @SerializedName("setup_credential_usage")
+      SetupCredentialUsage setupCredentialUsage;
+
       /**
        * If 3D Secure authentication was performed with a third-party provider, the authentication
        * details to use for this setup.
@@ -8437,12 +8441,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           Boolean moto,
           Network network,
           RequestThreeDSecure requestThreeDSecure,
+          SetupCredentialUsage setupCredentialUsage,
           ThreeDSecure threeDSecure) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.moto = moto;
         this.network = network;
         this.requestThreeDSecure = requestThreeDSecure;
+        this.setupCredentialUsage = setupCredentialUsage;
         this.threeDSecure = threeDSecure;
       }
 
@@ -8461,6 +8467,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        private SetupCredentialUsage setupCredentialUsage;
+
         private ThreeDSecure threeDSecure;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -8471,6 +8479,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
               this.moto,
               this.network,
               this.requestThreeDSecure,
+              this.setupCredentialUsage,
               this.threeDSecure);
         }
 
@@ -8544,6 +8553,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             SetupIntentUpdateParams.PaymentMethodOptions.Card.RequestThreeDSecure
                 requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
+          return this;
+        }
+
+        /** Set to indicate the future transaction type usage for the card being set up. */
+        public Builder setSetupCredentialUsage(
+            SetupIntentUpdateParams.PaymentMethodOptions.Card.SetupCredentialUsage
+                setupCredentialUsage) {
+          this.setupCredentialUsage = setupCredentialUsage;
           return this;
         }
 
@@ -9572,6 +9589,24 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         private final String value;
 
         RequestThreeDSecure(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupCredentialUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("installment")
+        INSTALLMENT("installment"),
+
+        @SerializedName("recurring")
+        RECURRING("recurring"),
+
+        @SerializedName("unscheduled")
+        UNSCHEDULED("unscheduled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupCredentialUsage(String value) {
           this.value = value;
         }
       }

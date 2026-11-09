@@ -321,6 +321,9 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
+    @SerializedName("subscription_pause")
+    SubscriptionPause subscriptionPause;
+
     @SerializedName("subscription_update")
     SubscriptionUpdate subscriptionUpdate;
 
@@ -472,6 +475,68 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
                       .map(x -> new ExpandableField<FeedbackOption>(x.getId(), x))
                       .collect(Collectors.toList())
                   : null;
+        }
+      }
+    }
+
+    /**
+     * For more details about SubscriptionPause, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionPause extends StripeObject {
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Whether the feature is enabled. Customers can only pause subscriptions in the <a
+       * href="https://stripe.com/customer-management">redesigned customer portal</a>.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * For more details about Duration, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration extends StripeObject {
+        /** The preset pause durations customers can choose from. */
+        @SerializedName("interval_options")
+        List<Configuration.Features.SubscriptionPause.Duration.IntervalOption> intervalOptions;
+
+        /**
+         * Whether subscriptions can be paused indefinitely or for a preset duration.
+         *
+         * <p>One of {@code indefinite}, or {@code interval_options}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about IntervalOption, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class IntervalOption extends StripeObject {
+          /**
+           * Specifies the pause duration unit. Either {@code day}, {@code week}, {@code month}, or
+           * {@code year}.
+           *
+           * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /** The number of intervals in the pause duration. The maximum duration is three years. */
+          @SerializedName("interval_count")
+          Long intervalCount;
         }
       }
     }

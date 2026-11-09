@@ -5,6 +5,89 @@ Instead, edit a corresponding `.change.md` file and run `hark build`.
 
 # Changelog
 
+## <a id="34-1-0"></a>34.1.0 - 2026-10-29
+This release changes the pinned API version to `2026-10-28.endive`.
+
+* [#2313](https://github.com/stripe/stripe-java/pull/2313) Reject ASCII-whitespace-only webhook secrets
+  - Reject webhook signing secrets made entirely of ASCII whitespace instead of using them as HMAC keys.
+* [#2312](https://github.com/stripe/stripe-java/pull/2312) Add API v2 Search support
+
+  Adds `com.stripe.model.v2.StripeSearchResult<T>` and support for auto pagination of search results.
+* [#2316](https://github.com/stripe/stripe-java/pull/2316) Fix API v2 list auto-pagination across empty pages
+* Preserve event context on fetched related objects
+* [#2321](https://github.com/stripe/stripe-java/pull/2321) Update generated code
+  * Add support for new resources `v2.core.vault.GbBankAccount`, `v2.core.vault.UsBankAccount`, `v2.moneymanagement.Adjustment`, `v2.moneymanagement.FinancialAccount`, `v2.moneymanagement.FinancialAddressCreditSimulation`, `v2.moneymanagement.FinancialAddress`, `v2.moneymanagement.InboundTransfer`, `v2.moneymanagement.OutboundPayment`, `v2.moneymanagement.OutboundSetupIntent`, `v2.moneymanagement.PayoutIntent`, `v2.moneymanagement.PayoutMethod`, `v2.moneymanagement.PayoutMethodsBankAccountSpec`, `v2.moneymanagement.ReceivedCredit`, `v2.moneymanagement.RecipientVerification`, `v2.moneymanagement.TransactionEntry`, and `v2.moneymanagement.Transaction`
+  * Add support for `acknowledge`, `create`, `recipient_verifications`, and `retrieve` methods on resource `v2.moneymanagement.RecipientVerification`
+  * Add support for `list` and `retrieve` methods on resources `v2.moneymanagement.Adjustment`, `v2.moneymanagement.ReceivedCredit`, and `v2.moneymanagement.TransactionEntry`
+  * Add support for `list`, `refresh_regulatory_receipt`, `retrieve`, and `update` methods on resource `v2.moneymanagement.Transaction`
+  * Add support for `credit` method on resource `v2.moneymanagement.FinancialAddressCreditSimulation`
+  * Add support for `retrieve` method on resource `v2.moneymanagement.PayoutMethodsBankAccountSpec`
+  * Add support for `archive`, `list`, `retrieve`, and `unarchive` methods on resource `v2.moneymanagement.PayoutMethod`
+  * Add support for `cancel`, `confirm`, `create`, `list`, `refresh_fx_quote`, `refresh_recipient_verification`, `retrieve`, and `update` methods on resource `v2.moneymanagement.PayoutIntent`
+  * Add support for `cancel`, `create`, `list`, `retrieve`, and `update` methods on resource `v2.moneymanagement.OutboundSetupIntent`
+  * Add support for `cancel`, `create`, `list`, and `retrieve` methods on resource `v2.moneymanagement.OutboundPayment`
+  * Add support for `create`, `list`, and `retrieve` methods on resources `v2.moneymanagement.FinancialAddress` and `v2.moneymanagement.InboundTransfer`
+  * Add support for `list`, `retrieve`, and `update` methods on resource `v2.moneymanagement.FinancialAccount`
+  * Add support for `archive`, `confirm_microdeposits`, `create`, `list`, `retrieve`, `send_microdeposits`, `unarchive`, and `update` methods on resource `v2.core.vault.UsBankAccount`
+  * Add support for `archive`, `create`, `list`, `retrieve`, and `unarchive` methods on resource `v2.core.vault.GbBankAccount`
+  * Add support for `reportingChart`, `terminalHardwareOrders`, and `terminalHardwareShop` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `weroPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `physicalAddress` on `Account.company`, `AccountCreateParams.company`, `AccountUpdateParams.company`, and `TokenCreateParams.account.company`
+  * Add support for `proofOfBusinessPresence` on `AccountCreateParams.documents` and `AccountUpdateParams.documents`
+  * Add support for `subscriptionPause` on `billingportal.Configuration.features`, `billingportal.ConfigurationCreateParams.features`, `billingportal.ConfigurationUpdateParams.features`, `billingportal.Session.flow`, and `billingportal.SessionCreateParams.flow_data`
+  * Add support for `afterExpiration` on `billingportal.SessionCreateParams` and `billingportal.Session`
+  * Add support for new value `subscription_pause` on enum `billingportal.SessionCreateParams.flow_data.type`
+  * Add support for `setupCredentialUsage` on `Charge.payment_method_details.card`, `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card`, `SetupIntent.payment_method_options.card`, `SetupIntentConfirmParams.payment_method_options.card`, `SetupIntentCreateParams.payment_method_options.card`, and `SetupIntentUpdateParams.payment_method_options.card`
+  * Add support for `storedCredentialUsage` on `Charge.payment_method_details.card`, `PaymentAttemptRecord.payment_method_details.card`, `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card`, and `PaymentRecord.payment_method_details.card`
+  * Add support for new value `hi-IN` on enum `checkout.SessionCreateParams.locale`
+  * Add support for `accountTaxIds`, `customFields`, `description`, and `footer` on `PaymentLink.subscription_data.invoice_settings`, `PaymentLinkCreateParams.subscription_data.invoice_settings`, `PaymentLinkUpdateParams.subscription_data.invoice_settings`, and `checkout.SessionCreateParams.subscription_data.invoice_settings`
+  * Add support for `paymentIntentData` on `checkout.SessionUpdateParams`
+  * Add support for new values `au_acn`, `au_wpn`, `bw_vat`, `ci_vat`, `cz_dic`, `fr_siren`, `fr_siret`, `fr_spi`, `gh_tin`, `is_kt`, `md_cf`, `mu_vat`, `mz_nuit`, `nz_bn`, `pt_nif`, `sm_coe`, `tt_bir`, and `tt_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceCreatePreviewParams.customer_details.tax_ids[].type`, `TaxIdCreateParams.type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for `intendedSubmissionMethod` on `DisputeUpdateParams` and `Dispute`
+  * Add support for `appeal` on `Dispute.evidence` and `DisputeUpdateParams.evidence`
+  * Add support for `submissionMethod` on `Dispute.evidence_details`
+  * Add support for new value `sequra` on enums `InvoiceCreateParams.payment_settings.paymentMethodTypes`, `InvoiceUpdateParams.payment_settings.paymentMethodTypes`, `SubscriptionCreateParams.payment_settings.paymentMethodTypes`, and `SubscriptionUpdateParams.payment_settings.paymentMethodTypes`
+  * Add support for new values `admissions_tax`, `attendance_tax`, `entertainment_tax`, `get_fund`, `gross_receipts_tax`, `hospitality_tax`, `luxury_tax`, `nhil`, `resort_tax`, and `tourism_tax` on enums `InvoiceAddLinesParams.lines[].tax_amounts[].tax_rate_data.taxType`, `InvoiceLineItemUpdateParams.tax_amounts[].tax_rate_data.taxType`, `InvoiceUpdateLinesParams.lines[].tax_amounts[].tax_rate_data.taxType`, `TaxRateCreateParams.taxType`, and `TaxRateUpdateParams.taxType`
+  * Add support for `pauseSchedules` on `InvoiceCreatePreviewParams.schedule_details`
+  * Add support for `financialAccount` on `issuing.CardUpdateParams`
+  * Add support for `deliveredAt` and `shippedAt` on `issuing.Card.shipping`
+  * Add support for new value `scalapay` on enums `PaymentLinkCreateParams.paymentMethodTypes` and `PaymentLinkUpdateParams.paymentMethodTypes`
+  * Add support for `referenceStatus` and `reference` on `Refund.destination_details.afterpay_clearpay`, `Refund.destination_details.klarna`, and `Refund.destination_details.paypal`
+  * Add support for `bw`, `ci`, `gh`, and `mu` on `tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+  * Add support for `utilityUsersTax` on `tax.Registration.country_options.us` and `tax.RegistrationCreateParams.country_options.us`
+  * Add support for new values `digital_excise_tax` and `utility_users_tax` on enum `tax.RegistrationCreateParams.country_options.us.type`
+  * Add support for `readerSecurity` and `stripeT600` on `terminal.ConfigurationCreateParams`, `terminal.ConfigurationUpdateParams`, and `terminal.Configuration`
+  * Add support for new values `simulated_stripe_t600` and `stripe_t600` on enum `terminal.ReaderListParams.deviceType`
+  * Add support for new values `three_d_secure.authentication.canceled`, `three_d_secure.authentication.challenge_started`, `three_d_secure.authentication.errored`, `three_d_secure.authentication.failed`, `three_d_secure.authentication.requires_challenge`, `three_d_secure.authentication.requires_submission`, and `three_d_secure.authentication.succeeded` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
+  * Add support for new value `2026-10-28.endive` on enum `WebhookEndpointCreateParams.apiVersion`
+  * Add support for `bankAccounts` and `cards` on `v2.core.Account.configuration.recipient.capabilities`, `v2.core.AccountCreateParams.configuration.recipient.capabilities`, and `v2.core.AccountUpdateParams.configuration.recipient.capabilities`
+  * Add support for `payoutMethods` on `v2.core.Account.defaults` and `v2.core.AccountUpdateParams.defaults`
+  * Add support for `alternatives` on `v2.core.Account.future_requirements` and `v2.core.Account.requirements`
+  * Add support for `customer` and `subscription` on `EventsV1InvoiceUpcomingEvent`
+  * Add support for new values `bank_accounts.ach`, `bank_accounts.fedwire`, `bank_accounts.fps`, `bank_accounts.rtp`, `bank_accounts.sepa`, and `bank_accounts.swift` on enum `EventsV2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent.updatedCapability`
+  * Add support for snapshot events `three_d_secure.authentication.canceled`, `three_d_secure.authentication.challenge_started`, `three_d_secure.authentication.errored`, `three_d_secure.authentication.failed`, `three_d_secure.authentication.requires_challenge`, `three_d_secure.authentication.requires_submission`, and `three_d_secure.authentication.succeeded` with resource `threedsecure.Authentication`
+  * Add support for event notifications `V1CustomerDiscountSourceChangedEvent`, `V1EntitlementsActiveEntitlementSummaryEntitlementAddedEvent`, and `V1EntitlementsActiveEntitlementSummaryEntitlementRemovedEvent`
+  * Add support for event notifications `V1CustomerSubscriptionActiveEvent`, `V1CustomerSubscriptionCancelAtChangedEvent`, `V1CustomerSubscriptionDefaultPaymentMethodChangedEvent`, `V1CustomerSubscriptionIncompleteEvent`, `V1CustomerSubscriptionIncompleteExpiredEvent`, `V1CustomerSubscriptionItemAddedEvent`, `V1CustomerSubscriptionItemPriceChangedEvent`, `V1CustomerSubscriptionItemQuantityChangedEvent`, `V1CustomerSubscriptionItemRemovedEvent`, `V1CustomerSubscriptionItemTaxRatesChangedEvent`, `V1CustomerSubscriptionPastDueEvent`, `V1CustomerSubscriptionTrialingEvent`, and `V1CustomerSubscriptionUnpaidEvent` with related object `Subscription`
+  * Add support for event notifications `V1FinancialConnectionsAccountBalanceRefreshFailedEvent`, `V1FinancialConnectionsAccountBalanceRefreshSucceededEvent`, `V1FinancialConnectionsAccountInferredBalancesRefreshFailedEvent`, `V1FinancialConnectionsAccountInferredBalancesRefreshSucceededEvent`, `V1FinancialConnectionsAccountOwnershipRefreshFailedEvent`, `V1FinancialConnectionsAccountOwnershipRefreshSucceededEvent`, `V1FinancialConnectionsAccountRiskIntelligenceRefreshFailedEvent`, `V1FinancialConnectionsAccountRiskIntelligenceRefreshSucceededEvent`, `V1FinancialConnectionsAccountTransactionsRefreshFailedEvent`, and `V1FinancialConnectionsAccountTransactionsRefreshSucceededEvent` with related object `financialconnections.Account`
+  * Add support for event notifications `V1InvoiceDiscountAddedEvent`, `V1InvoiceDiscountRemovedEvent`, `V1InvoiceLineItemAddedEvent`, `V1InvoiceLineItemPricingChangedEvent`, `V1InvoiceLineItemQuantityChangedEvent`, and `V1InvoiceLineItemRemovedEvent` with related object `Invoice`
+  * Add support for event notifications `V1InvoicePaymentCanceledEvent` and `V1InvoicePaymentOpenEvent` with related object `InvoicePayment`
+  * Add support for event notifications `V1InvoiceitemAmountChangedEvent`, `V1InvoiceitemDiscountAddedEvent`, and `V1InvoiceitemDiscountRemovedEvent` with related object `InvoiceItem`
+  * Add support for event notifications `V1PriceActivatedEvent`, `V1PriceDeactivatedEvent`, `V1PriceLookupKeyChangedEvent`, and `V1PriceTaxBehaviorChangedEvent` with related object `Price`
+  * Add support for event notifications `V1ProductActivatedEvent`, `V1ProductDeactivatedEvent`, `V1ProductDefaultPriceChangedEvent`, and `V1ProductTaxCodeChangedEvent` with related object `Product`
+  * Add support for event notification `V1PromotionCodeFullyRedeemedEvent` with related object `PromotionCode`
+  * Add support for event notifications `V1SubscriptionSchedulePhaseAddedEvent`, `V1SubscriptionSchedulePhaseDefaultTaxRatesChangedEvent`, `V1SubscriptionSchedulePhaseEndDateChangedEvent`, `V1SubscriptionSchedulePhaseRemovedEvent`, and `V1SubscriptionSchedulePhaseTrialEndChangedEvent` with related object `SubscriptionSchedule`
+  * Add support for event notification `V2MoneyManagementAdjustmentCreatedEvent` with related object `v2.moneymanagement.Adjustment`
+  * Add support for event notifications `V2MoneyManagementFinancialAccountCreatedEvent` and `V2MoneyManagementFinancialAccountUpdatedEvent` with related object `v2.moneymanagement.FinancialAccount`
+  * Add support for event notifications `V2MoneyManagementFinancialAddressActivatedEvent` and `V2MoneyManagementFinancialAddressFailedEvent` with related object `v2.moneymanagement.FinancialAddress`
+  * Add support for event notifications `V2MoneyManagementInboundTransferAvailableEvent`, `V2MoneyManagementInboundTransferBankDebitFailedEvent`, `V2MoneyManagementInboundTransferBankDebitProcessingEvent`, `V2MoneyManagementInboundTransferBankDebitQueuedEvent`, `V2MoneyManagementInboundTransferBankDebitReturnedEvent`, and `V2MoneyManagementInboundTransferBankDebitSucceededEvent` with related object `v2.moneymanagement.InboundTransfer`
+  * Add support for event notifications `V2MoneyManagementOutboundPaymentCanceledEvent`, `V2MoneyManagementOutboundPaymentCreatedEvent`, `V2MoneyManagementOutboundPaymentFailedEvent`, `V2MoneyManagementOutboundPaymentPostedEvent`, `V2MoneyManagementOutboundPaymentReturnedEvent`, `V2MoneyManagementOutboundPaymentUnderReviewEvent`, and `V2MoneyManagementOutboundPaymentUpdatedEvent` with related object `v2.moneymanagement.OutboundPayment`
+  * Add support for event notifications `V2MoneyManagementPayoutIntentCanceledEvent`, `V2MoneyManagementPayoutIntentCreatedEvent`, `V2MoneyManagementPayoutIntentPendingEvent`, `V2MoneyManagementPayoutIntentPostedEvent`, `V2MoneyManagementPayoutIntentProcessingEvent`, `V2MoneyManagementPayoutIntentRequiresActionEvent`, and `V2MoneyManagementPayoutIntentUpdatedEvent` with related object `v2.moneymanagement.PayoutIntent`
+  * Add support for event notifications `V2MoneyManagementPayoutMethodCreatedEvent` and `V2MoneyManagementPayoutMethodUpdatedEvent` with related object `v2.moneymanagement.PayoutMethod`
+  * Add support for event notifications `V2MoneyManagementReceivedCreditAvailableEvent`, `V2MoneyManagementReceivedCreditFailedEvent`, `V2MoneyManagementReceivedCreditReturnedEvent`, and `V2MoneyManagementReceivedCreditSucceededEvent` with related object `v2.moneymanagement.ReceivedCredit`
+  * Add support for event notifications `V2MoneyManagementRecipientVerificationCreatedEvent` and `V2MoneyManagementRecipientVerificationUpdatedEvent` with related object `v2.moneymanagement.RecipientVerification`
+  * Add support for event notifications `V2MoneyManagementTransactionCreatedEvent` and `V2MoneyManagementTransactionUpdatedEvent` with related object `v2.moneymanagement.Transaction`
+  * Add support for error types `AlreadyCanceledException`, `BlockedByStripeException`, `CannotProceedException`, `CapabilityNotEnabledException`, `ControlledByAlternateResourceException`, `FeatureNotEnabledException`, `FinancialAccountNotOpenException`, `FxQuoteNeedsRefreshException`, `InsufficientFundsException`, `InvalidPaymentMethodException`, `InvalidPayoutMethodException`, `InvalidVaultedCredentialException`, `NotCancelableException`, `QuotaExceededException`, `RecipientNotNotifiableException`, `VerificationAttemptFailedException`, `VerificationExpiredException`, and `VerificationNotInitiatedException`
+
 ## <a id="34-0-0"></a>34.0.0 - 2026-09-30
 This release changes the pinned API version to `2026-09-30.endive`.
 

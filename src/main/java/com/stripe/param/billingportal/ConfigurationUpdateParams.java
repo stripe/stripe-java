@@ -440,6 +440,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
+    /** Information about pausing subscriptions in the portal. */
+    @SerializedName("subscription_pause")
+    SubscriptionPause subscriptionPause;
+
     /** Information about updating subscriptions in the portal. */
     @SerializedName("subscription_update")
     SubscriptionUpdate subscriptionUpdate;
@@ -450,12 +454,14 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         InvoiceHistory invoiceHistory,
         PaymentMethodUpdate paymentMethodUpdate,
         SubscriptionCancel subscriptionCancel,
+        SubscriptionPause subscriptionPause,
         SubscriptionUpdate subscriptionUpdate) {
       this.customerUpdate = customerUpdate;
       this.extraParams = extraParams;
       this.invoiceHistory = invoiceHistory;
       this.paymentMethodUpdate = paymentMethodUpdate;
       this.subscriptionCancel = subscriptionCancel;
+      this.subscriptionPause = subscriptionPause;
       this.subscriptionUpdate = subscriptionUpdate;
     }
 
@@ -474,6 +480,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
       private SubscriptionCancel subscriptionCancel;
 
+      private SubscriptionPause subscriptionPause;
+
       private SubscriptionUpdate subscriptionUpdate;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -484,6 +492,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
             this.invoiceHistory,
             this.paymentMethodUpdate,
             this.subscriptionCancel,
+            this.subscriptionPause,
             this.subscriptionUpdate);
       }
 
@@ -538,6 +547,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       public Builder setSubscriptionCancel(
           ConfigurationUpdateParams.Features.SubscriptionCancel subscriptionCancel) {
         this.subscriptionCancel = subscriptionCancel;
+        return this;
+      }
+
+      /** Information about pausing subscriptions in the portal. */
+      public Builder setSubscriptionPause(
+          ConfigurationUpdateParams.Features.SubscriptionPause subscriptionPause) {
+        this.subscriptionPause = subscriptionPause;
         return this;
       }
 
@@ -1294,6 +1310,404 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
         ProrationBehavior(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionPause {
+      /**
+       * Controls how long a subscription can be paused. Defaults to {@code interval_options} with a
+       * single one-month option.
+       */
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Whether the feature is enabled. Customers can only pause subscriptions in the <a
+       * href="https://stripe.com/customer-management">redesigned customer portal</a>.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private SubscriptionPause(
+          Duration duration, Boolean enabled, Map<String, Object> extraParams) {
+        this.duration = duration;
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Duration duration;
+
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfigurationUpdateParams.Features.SubscriptionPause build() {
+          return new ConfigurationUpdateParams.Features.SubscriptionPause(
+              this.duration, this.enabled, this.extraParams);
+        }
+
+        /**
+         * Controls how long a subscription can be paused. Defaults to {@code interval_options} with
+         * a single one-month option.
+         */
+        public Builder setDuration(
+            ConfigurationUpdateParams.Features.SubscriptionPause.Duration duration) {
+          this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Whether the feature is enabled. Customers can only pause subscriptions in the <a
+         * href="https://stripe.com/customer-management">redesigned customer portal</a>.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationUpdateParams.Features.SubscriptionPause#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationUpdateParams.Features.SubscriptionPause#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The preset pause durations customers can choose from. Required when {@code type} is
+         * {@code interval_options}.
+         */
+        @SerializedName("interval_options")
+        Object intervalOptions;
+
+        /**
+         * <strong>Required.</strong> Whether subscriptions can be paused indefinitely or for a
+         * preset duration.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private Duration(Map<String, Object> extraParams, Object intervalOptions, Type type) {
+          this.extraParams = extraParams;
+          this.intervalOptions = intervalOptions;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object intervalOptions;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ConfigurationUpdateParams.Features.SubscriptionPause.Duration build() {
+            return new ConfigurationUpdateParams.Features.SubscriptionPause.Duration(
+                this.extraParams, this.intervalOptions, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionPause.Duration#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionPause.Duration#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `intervalOptions` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionPause.Duration#intervalOptions} for the
+           * field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addIntervalOption(
+              ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption
+                  element) {
+            if (this.intervalOptions == null || this.intervalOptions instanceof EmptyParam) {
+              this.intervalOptions =
+                  new ArrayList<
+                      ConfigurationUpdateParams.Features.SubscriptionPause.Duration
+                          .IntervalOption>();
+            }
+            ((List<ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption>)
+                    this.intervalOptions)
+                .add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `intervalOptions` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionPause.Duration#intervalOptions} for the
+           * field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllIntervalOption(
+              List<ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption>
+                  elements) {
+            if (this.intervalOptions == null || this.intervalOptions instanceof EmptyParam) {
+              this.intervalOptions =
+                  new ArrayList<
+                      ConfigurationUpdateParams.Features.SubscriptionPause.Duration
+                          .IntervalOption>();
+            }
+            ((List<ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption>)
+                    this.intervalOptions)
+                .addAll(elements);
+            return this;
+          }
+
+          /**
+           * The preset pause durations customers can choose from. Required when {@code type} is
+           * {@code interval_options}.
+           */
+          public Builder setIntervalOptions(EmptyParam intervalOptions) {
+            this.intervalOptions = intervalOptions;
+            return this;
+          }
+
+          /**
+           * The preset pause durations customers can choose from. Required when {@code type} is
+           * {@code interval_options}.
+           */
+          public Builder setIntervalOptions(
+              List<ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption>
+                  intervalOptions) {
+            this.intervalOptions = intervalOptions;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Whether subscriptions can be paused indefinitely or for a
+           * preset duration.
+           */
+          public Builder setType(
+              ConfigurationUpdateParams.Features.SubscriptionPause.Duration.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class IntervalOption {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> Specifies the pause duration unit. Either {@code day},
+           * {@code week}, {@code month}, or {@code year}.
+           */
+          @SerializedName("interval")
+          Interval interval;
+
+          /**
+           * The number of intervals in the pause duration. Defaults to 1. The maximum duration is
+           * three years.
+           */
+          @SerializedName("interval_count")
+          Long intervalCount;
+
+          private IntervalOption(
+              Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.intervalCount = intervalCount;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Long intervalCount;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption
+                build() {
+              return new ConfigurationUpdateParams.Features.SubscriptionPause.Duration
+                  .IntervalOption(this.extraParams, this.interval, this.intervalCount);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Specifies the pause duration unit. Either {@code day},
+             * {@code week}, {@code month}, or {@code year}.
+             */
+            public Builder setInterval(
+                ConfigurationUpdateParams.Features.SubscriptionPause.Duration.IntervalOption
+                        .Interval
+                    interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /**
+             * The number of intervals in the pause duration. Defaults to 1. The maximum duration is
+             * three years.
+             */
+            public Builder setIntervalCount(Long intervalCount) {
+              this.intervalCount = intervalCount;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week"),
+
+            @SerializedName("year")
+            YEAR("year");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("indefinite")
+          INDEFINITE("indefinite"),
+
+          @SerializedName("interval_options")
+          INTERVAL_OPTIONS("interval_options");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }

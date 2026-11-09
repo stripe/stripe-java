@@ -113,11 +113,65 @@ public abstract class StripeException extends Exception {
       StripeResponseGetter responseGetter) {
     switch (type) {
         // The beginning of the section generated from our OpenAPI spec
+      case "already_canceled":
+        return com.stripe.exception.AlreadyCanceledException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "blocked_by_stripe":
+        return com.stripe.exception.BlockedByStripeException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "cannot_proceed":
+        return com.stripe.exception.CannotProceedException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "capability_not_enabled":
+        return com.stripe.exception.CapabilityNotEnabledException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "controlled_by_alternate_resource":
+        return com.stripe.exception.ControlledByAlternateResourceException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "feature_not_enabled":
+        return com.stripe.exception.FeatureNotEnabledException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "financial_account_not_open":
+        return com.stripe.exception.FinancialAccountNotOpenException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "fx_quote_needs_refresh":
+        return com.stripe.exception.FxQuoteNeedsRefreshException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "insufficient_funds":
+        return com.stripe.exception.InsufficientFundsException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "invalid_payment_method":
+        return com.stripe.exception.InvalidPaymentMethodException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "invalid_payout_method":
+        return com.stripe.exception.InvalidPayoutMethodException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "invalid_vaulted_credential":
+        return com.stripe.exception.InvalidVaultedCredentialException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "not_cancelable":
+        return com.stripe.exception.NotCancelableException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "quota_exceeded":
+        return com.stripe.exception.QuotaExceededException.parse(
+            body, statusCode, requestId, responseGetter);
       case "rate_limit":
         return com.stripe.exception.RateLimitException.parse(
             body, statusCode, requestId, responseGetter);
+      case "recipient_not_notifiable":
+        return com.stripe.exception.RecipientNotNotifiableException.parse(
+            body, statusCode, requestId, responseGetter);
       case "temporary_session_expired":
         return com.stripe.exception.TemporarySessionExpiredException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "verification_attempt_failed":
+        return com.stripe.exception.VerificationAttemptFailedException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "verification_expired":
+        return com.stripe.exception.VerificationExpiredException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "verification_not_initiated":
+        return com.stripe.exception.VerificationNotInitiatedException.parse(
             body, statusCode, requestId, responseGetter);
         // The end of the section generated from our OpenAPI spec
     }

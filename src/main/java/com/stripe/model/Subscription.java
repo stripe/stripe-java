@@ -343,11 +343,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * <p>A subscription that is currently in a trial period is {@code trialing} and moves to {@code
    * active} when the trial period is over.
    *
-   * <p>A subscription can only enter a {@code paused} status <a
+   * <p>A subscription can enter a {@code paused} status in several ways, including <a
    * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials#create-free-trials-without-payment">when
-   * a trial ends without a payment method</a>. A {@code paused} subscription doesn't generate
-   * invoices and can be resumed after your customer adds their payment method. The {@code paused}
-   * status is different from <a
+   * a trial ends without a payment method</a> or when you pause it using the <a
+   * href="https://docs.stripe.com/api/subscriptions/pause">pause endpoint</a>. A {@code paused}
+   * subscription doesn't advance to a new billing period or generate invoices until it resumes. The
+   * {@code paused} status is different from <a
    * href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing collection</a>,
    * which still generates invoices and leaves the subscription's status unchanged.
    *
@@ -610,8 +611,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -632,8 +634,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -654,8 +657,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -680,8 +684,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -702,8 +707,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -2409,8 +2415,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @EqualsAndHashCode(callSuper = false)
       public static class Pix extends StripeObject {
         /**
-         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-         * Defaults to 86400 seconds.
+         * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+         * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
          */
         @SerializedName("expires_after_seconds")
         Long expiresAfterSeconds;
