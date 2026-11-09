@@ -112,7 +112,12 @@ public class HttpURLConnectionClient extends HttpClient {
     conn.setReadTimeout(request.options().getReadTimeout());
     conn.setUseCaches(false);
     for (Map.Entry<String, List<String>> entry : getHeaders(request).map().entrySet()) {
-      conn.setRequestProperty(entry.getKey(), String.join(",", entry.getValue()));
+      String value = String.join(",", entry.getValue());
+      if (value.indexOf('\r') >= 0 || value.indexOf('\n') >= 0 || value.indexOf('\0') >= 0) {
+        throw new IllegalArgumentException(
+            "Illegal character(s) in message header value: " + entry.getKey());
+      }
+      conn.setRequestProperty(entry.getKey(), value);
     }
 
     conn.setRequestMethod(request.method().name());
