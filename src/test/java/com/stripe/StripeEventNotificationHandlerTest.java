@@ -1,11 +1,14 @@
 package com.stripe;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -16,19 +19,26 @@ import com.stripe.events.UnknownEventNotification;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.events.V2CoreAccountCreatedEventNotification;
 import com.stripe.exception.SignatureVerificationException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.v2.core.EventNotification;
-import com.stripe.net.LiveStripeResponseGetter;
+import com.stripe.net.ApiResource;
+import com.stripe.net.HttpClient;
+import com.stripe.net.HttpHeaders;
+import com.stripe.net.StripeRequest;
+import com.stripe.net.StripeResponse;
 import com.stripe.net.Webhook;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 public class StripeEventNotificationHandlerTest {
   private static final String DUMMY_WEBHOOK_SECRET = "whsec_test_secret";
@@ -269,17 +279,28 @@ public class StripeEventNotificationHandlerTest {
 
   @Test
   public void testHandlerUsesEventStripeContext()
-      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException,
+          StripeException {
     // Test that the handler receives a client with stripe_context from the event
+    HttpClient httpClient = mock(HttpClient.class);
+    when(httpClient.requestWithRetries(any()))
+        .thenReturn(new StripeResponse(200, HttpHeaders.of(Collections.emptyMap()), "{}"));
+    stripeClient =
+        StripeClient.builder()
+            .setApiKey("sk_test_1234")
+            .setStripeAccount("acct_123")
+            .setStripeContext("original_context_123")
+            .setHttpClient(httpClient)
+            .build();
+    eventNotificationHandler =
+        new StripeEventNotificationHandler(DUMMY_WEBHOOK_SECRET, stripeClient, fallbackCallback);
     AtomicReference<String> receivedContext = new AtomicReference<>();
-    AtomicReference<String> receivedAccount = new AtomicReference<>();
 
     EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
         (event, client) -> {
-          LiveStripeResponseGetter responseGetter =
-              (LiveStripeResponseGetter) client.getResponseGetter();
-          receivedAccount.set(responseGetter.getOptions().getStripeAccount());
           receivedContext.set(client.getContext());
+          assertDoesNotThrow(
+              () -> client.rawRequest(ApiResource.RequestMethod.GET, "/v1/products", null));
         };
 
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
@@ -290,7 +311,12 @@ public class StripeEventNotificationHandlerTest {
     eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader);
 
     assertEquals("event_context_456", receivedContext.get());
-    assertNull(receivedAccount.get());
+    ArgumentCaptor<StripeRequest> request = ArgumentCaptor.forClass(StripeRequest.class);
+    verify(httpClient).requestWithRetries(request.capture());
+    assertEquals(
+        "event_context_456",
+        request.getValue().headers().firstValue("Stripe-Context").orElse(null));
+    assertFalse(request.getValue().headers().firstValue("Stripe-Account").isPresent());
   }
 
   @Test

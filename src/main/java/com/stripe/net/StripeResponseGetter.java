@@ -61,21 +61,6 @@ public interface StripeResponseGetter {
   };
 
   /**
-   * Returns a new StripeResponseGetter with the same underlying configuration (e.g. HTTP client,
-   * API key) as this instance, but scoped to the given {@code stripe_context}, with any {@code
-   * stripe_account} cleared.
-   *
-   * @param context the {@code stripe_context} to scope to, or {@code null} to clear it
-   * @return a new, context-scoped StripeResponseGetter
-   * @throws IllegalStateException if this StripeResponseGetter implementation doesn't support
-   *     context scoping
-   */
-  default StripeResponseGetter withStripeContext(String context) {
-    throw new IllegalStateException(
-        "Cannot create a response getter with a custom context for this StripeResponseGetter implementation");
-  }
-
-  /**
    * This method should e.g. throws an ApiKeyMissingError if a proper API Key cannot be determined
    * by the ResponseGetter or from the RequestOptions passed in.
    */

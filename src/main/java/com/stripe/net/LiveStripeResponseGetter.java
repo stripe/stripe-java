@@ -18,8 +18,6 @@ import com.stripe.util.Stopwatch;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.net.PasswordAuthentication;
-import java.net.Proxy;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -102,103 +100,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   public StripeResponseGetterOptions getOptions() {
     return this.options;
-  }
-
-  /**
-   * Creates a new LiveStripeResponseGetter with the same configuration and HTTP client as this
-   * instance, but scoped to the given {@code stripe_context}, with any {@code stripe_account}
-   * cleared.
-   *
-   * @param context the {@code stripe_context} to scope to, or {@code null} to clear it
-   * @return a new LiveStripeResponseGetter scoped to the given context
-   */
-  @Override
-  public LiveStripeResponseGetter withStripeContext(String context) {
-    return withNewOptions(
-        options -> new ContextScopedStripeResponseGetterOptions(options, context));
-  }
-
-  /**
-   * Wraps an existing {@link StripeResponseGetterOptions}, delegating every setting except {@code
-   * stripe_account} (always cleared) and {@code stripe_context} (overridden). Used by {@link
-   * #withStripeContext} so it works regardless of the concrete {@link StripeResponseGetterOptions}
-   * implementation backing this getter.
-   */
-  private static final class ContextScopedStripeResponseGetterOptions
-      extends StripeResponseGetterOptions {
-    private final StripeResponseGetterOptions delegate;
-    private final String stripeContext;
-
-    ContextScopedStripeResponseGetterOptions(
-        StripeResponseGetterOptions delegate, String stripeContext) {
-      this.delegate = delegate;
-      this.stripeContext = stripeContext;
-    }
-
-    @Override
-    public Authenticator getAuthenticator() {
-      return delegate.getAuthenticator();
-    }
-
-    @Override
-    public String getClientId() {
-      return delegate.getClientId();
-    }
-
-    @Override
-    public int getConnectTimeout() {
-      return delegate.getConnectTimeout();
-    }
-
-    @Override
-    public Proxy getConnectionProxy() {
-      return delegate.getConnectionProxy();
-    }
-
-    @Override
-    public int getMaxNetworkRetries() {
-      return delegate.getMaxNetworkRetries();
-    }
-
-    @Override
-    public PasswordAuthentication getProxyCredential() {
-      return delegate.getProxyCredential();
-    }
-
-    @Override
-    public String getApiBase() {
-      return delegate.getApiBase();
-    }
-
-    @Override
-    public String getFilesBase() {
-      return delegate.getFilesBase();
-    }
-
-    @Override
-    public String getConnectBase() {
-      return delegate.getConnectBase();
-    }
-
-    @Override
-    public String getMeterEventsBase() {
-      return delegate.getMeterEventsBase();
-    }
-
-    @Override
-    public int getReadTimeout() {
-      return delegate.getReadTimeout();
-    }
-
-    @Override
-    public String getStripeAccount() {
-      return null;
-    }
-
-    @Override
-    public String getStripeContext() {
-      return stripeContext;
-    }
   }
 
   private StripeRequest toStripeRequest(ApiRequest apiRequest, RequestOptions mergedOptions)

@@ -442,8 +442,8 @@ public class StripeClientTest extends BaseStripeTest {
                     200,
                     HttpHeaders.of(Collections.emptyMap()),
                     "{\"id\": \"prod_shared\", \"object\": \"product\"}"))
-        .when(networkSpy)
-        .rawRequest(Mockito.any());
+        .when(httpClientSpy)
+        .request(Mockito.any());
 
     EventNotification eventNotification =
         EventNotification.fromJson(
@@ -467,6 +467,14 @@ public class StripeClientTest extends BaseStripeTest {
     ArgumentCaptor<RawApiRequest> rawRequestCaptor = ArgumentCaptor.forClass(RawApiRequest.class);
     Mockito.verify(networkSpy).rawRequest(rawRequestCaptor.capture());
     assertEquals("acct_child", rawRequestCaptor.getValue().getOptions().getStripeContext());
+
+    verifyStripeRequest(
+        request -> {
+          assertEquals(RequestMethod.GET, request.method());
+          assertEquals("/v1/products/prod_shared", request.url().getPath());
+          assertEquals("acct_child", request.headers().firstValue("Stripe-Context").orElse(null));
+          assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
+        });
 
     verifyStripeRequest(
         request -> {
