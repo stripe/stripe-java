@@ -120,13 +120,12 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     RequestOptions.RequestOptionsBuilder optsBuilder = new RequestOptions.RequestOptionsBuilder();
     optsBuilder.setStripeRequestTrigger("event=" + id);
 
-    if (context != null) {
-      optsBuilder.setStripeContext(context);
-    }
-
     RequestOptions opts = optsBuilder.build();
 
-    return this.responseGetter.request(
+    // Scope the getter used for this request to the event's own context.
+    StripeResponseGetter scopedResponseGetter = this.responseGetter.withStripeContext(context);
+
+    return scopedResponseGetter.request(
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, url, null, opts),
         objectClass);
   }
