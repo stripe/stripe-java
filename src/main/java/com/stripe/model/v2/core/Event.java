@@ -11,6 +11,7 @@ import com.stripe.model.v2.EventDataClassLookup;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
+import com.stripe.net.ContextScopedStripeResponseGetter;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import java.time.Instant;
@@ -126,7 +127,11 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
 
     RequestOptions opts = optsBuilder.build();
 
-    return this.responseGetter.request(
+    // The related object must retain the event's scope for subsequent requests.
+    StripeResponseGetter scopedResponseGetter =
+        ContextScopedStripeResponseGetter.withStripeContext(this.responseGetter, context);
+
+    return scopedResponseGetter.request(
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, url, null, opts),
         objectClass);
   }
