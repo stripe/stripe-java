@@ -5529,14 +5529,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String storedCredentialUsage;
 
       /**
-       * Selected usage to indicate the transaction type of the off-session payment.
-       *
-       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
-       */
-      @SerializedName("stored_credential_usage")
-      String storedCredentialUsage;
-
-      /**
        * For more details about Installments, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
