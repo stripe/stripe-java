@@ -767,12 +767,26 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, Session.class);
   }
 
-  /** Creates a Checkout Session object. */
+  /**
+   * Creates a Checkout Session object.
+   *
+   * <p>Validate requests on your server and protect your application’s Session-creation endpoint
+   * with access controls and limits on repeated creation. See <a
+   * href="https://docs.stripe.com/payments/accept-a-payment?payment-ui=elements&api-integration=checkout#protect-session-creation">Protect
+   * your Session-creation endpoint</a>.
+   */
   public static Session create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a Checkout Session object. */
+  /**
+   * Creates a Checkout Session object.
+   *
+   * <p>Validate requests on your server and protect your application’s Session-creation endpoint
+   * with access controls and limits on repeated creation. See <a
+   * href="https://docs.stripe.com/payments/accept-a-payment?payment-ui=elements&api-integration=checkout#protect-session-creation">Protect
+   * your Session-creation endpoint</a>.
+   */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/checkout/sessions";
@@ -781,12 +795,26 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Creates a Checkout Session object. */
+  /**
+   * Creates a Checkout Session object.
+   *
+   * <p>Validate requests on your server and protect your application’s Session-creation endpoint
+   * with access controls and limits on repeated creation. See <a
+   * href="https://docs.stripe.com/payments/accept-a-payment?payment-ui=elements&api-integration=checkout#protect-session-creation">Protect
+   * your Session-creation endpoint</a>.
+   */
   public static Session create(SessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a Checkout Session object. */
+  /**
+   * Creates a Checkout Session object.
+   *
+   * <p>Validate requests on your server and protect your application’s Session-creation endpoint
+   * with access controls and limits on repeated creation. See <a
+   * href="https://docs.stripe.com/payments/accept-a-payment?payment-ui=elements&api-integration=checkout#protect-session-creation">Protect
+   * your Session-creation endpoint</a>.
+   */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/checkout/sessions";

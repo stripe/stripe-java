@@ -29,7 +29,8 @@ public class FxQuoteCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> A list of three letter <a
    * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
-   * Must be <a href="https://stripe.com/docs/currencies">supported currencies</a>.
+   * Must be <a href="https://stripe.com/docs/currencies">supported currencies</a>. Payout-only
+   * currencies are also supported, but only for informational quotes ({@code lock_duration=none}).
    */
   @SerializedName("from_currencies")
   List<String> fromCurrencies;
@@ -44,7 +45,8 @@ public class FxQuoteCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Three-letter <a
    * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
-   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. Payout-only
+   * currencies are also supported, but only for informational quotes ({@code lock_duration=none}).
    */
   @SerializedName("to_currency")
   String toCurrency;
@@ -186,7 +188,9 @@ public class FxQuoteCreateParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> Three-letter <a
      * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
-     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. Payout-only
+     * currencies are also supported, but only for informational quotes ({@code
+     * lock_duration=none}).
      */
     public Builder setToCurrency(String toCurrency) {
       this.toCurrency = toCurrency;

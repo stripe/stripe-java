@@ -79,6 +79,13 @@ public class GrantedToken extends ApiResource implements HasId {
   @SerializedName("payment_method_details")
   PaymentMethodDetails paymentMethodDetails;
 
+  /**
+   * Referral fees may be charged when a SharedPaymentGrantedToken is used. This behavior is
+   * controlled by the issuer of the token. This field provides details about the referral fee rate.
+   */
+  @SerializedName("referral_fee_details")
+  ReferralFeeDetails referralFeeDetails;
+
   /** Risk details of the SharedPaymentGrantedToken. */
   @SerializedName("risk_details")
   RiskDetails riskDetails;
@@ -332,14 +339,14 @@ public class GrantedToken extends ApiResource implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
         /**
-         * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
-         * {@code unavailable}, or {@code unchecked}.
+         * If an address line1 was provided, results of the check, one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
         /**
-         * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+         * If an address postal code was provided, results of the check, one of {@code pass}, {@code
          * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
@@ -594,6 +601,39 @@ public class GrantedToken extends ApiResource implements HasId {
       @SerializedName("persistent_token")
       @Deprecated
       String persistentToken;
+    }
+  }
+
+  /**
+   * Referral fees may be charged when a SharedPaymentGrantedToken is used. This behavior is
+   * controlled by the issuer of the token. This field provides details about the referral fee rate.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReferralFeeDetails extends StripeObject {
+    @SerializedName("rate")
+    Rate rate;
+
+    /**
+     * For more details about Rate, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rate extends StripeObject {
+      /** The percentage of the payment amount which will be calculated as a fee. */
+      @SerializedName("percentage")
+      BigDecimal percentage;
+
+      /**
+       * The type of fee rate.
+       *
+       * <p>Equal to {@code percentage}.
+       */
+      @SerializedName("type")
+      String type;
     }
   }
 
@@ -924,6 +964,7 @@ public class GrantedToken extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(agentDetails, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(referralFeeDetails, responseGetter);
     trySetResponseGetter(riskDetails, responseGetter);
     trySetResponseGetter(usageDetails, responseGetter);
     trySetResponseGetter(usageLimits, responseGetter);

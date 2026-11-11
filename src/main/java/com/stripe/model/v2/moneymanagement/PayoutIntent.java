@@ -380,7 +380,8 @@ public class PayoutIntent extends StripeObject implements HasId {
       /**
        * Open Enum. The reason for the failure.
        *
-       * <p>One of {@code account_not_configured_as_recipient}, {@code
+       * <p>One of {@code account_not_configured_as_recipient}, {@code check_attachment_too_large},
+       * {@code check_expired}, {@code check_undeliverable}, {@code
        * currency_not_supported_for_financial_account_balance}, {@code
        * feature_not_active_for_recipient}, {@code fx_rate_drift_exceeded_after_review}, {@code
        * insufficient_funds}, {@code payout_method_account_type_incorrect}, {@code
@@ -559,6 +560,10 @@ public class PayoutIntent extends StripeObject implements HasId {
       @SerializedName("bank_account")
       BankAccount bankAccount;
 
+      /** Options for check send payout methods. */
+      @SerializedName("check_send")
+      CheckSend checkSend;
+
       /** Options for bank account payout methods. */
       @Getter
       @Setter
@@ -607,6 +612,32 @@ public class PayoutIntent extends StripeObject implements HasId {
             String transactionPurpose;
           }
         }
+      }
+
+      /** Options for check send payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CheckSend extends StripeObject {
+        /** The ID of a file to include as an attachment with the check. */
+        @SerializedName("attachment_file")
+        String attachmentFile;
+
+        /** Memo printed on the memo field of the check. */
+        @SerializedName("memo")
+        String memo;
+
+        /**
+         * Open Enum. Shipping speed of the check. Defaults to standard.
+         *
+         * <p>One of {@code priority}, or {@code standard}.
+         */
+        @SerializedName("shipping_speed")
+        String shippingSpeed;
+
+        /** Signature printed on the check. */
+        @SerializedName("signature")
+        String signature;
       }
     }
   }

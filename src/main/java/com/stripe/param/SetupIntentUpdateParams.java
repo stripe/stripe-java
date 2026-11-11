@@ -9839,6 +9839,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Additional fields for Financial Connections session creation. */
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /** Additional fields for Mandate creation. */
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
@@ -9848,9 +9852,11 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private BacsDebit(
           Map<String, Object> extraParams,
+          FinancialConnections financialConnections,
           MandateOptions mandateOptions,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
+        this.financialConnections = financialConnections;
         this.mandateOptions = mandateOptions;
         this.verificationMethod = verificationMethod;
       }
@@ -9862,6 +9868,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private FinancialConnections financialConnections;
+
         private MandateOptions mandateOptions;
 
         private VerificationMethod verificationMethod;
@@ -9869,7 +9877,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit build() {
           return new SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.mandateOptions, this.verificationMethod);
+              this.extraParams,
+              this.financialConnections,
+              this.mandateOptions,
+              this.verificationMethod);
         }
 
         /**
@@ -9900,6 +9911,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Additional fields for Financial Connections session creation. */
+        public Builder setFinancialConnections(
+            SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections
+                financialConnections) {
+          this.financialConnections = financialConnections;
+          return this;
+        }
+
         /** Additional fields for Mandate creation. */
         public Builder setMandateOptions(
             SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.MandateOptions mandateOptions) {
@@ -9912,6 +9931,97 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
                 verificationMethod) {
           this.verificationMethod = verificationMethod;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * For webview integrations only. Upon completing OAuth login in the native browser, the
+         * user will be redirected to this URL to return to your app.
+         */
+        @SerializedName("return_url")
+        Object returnUrl;
+
+        private FinancialConnections(Map<String, Object> extraParams, Object returnUrl) {
+          this.extraParams = extraParams;
+          this.returnUrl = returnUrl;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object returnUrl;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections
+              build() {
+            return new SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections(
+                this.extraParams, this.returnUrl);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * For webview integrations only. Upon completing OAuth login in the native browser, the
+           * user will be redirected to this URL to return to your app.
+           */
+          public Builder setReturnUrl(String returnUrl) {
+            this.returnUrl = returnUrl;
+            return this;
+          }
+
+          /**
+           * For webview integrations only. Upon completing OAuth login in the native browser, the
+           * user will be redirected to this URL to return to your app.
+           */
+          public Builder setReturnUrl(EmptyParam returnUrl) {
+            this.returnUrl = returnUrl;
+            return this;
+          }
         }
       }
 

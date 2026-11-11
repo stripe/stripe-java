@@ -45,13 +45,15 @@ public final class NetworkTokenService extends ApiService {
   }
   /** Creates a Network Token from an existing card reference. */
   public NetworkToken createFromCredential(NetworkTokenCreateFromCredentialParams params)
-      throws StripeException, CannotProceedException, BlockedByStripeException {
+      throws StripeException, CannotProceedException, BlockedByStripeException,
+          MerchantNotGatedException {
     return createFromCredential(params, (RequestOptions) null);
   }
   /** Creates a Network Token from an existing card reference. */
   public NetworkToken createFromCredential(
       NetworkTokenCreateFromCredentialParams params, RequestOptions options)
-      throws StripeException, CannotProceedException, BlockedByStripeException {
+      throws StripeException, CannotProceedException, BlockedByStripeException,
+          MerchantNotGatedException {
     String path = "/v2/core/vault/network_tokens/create_from_credential";
     ApiRequest request =
         new ApiRequest(

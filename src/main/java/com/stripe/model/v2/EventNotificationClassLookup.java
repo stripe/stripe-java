@@ -1497,6 +1497,22 @@ public final class EventNotificationClassLookup {
         "v2.money_management.reward_program.reward_reversed",
         com.stripe.events.V2MoneyManagementRewardProgramRewardReversedEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.spending_mandate.canceled",
+        com.stripe.events.V2MoneyManagementSpendingMandateCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.created",
+        com.stripe.events.V2MoneyManagementSpendingMandateCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.expired",
+        com.stripe.events.V2MoneyManagementSpendingMandateExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.pending_cancellation",
+        com.stripe.events.V2MoneyManagementSpendingMandatePendingCancellationEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.updated",
+        com.stripe.events.V2MoneyManagementSpendingMandateUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.transaction.created",
         com.stripe.events.V2MoneyManagementTransactionCreatedEventNotification.class);
     eventClassLookup.put(

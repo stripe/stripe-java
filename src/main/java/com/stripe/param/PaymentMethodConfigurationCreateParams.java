@@ -568,6 +568,14 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   Swish swish;
 
   /**
+   * Customers are redirected to Toss Pay to authenticate their payment, then return to your website
+   * or app. You receive immediate notification of whether the payment succeeded or failed. With
+   * recurring access, customers can authorize a reusable mandate for future off-session payments.
+   */
+  @SerializedName("toss_pay")
+  TossPay tossPay;
+
+  /**
    * Twint is a payment method popular in Switzerland. It allows customers to pay using their mobile
    * phone. Check this <a href="https://docs.stripe.com/payments/twint">page</a> for more details.
    */
@@ -684,6 +692,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
       Sofort sofort,
       Sunbit sunbit,
       Swish swish,
+      TossPay tossPay,
       Twint twint,
       Upi upi,
       UsBankAccount usBankAccount,
@@ -756,6 +765,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     this.sofort = sofort;
     this.sunbit = sunbit;
     this.swish = swish;
+    this.tossPay = tossPay;
     this.twint = twint;
     this.upi = upi;
     this.usBankAccount = usBankAccount;
@@ -901,6 +911,8 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
 
     private Swish swish;
 
+    private TossPay tossPay;
+
     private Twint twint;
 
     private Upi upi;
@@ -982,6 +994,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
           this.sofort,
           this.sunbit,
           this.swish,
+          this.tossPay,
           this.twint,
           this.upi,
           this.usBankAccount,
@@ -1718,6 +1731,17 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
      */
     public Builder setSwish(PaymentMethodConfigurationCreateParams.Swish swish) {
       this.swish = swish;
+      return this;
+    }
+
+    /**
+     * Customers are redirected to Toss Pay to authenticate their payment, then return to your
+     * website or app. You receive immediate notification of whether the payment succeeded or
+     * failed. With recurring access, customers can authorize a reusable mandate for future
+     * off-session payments.
+     */
+    public Builder setTossPay(PaymentMethodConfigurationCreateParams.TossPay tossPay) {
+      this.tossPay = tossPay;
       return this;
     }
 
@@ -12030,6 +12054,172 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationCreateParams.Swish.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TossPay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private TossPay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationCreateParams.TossPay build() {
+        return new PaymentMethodConfigurationCreateParams.TossPay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationCreateParams.TossPay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationCreateParams.TossPay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationCreateParams.TossPay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationCreateParams.TossPay.DisplayPreference build() {
+          return new PaymentMethodConfigurationCreateParams.TossPay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.TossPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationCreateParams.TossPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationCreateParams.TossPay.DisplayPreference.Preference
+                preference) {
           this.preference = preference;
           return this;
         }

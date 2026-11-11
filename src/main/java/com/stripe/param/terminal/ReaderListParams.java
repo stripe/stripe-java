@@ -276,11 +276,20 @@ public class ReaderListParams extends ApiRequestParams {
     @SerializedName("stripe_s700")
     STRIPE_S700("stripe_s700"),
 
+    @SerializedName("stripe_s700_devkit")
+    STRIPE_S700_DEVKIT("stripe_s700_devkit"),
+
     @SerializedName("stripe_s710")
     STRIPE_S710("stripe_s710"),
 
+    @SerializedName("stripe_s710_devkit")
+    STRIPE_S710_DEVKIT("stripe_s710_devkit"),
+
     @SerializedName("stripe_t600")
     STRIPE_T600("stripe_t600"),
+
+    @SerializedName("stripe_t600_devkit")
+    STRIPE_T600_DEVKIT("stripe_t600_devkit"),
 
     @SerializedName("verifone_P400")
     VERIFONE_P400("verifone_P400"),
@@ -294,8 +303,14 @@ public class ReaderListParams extends ApiRequestParams {
     @SerializedName("verifone_ux700")
     VERIFONE_UX700("verifone_ux700"),
 
+    @SerializedName("verifone_ux700_devkit")
+    VERIFONE_UX700_DEVKIT("verifone_ux700_devkit"),
+
     @SerializedName("verifone_v660p")
-    VERIFONE_V660P("verifone_v660p");
+    VERIFONE_V660P("verifone_v660p"),
+
+    @SerializedName("verifone_v660p_devkit")
+    VERIFONE_V660P_DEVKIT("verifone_v660p_devkit");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

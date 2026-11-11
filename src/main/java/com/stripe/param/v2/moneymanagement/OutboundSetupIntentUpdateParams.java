@@ -590,6 +590,9 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("card")
       CARD("card"),
 
+      @SerializedName("check_send")
+      CHECK_SEND("check_send"),
+
       @SerializedName("crypto_wallet")
       CRYPTO_WALLET("crypto_wallet"),
 

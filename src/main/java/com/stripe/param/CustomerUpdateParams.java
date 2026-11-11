@@ -96,6 +96,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
   InvoiceSettings invoiceSettings;
 
   /**
+   * Advertising attribution information for this customer. Only one attribution is supported, and
+   * it can only be set once.
+   */
+  @SerializedName("marketing_attributions")
+  List<CustomerUpdateParams.MarketingAttribution> marketingAttributions;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -151,6 +158,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Object individualName,
       Object invoicePrefix,
       InvoiceSettings invoiceSettings,
+      List<CustomerUpdateParams.MarketingAttribution> marketingAttributions,
       Object metadata,
       Object name,
       Long nextInvoiceSequence,
@@ -173,6 +181,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     this.individualName = individualName;
     this.invoicePrefix = invoicePrefix;
     this.invoiceSettings = invoiceSettings;
+    this.marketingAttributions = marketingAttributions;
     this.metadata = metadata;
     this.name = name;
     this.nextInvoiceSequence = nextInvoiceSequence;
@@ -214,6 +223,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private InvoiceSettings invoiceSettings;
 
+    private List<CustomerUpdateParams.MarketingAttribution> marketingAttributions;
+
     private Object metadata;
 
     private Object name;
@@ -249,6 +260,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.individualName,
           this.invoicePrefix,
           this.invoiceSettings,
+          this.marketingAttributions,
           this.metadata,
           this.name,
           this.nextInvoiceSequence,
@@ -465,6 +477,33 @@ public class CustomerUpdateParams extends ApiRequestParams {
     /** Default invoice settings for this customer. */
     public Builder setInvoiceSettings(CustomerUpdateParams.InvoiceSettings invoiceSettings) {
       this.invoiceSettings = invoiceSettings;
+      return this;
+    }
+
+    /**
+     * Add an element to `marketingAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link CustomerUpdateParams#marketingAttributions} for the field documentation.
+     */
+    public Builder addMarketingAttribution(CustomerUpdateParams.MarketingAttribution element) {
+      if (this.marketingAttributions == null) {
+        this.marketingAttributions = new ArrayList<>();
+      }
+      this.marketingAttributions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `marketingAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link CustomerUpdateParams#marketingAttributions} for the field documentation.
+     */
+    public Builder addAllMarketingAttribution(
+        List<CustomerUpdateParams.MarketingAttribution> elements) {
+      if (this.marketingAttributions == null) {
+        this.marketingAttributions = new ArrayList<>();
+      }
+      this.marketingAttributions.addAll(elements);
       return this;
     }
 
@@ -1433,6 +1472,321 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
         AmountTaxDisplay(String value) {
           this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MarketingAttribution {
+    /** Information used when sending conversions to an advertising platform. */
+    @SerializedName("ad_conversion")
+    AdConversion adConversion;
+
+    /** The advertising platform's click identifier. */
+    @SerializedName("click_id")
+    Object clickId;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The Unix timestamp when the advertising interaction occurred. */
+    @SerializedName("occurred_at")
+    Long occurredAt;
+
+    /** The advertising group ID from the {@code utm_adgroup} parameter. */
+    @SerializedName("utm_adgroup")
+    Object utmAdgroup;
+
+    /** The advertising content identifier from the {@code utm_content} parameter. */
+    @SerializedName("utm_content")
+    Object utmContent;
+
+    /** The advertising campaign ID from the {@code utm_id} parameter. */
+    @SerializedName("utm_id")
+    Object utmId;
+
+    /** The marketing medium from the {@code utm_medium} parameter. */
+    @SerializedName("utm_medium")
+    Object utmMedium;
+
+    /** The referral source from the {@code utm_source} parameter. */
+    @SerializedName("utm_source")
+    Object utmSource;
+
+    /** The paid search term from the {@code utm_term} parameter. */
+    @SerializedName("utm_term")
+    Object utmTerm;
+
+    private MarketingAttribution(
+        AdConversion adConversion,
+        Object clickId,
+        Map<String, Object> extraParams,
+        Long occurredAt,
+        Object utmAdgroup,
+        Object utmContent,
+        Object utmId,
+        Object utmMedium,
+        Object utmSource,
+        Object utmTerm) {
+      this.adConversion = adConversion;
+      this.clickId = clickId;
+      this.extraParams = extraParams;
+      this.occurredAt = occurredAt;
+      this.utmAdgroup = utmAdgroup;
+      this.utmContent = utmContent;
+      this.utmId = utmId;
+      this.utmMedium = utmMedium;
+      this.utmSource = utmSource;
+      this.utmTerm = utmTerm;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AdConversion adConversion;
+
+      private Object clickId;
+
+      private Map<String, Object> extraParams;
+
+      private Long occurredAt;
+
+      private Object utmAdgroup;
+
+      private Object utmContent;
+
+      private Object utmId;
+
+      private Object utmMedium;
+
+      private Object utmSource;
+
+      private Object utmTerm;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerUpdateParams.MarketingAttribution build() {
+        return new CustomerUpdateParams.MarketingAttribution(
+            this.adConversion,
+            this.clickId,
+            this.extraParams,
+            this.occurredAt,
+            this.utmAdgroup,
+            this.utmContent,
+            this.utmId,
+            this.utmMedium,
+            this.utmSource,
+            this.utmTerm);
+      }
+
+      /** Information used when sending conversions to an advertising platform. */
+      public Builder setAdConversion(
+          CustomerUpdateParams.MarketingAttribution.AdConversion adConversion) {
+        this.adConversion = adConversion;
+        return this;
+      }
+
+      /** The advertising platform's click identifier. */
+      public Builder setClickId(String clickId) {
+        this.clickId = clickId;
+        return this;
+      }
+
+      /** The advertising platform's click identifier. */
+      public Builder setClickId(EmptyParam clickId) {
+        this.clickId = clickId;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CustomerUpdateParams.MarketingAttribution#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CustomerUpdateParams.MarketingAttribution#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The Unix timestamp when the advertising interaction occurred. */
+      public Builder setOccurredAt(Long occurredAt) {
+        this.occurredAt = occurredAt;
+        return this;
+      }
+
+      /** The advertising group ID from the {@code utm_adgroup} parameter. */
+      public Builder setUtmAdgroup(String utmAdgroup) {
+        this.utmAdgroup = utmAdgroup;
+        return this;
+      }
+
+      /** The advertising group ID from the {@code utm_adgroup} parameter. */
+      public Builder setUtmAdgroup(EmptyParam utmAdgroup) {
+        this.utmAdgroup = utmAdgroup;
+        return this;
+      }
+
+      /** The advertising content identifier from the {@code utm_content} parameter. */
+      public Builder setUtmContent(String utmContent) {
+        this.utmContent = utmContent;
+        return this;
+      }
+
+      /** The advertising content identifier from the {@code utm_content} parameter. */
+      public Builder setUtmContent(EmptyParam utmContent) {
+        this.utmContent = utmContent;
+        return this;
+      }
+
+      /** The advertising campaign ID from the {@code utm_id} parameter. */
+      public Builder setUtmId(String utmId) {
+        this.utmId = utmId;
+        return this;
+      }
+
+      /** The advertising campaign ID from the {@code utm_id} parameter. */
+      public Builder setUtmId(EmptyParam utmId) {
+        this.utmId = utmId;
+        return this;
+      }
+
+      /** The marketing medium from the {@code utm_medium} parameter. */
+      public Builder setUtmMedium(String utmMedium) {
+        this.utmMedium = utmMedium;
+        return this;
+      }
+
+      /** The marketing medium from the {@code utm_medium} parameter. */
+      public Builder setUtmMedium(EmptyParam utmMedium) {
+        this.utmMedium = utmMedium;
+        return this;
+      }
+
+      /** The referral source from the {@code utm_source} parameter. */
+      public Builder setUtmSource(String utmSource) {
+        this.utmSource = utmSource;
+        return this;
+      }
+
+      /** The referral source from the {@code utm_source} parameter. */
+      public Builder setUtmSource(EmptyParam utmSource) {
+        this.utmSource = utmSource;
+        return this;
+      }
+
+      /** The paid search term from the {@code utm_term} parameter. */
+      public Builder setUtmTerm(String utmTerm) {
+        this.utmTerm = utmTerm;
+        return this;
+      }
+
+      /** The paid search term from the {@code utm_term} parameter. */
+      public Builder setUtmTerm(EmptyParam utmTerm) {
+        this.utmTerm = utmTerm;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdConversion {
+      /**
+       * <strong>Required.</strong> Whether the customer consented to sending conversion data to an
+       * advertising platform.
+       */
+      @SerializedName("consent_collected")
+      Boolean consentCollected;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AdConversion(Boolean consentCollected, Map<String, Object> extraParams) {
+        this.consentCollected = consentCollected;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean consentCollected;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerUpdateParams.MarketingAttribution.AdConversion build() {
+          return new CustomerUpdateParams.MarketingAttribution.AdConversion(
+              this.consentCollected, this.extraParams);
+        }
+
+        /**
+         * <strong>Required.</strong> Whether the customer consented to sending conversion data to
+         * an advertising platform.
+         */
+        public Builder setConsentCollected(Boolean consentCollected) {
+          this.consentCollected = consentCollected;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerUpdateParams.MarketingAttribution.AdConversion#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerUpdateParams.MarketingAttribution.AdConversion#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }

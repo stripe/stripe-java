@@ -2494,6 +2494,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("wechat_pay_redirect_to_ios_app")
     WechatPayRedirectToIosApp wechatPayRedirectToIosApp;
 
+    @SerializedName("wechat_pay_redirect_to_mini_program")
+    WechatPayRedirectToMiniProgram wechatPayRedirectToMiniProgram;
+
     /**
      * For more details about AlipayHandleRedirect, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
@@ -3714,6 +3717,39 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** An universal link that redirect to WeChat Pay app. */
       @SerializedName("native_url")
       String nativeUrl;
+    }
+
+    /**
+     * For more details about WechatPayRedirectToMiniProgram, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPayRedirectToMiniProgram extends StripeObject {
+      /** Mini Program ID registered on WeChat Open Platform. */
+      @SerializedName("app_id")
+      String appId;
+
+      /** Random string. */
+      @SerializedName("nonce_str")
+      String nonceStr;
+
+      /** Unique trading ID assigned by WeChat Pay. */
+      @SerializedName("prepay_id")
+      String prepayId;
+
+      /** Signature. */
+      @SerializedName("sign")
+      String sign;
+
+      /** Signature type. */
+      @SerializedName("sign_type")
+      String signType;
+
+      /** Current time in epoch format. */
+      @SerializedName("timestamp")
+      String timestamp;
     }
   }
 

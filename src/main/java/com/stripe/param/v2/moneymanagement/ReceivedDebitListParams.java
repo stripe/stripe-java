@@ -24,15 +24,23 @@ public class ReceivedDebitListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Filter by the received debit mandate ID. */
+  /** Filter by the received debit mandate ID. Deprecated: use {@code spending_mandate} instead. */
   @SerializedName("received_debit_mandate")
   String receivedDebitMandate;
 
+  /** Filter by the SpendingMandate ID. */
+  @SerializedName("spending_mandate")
+  String spendingMandate;
+
   private ReceivedDebitListParams(
-      Map<String, Object> extraParams, Long limit, String receivedDebitMandate) {
+      Map<String, Object> extraParams,
+      Long limit,
+      String receivedDebitMandate,
+      String spendingMandate) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.receivedDebitMandate = receivedDebitMandate;
+    this.spendingMandate = spendingMandate;
   }
 
   public static Builder builder() {
@@ -46,9 +54,12 @@ public class ReceivedDebitListParams extends ApiRequestParams {
 
     private String receivedDebitMandate;
 
+    private String spendingMandate;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ReceivedDebitListParams build() {
-      return new ReceivedDebitListParams(this.extraParams, this.limit, this.receivedDebitMandate);
+      return new ReceivedDebitListParams(
+          this.extraParams, this.limit, this.receivedDebitMandate, this.spendingMandate);
     }
 
     /**
@@ -83,9 +94,17 @@ public class ReceivedDebitListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filter by the received debit mandate ID. */
+    /**
+     * Filter by the received debit mandate ID. Deprecated: use {@code spending_mandate} instead.
+     */
     public Builder setReceivedDebitMandate(String receivedDebitMandate) {
       this.receivedDebitMandate = receivedDebitMandate;
+      return this;
+    }
+
+    /** Filter by the SpendingMandate ID. */
+    public Builder setSpendingMandate(String spendingMandate) {
+      this.spendingMandate = spendingMandate;
       return this;
     }
   }

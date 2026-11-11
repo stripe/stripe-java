@@ -19,21 +19,21 @@ public final class ReceivedDebitMandateService extends ApiService {
     super(responseGetter);
   }
 
-  /** Returns a list of ReceivedDebitMandates. */
+  /** Deprecated: Use ListSpendingMandates instead. Returns a list of ReceivedDebitMandates. */
   public StripeCollection<ReceivedDebitMandate> list(ReceivedDebitMandateListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Returns a list of ReceivedDebitMandates. */
+  /** Deprecated: Use ListSpendingMandates instead. Returns a list of ReceivedDebitMandates. */
   public StripeCollection<ReceivedDebitMandate> list(RequestOptions options)
       throws StripeException {
     return list((ReceivedDebitMandateListParams) null, options);
   }
-  /** Returns a list of ReceivedDebitMandates. */
+  /** Deprecated: Use ListSpendingMandates instead. Returns a list of ReceivedDebitMandates. */
   public StripeCollection<ReceivedDebitMandate> list() throws StripeException {
     return list((ReceivedDebitMandateListParams) null, (RequestOptions) null);
   }
-  /** Returns a list of ReceivedDebitMandates. */
+  /** Deprecated: Use ListSpendingMandates instead. Returns a list of ReceivedDebitMandates. */
   public StripeCollection<ReceivedDebitMandate> list(
       ReceivedDebitMandateListParams params, RequestOptions options) throws StripeException {
     String path = "/v2/money_management/received_debit_mandates";
@@ -47,11 +47,17 @@ public final class ReceivedDebitMandateService extends ApiService {
     return this.request(
         request, new TypeToken<StripeCollection<ReceivedDebitMandate>>() {}.getType());
   }
-  /** Retrieves the details of an existing ReceivedDebitMandate. */
+  /**
+   * Deprecated: Use RetrieveSpendingMandate instead. Retrieves the details of an existing
+   * ReceivedDebitMandate.
+   */
   public ReceivedDebitMandate retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieves the details of an existing ReceivedDebitMandate. */
+  /**
+   * Deprecated: Use RetrieveSpendingMandate instead. Retrieves the details of an existing
+   * ReceivedDebitMandate.
+   */
   public ReceivedDebitMandate retrieve(String id, RequestOptions options) throws StripeException {
     String path =
         String.format(
@@ -60,11 +66,11 @@ public final class ReceivedDebitMandateService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, ReceivedDebitMandate.class);
   }
-  /** Cancels an active ReceivedDebitMandate. */
+  /** Deprecated: Use CancelSpendingMandate instead. Cancels an active ReceivedDebitMandate. */
   public ReceivedDebitMandate cancel(String id) throws StripeException {
     return cancel(id, (RequestOptions) null);
   }
-  /** Cancels an active ReceivedDebitMandate. */
+  /** Deprecated: Use CancelSpendingMandate instead. Cancels an active ReceivedDebitMandate. */
   public ReceivedDebitMandate cancel(String id, RequestOptions options) throws StripeException {
     String path =
         String.format(

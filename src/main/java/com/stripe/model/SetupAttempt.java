@@ -357,6 +357,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("stripe_balance")
     StripeBalance stripeBalance;
 
+    @SerializedName("toss_pay")
+    TossPay tossPay;
+
     @SerializedName("twint")
     Twint twint;
 
@@ -638,14 +641,14 @@ public class SetupAttempt extends ApiResource implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
         /**
-         * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
-         * {@code unavailable}, or {@code unchecked}.
+         * If an address line1 was provided, results of the check, one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
         /**
-         * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+         * If an address postal code was provided, results of the check, one of {@code pass}, {@code
          * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
@@ -1206,6 +1209,19 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeBalance extends StripeObject {}
+
+    /**
+     * For more details about TossPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TossPay extends StripeObject {
+      /** The buyer identifier provided by NICE for this Toss Pay account, when available. */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
 
     /**
      * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API

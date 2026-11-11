@@ -78,6 +78,10 @@ public class IssuedToken extends ApiResource implements HasId {
   @SerializedName("payment_method")
   String paymentMethod;
 
+  /** Referral fee details of the SharedPaymentIssuedToken. */
+  @SerializedName("referral_fee_details")
+  ReferralFeeDetails referralFeeDetails;
+
   /**
    * If the customer does not exit their browser while authenticating, they will be redirected to
    * this specified URL after completion.
@@ -319,6 +323,27 @@ public class IssuedToken extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about ReferralFeeDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReferralFeeDetails extends StripeObject {
+    /** The Customer to be invoiced for fees assessed. */
+    @SerializedName("customer")
+    String customer;
+
+    /** The account to be invoiced for fees assessed. */
+    @SerializedName("customer_account")
+    String customerAccount;
+
+    /** The percentage of the payment charged as a referral fee. */
+    @SerializedName("referral_fee_percent")
+    BigDecimal referralFeePercent;
+  }
+
+  /**
    * For more details about RiskDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -544,6 +569,7 @@ public class IssuedToken extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
+    trySetResponseGetter(referralFeeDetails, responseGetter);
     trySetResponseGetter(riskDetails, responseGetter);
     trySetResponseGetter(sellerDetails, responseGetter);
     trySetResponseGetter(usageDetails, responseGetter);

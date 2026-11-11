@@ -308,6 +308,9 @@ public final class EventDataClassLookup {
         "v2.money_management.reward_program_rule",
         com.stripe.model.v2.moneymanagement.RewardProgramRule.class);
     classLookup.put(
+        "v2.money_management.spending_mandate",
+        com.stripe.model.v2.moneymanagement.SpendingMandate.class);
+    classLookup.put(
         "v2.money_management.transaction", com.stripe.model.v2.moneymanagement.Transaction.class);
     classLookup.put(
         "v2.money_management.transaction_entry",
@@ -1659,6 +1662,21 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.reward_program.reward_reversed",
         com.stripe.events.V2MoneyManagementRewardProgramRewardReversedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.canceled",
+        com.stripe.events.V2MoneyManagementSpendingMandateCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.created",
+        com.stripe.events.V2MoneyManagementSpendingMandateCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.expired",
+        com.stripe.events.V2MoneyManagementSpendingMandateExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.pending_cancellation",
+        com.stripe.events.V2MoneyManagementSpendingMandatePendingCancellationEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.spending_mandate.updated",
+        com.stripe.events.V2MoneyManagementSpendingMandateUpdatedEvent.class);
     eventClassLookup.put(
         "v2.money_management.transaction.created",
         com.stripe.events.V2MoneyManagementTransactionCreatedEvent.class);

@@ -303,6 +303,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("toss_pay")
+    TossPay tossPay;
+
     @SerializedName("twint")
     Twint twint;
 
@@ -715,6 +718,19 @@ public class Mandate extends ApiResource implements HasId {
        */
       @SerializedName("url")
       String url;
+    }
+
+    /**
+     * For more details about TossPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TossPay extends StripeObject {
+      /** The buyer identifier provided by NICE for this Toss Pay account, when available. */
+      @SerializedName("buyer_id")
+      String buyerId;
     }
 
     /**

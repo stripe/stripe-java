@@ -3,6 +3,7 @@ package com.stripe.param.sharedpayment;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,10 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
    */
   @SerializedName("payment_method")
   String paymentMethod;
+
+  /** Referral fee details for this SharedPaymentToken. */
+  @SerializedName("referral_fee_details")
+  ReferralFeeDetails referralFeeDetails;
 
   /**
    * If the customer does not exit their browser while authenticating, they will be redirected to
@@ -74,6 +79,7 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String paymentMethod,
+      ReferralFeeDetails referralFeeDetails,
       String returnUrl,
       SellerDetails sellerDetails,
       SetupFutureUsage setupFutureUsage,
@@ -83,6 +89,7 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentMethod = paymentMethod;
+    this.referralFeeDetails = referralFeeDetails;
     this.returnUrl = returnUrl;
     this.sellerDetails = sellerDetails;
     this.setupFutureUsage = setupFutureUsage;
@@ -102,6 +109,8 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
 
     private String paymentMethod;
 
+    private ReferralFeeDetails referralFeeDetails;
+
     private String returnUrl;
 
     private SellerDetails sellerDetails;
@@ -120,6 +129,7 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.paymentMethod,
+          this.referralFeeDetails,
           this.returnUrl,
           this.sellerDetails,
           this.setupFutureUsage,
@@ -189,6 +199,13 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Referral fee details for this SharedPaymentToken. */
+    public Builder setReferralFeeDetails(
+        IssuedTokenCreateParams.ReferralFeeDetails referralFeeDetails) {
+      this.referralFeeDetails = referralFeeDetails;
+      return this;
+    }
+
     /**
      * If the customer does not exit their browser while authenticating, they will be redirected to
      * this specified URL after completion.
@@ -254,6 +271,113 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
     public Builder setUseStripeSdk(Boolean useStripeSdk) {
       this.useStripeSdk = useStripeSdk;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReferralFeeDetails {
+    /** The Customer to be invoiced for fees assessed. */
+    @SerializedName("customer")
+    String customer;
+
+    /** The account with a Customer configuration to be invoiced for fees assessed. */
+    @SerializedName("customer_account")
+    String customerAccount;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> The percentage of the payment to charge as a referral fee, from 0
+     * through 50 with at most two decimal places.
+     */
+    @SerializedName("referral_fee_percent")
+    BigDecimal referralFeePercent;
+
+    private ReferralFeeDetails(
+        String customer,
+        String customerAccount,
+        Map<String, Object> extraParams,
+        BigDecimal referralFeePercent) {
+      this.customer = customer;
+      this.customerAccount = customerAccount;
+      this.extraParams = extraParams;
+      this.referralFeePercent = referralFeePercent;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String customer;
+
+      private String customerAccount;
+
+      private Map<String, Object> extraParams;
+
+      private BigDecimal referralFeePercent;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public IssuedTokenCreateParams.ReferralFeeDetails build() {
+        return new IssuedTokenCreateParams.ReferralFeeDetails(
+            this.customer, this.customerAccount, this.extraParams, this.referralFeePercent);
+      }
+
+      /** The Customer to be invoiced for fees assessed. */
+      public Builder setCustomer(String customer) {
+        this.customer = customer;
+        return this;
+      }
+
+      /** The account with a Customer configuration to be invoiced for fees assessed. */
+      public Builder setCustomerAccount(String customerAccount) {
+        this.customerAccount = customerAccount;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * IssuedTokenCreateParams.ReferralFeeDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link IssuedTokenCreateParams.ReferralFeeDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The percentage of the payment to charge as a referral fee, from
+       * 0 through 50 with at most two decimal places.
+       */
+      public Builder setReferralFeePercent(BigDecimal referralFeePercent) {
+        this.referralFeePercent = referralFeePercent;
+        return this;
+      }
     }
   }
 
