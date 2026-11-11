@@ -17,6 +17,11 @@ public class RawRequestOptions extends RequestOptions {
     return additionalHeaders;
   }
 
+  @Override
+  public RawRequestOptionsBuilder toBuilderFullCopy() {
+    return copyToBuilder(new RawRequestOptionsBuilder()).setAdditionalHeaders(additionalHeaders);
+  }
+
   public static RawRequestOptionsBuilder builder() {
     return new RawRequestOptionsBuilder();
   }
