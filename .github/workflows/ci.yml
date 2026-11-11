@@ -31,29 +31,10 @@ jobs:
       contents: read
 
     steps:
-      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-
-      - name: Setup Java
-        id: setup-jre
-        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
-        with:
-          java-version: "17" # always use 17 LTS for building
-          architecture: x64
-          distribution: zulu
-
-      - name: Set Test Java Runtime Environment variable
-        run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
-        env:
-          JRE_PATH: ${{ steps.setup-jre.outputs.path }}
-
-      - name: Spotless
-        run: just format-check
-
-      - name: Build artifacts
-        run: ./gradlew assemble javadoc
+      - uses: ./.github/actions/build
 
   test:
     name: Test (${{ matrix.java-version }}, ${{ matrix.os }})
@@ -66,6 +47,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # Keep in sync with the test matrix in canary.yml.
         os:
           - "ubuntu-24.04"
         # We test Stripe SDK against Java LTS versions(8, 11, 17, 21, 25) and currently supported non-LTS versions.
@@ -87,55 +69,12 @@ jobs:
             java-version: "25"
 
     steps:
-      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Read OpenAPI version
-        id: openapi
-        shell: bash
-        run: echo "version=$(< OPENAPI_VERSION)" >> "$GITHUB_OUTPUT"
-
-      - name: Setup Test Java Runtime
-        id: setup-test-jre
-        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+      - uses: ./.github/actions/test
         with:
           java-version: ${{ matrix.java-version }}
-          architecture: x64
-          distribution: zulu
-
-      - name: Set Test Java Runtime Environment variable
-        shell: bash
-        run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
-        env:
-          JRE_PATH: ${{ steps.setup-test-jre.outputs.path }}
-
-      # our gradle version wants java 17, so any other test version needs a separate setup
-      - name: Setup Gradle JDK
-        if: ${{ matrix.java-version != '17' }}
-        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
-        with:
-          java-version: "17"
-          architecture: x64
-          distribution: zulu
-
-      - name: Tweak gradle.properties for Java 8
-        if: ${{ matrix.java-version == '8' }}
-        run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
-
-      - name: Display version
-        shell: bash
-        run: |
-          ./gradlew --version
-          echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
-
-      - uses: stripe/openapi/actions/stripe-mock@master
-        with:
-          openapi_version: ${{ steps.openapi.outputs.version }}
-          # Used to determine if stripe-mock runs in beta mode
-          base: ${{ github.base_ref == 'private-preview' && 'beta' || github.ref_name == 'private-preview' && 'beta' || contains(github.ref_name, '-alpha.') && 'beta' || github.base_ref || github.ref_name }}
-      - name: Run test suite
-        run: just test
 
   publish:
     if: >-

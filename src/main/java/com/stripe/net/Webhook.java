@@ -7,11 +7,15 @@ import com.stripe.model.StripeObject;
 import com.stripe.util.StringUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -229,7 +233,7 @@ public final class Webhook {
       }
       if (!signatureFound) {
         throw new SignatureVerificationException(
-            "No signatures found matching the expected signature for payload", sigHeader);
+            getSignatureErrorMessage(sigHeader, payload, secret), sigHeader);
       }
 
       long currentTime = clock == null ? Util.getTimeNow() : clock.millis() / 1000;
@@ -240,6 +244,125 @@ public final class Webhook {
       }
 
       return true;
+    }
+
+    /**
+     * Builds a signature verification error message using header metadata.
+     *
+     * @param sigHeader signature header value passed in by the user.
+     * @param payload the payload passed in by the user.
+     * @param secret signing secret passed in by the user.
+     * @return the diagnostic or generic error message.
+     */
+    private static String getSignatureErrorMessage(
+        String sigHeader, String payload, String secret) {
+      DebugMetadata metadata = DebugMetadata.fromSignatureHeader(sigHeader);
+
+      // If metadata has an asterisk-masked secret, compare only its length and last four characters
+      String maskedSecret = metadata.secret == null ? "" : metadata.secret;
+      int maskedLength = maskedSecret.length();
+      int secretLength = secret.length();
+      String maskedSuffix = maskedSecret.substring(Math.max(0, maskedLength - 4));
+      String secretSuffix = secret.substring(Math.max(0, secretLength - 4));
+      if (maskedSecret.contains("*")
+          && (secretLength != maskedLength || !secretSuffix.equals(maskedSuffix))) {
+        String dashboardUrl = "https://dashboard.stripe.com/webhooks";
+        if (metadata.destination != null) {
+          dashboardUrl += "/" + ApiResource.urlEncode(metadata.destination);
+        }
+
+        return String.format(
+            Locale.ROOT,
+            "Webhook signature verification failed. This request may not have originated from Stripe.\n\n"
+                + "The signing secret you provided is %d characters long and ends in `%s`. "
+                + "However, the signing secret for this destination is %d characters long and looks like `%s`. "
+                + "Ensure you're using the signing secret for this destination, as shown on the Dashboard: %s\n\n"
+                + "Learn more: https://docs.stripe.com/webhooks/signature",
+            secretLength,
+            secretSuffix,
+            maskedLength,
+            maskedSecret,
+            dashboardUrl);
+      }
+
+      // If metadata includes the truncated payload hash, compare with the payload passed in
+      if (metadata.payload != null && metadata.payload.matches("[0-9a-fA-F]{8}")) {
+        String expectedHash = metadata.payload.toLowerCase(Locale.ROOT);
+        byte[] hash;
+        try {
+          hash =
+              MessageDigest.getInstance("SHA-256")
+                  .digest(String.valueOf(payload).getBytes(StandardCharsets.UTF_8));
+        } catch (NoSuchAlgorithmException e) {
+          throw new AssertionError("SHA-256 is unavailable", e);
+        }
+        StringBuilder actualHash = new StringBuilder(8);
+        for (int i = hash.length - 4; i < hash.length; i++) {
+          actualHash.append(Integer.toString((hash[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        if (!expectedHash.contentEquals(actualHash)) {
+          return String.format(
+              Locale.ROOT,
+              "Webhook signature verification failed.\n\n"
+                  + "The request body you passed to this function differs from the request body sent by Stripe "
+                  + "to this webhook destination.\n"
+                  + "The SHA-256 hash of the body should end in `%s`. "
+                  + "However, the SHA-256 hash of the body you provided ends in `%s`.\n\n"
+                  + "Make sure your code does not reformat or otherwise alter the raw HTTP request body "
+                  + "before passing it to this function.\n\n"
+                  + "Learn more: https://docs.stripe.com/webhooks/signature",
+              expectedHash,
+              actualHash);
+        }
+      }
+
+      // Fall back to the generic message if no debug metadata is available
+      return "No signatures found matching the expected signature for payload";
+    }
+
+    private static final class DebugMetadata {
+      private final String secret;
+      private final String destination;
+      private final String payload;
+
+      private DebugMetadata(String secret, String destination, String payload) {
+        this.secret = secret;
+        this.destination = destination;
+        this.payload = payload;
+      }
+
+      /**
+       * Extracts metadata from the signature header to help debug verification failures.
+       *
+       * @param value signature header value passed in by the user.
+       * @return recognized fields, with unusable values set to null.
+       */
+      private static DebugMetadata fromSignatureHeader(String value) {
+        // For each metadata key, extract the first value found in the header.
+        Map<String, String> metadata = new HashMap<>();
+        for (String item : value.split(",\\s*", -1)) {
+          String[] parts = item.split("=", 2);
+          String key = parts[0];
+          if ((key.equals("secret") || key.equals("destination") || key.equals("payload"))
+              && !metadata.containsKey(key)) {
+            String metadataValue = parts.length == 2 ? parts[1] : null;
+            metadataValue = isSafeMetadataValue(metadataValue) ? metadataValue.trim() : null;
+            metadata.put(
+                key, metadataValue == null || metadataValue.isEmpty() ? null : metadataValue);
+          }
+        }
+        return new DebugMetadata(
+            metadata.get("secret"), metadata.get("destination"), metadata.get("payload"));
+      }
+
+      /**
+       * @param value an optional header metadata value.
+       * @return whether the value is usable for diagnostics.
+       */
+      private static boolean isSafeMetadataValue(String value) {
+        // Ignore overly long, potentially attacker-provided metadata values.
+        return value != null && value.length() <= 100;
+      }
     }
 
     /**

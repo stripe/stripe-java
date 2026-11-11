@@ -1,0 +1,85 @@
+name: Canary CI
+
+# Runs the same checks as CI against code generated from the canary specs.
+# sdk-codegen force-pushes these branches; they are never released, so there is
+# no publish job. compat is omitted too: it compares against a pull request base.
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - canary-ga
+      - canary-beta
+      - canary-private-preview
+
+permissions: {}
+
+concurrency:
+  # Each push replaces the branch, so an older run's result is stale.
+  group: canary-ci-${{ github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  # Map each canary branch to the channel stripe-mock serves.
+  CANARY_CHANNEL: >-
+    ${{
+      github.ref_name == 'canary-ga' && 'ga' ||
+      github.ref_name == 'canary-beta' && 'beta' ||
+      github.ref_name == 'canary-private-preview' && 'private-preview' ||
+      'unsupported'
+    }}
+
+jobs:
+  build:
+    name: Build
+
+    runs-on: "ubuntu-24.04"
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/build
+
+  test:
+    name: Test (${{ matrix.java-version }}, ${{ matrix.os }})
+
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # Keep in sync with the test matrix in ci.yml.
+        os:
+          - "ubuntu-24.04"
+        # We test Stripe SDK against Java LTS versions(8, 11, 17, 21, 25) and currently supported non-LTS versions.
+        # https://www.oracle.com/java/technologies/java-se-support-roadmap.html
+        # https://endoflife.date/oracle-jdk
+        java-version:
+          # LTS versions
+          - "8"
+          - "11"
+          - "17"
+          - "21"
+          - "25"
+          # non-LTS versions
+          # we should periodically add the latest non-LTS version here to test against
+          - "26"
+        include:
+          - os: windows-latest
+            # use any modern-ish version
+            java-version: "25"
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/test
+        with:
+          java-version: ${{ matrix.java-version }}
+          canary_channel: ${{ env.CANARY_CHANNEL }}
