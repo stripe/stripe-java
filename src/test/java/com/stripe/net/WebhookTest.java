@@ -70,7 +70,10 @@ public class WebhookTest extends BaseStripeTest {
       signature = Webhook.Util.computeHmacSha256(secret, payloadToSign);
     }
 
-    final String header = String.format("t=%d,%s=%s", timestamp, scheme, signature);
+    String header = String.format("t=%d,%s=%s", timestamp, scheme, signature);
+    if (options.get("debugMetadata") != null) {
+      header += "," + options.get("debugMetadata");
+    }
     return header;
   }
 
@@ -253,6 +256,147 @@ public class WebhookTest extends BaseStripeTest {
             });
     assertEquals(
         "No signatures found matching the expected signature for payload", exception.getMessage());
+  }
+
+  @Test
+  public void testSigningSecretMismatchDiagnostics()
+      throws NoSuchAlgorithmException, InvalidKeyException {
+    String[][] cases = {
+      // A mismatched secret links to the supplied destination.
+      {
+        "whsec_abcdefghijklmnopqrstuvwxyz",
+        "whsec_****************************1q84",
+        "we_123",
+        "wxyz",
+        "/we_123"
+      },
+      // A missing destination uses the bare Dashboard URL.
+      {
+        "whsec_abcdefghijklmnopqrstuvwxyz", "whsec_****************************1q84", "", "wxyz", ""
+      },
+      // A matching suffix is not enough if the lengths differ.
+      {"short1q84", "whsec_****************************1q84", "", "1q84", ""},
+      // A mostly unmasked value still reveals only the last four secret characters.
+      {"whsec_abcdefghijklmnopqrstuvwxyz", "whsec_*bcdefghijklmnopqrstuvwxyZ", "", "wxyz", ""},
+      // A secret shorter than four characters is shown in full.
+      {"abc", "*", "", "abc", ""}
+    };
+    for (String[] testCase : cases) {
+      Map<String, Object> options = new HashMap<>();
+      options.put("signature", "bad_signature");
+      options.put("debugMetadata", "secret=" + testCase[1] + ",destination=" + testCase[2]);
+      String sigHeader = generateSigHeader(options);
+
+      SignatureVerificationException exception =
+          assertThrows(
+              SignatureVerificationException.class,
+              () -> Webhook.Signature.verifyHeader(payload, sigHeader, testCase[0], 0));
+      assertEquals(
+          "Webhook signature verification failed. This request may not have originated from Stripe.\n\n"
+              + "The signing secret you provided is "
+              + testCase[0].length()
+              + " characters long and ends in `"
+              + testCase[3]
+              + "`. However, the signing secret for this destination is "
+              + testCase[1].length()
+              + " characters long and looks like `"
+              + testCase[1]
+              + "`. Ensure you're using the signing secret for this destination, as shown on the Dashboard: "
+              + "https://dashboard.stripe.com/webhooks"
+              + testCase[4]
+              + "\n\nLearn more: https://docs.stripe.com/webhooks/signature",
+          exception.getMessage());
+    }
+  }
+
+  @Test
+  public void testPayloadMismatchDiagnostics()
+      throws NoSuchAlgorithmException, InvalidKeyException {
+    Map<String, Object> options = new HashMap<>();
+    options.put("payload", "hello");
+    options.put("debugMetadata", "secret=whsec_*******cret,payload=938B9824");
+    String sigHeader = generateSigHeader(options);
+
+    // User supplies the original body with an extra trailing space.
+    SignatureVerificationException exception =
+        assertThrows(
+            SignatureVerificationException.class,
+            () -> Webhook.Signature.verifyHeader("hello ", sigHeader, secret, 0));
+    assertEquals(
+        "Webhook signature verification failed.\n\n"
+            + "The request body you passed to this function differs from the request body sent by Stripe "
+            + "to this webhook destination.\n"
+            + "The SHA-256 hash of the body should end in `938b9824`. However, "
+            + "the SHA-256 hash of the body you provided ends in `64dfc461`.\n\n"
+            + "Make sure your code does not reformat or otherwise alter the raw HTTP request body "
+            + "before passing it to this function.\n\n"
+            + "Learn more: https://docs.stripe.com/webhooks/signature",
+        exception.getMessage());
+  }
+
+  @Test
+  public void testUnusablePayloadMetadataFallsBackToGenericError()
+      throws NoSuchAlgorithmException, InvalidKeyException {
+    String[] cases = {
+      "payload=",
+      "payload,payload=00000000",
+      "payload=not-hex,payload=00000000",
+      "payload=1234567",
+      "payload=123456789",
+      "payload=1234567g",
+      "payload=1234567\n",
+      "payload=" + new String(new char[101]).replace('\0', 'a') + ",payload=00000000"
+    };
+    for (String metadata : cases) {
+      Map<String, Object> options = new HashMap<>();
+      options.put("signature", "bad_signature");
+      options.put("debugMetadata", metadata);
+      String sigHeader = generateSigHeader(options);
+
+      SignatureVerificationException exception =
+          assertThrows(
+              SignatureVerificationException.class,
+              () -> Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0));
+      assertEquals(
+          "No signatures found matching the expected signature for payload",
+          exception.getMessage());
+    }
+  }
+
+  @Test
+  public void testMatchingMetadataFallsBackToGenericError()
+      throws NoSuchAlgorithmException, InvalidKeyException {
+    String[] cases = {
+      "payload=938B9824",
+      "secret=whsec_*******cret",
+      "secret=other*xxxx_secret",
+      "secret=other_*******cret,payload=938b9824",
+      "secret=whsec_*******cret,secret=*wrong,payload=938b9824,payload=00000000"
+    };
+    for (String metadata : cases) {
+      Map<String, Object> options = new HashMap<>();
+      options.put("signature", "bad_signature");
+      options.put("debugMetadata", metadata);
+      String sigHeader = generateSigHeader(options);
+
+      SignatureVerificationException exception =
+          assertThrows(
+              SignatureVerificationException.class,
+              () -> Webhook.Signature.verifyHeader("hello", sigHeader, secret, 0));
+      assertEquals(
+          "No signatures found matching the expected signature for payload",
+          exception.getMessage());
+    }
+  }
+
+  @Test
+  public void testValidSignatureIgnoresConflictingMetadata()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    Map<String, Object> options = new HashMap<>();
+    options.put("debugMetadata", "secret=*wrong,destination=arbitrary,payload=00000000");
+    String sigHeader = generateSigHeader(options);
+
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10));
   }
 
   @Test

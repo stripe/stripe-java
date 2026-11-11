@@ -31,6 +31,16 @@ public class ApiRequest extends BaseApiRequest {
     this(baseAddress, method, path, options, null, params);
   }
 
+  ApiRequest withOptions(RequestOptions options) {
+    return new ApiRequest(
+        this.getBaseAddress(),
+        this.getMethod(),
+        this.getPath(),
+        options,
+        this.getUsage(),
+        this.getParams());
+  }
+
   public ApiRequest addUsage(String usage) {
     List<String> newUsage = new ArrayList<>();
     if (this.getUsage() != null) {

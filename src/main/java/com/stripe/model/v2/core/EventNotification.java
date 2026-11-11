@@ -147,14 +147,15 @@ public abstract class EventNotification {
   protected Event fetchEvent() throws StripeException {
     // `id` comes from the notification body, so encode it the way the generated
     // services do -- otherwise it can inject extra path or query segments.
+    StripeClient scopedClient = client.withStripeContext(context);
     StripeResponse response =
-        client.rawRequest(
+        scopedClient.rawRequest(
             RequestMethod.GET,
             String.format("/v2/core/events/%s", ApiResource.urlEncodeId(id)),
             null,
             getRequestOptions());
 
-    return (Event) client.withStripeContext(context).deserialize(response.body(), ApiMode.V2);
+    return (Event) scopedClient.deserialize(response.body(), ApiMode.V2);
   }
 
   /** Retrieves the object associated with the event. */
@@ -177,11 +178,10 @@ public abstract class EventNotification {
   }
 
   private StripeObject fetchRelatedObjectByUrl(String relativeUrl) throws StripeException {
+    StripeClient scopedClient = client.withStripeContext(context);
     StripeResponse response =
-        client.rawRequest(RequestMethod.GET, relativeUrl, null, getRequestOptions());
+        scopedClient.rawRequest(RequestMethod.GET, relativeUrl, null, getRequestOptions());
 
-    return client
-        .withStripeContext(context)
-        .deserialize(response.body(), ApiMode.getMode(relativeUrl));
+    return scopedClient.deserialize(response.body(), ApiMode.getMode(relativeUrl));
   }
 }
