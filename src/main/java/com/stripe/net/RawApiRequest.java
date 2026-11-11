@@ -34,6 +34,16 @@ public class RawApiRequest extends BaseApiRequest {
     this(baseAddress, method, path, options, null, rawContent);
   }
 
+  RawApiRequest withOptions(RawRequestOptions options) {
+    return new RawApiRequest(
+        this.getBaseAddress(),
+        this.getMethod(),
+        this.getPath(),
+        options,
+        this.getUsage(),
+        this.getRawContent());
+  }
+
   public RawApiRequest addUsage(String usage) {
     List<String> newUsage = new ArrayList<>();
     if (this.getUsage() != null) {
