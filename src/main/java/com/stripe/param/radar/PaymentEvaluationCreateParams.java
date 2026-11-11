@@ -1069,6 +1069,10 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
         @SerializedName("creditor_id")
         String creditorId;
 
+        /** Describes the presence of the customer during the payment. */
+        @SerializedName("customer_presence")
+        CustomerPresence customerPresence;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1079,9 +1083,19 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private SepaDebit(String creditorId, Map<String, Object> extraParams) {
+        /** Describes whether this payment is one-off or recurring. */
+        @SerializedName("payment_type")
+        PaymentType paymentType;
+
+        private SepaDebit(
+            String creditorId,
+            CustomerPresence customerPresence,
+            Map<String, Object> extraParams,
+            PaymentType paymentType) {
           this.creditorId = creditorId;
+          this.customerPresence = customerPresence;
           this.extraParams = extraParams;
+          this.paymentType = paymentType;
         }
 
         public static Builder builder() {
@@ -1091,13 +1105,17 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
         public static class Builder {
           private String creditorId;
 
+          private CustomerPresence customerPresence;
+
           private Map<String, Object> extraParams;
+
+          private PaymentType paymentType;
 
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.SepaDebit
               build() {
             return new PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.SepaDebit(
-                this.creditorId, this.extraParams);
+                this.creditorId, this.customerPresence, this.extraParams, this.paymentType);
           }
 
           /**
@@ -1109,6 +1127,15 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
            */
           public Builder setCreditorId(String creditorId) {
             this.creditorId = creditorId;
+            return this;
+          }
+
+          /** Describes the presence of the customer during the payment. */
+          public Builder setCustomerPresence(
+              PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.SepaDebit
+                      .CustomerPresence
+                  customerPresence) {
+            this.customerPresence = customerPresence;
             return this;
           }
 
@@ -1140,6 +1167,45 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+
+          /** Describes whether this payment is one-off or recurring. */
+          public Builder setPaymentType(
+              PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.SepaDebit
+                      .PaymentType
+                  paymentType) {
+            this.paymentType = paymentType;
+            return this;
+          }
+        }
+
+        public enum CustomerPresence implements ApiRequestParams.EnumParam {
+          @SerializedName("off_session")
+          OFF_SESSION("off_session"),
+
+          @SerializedName("on_session")
+          ON_SESSION("on_session");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          CustomerPresence(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentType implements ApiRequestParams.EnumParam {
+          @SerializedName("one_off")
+          ONE_OFF("one_off"),
+
+          @SerializedName("recurring")
+          RECURRING("recurring");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentType(String value) {
+            this.value = value;
           }
         }
       }

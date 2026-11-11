@@ -1303,11 +1303,26 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
       @SerializedName("verification_method")
       String verificationMethod;
+
+      /**
+       * For more details about FinancialConnections, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections extends StripeObject {
+        @SerializedName("return_url")
+        String returnUrl;
+      }
 
       /**
        * For more details about MandateOptions, please refer to the <a

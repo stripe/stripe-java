@@ -517,6 +517,11 @@ import com.stripe.events.V2MoneyManagementRecipientVerificationCreatedEventNotif
 import com.stripe.events.V2MoneyManagementRecipientVerificationUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementRewardProgramRewardEarnedEventNotification;
 import com.stripe.events.V2MoneyManagementRewardProgramRewardReversedEventNotification;
+import com.stripe.events.V2MoneyManagementSpendingMandateCanceledEventNotification;
+import com.stripe.events.V2MoneyManagementSpendingMandateCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementSpendingMandateExpiredEventNotification;
+import com.stripe.events.V2MoneyManagementSpendingMandatePendingCancellationEventNotification;
+import com.stripe.events.V2MoneyManagementSpendingMandateUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification;
 import com.stripe.events.V2OrchestratedCommerceAgreementConfirmedEventNotification;
@@ -3891,6 +3896,42 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V2MoneyManagementRewardProgramRewardReversedEventNotification>
           callback) {
     this.register("v2.money_management.reward_program.reward_reversed", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementSpendingMandateCanceled(
+      EventNotificationCallback<V2MoneyManagementSpendingMandateCanceledEventNotification>
+          callback) {
+    this.register("v2.money_management.spending_mandate.canceled", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementSpendingMandateCreated(
+      EventNotificationCallback<V2MoneyManagementSpendingMandateCreatedEventNotification>
+          callback) {
+    this.register("v2.money_management.spending_mandate.created", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementSpendingMandateExpired(
+      EventNotificationCallback<V2MoneyManagementSpendingMandateExpiredEventNotification>
+          callback) {
+    this.register("v2.money_management.spending_mandate.expired", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementSpendingMandatePendingCancellation(
+      EventNotificationCallback<
+              V2MoneyManagementSpendingMandatePendingCancellationEventNotification>
+          callback) {
+    this.register("v2.money_management.spending_mandate.pending_cancellation", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementSpendingMandateUpdated(
+      EventNotificationCallback<V2MoneyManagementSpendingMandateUpdatedEventNotification>
+          callback) {
+    this.register("v2.money_management.spending_mandate.updated", callback);
     return self();
   }
 

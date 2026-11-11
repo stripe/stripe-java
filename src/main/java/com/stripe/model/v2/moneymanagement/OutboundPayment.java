@@ -276,7 +276,8 @@ public class OutboundPayment extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code failed} status reason.
        *
-       * <p>One of {@code fx_rate_drift_exceeded_after_review}, {@code
+       * <p>One of {@code check_attachment_too_large}, {@code check_expired}, {@code
+       * check_undeliverable}, {@code fx_rate_drift_exceeded_after_review}, {@code
        * paper_check_attachment_too_large}, {@code paper_check_expired}, {@code
        * paper_check_undeliverable}, {@code payout_method_amount_limit_exceeded}, {@code
        * payout_method_declined}, {@code payout_method_does_not_exist}, {@code
@@ -389,6 +390,10 @@ public class OutboundPayment extends StripeObject implements HasId {
       @SerializedName("bank_account")
       BankAccount bankAccount;
 
+      /** Options for check send payout methods. */
+      @SerializedName("check_send")
+      CheckSend checkSend;
+
       /** Options for bank account payout methods. */
       @Getter
       @Setter
@@ -438,6 +443,32 @@ public class OutboundPayment extends StripeObject implements HasId {
           }
         }
       }
+
+      /** Options for check send payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CheckSend extends StripeObject {
+        /** The ID of a file to include as an attachment with the check. */
+        @SerializedName("attachment_file")
+        String attachmentFile;
+
+        /** Memo printed on the memo field of the check. */
+        @SerializedName("memo")
+        String memo;
+
+        /**
+         * Open Enum. Shipping speed of the check. Defaults to standard.
+         *
+         * <p>One of {@code priority}, or {@code standard}.
+         */
+        @SerializedName("shipping_speed")
+        String shippingSpeed;
+
+        /** Signature printed on the check. */
+        @SerializedName("signature")
+        String signature;
+      }
     }
   }
 
@@ -478,6 +509,10 @@ public class OutboundPayment extends StripeObject implements HasId {
     /** Card tracking details. */
     @SerializedName("card")
     Card card;
+
+    /** Check send tracking details. */
+    @SerializedName("check_send")
+    CheckSend checkSend;
 
     /** Crypto wallet tracking details. */
     @SerializedName("crypto_wallet")
@@ -527,6 +562,85 @@ public class OutboundPayment extends StripeObject implements HasId {
        */
       @SerializedName("retrieval_reference")
       String retrievalReference;
+    }
+
+    /** Check send tracking details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CheckSend extends StripeObject {
+      /**
+       * Open Enum. Carrier of the check.
+       *
+       * <p>One of {@code fedex}, or {@code usps}.
+       */
+      @SerializedName("carrier")
+      String carrier;
+
+      /** Check number. */
+      @SerializedName("check_number")
+      String checkNumber;
+
+      /** Postal code of the latest tracking update. */
+      @SerializedName("current_postal_code")
+      String currentPostalCode;
+
+      /** The ID of a file containing a preview image of the mailed check. */
+      @SerializedName("mailed_check_preview_file")
+      String mailedCheckPreviewFile;
+
+      /** Mailing address of the check. */
+      @SerializedName("mailing_address")
+      MailingAddress mailingAddress;
+
+      /** Tracking number for the check. */
+      @SerializedName("tracking_number")
+      String trackingNumber;
+
+      /**
+       * Open Enum. Tracking status of the check.
+       *
+       * <p>One of {@code delivered}, {@code in_transit}, or {@code mailed}.
+       */
+      @SerializedName("tracking_status")
+      String trackingStatus;
+
+      /** When the tracking details were last updated. */
+      @SerializedName("updated_at")
+      Instant updatedAt;
+
+      /** Mailing address of the check. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MailingAddress extends StripeObject {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** State, county, province, or region. */
+        @SerializedName("state")
+        String state;
+      }
     }
 
     /** Crypto wallet tracking details. */

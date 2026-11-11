@@ -21,7 +21,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** ReserveHolds are used to place a temporary ReserveHold on a merchant's funds. */
+/**
+ * A ReserveHold holds a portion of an account's funds until it's released. Stripe or the account's
+ * platform can create a ReserveHold directly, and a ReservePlan creates ReserveHolds automatically
+ * from incoming Charges.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -171,16 +175,16 @@ public class Hold extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public static HoldCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public static HoldCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -191,16 +195,16 @@ public class Hold extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public static HoldCollection list(HoldListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public static HoldCollection list(HoldListParams params, RequestOptions options)
       throws StripeException {
@@ -216,17 +220,17 @@ public class Hold extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, HoldCollection.class);
   }
 
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public static Hold retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public static Hold retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public static Hold retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/holds/%s", ApiResource.urlEncodeId(id));
@@ -235,7 +239,7 @@ public class Hold extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Hold.class);
   }
 
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public static Hold retrieve(String id, HoldRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/holds/%s", ApiResource.urlEncodeId(id));

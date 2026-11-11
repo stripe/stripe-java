@@ -40,6 +40,10 @@ public class PaymentAttemptRecordReportAuthenticatedParams extends ApiRequestPar
   @SerializedName("metadata")
   Object metadata;
 
+  /** Payment evaluations associated with this reported payment. */
+  @SerializedName("payment_evaluations")
+  List<String> paymentEvaluations;
+
   /** Information about the Payment Method debited for this payment. */
   @SerializedName("payment_method_details")
   PaymentMethodDetails paymentMethodDetails;
@@ -49,11 +53,13 @@ public class PaymentAttemptRecordReportAuthenticatedParams extends ApiRequestPar
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
+      List<String> paymentEvaluations,
       PaymentMethodDetails paymentMethodDetails) {
     this.authenticatedAt = authenticatedAt;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.paymentEvaluations = paymentEvaluations;
     this.paymentMethodDetails = paymentMethodDetails;
   }
 
@@ -70,6 +76,8 @@ public class PaymentAttemptRecordReportAuthenticatedParams extends ApiRequestPar
 
     private Object metadata;
 
+    private List<String> paymentEvaluations;
+
     private PaymentMethodDetails paymentMethodDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -79,6 +87,7 @@ public class PaymentAttemptRecordReportAuthenticatedParams extends ApiRequestPar
           this.expand,
           this.extraParams,
           this.metadata,
+          this.paymentEvaluations,
           this.paymentMethodDetails);
     }
 
@@ -189,6 +198,34 @@ public class PaymentAttemptRecordReportAuthenticatedParams extends ApiRequestPar
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Add an element to `paymentEvaluations` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentAttemptRecordReportAuthenticatedParams#paymentEvaluations} for the field
+     * documentation.
+     */
+    public Builder addPaymentEvaluation(String element) {
+      if (this.paymentEvaluations == null) {
+        this.paymentEvaluations = new ArrayList<>();
+      }
+      this.paymentEvaluations.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `paymentEvaluations` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentAttemptRecordReportAuthenticatedParams#paymentEvaluations} for the field
+     * documentation.
+     */
+    public Builder addAllPaymentEvaluation(List<String> elements) {
+      if (this.paymentEvaluations == null) {
+        this.paymentEvaluations = new ArrayList<>();
+      }
+      this.paymentEvaluations.addAll(elements);
       return this;
     }
 

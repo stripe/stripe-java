@@ -196,6 +196,10 @@ public class ReceivedDebit extends StripeObject implements HasId {
     @SerializedName("payment_method_type")
     String paymentMethodType;
 
+    /** The ID of the SpendingMandate associated with this debit. */
+    @SerializedName("spending_mandate")
+    String spendingMandate;
+
     /** The statement descriptor set by the originator of the debit. */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
@@ -235,7 +239,10 @@ public class ReceivedDebit extends StripeObject implements HasId {
       @SerializedName("network")
       String network;
 
-      /** The ID of the mandate associated with this debit. */
+      /**
+       * The ID of the mandate associated with this debit. Deprecated: use {@code
+       * bank_transfer.spending_mandate} instead.
+       */
       @SerializedName("received_debit_mandate")
       String receivedDebitMandate;
 

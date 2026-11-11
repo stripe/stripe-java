@@ -259,6 +259,10 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     @SerializedName("card")
     Card card;
 
+    /** The type specific details of the check send payout method. */
+    @SerializedName("check_send")
+    CheckSend checkSend;
+
     /** The type specific details of the crypto wallet payout method. */
     @SerializedName("crypto_wallet")
     CryptoWallet cryptoWallet;
@@ -284,6 +288,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
         ApplePay applePay,
         BankAccount bankAccount,
         Card card,
+        CheckSend checkSend,
         CryptoWallet cryptoWallet,
         Map<String, Object> extraParams,
         Pix pix,
@@ -291,6 +296,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       this.applePay = applePay;
       this.bankAccount = bankAccount;
       this.card = card;
+      this.checkSend = checkSend;
       this.cryptoWallet = cryptoWallet;
       this.extraParams = extraParams;
       this.pix = pix;
@@ -308,6 +314,8 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
 
       private Card card;
 
+      private CheckSend checkSend;
+
       private CryptoWallet cryptoWallet;
 
       private Map<String, Object> extraParams;
@@ -322,6 +330,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
             this.applePay,
             this.bankAccount,
             this.card,
+            this.checkSend,
             this.cryptoWallet,
             this.extraParams,
             this.pix,
@@ -345,6 +354,13 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       /** The type specific details of the card payout method. */
       public Builder setCard(OutboundSetupIntentCreateParams.PayoutMethodData.Card card) {
         this.card = card;
+        return this;
+      }
+
+      /** The type specific details of the check send payout method. */
+      public Builder setCheckSend(
+          OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend checkSend) {
+        this.checkSend = checkSend;
         return this;
       }
 
@@ -800,6 +816,253 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class CheckSend {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The US mailing address the check is sent to. */
+      @SerializedName("mailing_address")
+      MailingAddress mailingAddress;
+
+      /** <strong>Required.</strong> The name printed on the check's payee line. */
+      @SerializedName("payee_name")
+      String payeeName;
+
+      private CheckSend(
+          Map<String, Object> extraParams, MailingAddress mailingAddress, String payeeName) {
+        this.extraParams = extraParams;
+        this.mailingAddress = mailingAddress;
+        this.payeeName = payeeName;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MailingAddress mailingAddress;
+
+        private String payeeName;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend build() {
+          return new OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend(
+              this.extraParams, this.mailingAddress, this.payeeName);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The US mailing address the check is sent to. */
+        public Builder setMailingAddress(
+            OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend.MailingAddress
+                mailingAddress) {
+          this.mailingAddress = mailingAddress;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The name printed on the check's payee line. */
+        public Builder setPayeeName(String payeeName) {
+          this.payeeName = payeeName;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MailingAddress {
+        /** <strong>Required.</strong> City. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * <strong>Required.</strong> Two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        @SerializedName("line2")
+        String line2;
+
+        /** <strong>Required.</strong> ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** <strong>Required.</strong> State. */
+        @SerializedName("state")
+        String state;
+
+        private MailingAddress(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend.MailingAddress build() {
+            return new OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend.MailingAddress(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          /** <strong>Required.</strong> City. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Two-letter country code (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend.MailingAddress#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * OutboundSetupIntentCreateParams.PayoutMethodData.CheckSend.MailingAddress#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** <strong>Required.</strong> ZIP or postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** <strong>Required.</strong> State. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CryptoWallet {
       /** <strong>Required.</strong> Crypto wallet address. */
       @SerializedName("address")
@@ -1052,6 +1315,9 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("card")
       CARD("card"),
+
+      @SerializedName("check_send")
+      CHECK_SEND("check_send"),
 
       @SerializedName("crypto_wallet")
       CRYPTO_WALLET("crypto_wallet"),

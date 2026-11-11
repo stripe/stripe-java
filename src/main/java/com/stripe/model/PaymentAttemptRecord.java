@@ -1825,7 +1825,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
         String addressLine1Check;
 
         /**
-         * If you provide a address postal code, the check result is one of {@code pass}, {@code
+         * If you provide an address postal code, the check result is one of {@code pass}, {@code
          * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
@@ -2386,6 +2386,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
         @SerializedName("authorization_response_code")
         String authorizationResponseCode;
 
+        /** A message from the card issuer to show to the cardholder, and where it must be shown. */
+        @SerializedName("cardholder_message")
+        CardholderMessage cardholderMessage;
+
         /**
          * Describes the method used by the cardholder to verify ownership of the card. One of the
          * following: {@code approval}, {@code failure}, {@code none}, {@code offline_pin}, {@code
@@ -2415,6 +2419,23 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
          */
         @SerializedName("transaction_status_information")
         String transactionStatusInformation;
+
+        /** A message from the card issuer to show to the cardholder, and where it must be shown. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CardholderMessage extends StripeObject {
+          /**
+           * Where the message must be printed or displayed. An empty list means the message must
+           * not be shown.
+           */
+          @SerializedName("destinations")
+          List<String> destinations;
+
+          /** The message from the card issuer, such as the remaining balance. */
+          @SerializedName("value")
+          String value;
+        }
       }
 
       /**

@@ -6,7 +6,10 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Returned when raw PAN permissions are not enabled for the account. */
+/**
+ * Returned when the account doesn't have permission to create network tokens from raw card details
+ * or to generate {@code dynamic_cvc} cryptograms.
+ */
 public final class MerchantNotGatedException extends ApiException {
   private static final long serialVersionUID = 2L;
 

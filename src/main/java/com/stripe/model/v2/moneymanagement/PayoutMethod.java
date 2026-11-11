@@ -43,6 +43,10 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("card")
   Card card;
 
+  /** The PayoutMethodCheckSend object details. */
+  @SerializedName("check_send")
+  CheckSend checkSend;
+
   /** Created timestamp. */
   @SerializedName("created")
   Instant created;
@@ -94,8 +98,8 @@ public class PayoutMethod extends StripeObject implements HasId {
   /**
    * Open Enum. The type of payout method.
    *
-   * <p>One of {@code apple_pay}, {@code bank_account}, {@code card}, {@code crypto_wallet}, {@code
-   * network_business_profile_wallet}, or {@code pix}.
+   * <p>One of {@code apple_pay}, {@code bank_account}, {@code card}, {@code check_send}, {@code
+   * crypto_wallet}, {@code network_business_profile_wallet}, or {@code pix}.
    */
   @SerializedName("type")
   String type;
@@ -247,6 +251,53 @@ public class PayoutMethod extends StripeObject implements HasId {
     /** The list of currencies supported by this bank account. */
     @SerializedName("supported_currencies")
     List<String> supportedCurrencies;
+  }
+
+  /** The PayoutMethodCheckSend object details. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CheckSend extends StripeObject {
+    /** The US mailing address the check is sent to. */
+    @SerializedName("mailing_address")
+    MailingAddress mailingAddress;
+
+    /** The name printed on the check's payee line. */
+    @SerializedName("payee_name")
+    String payeeName;
+
+    /** The US mailing address the check is sent to. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MailingAddress extends StripeObject {
+      /** City. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      String line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /** State. */
+      @SerializedName("state")
+      String state;
+    }
   }
 
   /** The PayoutMethodCryptoWallet object details. */

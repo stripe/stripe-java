@@ -2193,14 +2193,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
         /**
-         * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
-         * {@code unavailable}, or {@code unchecked}.
+         * If an address line1 was provided, results of the check, one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
         /**
-         * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+         * If an address postal code was provided, results of the check, one of {@code pass}, {@code
          * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
@@ -2736,15 +2736,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
               @EqualsAndHashCode(callSuper = false)
               public static class Checks extends StripeObject {
                 /**
-                 * If a address line1 was provided, results of the check, one of {@code pass},
+                 * If an address line1 was provided, results of the check, one of {@code pass},
                  * {@code fail}, {@code unavailable}, or {@code unchecked}.
                  */
                 @SerializedName("address_line1_check")
                 String addressLine1Check;
 
                 /**
-                 * If a address postal code was provided, results of the check, one of {@code pass},
-                 * {@code fail}, {@code unavailable}, or {@code unchecked}.
+                 * If an address postal code was provided, results of the check, one of {@code
+                 * pass}, {@code fail}, {@code unavailable}, or {@code unchecked}.
                  */
                 @SerializedName("address_postal_code_check")
                 String addressPostalCodeCheck;
@@ -3298,6 +3298,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("authorization_response_code")
         String authorizationResponseCode;
 
+        /** A message from the card issuer to show to the cardholder, and where it must be shown. */
+        @SerializedName("cardholder_message")
+        CardholderMessage cardholderMessage;
+
         /**
          * Describes the method used by the cardholder to verify ownership of the card. One of the
          * following: {@code approval}, {@code failure}, {@code none}, {@code offline_pin}, {@code
@@ -3327,6 +3331,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("transaction_status_information")
         String transactionStatusInformation;
+
+        /** A message from the card issuer to show to the cardholder, and where it must be shown. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CardholderMessage extends StripeObject {
+          /**
+           * Where the message must be printed or displayed. An empty list means the message must
+           * not be shown.
+           */
+          @SerializedName("destinations")
+          List<String> destinations;
+
+          /** The message from the card issuer, such as the remaining balance. */
+          @SerializedName("value")
+          String value;
+        }
       }
 
       /**
@@ -4348,14 +4369,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
           @EqualsAndHashCode(callSuper = false)
           public static class Checks extends StripeObject {
             /**
-             * If a address line1 was provided, results of the check, one of {@code pass}, {@code
+             * If an address line1 was provided, results of the check, one of {@code pass}, {@code
              * fail}, {@code unavailable}, or {@code unchecked}.
              */
             @SerializedName("address_line1_check")
             String addressLine1Check;
 
             /**
-             * If a address postal code was provided, results of the check, one of {@code pass},
+             * If an address postal code was provided, results of the check, one of {@code pass},
              * {@code fail}, {@code unavailable}, or {@code unchecked}.
              */
             @SerializedName("address_postal_code_check")

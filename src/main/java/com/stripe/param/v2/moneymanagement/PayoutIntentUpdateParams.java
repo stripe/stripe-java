@@ -538,6 +538,10 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
       @SerializedName("bank_account")
       BankAccount bankAccount;
 
+      /** Options for check send payout methods. */
+      @SerializedName("check_send")
+      CheckSend checkSend;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -547,8 +551,10 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private PayoutMethodOptions(BankAccount bankAccount, Map<String, Object> extraParams) {
+      private PayoutMethodOptions(
+          BankAccount bankAccount, CheckSend checkSend, Map<String, Object> extraParams) {
         this.bankAccount = bankAccount;
+        this.checkSend = checkSend;
         this.extraParams = extraParams;
       }
 
@@ -559,18 +565,27 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private BankAccount bankAccount;
 
+        private CheckSend checkSend;
+
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PayoutIntentUpdateParams.To.PayoutMethodOptions build() {
           return new PayoutIntentUpdateParams.To.PayoutMethodOptions(
-              this.bankAccount, this.extraParams);
+              this.bankAccount, this.checkSend, this.extraParams);
         }
 
         /** Options for bank account payout methods. */
         public Builder setBankAccount(
             PayoutIntentUpdateParams.To.PayoutMethodOptions.BankAccount bankAccount) {
           this.bankAccount = bankAccount;
+          return this;
+        }
+
+        /** Options for check send payout methods. */
+        public Builder setCheckSend(
+            PayoutIntentUpdateParams.To.PayoutMethodOptions.CheckSend checkSend) {
+          this.checkSend = checkSend;
           return this;
         }
 
@@ -991,6 +1006,162 @@ public class PayoutIntentUpdateParams extends ApiRequestParams {
           private final String value;
 
           PreferredNetwork(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CheckSend {
+        /** The ID of a file to include as an attachment with the check. */
+        @SerializedName("attachment_file")
+        Object attachmentFile;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Memo printed on the memo field of the check. */
+        @SerializedName("memo")
+        Object memo;
+
+        /** Open Enum. Shipping speed of the check. Defaults to standard. */
+        @SerializedName("shipping_speed")
+        ShippingSpeed shippingSpeed;
+
+        /** <strong>Required.</strong> Signature printed on the check. */
+        @SerializedName("signature")
+        Object signature;
+
+        private CheckSend(
+            Object attachmentFile,
+            Map<String, Object> extraParams,
+            Object memo,
+            ShippingSpeed shippingSpeed,
+            Object signature) {
+          this.attachmentFile = attachmentFile;
+          this.extraParams = extraParams;
+          this.memo = memo;
+          this.shippingSpeed = shippingSpeed;
+          this.signature = signature;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object attachmentFile;
+
+          private Map<String, Object> extraParams;
+
+          private Object memo;
+
+          private ShippingSpeed shippingSpeed;
+
+          private Object signature;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PayoutIntentUpdateParams.To.PayoutMethodOptions.CheckSend build() {
+            return new PayoutIntentUpdateParams.To.PayoutMethodOptions.CheckSend(
+                this.attachmentFile,
+                this.extraParams,
+                this.memo,
+                this.shippingSpeed,
+                this.signature);
+          }
+
+          /** The ID of a file to include as an attachment with the check. */
+          public Builder setAttachmentFile(String attachmentFile) {
+            this.attachmentFile = attachmentFile;
+            return this;
+          }
+
+          /** The ID of a file to include as an attachment with the check. */
+          public Builder setAttachmentFile(EmptyParam attachmentFile) {
+            this.attachmentFile = attachmentFile;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PayoutIntentUpdateParams.To.PayoutMethodOptions.CheckSend#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PayoutIntentUpdateParams.To.PayoutMethodOptions.CheckSend#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Memo printed on the memo field of the check. */
+          public Builder setMemo(String memo) {
+            this.memo = memo;
+            return this;
+          }
+
+          /** Memo printed on the memo field of the check. */
+          public Builder setMemo(EmptyParam memo) {
+            this.memo = memo;
+            return this;
+          }
+
+          /** Open Enum. Shipping speed of the check. Defaults to standard. */
+          public Builder setShippingSpeed(
+              PayoutIntentUpdateParams.To.PayoutMethodOptions.CheckSend.ShippingSpeed
+                  shippingSpeed) {
+            this.shippingSpeed = shippingSpeed;
+            return this;
+          }
+
+          /** <strong>Required.</strong> Signature printed on the check. */
+          public Builder setSignature(String signature) {
+            this.signature = signature;
+            return this;
+          }
+
+          /** <strong>Required.</strong> Signature printed on the check. */
+          public Builder setSignature(EmptyParam signature) {
+            this.signature = signature;
+            return this;
+          }
+        }
+
+        public enum ShippingSpeed implements ApiRequestParams.EnumParam {
+          @SerializedName("priority")
+          PRIORITY("priority"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ShippingSpeed(String value) {
             this.value = value;
           }
         }

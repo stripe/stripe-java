@@ -641,6 +641,22 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         /** Creditor identifier used for the intended debit. */
         @SerializedName("creditor_id")
         String creditorId;
+
+        /**
+         * Describes the presence of the customer during the payment.
+         *
+         * <p>One of {@code off_session}, or {@code on_session}.
+         */
+        @SerializedName("customer_presence")
+        String customerPresence;
+
+        /**
+         * Describes whether this payment is one-off or recurring.
+         *
+         * <p>One of {@code one_off}, or {@code recurring}.
+         */
+        @SerializedName("payment_type")
+        String paymentType;
       }
 
       /** Money movement details for a US bank account payment. */
