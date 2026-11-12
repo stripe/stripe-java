@@ -222,7 +222,8 @@ public class OutboundPayment extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code returned} status reason.
        *
-       * <p>One of {@code payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
+       * <p>One of {@code payout_method_account_type_incorrect}, {@code
+       * payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
        * payout_method_currency_unsupported}, {@code payout_method_does_not_exist}, {@code
        * payout_method_holder_address_incorrect}, {@code payout_method_holder_details_incorrect},
        * {@code payout_method_holder_name_incorrect}, {@code payout_method_invalid_account_number},

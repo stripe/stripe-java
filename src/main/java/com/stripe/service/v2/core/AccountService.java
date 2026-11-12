@@ -2,6 +2,7 @@
 package com.stripe.service.v2.core;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.InactiveApiOperationConfirmationRequiredException;
 import com.stripe.exception.RateLimitException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
@@ -57,7 +58,9 @@ public final class AccountService extends ApiService {
    * that store the features an account has access to. An account can be configured as any or all of
    * the following configurations: Customer, Merchant and/or Recipient.
    */
-  public Account create(AccountCreateParams params) throws StripeException, RateLimitException {
+  public Account create(AccountCreateParams params)
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return create(params, (RequestOptions) null);
   }
   /**
@@ -66,7 +69,9 @@ public final class AccountService extends ApiService {
    * that store the features an account has access to. An account can be configured as any or all of
    * the following configurations: Customer, Merchant and/or Recipient.
    */
-  public Account create(RequestOptions options) throws StripeException, RateLimitException {
+  public Account create(RequestOptions options)
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return create((AccountCreateParams) null, options);
   }
   /**
@@ -75,7 +80,9 @@ public final class AccountService extends ApiService {
    * that store the features an account has access to. An account can be configured as any or all of
    * the following configurations: Customer, Merchant and/or Recipient.
    */
-  public Account create() throws StripeException, RateLimitException {
+  public Account create()
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return create((AccountCreateParams) null, (RequestOptions) null);
   }
   /**
@@ -85,7 +92,8 @@ public final class AccountService extends ApiService {
    * the following configurations: Customer, Merchant and/or Recipient.
    */
   public Account create(AccountCreateParams params, RequestOptions options)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     String path = "/v2/core/accounts";
     ApiRequest request =
         new ApiRequest(
@@ -125,21 +133,26 @@ public final class AccountService extends ApiService {
   }
   /** Updates the details of an Account. */
   public Account update(String id, AccountUpdateParams params)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return update(id, params, (RequestOptions) null);
   }
   /** Updates the details of an Account. */
   public Account update(String id, RequestOptions options)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return update(id, (AccountUpdateParams) null, options);
   }
   /** Updates the details of an Account. */
-  public Account update(String id) throws StripeException, RateLimitException {
+  public Account update(String id)
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return update(id, (AccountUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the details of an Account. */
   public Account update(String id, AccountUpdateParams params, RequestOptions options)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     String path = String.format("/v2/core/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(

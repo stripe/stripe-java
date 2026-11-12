@@ -7162,6 +7162,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the IGIC registration. */
+      @SerializedName("igic")
+      Igic igic;
+
       /** Options for the standard registration. */
       @SerializedName("standard")
       Standard standard;
@@ -7170,8 +7174,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName("type")
       Type type;
 
-      private Es(Map<String, Object> extraParams, Standard standard, Type type) {
+      private Es(Map<String, Object> extraParams, Igic igic, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.igic = igic;
         this.standard = standard;
         this.type = type;
       }
@@ -7183,6 +7188,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Igic igic;
+
         private Standard standard;
 
         private Type type;
@@ -7190,7 +7197,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Es build() {
           return new RegistrationCreateParams.CountryOptions.Es(
-              this.extraParams, this.standard, this.type);
+              this.extraParams, this.igic, this.standard, this.type);
         }
 
         /**
@@ -7221,6 +7228,12 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the IGIC registration. */
+        public Builder setIgic(RegistrationCreateParams.CountryOptions.Es.Igic igic) {
+          this.igic = igic;
+          return this;
+        }
+
         /** Options for the standard registration. */
         public Builder setStandard(RegistrationCreateParams.CountryOptions.Es.Standard standard) {
           this.standard = standard;
@@ -7231,6 +7244,96 @@ public class RegistrationCreateParams extends ApiRequestParams {
         public Builder setType(RegistrationCreateParams.CountryOptions.Es.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Place of supply scheme used in an IGIC registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Igic(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Es.Igic build() {
+            return new RegistrationCreateParams.CountryOptions.Es.Igic(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Es.Igic#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Es.Igic#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Place of supply scheme used in an IGIC registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Es.Igic.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -7332,6 +7435,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("igic")
+        IGIC("igic"),
+
         @SerializedName("ioss")
         IOSS("ioss"),
 

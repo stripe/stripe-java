@@ -13,7 +13,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** ReserveHolds are used to place a temporary ReserveHold on a merchant's funds. */
+/**
+ * A ReserveHold holds a portion of an account's funds until it's released. Stripe or the account's
+ * platform can create a ReserveHold directly, and a ReservePlan creates ReserveHolds automatically
+ * from incoming Charges.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -1654,6 +1654,23 @@ public class SessionCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
+     * Controls how much address information Checkout collects when <a
+     * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-automatic_tax-enabled">automatic_tax</a>
+     * is enabled.
+     *
+     * <p>Defaults to {@code full}, which collects the address fields needed for the most accurate
+     * tax calculation. Set to {@code minimal} to collect only the fields required for tax in the
+     * buyer's country, accepting potentially less precise tax calculation in exchange for a
+     * streamlined form.
+     *
+     * <p>Only honored when {@code automatic_tax.enabled} is {@code true}, {@code
+     * billing_address_collection} is {@code auto}, the resolved tax address source is the session
+     * billing address, and {@code ui_mode} is {@code form}.
+     */
+    @SerializedName("address_collection_precision")
+    AddressCollectionPrecision addressCollectionPrecision;
+
+    /**
      * <strong>Required.</strong> Set to {@code true} to <a
      * href="https://docs.stripe.com/tax">calculate tax automatically</a> using the customer's
      * location.
@@ -1681,7 +1698,12 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("liability")
     Liability liability;
 
-    private AutomaticTax(Boolean enabled, Map<String, Object> extraParams, Liability liability) {
+    private AutomaticTax(
+        AddressCollectionPrecision addressCollectionPrecision,
+        Boolean enabled,
+        Map<String, Object> extraParams,
+        Liability liability) {
+      this.addressCollectionPrecision = addressCollectionPrecision;
       this.enabled = enabled;
       this.extraParams = extraParams;
       this.liability = liability;
@@ -1692,6 +1714,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AddressCollectionPrecision addressCollectionPrecision;
+
       private Boolean enabled;
 
       private Map<String, Object> extraParams;
@@ -1700,7 +1724,28 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.AutomaticTax build() {
-        return new SessionCreateParams.AutomaticTax(this.enabled, this.extraParams, this.liability);
+        return new SessionCreateParams.AutomaticTax(
+            this.addressCollectionPrecision, this.enabled, this.extraParams, this.liability);
+      }
+
+      /**
+       * Controls how much address information Checkout collects when <a
+       * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-automatic_tax-enabled">automatic_tax</a>
+       * is enabled.
+       *
+       * <p>Defaults to {@code full}, which collects the address fields needed for the most accurate
+       * tax calculation. Set to {@code minimal} to collect only the fields required for tax in the
+       * buyer's country, accepting potentially less precise tax calculation in exchange for a
+       * streamlined form.
+       *
+       * <p>Only honored when {@code automatic_tax.enabled} is {@code true}, {@code
+       * billing_address_collection} is {@code auto}, the resolved tax address source is the session
+       * billing address, and {@code ui_mode} is {@code form}.
+       */
+      public Builder setAddressCollectionPrecision(
+          SessionCreateParams.AutomaticTax.AddressCollectionPrecision addressCollectionPrecision) {
+        this.addressCollectionPrecision = addressCollectionPrecision;
+        return this;
       }
 
       /**
@@ -1850,6 +1895,21 @@ public class SessionCreateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum AddressCollectionPrecision implements ApiRequestParams.EnumParam {
+      @SerializedName("full")
+      FULL("full"),
+
+      @SerializedName("minimal")
+      MINIMAL("minimal");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AddressCollectionPrecision(String value) {
+        this.value = value;
       }
     }
   }

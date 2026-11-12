@@ -3777,6 +3777,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("ae_vat")
           AE_VAT("ae_vat"),
 
+          @SerializedName("ag_tin")
+          AG_TIN("ag_tin"),
+
           @SerializedName("ao_nif")
           AO_NIF("ao_nif"),
 
@@ -3801,8 +3804,14 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("au_in")
           AU_IN("au_in"),
 
+          @SerializedName("au_wpn")
+          AU_WPN("au_wpn"),
+
           @SerializedName("az_tin")
           AZ_TIN("az_tin"),
+
+          @SerializedName("ba_pib")
+          BA_PIB("ba_pib"),
 
           @SerializedName("bd_etin")
           BD_ETIN("bd_etin"),
@@ -3819,6 +3828,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("bg_vat")
           BG_VAT("bg_vat"),
 
+          @SerializedName("bj_ifu")
+          BJ_IFU("bj_ifu"),
+
           @SerializedName("br_cnpj")
           BR_CNPJ("br_cnpj"),
 
@@ -3834,6 +3846,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("ca_neq")
           CA_NEQ("ca_neq"),
 
+          @SerializedName("ca_qst")
+          CA_QST("ca_qst"),
+
           @SerializedName("ca_rid")
           CA_RID("ca_rid"),
 
@@ -3842,6 +3857,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("ch_uid")
           CH_UID("ch_uid"),
+
+          @SerializedName("cl_rut")
+          CL_RUT("cl_rut"),
 
           @SerializedName("cr_cpj")
           CR_CPJ("cr_cpj"),
@@ -3857,6 +3875,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("cy_vat")
           CY_VAT("cy_vat"),
+
+          @SerializedName("cz_dic")
+          CZ_DIC("cz_dic"),
 
           @SerializedName("cz_ico")
           CZ_ICO("cz_ico"),
@@ -3882,6 +3903,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("do_rcn")
           DO_RCN("do_rcn"),
 
+          @SerializedName("dz_nif")
+          DZ_NIF("dz_nif"),
+
           @SerializedName("ee_rk")
           EE_RK("ee_rk"),
 
@@ -3893,6 +3917,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("es_vat")
           ES_VAT("es_vat"),
+
+          @SerializedName("et_tin")
+          ET_TIN("et_tin"),
 
           @SerializedName("fi_vat")
           FI_VAT("fi_vat"),
@@ -3906,6 +3933,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("fr_siren")
           FR_SIREN("fr_siren"),
 
+          @SerializedName("fr_siret")
+          FR_SIRET("fr_siret"),
+
           @SerializedName("fr_vat")
           FR_VAT("fr_vat"),
 
@@ -3915,8 +3945,14 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("gb_vat")
           GB_VAT("gb_vat"),
 
+          @SerializedName("ge_tin")
+          GE_TIN("ge_tin"),
+
           @SerializedName("gi_crn")
           GI_CRN("gi_crn"),
+
+          @SerializedName("gi_vat")
+          GI_VAT("gi_vat"),
 
           @SerializedName("gr_afm")
           GR_AFM("gr_afm"),
@@ -3954,6 +3990,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("hu_vat")
           HU_VAT("hu_vat"),
 
+          @SerializedName("id_npwp")
+          ID_NPWP("id_npwp"),
+
           @SerializedName("ie_crn")
           IE_CRN("ie_crn"),
 
@@ -3962,6 +4001,21 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("ie_vat")
           IE_VAT("ie_vat"),
+
+          @SerializedName("il_tin")
+          IL_TIN("il_tin"),
+
+          @SerializedName("il_vat")
+          IL_VAT("il_vat"),
+
+          @SerializedName("in_gst")
+          IN_GST("in_gst"),
+
+          @SerializedName("in_pan")
+          IN_PAN("in_pan"),
+
+          @SerializedName("is_kt")
+          IS_KT("is_kt"),
 
           @SerializedName("it_rea")
           IT_REA("it_rea"),
@@ -3972,11 +4026,26 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("jp_cn")
           JP_CN("jp_cn"),
 
+          @SerializedName("kh_tin")
+          KH_TIN("kh_tin"),
+
+          @SerializedName("kr_brn")
+          KR_BRN("kr_brn"),
+
           @SerializedName("kz_bin")
           KZ_BIN("kz_bin"),
 
+          @SerializedName("la_tin")
+          LA_TIN("la_tin"),
+
+          @SerializedName("lc_tin")
+          LC_TIN("lc_tin"),
+
           @SerializedName("li_uid")
           LI_UID("li_uid"),
+
+          @SerializedName("li_vat")
+          LI_VAT("li_vat"),
 
           @SerializedName("lt_ccrn")
           LT_CCRN("lt_ccrn"),
@@ -3999,6 +4068,15 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("lv_vat")
           LV_VAT("lv_vat"),
 
+          @SerializedName("md_cf")
+          MD_CF("md_cf"),
+
+          @SerializedName("mg_nif")
+          MG_NIF("mg_nif"),
+
+          @SerializedName("mk_edb")
+          MK_EDB("mk_edb"),
+
           @SerializedName("mt_crn")
           MT_CRN("mt_crn"),
 
@@ -4007,6 +4085,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("mt_vat")
           MT_VAT("mt_vat"),
+
+          @SerializedName("mu_vat")
+          MU_VAT("mu_vat"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -4026,6 +4107,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("mz_nuit")
           MZ_NUIT("mz_nuit"),
 
+          @SerializedName("ne_tin")
+          NE_TIN("ne_tin"),
+
           @SerializedName("nl_kvk")
           NL_KVK("nl_kvk"),
 
@@ -4043,6 +4127,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("nz_ird")
           NZ_IRD("nz_ird"),
+
+          @SerializedName("om_tin")
+          OM_TIN("om_tin"),
 
           @SerializedName("pe_ruc")
           PE_RUC("pe_ruc"),
@@ -4062,6 +4149,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("pt_vat")
           PT_VAT("pt_vat"),
 
+          @SerializedName("qa_tin")
+          QA_TIN("qa_tin"),
+
           @SerializedName("ro_cui")
           RO_CUI("ro_cui"),
 
@@ -4070,6 +4160,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("ro_vat")
           RO_VAT("ro_vat"),
+
+          @SerializedName("rw_tin")
+          RW_TIN("rw_tin"),
 
           @SerializedName("sa_crn")
           SA_CRN("sa_crn"),
@@ -4104,6 +4197,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("sk_vat")
           SK_VAT("sk_vat"),
 
+          @SerializedName("sm_coe")
+          SM_COE("sm_coe"),
+
           @SerializedName("th_crn")
           TH_CRN("th_crn"),
 
@@ -4113,8 +4209,20 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("th_tin")
           TH_TIN("th_tin"),
 
+          @SerializedName("tr_tin")
+          TR_TIN("tr_tin"),
+
+          @SerializedName("tt_bir")
+          TT_BIR("tt_bir"),
+
+          @SerializedName("tt_vat")
+          TT_VAT("tt_vat"),
+
           @SerializedName("us_ein")
-          US_EIN("us_ein");
+          US_EIN("us_ein"),
+
+          @SerializedName("vn_tin")
+          VN_TIN("vn_tin");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -7273,6 +7381,15 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("ae_eid")
           AE_EID("ae_eid"),
 
+          @SerializedName("ae_pp")
+          AE_PP("ae_pp"),
+
+          @SerializedName("al_pp")
+          AL_PP("al_pp"),
+
+          @SerializedName("am_pp")
+          AM_PP("am_pp"),
+
           @SerializedName("ao_nif")
           AO_NIF("ao_nif"),
 
@@ -7282,8 +7399,23 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("ar_dni")
           AR_DNI("ar_dni"),
 
+          @SerializedName("ar_pp")
+          AR_PP("ar_pp"),
+
+          @SerializedName("at_pp")
+          AT_PP("at_pp"),
+
           @SerializedName("at_stn")
           AT_STN("at_stn"),
+
+          @SerializedName("au_pp")
+          AU_PP("au_pp"),
+
+          @SerializedName("az_pin")
+          AZ_PIN("az_pin"),
+
+          @SerializedName("az_pp")
+          AZ_PP("az_pp"),
 
           @SerializedName("az_tin")
           AZ_TIN("az_tin"),
@@ -7297,17 +7429,53 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("bd_nid")
           BD_NID("bd_nid"),
 
+          @SerializedName("bd_pp")
+          BD_PP("bd_pp"),
+
           @SerializedName("be_nrn")
           BE_NRN("be_nrn"),
+
+          @SerializedName("be_pp")
+          BE_PP("be_pp"),
+
+          @SerializedName("bg_pp")
+          BG_PP("bg_pp"),
 
           @SerializedName("bg_ucn")
           BG_UCN("bg_ucn"),
 
+          @SerializedName("bh_pp")
+          BH_PP("bh_pp"),
+
+          @SerializedName("bj_pp")
+          BJ_PP("bj_pp"),
+
           @SerializedName("bn_nric")
           BN_NRIC("bn_nric"),
 
+          @SerializedName("bo_pp")
+          BO_PP("bo_pp"),
+
           @SerializedName("br_cpf")
           BR_CPF("br_cpf"),
+
+          @SerializedName("br_pp")
+          BR_PP("br_pp"),
+
+          @SerializedName("br_rg")
+          BR_RG("br_rg"),
+
+          @SerializedName("bs_pp")
+          BS_PP("bs_pp"),
+
+          @SerializedName("bs_tin")
+          BS_TIN("bs_tin"),
+
+          @SerializedName("by_pp")
+          BY_PP("by_pp"),
+
+          @SerializedName("ca_pp")
+          CA_PP("ca_pp"),
 
           @SerializedName("ca_sin")
           CA_SIN("ca_sin"),
@@ -7315,14 +7483,29 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("ch_oasi")
           CH_OASI("ch_oasi"),
 
+          @SerializedName("ch_pp")
+          CH_PP("ch_pp"),
+
+          @SerializedName("ci_pp")
+          CI_PP("ci_pp"),
+
+          @SerializedName("cl_pp")
+          CL_PP("cl_pp"),
+
           @SerializedName("cl_rut")
           CL_RUT("cl_rut"),
+
+          @SerializedName("cm_pp")
+          CM_PP("cm_pp"),
 
           @SerializedName("cn_pp")
           CN_PP("cn_pp"),
 
           @SerializedName("co_nuip")
           CO_NUIP("co_nuip"),
+
+          @SerializedName("co_pp")
+          CO_PP("co_pp"),
 
           @SerializedName("cr_ci")
           CR_CI("cr_ci"),
@@ -7336,11 +7519,26 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("cr_nite")
           CR_NITE("cr_nite"),
 
+          @SerializedName("cr_pp")
+          CR_PP("cr_pp"),
+
+          @SerializedName("cy_pp")
+          CY_PP("cy_pp"),
+
           @SerializedName("cy_tic")
           CY_TIC("cy_tic"),
 
+          @SerializedName("cz_dic")
+          CZ_DIC("cz_dic"),
+
+          @SerializedName("cz_pp")
+          CZ_PP("cz_pp"),
+
           @SerializedName("cz_rc")
           CZ_RC("cz_rc"),
+
+          @SerializedName("de_pp")
+          DE_PP("de_pp"),
 
           @SerializedName("de_stn")
           DE_STN("de_stn"),
@@ -7348,77 +7546,251 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("dk_cpr")
           DK_CPR("dk_cpr"),
 
+          @SerializedName("dk_pp")
+          DK_PP("dk_pp"),
+
           @SerializedName("do_cie")
           DO_CIE("do_cie"),
+
+          @SerializedName("do_pp")
+          DO_PP("do_pp"),
 
           @SerializedName("do_rcn")
           DO_RCN("do_rcn"),
 
+          @SerializedName("dz_pp")
+          DZ_PP("dz_pp"),
+
           @SerializedName("ec_ci")
           EC_CI("ec_ci"),
+
+          @SerializedName("ec_pp")
+          EC_PP("ec_pp"),
 
           @SerializedName("ee_ik")
           EE_IK("ee_ik"),
 
+          @SerializedName("ee_pp")
+          EE_PP("ee_pp"),
+
+          @SerializedName("eg_pp")
+          EG_PP("eg_pp"),
+
           @SerializedName("es_nif")
           ES_NIF("es_nif"),
+
+          @SerializedName("es_pp")
+          ES_PP("es_pp"),
+
+          @SerializedName("et_tin")
+          ET_TIN("et_tin"),
 
           @SerializedName("fi_hetu")
           FI_HETU("fi_hetu"),
 
+          @SerializedName("fi_pp")
+          FI_PP("fi_pp"),
+
           @SerializedName("fr_nir")
           FR_NIR("fr_nir"),
+
+          @SerializedName("fr_pp")
+          FR_PP("fr_pp"),
+
+          @SerializedName("fr_spi")
+          FR_SPI("fr_spi"),
+
+          @SerializedName("ga_nif")
+          GA_NIF("ga_nif"),
 
           @SerializedName("gb_nino")
           GB_NINO("gb_nino"),
 
+          @SerializedName("gb_pp")
+          GB_PP("gb_pp"),
+
+          @SerializedName("ge_pp")
+          GE_PP("ge_pp"),
+
+          @SerializedName("gh_pp")
+          GH_PP("gh_pp"),
+
           @SerializedName("gr_afm")
           GR_AFM("gr_afm"),
+
+          @SerializedName("gr_pp")
+          GR_PP("gr_pp"),
+
+          @SerializedName("gt_cui")
+          GT_CUI("gt_cui"),
 
           @SerializedName("gt_nit")
           GT_NIT("gt_nit"),
 
+          @SerializedName("gt_pp")
+          GT_PP("gt_pp"),
+
           @SerializedName("hk_id")
           HK_ID("hk_id"),
+
+          @SerializedName("hk_pp")
+          HK_PP("hk_pp"),
+
+          @SerializedName("hn_dni")
+          HN_DNI("hn_dni"),
+
+          @SerializedName("hn_pp")
+          HN_PP("hn_pp"),
 
           @SerializedName("hr_oib")
           HR_OIB("hr_oib"),
 
+          @SerializedName("hr_pp")
+          HR_PP("hr_pp"),
+
+          @SerializedName("ht_pp")
+          HT_PP("ht_pp"),
+
           @SerializedName("hu_ad")
           HU_AD("hu_ad"),
+
+          @SerializedName("hu_pp")
+          HU_PP("hu_pp"),
 
           @SerializedName("id_nik")
           ID_NIK("id_nik"),
 
+          @SerializedName("id_pp")
+          ID_PP("id_pp"),
+
+          @SerializedName("ie_pp")
+          IE_PP("ie_pp"),
+
           @SerializedName("ie_ppsn")
           IE_PPSN("ie_ppsn"),
+
+          @SerializedName("il_pp")
+          IL_PP("il_pp"),
+
+          @SerializedName("in_pan")
+          IN_PAN("in_pan"),
+
+          @SerializedName("in_pp")
+          IN_PP("in_pp"),
+
+          @SerializedName("iq_pp")
+          IQ_PP("iq_pp"),
 
           @SerializedName("is_kt")
           IS_KT("is_kt"),
 
+          @SerializedName("is_pp")
+          IS_PP("is_pp"),
+
           @SerializedName("it_cf")
           IT_CF("it_cf"),
+
+          @SerializedName("it_pp")
+          IT_PP("it_pp"),
+
+          @SerializedName("je_pp")
+          JE_PP("je_pp"),
+
+          @SerializedName("jm_pp")
+          JM_PP("jm_pp"),
+
+          @SerializedName("jo_pp")
+          JO_PP("jo_pp"),
 
           @SerializedName("jp_inc")
           JP_INC("jp_inc"),
 
+          @SerializedName("jp_pp")
+          JP_PP("jp_pp"),
+
           @SerializedName("ke_pin")
           KE_PIN("ke_pin"),
+
+          @SerializedName("ke_pp")
+          KE_PP("ke_pp"),
+
+          @SerializedName("kr_pp")
+          KR_PP("kr_pp"),
+
+          @SerializedName("kw_pp")
+          KW_PP("kw_pp"),
 
           @SerializedName("kz_iin")
           KZ_IIN("kz_iin"),
 
+          @SerializedName("kz_pp")
+          KZ_PP("kz_pp"),
+
+          @SerializedName("lb_pp")
+          LB_PP("lb_pp"),
+
           @SerializedName("li_peid")
           LI_PEID("li_peid"),
+
+          @SerializedName("li_pp")
+          LI_PP("li_pp"),
+
+          @SerializedName("lk_pp")
+          LK_PP("lk_pp"),
 
           @SerializedName("lt_ak")
           LT_AK("lt_ak"),
 
+          @SerializedName("lt_pp")
+          LT_PP("lt_pp"),
+
           @SerializedName("lu_nif")
           LU_NIF("lu_nif"),
 
+          @SerializedName("lu_pp")
+          LU_PP("lu_pp"),
+
           @SerializedName("lv_pk")
           LV_PK("lv_pk"),
+
+          @SerializedName("lv_pp")
+          LV_PP("lv_pp"),
+
+          @SerializedName("ma_pp")
+          MA_PP("ma_pp"),
+
+          @SerializedName("md_cf")
+          MD_CF("md_cf"),
+
+          @SerializedName("md_pp")
+          MD_PP("md_pp"),
+
+          @SerializedName("mg_nif")
+          MG_NIF("mg_nif"),
+
+          @SerializedName("mk_pin")
+          MK_PIN("mk_pin"),
+
+          @SerializedName("mk_pp")
+          MK_PP("mk_pp"),
+
+          @SerializedName("mm_pp")
+          MM_PP("mm_pp"),
+
+          @SerializedName("mn_pp")
+          MN_PP("mn_pp"),
+
+          @SerializedName("mt_pp")
+          MT_PP("mt_pp"),
+
+          @SerializedName("mu_pp")
+          MU_PP("mu_pp"),
+
+          @SerializedName("mx_curp")
+          MX_CURP("mx_curp"),
+
+          @SerializedName("mx_pp")
+          MX_PP("mx_pp"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -7426,26 +7798,56 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("my_nric")
           MY_NRIC("my_nric"),
 
+          @SerializedName("my_pp")
+          MY_PP("my_pp"),
+
           @SerializedName("mz_nuit")
           MZ_NUIT("mz_nuit"),
 
           @SerializedName("ng_nin")
           NG_NIN("ng_nin"),
 
+          @SerializedName("ng_pp")
+          NG_PP("ng_pp"),
+
           @SerializedName("nl_bsn")
           NL_BSN("nl_bsn"),
+
+          @SerializedName("nl_pp")
+          NL_PP("nl_pp"),
 
           @SerializedName("no_nin")
           NO_NIN("no_nin"),
 
+          @SerializedName("no_pp")
+          NO_PP("no_pp"),
+
+          @SerializedName("np_pp")
+          NP_PP("np_pp"),
+
           @SerializedName("nz_ird")
           NZ_IRD("nz_ird"),
+
+          @SerializedName("nz_pp")
+          NZ_PP("nz_pp"),
+
+          @SerializedName("pa_pp")
+          PA_PP("pa_pp"),
 
           @SerializedName("pe_dni")
           PE_DNI("pe_dni"),
 
+          @SerializedName("pe_pp")
+          PE_PP("pe_pp"),
+
+          @SerializedName("ph_pp")
+          PH_PP("ph_pp"),
+
           @SerializedName("pk_cnic")
           PK_CNIC("pk_cnic"),
+
+          @SerializedName("pk_pp")
+          PK_PP("pk_pp"),
 
           @SerializedName("pk_snic")
           PK_SNIC("pk_snic"),
@@ -7453,11 +7855,47 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("pl_pesel")
           PL_PESEL("pl_pesel"),
 
+          @SerializedName("pl_pp")
+          PL_PP("pl_pp"),
+
+          @SerializedName("pr_pp")
+          PR_PP("pr_pp"),
+
+          @SerializedName("ps_pp")
+          PS_PP("ps_pp"),
+
           @SerializedName("pt_nif")
           PT_NIF("pt_nif"),
 
+          @SerializedName("pt_pp")
+          PT_PP("pt_pp"),
+
+          @SerializedName("py_ci")
+          PY_CI("py_ci"),
+
+          @SerializedName("py_pp")
+          PY_PP("py_pp"),
+
           @SerializedName("ro_cnp")
           RO_CNP("ro_cnp"),
+
+          @SerializedName("ro_pp")
+          RO_PP("ro_pp"),
+
+          @SerializedName("rs_pp")
+          RS_PP("rs_pp"),
+
+          @SerializedName("ru_pp")
+          RU_PP("ru_pp"),
+
+          @SerializedName("rw_tin")
+          RW_TIN("rw_tin"),
+
+          @SerializedName("sa_pp")
+          SA_PP("sa_pp"),
+
+          @SerializedName("sa_ptin")
+          SA_PTIN("sa_ptin"),
 
           @SerializedName("sa_tin")
           SA_TIN("sa_tin"),
@@ -7465,14 +7903,32 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("se_pin")
           SE_PIN("se_pin"),
 
+          @SerializedName("se_pp")
+          SE_PP("se_pp"),
+
           @SerializedName("sg_fin")
           SG_FIN("sg_fin"),
 
           @SerializedName("sg_nric")
           SG_NRIC("sg_nric"),
 
+          @SerializedName("sg_pp")
+          SG_PP("sg_pp"),
+
+          @SerializedName("si_pp")
+          SI_PP("si_pp"),
+
+          @SerializedName("si_ptin")
+          SI_PTIN("si_ptin"),
+
           @SerializedName("sk_dic")
           SK_DIC("sk_dic"),
+
+          @SerializedName("sk_pp")
+          SK_PP("sk_pp"),
+
+          @SerializedName("sv_pp")
+          SV_PP("sv_pp"),
 
           @SerializedName("th_lc")
           TH_LC("th_lc"),
@@ -7480,14 +7936,38 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("th_pin")
           TH_PIN("th_pin"),
 
+          @SerializedName("th_pp")
+          TH_PP("th_pp"),
+
+          @SerializedName("tn_pp")
+          TN_PP("tn_pp"),
+
+          @SerializedName("tr_pp")
+          TR_PP("tr_pp"),
+
           @SerializedName("tr_tin")
           TR_TIN("tr_tin"),
+
+          @SerializedName("tt_bir")
+          TT_BIR("tt_bir"),
+
+          @SerializedName("tw_pp")
+          TW_PP("tw_pp"),
+
+          @SerializedName("ua_pp")
+          UA_PP("ua_pp"),
+
+          @SerializedName("ug_pp")
+          UG_PP("ug_pp"),
 
           @SerializedName("us_itin")
           US_ITIN("us_itin"),
 
           @SerializedName("us_itin_last_4")
           US_ITIN_LAST_4("us_itin_last_4"),
+
+          @SerializedName("us_pp")
+          US_PP("us_pp"),
 
           @SerializedName("us_ssn")
           US_SSN("us_ssn"),
@@ -7498,8 +7978,26 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("uy_dni")
           UY_DNI("uy_dni"),
 
+          @SerializedName("uy_pp")
+          UY_PP("uy_pp"),
+
+          @SerializedName("uz_pp")
+          UZ_PP("uz_pp"),
+
+          @SerializedName("uz_tin")
+          UZ_TIN("uz_tin"),
+
+          @SerializedName("ve_pp")
+          VE_PP("ve_pp"),
+
+          @SerializedName("vn_pp")
+          VN_PP("vn_pp"),
+
           @SerializedName("za_id")
-          ZA_ID("za_id");
+          ZA_ID("za_id"),
+
+          @SerializedName("za_pp")
+          ZA_PP("za_pp");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

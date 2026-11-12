@@ -1091,7 +1091,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
-      /** The timestamp when the microdeposits are expected to land. */
+      /**
+       * The timestamp when the microdeposits are expected to land. Null for instant microdeposits.
+       */
       @SerializedName("arrival_date")
       Long arrivalDate;
 
