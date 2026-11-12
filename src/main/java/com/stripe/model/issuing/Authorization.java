@@ -2556,6 +2556,10 @@ public class Authorization extends ApiResource
          */
         @SerializedName("token_risk_score")
         String tokenRiskScore;
+
+        /** The ID of the token service provider, specific to Visa. */
+        @SerializedName("token_service_provider_id")
+        String tokenServiceProviderId;
       }
 
       /**

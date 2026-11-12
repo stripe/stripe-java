@@ -13,9 +13,13 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class InvoiceListParams extends ApiRequestParams {
-  /** Only return invoices for the cadence specified by this billing cadence ID. */
+  /** Only return invoices for the billing cadence specified by this billing cadence ID. */
   @SerializedName("billing_cadence")
   String billingCadence;
+
+  /** Only return invoices for the billing group specified by this billing group ID. */
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * The collection method of the invoice to retrieve. Either {@code charge_automatically} or {@code
@@ -93,6 +97,7 @@ public class InvoiceListParams extends ApiRequestParams {
 
   private InvoiceListParams(
       String billingCadence,
+      String billingGroup,
       CollectionMethod collectionMethod,
       Object created,
       String customer,
@@ -106,6 +111,7 @@ public class InvoiceListParams extends ApiRequestParams {
       Status status,
       String subscription) {
     this.billingCadence = billingCadence;
+    this.billingGroup = billingGroup;
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.customer = customer;
@@ -126,6 +132,8 @@ public class InvoiceListParams extends ApiRequestParams {
 
   public static class Builder {
     private String billingCadence;
+
+    private String billingGroup;
 
     private CollectionMethod collectionMethod;
 
@@ -155,6 +163,7 @@ public class InvoiceListParams extends ApiRequestParams {
     public InvoiceListParams build() {
       return new InvoiceListParams(
           this.billingCadence,
+          this.billingGroup,
           this.collectionMethod,
           this.created,
           this.customer,
@@ -169,9 +178,15 @@ public class InvoiceListParams extends ApiRequestParams {
           this.subscription);
     }
 
-    /** Only return invoices for the cadence specified by this billing cadence ID. */
+    /** Only return invoices for the billing cadence specified by this billing cadence ID. */
     public Builder setBillingCadence(String billingCadence) {
       this.billingCadence = billingCadence;
+      return this;
+    }
+
+    /** Only return invoices for the billing group specified by this billing group ID. */
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 

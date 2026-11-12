@@ -467,6 +467,42 @@ public class Mandate extends ApiResource implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class India extends StripeObject {
         /**
+         * The registered amount in the smallest currency unit. For a maximum amount mandate, this
+         * is the authorized ceiling.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Whether the registered amount is fixed or a maximum.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * The stored mandate description, before SIHub registration removes non-alphanumeric
+         * characters.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * The registered end date, represented as midnight in India Standard Time, if specified.
+         */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
          * The reason why the mandate has an {@code inactive} status. This field is only populated
          * if the mandate is inactive.
          *
@@ -476,6 +512,26 @@ public class Mandate extends ApiResource implements HasId {
          */
         @SerializedName("inactive_reason")
         String inactiveReason;
+
+        /**
+         * The registered payment interval. This can differ from the interval originally requested.
+         *
+         * <p>One of {@code day}, {@code month}, {@code sporadic}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /** The number of intervals between registered payments. Null for sporadic mandates. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /** The reference registered for this mandate. */
+        @SerializedName("reference")
+        String reference;
+
+        /** The registered start date, represented as midnight in India Standard Time. */
+        @SerializedName("start_date")
+        Long startDate;
       }
     }
 

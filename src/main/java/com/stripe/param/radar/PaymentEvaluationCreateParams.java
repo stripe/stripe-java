@@ -49,19 +49,28 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
   @SerializedName("payment_details")
   PaymentDetails paymentDetails;
 
+  /**
+   * The signals to return in the Payment Evaluation response. Must include {@code
+   * fraudulent_payment}. If omitted, only {@code fraudulent_payment} is returned.
+   */
+  @SerializedName("requested_signals")
+  List<PaymentEvaluationCreateParams.RequestedSignal> requestedSignals;
+
   private PaymentEvaluationCreateParams(
       ClientDeviceMetadataDetails clientDeviceMetadataDetails,
       CustomerDetails customerDetails,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      PaymentDetails paymentDetails) {
+      PaymentDetails paymentDetails,
+      List<PaymentEvaluationCreateParams.RequestedSignal> requestedSignals) {
     this.clientDeviceMetadataDetails = clientDeviceMetadataDetails;
     this.customerDetails = customerDetails;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.paymentDetails = paymentDetails;
+    this.requestedSignals = requestedSignals;
   }
 
   public static Builder builder() {
@@ -81,6 +90,8 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
 
     private PaymentDetails paymentDetails;
 
+    private List<PaymentEvaluationCreateParams.RequestedSignal> requestedSignals;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentEvaluationCreateParams build() {
       return new PaymentEvaluationCreateParams(
@@ -89,7 +100,8 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.metadata,
-          this.paymentDetails);
+          this.paymentDetails,
+          this.requestedSignals);
     }
 
     /** Details about the Client Device Metadata to associate with the payment evaluation. */
@@ -189,6 +201,33 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> Details about the payment. */
     public Builder setPaymentDetails(PaymentEvaluationCreateParams.PaymentDetails paymentDetails) {
       this.paymentDetails = paymentDetails;
+      return this;
+    }
+
+    /**
+     * Add an element to `requestedSignals` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentEvaluationCreateParams#requestedSignals} for the field documentation.
+     */
+    public Builder addRequestedSignal(PaymentEvaluationCreateParams.RequestedSignal element) {
+      if (this.requestedSignals == null) {
+        this.requestedSignals = new ArrayList<>();
+      }
+      this.requestedSignals.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `requestedSignals` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentEvaluationCreateParams#requestedSignals} for the field documentation.
+     */
+    public Builder addAllRequestedSignal(
+        List<PaymentEvaluationCreateParams.RequestedSignal> elements) {
+      if (this.requestedSignals == null) {
+        this.requestedSignals = new ArrayList<>();
+      }
+      this.requestedSignals.addAll(elements);
       return this;
     }
   }
@@ -2175,6 +2214,30 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
           }
         }
       }
+    }
+  }
+
+  public enum RequestedSignal implements ApiRequestParams.EnumParam {
+    @SerializedName("bank_initiated_return")
+    BANK_INITIATED_RETURN("bank_initiated_return"),
+
+    @SerializedName("card_testing")
+    CARD_TESTING("card_testing"),
+
+    @SerializedName("early_fraud_warning")
+    EARLY_FRAUD_WARNING("early_fraud_warning"),
+
+    @SerializedName("fraudulent_dispute")
+    FRAUDULENT_DISPUTE("fraudulent_dispute"),
+
+    @SerializedName("fraudulent_payment")
+    FRAUDULENT_PAYMENT("fraudulent_payment");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    RequestedSignal(String value) {
+      this.value = value;
     }
   }
 }

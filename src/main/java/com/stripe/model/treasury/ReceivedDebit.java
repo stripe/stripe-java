@@ -451,16 +451,16 @@ public class ReceivedDebit extends ApiResource implements HasId {
     private TestHelpers() {}
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(Map<String, Object> params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -471,16 +471,16 @@ public class ReceivedDebit extends ApiResource implements HasId {
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(ReceivedDebitCreateParams params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
         throws StripeException {

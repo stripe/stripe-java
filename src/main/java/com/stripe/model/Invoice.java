@@ -2508,6 +2508,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @SerializedName("billing_cadence_details")
     BillingCadenceDetails billingCadenceDetails;
 
+    /** Details about the billing group that generated this invoice. */
+    @SerializedName("billing_group_details")
+    BillingGroupDetails billingGroupDetails;
+
     /** Details about the quote that generated this invoice. */
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
@@ -2540,6 +2544,27 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       /** The billing cadence that generated this invoice. */
       @SerializedName("billing_cadence")
       String billingCadence;
+
+      /** The billing group that generated this invoice. */
+      @SerializedName("billing_group")
+      String billingGroup;
+    }
+
+    /**
+     * For more details about BillingGroupDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingGroupDetails extends StripeObject {
+      /** The billing cadence that generated this invoice. */
+      @SerializedName("billing_cadence")
+      String billingCadence;
+
+      /** The billing group that generated this invoice. */
+      @SerializedName("billing_group")
+      String billingGroup;
     }
 
     /**

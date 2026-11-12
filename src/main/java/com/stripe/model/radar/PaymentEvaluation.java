@@ -97,6 +97,14 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @SerializedName("recommended_action")
   String recommendedAction;
 
+  /**
+   * The signals requested for this payment evaluation. Only returned when creating a payment
+   * evaluation. Includes the default signal list when {@code requested_signals} is omitted from the
+   * request.
+   */
+  @SerializedName("requested_signals")
+  List<String> requestedSignals;
+
   /** Details about Radar Rules associated with the payment evaluation. */
   @SerializedName("rules")
   Rules rules;

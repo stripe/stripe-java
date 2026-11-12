@@ -33,6 +33,10 @@ public class AlertHistoryEntry extends StripeObject implements HasId {
   @SerializedName("authorization_rate_drop")
   AuthorizationRateDrop authorizationRateDrop;
 
+  /** Populated when type is custom_payment_method_adapter_degraded. */
+  @SerializedName("custom_payment_method_adapter_degraded")
+  CustomPaymentMethodAdapterDegraded customPaymentMethodAdapterDegraded;
+
   /** Populated when type is elements_error. */
   @SerializedName("elements_error")
   ElementsError elementsError;
@@ -110,11 +114,12 @@ public class AlertHistoryEntry extends StripeObject implements HasId {
    * The type of the alert. Determines which sub-hash field is populated.
    *
    * <p>One of {@code api_error}, {@code api_latency}, {@code authorization_rate_drop}, {@code
-   * elements_error}, {@code event_generation_failure}, {@code fraud_rate}, {@code
-   * invoice_count_dropped}, {@code issuing_authorization_request_errors}, {@code
-   * issuing_authorization_request_timeout}, {@code meter_event_summaries_delayed}, {@code
-   * metronome_notification_latency}, {@code payment_method_error}, {@code sepa_debit_delayed},
-   * {@code traffic_volume_drop}, or {@code webhook_latency}.
+   * custom_payment_method_adapter_degraded}, {@code elements_error}, {@code
+   * event_generation_failure}, {@code fraud_rate}, {@code invoice_count_dropped}, {@code
+   * issuing_authorization_request_errors}, {@code issuing_authorization_request_timeout}, {@code
+   * meter_event_summaries_delayed}, {@code metronome_notification_latency}, {@code
+   * payment_method_error}, {@code sepa_debit_delayed}, {@code traffic_volume_drop}, or {@code
+   * webhook_latency}.
    */
   @SerializedName("type")
   String type;
@@ -304,6 +309,52 @@ public class AlertHistoryEntry extends StripeObject implements HasId {
        *
        * <p>One of {@code acquirer}, or {@code issuer}.
        */
+      @SerializedName("type")
+      String type;
+    }
+  }
+
+  /** Populated when type is custom_payment_method_adapter_degraded. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomPaymentMethodAdapterDegraded extends StripeObject {
+    /**
+     * Whether the custom payment method was disabled in Checkout as a result of the degradation.
+     * True while the alert is open and false when it is resolved.
+     */
+    @SerializedName("custom_payment_method_disabled_from_checkout")
+    Boolean customPaymentMethodDisabledFromCheckout;
+
+    /** The custom payment method type whose adapter is unhealthy. */
+    @SerializedName("custom_payment_method_type_details")
+    CustomPaymentMethodTypeDetails customPaymentMethodTypeDetails;
+
+    /** The reason the adapter's health is degraded. */
+    @SerializedName("degraded_health_reason")
+    String degradedHealthReason;
+
+    /** The custom payment method type whose adapter is unhealthy. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomPaymentMethodTypeDetails extends StripeObject {
+      /**
+       * The time when the custom payment method was automatically disabled. Null when it is
+       * enabled.
+       */
+      @SerializedName("auto_disabled_at")
+      Instant autoDisabledAt;
+
+      /** The display name of the custom payment method type. */
+      @SerializedName("display_name")
+      String displayName;
+
+      /** The URL of the user's self-hosted adapter endpoint. */
+      @SerializedName("reverse_api_url")
+      String reverseApiUrl;
+
+      /** The identifier of the custom payment method type (e.g., &quot;cpmt_...&quot;). */
       @SerializedName("type")
       String type;
     }

@@ -111,6 +111,10 @@ public class InboundTransfer extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethod extends StripeObject {
+      /** The Australian bank account credential used for AU BECS Direct Debit. */
+      @SerializedName("au_becs_debit")
+      String auBecsDebit;
+
       /** The Bacs Direct Debit PaymentMethod identifier. */
       @SerializedName("bacs_debit")
       String bacsDebit;

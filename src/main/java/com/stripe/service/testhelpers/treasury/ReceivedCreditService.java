@@ -18,15 +18,15 @@ public final class ReceivedCreditService extends ApiService {
   }
 
   /**
-   * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-   * mode, you can’t directly create ReceivedCredits initiated by third parties.
+   * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+   * directly create {@code ReceivedCredit} objects initiated by third parties.
    */
   public ReceivedCredit create(ReceivedCreditCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-   * mode, you can’t directly create ReceivedCredits initiated by third parties.
+   * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+   * directly create {@code ReceivedCredit} objects initiated by third parties.
    */
   public ReceivedCredit create(ReceivedCreditCreateParams params, RequestOptions options)
       throws StripeException {

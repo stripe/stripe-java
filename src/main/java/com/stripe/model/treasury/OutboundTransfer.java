@@ -716,16 +716,16 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
-     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     * Updates a test {@code OutboundTransfer} with tracking details. The {@code OutboundTransfer}
+     * must not be cancelable, and can’t be in the {@code canceled} or {@code failed} states.
      */
     public OutboundTransfer update(Map<String, Object> params) throws StripeException {
       return update(params, (RequestOptions) null);
     }
 
     /**
-     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
-     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     * Updates a test {@code OutboundTransfer} with tracking details. The {@code OutboundTransfer}
+     * must not be cancelable, and can’t be in the {@code canceled} or {@code failed} states.
      */
     public OutboundTransfer update(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -739,16 +739,16 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
-     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     * Updates a test {@code OutboundTransfer} with tracking details. The {@code OutboundTransfer}
+     * must not be cancelable, and can’t be in the {@code canceled} or {@code failed} states.
      */
     public OutboundTransfer update(OutboundTransferUpdateParams params) throws StripeException {
       return update(params, (RequestOptions) null);
     }
 
     /**
-     * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
-     * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+     * Updates a test {@code OutboundTransfer} with tracking details. The {@code OutboundTransfer}
+     * must not be cancelable, and can’t be in the {@code canceled} or {@code failed} states.
      */
     public OutboundTransfer update(OutboundTransferUpdateParams params, RequestOptions options)
         throws StripeException {
@@ -768,32 +768,32 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer fail() throws StripeException {
       return fail((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer fail(RequestOptions options) throws StripeException {
       return fail((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer fail(Map<String, Object> params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer fail(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -807,16 +807,16 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer fail(OutboundTransferFailParams params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer fail(OutboundTransferFailParams params, RequestOptions options)
         throws StripeException {
@@ -836,32 +836,32 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer post() throws StripeException {
       return post((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer post(RequestOptions options) throws StripeException {
       return post((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer post(Map<String, Object> params) throws StripeException {
       return post(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer post(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -875,16 +875,16 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer post(OutboundTransferPostParams params) throws StripeException {
       return post(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+     * OutboundTransfer} must already be in the {@code processing} state.
      */
     public OutboundTransfer post(OutboundTransferPostParams params, RequestOptions options)
         throws StripeException {
@@ -904,24 +904,24 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+     * OutboundTransfer} must already be in the {@code posted} state.
      */
     public OutboundTransfer returnOutboundTransfer() throws StripeException {
       return returnOutboundTransfer((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+     * OutboundTransfer} must already be in the {@code posted} state.
      */
     public OutboundTransfer returnOutboundTransfer(RequestOptions options) throws StripeException {
       return returnOutboundTransfer((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+     * OutboundTransfer} must already be in the {@code posted} state.
      */
     public OutboundTransfer returnOutboundTransfer(Map<String, Object> params)
         throws StripeException {
@@ -929,8 +929,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+     * OutboundTransfer} must already be in the {@code posted} state.
      */
     public OutboundTransfer returnOutboundTransfer(
         Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -944,8 +944,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+     * OutboundTransfer} must already be in the {@code posted} state.
      */
     public OutboundTransfer returnOutboundTransfer(
         OutboundTransferReturnOutboundTransferParams params) throws StripeException {
@@ -953,8 +953,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-     * OutboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+     * OutboundTransfer} must already be in the {@code posted} state.
      */
     public OutboundTransfer returnOutboundTransfer(
         OutboundTransferReturnOutboundTransferParams params, RequestOptions options)

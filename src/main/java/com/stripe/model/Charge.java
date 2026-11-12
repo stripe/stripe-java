@@ -3420,8 +3420,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
-       * {@code tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui},
+       * {@code tempo}, or {@code tron}.
        */
       @SerializedName("network")
       String network;
@@ -4592,7 +4592,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public static class NzBankAccount extends StripeObject {
       /**
        * The name on the bank account. Only present if the account holder name is different from the
-       * name of the authorized signatory collected in the PaymentMethod’s billing details.
+       * name of the authorized signatory collected in the PaymentMethod's billing details.
        */
       @SerializedName("account_holder_name")
       String accountHolderName;

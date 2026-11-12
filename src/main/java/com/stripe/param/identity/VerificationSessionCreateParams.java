@@ -38,6 +38,10 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** An authorized LinkSharedData grant used to populate and submit a document-only session. */
+  @SerializedName("link_shared_data")
+  LinkSharedData linkSharedData;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -95,6 +99,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       Boolean confirm,
       List<String> expand,
       Map<String, Object> extraParams,
+      LinkSharedData linkSharedData,
       Map<String, String> metadata,
       Options options,
       ProvidedDetails providedDetails,
@@ -109,6 +114,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     this.confirm = confirm;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.linkSharedData = linkSharedData;
     this.metadata = metadata;
     this.options = options;
     this.providedDetails = providedDetails;
@@ -133,6 +139,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private LinkSharedData linkSharedData;
 
     private Map<String, String> metadata;
 
@@ -161,6 +169,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
           this.confirm,
           this.expand,
           this.extraParams,
+          this.linkSharedData,
           this.metadata,
           this.options,
           this.providedDetails,
@@ -237,6 +246,13 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** An authorized LinkSharedData grant used to populate and submit a document-only session. */
+    public Builder setLinkSharedData(
+        VerificationSessionCreateParams.LinkSharedData linkSharedData) {
+      this.linkSharedData = linkSharedData;
       return this;
     }
 
@@ -326,6 +342,103 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     public Builder setVerificationFlow(String verificationFlow) {
       this.verificationFlow = verificationFlow;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LinkSharedData {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> The LinkSharedData grant authorizing use of a shared identity
+     * document. Requires confirm=true.
+     */
+    @SerializedName("granted_token")
+    String grantedToken;
+
+    /**
+     * <strong>Required.</strong> The identity_data.identity_documents[].key returned for this
+     * grant. Required even when the grant contains only one document.
+     */
+    @SerializedName("identity_document")
+    String identityDocument;
+
+    private LinkSharedData(
+        Map<String, Object> extraParams, String grantedToken, String identityDocument) {
+      this.extraParams = extraParams;
+      this.grantedToken = grantedToken;
+      this.identityDocument = identityDocument;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String grantedToken;
+
+      private String identityDocument;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public VerificationSessionCreateParams.LinkSharedData build() {
+        return new VerificationSessionCreateParams.LinkSharedData(
+            this.extraParams, this.grantedToken, this.identityDocument);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * VerificationSessionCreateParams.LinkSharedData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link VerificationSessionCreateParams.LinkSharedData#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The LinkSharedData grant authorizing use of a shared identity
+       * document. Requires confirm=true.
+       */
+      public Builder setGrantedToken(String grantedToken) {
+        this.grantedToken = grantedToken;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The identity_data.identity_documents[].key returned for this
+       * grant. Required even when the grant contains only one document.
+       */
+      public Builder setIdentityDocument(String identityDocument) {
+        this.identityDocument = identityDocument;
+        return this;
+      }
     }
   }
 

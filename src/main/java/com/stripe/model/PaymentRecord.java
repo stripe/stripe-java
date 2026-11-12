@@ -2582,8 +2582,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
-       * {@code tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui},
+       * {@code tempo}, or {@code tron}.
        */
       @SerializedName("network")
       String network;

@@ -546,16 +546,16 @@ public class ReceivedCredit extends ApiResource implements HasId {
     private TestHelpers() {}
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(Map<String, Object> params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -566,16 +566,16 @@ public class ReceivedCredit extends ApiResource implements HasId {
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(ReceivedCreditCreateParams params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(ReceivedCreditCreateParams params, RequestOptions options)
         throws StripeException {

@@ -411,10 +411,19 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
       @SerializedName("network_decline_code")
       String networkDeclineCode;
 
-      private Card(Checks checks, Map<String, Object> extraParams, String networkDeclineCode) {
+      /** Populated if this transaction used 3D Secure authentication. */
+      @SerializedName("three_d_secure")
+      ThreeDSecure threeDSecure;
+
+      private Card(
+          Checks checks,
+          Map<String, Object> extraParams,
+          String networkDeclineCode,
+          ThreeDSecure threeDSecure) {
         this.checks = checks;
         this.extraParams = extraParams;
         this.networkDeclineCode = networkDeclineCode;
+        this.threeDSecure = threeDSecure;
       }
 
       public static Builder builder() {
@@ -428,10 +437,12 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
 
         private String networkDeclineCode;
 
+        private ThreeDSecure threeDSecure;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card build() {
           return new PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card(
-              this.checks, this.extraParams, this.networkDeclineCode);
+              this.checks, this.extraParams, this.networkDeclineCode, this.threeDSecure);
         }
 
         /** Verification checks performed on the card. */
@@ -474,6 +485,14 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
         /** Decline code from the card network for the failed payment. */
         public Builder setNetworkDeclineCode(String networkDeclineCode) {
           this.networkDeclineCode = networkDeclineCode;
+          return this;
+        }
+
+        /** Populated if this transaction used 3D Secure authentication. */
+        public Builder setThreeDSecure(
+            PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure
+                threeDSecure) {
+          this.threeDSecure = threeDSecure;
           return this;
         }
       }
@@ -655,6 +674,330 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
           private final String value;
 
           CvcCheck(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ThreeDSecure {
+        /**
+         * For authenticated transactions: Indicates how the issuing bank authenticated the
+         * customer.
+         */
+        @SerializedName("authentication_flow")
+        AuthenticationFlow authenticationFlow;
+
+        /**
+         * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of
+         * authentication was performed.
+         */
+        @SerializedName("electronic_commerce_indicator")
+        ElectronicCommerceIndicator electronicCommerceIndicator;
+
+        /** The exemption requested via 3DS and accepted by the issuer at authentication time. */
+        @SerializedName("exemption_indicator")
+        ExemptionIndicator exemptionIndicator;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Indicates the outcome of 3D Secure authentication. */
+        @SerializedName("result")
+        Result result;
+
+        /**
+         * Additional information about why 3D Secure succeeded or failed, based on the {@code
+         * result}.
+         */
+        @SerializedName("result_reason")
+        ResultReason resultReason;
+
+        /** <strong>Required.</strong> The version of 3D Secure that was used. */
+        @SerializedName("version")
+        Version version;
+
+        private ThreeDSecure(
+            AuthenticationFlow authenticationFlow,
+            ElectronicCommerceIndicator electronicCommerceIndicator,
+            ExemptionIndicator exemptionIndicator,
+            Map<String, Object> extraParams,
+            Result result,
+            ResultReason resultReason,
+            Version version) {
+          this.authenticationFlow = authenticationFlow;
+          this.electronicCommerceIndicator = electronicCommerceIndicator;
+          this.exemptionIndicator = exemptionIndicator;
+          this.extraParams = extraParams;
+          this.result = result;
+          this.resultReason = resultReason;
+          this.version = version;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AuthenticationFlow authenticationFlow;
+
+          private ElectronicCommerceIndicator electronicCommerceIndicator;
+
+          private ExemptionIndicator exemptionIndicator;
+
+          private Map<String, Object> extraParams;
+
+          private Result result;
+
+          private ResultReason resultReason;
+
+          private Version version;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card
+                  .ThreeDSecure
+              build() {
+            return new PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card
+                .ThreeDSecure(
+                this.authenticationFlow,
+                this.electronicCommerceIndicator,
+                this.exemptionIndicator,
+                this.extraParams,
+                this.result,
+                this.resultReason,
+                this.version);
+          }
+
+          /**
+           * For authenticated transactions: Indicates how the issuing bank authenticated the
+           * customer.
+           */
+          public Builder setAuthenticationFlow(
+              PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure
+                      .AuthenticationFlow
+                  authenticationFlow) {
+            this.authenticationFlow = authenticationFlow;
+            return this;
+          }
+
+          /**
+           * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree
+           * of authentication was performed.
+           */
+          public Builder setElectronicCommerceIndicator(
+              PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure
+                      .ElectronicCommerceIndicator
+                  electronicCommerceIndicator) {
+            this.electronicCommerceIndicator = electronicCommerceIndicator;
+            return this;
+          }
+
+          /** The exemption requested via 3DS and accepted by the issuer at authentication time. */
+          public Builder setExemptionIndicator(
+              PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure
+                      .ExemptionIndicator
+                  exemptionIndicator) {
+            this.exemptionIndicator = exemptionIndicator;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Indicates the outcome of 3D Secure authentication. */
+          public Builder setResult(
+              PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure
+                      .Result
+                  result) {
+            this.result = result;
+            return this;
+          }
+
+          /**
+           * Additional information about why 3D Secure succeeded or failed, based on the {@code
+           * result}.
+           */
+          public Builder setResultReason(
+              PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure
+                      .ResultReason
+                  resultReason) {
+            this.resultReason = resultReason;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The version of 3D Secure that was used. */
+          public Builder setVersion(
+              PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card.ThreeDSecure
+                      .Version
+                  version) {
+            this.version = version;
+            return this;
+          }
+        }
+
+        public enum AuthenticationFlow implements ApiRequestParams.EnumParam {
+          @SerializedName("challenge")
+          CHALLENGE("challenge"),
+
+          @SerializedName("frictionless")
+          FRICTIONLESS("frictionless");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AuthenticationFlow(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum ElectronicCommerceIndicator implements ApiRequestParams.EnumParam {
+          @SerializedName("01")
+          N01("01"),
+
+          @SerializedName("02")
+          N02("02"),
+
+          @SerializedName("05")
+          N05("05"),
+
+          @SerializedName("06")
+          N06("06"),
+
+          @SerializedName("07")
+          N07("07");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ElectronicCommerceIndicator(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum ExemptionIndicator implements ApiRequestParams.EnumParam {
+          @SerializedName("low_risk")
+          LOW_RISK("low_risk"),
+
+          @SerializedName("none")
+          NONE("none");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ExemptionIndicator(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Result implements ApiRequestParams.EnumParam {
+          @SerializedName("attempt_acknowledged")
+          ATTEMPT_ACKNOWLEDGED("attempt_acknowledged"),
+
+          @SerializedName("authenticated")
+          AUTHENTICATED("authenticated"),
+
+          @SerializedName("exempted")
+          EXEMPTED("exempted"),
+
+          @SerializedName("failed")
+          FAILED("failed"),
+
+          @SerializedName("not_supported")
+          NOT_SUPPORTED("not_supported"),
+
+          @SerializedName("processing_error")
+          PROCESSING_ERROR("processing_error");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Result(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum ResultReason implements ApiRequestParams.EnumParam {
+          @SerializedName("abandoned")
+          ABANDONED("abandoned"),
+
+          @SerializedName("canceled")
+          CANCELED("canceled"),
+
+          @SerializedName("card_not_enrolled")
+          CARD_NOT_ENROLLED("card_not_enrolled"),
+
+          @SerializedName("network_not_supported")
+          NETWORK_NOT_SUPPORTED("network_not_supported"),
+
+          @SerializedName("protocol_error")
+          PROTOCOL_ERROR("protocol_error"),
+
+          @SerializedName("rejected")
+          REJECTED("rejected");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ResultReason(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Version implements ApiRequestParams.EnumParam {
+          @SerializedName("1.0.2")
+          N1__0__2("1.0.2"),
+
+          @SerializedName("2.1.0")
+          N2__1__0("2.1.0"),
+
+          @SerializedName("2.2.0")
+          N2__2__0("2.2.0"),
+
+          @SerializedName("2.3.0")
+          N2__3__0("2.3.0"),
+
+          @SerializedName("2.3.1")
+          N2__3__1("2.3.1");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Version(String value) {
             this.value = value;
           }
         }

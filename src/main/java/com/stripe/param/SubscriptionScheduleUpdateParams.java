@@ -1625,6 +1625,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName("issuer")
       Issuer issuer;
 
+      /**
+       * Settings that control how invoices render in customer-facing interfaces such as the PDF or
+       * hosted invoice page.
+       */
+      @SerializedName("rendering")
+      Object rendering;
+
       private InvoiceSettings(
           Object accountTaxIds,
           Object customFields,
@@ -1632,7 +1639,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           Object description,
           Map<String, Object> extraParams,
           Object footer,
-          Issuer issuer) {
+          Issuer issuer,
+          Object rendering) {
         this.accountTaxIds = accountTaxIds;
         this.customFields = customFields;
         this.daysUntilDue = daysUntilDue;
@@ -1640,6 +1648,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.footer = footer;
         this.issuer = issuer;
+        this.rendering = rendering;
       }
 
       public static Builder builder() {
@@ -1661,6 +1670,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Issuer issuer;
 
+        private Object rendering;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings build() {
           return new SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings(
@@ -1670,7 +1681,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
               this.description,
               this.extraParams,
               this.footer,
-              this.issuer);
+              this.issuer,
+              this.rendering);
         }
 
         /**
@@ -1842,6 +1854,25 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         public Builder setIssuer(
             SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Issuer issuer) {
           this.issuer = issuer;
+          return this;
+        }
+
+        /**
+         * Settings that control how invoices render in customer-facing interfaces such as the PDF
+         * or hosted invoice page.
+         */
+        public Builder setRendering(
+            SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Rendering rendering) {
+          this.rendering = rendering;
+          return this;
+        }
+
+        /**
+         * Settings that control how invoices render in customer-facing interfaces such as the PDF
+         * or hosted invoice page.
+         */
+        public Builder setRendering(EmptyParam rendering) {
+          this.rendering = rendering;
           return this;
         }
       }
@@ -2073,6 +2104,117 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
           Type(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Rendering {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** ID of the invoice rendering template to use for future invoices. */
+        @SerializedName("template")
+        Object template;
+
+        /**
+         * The specific version of invoice rendering template to use for future invoices. If set to
+         * null, the latest version of the template will be used.
+         */
+        @SerializedName("template_version")
+        Object templateVersion;
+
+        private Rendering(
+            Map<String, Object> extraParams, Object template, Object templateVersion) {
+          this.extraParams = extraParams;
+          this.template = template;
+          this.templateVersion = templateVersion;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object template;
+
+          private Object templateVersion;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Rendering
+              build() {
+            return new SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Rendering(
+                this.extraParams, this.template, this.templateVersion);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Rendering#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings.Rendering#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** ID of the invoice rendering template to use for future invoices. */
+          public Builder setTemplate(String template) {
+            this.template = template;
+            return this;
+          }
+
+          /** ID of the invoice rendering template to use for future invoices. */
+          public Builder setTemplate(EmptyParam template) {
+            this.template = template;
+            return this;
+          }
+
+          /**
+           * The specific version of invoice rendering template to use for future invoices. If set
+           * to null, the latest version of the template will be used.
+           */
+          public Builder setTemplateVersion(Long templateVersion) {
+            this.templateVersion = templateVersion;
+            return this;
+          }
+
+          /**
+           * The specific version of invoice rendering template to use for future invoices. If set
+           * to null, the latest version of the template will be used.
+           */
+          public Builder setTemplateVersion(EmptyParam templateVersion) {
+            this.templateVersion = templateVersion;
+            return this;
           }
         }
       }

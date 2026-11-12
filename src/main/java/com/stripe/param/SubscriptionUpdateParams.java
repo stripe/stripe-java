@@ -10199,6 +10199,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Upi {
+        /** Controls when the funds will be captured from the customer's account. */
+        @SerializedName("debit_behavior")
+        Object debitBehavior;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10213,7 +10217,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
-        private Upi(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        private Upi(
+            Object debitBehavior, Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.debitBehavior = debitBehavior;
           this.extraParams = extraParams;
           this.mandateOptions = mandateOptions;
         }
@@ -10223,6 +10229,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object debitBehavior;
+
           private Map<String, Object> extraParams;
 
           private MandateOptions mandateOptions;
@@ -10230,7 +10238,19 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Upi build() {
             return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Upi(
-                this.extraParams, this.mandateOptions);
+                this.debitBehavior, this.extraParams, this.mandateOptions);
+          }
+
+          /** Controls when the funds will be captured from the customer's account. */
+          public Builder setDebitBehavior(String debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
+          }
+
+          /** Controls when the funds will be captured from the customer's account. */
+          public Builder setDebitBehavior(EmptyParam debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
           }
 
           /**

@@ -8,10 +8,14 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceRenderingTemplateArchiveParams;
+import com.stripe.param.InvoiceRenderingTemplateCreateParams;
 import com.stripe.param.InvoiceRenderingTemplateListParams;
 import com.stripe.param.InvoiceRenderingTemplateRetrieveParams;
 import com.stripe.param.InvoiceRenderingTemplateUnarchiveParams;
+import com.stripe.param.InvoiceRenderingTemplateUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,7 +29,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InvoiceRenderingTemplate extends ApiResource implements HasId {
+public class InvoiceRenderingTemplate extends ApiResource
+    implements HasId, MetadataStore<InvoiceRenderingTemplate> {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -34,6 +39,10 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /** The policy that controls how individual line items are rendered. */
+  @SerializedName("line_item_policy")
+  LineItemPolicy lineItemPolicy;
 
   /**
    * If the object exists in live mode, the value is {@code true}. If the object exists in test
@@ -47,6 +56,7 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -65,6 +75,10 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
   /** The status of the template, one of {@code active} or {@code archived}. */
   @SerializedName("status")
   String status;
+
+  /** The policies that control how line items are grouped into summary items. */
+  @SerializedName("summary_item_policies")
+  List<InvoiceRenderingTemplate.SummaryItemPolicy> summaryItemPolicies;
 
   /**
    * Version of this template; version increases by one when an update on the template changes any
@@ -150,6 +164,41 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, InvoiceRenderingTemplate.class);
+  }
+
+  /** Creates an invoice rendering template. */
+  public static InvoiceRenderingTemplate create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates an invoice rendering template. */
+  public static InvoiceRenderingTemplate create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/invoice_rendering_templates";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getGlobalResponseGetter().request(request, InvoiceRenderingTemplate.class);
+  }
+
+  /** Creates an invoice rendering template. */
+  public static InvoiceRenderingTemplate create(InvoiceRenderingTemplateCreateParams params)
+      throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates an invoice rendering template. */
+  public static InvoiceRenderingTemplate create(
+      InvoiceRenderingTemplateCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/invoice_rendering_templates";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, InvoiceRenderingTemplate.class);
   }
 
   /**
@@ -298,5 +347,100 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, InvoiceRenderingTemplate.class);
+  }
+
+  /** Updates an existing invoice rendering template. */
+  @Override
+  public InvoiceRenderingTemplate update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing invoice rendering template. */
+  @Override
+  public InvoiceRenderingTemplate update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoice_rendering_templates/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, InvoiceRenderingTemplate.class);
+  }
+
+  /** Updates an existing invoice rendering template. */
+  public InvoiceRenderingTemplate update(InvoiceRenderingTemplateUpdateParams params)
+      throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing invoice rendering template. */
+  public InvoiceRenderingTemplate update(
+      InvoiceRenderingTemplateUpdateParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v1/invoice_rendering_templates/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, InvoiceRenderingTemplate.class);
+  }
+
+  /**
+   * For more details about LineItemPolicy, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LineItemPolicy extends StripeObject {
+    /**
+     * A CEL expression that takes in a line item and returns a string indicating whether the line
+     * item should be 'hidden_if_zero' or 'visible'. If 'hidden_if_zero', the line item will be
+     * hidden if the line item's amount is zero on the invoice. If 'visible', the line item will be
+     * shown regardless of the line item's amount.
+     */
+    @SerializedName("display")
+    String display;
+  }
+
+  /**
+   * For more details about SummaryItemPolicy, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SummaryItemPolicy extends StripeObject {
+    /**
+     * Either {@code all} or {@code none}. For all summary items created from this policy, if {@code
+     * all}, every line item will be shown under the summary item header. If {@code none}, the line
+     * items will be hidden and only the summary item header will be shown.
+     */
+    @SerializedName("display_items")
+    String displayItems;
+
+    /**
+     * A CEL expression that takes in a line item and returns a boolean indicating whether the line
+     * item should be considered when grouping.
+     */
+    @SerializedName("filter")
+    String filter;
+
+    /**
+     * A CEL expression that takes in a line item and returns a string. Line items with the same
+     * string results are put in the same summary items. The string result will become the
+     * description of the summary item.
+     */
+    @SerializedName("group_by")
+    String groupBy;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(lineItemPolicy, responseGetter);
   }
 }

@@ -137,7 +137,11 @@ public class Form extends ApiResource implements HasId {
 
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -145,7 +149,11 @@ public class Form extends ApiResource implements HasId {
 
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -158,7 +166,11 @@ public class Form extends ApiResource implements HasId {
 
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(FormCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -166,7 +178,11 @@ public class Form extends ApiResource implements HasId {
 
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(FormCreateParams params, RequestOptions options)
       throws StripeException {

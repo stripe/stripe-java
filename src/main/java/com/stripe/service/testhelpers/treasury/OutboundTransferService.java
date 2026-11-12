@@ -21,16 +21,16 @@ public final class OutboundTransferService extends ApiService {
   }
 
   /**
-   * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
-   * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+   * Updates a test {@code OutboundTransfer} with tracking details. The {@code OutboundTransfer}
+   * must not be cancelable, and can’t be in the {@code canceled} or {@code failed} states.
    */
   public OutboundTransfer update(String outboundTransfer, OutboundTransferUpdateParams params)
       throws StripeException {
     return update(outboundTransfer, params, (RequestOptions) null);
   }
   /**
-   * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
-   * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
+   * Updates a test {@code OutboundTransfer} with tracking details. The {@code OutboundTransfer}
+   * must not be cancelable, and can’t be in the {@code canceled} or {@code failed} states.
    */
   public OutboundTransfer update(
       String outboundTransfer, OutboundTransferUpdateParams params, RequestOptions options)
@@ -49,31 +49,31 @@ public final class OutboundTransferService extends ApiService {
     return this.request(request, OutboundTransfer.class);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer fail(String outboundTransfer, OutboundTransferFailParams params)
       throws StripeException {
     return fail(outboundTransfer, params, (RequestOptions) null);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer fail(String outboundTransfer, RequestOptions options)
       throws StripeException {
     return fail(outboundTransfer, (OutboundTransferFailParams) null, options);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer fail(String outboundTransfer) throws StripeException {
     return fail(outboundTransfer, (OutboundTransferFailParams) null, (RequestOptions) null);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code failed} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer fail(
       String outboundTransfer, OutboundTransferFailParams params, RequestOptions options)
@@ -92,31 +92,31 @@ public final class OutboundTransferService extends ApiService {
     return this.request(request, OutboundTransfer.class);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer post(String outboundTransfer, OutboundTransferPostParams params)
       throws StripeException {
     return post(outboundTransfer, params, (RequestOptions) null);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer post(String outboundTransfer, RequestOptions options)
       throws StripeException {
     return post(outboundTransfer, (OutboundTransferPostParams) null, options);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer post(String outboundTransfer) throws StripeException {
     return post(outboundTransfer, (OutboundTransferPostParams) null, (RequestOptions) null);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code posted} status. The {@code
+   * OutboundTransfer} must already be in the {@code processing} state.
    */
   public OutboundTransfer post(
       String outboundTransfer, OutboundTransferPostParams params, RequestOptions options)
@@ -135,8 +135,8 @@ public final class OutboundTransferService extends ApiService {
     return this.request(request, OutboundTransfer.class);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+   * OutboundTransfer} must already be in the {@code posted} state.
    */
   public OutboundTransfer returnOutboundTransfer(
       String outboundTransfer, OutboundTransferReturnOutboundTransferParams params)
@@ -144,8 +144,8 @@ public final class OutboundTransferService extends ApiService {
     return returnOutboundTransfer(outboundTransfer, params, (RequestOptions) null);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+   * OutboundTransfer} must already be in the {@code posted} state.
    */
   public OutboundTransfer returnOutboundTransfer(String outboundTransfer, RequestOptions options)
       throws StripeException {
@@ -153,8 +153,8 @@ public final class OutboundTransferService extends ApiService {
         outboundTransfer, (OutboundTransferReturnOutboundTransferParams) null, options);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+   * OutboundTransfer} must already be in the {@code posted} state.
    */
   public OutboundTransfer returnOutboundTransfer(String outboundTransfer) throws StripeException {
     return returnOutboundTransfer(
@@ -163,8 +163,8 @@ public final class OutboundTransferService extends ApiService {
         (RequestOptions) null);
   }
   /**
-   * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
-   * OutboundTransfer must already be in the {@code processing} state.
+   * Transitions a test {@code OutboundTransfer} to the {@code returned} status. The {@code
+   * OutboundTransfer} must already be in the {@code posted} state.
    */
   public OutboundTransfer returnOutboundTransfer(
       String outboundTransfer,

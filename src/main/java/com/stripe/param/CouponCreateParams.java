@@ -468,7 +468,7 @@ public class CouponCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** An array of Product IDs that this Coupon will apply to. */
+    /** An array of up to 100 Product IDs that this Coupon will apply to. */
     @SerializedName("products")
     List<String> products;
 

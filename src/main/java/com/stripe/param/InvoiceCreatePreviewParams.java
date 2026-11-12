@@ -28,6 +28,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   String billingCadence;
 
   /**
+   * The identifier of the billing group for which you’d like to retrieve the upcoming invoice.
+   * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details} or
+   * {@code schedule_details} are provided.
+   */
+  @SerializedName("billing_group")
+  String billingGroup;
+
+  /**
    * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
    */
   @SerializedName("currency")
@@ -149,6 +157,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   private InvoiceCreatePreviewParams(
       AutomaticTax automaticTax,
       String billingCadence,
+      String billingGroup,
       String currency,
       String customer,
       String customerAccount,
@@ -167,6 +176,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       SubscriptionDetails subscriptionDetails) {
     this.automaticTax = automaticTax;
     this.billingCadence = billingCadence;
+    this.billingGroup = billingGroup;
     this.currency = currency;
     this.customer = customer;
     this.customerAccount = customerAccount;
@@ -193,6 +203,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private String billingCadence;
+
+    private String billingGroup;
 
     private String currency;
 
@@ -231,6 +243,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       return new InvoiceCreatePreviewParams(
           this.automaticTax,
           this.billingCadence,
+          this.billingGroup,
           this.currency,
           this.customer,
           this.customerAccount,
@@ -262,6 +275,16 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
      */
     public Builder setBillingCadence(String billingCadence) {
       this.billingCadence = billingCadence;
+      return this;
+    }
+
+    /**
+     * The identifier of the billing group for which you’d like to retrieve the upcoming invoice.
+     * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details}
+     * or {@code schedule_details} are provided.
+     */
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 

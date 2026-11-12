@@ -563,7 +563,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /**
      * The surcharge provider used for this payment link.
      *
-     * <p>One of {@code daikin}, {@code interpayments}, {@code proserv}, or {@code yeeld}.
+     * <p>One of {@code daikin}, {@code dealerfx}, {@code interpayments}, {@code proserv}, or {@code
+     * yeeld}.
      */
     @SerializedName("provider")
     String provider;

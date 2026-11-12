@@ -379,6 +379,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("origin_context")
   String originContext;
 
+  @SerializedName("pass_through_fee_cost")
+  PassThroughFeeCost passThroughFeeCost;
+
   /**
    * The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. You can't confirm or
    * cancel the PaymentIntent for a Checkout Session. To cancel, <a
@@ -1217,7 +1220,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /**
      * The surcharge provider used for this session.
      *
-     * <p>One of {@code daikin}, {@code interpayments}, {@code proserv}, or {@code yeeld}.
+     * <p>One of {@code daikin}, {@code dealerfx}, {@code interpayments}, {@code proserv}, or {@code
+     * yeeld}.
      */
     @SerializedName("provider")
     String provider;
@@ -3433,6 +3437,31 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("minimum")
       Long minimum;
     }
+  }
+
+  /**
+   * For more details about PassThroughFeeCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PassThroughFeeCost extends StripeObject {
+    /** The pass-through fee before tax. */
+    @SerializedName("amount_subtotal")
+    Long amountSubtotal;
+
+    /** The tax on the pass-through fee. Pass-through fees aren't taxed, so this is always 0. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    /** The pass-through fee after tax. */
+    @SerializedName("amount_total")
+    Long amountTotal;
+
+    /** The amount the provider calculated the fee on. */
+    @SerializedName("calculation_basis_amount")
+    Long calculationBasisAmount;
   }
 
   /**
@@ -6505,6 +6534,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("amount_discount")
     Long amountDiscount;
 
+    /** The pass-through fee added to the Checkout Session, before tax. */
+    @SerializedName("amount_pass_through_fee")
+    Long amountPassThroughFee;
+
     /** This is the sum of all the shipping amounts. */
     @SerializedName("amount_shipping")
     Long amountShipping;
@@ -6657,6 +6690,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nameCollection, responseGetter);
+    trySetResponseGetter(passThroughFeeCost, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentLink, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);

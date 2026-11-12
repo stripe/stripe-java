@@ -14,9 +14,11 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceRenderingTemplateArchiveParams;
+import com.stripe.param.InvoiceRenderingTemplateCreateParams;
 import com.stripe.param.InvoiceRenderingTemplateListParams;
 import com.stripe.param.InvoiceRenderingTemplateRetrieveParams;
 import com.stripe.param.InvoiceRenderingTemplateUnarchiveParams;
+import com.stripe.param.InvoiceRenderingTemplateUpdateParams;
 
 public final class InvoiceRenderingTemplateService extends ApiService {
   public InvoiceRenderingTemplateService(StripeResponseGetter responseGetter) {
@@ -63,6 +65,32 @@ public final class InvoiceRenderingTemplateService extends ApiService {
     return this.request(
         request, new TypeToken<StripeCollection<InvoiceRenderingTemplate>>() {}.getType());
   }
+  /** Creates an invoice rendering template. */
+  public InvoiceRenderingTemplate create(InvoiceRenderingTemplateCreateParams params)
+      throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates an invoice rendering template. */
+  public InvoiceRenderingTemplate create(RequestOptions options) throws StripeException {
+    return create((InvoiceRenderingTemplateCreateParams) null, options);
+  }
+  /** Creates an invoice rendering template. */
+  public InvoiceRenderingTemplate create() throws StripeException {
+    return create((InvoiceRenderingTemplateCreateParams) null, (RequestOptions) null);
+  }
+  /** Creates an invoice rendering template. */
+  public InvoiceRenderingTemplate create(
+      InvoiceRenderingTemplateCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/invoice_rendering_templates";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, InvoiceRenderingTemplate.class);
+  }
   /**
    * Retrieves an invoice rendering template with the given ID. It by default returns the latest
    * version of the template. Optionally, specify a version to see previous versions.
@@ -99,6 +127,35 @@ public final class InvoiceRenderingTemplateService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, InvoiceRenderingTemplate.class);
+  }
+  /** Updates an existing invoice rendering template. */
+  public InvoiceRenderingTemplate update(
+      String template, InvoiceRenderingTemplateUpdateParams params) throws StripeException {
+    return update(template, params, (RequestOptions) null);
+  }
+  /** Updates an existing invoice rendering template. */
+  public InvoiceRenderingTemplate update(String template, RequestOptions options)
+      throws StripeException {
+    return update(template, (InvoiceRenderingTemplateUpdateParams) null, options);
+  }
+  /** Updates an existing invoice rendering template. */
+  public InvoiceRenderingTemplate update(String template) throws StripeException {
+    return update(template, (InvoiceRenderingTemplateUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates an existing invoice rendering template. */
+  public InvoiceRenderingTemplate update(
+      String template, InvoiceRenderingTemplateUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoice_rendering_templates/%s", ApiResource.urlEncodeId(template));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options);

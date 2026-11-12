@@ -64,22 +64,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @SerializedName("deleted")
   Boolean deleted;
 
-  /**
-   * The overall device health of the reader: {@code healthy} or {@code unhealthy}. Renamed to
-   * {@code no_issues_detected} and {@code needs_attention} respectively; see {@code
-   * device_health_details} for the specific conditions.
-   *
-   * <p>One of {@code healthy}, or {@code unhealthy}.
-   */
-  @SerializedName("device_health")
-  String deviceHealth;
-
-  /**
-   * The set of conditions affecting the reader's device health. Empty when there are no conditions.
-   */
-  @SerializedName("device_health_details")
-  List<Reader.DeviceHealthDetail> deviceHealthDetails;
-
   /** The current software version of the reader. */
   @SerializedName("device_sw_version")
   String deviceSwVersion;
@@ -2081,23 +2065,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         }
       }
     }
-  }
-
-  /**
-   * For more details about DeviceHealthDetail, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class DeviceHealthDetail extends StripeObject {
-    /**
-     * The type of condition affecting the reader's device health.
-     *
-     * <p>Equal to {@code unrecoverable_tamper}.
-     */
-    @SerializedName("type")
-    String type;
   }
 
   public TestHelpers getTestHelpers() {
