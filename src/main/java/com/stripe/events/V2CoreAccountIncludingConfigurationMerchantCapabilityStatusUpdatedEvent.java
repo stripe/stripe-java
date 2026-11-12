@@ -24,16 +24,19 @@ public final class V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUp
      *
      * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code affirm_payments},
      * {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code amazon_pay_payments},
-     * {@code au_becs_debit_payments}, {@code bacs_debit_payments}, {@code bancontact_payments},
-     * {@code blik_payments}, {@code blik_recurring_payments}, {@code boleto_payments}, {@code
-     * card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments}, {@code
-     * eps_payments}, {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code
-     * grabpay_payments}, {@code ideal_payments}, {@code jcb_payments}, {@code
-     * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
-     * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-     * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments}, {@code
-     * naver_pay_payments}, {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments},
-     * {@code paynow_payments}, {@code stripe_balance.payouts}, {@code pay_by_bank_payments}, {@code
+     * {@code automatic_indirect_tax}, {@code au_becs_debit_payments}, {@code bacs_debit_payments},
+     * {@code bancontact_payments}, {@code billie_payments}, {@code blik_payments}, {@code
+     * blik_recurring_payments}, {@code boleto_payments}, {@code card_payments}, {@code
+     * cartes_bancaires_payments}, {@code cashapp_payments}, {@code eps_payments}, {@code
+     * fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+     * ideal_payments}, {@code jcb_payments}, {@code jp_bank_transfer_payments}, {@code
+     * kakao_pay_payments}, {@code klarna_payments}, {@code konbini_payments}, {@code
+     * kr_card_payments}, {@code link_payments}, {@code mb_way_payments}, {@code
+     * mobilepay_payments}, {@code momo_payments}, {@code multibanco_payments}, {@code
+     * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
+     * nz_bank_account_becs_debit_payments}, {@code oxxo_payments}, {@code p24_payments}, {@code
+     * payco_payments}, {@code paynow_payments}, {@code stripe_balance.payouts}, {@code
+     * paypay_payments}, {@code pay_by_bank_payments}, {@code pix_payments}, {@code
      * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
      * satispay_payments}, {@code sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
      * sequra_payments}, {@code sunbit_payments}, {@code swish_payments}, {@code twint_payments},

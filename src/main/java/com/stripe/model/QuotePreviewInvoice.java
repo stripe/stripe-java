@@ -189,6 +189,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("customer_address")
   Address customerAddress;
 
+  /** The customer balance amounts applied to this invoice. */
+  @SerializedName("customer_balance")
+  CustomerBalance customerBalance;
+
   /**
    * The customer's email. Until the invoice is finalized, this field will equal {@code
    * customer.email}. Once the invoice is finalized, this field will no longer be updated.
@@ -1040,6 +1044,27 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     /** The value of the custom field. */
     @SerializedName("value")
     String value;
+  }
+
+  /**
+   * For more details about CustomerBalance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomerBalance extends StripeObject {
+    /** The total amount of customer balance applied to this invoice (automatically + manually). */
+    @SerializedName("applied_balance")
+    Long appliedBalance;
+
+    /** The amount of customer balance automatically applied during invoice finalization. */
+    @SerializedName("automatically_applied_balance")
+    Long automaticallyAppliedBalance;
+
+    /** The total amount of customer balance manually applied after finalization. */
+    @SerializedName("manually_applied_balance")
+    Long manuallyAppliedBalance;
   }
 
   /**
@@ -2353,6 +2378,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(confirmationSecret, responseGetter);
     trySetResponseGetter(customerAddress, responseGetter);
+    trySetResponseGetter(customerBalance, responseGetter);
     trySetResponseGetter(customerShipping, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);

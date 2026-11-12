@@ -581,6 +581,9 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("apple_pay")
+      APPLE_PAY("apple_pay"),
+
       @SerializedName("bank_account")
       BANK_ACCOUNT("bank_account"),
 

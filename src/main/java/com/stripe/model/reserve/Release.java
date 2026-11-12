@@ -157,16 +157,18 @@ public class Release extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -177,16 +179,18 @@ public class Release extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(ReleaseListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(ReleaseListParams params, RequestOptions options)
       throws StripeException {
@@ -202,17 +206,17 @@ public class Release extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, ReleaseCollection.class);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/releases/%s", ApiResource.urlEncodeId(id));
@@ -221,7 +225,7 @@ public class Release extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Release.class);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id, ReleaseRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/releases/%s", ApiResource.urlEncodeId(id));

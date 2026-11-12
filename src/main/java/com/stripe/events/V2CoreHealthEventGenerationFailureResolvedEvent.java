@@ -28,6 +28,13 @@ public final class V2CoreHealthEventGenerationFailureResolvedEvent extends Event
     /** The time when the user experience has returned to expected levels. */
     @SerializedName("resolved_at")
     Instant resolvedAt;
+    /**
+     * The severity of the alert.
+     *
+     * <p>One of {@code critical}, or {@code non_critical}.
+     */
+    @SerializedName("severity")
+    String severity;
     /** A short description of the alert. */
     @SerializedName("summary")
     String summary;

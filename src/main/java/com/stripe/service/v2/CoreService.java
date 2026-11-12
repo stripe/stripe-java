@@ -29,6 +29,10 @@ public final class CoreService extends ApiService {
     return new com.stripe.service.v2.core.BatchJobService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.ClaimableSandboxService claimableSandboxes() {
+    return new com.stripe.service.v2.core.ClaimableSandboxService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.EventDestinationService eventDestinations() {
     return new com.stripe.service.v2.core.EventDestinationService(this.getResponseGetter());
   }

@@ -18,6 +18,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams;
+import com.stripe.param.v2.moneymanagement.OutboundSetupIntentFromFinancialConnectionsParams;
 import com.stripe.param.v2.moneymanagement.OutboundSetupIntentListParams;
 import com.stripe.param.v2.moneymanagement.OutboundSetupIntentUpdateParams;
 
@@ -80,6 +81,38 @@ public final class OutboundSetupIntentService extends ApiService {
           InvalidPayoutMethodException, QuotaExceededException,
           ControlledByAlternateResourceException {
     String path = "/v2/money_management/outbound_setup_intents";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, OutboundSetupIntent.class);
+  }
+  /** Create an OutboundSetupIntent object. */
+  public OutboundSetupIntent fromFinancialConnections(
+      OutboundSetupIntentFromFinancialConnectionsParams params)
+      throws StripeException, QuotaExceededException {
+    return fromFinancialConnections(params, (RequestOptions) null);
+  }
+  /** Create an OutboundSetupIntent object. */
+  public OutboundSetupIntent fromFinancialConnections(RequestOptions options)
+      throws StripeException, QuotaExceededException {
+    return fromFinancialConnections(
+        (OutboundSetupIntentFromFinancialConnectionsParams) null, options);
+  }
+  /** Create an OutboundSetupIntent object. */
+  public OutboundSetupIntent fromFinancialConnections()
+      throws StripeException, QuotaExceededException {
+    return fromFinancialConnections(
+        (OutboundSetupIntentFromFinancialConnectionsParams) null, (RequestOptions) null);
+  }
+  /** Create an OutboundSetupIntent object. */
+  public OutboundSetupIntent fromFinancialConnections(
+      OutboundSetupIntentFromFinancialConnectionsParams params, RequestOptions options)
+      throws StripeException, QuotaExceededException {
+    String path = "/v2/money_management/outbound_setup_intents/from_financial_connections";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

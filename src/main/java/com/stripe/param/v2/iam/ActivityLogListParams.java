@@ -34,15 +34,26 @@ public class ActivityLogListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /**
+   * Controls which activity logs an organization-level request returns. Specify {@code @self} to
+   * return logs recorded in the organization context and {@code @organization_members} to return
+   * logs recorded in accounts that belong to the organization. Specify both values to return logs
+   * from both sources. Defaults to {@code ["@self"]} when omitted. Cannot be empty.
+   */
+  @SerializedName("logs_from")
+  List<String> logsFrom;
+
   private ActivityLogListParams(
       List<ActivityLogListParams.ActionGroup> actionGroups,
       List<ActivityLogListParams.Action> actions,
       Map<String, Object> extraParams,
-      Long limit) {
+      Long limit,
+      List<String> logsFrom) {
     this.actionGroups = actionGroups;
     this.actions = actions;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.logsFrom = logsFrom;
   }
 
   public static Builder builder() {
@@ -58,10 +69,12 @@ public class ActivityLogListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private List<String> logsFrom;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ActivityLogListParams build() {
       return new ActivityLogListParams(
-          this.actionGroups, this.actions, this.extraParams, this.limit);
+          this.actionGroups, this.actions, this.extraParams, this.limit, this.logsFrom);
     }
 
     /**
@@ -147,6 +160,32 @@ public class ActivityLogListParams extends ApiRequestParams {
       this.limit = limit;
       return this;
     }
+
+    /**
+     * Add an element to `logsFrom` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ActivityLogListParams#logsFrom} for the field documentation.
+     */
+    public Builder addLogsFrom(String element) {
+      if (this.logsFrom == null) {
+        this.logsFrom = new ArrayList<>();
+      }
+      this.logsFrom.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `logsFrom` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ActivityLogListParams#logsFrom} for the field documentation.
+     */
+    public Builder addAllLogsFrom(List<String> elements) {
+      if (this.logsFrom == null) {
+        this.logsFrom = new ArrayList<>();
+      }
+      this.logsFrom.addAll(elements);
+      return this;
+    }
   }
 
   public enum Action implements ApiRequestParams.EnumParam {
@@ -164,6 +203,48 @@ public class ActivityLogListParams extends ApiRequestParams {
 
     @SerializedName("api_key_viewed")
     API_KEY_VIEWED("api_key_viewed"),
+
+    @SerializedName("application_authorized")
+    APPLICATION_AUTHORIZED("application_authorized"),
+
+    @SerializedName("application_created")
+    APPLICATION_CREATED("application_created"),
+
+    @SerializedName("application_deauthorized")
+    APPLICATION_DEAUTHORIZED("application_deauthorized"),
+
+    @SerializedName("app_installed")
+    APP_INSTALLED("app_installed"),
+
+    @SerializedName("app_uninstalled")
+    APP_UNINSTALLED("app_uninstalled"),
+
+    @SerializedName("connect_express_branding_updated")
+    CONNECT_EXPRESS_BRANDING_UPDATED("connect_express_branding_updated"),
+
+    @SerializedName("connect_oauth_disabled")
+    CONNECT_OAUTH_DISABLED("connect_oauth_disabled"),
+
+    @SerializedName("connect_oauth_enabled")
+    CONNECT_OAUTH_ENABLED("connect_oauth_enabled"),
+
+    @SerializedName("connect_settings_updated")
+    CONNECT_SETTINGS_UPDATED("connect_settings_updated"),
+
+    @SerializedName("connect_site_link_updated")
+    CONNECT_SITE_LINK_UPDATED("connect_site_link_updated"),
+
+    @SerializedName("data_export_requested")
+    DATA_EXPORT_REQUESTED("data_export_requested"),
+
+    @SerializedName("event_destination_added")
+    EVENT_DESTINATION_ADDED("event_destination_added"),
+
+    @SerializedName("event_destination_removed")
+    EVENT_DESTINATION_REMOVED("event_destination_removed"),
+
+    @SerializedName("event_destination_updated")
+    EVENT_DESTINATION_UPDATED("event_destination_updated"),
 
     @SerializedName("issuing_activated")
     ISSUING_ACTIVATED("issuing_activated"),
@@ -216,6 +297,39 @@ public class ActivityLogListParams extends ApiRequestParams {
     @SerializedName("payout_schedule_edits_enabled")
     PAYOUT_SCHEDULE_EDITS_ENABLED("payout_schedule_edits_enabled"),
 
+    @SerializedName("payout_schedule_updated")
+    PAYOUT_SCHEDULE_UPDATED("payout_schedule_updated"),
+
+    @SerializedName("radar_adaptive_3ds_disabled")
+    RADAR_ADAPTIVE_3DS_DISABLED("radar_adaptive_3ds_disabled"),
+
+    @SerializedName("radar_dynamic_risk_thresholds_disabled")
+    RADAR_DYNAMIC_RISK_THRESHOLDS_DISABLED("radar_dynamic_risk_thresholds_disabled"),
+
+    @SerializedName("radar_early_fraud_warning_disabled")
+    RADAR_EARLY_FRAUD_WARNING_DISABLED("radar_early_fraud_warning_disabled"),
+
+    @SerializedName("radar_for_setup_intents_disabled")
+    RADAR_FOR_SETUP_INTENTS_DISABLED("radar_for_setup_intents_disabled"),
+
+    @SerializedName("radar_fraud_dispute_protection_disabled")
+    RADAR_FRAUD_DISPUTE_PROTECTION_DISABLED("radar_fraud_dispute_protection_disabled"),
+
+    @SerializedName("radar_rule_added")
+    RADAR_RULE_ADDED("radar_rule_added"),
+
+    @SerializedName("radar_rule_disabled")
+    RADAR_RULE_DISABLED("radar_rule_disabled"),
+
+    @SerializedName("radar_rule_enabled")
+    RADAR_RULE_ENABLED("radar_rule_enabled"),
+
+    @SerializedName("radar_rule_removed")
+    RADAR_RULE_REMOVED("radar_rule_removed"),
+
+    @SerializedName("radar_rule_updated")
+    RADAR_RULE_UPDATED("radar_rule_updated"),
+
     @SerializedName("scim_group_deleted")
     SCIM_GROUP_DELETED("scim_group_deleted"),
 
@@ -243,11 +357,17 @@ public class ActivityLogListParams extends ApiRequestParams {
     @SerializedName("sso_settings_updated")
     SSO_SETTINGS_UPDATED("sso_settings_updated"),
 
+    @SerializedName("stripe_access_started")
+    STRIPE_ACCESS_STARTED("stripe_access_started"),
+
     @SerializedName("two_step_authentication_mandate_disabled")
     TWO_STEP_AUTHENTICATION_MANDATE_DISABLED("two_step_authentication_mandate_disabled"),
 
     @SerializedName("two_step_authentication_mandate_enabled")
     TWO_STEP_AUTHENTICATION_MANDATE_ENABLED("two_step_authentication_mandate_enabled"),
+
+    @SerializedName("user_access_started")
+    USER_ACCESS_STARTED("user_access_started"),
 
     @SerializedName("user_auth_challenge_failed")
     USER_AUTH_CHALLENGE_FAILED("user_auth_challenge_failed"),
@@ -342,8 +462,20 @@ public class ActivityLogListParams extends ApiRequestParams {
     @SerializedName("api_key")
     API_KEY("api_key"),
 
+    @SerializedName("app")
+    APP("app"),
+
     @SerializedName("authentication")
     AUTHENTICATION("authentication"),
+
+    @SerializedName("connect")
+    CONNECT("connect"),
+
+    @SerializedName("data_export")
+    DATA_EXPORT("data_export"),
+
+    @SerializedName("event_destination")
+    EVENT_DESTINATION("event_destination"),
 
     @SerializedName("issuing")
     ISSUING("issuing"),
@@ -351,11 +483,20 @@ public class ActivityLogListParams extends ApiRequestParams {
     @SerializedName("payout")
     PAYOUT("payout"),
 
+    @SerializedName("radar")
+    RADAR("radar"),
+
     @SerializedName("scim")
     SCIM("scim"),
 
     @SerializedName("sso")
     SSO("sso"),
+
+    @SerializedName("stripe_access")
+    STRIPE_ACCESS("stripe_access"),
+
+    @SerializedName("user_access")
+    USER_ACCESS("user_access"),
 
     @SerializedName("user_invite")
     USER_INVITE("user_invite"),

@@ -9,6 +9,10 @@ public final class TestHelpersService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.testhelpers.CapitalService capital() {
+    return new com.stripe.service.testhelpers.CapitalService(this.getResponseGetter());
+  }
+
   public com.stripe.service.testhelpers.ConfirmationTokenService confirmationTokens() {
     return new com.stripe.service.testhelpers.ConfirmationTokenService(this.getResponseGetter());
   }

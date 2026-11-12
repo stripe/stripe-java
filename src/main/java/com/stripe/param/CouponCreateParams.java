@@ -42,6 +42,10 @@ public class CouponCreateParams extends ApiRequestParams {
   @SerializedName("currency_options")
   Map<String, CouponCreateParams.CurrencyOption> currencyOptions;
 
+  /** The custom coupon calculation configuration. */
+  @SerializedName("custom")
+  Custom custom;
+
   /**
    * Specifies how long the discount will be in effect if used on a subscription. Defaults to {@code
    * once}.
@@ -124,11 +128,16 @@ public class CouponCreateParams extends ApiRequestParams {
   @SerializedName("script")
   Script script;
 
+  /** The coupon calculation type. Must be {@code custom} when {@code custom} is provided. */
+  @SerializedName("type")
+  Type type;
+
   private CouponCreateParams(
       Long amountOff,
       AppliesTo appliesTo,
       String currency,
       Map<String, CouponCreateParams.CurrencyOption> currencyOptions,
+      Custom custom,
       Duration duration,
       Long durationInMonths,
       List<String> expand,
@@ -139,11 +148,13 @@ public class CouponCreateParams extends ApiRequestParams {
       String name,
       BigDecimal percentOff,
       Long redeemBy,
-      Script script) {
+      Script script,
+      Type type) {
     this.amountOff = amountOff;
     this.appliesTo = appliesTo;
     this.currency = currency;
     this.currencyOptions = currencyOptions;
+    this.custom = custom;
     this.duration = duration;
     this.durationInMonths = durationInMonths;
     this.expand = expand;
@@ -155,6 +166,7 @@ public class CouponCreateParams extends ApiRequestParams {
     this.percentOff = percentOff;
     this.redeemBy = redeemBy;
     this.script = script;
+    this.type = type;
   }
 
   public static Builder builder() {
@@ -169,6 +181,8 @@ public class CouponCreateParams extends ApiRequestParams {
     private String currency;
 
     private Map<String, CouponCreateParams.CurrencyOption> currencyOptions;
+
+    private Custom custom;
 
     private Duration duration;
 
@@ -192,6 +206,8 @@ public class CouponCreateParams extends ApiRequestParams {
 
     private Script script;
 
+    private Type type;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CouponCreateParams build() {
       return new CouponCreateParams(
@@ -199,6 +215,7 @@ public class CouponCreateParams extends ApiRequestParams {
           this.appliesTo,
           this.currency,
           this.currencyOptions,
+          this.custom,
           this.duration,
           this.durationInMonths,
           this.expand,
@@ -209,7 +226,8 @@ public class CouponCreateParams extends ApiRequestParams {
           this.name,
           this.percentOff,
           this.redeemBy,
-          this.script);
+          this.script,
+          this.type);
     }
 
     /**
@@ -259,6 +277,12 @@ public class CouponCreateParams extends ApiRequestParams {
         this.currencyOptions = new HashMap<>();
       }
       this.currencyOptions.putAll(map);
+      return this;
+    }
+
+    /** The custom coupon calculation configuration. */
+    public Builder setCustom(CouponCreateParams.Custom custom) {
+      this.custom = custom;
       return this;
     }
 
@@ -439,6 +463,12 @@ public class CouponCreateParams extends ApiRequestParams {
       this.script = script;
       return this;
     }
+
+    /** The coupon calculation type. Must be {@code custom} when {@code custom} is provided. */
+    public Builder setType(CouponCreateParams.Type type) {
+      this.type = type;
+      return this;
+    }
   }
 
   @Getter
@@ -607,6 +637,197 @@ public class CouponCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class Custom {
+    /**
+     * The configuration values of the extension. The keys and values are specific to the extension
+     * implementation. May be omitted for extensions that have no configuration schema, in which
+     * case an empty configuration is used.
+     */
+    @SerializedName("configuration")
+    Map<String, Object> configuration;
+
+    /** <strong>Required.</strong> The extension used to calculate the coupon. */
+    @SerializedName("extension")
+    Extension extension;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Custom(
+        Map<String, Object> configuration, Extension extension, Map<String, Object> extraParams) {
+      this.configuration = configuration;
+      this.extension = extension;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> configuration;
+
+      private Extension extension;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CouponCreateParams.Custom build() {
+        return new CouponCreateParams.Custom(this.configuration, this.extension, this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `configuration` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.Custom#configuration} for the field documentation.
+       */
+      public Builder putConfiguration(String key, Object value) {
+        if (this.configuration == null) {
+          this.configuration = new HashMap<>();
+        }
+        this.configuration.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `configuration` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.Custom#configuration} for the field documentation.
+       */
+      public Builder putAllConfiguration(Map<String, Object> map) {
+        if (this.configuration == null) {
+          this.configuration = new HashMap<>();
+        }
+        this.configuration.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The extension used to calculate the coupon. */
+      public Builder setExtension(CouponCreateParams.Custom.Extension extension) {
+        this.extension = extension;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CouponCreateParams.Custom#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.Custom#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Extension {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The Extension Prototype ID. */
+      @SerializedName("id")
+      String id;
+
+      /** The semantic version of the extension. */
+      @SerializedName("version")
+      String version;
+
+      private Extension(Map<String, Object> extraParams, String id, String version) {
+        this.extraParams = extraParams;
+        this.id = id;
+        this.version = version;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String id;
+
+        private String version;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CouponCreateParams.Custom.Extension build() {
+          return new CouponCreateParams.Custom.Extension(this.extraParams, this.id, this.version);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CouponCreateParams.Custom.Extension#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CouponCreateParams.Custom.Extension#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The Extension Prototype ID. */
+        public Builder setId(String id) {
+          this.id = id;
+          return this;
+        }
+
+        /** The semantic version of the extension. */
+        public Builder setVersion(String version) {
+          this.version = version;
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Script {
     /**
      * <strong>Required.</strong> The configuration values of the script. The keys and values are
@@ -724,6 +945,18 @@ public class CouponCreateParams extends ApiRequestParams {
     private final String value;
 
     Duration(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("custom")
+    CUSTOM("custom");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Type(String value) {
       this.value = value;
     }
   }

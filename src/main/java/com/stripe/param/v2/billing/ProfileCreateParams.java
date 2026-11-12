@@ -15,7 +15,7 @@ public class ProfileCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
-  /** The ID of the payment method object. */
+  /** The ID of the payment method object. If set to nil, the customer payment method is used. */
   @SerializedName("default_payment_method")
   String defaultPaymentMethod;
 
@@ -95,7 +95,7 @@ public class ProfileCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the payment method object. */
+    /** The ID of the payment method object. If set to nil, the customer payment method is used. */
     public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
       return this;

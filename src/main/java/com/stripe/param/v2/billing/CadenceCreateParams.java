@@ -189,6 +189,10 @@ public class CadenceCreateParams extends ApiRequestParams {
     @SerializedName("day")
     Day day;
 
+    /** When the anchor for the cadence should be set. Defaults to {@code now}. */
+    @SerializedName("effective_at")
+    EffectiveAt effectiveAt;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -224,6 +228,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
     private BillingCycle(
         Day day,
+        EffectiveAt effectiveAt,
         Map<String, Object> extraParams,
         Long intervalCount,
         Month month,
@@ -231,6 +236,7 @@ public class CadenceCreateParams extends ApiRequestParams {
         Week week,
         Year year) {
       this.day = day;
+      this.effectiveAt = effectiveAt;
       this.extraParams = extraParams;
       this.intervalCount = intervalCount;
       this.month = month;
@@ -245,6 +251,8 @@ public class CadenceCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private Day day;
+
+      private EffectiveAt effectiveAt;
 
       private Map<String, Object> extraParams;
 
@@ -262,6 +270,7 @@ public class CadenceCreateParams extends ApiRequestParams {
       public CadenceCreateParams.BillingCycle build() {
         return new CadenceCreateParams.BillingCycle(
             this.day,
+            this.effectiveAt,
             this.extraParams,
             this.intervalCount,
             this.month,
@@ -273,6 +282,12 @@ public class CadenceCreateParams extends ApiRequestParams {
       /** Specific configuration for determining billing dates when type=day. */
       public Builder setDay(CadenceCreateParams.BillingCycle.Day day) {
         this.day = day;
+        return this;
+      }
+
+      /** When the anchor for the cadence should be set. Defaults to {@code now}. */
+      public Builder setEffectiveAt(CadenceCreateParams.BillingCycle.EffectiveAt effectiveAt) {
+        this.effectiveAt = effectiveAt;
         return this;
       }
 
@@ -1222,6 +1237,21 @@ public class CadenceCreateParams extends ApiRequestParams {
             return this;
           }
         }
+      }
+    }
+
+    public enum EffectiveAt implements ApiRequestParams.EnumParam {
+      @SerializedName("now")
+      NOW("now"),
+
+      @SerializedName("on_activation")
+      ON_ACTIVATION("on_activation");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EffectiveAt(String value) {
+        this.value = value;
       }
     }
 

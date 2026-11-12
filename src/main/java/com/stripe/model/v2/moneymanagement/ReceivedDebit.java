@@ -107,7 +107,20 @@ public class ReceivedDebit extends StripeObject implements HasId {
     String financialAddress;
 
     /**
-     * Open Enum. The type of the payment method used to originate the debit.
+     * The bank network the debit was originated on.
+     *
+     * <p>Equal to {@code ach}.
+     */
+    @SerializedName("network")
+    String network;
+
+    /** The originating bank account's credential details. */
+    @SerializedName("originating_bank_account")
+    OriginatingBankAccount originatingBankAccount;
+
+    /**
+     * Deprecated: Use {@code bank_transfer.originating_bank_account.type} instead. Open Enum. The
+     * type of the payment method used to originate the debit.
      *
      * <p>Equal to {@code us_bank_account}.
      */
@@ -119,15 +132,55 @@ public class ReceivedDebit extends StripeObject implements HasId {
     String statementDescriptor;
 
     /**
-     * Object containing details of the US Bank Account that originated the debit. Present when the
-     * debit was originated via ACH.
+     * Deprecated: Use {@code bank_transfer.originating_bank_account.aba} instead. Object containing
+     * details of the US Bank Account that originated the debit. Present when the debit was
+     * originated via ACH.
      */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
+    /** The originating bank account's credential details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OriginatingBankAccount extends StripeObject {
+      /** Details of the originating account. Present when type is {@code aba}. */
+      @SerializedName("aba")
+      Aba aba;
+
+      /**
+       * The credential type identifying the originating bank account.
+       *
+       * <p>Equal to {@code aba}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Details of the originating account. Present when type is {@code aba}. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Aba extends StripeObject {
+        /**
+         * The name of the account holder that originated the debit, as provided by the ACH network.
+         */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The name of the bank the debit originated from. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The routing number of the bank that originated the debit. */
+        @SerializedName("routing_number")
+        String routingNumber;
+      }
+    }
+
     /**
-     * Object containing details of the US Bank Account that originated the debit. Present when the
-     * debit was originated via ACH.
+     * Deprecated: Use {@code bank_transfer.originating_bank_account.aba} instead. Object containing
+     * details of the US Bank Account that originated the debit. Present when the debit was
+     * originated via ACH.
      */
     @Getter
     @Setter

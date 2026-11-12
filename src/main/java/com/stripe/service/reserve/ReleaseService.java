@@ -21,29 +21,33 @@ public final class ReleaseService extends ApiService {
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public StripeCollection<Release> list(ReleaseListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public StripeCollection<Release> list(RequestOptions options) throws StripeException {
     return list((ReleaseListParams) null, options);
   }
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public StripeCollection<Release> list() throws StripeException {
     return list((ReleaseListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public StripeCollection<Release> list(ReleaseListParams params, RequestOptions options)
       throws StripeException {
@@ -57,19 +61,19 @@ public final class ReleaseService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Release>>() {}.getType());
   }
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public Release retrieve(String id, ReleaseRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public Release retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (ReleaseRetrieveParams) null, options);
   }
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public Release retrieve(String id) throws StripeException {
     return retrieve(id, (ReleaseRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public Release retrieve(String id, ReleaseRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/releases/%s", ApiResource.urlEncodeId(id));

@@ -133,6 +133,10 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class PayoutMethodData {
+    /** The type specific details of the Apple Pay payout method. */
+    @SerializedName("apple_pay")
+    ApplePay applePay;
+
     /** The type specific details of the bank account payout method. */
     @SerializedName("bank_account")
     BankAccount bankAccount;
@@ -159,11 +163,13 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     Type type;
 
     private PayoutMethodData(
+        ApplePay applePay,
         BankAccount bankAccount,
         Card card,
         CryptoWallet cryptoWallet,
         Map<String, Object> extraParams,
         Type type) {
+      this.applePay = applePay;
       this.bankAccount = bankAccount;
       this.card = card;
       this.cryptoWallet = cryptoWallet;
@@ -176,6 +182,8 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private ApplePay applePay;
+
       private BankAccount bankAccount;
 
       private Card card;
@@ -189,7 +197,19 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public OutboundSetupIntentCreateParams.PayoutMethodData build() {
         return new OutboundSetupIntentCreateParams.PayoutMethodData(
-            this.bankAccount, this.card, this.cryptoWallet, this.extraParams, this.type);
+            this.applePay,
+            this.bankAccount,
+            this.card,
+            this.cryptoWallet,
+            this.extraParams,
+            this.type);
+      }
+
+      /** The type specific details of the Apple Pay payout method. */
+      public Builder setApplePay(
+          OutboundSetupIntentCreateParams.PayoutMethodData.ApplePay applePay) {
+        this.applePay = applePay;
+        return this;
       }
 
       /** The type specific details of the bank account payout method. */
@@ -243,6 +263,105 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       public Builder setType(OutboundSetupIntentCreateParams.PayoutMethodData.Type type) {
         this.type = type;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApplePay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The paymentData property of the Apple-provided PKPaymentToken (or ApplePayPaymentToken, for
+       * Apple Pay on the Web) as a UTF-8 encoded serialization of a JSON dictionary.
+       */
+      @SerializedName("pk_token")
+      String pkToken;
+
+      /**
+       * <strong>Required.</strong> The paymentMethod.displayName property of the Apple-provided
+       * PKPaymentToken (or ApplePayPaymentToken, for Apple Pay on the Web), e.g. &quot;Visa
+       * 1234&quot;.
+       */
+      @SerializedName("pk_token_display_name")
+      String pkTokenDisplayName;
+
+      private ApplePay(Map<String, Object> extraParams, String pkToken, String pkTokenDisplayName) {
+        this.extraParams = extraParams;
+        this.pkToken = pkToken;
+        this.pkTokenDisplayName = pkTokenDisplayName;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String pkToken;
+
+        private String pkTokenDisplayName;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public OutboundSetupIntentCreateParams.PayoutMethodData.ApplePay build() {
+          return new OutboundSetupIntentCreateParams.PayoutMethodData.ApplePay(
+              this.extraParams, this.pkToken, this.pkTokenDisplayName);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundSetupIntentCreateParams.PayoutMethodData.ApplePay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundSetupIntentCreateParams.PayoutMethodData.ApplePay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The paymentData property of the Apple-provided PKPaymentToken (or ApplePayPaymentToken,
+         * for Apple Pay on the Web) as a UTF-8 encoded serialization of a JSON dictionary.
+         */
+        public Builder setPkToken(String pkToken) {
+          this.pkToken = pkToken;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The paymentMethod.displayName property of the Apple-provided
+         * PKPaymentToken (or ApplePayPaymentToken, for Apple Pay on the Web), e.g. &quot;Visa
+         * 1234&quot;.
+         */
+        public Builder setPkTokenDisplayName(String pkTokenDisplayName) {
+          this.pkTokenDisplayName = pkTokenDisplayName;
+          return this;
+        }
       }
     }
 
@@ -699,6 +818,9 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("apple_pay")
+      APPLE_PAY("apple_pay"),
+
       @SerializedName("bank_account")
       BANK_ACCOUNT("bank_account"),
 

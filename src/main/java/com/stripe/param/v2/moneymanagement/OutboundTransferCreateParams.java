@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class OutboundTransferCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The &quot;presentment amount&quot; for the OutboundPayment. */
+  /** <strong>Required.</strong> The &quot;presentment amount&quot; for the OutboundTransfer. */
   @SerializedName("amount")
   Amount amount;
 
@@ -22,7 +22,11 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("delivery_options")
   DeliveryOptions deliveryOptions;
 
-  /** An arbitrary string attached to the OutboundTransfer. Often useful for displaying to users. */
+  /**
+   * An arbitrary string attached to the OutboundTransfer. Often useful for displaying to users. The
+   * description can not be longer than 100 characters and can only contain basic Latin characters
+   * and spaces. The following special characters are not allowed: '&quot;* .
+   */
   @SerializedName("description")
   String description;
 
@@ -111,7 +115,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           this.to);
     }
 
-    /** <strong>Required.</strong> The &quot;presentment amount&quot; for the OutboundPayment. */
+    /** <strong>Required.</strong> The &quot;presentment amount&quot; for the OutboundTransfer. */
     public Builder setAmount(Amount amount) {
       this.amount = amount;
       return this;
@@ -126,6 +130,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     /**
      * An arbitrary string attached to the OutboundTransfer. Often useful for displaying to users.
+     * The description can not be longer than 100 characters and can only contain basic Latin
+     * characters and spaces. The following special characters are not allowed: '&quot;* .
      */
     public Builder setDescription(String description) {
       this.description = description;

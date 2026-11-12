@@ -88,8 +88,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   PaymentDetails paymentDetails;
 
   /**
-   * Recommended action based on the score of the {@code fraudulent_payment} signal. Possible values
-   * are {@code block}, {@code continue} and {@code request_three_d_secure}.
+   * Recommended action for this payment based on its evaluated signals and rules.
    *
    * <p>One of {@code block}, or {@code continue}.
    */

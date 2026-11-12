@@ -24,7 +24,7 @@ public class ImportCreateParams extends ApiRequestParams {
   @SerializedName("feed_type")
   FeedType feedType;
 
-  /** <strong>Required.</strong> Additional information about the import in a structured format. */
+  /** Additional information about the import in a structured format. */
   @SerializedName("metadata")
   Map<String, String> metadata;
 

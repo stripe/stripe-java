@@ -119,16 +119,16 @@ public class Plan extends ApiResource implements HasId {
   String type;
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -139,16 +139,16 @@ public class Plan extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(PlanListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(PlanListParams params, RequestOptions options)
       throws StripeException {
@@ -164,17 +164,17 @@ public class Plan extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, PlanCollection.class);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/plans/%s", ApiResource.urlEncodeId(id));
@@ -183,7 +183,7 @@ public class Plan extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Plan.class);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/plans/%s", ApiResource.urlEncodeId(id));

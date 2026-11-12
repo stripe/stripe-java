@@ -22,6 +22,13 @@ public class CustomerBalanceTransactionCreateParams extends ApiRequestParams {
   Long amount;
 
   /**
+   * Required when {@code type} is {@code applied_to_invoice}. Identifies the open invoice to apply
+   * the customer's balance credit to.
+   */
+  @SerializedName("applied_to_invoice")
+  AppliedToInvoice appliedToInvoice;
+
+  /**
    * <strong>Required.</strong> Three-letter <a
    * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
    * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. Specifies the <a
@@ -58,19 +65,31 @@ public class CustomerBalanceTransactionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /**
+   * The type of customer balance transaction. Defaults to {@code adjustment}, which updates the
+   * customer's credit balance directly. Set to {@code applied_to_invoice} to apply the customer's
+   * existing credit balance to a specific open invoice.
+   */
+  @SerializedName("type")
+  Type type;
+
   private CustomerBalanceTransactionCreateParams(
       Long amount,
+      AppliedToInvoice appliedToInvoice,
       String currency,
       String description,
       List<String> expand,
       Map<String, Object> extraParams,
-      Object metadata) {
+      Object metadata,
+      Type type) {
     this.amount = amount;
+    this.appliedToInvoice = appliedToInvoice;
     this.currency = currency;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.type = type;
   }
 
   public static Builder builder() {
@@ -79,6 +98,8 @@ public class CustomerBalanceTransactionCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Long amount;
+
+    private AppliedToInvoice appliedToInvoice;
 
     private String currency;
 
@@ -90,15 +111,19 @@ public class CustomerBalanceTransactionCreateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Type type;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerBalanceTransactionCreateParams build() {
       return new CustomerBalanceTransactionCreateParams(
           this.amount,
+          this.appliedToInvoice,
           this.currency,
           this.description,
           this.expand,
           this.extraParams,
-          this.metadata);
+          this.metadata,
+          this.type);
     }
 
     /**
@@ -107,6 +132,16 @@ public class CustomerBalanceTransactionCreateParams extends ApiRequestParams {
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
+      return this;
+    }
+
+    /**
+     * Required when {@code type} is {@code applied_to_invoice}. Identifies the open invoice to
+     * apply the customer's balance credit to.
+     */
+    public Builder setAppliedToInvoice(
+        CustomerBalanceTransactionCreateParams.AppliedToInvoice appliedToInvoice) {
+      this.appliedToInvoice = appliedToInvoice;
       return this;
     }
 
@@ -230,6 +265,109 @@ public class CustomerBalanceTransactionCreateParams extends ApiRequestParams {
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
+    }
+
+    /**
+     * The type of customer balance transaction. Defaults to {@code adjustment}, which updates the
+     * customer's credit balance directly. Set to {@code applied_to_invoice} to apply the customer's
+     * existing credit balance to a specific open invoice.
+     */
+    public Builder setType(CustomerBalanceTransactionCreateParams.Type type) {
+      this.type = type;
+      return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AppliedToInvoice {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> The ID of the open invoice to apply the customer's balance credit
+     * to.
+     */
+    @SerializedName("invoice")
+    String invoice;
+
+    private AppliedToInvoice(Map<String, Object> extraParams, String invoice) {
+      this.extraParams = extraParams;
+      this.invoice = invoice;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String invoice;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerBalanceTransactionCreateParams.AppliedToInvoice build() {
+        return new CustomerBalanceTransactionCreateParams.AppliedToInvoice(
+            this.extraParams, this.invoice);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CustomerBalanceTransactionCreateParams.AppliedToInvoice#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CustomerBalanceTransactionCreateParams.AppliedToInvoice#extraParams} for the
+       * field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The ID of the open invoice to apply the customer's balance
+       * credit to.
+       */
+      public Builder setInvoice(String invoice) {
+        this.invoice = invoice;
+        return this;
+      }
+    }
+  }
+
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("adjustment")
+    ADJUSTMENT("adjustment"),
+
+    @SerializedName("applied_to_invoice")
+    APPLIED_TO_INVOICE("applied_to_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Type(String value) {
+      this.value = value;
     }
   }
 }

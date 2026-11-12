@@ -989,6 +989,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax extends StripeObject {
+    /**
+     * Controls how much address information Checkout collects when automatic tax is enabled.
+     *
+     * <p>One of {@code full}, or {@code minimal}.
+     */
+    @SerializedName("address_collection_precision")
+    String addressCollectionPrecision;
+
     /** Indicates whether automatic tax is enabled for the session. */
     @SerializedName("enabled")
     Boolean enabled;

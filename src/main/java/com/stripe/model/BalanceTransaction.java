@@ -65,12 +65,13 @@ public class BalanceTransaction extends ApiResource implements HasId {
   String description;
 
   /**
-   * If applicable, this transaction uses an exchange rate. If money converts from currency A to
-   * currency B, then the {@code amount} in currency A, multiplied by the {@code exchange_rate},
-   * equals the {@code amount} in currency B. For example, if you charge a customer 10.00 EUR, the
-   * PaymentIntent's {@code amount} is {@code 1000} and {@code currency} is {@code eur}. If this
-   * converts to 12.34 USD in your Stripe account, the BalanceTransaction's {@code amount} is {@code
-   * 1234}, its {@code currency} is {@code usd}, and the {@code exchange_rate} is {@code 1.234}.
+   * The exchange rate used for this transaction, if applicable. Multiplying the source {@code
+   * amount} by the {@code exchange_rate} gives the destination {@code amount}, both in their
+   * currencies' smallest units. For example, {@code 1000} EUR cents converts to {@code 1234} USD
+   * cents at {@code 1.234}. For a zero-decimal currency such as JPY, {@code 1000} JPY converts to
+   * {@code 640} USD cents (6.40 USD) at {@code 0.64}, equivalent to {@code 0.0064} USD per JPY. For
+   * JPY to USD, the API multiplier is 100 times the whole-unit rate because JPY amounts use yen and
+   * USD amounts use cents.
    */
   @SerializedName("exchange_rate")
   BigDecimal exchangeRate;

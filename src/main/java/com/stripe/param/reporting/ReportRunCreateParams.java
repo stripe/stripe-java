@@ -190,6 +190,10 @@ public class ReportRunCreateParams extends ApiRequestParams {
     @SerializedName("reporting_category")
     ReportingCategory reportingCategory;
 
+    /** The tax invoice month in YYYY-MM format. */
+    @SerializedName("tax_invoice_month")
+    String taxInvoiceMonth;
+
     /**
      * Defaults to {@code Etc/UTC}. The output timezone for all timestamps in the report. A list of
      * possible time zone values is maintained at the <a href="http://www.iana.org/time-zones">IANA
@@ -207,6 +211,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
         Long intervalStart,
         String payout,
         ReportingCategory reportingCategory,
+        String taxInvoiceMonth,
         Timezone timezone) {
       this.columns = columns;
       this.connectedAccount = connectedAccount;
@@ -216,6 +221,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
       this.intervalStart = intervalStart;
       this.payout = payout;
       this.reportingCategory = reportingCategory;
+      this.taxInvoiceMonth = taxInvoiceMonth;
       this.timezone = timezone;
     }
 
@@ -240,6 +246,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
       private ReportingCategory reportingCategory;
 
+      private String taxInvoiceMonth;
+
       private Timezone timezone;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -253,6 +261,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
             this.intervalStart,
             this.payout,
             this.reportingCategory,
+            this.taxInvoiceMonth,
             this.timezone);
       }
 
@@ -342,6 +351,12 @@ public class ReportRunCreateParams extends ApiRequestParams {
       public Builder setReportingCategory(
           ReportRunCreateParams.Parameters.ReportingCategory reportingCategory) {
         this.reportingCategory = reportingCategory;
+        return this;
+      }
+
+      /** The tax invoice month in YYYY-MM format. */
+      public Builder setTaxInvoiceMonth(String taxInvoiceMonth) {
+        this.taxInvoiceMonth = taxInvoiceMonth;
         return this;
       }
 

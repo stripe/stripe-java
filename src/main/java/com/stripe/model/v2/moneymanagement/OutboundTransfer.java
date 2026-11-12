@@ -195,8 +195,9 @@ public class OutboundTransfer extends StripeObject implements HasId {
        * <p>One of {@code fx_rate_drift_exceeded_after_review}, {@code
        * payout_method_amount_limit_exceeded}, {@code payout_method_declined}, {@code
        * payout_method_does_not_exist}, {@code payout_method_expired}, {@code
-       * payout_method_unsupported}, {@code payout_method_usage_frequency_limit_exceeded}, {@code
-       * review_rejected}, or {@code unknown_failure}.
+       * payout_method_invalid_account_number}, {@code payout_method_unsupported}, {@code
+       * payout_method_usage_frequency_limit_exceeded}, {@code review_rejected}, or {@code
+       * unknown_failure}.
        */
       @SerializedName("reason")
       String reason;
@@ -224,7 +225,8 @@ public class OutboundTransfer extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code returned} status reason.
        *
-       * <p>One of {@code payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
+       * <p>One of {@code payout_method_account_type_incorrect}, {@code
+       * payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
        * payout_method_currency_unsupported}, {@code payout_method_does_not_exist}, {@code
        * payout_method_holder_address_incorrect}, {@code payout_method_holder_details_incorrect},
        * {@code payout_method_holder_name_incorrect}, {@code payout_method_invalid_account_number},

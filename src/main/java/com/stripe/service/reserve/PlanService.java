@@ -21,29 +21,29 @@ public final class PlanService extends ApiService {
   }
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public StripeCollection<Plan> list(PlanListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public StripeCollection<Plan> list(RequestOptions options) throws StripeException {
     return list((PlanListParams) null, options);
   }
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public StripeCollection<Plan> list() throws StripeException {
     return list((PlanListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public StripeCollection<Plan> list(PlanListParams params, RequestOptions options)
       throws StripeException {
@@ -57,19 +57,19 @@ public final class PlanService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Plan>>() {}.getType());
   }
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public Plan retrieve(String id, PlanRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public Plan retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (PlanRetrieveParams) null, options);
   }
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public Plan retrieve(String id) throws StripeException {
     return retrieve(id, (PlanRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public Plan retrieve(String id, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/plans/%s", ApiResource.urlEncodeId(id));

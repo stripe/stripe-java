@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ProfileUpdateParams extends ApiRequestParams {
-  /** The ID of the payment method object. */
+  /** The ID of the payment method object. If set to nil, the customer payment method is used. */
   @SerializedName("default_payment_method")
   Object defaultPaymentMethod;
 
@@ -85,13 +85,13 @@ public class ProfileUpdateParams extends ApiRequestParams {
           this.metadata);
     }
 
-    /** The ID of the payment method object. */
+    /** The ID of the payment method object. If set to nil, the customer payment method is used. */
     public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
       return this;
     }
 
-    /** The ID of the payment method object. */
+    /** The ID of the payment method object. If set to nil, the customer payment method is used. */
     public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
       return this;

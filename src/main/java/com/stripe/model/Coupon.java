@@ -21,13 +21,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A coupon contains information about a percent-off or amount-off discount you might want to apply
- * to a customer. Coupons may be applied to <a
- * href="https://docs.stripe.com/api#subscriptions">subscriptions</a>, <a
+ * A coupon defines a fixed or custom discount. Fixed discounts take a percentage or amount off,
+ * while <a href="https://docs.stripe.com/billing/subscriptions/script-coupons">custom coupons</a>
+ * use scripts to calculate discounts dynamically for subscriptions and invoices. You can apply
+ * coupons to customers' <a href="https://docs.stripe.com/api#subscriptions">subscriptions</a>, <a
  * href="https://docs.stripe.com/api#invoices">invoices</a>, <a
- * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a>, <a
- * href="https://docs.stripe.com/api#quotes">quotes</a>, and more. Coupons do not work with
- * conventional one-off <a href="https://stripe.com/api/charges/create">charges</a> or <a
+ * href="https://docs.stripe.com/api/checkout/sessions">Checkout Sessions</a>, <a
+ * href="https://docs.stripe.com/api#quotes">quotes</a>, and other supported billing objects. The
+ * optional <a
+ * href="https://stripe.com/api/coupons/object#coupon_object-applies_to-products">applies_to.products</a>
+ * property limits which product line items are eligible for the discount, independently of where
+ * you apply the coupon. Coupons don't work with conventional one-off <a
+ * href="https://stripe.com/api/charges/create">charges</a> or <a
  * href="https://docs.stripe.com/api/payment_intents">payment intents</a>.
  */
 @Getter
@@ -63,6 +68,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   @SerializedName("currency_options")
   Map<String, Coupon.CurrencyOption> currencyOptions;
+
+  @SerializedName("custom")
+  Custom custom;
 
   /** Always true for a deleted object. */
   @SerializedName("deleted")
@@ -149,7 +157,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /**
    * The type of coupon logic used to calculate the discount.
    *
-   * <p>One of {@code amount_off}, {@code percent_off}, or {@code script}.
+   * <p>One of {@code amount_off}, {@code custom}, {@code percent_off}, or {@code script}.
    */
   @SerializedName("type")
   String type;
@@ -421,6 +429,40 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   }
 
   /**
+   * For more details about Custom, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Custom extends StripeObject {
+    /** The configuration supplied to the extension. */
+    @SerializedName("configuration")
+    Map<String, Object> configuration;
+
+    @SerializedName("extension")
+    Extension extension;
+
+    /**
+     * For more details about Extension, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Extension extends StripeObject implements HasId {
+      /** The Extension Prototype ID. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /** The semantic version of the extension. */
+      @SerializedName("version")
+      String version;
+    }
+  }
+
+  /**
    * For more details about Script, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -449,6 +491,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(appliesTo, responseGetter);
+    trySetResponseGetter(custom, responseGetter);
     trySetResponseGetter(script, responseGetter);
   }
 }

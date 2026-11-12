@@ -10,7 +10,8 @@ import lombok.Setter;
 
 /**
  * Account Links let a platform create a temporary, single-use URL that an account can use to access
- * a Stripe-hosted flow for collecting or updating required information.
+ * a Stripe-hosted flow for collecting or updating required information, or to access its
+ * Stripe-hosted Dashboard.
  */
 @Getter
 @Setter
@@ -64,6 +65,13 @@ public class AccountLink extends StripeObject {
   @EqualsAndHashCode(callSuper = false)
   public static class UseCase extends StripeObject {
     /**
+     * Hash containing configuration options for an Account Link that provides access to the
+     * account's Stripe-hosted Dashboard.
+     */
+    @SerializedName("account_dashboard")
+    AccountDashboard accountDashboard;
+
+    /**
      * Hash containing configuration options for an Account Link object that onboards a new account.
      */
     @SerializedName("account_onboarding")
@@ -78,10 +86,26 @@ public class AccountLink extends StripeObject {
     /**
      * Open Enum. The type of Account Link the user is requesting.
      *
-     * <p>One of {@code account_onboarding}, or {@code account_update}.
+     * <p>One of {@code account_dashboard}, {@code account_onboarding}, or {@code account_update}.
      */
     @SerializedName("type")
     String type;
+
+    /**
+     * Hash containing configuration options for an Account Link that provides access to the
+     * account's Stripe-hosted Dashboard.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AccountDashboard extends StripeObject {
+      /**
+       * The URL to redirect to if the Account Link has expired or has already been used.
+       * Authenticate the user before generating a replacement link.
+       */
+      @SerializedName("refresh_url")
+      String refreshUrl;
+    }
 
     /**
      * Hash containing configuration options for an Account Link object that onboards a new account.

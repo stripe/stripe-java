@@ -13,8 +13,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The {@code QueryRun} object represents an ad-hoc SQL execution. Once created, Stripe processes
- * the query. When the query has finished running, the object provides a reference to the results.
+ * The <a href="https://stripe.com/data/api/query-runs">Queries and Reports API</a> replaces this
+ * API. For new integrations, use {@code /v2/data/query_runs} instead. The {@code QueryRun} object
+ * represents an ad-hoc SQL execution. Once created, Stripe processes the query. When the query has
+ * finished running, the object provides a reference to the results.
  */
 @Getter
 @Setter
@@ -78,12 +80,22 @@ public class QueryRun extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Result extends StripeObject {
+    /** The number of columns in the file. */
+    @SerializedName("col_count")
+    @JsonAdapter(StringInt64TypeAdapter.class)
+    Long colCount;
+
     /**
      * Contains metadata about the file produced by the {@code ReportRun} or {@code QueryRun},
      * including its content type, size, and a URL to download its contents.
      */
     @SerializedName("file")
     File file;
+
+    /** The number of data rows in the file, excluding the column header row. */
+    @SerializedName("row_count")
+    @JsonAdapter(StringInt64TypeAdapter.class)
+    Long rowCount;
 
     /**
      * The type of the {@code ReportRun} or {@code QueryRun} result.

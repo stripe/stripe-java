@@ -84,10 +84,14 @@ public class Cadence extends StripeObject implements HasId {
   /**
    * The current status of the cadence.
    *
-   * <p>One of {@code active}, or {@code canceled}.
+   * <p>One of {@code active}, {@code canceled}, or {@code initializing}.
    */
   @SerializedName("status")
   String status;
+
+  /** Timestamps for billing cadence status transitions. */
+  @SerializedName("status_transitions")
+  StatusTransitions statusTransitions;
 
   /** The ID of the Test Clock. */
   @SerializedName("test_clock")
@@ -101,6 +105,14 @@ public class Cadence extends StripeObject implements HasId {
     /** Specific configuration for determining billing dates when type=day. */
     @SerializedName("day")
     Day day;
+
+    /**
+     * When the anchor for the cadence should be set. Defaults to {@code now}.
+     *
+     * <p>One of {@code now}, or {@code on_activation}.
+     */
+    @SerializedName("effective_at")
+    String effectiveAt;
 
     /**
      * The number of intervals (specified in the interval attribute) between cadence billings. For
@@ -809,5 +821,19 @@ public class Cadence extends StripeObject implements HasId {
         }
       }
     }
+  }
+
+  /** Timestamps for billing cadence status transitions. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    /** When the billing cadence status transitioned to activated. */
+    @SerializedName("activated_at")
+    String activatedAt;
+
+    /** When the billing cadence status transitioned to canceled. */
+    @SerializedName("canceled_at")
+    String canceledAt;
   }
 }

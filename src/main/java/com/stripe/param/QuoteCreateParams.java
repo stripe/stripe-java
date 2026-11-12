@@ -5763,7 +5763,10 @@ public class QuoteCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
-    /** The discounts applied to this line item. */
+    /**
+     * The discounts applied to this line item. Repeating coupons are only supported for recurring
+     * prices.
+     */
     @SerializedName("discounts")
     Object discounts;
 
@@ -5869,13 +5872,19 @@ public class QuoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The discounts applied to this line item. */
+      /**
+       * The discounts applied to this line item. Repeating coupons are only supported for recurring
+       * prices.
+       */
       public Builder setDiscounts(EmptyParam discounts) {
         this.discounts = discounts;
         return this;
       }
 
-      /** The discounts applied to this line item. */
+      /**
+       * The discounts applied to this line item. Repeating coupons are only supported for recurring
+       * prices.
+       */
       public Builder setDiscounts(List<QuoteCreateParams.LineItem.Discount> discounts) {
         this.discounts = discounts;
         return this;
