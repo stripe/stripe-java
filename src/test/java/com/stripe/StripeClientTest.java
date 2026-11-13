@@ -15,6 +15,7 @@ import com.stripe.events.UnknownEventNotification;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.events.V1BillingMeterNoMeterFoundEventNotification;
+import com.stripe.events.V1ProductUpdatedEvent;
 import com.stripe.events.V1ProductUpdatedEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
@@ -441,8 +442,8 @@ public class StripeClientTest extends BaseStripeTest {
                     200,
                     HttpHeaders.of(Collections.emptyMap()),
                     "{\"id\": \"prod_shared\", \"object\": \"product\"}"))
-        .when(networkSpy)
-        .rawRequest(Mockito.any());
+        .when(httpClientSpy)
+        .request(Mockito.any());
 
     EventNotification eventNotification =
         EventNotification.fromJson(
@@ -466,6 +467,71 @@ public class StripeClientTest extends BaseStripeTest {
     ArgumentCaptor<RawApiRequest> rawRequestCaptor = ArgumentCaptor.forClass(RawApiRequest.class);
     Mockito.verify(networkSpy).rawRequest(rawRequestCaptor.capture());
     assertEquals("acct_child", rawRequestCaptor.getValue().getOptions().getStripeContext());
+
+    verifyStripeRequest(
+        request -> {
+          assertEquals(RequestMethod.GET, request.method());
+          assertEquals("/v1/products/prod_shared", request.url().getPath());
+          assertEquals("acct_child", request.headers().firstValue("Stripe-Context").orElse(null));
+          assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
+        });
+
+    verifyStripeRequest(
+        request -> {
+          assertEquals(RequestMethod.DELETE, request.method());
+          assertEquals("/v1/products/prod_shared", request.url().getPath());
+          assertEquals("acct_child", request.headers().firstValue("Stripe-Context").orElse(null));
+          assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
+        });
+  }
+
+  @Test
+  public void eventFetchRelatedObjectRetainsOwnContext() throws StripeException {
+    Stripe.enableTelemetry = false;
+    StripeResponseGetterOptions options =
+        StripeClient.builder()
+            .setApiKey(TEST_API_KEY)
+            .setApiBase(getStripeMockUrl())
+            .setStripeAccount("acct_platform")
+            .setStripeContext("ctx_platform")
+            .buildOptions();
+    networkSpy = Mockito.spy(new LiveStripeResponseGetter(options, httpClientSpy));
+
+    Mockito.doAnswer(
+            invocation ->
+                new StripeResponse(
+                    200,
+                    HttpHeaders.of(Collections.emptyMap()),
+                    "{\"id\": \"prod_shared\", \"object\": \"product\"}"))
+        .when(httpClientSpy)
+        .request(Mockito.any());
+
+    V1ProductUpdatedEvent event =
+        assertInstanceOf(
+            V1ProductUpdatedEvent.class,
+            Event.parse(
+                "{"
+                    + "\"id\":\"evt_123\","
+                    + "\"object\":\"v2.core.event\","
+                    + "\"type\":\"v1.product.updated\","
+                    + "\"created\":\"2022-02-15T00:27:45.330Z\","
+                    + "\"context\":\"acct_child\","
+                    + "\"related_object\":{"
+                    + "\"id\":\"prod_shared\","
+                    + "\"type\":\"product\","
+                    + "\"url\":\"/v1/products/prod_shared\"}}"));
+    event.setResponseGetter(networkSpy);
+
+    Product product = event.fetchRelatedObject();
+    product.delete();
+
+    verifyStripeRequest(
+        request -> {
+          assertEquals(RequestMethod.GET, request.method());
+          assertEquals("/v1/products/prod_shared", request.url().getPath());
+          assertEquals("acct_child", request.headers().firstValue("Stripe-Context").orElse(null));
+          assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
+        });
 
     verifyStripeRequest(
         request -> {

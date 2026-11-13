@@ -16,6 +16,8 @@ public class RequestOptions {
   private final String stripeRequestTrigger;
   private final String idempotencyKey;
   private final String stripeAccount;
+  // A scoped getter must distinguish suppressing an inherited account from leaving it unspecified.
+  private final boolean stripeAccountSuppressed;
   private final String baseUrl;
   /** Stripe version always set at {@link Stripe#API_VERSION}. */
   private final String stripeVersion = Stripe.API_VERSION;
@@ -42,6 +44,7 @@ public class RequestOptions {
       String stripeContext,
       String stripeRequestTrigger,
       String stripeAccount,
+      boolean stripeAccountSuppressed,
       String stripeVersionOverride,
       String baseUrl,
       Integer connectTimeout,
@@ -55,6 +58,7 @@ public class RequestOptions {
     this.stripeContext = stripeContext;
     this.stripeRequestTrigger = stripeRequestTrigger;
     this.stripeAccount = stripeAccount;
+    this.stripeAccountSuppressed = stripeAccountSuppressed;
     this.stripeVersionOverride = stripeVersionOverride;
     this.baseUrl = baseUrl;
     this.connectTimeout = connectTimeout;
@@ -72,6 +76,7 @@ public class RequestOptions {
         builder.stripeContext,
         builder.stripeRequestTrigger,
         normalizeStripeAccount(builder.stripeAccount),
+        builder.stripeAccountSuppressed,
         normalizeStripeVersion(builder.stripeVersionOverride),
         normalizeBaseUrl(builder.baseUrl),
         builder.connectTimeout,
@@ -161,8 +166,14 @@ public class RequestOptions {
    * @return option builder.
    */
   public RequestOptionsBuilder toBuilderFullCopy() {
-    return RequestOptionsBuilder.unsafeSetStripeVersionOverride(
-        new RequestOptionsBuilder()
+    return copyToBuilder(new RequestOptionsBuilder());
+  }
+
+  /** Copies all options, including internal scoping state, into the supplied builder. */
+  protected <T extends RequestOptionsBuilder> T copyToBuilder(T builder) {
+    builder.stripeAccountSuppressed = this.stripeAccountSuppressed;
+    RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+        builder
             .setAuthenticator(this.authenticator)
             .setBaseUrl(this.baseUrl)
             .setClientId(this.clientId)
@@ -176,6 +187,7 @@ public class RequestOptions {
             .setConnectionProxy(this.connectionProxy)
             .setProxyCredential(this.proxyCredential),
         stripeVersionOverride);
+    return builder;
   }
 
   public static class RequestOptionsBuilder {
@@ -185,6 +197,7 @@ public class RequestOptions {
     protected String stripeContext;
     protected String stripeRequestTrigger;
     protected String stripeAccount;
+    boolean stripeAccountSuppressed;
     protected String stripeVersionOverride;
     protected Integer connectTimeout;
     protected Integer readTimeout;
@@ -521,6 +534,11 @@ public class RequestOptions {
       stripeContext = clientOptions.getStripeContext();
     }
 
+    String stripeAccount = options.getStripeAccount();
+    if (stripeAccount == null && !options.stripeAccountSuppressed) {
+      stripeAccount = clientOptions.getStripeAccount();
+    }
+
     return RequestOptionsBuilder.unsafeSetStripeVersionOverride(
             new RequestOptionsBuilder()
                 .setAuthenticator(
@@ -534,10 +552,7 @@ public class RequestOptions {
                 .setIdempotencyKey(options.getIdempotencyKey())
                 .setStripeContext(stripeContext)
                 .setStripeRequestTrigger(options.getStripeRequestTrigger())
-                .setStripeAccount(
-                    options.getStripeAccount() != null
-                        ? options.getStripeAccount()
-                        : clientOptions.getStripeAccount())
+                .setStripeAccount(stripeAccount)
                 .setConnectTimeout(
                     options.getConnectTimeout() != null
                         ? options.getConnectTimeout()
