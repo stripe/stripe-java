@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentMethodDomainCreateParams;
 import com.stripe.param.PaymentMethodDomainListParams;
 import com.stripe.param.PaymentMethodDomainRetrieveParams;
@@ -568,16 +567,5 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       @SerializedName("error_message")
       String errorMessage;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amazonPay, responseGetter);
-    trySetResponseGetter(applePay, responseGetter);
-    trySetResponseGetter(googlePay, responseGetter);
-    trySetResponseGetter(klarna, responseGetter);
-    trySetResponseGetter(link, responseGetter);
-    trySetResponseGetter(paypal, responseGetter);
   }
 }

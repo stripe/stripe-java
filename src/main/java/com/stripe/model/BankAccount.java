@@ -770,7 +770,5 @@ public class BankAccount extends ApiResource
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(account, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
   }
 }

@@ -652,7 +652,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DiscountAmount extends StripeObject {
+  public static class DiscountAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the discount. */
     @SerializedName("amount")
     Long amount;
@@ -680,6 +680,11 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -689,7 +694,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PretaxCreditAmount extends StripeObject {
+  public static class PretaxCreditAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the pretax credit amount. */
     @SerializedName("amount")
     Long amount;
@@ -753,6 +758,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditBalanceTransaction, responseGetter);
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -762,7 +773,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Refund extends StripeObject {
+  public static class Refund extends StripeObject implements StripeActiveObject {
     /** Amount of the refund that applies to this credit note, in cents (or local equivalent). */
     @SerializedName("amount_refunded")
     Long amountRefunded;
@@ -816,6 +827,11 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
       @SerializedName("refund_group")
       String refundGroup;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(refund, responseGetter);
+    }
   }
 
   /**
@@ -825,7 +841,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShippingCost extends StripeObject {
+  public static class ShippingCost extends StripeObject implements StripeActiveObject {
     /** Total shipping cost before any taxes are applied. */
     @SerializedName("amount_subtotal")
     Long amountSubtotal;
@@ -874,7 +890,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Tax extends StripeObject {
+    public static class Tax extends StripeObject implements StripeActiveObject {
       /** Amount of tax applied for this rate. */
       @SerializedName("amount")
       Long amount;
@@ -907,6 +923,19 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
       /** The amount on which tax is calculated, in cents (or local equivalent). */
       @SerializedName("taxable_amount")
       Long taxableAmount;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(rate, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(shippingRate, responseGetter);
+      if (taxes != null) {
+        taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -917,7 +946,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TotalTax extends StripeObject {
+  public static class TotalTax extends StripeObject implements StripeActiveObject {
     /** The amount of the tax, in cents (or local equivalent). */
     @SerializedName("amount")
     Long amount;
@@ -970,7 +999,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxRateDetails extends StripeObject {
+    public static class TaxRateDetails extends StripeObject implements StripeActiveObject {
       /** ID of the tax rate. */
       @SerializedName("tax_rate")
       @Getter(lombok.AccessLevel.NONE)
@@ -994,6 +1023,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
       public void setTaxRateObject(TaxRate expandableObject) {
         this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(taxRate, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(taxRateDetails, responseGetter);
     }
   }
 
@@ -1002,8 +1041,20 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerBalanceTransaction, responseGetter);
+    if (discountAmounts != null) {
+      discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(lines, responseGetter);
+    if (pretaxCreditAmounts != null) {
+      pretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (refunds != null) {
+      refunds.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(shippingCost, responseGetter);
+    if (totalTaxes != null) {
+      totalTaxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

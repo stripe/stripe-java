@@ -273,7 +273,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodPreview extends StripeObject {
+  public static class PaymentMethodPreview extends StripeObject implements StripeActiveObject {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
@@ -663,7 +663,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingDetails extends StripeObject {
+    public static class BillingDetails extends StripeObject implements StripeActiveObject {
       /** Billing address. */
       @SerializedName("address")
       Address address;
@@ -686,6 +686,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
        */
       @SerializedName("tax_id")
       String taxId;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
     }
 
     /**
@@ -734,7 +739,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
+    public static class Card extends StripeObject implements StripeActiveObject {
       /**
        * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
        * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
@@ -877,7 +882,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class GeneratedFrom extends StripeObject {
+      public static class GeneratedFrom extends StripeObject implements StripeActiveObject {
         /** The charge that created this object. */
         @SerializedName("charge")
         String charge;
@@ -1231,6 +1236,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
             }
           }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(setupAttempt, responseGetter);
+        }
       }
 
       /**
@@ -1277,7 +1287,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Wallet extends StripeObject {
+      public static class Wallet extends StripeObject implements StripeActiveObject {
         @SerializedName("amex_express_checkout")
         AmexExpressCheckout amexExpressCheckout;
 
@@ -1355,7 +1365,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Masterpass extends StripeObject {
+        public static class Masterpass extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -1385,6 +1395,12 @@ public class ConfirmationToken extends ApiResource implements HasId {
            */
           @SerializedName("shipping_address")
           Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
 
         /**
@@ -1403,7 +1419,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class VisaCheckout extends StripeObject {
+        public static class VisaCheckout extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -1433,7 +1449,25 @@ public class ConfirmationToken extends ApiResource implements HasId {
            */
           @SerializedName("shipping_address")
           Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(masterpass, responseGetter);
+          trySetResponseGetter(visaCheckout, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedFrom, responseGetter);
+        trySetResponseGetter(wallet, responseGetter);
       }
     }
 
@@ -2239,7 +2273,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SepaDebit extends StripeObject {
+    public static class SepaDebit extends StripeObject implements StripeActiveObject {
       /** Bank code of bank associated with the bank account. */
       @SerializedName("bank_code")
       String bankCode;
@@ -2274,7 +2308,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class GeneratedFrom extends StripeObject {
+      public static class GeneratedFrom extends StripeObject implements StripeActiveObject {
         /** The ID of the Charge that generated this PaymentMethod, if any. */
         @SerializedName("charge")
         @Getter(lombok.AccessLevel.NONE)
@@ -2323,6 +2357,17 @@ public class ConfirmationToken extends ApiResource implements HasId {
           this.setupAttempt =
               new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(charge, responseGetter);
+          trySetResponseGetter(setupAttempt, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedFrom, responseGetter);
       }
     }
 
@@ -2519,6 +2564,14 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(billingDetails, responseGetter);
+      trySetResponseGetter(card, responseGetter);
+      trySetResponseGetter(customer, responseGetter);
+      trySetResponseGetter(sepaDebit, responseGetter);
+    }
   }
 
   public static class TestHelpers {
@@ -2563,8 +2616,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(mandateData, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
   }

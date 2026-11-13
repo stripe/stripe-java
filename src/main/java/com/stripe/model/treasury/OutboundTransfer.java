@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Mandate;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -359,7 +360,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DestinationPaymentMethodDetails extends StripeObject {
+  public static class DestinationPaymentMethodDetails extends StripeObject
+      implements StripeActiveObject {
     @SerializedName("billing_details")
     BillingDetails billingDetails;
 
@@ -384,7 +386,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingDetails extends StripeObject {
+    public static class BillingDetails extends StripeObject implements StripeActiveObject {
       @SerializedName("address")
       Address address;
 
@@ -395,6 +397,11 @@ public class OutboundTransfer extends ApiResource implements HasId {
       /** Full name. */
       @SerializedName("name")
       String name;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
     }
 
     /**
@@ -426,7 +433,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
+    public static class UsBankAccount extends StripeObject implements StripeActiveObject {
       /**
        * Account holder type: individual or company.
        *
@@ -495,6 +502,17 @@ public class OutboundTransfer extends ApiResource implements HasId {
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mandate, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(billingDetails, responseGetter);
+      trySetResponseGetter(usBankAccount, responseGetter);
     }
   }
 
@@ -505,7 +523,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ReturnedDetails extends StripeObject {
+  public static class ReturnedDetails extends StripeObject implements StripeActiveObject {
     /**
      * Reason for the return.
      *
@@ -540,6 +558,11 @@ public class OutboundTransfer extends ApiResource implements HasId {
     public void setTransactionObject(Transaction expandableObject) {
       this.transaction =
           new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(transaction, responseGetter);
     }
   }
 
@@ -908,8 +931,6 @@ public class OutboundTransfer extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(destinationPaymentMethodDetails, responseGetter);
     trySetResponseGetter(returnedDetails, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
-    trySetResponseGetter(trackingDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

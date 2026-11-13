@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.File;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -289,7 +290,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BbposWisepad3 extends StripeObject {
+  public static class BbposWisepad3 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -312,6 +313,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -322,7 +328,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BbposWiseposE extends StripeObject {
+  public static class BbposWiseposE extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -345,6 +351,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -417,7 +428,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StripeS700 extends StripeObject {
+  public static class StripeS700 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -440,6 +451,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -450,7 +466,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StripeS710 extends StripeObject {
+  public static class StripeS710 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -473,6 +489,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -483,7 +504,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StripeT600 extends StripeObject {
+  public static class StripeT600 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -506,6 +527,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -1092,7 +1118,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerifoneM425 extends StripeObject {
+  public static class VerifoneM425 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1115,6 +1141,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -1125,7 +1156,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerifoneP400 extends StripeObject {
+  public static class VerifoneP400 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1148,6 +1179,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -1158,7 +1194,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerifoneP630 extends StripeObject {
+  public static class VerifoneP630 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1181,6 +1217,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -1191,7 +1232,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerifoneUx700 extends StripeObject {
+  public static class VerifoneUx700 extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1214,6 +1255,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -1224,7 +1270,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerifoneV660p extends StripeObject {
+  public static class VerifoneV660p extends StripeObject implements StripeActiveObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1247,6 +1293,11 @@ public class Configuration extends ApiResource implements HasId {
 
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(splashscreen, responseGetter);
     }
   }
 
@@ -1353,19 +1404,13 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWisepad3, responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
-    trySetResponseGetter(cellular, responseGetter);
-    trySetResponseGetter(offline, responseGetter);
-    trySetResponseGetter(readerSecurity, responseGetter);
-    trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(stripeS710, responseGetter);
     trySetResponseGetter(stripeT600, responseGetter);
-    trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneM425, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
     trySetResponseGetter(verifoneP630, responseGetter);
     trySetResponseGetter(verifoneUx700, responseGetter);
     trySetResponseGetter(verifoneV660p, responseGetter);
-    trySetResponseGetter(wifi, responseGetter);
   }
 }

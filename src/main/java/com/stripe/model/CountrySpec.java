@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CountrySpecListParams;
 import com.stripe.param.CountrySpecRetrieveParams;
 import java.util.List;
@@ -189,11 +188,5 @@ public class CountrySpec extends ApiResource implements HasId {
       @SerializedName("minimum")
       List<String> minimum;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(verificationFields, responseGetter);
   }
 }

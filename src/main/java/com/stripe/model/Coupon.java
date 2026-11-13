@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CouponCreateParams;
 import com.stripe.param.CouponListParams;
 import com.stripe.param.CouponRetrieveParams;
@@ -402,11 +401,5 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
      */
     @SerializedName("amount_off")
     Long amountOff;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(appliesTo, responseGetter);
   }
 }

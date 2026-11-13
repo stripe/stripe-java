@@ -431,6 +431,5 @@ public class Token extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(networkData, responseGetter);
   }
 }

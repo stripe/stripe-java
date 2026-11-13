@@ -880,7 +880,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InvoiceSettings extends StripeObject {
+  public static class InvoiceSettings extends StripeObject implements StripeActiveObject {
     /** Default custom fields to be displayed on invoices for this customer. */
     @SerializedName("custom_fields")
     List<Customer.InvoiceSettings.CustomField> customFields;
@@ -957,6 +957,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
        */
       @SerializedName("template")
       String template;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(defaultPaymentMethod, responseGetter);
     }
   }
 
@@ -1087,7 +1092,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     trySetResponseGetter(shipping, responseGetter);
     trySetResponseGetter(sources, responseGetter);
     trySetResponseGetter(subscriptions, responseGetter);
-    trySetResponseGetter(tax, responseGetter);
     trySetResponseGetter(taxIds, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }

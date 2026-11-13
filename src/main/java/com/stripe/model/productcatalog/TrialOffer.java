@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Price;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -281,7 +282,7 @@ public class TrialOffer extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class EndBehavior extends StripeObject {
+  public static class EndBehavior extends StripeObject implements StripeActiveObject {
     @SerializedName("transition")
     Transition transition;
 
@@ -300,7 +301,7 @@ public class TrialOffer extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Transition extends StripeObject {
+    public static class Transition extends StripeObject implements StripeActiveObject {
       /** The new price to use at the end of the trial offer period. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -324,13 +325,22 @@ public class TrialOffer extends ApiResource implements HasId {
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(price, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(transition, responseGetter);
     }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(duration, responseGetter);
     trySetResponseGetter(endBehavior, responseGetter);
     trySetResponseGetter(price, responseGetter);
   }

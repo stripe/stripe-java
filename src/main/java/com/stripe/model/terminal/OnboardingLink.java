@@ -9,7 +9,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.OnboardingLinkCreateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -112,11 +111,5 @@ public class OnboardingLink extends ApiResource {
       @SerializedName("merchant_display_name")
       String merchantDisplayName;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(linkOptions, responseGetter);
   }
 }

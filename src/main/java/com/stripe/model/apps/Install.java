@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.apps.InstallCreateParams;
 import com.stripe.param.apps.InstallListParams;
 import com.stripe.param.apps.InstallRetrieveParams;
@@ -448,12 +447,5 @@ public class Install extends ApiResource implements HasId {
     /** The URLs that the app can load images from. */
     @SerializedName("image_src")
     List<String> imageSrc;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(contentSecurityPolicyGranted, responseGetter);
-    trySetResponseGetter(contentSecurityPolicyPending, responseGetter);
   }
 }

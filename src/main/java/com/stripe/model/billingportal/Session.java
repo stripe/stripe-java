@@ -471,8 +471,6 @@ public class Session extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(configuration, responseGetter);
-    trySetResponseGetter(flow, responseGetter);
   }
 }

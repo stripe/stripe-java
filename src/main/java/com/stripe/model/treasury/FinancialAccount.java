@@ -581,9 +581,6 @@ public class FinancialAccount extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(balance, responseGetter);
     trySetResponseGetter(features, responseGetter);
-    trySetResponseGetter(platformRestrictions, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
   }
 }

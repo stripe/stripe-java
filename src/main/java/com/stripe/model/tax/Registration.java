@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.tax.RegistrationCreateParams;
 import com.stripe.param.tax.RegistrationListParams;
 import com.stripe.param.tax.RegistrationRetrieveParams;
@@ -3384,11 +3383,5 @@ public class Registration extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(countryOptions, responseGetter);
   }
 }

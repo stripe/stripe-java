@@ -421,7 +421,6 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(source, responseGetter);
   }
 }

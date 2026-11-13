@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -488,7 +489,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Shipping extends StripeObject {
+  public static class Shipping extends StripeObject implements StripeActiveObject {
     @SerializedName("address")
     Address address;
 
@@ -596,7 +597,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AddressValidation extends StripeObject {
+    public static class AddressValidation extends StripeObject implements StripeActiveObject {
       /**
        * The address validation capabilities to use.
        *
@@ -618,6 +619,11 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("result")
       String result;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(normalizedAddress, responseGetter);
+      }
     }
 
     /**
@@ -636,6 +642,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("eori_number")
       String eoriNumber;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(addressValidation, responseGetter);
     }
   }
 
@@ -1146,13 +1158,9 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
-    trySetResponseGetter(latestFraudWarning, responseGetter);
-    trySetResponseGetter(lifecycleControls, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
-    trySetResponseGetter(spendingControls, responseGetter);
-    trySetResponseGetter(wallets, responseGetter);
   }
 }

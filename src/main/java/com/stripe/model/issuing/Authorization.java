@@ -1641,16 +1641,14 @@ public class Authorization extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amountDetails, responseGetter);
+    if (balanceTransactions != null) {
+      balanceTransactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
-    trySetResponseGetter(fleet, responseGetter);
-    trySetResponseGetter(fuel, responseGetter);
-    trySetResponseGetter(merchantData, responseGetter);
-    trySetResponseGetter(networkData, responseGetter);
-    trySetResponseGetter(pendingRequest, responseGetter);
     trySetResponseGetter(token, responseGetter);
-    trySetResponseGetter(treasury, responseGetter);
-    trySetResponseGetter(verificationData, responseGetter);
+    if (transactions != null) {
+      transactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

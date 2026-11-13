@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentMethodConfigurationCreateParams;
 import com.stripe.param.PaymentMethodConfigurationListParams;
 import com.stripe.param.PaymentMethodConfigurationRetrieveParams;
@@ -3484,70 +3483,5 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(acssDebit, responseGetter);
-    trySetResponseGetter(affirm, responseGetter);
-    trySetResponseGetter(afterpayClearpay, responseGetter);
-    trySetResponseGetter(alipay, responseGetter);
-    trySetResponseGetter(alma, responseGetter);
-    trySetResponseGetter(amazonPay, responseGetter);
-    trySetResponseGetter(applePay, responseGetter);
-    trySetResponseGetter(auBecsDebit, responseGetter);
-    trySetResponseGetter(bacsDebit, responseGetter);
-    trySetResponseGetter(bancontact, responseGetter);
-    trySetResponseGetter(billie, responseGetter);
-    trySetResponseGetter(bizum, responseGetter);
-    trySetResponseGetter(blik, responseGetter);
-    trySetResponseGetter(boleto, responseGetter);
-    trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(cartesBancaires, responseGetter);
-    trySetResponseGetter(cashapp, responseGetter);
-    trySetResponseGetter(crypto, responseGetter);
-    trySetResponseGetter(customerBalance, responseGetter);
-    trySetResponseGetter(eps, responseGetter);
-    trySetResponseGetter(fpx, responseGetter);
-    trySetResponseGetter(giropay, responseGetter);
-    trySetResponseGetter(googlePay, responseGetter);
-    trySetResponseGetter(grabpay, responseGetter);
-    trySetResponseGetter(ideal, responseGetter);
-    trySetResponseGetter(jcb, responseGetter);
-    trySetResponseGetter(kakaoPay, responseGetter);
-    trySetResponseGetter(klarna, responseGetter);
-    trySetResponseGetter(konbini, responseGetter);
-    trySetResponseGetter(krCard, responseGetter);
-    trySetResponseGetter(link, responseGetter);
-    trySetResponseGetter(mbWay, responseGetter);
-    trySetResponseGetter(mobilepay, responseGetter);
-    trySetResponseGetter(multibanco, responseGetter);
-    trySetResponseGetter(naverPay, responseGetter);
-    trySetResponseGetter(nzBankAccount, responseGetter);
-    trySetResponseGetter(oxxo, responseGetter);
-    trySetResponseGetter(p24, responseGetter);
-    trySetResponseGetter(payByBank, responseGetter);
-    trySetResponseGetter(payco, responseGetter);
-    trySetResponseGetter(paynow, responseGetter);
-    trySetResponseGetter(paypal, responseGetter);
-    trySetResponseGetter(paypay, responseGetter);
-    trySetResponseGetter(payto, responseGetter);
-    trySetResponseGetter(pix, responseGetter);
-    trySetResponseGetter(promptpay, responseGetter);
-    trySetResponseGetter(revolutPay, responseGetter);
-    trySetResponseGetter(samsungPay, responseGetter);
-    trySetResponseGetter(satispay, responseGetter);
-    trySetResponseGetter(scalapay, responseGetter);
-    trySetResponseGetter(sepaDebit, responseGetter);
-    trySetResponseGetter(sequra, responseGetter);
-    trySetResponseGetter(sofort, responseGetter);
-    trySetResponseGetter(sunbit, responseGetter);
-    trySetResponseGetter(swish, responseGetter);
-    trySetResponseGetter(twint, responseGetter);
-    trySetResponseGetter(upi, responseGetter);
-    trySetResponseGetter(usBankAccount, responseGetter);
-    trySetResponseGetter(wechatPay, responseGetter);
-    trySetResponseGetter(zip, responseGetter);
   }
 }

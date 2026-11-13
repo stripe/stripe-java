@@ -426,6 +426,5 @@ public class Event extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(data, responseGetter);
-    trySetResponseGetter(request, responseGetter);
   }
 }

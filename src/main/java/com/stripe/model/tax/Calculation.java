@@ -721,9 +721,6 @@ public class Calculation extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
-    trySetResponseGetter(shipFromDetails, responseGetter);
-    trySetResponseGetter(shippingCost, responseGetter);
   }
 }

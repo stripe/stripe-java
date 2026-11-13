@@ -343,7 +343,6 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
-    trySetResponseGetter(feeSource, responseGetter);
     trySetResponseGetter(originatingTransaction, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
   }
