@@ -207,10 +207,6 @@ public class Hold extends StripeObject implements HasId, StripeActiveObject {
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
-    if (releaseDetails != null) {
-      releaseDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(releaseSchedule, responseGetter);
     trySetResponseGetter(reservePlan, responseGetter);
     trySetResponseGetter(sourceCharge, responseGetter);
   }

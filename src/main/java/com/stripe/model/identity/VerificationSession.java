@@ -715,7 +715,7 @@ public class VerificationSession extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Options extends StripeObject implements StripeActiveObject {
+  public static class Options extends StripeObject {
     @SerializedName("document")
     Document document;
 
@@ -830,15 +830,6 @@ public class VerificationSession extends ApiResource
       /** Request one time password verification of {@code provided_details.phone}. */
       @SerializedName("require_verification")
       Boolean requireVerification;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(document, responseGetter);
-      trySetResponseGetter(email, responseGetter);
-      trySetResponseGetter(idNumber, responseGetter);
-      trySetResponseGetter(matching, responseGetter);
-      trySetResponseGetter(phone, responseGetter);
     }
   }
 
@@ -974,19 +965,13 @@ public class VerificationSession extends ApiResource
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(address, responseGetter);
-      trySetResponseGetter(dob, responseGetter);
     }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(lastError, responseGetter);
     trySetResponseGetter(lastVerificationReport, responseGetter);
-    trySetResponseGetter(options, responseGetter);
-    trySetResponseGetter(providedDetails, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
-    trySetResponseGetter(relatedPerson, responseGetter);
     trySetResponseGetter(verifiedOutputs, responseGetter);
   }
 }

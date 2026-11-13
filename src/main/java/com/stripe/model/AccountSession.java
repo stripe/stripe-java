@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.AccountSessionCreateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -125,7 +124,7 @@ public class AccountSession extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Components extends StripeObject implements StripeActiveObject {
+  public static class Components extends StripeObject {
     @SerializedName("account_management")
     AccountManagement accountManagement;
 
@@ -208,7 +207,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AccountManagement extends StripeObject implements StripeActiveObject {
+    public static class AccountManagement extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -242,11 +241,6 @@ public class AccountSession extends ApiResource {
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
       }
     }
 
@@ -257,7 +251,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AccountOnboarding extends StripeObject implements StripeActiveObject {
+    public static class AccountOnboarding extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -292,11 +286,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -306,7 +295,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BalanceReport extends StripeObject implements StripeActiveObject {
+    public static class BalanceReport extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -322,11 +311,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -336,7 +320,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Balances extends StripeObject implements StripeActiveObject {
+    public static class Balances extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -395,11 +379,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("standard_payouts")
         Boolean standardPayouts;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -409,7 +388,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DisputesList extends StripeObject implements StripeActiveObject {
+    public static class DisputesList extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -457,11 +436,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("smart_disputes_management")
         Boolean smartDisputesManagement;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -471,7 +445,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Documents extends StripeObject implements StripeActiveObject {
+    public static class Documents extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -487,11 +461,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -501,7 +470,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class FinancialAccount extends StripeObject implements StripeActiveObject {
+    public static class FinancialAccount extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -544,11 +513,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("transfer_balance")
         Boolean transferBalance;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -558,8 +522,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class FinancialAccountTransactions extends StripeObject
-        implements StripeActiveObject {
+    public static class FinancialAccountTransactions extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -579,11 +542,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("card_spend_dispute_management")
         Boolean cardSpendDisputeManagement;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -593,7 +551,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class InstantPayoutsPromotion extends StripeObject implements StripeActiveObject {
+    public static class InstantPayoutsPromotion extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -636,11 +594,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -650,7 +603,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class IssuingCard extends StripeObject implements StripeActiveObject {
+    public static class IssuingCard extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -682,11 +635,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("spend_control_management")
         Boolean spendControlManagement;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -696,7 +644,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class IssuingCardsList extends StripeObject implements StripeActiveObject {
+    public static class IssuingCardsList extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -738,11 +686,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("spend_control_management")
         Boolean spendControlManagement;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -752,7 +695,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class NotificationBanner extends StripeObject implements StripeActiveObject {
+    public static class NotificationBanner extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -787,11 +730,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -801,7 +739,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentDetails extends StripeObject implements StripeActiveObject {
+    public static class PaymentDetails extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -849,11 +787,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("smart_disputes_management")
         Boolean smartDisputesManagement;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -863,7 +796,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentDisputes extends StripeObject implements StripeActiveObject {
+    public static class PaymentDisputes extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -904,11 +837,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("smart_disputes_management")
         Boolean smartDisputesManagement;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -918,7 +846,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentMethodSettings extends StripeObject implements StripeActiveObject {
+    public static class PaymentMethodSettings extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -942,11 +870,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -956,7 +879,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payments extends StripeObject implements StripeActiveObject {
+    public static class Payments extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1004,11 +927,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("smart_disputes_management")
         Boolean smartDisputesManagement;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1018,7 +936,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PayoutDetails extends StripeObject implements StripeActiveObject {
+    public static class PayoutDetails extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1034,11 +952,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1048,8 +961,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PayoutReconciliationReport extends StripeObject
-        implements StripeActiveObject {
+    public static class PayoutReconciliationReport extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1065,11 +977,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1079,7 +986,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payouts extends StripeObject implements StripeActiveObject {
+    public static class Payouts extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1138,11 +1045,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("standard_payouts")
         Boolean standardPayouts;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1152,7 +1054,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PayoutsList extends StripeObject implements StripeActiveObject {
+    public static class PayoutsList extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1168,11 +1070,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1182,7 +1079,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ReportingChart extends StripeObject implements StripeActiveObject {
+    public static class ReportingChart extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1198,11 +1095,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1212,7 +1104,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxRegistrations extends StripeObject implements StripeActiveObject {
+    public static class TaxRegistrations extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1228,11 +1120,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1242,7 +1129,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxSettings extends StripeObject implements StripeActiveObject {
+    public static class TaxSettings extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1258,11 +1145,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1272,7 +1154,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TerminalHardwareOrders extends StripeObject implements StripeActiveObject {
+    public static class TerminalHardwareOrders extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1288,11 +1170,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
 
     /**
@@ -1302,7 +1179,7 @@ public class AccountSession extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TerminalHardwareShop extends StripeObject implements StripeActiveObject {
+    public static class TerminalHardwareShop extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1318,46 +1195,6 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(features, responseGetter);
-      }
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(accountManagement, responseGetter);
-      trySetResponseGetter(accountOnboarding, responseGetter);
-      trySetResponseGetter(balanceReport, responseGetter);
-      trySetResponseGetter(balances, responseGetter);
-      trySetResponseGetter(disputesList, responseGetter);
-      trySetResponseGetter(documents, responseGetter);
-      trySetResponseGetter(financialAccount, responseGetter);
-      trySetResponseGetter(financialAccountTransactions, responseGetter);
-      trySetResponseGetter(instantPayoutsPromotion, responseGetter);
-      trySetResponseGetter(issuingCard, responseGetter);
-      trySetResponseGetter(issuingCardsList, responseGetter);
-      trySetResponseGetter(notificationBanner, responseGetter);
-      trySetResponseGetter(paymentDetails, responseGetter);
-      trySetResponseGetter(paymentDisputes, responseGetter);
-      trySetResponseGetter(paymentMethodSettings, responseGetter);
-      trySetResponseGetter(payments, responseGetter);
-      trySetResponseGetter(payoutDetails, responseGetter);
-      trySetResponseGetter(payoutReconciliationReport, responseGetter);
-      trySetResponseGetter(payouts, responseGetter);
-      trySetResponseGetter(payoutsList, responseGetter);
-      trySetResponseGetter(reportingChart, responseGetter);
-      trySetResponseGetter(taxRegistrations, responseGetter);
-      trySetResponseGetter(taxSettings, responseGetter);
-      trySetResponseGetter(terminalHardwareOrders, responseGetter);
-      trySetResponseGetter(terminalHardwareShop, responseGetter);
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(components, responseGetter);
   }
 }

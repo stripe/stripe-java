@@ -347,10 +347,6 @@ public class VerificationReport extends ApiResource implements HasId {
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(address, responseGetter);
-      trySetResponseGetter(dob, responseGetter);
-      trySetResponseGetter(error, responseGetter);
-      trySetResponseGetter(expirationDate, responseGetter);
-      trySetResponseGetter(issuedDate, responseGetter);
     }
   }
 
@@ -358,7 +354,7 @@ public class VerificationReport extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Email extends StripeObject implements StripeActiveObject {
+  public static class Email extends StripeObject {
     /** Email to be verified. */
     @SerializedName("email")
     String email;
@@ -398,18 +394,13 @@ public class VerificationReport extends ApiResource implements HasId {
       @SerializedName("reason")
       String reason;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(error, responseGetter);
-    }
   }
 
   /** Result from an id_number check. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class IdNumber extends StripeObject implements StripeActiveObject {
+  public static class IdNumber extends StripeObject {
     /** Date of birth. */
     @SerializedName("dob")
     Dob dob;
@@ -490,12 +481,6 @@ public class VerificationReport extends ApiResource implements HasId {
       @SerializedName("reason")
       String reason;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(dob, responseGetter);
-      trySetResponseGetter(error, responseGetter);
-    }
   }
 
   /**
@@ -505,7 +490,7 @@ public class VerificationReport extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Options extends StripeObject implements StripeActiveObject {
+  public static class Options extends StripeObject {
     @SerializedName("document")
     Document document;
 
@@ -561,19 +546,13 @@ public class VerificationReport extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class IdNumber extends StripeObject {}
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(document, responseGetter);
-      trySetResponseGetter(idNumber, responseGetter);
-    }
   }
 
   /** Result from a phone check. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Phone extends StripeObject implements StripeActiveObject {
+  public static class Phone extends StripeObject {
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
     Errors error;
@@ -613,18 +592,13 @@ public class VerificationReport extends ApiResource implements HasId {
       @SerializedName("reason")
       String reason;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(error, responseGetter);
-    }
   }
 
   /** Result from a selfie check. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Selfie extends StripeObject implements StripeActiveObject {
+  public static class Selfie extends StripeObject {
     /**
      * ID of the <a href="https://docs.stripe.com/api/files">File</a> holding the image of the
      * identity document used in this check.
@@ -675,21 +649,11 @@ public class VerificationReport extends ApiResource implements HasId {
       @SerializedName("reason")
       String reason;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(error, responseGetter);
-    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(document, responseGetter);
-    trySetResponseGetter(email, responseGetter);
-    trySetResponseGetter(idNumber, responseGetter);
-    trySetResponseGetter(options, responseGetter);
-    trySetResponseGetter(phone, responseGetter);
-    trySetResponseGetter(selfie, responseGetter);
   }
 }

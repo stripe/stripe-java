@@ -530,7 +530,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Parent extends StripeObject implements StripeActiveObject {
+  public static class Parent extends StripeObject {
     /** Details about the subscription that generated this invoice item. */
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
@@ -558,11 +558,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       /** The subscription item that generated this invoice item. */
       @SerializedName("subscription_item")
       String subscriptionItem;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(subscriptionDetails, responseGetter);
     }
   }
 
@@ -690,7 +685,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CreditedItems extends StripeObject implements StripeActiveObject {
+    public static class CreditedItems extends StripeObject {
       /**
        * When {@code type} is {@code invoice_item}, the invoice item id for the debited invoice item
        * corresponding to this credit proration.
@@ -728,11 +723,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
          */
         @SerializedName("invoice_line_items")
         List<String> invoiceLineItems;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(invoiceLineItemDetails, responseGetter);
       }
     }
 
@@ -780,7 +770,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(creditedItems, responseGetter);
       if (discountAmounts != null) {
         discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
       }
@@ -795,11 +784,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
     trySetResponseGetter(invoice, responseGetter);
-    if (invoicingRules != null) {
-      invoicingRules.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(parent, responseGetter);
-    trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(prorationDetails, responseGetter);
     if (taxRates != null) {

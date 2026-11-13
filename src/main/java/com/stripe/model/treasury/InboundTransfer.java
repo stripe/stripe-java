@@ -751,10 +751,7 @@ public class InboundTransfer extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(failureDetails, responseGetter);
-    trySetResponseGetter(linkedFlows, responseGetter);
     trySetResponseGetter(originPaymentMethodDetails, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

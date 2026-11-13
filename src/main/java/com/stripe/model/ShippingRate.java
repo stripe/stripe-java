@@ -273,7 +273,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DeliveryEstimate extends StripeObject implements StripeActiveObject {
+  public static class DeliveryEstimate extends StripeObject {
     /**
      * The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.
      */
@@ -324,12 +324,6 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
       /** Must be greater than 0. */
       @SerializedName("value")
       Long value;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(maximum, responseGetter);
-      trySetResponseGetter(minimum, responseGetter);
     }
   }
 
@@ -385,8 +379,6 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(deliveryEstimate, responseGetter);
-    trySetResponseGetter(fixedAmount, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
   }
 }

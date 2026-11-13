@@ -2337,7 +2337,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(quoteDetails, responseGetter);
       trySetResponseGetter(subscriptionDetails, responseGetter);
     }
   }
@@ -2349,7 +2348,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentSettings extends StripeObject implements StripeActiveObject {
+  public static class PaymentSettings extends StripeObject {
     /**
      * ID of the mandate to be used for this invoice. It must correspond to the payment method used
      * to pay the invoice, including the invoice's default_payment_method or default_source, if set.
@@ -2378,7 +2377,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
+    public static class PaymentMethodOptions extends StripeObject {
       /**
        * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
        * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
@@ -2470,7 +2469,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class AcssDebit extends StripeObject implements StripeActiveObject {
+      public static class AcssDebit extends StripeObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2497,11 +2496,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
            */
           @SerializedName("transaction_type")
           String transactionType;
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(mandateOptions, responseGetter);
         }
       }
 
@@ -2530,7 +2524,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Billie extends StripeObject implements StripeActiveObject {
+      public static class Billie extends StripeObject {
         @SerializedName("company_details")
         CompanyDetails companyDetails;
 
@@ -2545,7 +2539,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class CompanyDetails extends StripeObject implements StripeActiveObject {
+        public static class CompanyDetails extends StripeObject {
           @SerializedName("registered_address")
           RegisteredAddress registeredAddress;
 
@@ -2604,16 +2598,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             @SerializedName("state")
             String state;
           }
-
-          @Override
-          public void setResponseGetter(StripeResponseGetter responseGetter) {
-            trySetResponseGetter(registeredAddress, responseGetter);
-          }
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(companyDetails, responseGetter);
         }
       }
 
@@ -2633,7 +2617,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Card extends StripeObject implements StripeActiveObject {
+      public static class Card extends StripeObject {
         @SerializedName("installments")
         Installments installments;
 
@@ -2664,11 +2648,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
           @SerializedName("enabled")
           Boolean enabled;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(installments, responseGetter);
-        }
       }
 
       /**
@@ -2678,7 +2657,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CustomerBalance extends StripeObject implements StripeActiveObject {
+      public static class CustomerBalance extends StripeObject {
         @SerializedName("bank_transfer")
         BankTransfer bankTransfer;
 
@@ -2698,7 +2677,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class BankTransfer extends StripeObject implements StripeActiveObject {
+        public static class BankTransfer extends StripeObject {
           @SerializedName("eu_bank_transfer")
           EuBankTransfer euBankTransfer;
 
@@ -2727,16 +2706,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             @SerializedName("country")
             String country;
           }
-
-          @Override
-          public void setResponseGetter(StripeResponseGetter responseGetter) {
-            trySetResponseGetter(euBankTransfer, responseGetter);
-          }
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(bankTransfer, responseGetter);
         }
       }
 
@@ -2756,7 +2725,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Payto extends StripeObject implements StripeActiveObject {
+      public static class Payto extends StripeObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2793,11 +2762,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
            */
           @SerializedName("purpose")
           String purpose;
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(mandateOptions, responseGetter);
         }
       }
 
@@ -2841,7 +2805,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Upi extends StripeObject implements StripeActiveObject {
+      public static class Upi extends StripeObject {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2876,11 +2840,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
           @SerializedName("end_date")
           Long endDate;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(mandateOptions, responseGetter);
-        }
       }
 
       /**
@@ -2890,7 +2849,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class UsBankAccount extends StripeObject implements StripeActiveObject {
+      public static class UsBankAccount extends StripeObject {
         @SerializedName("financial_connections")
         FinancialConnections financialConnections;
 
@@ -2909,8 +2868,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class FinancialConnections extends StripeObject
-            implements StripeActiveObject {
+        public static class FinancialConnections extends StripeObject {
           @SerializedName("filters")
           Filters filters;
 
@@ -2940,39 +2898,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             @SerializedName("account_subcategories")
             List<String> accountSubcategories;
           }
-
-          @Override
-          public void setResponseGetter(StripeResponseGetter responseGetter) {
-            trySetResponseGetter(filters, responseGetter);
-          }
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(financialConnections, responseGetter);
         }
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(acssDebit, responseGetter);
-        trySetResponseGetter(bancontact, responseGetter);
-        trySetResponseGetter(billie, responseGetter);
-        trySetResponseGetter(blik, responseGetter);
-        trySetResponseGetter(card, responseGetter);
-        trySetResponseGetter(customerBalance, responseGetter);
-        trySetResponseGetter(konbini, responseGetter);
-        trySetResponseGetter(payto, responseGetter);
-        trySetResponseGetter(pix, responseGetter);
-        trySetResponseGetter(sepaDebit, responseGetter);
-        trySetResponseGetter(upi, responseGetter);
-        trySetResponseGetter(usBankAccount, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(paymentMethodOptions, responseGetter);
     }
   }
 
@@ -2983,7 +2910,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Rendering extends StripeObject implements StripeActiveObject {
+  public static class Rendering extends StripeObject {
     /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
     @SerializedName("amount_tax_display")
     String amountTaxDisplay;
@@ -3016,11 +2943,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
        */
       @SerializedName("page_size")
       String pageSize;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(pdf, responseGetter);
     }
   }
 
@@ -3136,7 +3058,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject implements StripeActiveObject {
+  public static class StatusDetails extends StripeObject {
     @SerializedName("uncollectible")
     Uncollectible uncollectible;
 
@@ -3156,11 +3078,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
        */
       @SerializedName("reason")
       String reason;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(uncollectible, responseGetter);
     }
   }
 
@@ -3196,7 +3113,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ThresholdReason extends StripeObject implements StripeActiveObject {
+  public static class ThresholdReason extends StripeObject {
     /** The total invoice amount threshold boundary if it triggered the threshold invoice. */
     @SerializedName("amount_gte")
     Long amountGte;
@@ -3220,13 +3137,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       /** The quantity threshold boundary that applied to the given line item. */
       @SerializedName("usage_gte")
       Long usageGte;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (itemReasons != null) {
-        itemReasons.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
     }
   }
 
@@ -3456,16 +3366,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     }
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
-    trySetResponseGetter(confirmationSecret, responseGetter);
-    if (customFields != null) {
-      customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerAddress, responseGetter);
     trySetResponseGetter(customerShipping, responseGetter);
-    if (customerTaxIds != null) {
-      customerTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
     if (defaultTaxRates != null) {
@@ -3481,15 +3384,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(lines, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(parent, responseGetter);
-    trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(payments, responseGetter);
-    trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
-    trySetResponseGetter(thresholdReason, responseGetter);
     if (totalDiscountAmounts != null) {
       totalDiscountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
     }

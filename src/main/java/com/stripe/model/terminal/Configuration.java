@@ -542,7 +542,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Tipping extends StripeObject implements StripeActiveObject {
+  public static class Tipping extends StripeObject {
     @SerializedName("aed")
     Aed aed;
 
@@ -1109,31 +1109,6 @@ public class Configuration extends ApiResource implements HasId {
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(aed, responseGetter);
-      trySetResponseGetter(aud, responseGetter);
-      trySetResponseGetter(cad, responseGetter);
-      trySetResponseGetter(chf, responseGetter);
-      trySetResponseGetter(czk, responseGetter);
-      trySetResponseGetter(dkk, responseGetter);
-      trySetResponseGetter(eur, responseGetter);
-      trySetResponseGetter(gbp, responseGetter);
-      trySetResponseGetter(gip, responseGetter);
-      trySetResponseGetter(hkd, responseGetter);
-      trySetResponseGetter(huf, responseGetter);
-      trySetResponseGetter(jpy, responseGetter);
-      trySetResponseGetter(mxn, responseGetter);
-      trySetResponseGetter(myr, responseGetter);
-      trySetResponseGetter(nok, responseGetter);
-      trySetResponseGetter(nzd, responseGetter);
-      trySetResponseGetter(pln, responseGetter);
-      trySetResponseGetter(ron, responseGetter);
-      trySetResponseGetter(sek, responseGetter);
-      trySetResponseGetter(sgd, responseGetter);
-      trySetResponseGetter(usd, responseGetter);
-    }
   }
 
   /**
@@ -1333,7 +1308,7 @@ public class Configuration extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Wifi extends StripeObject implements StripeActiveObject {
+  public static class Wifi extends StripeObject {
     @SerializedName("enterprise_eap_peap")
     EnterpriseEapPeap enterpriseEapPeap;
 
@@ -1422,13 +1397,6 @@ public class Configuration extends ApiResource implements HasId {
       @SerializedName("ssid")
       String ssid;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(enterpriseEapPeap, responseGetter);
-      trySetResponseGetter(enterpriseEapTls, responseGetter);
-      trySetResponseGetter(personalPsk, responseGetter);
-    }
   }
 
   @Override
@@ -1436,19 +1404,13 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWisepad3, responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
-    trySetResponseGetter(cellular, responseGetter);
-    trySetResponseGetter(offline, responseGetter);
-    trySetResponseGetter(readerSecurity, responseGetter);
-    trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(stripeS710, responseGetter);
     trySetResponseGetter(stripeT600, responseGetter);
-    trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneM425, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
     trySetResponseGetter(verifoneP630, responseGetter);
     trySetResponseGetter(verifoneUx700, responseGetter);
     trySetResponseGetter(verifoneV660p, responseGetter);
-    trySetResponseGetter(wifi, responseGetter);
   }
 }

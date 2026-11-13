@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -229,7 +228,7 @@ public class Token extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NetworkData extends StripeObject implements StripeActiveObject {
+  public static class NetworkData extends StripeObject {
     @SerializedName("device")
     Device device;
 
@@ -355,7 +354,7 @@ public class Token extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class WalletProvider extends StripeObject implements StripeActiveObject {
+    public static class WalletProvider extends StripeObject {
       /** The wallet provider-given account ID of the digital wallet the token belongs to. */
       @SerializedName("account_id")
       String accountId;
@@ -425,19 +424,6 @@ public class Token extends ApiResource implements HasId {
         @SerializedName("postal_code")
         String postalCode;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(cardholderAddress, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(device, responseGetter);
-      trySetResponseGetter(mastercard, responseGetter);
-      trySetResponseGetter(visa, responseGetter);
-      trySetResponseGetter(walletProvider, responseGetter);
     }
   }
 
@@ -445,6 +431,5 @@ public class Token extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(networkData, responseGetter);
   }
 }

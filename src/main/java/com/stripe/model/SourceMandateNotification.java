@@ -141,9 +141,6 @@ public class SourceMandateNotification extends StripeObject implements HasId, St
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
-    trySetResponseGetter(acssDebit, responseGetter);
-    trySetResponseGetter(bacsDebit, responseGetter);
-    trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(source, responseGetter);
   }
 }

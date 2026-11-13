@@ -331,8 +331,6 @@ public class Review extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(charge, responseGetter);
-    trySetResponseGetter(ipAddressLocation, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
-    trySetResponseGetter(session, responseGetter);
   }
 }

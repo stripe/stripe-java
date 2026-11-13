@@ -404,7 +404,6 @@ public class TransactionEntry extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(balanceImpact, responseGetter);
     trySetResponseGetter(flowDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }

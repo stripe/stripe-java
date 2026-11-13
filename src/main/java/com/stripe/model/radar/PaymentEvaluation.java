@@ -193,7 +193,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Event extends StripeObject implements StripeActiveObject {
+  public static class Event extends StripeObject {
     /** Dispute opened event details attached to this payment evaluation. */
     @SerializedName("dispute_opened")
     DisputeOpened disputeOpened;
@@ -311,7 +311,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UserInterventionRaised extends StripeObject implements StripeActiveObject {
+    public static class UserInterventionRaised extends StripeObject {
       /** User intervention raised custom event details attached to this payment evaluation. */
       @SerializedName("custom")
       Custom custom;
@@ -340,11 +340,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         @SerializedName("type")
         String type;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(custom, responseGetter);
-      }
     }
 
     /** User Intervention Resolved Event details attached to this payment evaluation. */
@@ -364,22 +359,13 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       @SerializedName("outcome")
       String outcome;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(disputeOpened, responseGetter);
-      trySetResponseGetter(earlyFraudWarningReceived, responseGetter);
-      trySetResponseGetter(refunded, responseGetter);
-      trySetResponseGetter(userInterventionRaised, responseGetter);
-      trySetResponseGetter(userInterventionResolved, responseGetter);
-    }
   }
 
   /** Outcome details for this payment evaluation. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Outcome extends StripeObject implements StripeActiveObject {
+  public static class Outcome extends StripeObject {
     /** Details of a merchant_blocked outcome attached to this payment evaluation. */
     @SerializedName("merchant_blocked")
     MerchantBlocked merchantBlocked;
@@ -424,7 +410,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Rejected extends StripeObject implements StripeActiveObject {
+    public static class Rejected extends StripeObject {
       /** Details of an rejected card outcome attached to this payment evaluation. */
       @SerializedName("card")
       Card card;
@@ -470,18 +456,13 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         @SerializedName("reason")
         String reason;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(card, responseGetter);
-      }
     }
 
     /** Details of a succeeded outcome attached to this payment evaluation. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Succeeded extends StripeObject implements StripeActiveObject {
+    public static class Succeeded extends StripeObject {
       /** Details of an succeeded card outcome attached to this payment evaluation. */
       @SerializedName("card")
       Card card;
@@ -516,18 +497,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         @SerializedName("cvc_check")
         String cvcCheck;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(card, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(merchantBlocked, responseGetter);
-      trySetResponseGetter(rejected, responseGetter);
-      trySetResponseGetter(succeeded, responseGetter);
     }
   }
 
@@ -580,7 +549,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class MoneyMovementDetails extends StripeObject implements StripeActiveObject {
+    public static class MoneyMovementDetails extends StripeObject {
       /** Describes card money movement details. */
       @SerializedName("card")
       Card card;
@@ -614,11 +583,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
          */
         @SerializedName("payment_type")
         String paymentType;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(card, responseGetter);
       }
     }
 
@@ -715,7 +679,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(moneyMovementDetails, responseGetter);
       trySetResponseGetter(paymentMethodDetails, responseGetter);
       trySetResponseGetter(shippingDetails, responseGetter);
     }
@@ -725,7 +688,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Signals extends StripeObject implements StripeActiveObject {
+  public static class Signals extends StripeObject {
     /** The likelihood that this {@code PaymentEvaluation} results in an early fraud warning. */
     @SerializedName("early_fraud_warning")
     EarlyFraudWarning earlyFraudWarning;
@@ -821,25 +784,11 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       @SerializedName("score")
       BigDecimal score;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(earlyFraudWarning, responseGetter);
-      trySetResponseGetter(fraudulentDispute, responseGetter);
-      trySetResponseGetter(fraudulentPayment, responseGetter);
-    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(clientDeviceMetadataDetails, responseGetter);
-    trySetResponseGetter(customerDetails, responseGetter);
-    if (events != null) {
-      events.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);
-    trySetResponseGetter(signals, responseGetter);
   }
 }

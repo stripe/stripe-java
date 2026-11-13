@@ -320,7 +320,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Parent extends StripeObject implements StripeActiveObject {
+  public static class Parent extends StripeObject {
     /** Details about the invoice item that generated this line item. */
     @SerializedName("invoice_item_details")
     InvoiceItemDetails invoiceItemDetails;
@@ -344,7 +344,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class InvoiceItemDetails extends StripeObject implements StripeActiveObject {
+    public static class InvoiceItemDetails extends StripeObject {
       /** The invoice item that generated this line item. */
       @SerializedName("invoice_item")
       String invoiceItem;
@@ -368,7 +368,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ProrationDetails extends StripeObject implements StripeActiveObject {
+      public static class ProrationDetails extends StripeObject {
         /**
          * For a credit proration {@code line_item}, the original debit line_items to which the
          * credit proration applies.
@@ -392,16 +392,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
           @SerializedName("invoice_line_items")
           List<String> invoiceLineItems;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(creditedItems, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(prorationDetails, responseGetter);
       }
     }
 
@@ -412,7 +402,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SubscriptionItemDetails extends StripeObject implements StripeActiveObject {
+    public static class SubscriptionItemDetails extends StripeObject {
       /** The invoice item that generated this line item. */
       @SerializedName("invoice_item")
       String invoiceItem;
@@ -440,7 +430,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ProrationDetails extends StripeObject implements StripeActiveObject {
+      public static class ProrationDetails extends StripeObject {
         /**
          * For a credit proration {@code line_item}, the original debit line_items to which the
          * credit proration applies.
@@ -464,23 +454,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
           @SerializedName("invoice_line_items")
           List<String> invoiceLineItems;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(creditedItems, responseGetter);
-        }
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(prorationDetails, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(invoiceItemDetails, responseGetter);
-      trySetResponseGetter(subscriptionItemDetails, responseGetter);
     }
   }
 
@@ -763,8 +737,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     if (discounts != null) {
       discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
-    trySetResponseGetter(parent, responseGetter);
-    trySetResponseGetter(period, responseGetter);
     if (pretaxCreditAmounts != null) {
       pretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
     }

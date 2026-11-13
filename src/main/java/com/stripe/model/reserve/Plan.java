@@ -3,9 +3,7 @@ package com.stripe.model.reserve;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
-import com.stripe.net.StripeResponseGetter;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Plan extends StripeObject implements HasId, StripeActiveObject {
+public class Plan extends StripeObject implements HasId {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -155,12 +153,5 @@ public class Plan extends StripeObject implements HasId, StripeActiveObject {
     /** The time at which the ReservePlan expires. */
     @SerializedName("expires_on")
     Long expiresOn;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    trySetResponseGetter(fixedRelease, responseGetter);
-    trySetResponseGetter(manualRelease, responseGetter);
-    trySetResponseGetter(rollingRelease, responseGetter);
   }
 }

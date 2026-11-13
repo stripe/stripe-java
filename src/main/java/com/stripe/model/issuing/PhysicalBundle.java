@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.PhysicalBundleListParams;
 import com.stripe.param.issuing.PhysicalBundleRetrieveParams;
 import java.util.Map;
@@ -186,11 +185,5 @@ public class PhysicalBundle extends ApiResource implements HasId {
      */
     @SerializedName("second_line")
     String secondLine;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(features, responseGetter);
   }
 }

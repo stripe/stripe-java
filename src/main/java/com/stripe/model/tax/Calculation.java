@@ -4,7 +4,6 @@ package com.stripe.model.tax;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -249,7 +248,7 @@ public class Calculation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomerDetails extends StripeObject implements StripeActiveObject {
+  public static class CustomerDetails extends StripeObject {
     /** The customer's postal address (for example, home or business location). */
     @SerializedName("address")
     Address address;
@@ -360,14 +359,6 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(address, responseGetter);
-      if (taxIds != null) {
-        taxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /**
@@ -377,7 +368,7 @@ public class Calculation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShipFromDetails extends StripeObject implements StripeActiveObject {
+  public static class ShipFromDetails extends StripeObject {
     @SerializedName("address")
     Address address;
 
@@ -419,11 +410,6 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("state")
       String state;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(address, responseGetter);
-    }
   }
 
   /**
@@ -433,7 +419,7 @@ public class Calculation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShippingCost extends StripeObject implements StripeActiveObject {
+  public static class ShippingCost extends StripeObject {
     /**
      * The shipping amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
@@ -482,7 +468,7 @@ public class Calculation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxBreakdown extends StripeObject implements StripeActiveObject {
+    public static class TaxBreakdown extends StripeObject {
       /**
        * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
        * currency unit</a>.
@@ -602,19 +588,6 @@ public class Calculation extends ApiResource implements HasId {
         @SerializedName("tax_type")
         String taxType;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(jurisdiction, responseGetter);
-        trySetResponseGetter(taxRateDetails, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (taxBreakdown != null) {
-        taxBreakdown.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
     }
   }
 
@@ -625,7 +598,7 @@ public class Calculation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxBreakdown extends StripeObject implements StripeActiveObject {
+  public static class TaxBreakdown extends StripeObject {
     /**
      * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>.
@@ -667,7 +640,7 @@ public class Calculation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxRateDetails extends StripeObject implements StripeActiveObject {
+    public static class TaxRateDetails extends StripeObject {
       /**
        * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
        * 3166-1 alpha-2</a>).
@@ -742,28 +715,12 @@ public class Calculation extends ApiResource implements HasId {
         @SerializedName("currency")
         String currency;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(flatAmount, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(taxRateDetails, responseGetter);
     }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
-    trySetResponseGetter(shipFromDetails, responseGetter);
-    trySetResponseGetter(shippingCost, responseGetter);
-    if (taxBreakdown != null) {
-      taxBreakdown.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
   }
 }

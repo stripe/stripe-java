@@ -495,7 +495,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AfterCompletion extends StripeObject implements StripeActiveObject {
+  public static class AfterCompletion extends StripeObject {
     @SerializedName("hosted_confirmation")
     HostedConfirmation hostedConfirmation;
 
@@ -534,12 +534,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       /** The URL the customer will be redirected to after the purchase is complete. */
       @SerializedName("url")
       String url;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(hostedConfirmation, responseGetter);
-      trySetResponseGetter(redirect, responseGetter);
     }
   }
 
@@ -622,7 +616,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ConsentCollection extends StripeObject implements StripeActiveObject {
+  public static class ConsentCollection extends StripeObject {
     /** Settings related to the payment method reuse text shown in the Checkout UI. */
     @SerializedName("payment_method_reuse_agreement")
     PaymentMethodReuseAgreement paymentMethodReuseAgreement;
@@ -666,11 +660,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("position")
       String position;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(paymentMethodReuseAgreement, responseGetter);
-    }
   }
 
   /**
@@ -680,7 +669,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomField extends StripeObject implements StripeActiveObject {
+  public static class CustomField extends StripeObject {
     @SerializedName("dropdown")
     Dropdown dropdown;
 
@@ -722,7 +711,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Dropdown extends StripeObject implements StripeActiveObject {
+    public static class Dropdown extends StripeObject {
       /** The value that pre-fills on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
@@ -750,13 +739,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
          */
         @SerializedName("value")
         String value;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        if (options != null) {
-          options.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
       }
     }
 
@@ -822,14 +804,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("minimum_length")
       Long minimumLength;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(dropdown, responseGetter);
-      trySetResponseGetter(label, responseGetter);
-      trySetResponseGetter(numeric, responseGetter);
-      trySetResponseGetter(text, responseGetter);
-    }
   }
 
   /**
@@ -839,7 +813,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomText extends StripeObject implements StripeActiveObject {
+  public static class CustomText extends StripeObject {
     /** Custom text that should be displayed after the payment confirmation button. */
     @SerializedName("after_submit")
     AfterSubmit afterSubmit;
@@ -908,14 +882,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(afterSubmit, responseGetter);
-      trySetResponseGetter(shippingAddress, responseGetter);
-      trySetResponseGetter(submit, responseGetter);
-      trySetResponseGetter(termsOfServiceAcceptance, responseGetter);
     }
   }
 
@@ -1109,11 +1075,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         if (accountTaxIds != null) {
           accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
-        if (customFields != null) {
-          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
         trySetResponseGetter(issuer, responseGetter);
-        trySetResponseGetter(renderingOptions, responseGetter);
       }
     }
 
@@ -1147,7 +1109,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NameCollection extends StripeObject implements StripeActiveObject {
+  public static class NameCollection extends StripeObject {
     @SerializedName("business")
     Business business;
 
@@ -1193,12 +1155,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("optional")
       Boolean optional;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(business, responseGetter);
-      trySetResponseGetter(individual, responseGetter);
-    }
   }
 
   /**
@@ -1208,7 +1164,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class OptionalItem extends StripeObject implements StripeActiveObject {
+  public static class OptionalItem extends StripeObject {
     @SerializedName("adjustable_quantity")
     AdjustableQuantity adjustableQuantity;
 
@@ -1244,11 +1200,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
        */
       @SerializedName("minimum")
       Long minimum;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(adjustableQuantity, responseGetter);
     }
   }
 
@@ -1320,7 +1271,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
+  public static class PaymentMethodOptions extends StripeObject {
     /** Configuration for {@code card} payment methods. */
     @SerializedName("card")
     Card card;
@@ -1332,7 +1283,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject implements StripeActiveObject {
+    public static class Card extends StripeObject {
       /**
        * Restrictions to apply to the card payment method. For example, you can block specific card
        * brands.
@@ -1355,16 +1306,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         @SerializedName("brands_blocked")
         List<String> brandsBlocked;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(restrictions, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(card, responseGetter);
     }
   }
 
@@ -1388,7 +1329,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Restrictions extends StripeObject implements StripeActiveObject {
+  public static class Restrictions extends StripeObject {
     @SerializedName("completed_sessions")
     CompletedSessions completedSessions;
 
@@ -1413,11 +1354,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
        */
       @SerializedName("limit")
       Long limit;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(completedSessions, responseGetter);
     }
   }
 
@@ -1661,9 +1597,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         if (accountTaxIds != null) {
           accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
-        if (customFields != null) {
-          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
         trySetResponseGetter(issuer, responseGetter);
       }
     }
@@ -1672,7 +1605,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TrialSettings extends StripeObject implements StripeActiveObject {
+    public static class TrialSettings extends StripeObject {
       /** Defines how a subscription behaves when a free trial ends. */
       @SerializedName("end_behavior")
       EndBehavior endBehavior;
@@ -1691,17 +1624,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         @SerializedName("missing_payment_method")
         String missingPaymentMethod;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(endBehavior, responseGetter);
-      }
     }
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(invoiceSettings, responseGetter);
-      trySetResponseGetter(trialSettings, responseGetter);
     }
   }
 
@@ -1769,32 +1696,15 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(afterCompletion, responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
-    trySetResponseGetter(consentCollection, responseGetter);
-    if (customFields != null) {
-      customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
-    trySetResponseGetter(managedPayments, responseGetter);
-    trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
-    if (optionalItems != null) {
-      optionalItems.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(paymentIntentData, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
-    trySetResponseGetter(phoneNumberCollection, responseGetter);
-    trySetResponseGetter(restrictions, responseGetter);
-    trySetResponseGetter(shippingAddressCollection, responseGetter);
     if (shippingOptions != null) {
       shippingOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
     trySetResponseGetter(subscriptionData, responseGetter);
-    trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
   }
 }

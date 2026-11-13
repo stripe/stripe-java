@@ -339,8 +339,5 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(accountHolder, responseGetter);
     trySetResponseGetter(accounts, responseGetter);
     trySetResponseGetter(bankAccountToken, responseGetter);
-    trySetResponseGetter(filters, responseGetter);
-    trySetResponseGetter(limits, responseGetter);
-    trySetResponseGetter(manualEntry, responseGetter);
   }
 }

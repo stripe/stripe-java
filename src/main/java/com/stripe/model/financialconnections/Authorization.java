@@ -3,9 +3,7 @@ package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
-import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Authorization extends StripeObject implements HasId, StripeActiveObject {
+public class Authorization extends StripeObject implements HasId {
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -60,7 +58,7 @@ public class Authorization extends StripeObject implements HasId, StripeActiveOb
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject implements StripeActiveObject {
+  public static class StatusDetails extends StripeObject {
     @SerializedName("active")
     Active active;
 
@@ -104,16 +102,5 @@ public class Authorization extends StripeObject implements HasId, StripeActiveOb
       @SerializedName("action")
       String action;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(active, responseGetter);
-      trySetResponseGetter(inactive, responseGetter);
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    trySetResponseGetter(statusDetails, responseGetter);
   }
 }

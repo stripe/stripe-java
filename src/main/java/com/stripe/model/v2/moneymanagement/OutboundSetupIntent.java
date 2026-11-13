@@ -3,7 +3,9 @@ package com.stripe.model.v2.moneymanagement;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class OutboundSetupIntent extends StripeObject implements HasId {
+public class OutboundSetupIntent extends StripeObject implements HasId, StripeActiveObject {
   /** Created timestamp. */
   @SerializedName("created")
   Instant created;
@@ -59,4 +61,9 @@ public class OutboundSetupIntent extends StripeObject implements HasId {
    */
   @SerializedName("usage_intent")
   String usageIntent;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(payoutMethod, responseGetter);
+  }
 }

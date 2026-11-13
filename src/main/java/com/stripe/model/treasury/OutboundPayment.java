@@ -522,7 +522,6 @@ public class OutboundPayment extends ApiResource implements HasId {
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(billingDetails, responseGetter);
-      trySetResponseGetter(financialAccount, responseGetter);
       trySetResponseGetter(usBankAccount, responseGetter);
     }
   }
@@ -633,7 +632,7 @@ public class OutboundPayment extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TrackingDetails extends StripeObject implements StripeActiveObject {
+  public static class TrackingDetails extends StripeObject {
     @SerializedName("ach")
     Ach ach;
 
@@ -687,12 +686,6 @@ public class OutboundPayment extends ApiResource implements HasId {
        */
       @SerializedName("omad")
       String omad;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(ach, responseGetter);
-      trySetResponseGetter(usDomesticWire, responseGetter);
     }
   }
 
@@ -971,10 +964,7 @@ public class OutboundPayment extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(destinationPaymentMethodDetails, responseGetter);
-    trySetResponseGetter(endUserDetails, responseGetter);
     trySetResponseGetter(returnedDetails, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
-    trySetResponseGetter(trackingDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

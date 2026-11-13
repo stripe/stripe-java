@@ -276,8 +276,6 @@ public class DebitReversal extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(linkedFlows, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

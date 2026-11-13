@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.BalanceSettingsRetrieveParams;
 import com.stripe.param.BalanceSettingsUpdateParams;
 import java.util.List;
@@ -135,7 +134,7 @@ public class BalanceSettings extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Payments extends StripeObject implements StripeActiveObject {
+  public static class Payments extends StripeObject {
     /**
      * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
      * account. See <a href="https://stripe.com/connect/account-balances">Understanding Connect
@@ -160,7 +159,7 @@ public class BalanceSettings extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payouts extends StripeObject implements StripeActiveObject {
+    public static class Payouts extends StripeObject {
       /**
        * Configures per-currency rules for automatically transferring funds from the payments
        * balance to a FinancialAccount.
@@ -263,11 +262,6 @@ public class BalanceSettings extends ApiResource {
         @SerializedName("weekly_payout_days")
         List<String> weeklyPayoutDays;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(schedule, responseGetter);
-      }
     }
 
     /**
@@ -277,7 +271,7 @@ public class BalanceSettings extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SettlementTiming extends StripeObject implements StripeActiveObject {
+    public static class SettlementTiming extends StripeObject {
       /** The number of days charge funds are held before becoming available. */
       @SerializedName("delay_days")
       Long delayDays;
@@ -330,23 +324,6 @@ public class BalanceSettings extends ApiResource {
         @SerializedName("timezone")
         String timezone;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(startOfDay, responseGetter);
-      }
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(payouts, responseGetter);
-      trySetResponseGetter(settlementTiming, responseGetter);
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(payments, responseGetter);
   }
 }

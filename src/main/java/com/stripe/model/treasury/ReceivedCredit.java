@@ -348,8 +348,6 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(billingDetails, responseGetter);
-      trySetResponseGetter(financialAccount, responseGetter);
-      trySetResponseGetter(usBankAccount, responseGetter);
     }
   }
 
@@ -586,7 +584,6 @@ public class ReceivedCredit extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(initiatingPaymentMethodDetails, responseGetter);
     trySetResponseGetter(linkedFlows, responseGetter);
-    trySetResponseGetter(reversalDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

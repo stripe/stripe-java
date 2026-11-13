@@ -830,7 +830,6 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(paymentRecordRefund, responseGetter);
       trySetResponseGetter(refund, responseGetter);
     }
   }

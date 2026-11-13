@@ -512,7 +512,7 @@ public class BankAccount extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FutureRequirements extends StripeObject implements StripeActiveObject {
+  public static class FutureRequirements extends StripeObject {
     /**
      * Fields that need to be resolved to keep the external account enabled. If not resolved by
      * {@code current_deadline}, these fields will appear in {@code past_due} as well, and the
@@ -633,13 +633,6 @@ public class BankAccount extends ApiResource
       @SerializedName("requirement")
       String requirement;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (errors != null) {
-        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /**
@@ -649,7 +642,7 @@ public class BankAccount extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Requirements extends StripeObject implements StripeActiveObject {
+  public static class Requirements extends StripeObject {
     /**
      * Fields that need to be resolved to keep the external account enabled. If not resolved by
      * {@code current_deadline}, these fields will appear in {@code past_due} as well, and the
@@ -770,13 +763,6 @@ public class BankAccount extends ApiResource
       @SerializedName("requirement")
       String requirement;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (errors != null) {
-        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   @Override
@@ -784,7 +770,5 @@ public class BankAccount extends ApiResource
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(account, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
   }
 }

@@ -410,6 +410,5 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(promotion, responseGetter);
-    trySetResponseGetter(restrictions, responseGetter);
   }
 }

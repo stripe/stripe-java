@@ -886,7 +886,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CollectInputs extends StripeObject implements StripeActiveObject {
+    public static class CollectInputs extends StripeObject {
       /** List of inputs to be collected. */
       @SerializedName("inputs")
       List<Reader.Action.CollectInputs.Input> inputs;
@@ -903,7 +903,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Input extends StripeObject implements StripeActiveObject {
+      public static class Input extends StripeObject {
         /** Default text of input being collected. */
         @SerializedName("custom_text")
         CustomText customText;
@@ -1009,7 +1009,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Selection extends StripeObject implements HasId, StripeActiveObject {
+        public static class Selection extends StripeObject implements HasId {
           /** List of possible choices to be selected. */
           @SerializedName("choices")
           List<Reader.Action.CollectInputs.Input.Selection.Choice> choices;
@@ -1040,13 +1040,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             /** The text to be selected. Maximum 30 characters. */
             @SerializedName("text")
             String text;
-          }
-
-          @Override
-          public void setResponseGetter(StripeResponseGetter responseGetter) {
-            if (choices != null) {
-              choices.forEach(x -> trySetResponseGetter(x, responseGetter));
-            }
           }
         }
 
@@ -1090,27 +1083,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           /** The toggle's collected value. Can be {@code enabled} or {@code disabled}. */
           @SerializedName("value")
           String value;
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(customText, responseGetter);
-          trySetResponseGetter(email, responseGetter);
-          trySetResponseGetter(numeric, responseGetter);
-          trySetResponseGetter(phone, responseGetter);
-          trySetResponseGetter(selection, responseGetter);
-          trySetResponseGetter(signature, responseGetter);
-          trySetResponseGetter(text, responseGetter);
-          if (toggles != null) {
-            toggles.forEach(x -> trySetResponseGetter(x, responseGetter));
-          }
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        if (inputs != null) {
-          inputs.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
       }
     }
@@ -1165,7 +1137,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CollectConfig extends StripeObject implements StripeActiveObject {
+      public static class CollectConfig extends StripeObject {
         /** Enable customer-initiated cancellation when processing this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
@@ -1191,16 +1163,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           @SerializedName("amount_eligible")
           Long amountEligible;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(tipping, responseGetter);
-        }
       }
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(collectConfig, responseGetter);
         trySetResponseGetter(paymentIntent, responseGetter);
         trySetResponseGetter(paymentMethod, responseGetter);
       }
@@ -1255,7 +1221,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(confirmConfig, responseGetter);
         trySetResponseGetter(paymentIntent, responseGetter);
       }
     }
@@ -1264,7 +1229,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PrintContent extends StripeObject implements StripeActiveObject {
+    public static class PrintContent extends StripeObject {
       /** Metadata of an uploaded file. */
       @SerializedName("image")
       Image image;
@@ -1297,11 +1262,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /** The format of the uploaded file. */
         @SerializedName("type")
         String type;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(image, responseGetter);
       }
     }
 
@@ -1343,7 +1303,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ProcessConfig extends StripeObject implements StripeActiveObject {
+      public static class ProcessConfig extends StripeObject {
         /** Enable customer-initiated cancellation when processing this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
@@ -1376,17 +1336,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           @SerializedName("amount_eligible")
           Long amountEligible;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(tipping, responseGetter);
-        }
       }
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
         trySetResponseGetter(paymentIntent, responseGetter);
-        trySetResponseGetter(processConfig, responseGetter);
       }
     }
 
@@ -1444,7 +1398,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(processConfig, responseGetter);
         trySetResponseGetter(setupIntent, responseGetter);
       }
     }
@@ -1585,7 +1538,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         trySetResponseGetter(charge, responseGetter);
         trySetResponseGetter(paymentIntent, responseGetter);
         trySetResponseGetter(refund, responseGetter);
-        trySetResponseGetter(refundPaymentConfig, responseGetter);
       }
     }
 
@@ -1593,7 +1545,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SetReaderDisplay extends StripeObject implements StripeActiveObject {
+    public static class SetReaderDisplay extends StripeObject {
       /** Cart object to be displayed by the reader, including line items, amounts, and currency. */
       @SerializedName("cart")
       Cart cart;
@@ -1611,7 +1563,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Cart extends StripeObject implements StripeActiveObject {
+      public static class Cart extends StripeObject {
         /**
          * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
          * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
@@ -1658,32 +1610,17 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           @SerializedName("quantity")
           Long quantity;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          if (lineItems != null) {
-            lineItems.forEach(x -> trySetResponseGetter(x, responseGetter));
-          }
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(cart, responseGetter);
       }
     }
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(apiError, responseGetter);
-      trySetResponseGetter(collectInputs, responseGetter);
       trySetResponseGetter(collectPaymentMethod, responseGetter);
       trySetResponseGetter(confirmPaymentIntent, responseGetter);
-      trySetResponseGetter(printContent, responseGetter);
       trySetResponseGetter(processPaymentIntent, responseGetter);
       trySetResponseGetter(processSetupIntent, responseGetter);
       trySetResponseGetter(refundPayment, responseGetter);
-      trySetResponseGetter(setReaderDisplay, responseGetter);
     }
   }
 

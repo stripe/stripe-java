@@ -900,7 +900,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NextAction extends StripeObject implements StripeActiveObject {
+  public static class NextAction extends StripeObject {
     @SerializedName("blik_authorize")
     BlikAuthorize blikAuthorize;
 
@@ -952,8 +952,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CashappHandleRedirectOrDisplayQrCode extends StripeObject
-        implements StripeActiveObject {
+    public static class CashappHandleRedirectOrDisplayQrCode extends StripeObject {
       /**
        * The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR
        * code, and supports QR code refreshing on expiration.
@@ -987,11 +986,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         /** The image_url_svg string used to render QR code. */
         @SerializedName("image_url_svg")
         String imageUrlSvg;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(qrCode, responseGetter);
       }
     }
 
@@ -1057,8 +1051,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UpiHandleRedirectOrDisplayQrCode extends StripeObject
-        implements StripeActiveObject {
+    public static class UpiHandleRedirectOrDisplayQrCode extends StripeObject {
       /**
        * The URL to the hosted UPI instructions page, which allows customers to view the QR code.
        */
@@ -1087,11 +1080,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         /** The image_url_svg string used to render QR code. */
         @SerializedName("image_url_svg")
         String imageUrlSvg;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(qrCode, responseGetter);
       }
     }
 
@@ -1123,16 +1111,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("microdeposit_type")
       String microdepositType;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(blikAuthorize, responseGetter);
-      trySetResponseGetter(cashappHandleRedirectOrDisplayQrCode, responseGetter);
-      trySetResponseGetter(pixDisplayQrCode, responseGetter);
-      trySetResponseGetter(redirectToUrl, responseGetter);
-      trySetResponseGetter(upiHandleRedirectOrDisplayQrCode, responseGetter);
-      trySetResponseGetter(verifyWithMicrodeposits, responseGetter);
-    }
   }
 
   /**
@@ -1160,7 +1138,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
+  public static class PaymentMethodOptions extends StripeObject {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
@@ -1213,7 +1191,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AcssDebit extends StripeObject implements StripeActiveObject {
+    public static class AcssDebit extends StripeObject {
       /**
        * Currency supported by the bank account
        *
@@ -1272,11 +1250,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("transaction_type")
         String transactionType;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1295,7 +1268,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BacsDebit extends StripeObject implements StripeActiveObject {
+    public static class BacsDebit extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -1315,11 +1288,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("reference_prefix")
         String referencePrefix;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1338,7 +1306,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Blik extends StripeObject implements StripeActiveObject {
+    public static class Blik extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -1362,11 +1330,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("type")
         String type;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1376,7 +1339,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject implements StripeActiveObject {
+    public static class Card extends StripeObject {
       /** Configuration options for setting up an eMandate for cards issued in India. */
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
@@ -1485,11 +1448,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("supported_types")
         List<String> supportedTypes;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1555,7 +1513,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payto extends StripeObject implements StripeActiveObject {
+    public static class Payto extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -1625,11 +1583,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("start_date")
         String startDate;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1639,7 +1592,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pix extends StripeObject implements StripeActiveObject {
+    public static class Pix extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -1702,11 +1655,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("start_date")
         String startDate;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1716,7 +1664,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SepaDebit extends StripeObject implements StripeActiveObject {
+    public static class SepaDebit extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -1736,11 +1684,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("reference_prefix")
         String referencePrefix;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1750,7 +1693,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Upi extends StripeObject implements StripeActiveObject {
+    public static class Upi extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -1785,11 +1728,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("end_date")
         Long endDate;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -1799,7 +1737,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject implements StripeActiveObject {
+    public static class UsBankAccount extends StripeObject {
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
 
@@ -1821,7 +1759,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class FinancialConnections extends StripeObject implements StripeActiveObject {
+      public static class FinancialConnections extends StripeObject {
         @SerializedName("filters")
         Filters filters;
 
@@ -1858,11 +1796,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
           @SerializedName("account_subcategories")
           List<String> accountSubcategories;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(filters, responseGetter);
-        }
       }
 
       /**
@@ -1881,31 +1814,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("collection_method")
         String collectionMethod;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(financialConnections, responseGetter);
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(acssDebit, responseGetter);
-      trySetResponseGetter(amazonPay, responseGetter);
-      trySetResponseGetter(bacsDebit, responseGetter);
-      trySetResponseGetter(bizum, responseGetter);
-      trySetResponseGetter(blik, responseGetter);
-      trySetResponseGetter(card, responseGetter);
-      trySetResponseGetter(cardPresent, responseGetter);
-      trySetResponseGetter(klarna, responseGetter);
-      trySetResponseGetter(link, responseGetter);
-      trySetResponseGetter(paypal, responseGetter);
-      trySetResponseGetter(payto, responseGetter);
-      trySetResponseGetter(pix, responseGetter);
-      trySetResponseGetter(sepaDebit, responseGetter);
-      trySetResponseGetter(upi, responseGetter);
-      trySetResponseGetter(usBankAccount, responseGetter);
     }
   }
 
@@ -1913,17 +1821,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(lastSetupError, responseGetter);
     trySetResponseGetter(latestAttempt, responseGetter);
-    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(mandate, responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(singleUseMandate, responseGetter);
   }
 }

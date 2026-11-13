@@ -1121,7 +1121,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Alma extends StripeObject implements StripeActiveObject {
+    public static class Alma extends StripeObject {
       @SerializedName("installments")
       Installments installments;
 
@@ -1141,11 +1141,6 @@ public class PaymentRecord extends ApiResource implements HasId {
         @SerializedName("count")
         Long count;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(installments, responseGetter);
-      }
     }
 
     /**
@@ -1155,7 +1150,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AmazonPay extends StripeObject implements StripeActiveObject {
+    public static class AmazonPay extends StripeObject {
       @SerializedName("funding")
       Funding funding;
 
@@ -1170,7 +1165,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Funding extends StripeObject implements StripeActiveObject {
+      public static class Funding extends StripeObject {
         @SerializedName("card")
         Card card;
 
@@ -1224,16 +1219,6 @@ public class PaymentRecord extends ApiResource implements HasId {
           @SerializedName("last4")
           String last4;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(card, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(funding, responseGetter);
       }
     }
 
@@ -1495,7 +1480,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject implements StripeActiveObject {
+    public static class Card extends StripeObject {
       /** The authorization code of the payment. */
       @SerializedName("authorization_code")
       String authorizationCode;
@@ -1662,7 +1647,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Installments extends StripeObject implements StripeActiveObject {
+      public static class Installments extends StripeObject {
         /** Installment plan selected for the payment. */
         @SerializedName("plan")
         Plan plan;
@@ -1695,11 +1680,6 @@ public class PaymentRecord extends ApiResource implements HasId {
            */
           @SerializedName("type")
           String type;
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(plan, responseGetter);
         }
       }
 
@@ -1797,7 +1777,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Wallet extends StripeObject implements StripeActiveObject {
+      public static class Wallet extends StripeObject {
         @SerializedName("apple_pay")
         ApplePay applePay;
 
@@ -1851,22 +1831,6 @@ public class PaymentRecord extends ApiResource implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Link extends StripeObject {}
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(applePay, responseGetter);
-          trySetResponseGetter(googlePay, responseGetter);
-          trySetResponseGetter(link, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(checks, responseGetter);
-        trySetResponseGetter(installments, responseGetter);
-        trySetResponseGetter(networkToken, responseGetter);
-        trySetResponseGetter(threeDSecure, responseGetter);
-        trySetResponseGetter(wallet, responseGetter);
       }
     }
 
@@ -1877,7 +1841,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CardPresent extends StripeObject implements StripeActiveObject {
+    public static class CardPresent extends StripeObject {
       /** The authorized amount. */
       @SerializedName("amount_authorized")
       Long amountAuthorized;
@@ -2165,13 +2129,6 @@ public class PaymentRecord extends ApiResource implements HasId {
          */
         @SerializedName("type")
         String type;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(offline, responseGetter);
-        trySetResponseGetter(receipt, responseGetter);
-        trySetResponseGetter(wallet, responseGetter);
       }
     }
 
@@ -2478,7 +2435,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class InteracPresent extends StripeObject implements StripeActiveObject {
+    public static class InteracPresent extends StripeObject {
       /** Card brand. Can be {@code interac}, {@code mastercard} or {@code visa}. */
       @SerializedName("brand")
       String brand;
@@ -2689,11 +2646,6 @@ public class PaymentRecord extends ApiResource implements HasId {
         @SerializedName("transaction_status_information")
         String transactionStatusInformation;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(receipt, responseGetter);
-      }
     }
 
     /**
@@ -2720,7 +2672,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Klarna extends StripeObject implements StripeActiveObject {
+    public static class Klarna extends StripeObject {
       /**
        * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
        * transaction's reader is assigned to.
@@ -2767,7 +2719,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class PayerDetails extends StripeObject implements StripeActiveObject {
+      public static class PayerDetails extends StripeObject {
         /** The payer's address. */
         @SerializedName("address")
         com.stripe.model.PaymentRecord.PaymentMethodDetails.Klarna.PayerDetails.Address address;
@@ -2784,16 +2736,6 @@ public class PaymentRecord extends ApiResource implements HasId {
           @SerializedName("country")
           String country;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(address, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(payerDetails, responseGetter);
       }
     }
 
@@ -2804,7 +2746,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Konbini extends StripeObject implements StripeActiveObject {
+    public static class Konbini extends StripeObject {
       /**
        * If the payment succeeded, this contains the details of the convenience store where the
        * payment was completed.
@@ -2827,11 +2769,6 @@ public class PaymentRecord extends ApiResource implements HasId {
          */
         @SerializedName("chain")
         String chain;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(store, responseGetter);
       }
     }
 
@@ -2907,7 +2844,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Mobilepay extends StripeObject implements StripeActiveObject {
+    public static class Mobilepay extends StripeObject {
       /** Internal card details. */
       @SerializedName("card")
       Card card;
@@ -2939,11 +2876,6 @@ public class PaymentRecord extends ApiResource implements HasId {
         /** The last 4 digits of the card. */
         @SerializedName("last4")
         String last4;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(card, responseGetter);
       }
     }
 
@@ -3150,7 +3082,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypal extends StripeObject implements StripeActiveObject {
+    public static class Paypal extends StripeObject {
       /**
        * Two-letter ISO code representing the buyer's country. Values are provided by PayPal
        * directly (if supported) at the time of authorization or settlement. They cannot be set or
@@ -3207,11 +3139,6 @@ public class PaymentRecord extends ApiResource implements HasId {
          */
         @SerializedName("status")
         String status;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(sellerProtection, responseGetter);
       }
     }
 
@@ -3286,7 +3213,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RevolutPay extends StripeObject implements StripeActiveObject {
+    public static class RevolutPay extends StripeObject {
       @SerializedName("funding")
       Funding funding;
 
@@ -3301,7 +3228,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Funding extends StripeObject implements StripeActiveObject {
+      public static class Funding extends StripeObject {
         @SerializedName("card")
         Card card;
 
@@ -3355,16 +3282,6 @@ public class PaymentRecord extends ApiResource implements HasId {
           @SerializedName("last4")
           String last4;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(card, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(funding, responseGetter);
       }
     }
 
@@ -3806,72 +3723,11 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(achCreditTransfer, responseGetter);
-      trySetResponseGetter(achDebit, responseGetter);
-      trySetResponseGetter(acssDebit, responseGetter);
-      trySetResponseGetter(affirm, responseGetter);
-      trySetResponseGetter(afterpayClearpay, responseGetter);
-      trySetResponseGetter(alipay, responseGetter);
-      trySetResponseGetter(alma, responseGetter);
-      trySetResponseGetter(amazonPay, responseGetter);
-      trySetResponseGetter(auBecsDebit, responseGetter);
-      trySetResponseGetter(bacsDebit, responseGetter);
       trySetResponseGetter(bancontact, responseGetter);
-      trySetResponseGetter(billie, responseGetter);
       trySetResponseGetter(billingDetails, responseGetter);
-      trySetResponseGetter(bizum, responseGetter);
-      trySetResponseGetter(blik, responseGetter);
-      trySetResponseGetter(boleto, responseGetter);
-      trySetResponseGetter(card, responseGetter);
-      trySetResponseGetter(cardPresent, responseGetter);
-      trySetResponseGetter(cashapp, responseGetter);
-      trySetResponseGetter(crypto, responseGetter);
-      trySetResponseGetter(custom, responseGetter);
-      trySetResponseGetter(customerBalance, responseGetter);
-      trySetResponseGetter(eps, responseGetter);
-      trySetResponseGetter(fpx, responseGetter);
-      trySetResponseGetter(giropay, responseGetter);
-      trySetResponseGetter(grabpay, responseGetter);
       trySetResponseGetter(ideal, responseGetter);
-      trySetResponseGetter(interacPresent, responseGetter);
-      trySetResponseGetter(kakaoPay, responseGetter);
-      trySetResponseGetter(klarna, responseGetter);
-      trySetResponseGetter(konbini, responseGetter);
-      trySetResponseGetter(krCard, responseGetter);
-      trySetResponseGetter(link, responseGetter);
-      trySetResponseGetter(mbWay, responseGetter);
-      trySetResponseGetter(mobilepay, responseGetter);
-      trySetResponseGetter(momo, responseGetter);
-      trySetResponseGetter(multibanco, responseGetter);
-      trySetResponseGetter(naverPay, responseGetter);
-      trySetResponseGetter(nzBankAccount, responseGetter);
-      trySetResponseGetter(oxxo, responseGetter);
-      trySetResponseGetter(p24, responseGetter);
-      trySetResponseGetter(payByBank, responseGetter);
-      trySetResponseGetter(payco, responseGetter);
-      trySetResponseGetter(paynow, responseGetter);
-      trySetResponseGetter(paypal, responseGetter);
-      trySetResponseGetter(paypay, responseGetter);
-      trySetResponseGetter(payto, responseGetter);
-      trySetResponseGetter(pix, responseGetter);
-      trySetResponseGetter(promptpay, responseGetter);
-      trySetResponseGetter(revolutPay, responseGetter);
-      trySetResponseGetter(samsungPay, responseGetter);
-      trySetResponseGetter(satispay, responseGetter);
-      trySetResponseGetter(scalapay, responseGetter);
-      trySetResponseGetter(sepaCreditTransfer, responseGetter);
-      trySetResponseGetter(sepaDebit, responseGetter);
-      trySetResponseGetter(sequra, responseGetter);
       trySetResponseGetter(sofort, responseGetter);
-      trySetResponseGetter(stripeAccount, responseGetter);
-      trySetResponseGetter(sunbit, responseGetter);
-      trySetResponseGetter(swish, responseGetter);
-      trySetResponseGetter(twint, responseGetter);
-      trySetResponseGetter(upi, responseGetter);
       trySetResponseGetter(usBankAccount, responseGetter);
-      trySetResponseGetter(wechat, responseGetter);
-      trySetResponseGetter(wechatPay, responseGetter);
-      trySetResponseGetter(zip, responseGetter);
     }
   }
 
@@ -3879,7 +3735,7 @@ public class PaymentRecord extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ProcessorDetails extends StripeObject implements StripeActiveObject {
+  public static class ProcessorDetails extends StripeObject {
     /**
      * Custom processors represent payment processors not modeled directly in the Stripe API. This
      * resource consists of details about the custom processor used for this payment attempt.
@@ -3910,11 +3766,6 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("payment_reference")
       String paymentReference;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(custom, responseGetter);
-    }
   }
 
   /** The customer's shipping information associated with this payment. */
@@ -3943,16 +3794,7 @@ public class PaymentRecord extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amount, responseGetter);
-    trySetResponseGetter(amountAuthorized, responseGetter);
-    trySetResponseGetter(amountCanceled, responseGetter);
-    trySetResponseGetter(amountFailed, responseGetter);
-    trySetResponseGetter(amountGuaranteed, responseGetter);
-    trySetResponseGetter(amountRefunded, responseGetter);
-    trySetResponseGetter(amountRequested, responseGetter);
-    trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
-    trySetResponseGetter(processorDetails, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
   }
 }

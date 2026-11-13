@@ -7,7 +7,6 @@ import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
-import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -546,7 +545,7 @@ public class Transaction extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PurchaseDetails extends StripeObject implements StripeActiveObject {
+  public static class PurchaseDetails extends StripeObject {
     /** Fleet-specific information for transactions using Fleet cards. */
     @SerializedName("fleet")
     Fleet fleet;
@@ -578,7 +577,7 @@ public class Transaction extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Fleet extends StripeObject implements StripeActiveObject {
+    public static class Fleet extends StripeObject {
       /** Answers to prompts presented to cardholder at point of sale. */
       @SerializedName("cardholder_prompt_data")
       CardholderPromptData cardholderPromptData;
@@ -644,7 +643,7 @@ public class Transaction extends ApiResource
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ReportedBreakdown extends StripeObject implements StripeActiveObject {
+      public static class ReportedBreakdown extends StripeObject {
         /** Breakdown of fuel portion of the purchase. */
         @SerializedName("fuel")
         Fuel fuel;
@@ -710,19 +709,6 @@ public class Transaction extends ApiResource
           @SerializedName("national_amount_decimal")
           BigDecimal nationalAmountDecimal;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(fuel, responseGetter);
-          trySetResponseGetter(nonFuel, responseGetter);
-          trySetResponseGetter(tax, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(cardholderPromptData, responseGetter);
-        trySetResponseGetter(reportedBreakdown, responseGetter);
       }
     }
 
@@ -733,7 +719,7 @@ public class Transaction extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Flight extends StripeObject implements StripeActiveObject {
+    public static class Flight extends StripeObject {
       /** The time that the flight departed. */
       @SerializedName("departure_at")
       Long departureAt;
@@ -785,13 +771,6 @@ public class Transaction extends ApiResource
         /** Whether a stopover is allowed on this flight. */
         @SerializedName("stopover_allowed")
         Boolean stopoverAllowed;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        if (segments != null) {
-          segments.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
       }
     }
 
@@ -880,17 +859,6 @@ public class Transaction extends ApiResource
       /** The unit cost of the item in cents. */
       @SerializedName("unit_cost")
       Long unitCost;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(fleet, responseGetter);
-      trySetResponseGetter(flight, responseGetter);
-      trySetResponseGetter(fuel, responseGetter);
-      trySetResponseGetter(lodging, responseGetter);
-      if (receipt != null) {
-        receipt.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
     }
   }
 
@@ -1056,16 +1024,11 @@ public class Transaction extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(authorization, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
     trySetResponseGetter(dispute, responseGetter);
-    trySetResponseGetter(merchantData, responseGetter);
-    trySetResponseGetter(networkData, responseGetter);
-    trySetResponseGetter(purchaseDetails, responseGetter);
     trySetResponseGetter(token, responseGetter);
-    trySetResponseGetter(treasury, responseGetter);
   }
 }

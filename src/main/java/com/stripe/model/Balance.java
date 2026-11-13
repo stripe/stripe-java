@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.BalanceRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -142,7 +141,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Available extends StripeObject implements StripeActiveObject {
+  public static class Available extends StripeObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -186,11 +185,6 @@ public class Balance extends ApiResource {
        */
       @SerializedName("fpx")
       Long fpx;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(sourceTypes, responseGetter);
     }
   }
 
@@ -201,7 +195,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ConnectReserved extends StripeObject implements StripeActiveObject {
+  public static class ConnectReserved extends StripeObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -246,11 +240,6 @@ public class Balance extends ApiResource {
       @SerializedName("fpx")
       Long fpx;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(sourceTypes, responseGetter);
-    }
   }
 
   /**
@@ -260,7 +249,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InstantAvailable extends StripeObject implements StripeActiveObject {
+  public static class InstantAvailable extends StripeObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -287,7 +276,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class NetAvailable extends StripeObject implements StripeActiveObject {
+    public static class NetAvailable extends StripeObject {
       /** Net balance amount, subtracting fees from platform-set pricing. */
       @SerializedName("amount")
       Long amount;
@@ -328,11 +317,6 @@ public class Balance extends ApiResource {
         @SerializedName("fpx")
         Long fpx;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(sourceTypes, responseGetter);
-      }
     }
 
     /**
@@ -364,14 +348,6 @@ public class Balance extends ApiResource {
       @SerializedName("fpx")
       Long fpx;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (netAvailable != null) {
-        netAvailable.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-      trySetResponseGetter(sourceTypes, responseGetter);
-    }
   }
 
   /**
@@ -381,7 +357,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Issuing extends StripeObject implements StripeActiveObject {
+  public static class Issuing extends StripeObject {
     /** Funds that are available for use. */
     @SerializedName("available")
     List<Balance.Issuing.Available> available;
@@ -393,7 +369,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Available extends StripeObject implements StripeActiveObject {
+    public static class Available extends StripeObject {
       /** Balance amount. */
       @SerializedName("amount")
       Long amount;
@@ -438,18 +414,6 @@ public class Balance extends ApiResource {
         @SerializedName("fpx")
         Long fpx;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(sourceTypes, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (available != null) {
-        available.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
     }
   }
 
@@ -460,7 +424,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Pending extends StripeObject implements StripeActiveObject {
+  public static class Pending extends StripeObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;
@@ -505,11 +469,6 @@ public class Balance extends ApiResource {
       @SerializedName("fpx")
       Long fpx;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(sourceTypes, responseGetter);
-    }
   }
 
   /**
@@ -519,8 +478,7 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RefundAndDisputePrefunding extends StripeObject
-      implements StripeActiveObject {
+  public static class RefundAndDisputePrefunding extends StripeObject {
     /** Funds that are available for use. */
     @SerializedName("available")
     List<Balance.RefundAndDisputePrefunding.Available> available;
@@ -536,7 +494,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Available extends StripeObject implements StripeActiveObject {
+    public static class Available extends StripeObject {
       /** Balance amount. */
       @SerializedName("amount")
       Long amount;
@@ -580,11 +538,6 @@ public class Balance extends ApiResource {
          */
         @SerializedName("fpx")
         Long fpx;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(sourceTypes, responseGetter);
       }
     }
 
@@ -595,7 +548,7 @@ public class Balance extends ApiResource {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pending extends StripeObject implements StripeActiveObject {
+    public static class Pending extends StripeObject {
       /** Balance amount. */
       @SerializedName("amount")
       Long amount;
@@ -640,40 +593,6 @@ public class Balance extends ApiResource {
         @SerializedName("fpx")
         Long fpx;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(sourceTypes, responseGetter);
-      }
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (available != null) {
-        available.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-      if (pending != null) {
-        pending.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    if (available != null) {
-      available.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    if (connectReserved != null) {
-      connectReserved.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    if (instantAvailable != null) {
-      instantAvailable.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(issuing, responseGetter);
-    if (pending != null) {
-      pending.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(refundAndDisputePrefunding, responseGetter);
   }
 }

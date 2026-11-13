@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.billing.FeedbackOptionCreateParams;
 import com.stripe.param.billing.FeedbackOptionDeactivateParams;
 import com.stripe.param.billing.FeedbackOptionListParams;
@@ -286,11 +285,5 @@ public class FeedbackOption extends ApiResource implements HasId {
      */
     @SerializedName("deactivated_at")
     Long deactivatedAt;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

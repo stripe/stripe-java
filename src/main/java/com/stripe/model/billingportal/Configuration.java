@@ -499,7 +499,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SubscriptionPause extends StripeObject implements StripeActiveObject {
+    public static class SubscriptionPause extends StripeObject {
       @SerializedName("duration")
       Duration duration;
 
@@ -517,7 +517,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Duration extends StripeObject implements StripeActiveObject {
+      public static class Duration extends StripeObject {
         /** The preset pause durations customers can choose from. */
         @SerializedName("interval_options")
         List<Configuration.Features.SubscriptionPause.Duration.IntervalOption> intervalOptions;
@@ -551,18 +551,6 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
           @SerializedName("interval_count")
           Long intervalCount;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          if (intervalOptions != null) {
-            intervalOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
-          }
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(duration, responseGetter);
       }
     }
 
@@ -573,7 +561,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SubscriptionUpdate extends StripeObject implements StripeActiveObject {
+    public static class SubscriptionUpdate extends StripeObject {
       /**
        * Determines the value to use for the billing cycle anchor on subscription updates. Valid
        * values are {@code now} or {@code unchanged}, and the default value is {@code unchanged}.
@@ -631,7 +619,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Product extends StripeObject implements StripeActiveObject {
+      public static class Product extends StripeObject {
         @SerializedName("adjustable_quantity")
         AdjustableQuantity adjustableQuantity;
 
@@ -663,11 +651,6 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
           @SerializedName("minimum")
           Long minimum;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(adjustableQuantity, responseGetter);
-        }
       }
 
       /**
@@ -677,7 +660,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ScheduleAtPeriodEnd extends StripeObject implements StripeActiveObject {
+      public static class ScheduleAtPeriodEnd extends StripeObject {
         /**
          * List of conditions. When any condition is true, an update will be scheduled at the end of
          * the current period.
@@ -701,32 +684,12 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
           @SerializedName("type")
           String type;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          if (conditions != null) {
-            conditions.forEach(x -> trySetResponseGetter(x, responseGetter));
-          }
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        if (products != null) {
-          products.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
-        trySetResponseGetter(scheduleAtPeriodEnd, responseGetter);
       }
     }
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(customerUpdate, responseGetter);
-      trySetResponseGetter(invoiceHistory, responseGetter);
-      trySetResponseGetter(paymentMethodUpdate, responseGetter);
       trySetResponseGetter(subscriptionCancel, responseGetter);
-      trySetResponseGetter(subscriptionPause, responseGetter);
-      trySetResponseGetter(subscriptionUpdate, responseGetter);
     }
   }
 
@@ -760,8 +723,6 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(businessProfile, responseGetter);
     trySetResponseGetter(features, responseGetter);
-    trySetResponseGetter(loginPage, responseGetter);
   }
 }

@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentMethodDomainCreateParams;
 import com.stripe.param.PaymentMethodDomainListParams;
 import com.stripe.param.PaymentMethodDomainRetrieveParams;
@@ -370,7 +369,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AmazonPay extends StripeObject implements StripeActiveObject {
+  public static class AmazonPay extends StripeObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -397,11 +396,6 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       /** The error message associated with the status of the payment method on the domain. */
       @SerializedName("error_message")
       String errorMessage;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(statusDetails, responseGetter);
     }
   }
 
@@ -409,7 +403,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ApplePay extends StripeObject implements StripeActiveObject {
+  public static class ApplePay extends StripeObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -436,11 +430,6 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       /** The error message associated with the status of the payment method on the domain. */
       @SerializedName("error_message")
       String errorMessage;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(statusDetails, responseGetter);
     }
   }
 
@@ -448,7 +437,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class GooglePay extends StripeObject implements StripeActiveObject {
+  public static class GooglePay extends StripeObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -475,11 +464,6 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       /** The error message associated with the status of the payment method on the domain. */
       @SerializedName("error_message")
       String errorMessage;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(statusDetails, responseGetter);
     }
   }
 
@@ -487,7 +471,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Klarna extends StripeObject implements StripeActiveObject {
+  public static class Klarna extends StripeObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -514,11 +498,6 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       /** The error message associated with the status of the payment method on the domain. */
       @SerializedName("error_message")
       String errorMessage;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(statusDetails, responseGetter);
     }
   }
 
@@ -526,7 +505,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Link extends StripeObject implements StripeActiveObject {
+  public static class Link extends StripeObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -553,11 +532,6 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       /** The error message associated with the status of the payment method on the domain. */
       @SerializedName("error_message")
       String errorMessage;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(statusDetails, responseGetter);
     }
   }
 
@@ -565,7 +539,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Paypal extends StripeObject implements StripeActiveObject {
+  public static class Paypal extends StripeObject {
     /**
      * The status of the payment method on the domain.
      *
@@ -593,21 +567,5 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
       @SerializedName("error_message")
       String errorMessage;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(statusDetails, responseGetter);
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amazonPay, responseGetter);
-    trySetResponseGetter(applePay, responseGetter);
-    trySetResponseGetter(googlePay, responseGetter);
-    trySetResponseGetter(klarna, responseGetter);
-    trySetResponseGetter(link, responseGetter);
-    trySetResponseGetter(paypal, responseGetter);
   }
 }

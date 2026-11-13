@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CountrySpecListParams;
 import com.stripe.param.CountrySpecRetrieveParams;
 import java.util.List;
@@ -149,7 +148,7 @@ public class CountrySpec extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerificationFields extends StripeObject implements StripeActiveObject {
+  public static class VerificationFields extends StripeObject {
     @SerializedName("company")
     Company company;
 
@@ -189,17 +188,5 @@ public class CountrySpec extends ApiResource implements HasId {
       @SerializedName("minimum")
       List<String> minimum;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(company, responseGetter);
-      trySetResponseGetter(individual, responseGetter);
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(verificationFields, responseGetter);
   }
 }

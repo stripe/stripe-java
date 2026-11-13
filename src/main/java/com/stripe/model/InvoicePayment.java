@@ -336,6 +336,5 @@ public class InvoicePayment extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(payment, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

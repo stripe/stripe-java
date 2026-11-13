@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentIntentAmountDetailsLineItemListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -135,7 +134,7 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
+  public static class PaymentMethodOptions extends StripeObject {
     @SerializedName("card")
     Card card;
 
@@ -222,14 +221,6 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
       @SerializedName("sold_by")
       String soldBy;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(card, responseGetter);
-      trySetResponseGetter(cardPresent, responseGetter);
-      trySetResponseGetter(klarna, responseGetter);
-      trySetResponseGetter(paypal, responseGetter);
-    }
   }
 
   /**
@@ -250,12 +241,5 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
      */
     @SerializedName("total_tax_amount")
     Long totalTaxAmount;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
-    trySetResponseGetter(tax, responseGetter);
   }
 }

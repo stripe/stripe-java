@@ -400,9 +400,7 @@ public class Transaction extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(balanceImpact, responseGetter);
     trySetResponseGetter(entries, responseGetter);
     trySetResponseGetter(flowDetails, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

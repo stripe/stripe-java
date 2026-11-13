@@ -635,7 +635,7 @@ public class Account extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Balance extends StripeObject implements StripeActiveObject {
+  public static class Balance extends StripeObject {
     /**
      * The time that the external institution calculated this balance. Measured in seconds since the
      * Unix epoch.
@@ -715,12 +715,6 @@ public class Account extends ApiResource implements HasId {
       @SerializedName("used")
       Map<String, Long> used;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(cash, responseGetter);
-      trySetResponseGetter(credit, responseGetter);
-    }
   }
 
   /**
@@ -792,7 +786,7 @@ public class Account extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject implements StripeActiveObject {
+  public static class StatusDetails extends StripeObject {
     @SerializedName("active")
     Active active;
 
@@ -823,11 +817,6 @@ public class Account extends ApiResource implements HasId {
       /** When the Account is expected to become inactive, if applicable. */
       @SerializedName("expected_deactivation_date")
       Long expectedDeactivationDate;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(active, responseGetter);
     }
   }
 
@@ -871,14 +860,6 @@ public class Account extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(accountHolder, responseGetter);
-    if (accountNumbers != null) {
-      accountNumbers.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(balance, responseGetter);
-    trySetResponseGetter(balanceRefresh, responseGetter);
     trySetResponseGetter(ownership, responseGetter);
-    trySetResponseGetter(ownershipRefresh, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
-    trySetResponseGetter(transactionRefresh, responseGetter);
   }
 }

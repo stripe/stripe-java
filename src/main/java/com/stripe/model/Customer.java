@@ -961,11 +961,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (customFields != null) {
-        customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
       trySetResponseGetter(defaultPaymentMethod, responseGetter);
-      trySetResponseGetter(renderingOptions, responseGetter);
     }
   }
 
@@ -976,7 +972,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Tax extends StripeObject implements StripeActiveObject {
+  public static class Tax extends StripeObject {
     /**
      * Surfaces if automatic tax computation is possible given the current customer location
      * information.
@@ -1028,11 +1024,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       /** The identified tax state, county, province, or region of the customer. */
       @SerializedName("state")
       String state;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(location, responseGetter);
     }
   }
 
@@ -1101,7 +1092,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     trySetResponseGetter(shipping, responseGetter);
     trySetResponseGetter(sources, responseGetter);
     trySetResponseGetter(subscriptions, responseGetter);
-    trySetResponseGetter(tax, responseGetter);
     trySetResponseGetter(taxIds, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }

@@ -2,7 +2,6 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SourceTransaction extends StripeObject implements HasId, StripeActiveObject {
+public class SourceTransaction extends StripeObject implements HasId {
   @SerializedName("ach_credit_transfer")
   AchCreditTransfer achCreditTransfer;
 
@@ -228,14 +227,5 @@ public class SourceTransaction extends StripeObject implements HasId, StripeActi
     /** Sender's name. */
     @SerializedName("sender_name")
     String senderName;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    trySetResponseGetter(achCreditTransfer, responseGetter);
-    trySetResponseGetter(chfCreditTransfer, responseGetter);
-    trySetResponseGetter(gbpCreditTransfer, responseGetter);
-    trySetResponseGetter(paperCheck, responseGetter);
-    trySetResponseGetter(sepaCreditTransfer, responseGetter);
   }
 }

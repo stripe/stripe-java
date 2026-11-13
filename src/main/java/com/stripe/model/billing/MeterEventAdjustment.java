@@ -9,7 +9,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.billing.MeterEventAdjustmentCreateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -111,11 +110,5 @@ public class MeterEventAdjustment extends ApiResource {
     /** Unique identifier for the event. */
     @SerializedName("identifier")
     String identifier;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(cancel, responseGetter);
   }
 }

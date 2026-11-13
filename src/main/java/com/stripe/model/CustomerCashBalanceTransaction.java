@@ -249,7 +249,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Funded extends StripeObject implements StripeActiveObject {
+  public static class Funded extends StripeObject {
     @SerializedName("bank_transfer")
     BankTransfer bankTransfer;
 
@@ -260,7 +260,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BankTransfer extends StripeObject implements StripeActiveObject {
+    public static class BankTransfer extends StripeObject {
       @SerializedName("eu_bank_transfer")
       EuBankTransfer euBankTransfer;
 
@@ -372,19 +372,6 @@ public class CustomerCashBalanceTransaction extends StripeObject
         @SerializedName("sender_name")
         String senderName;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(euBankTransfer, responseGetter);
-        trySetResponseGetter(gbBankTransfer, responseGetter);
-        trySetResponseGetter(jpBankTransfer, responseGetter);
-        trySetResponseGetter(usBankTransfer, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(bankTransfer, responseGetter);
     }
   }
 
@@ -518,7 +505,6 @@ public class CustomerCashBalanceTransaction extends StripeObject
     trySetResponseGetter(adjustedForOverdraft, responseGetter);
     trySetResponseGetter(appliedToPayment, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(funded, responseGetter);
     trySetResponseGetter(refundedFromPayment, responseGetter);
     trySetResponseGetter(transferredToBalance, responseGetter);
     trySetResponseGetter(unappliedFromPayment, responseGetter);

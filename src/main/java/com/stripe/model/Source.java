@@ -1342,9 +1342,6 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (items != null) {
-        items.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
       trySetResponseGetter(shipping, responseGetter);
     }
   }
@@ -1439,29 +1436,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(achCreditTransfer, responseGetter);
-    trySetResponseGetter(achDebit, responseGetter);
-    trySetResponseGetter(acssDebit, responseGetter);
-    trySetResponseGetter(alipay, responseGetter);
-    trySetResponseGetter(auBecsDebit, responseGetter);
-    trySetResponseGetter(bancontact, responseGetter);
-    trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(cardPresent, responseGetter);
-    trySetResponseGetter(codeVerification, responseGetter);
-    trySetResponseGetter(eps, responseGetter);
-    trySetResponseGetter(giropay, responseGetter);
-    trySetResponseGetter(ideal, responseGetter);
-    trySetResponseGetter(klarna, responseGetter);
-    trySetResponseGetter(multibanco, responseGetter);
     trySetResponseGetter(owner, responseGetter);
-    trySetResponseGetter(p24, responseGetter);
-    trySetResponseGetter(receiver, responseGetter);
-    trySetResponseGetter(redirect, responseGetter);
-    trySetResponseGetter(sepaCreditTransfer, responseGetter);
-    trySetResponseGetter(sepaDebit, responseGetter);
-    trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(sourceOrder, responseGetter);
-    trySetResponseGetter(threeDSecure, responseGetter);
-    trySetResponseGetter(wechat, responseGetter);
   }
 }

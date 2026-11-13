@@ -321,7 +321,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AdditionalTosAcceptances extends StripeObject implements StripeActiveObject {
+  public static class AdditionalTosAcceptances extends StripeObject {
     /** Details on the legal guardian's acceptance of the main Stripe service agreement. */
     @SerializedName("account")
     Account account;
@@ -347,11 +347,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        */
       @SerializedName("user_agent")
       String userAgent;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(account, responseGetter);
     }
   }
 
@@ -463,7 +458,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FutureRequirements extends StripeObject implements StripeActiveObject {
+  public static class FutureRequirements extends StripeObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -625,16 +620,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       @SerializedName("requirement")
       String requirement;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (alternatives != null) {
-        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-      if (errors != null) {
-        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /**
@@ -698,7 +683,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Requirements extends StripeObject implements StripeActiveObject {
+  public static class Requirements extends StripeObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -856,16 +841,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       @SerializedName("requirement")
       String requirement;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (alternatives != null) {
-        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-      if (errors != null) {
-        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /**
@@ -875,7 +850,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UsCfpbData extends StripeObject implements StripeActiveObject {
+  public static class UsCfpbData extends StripeObject {
     /** The persons ethnicity details. */
     @SerializedName("ethnicity_details")
     EthnicityDetails ethnicityDetails;
@@ -920,12 +895,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       /** Please specify your race, when other is selected. */
       @SerializedName("race_other")
       String raceOther;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(ethnicityDetails, responseGetter);
-      trySetResponseGetter(raceDetails, responseGetter);
     }
   }
 
@@ -1163,16 +1132,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(additionalTosAcceptances, responseGetter);
     trySetResponseGetter(address, responseGetter);
-    trySetResponseGetter(addressKana, responseGetter);
-    trySetResponseGetter(addressKanji, responseGetter);
-    trySetResponseGetter(dob, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
     trySetResponseGetter(registeredAddress, responseGetter);
-    trySetResponseGetter(relationship, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
-    trySetResponseGetter(usCfpbData, responseGetter);
     trySetResponseGetter(verification, responseGetter);
   }
 }

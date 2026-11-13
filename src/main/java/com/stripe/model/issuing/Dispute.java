@@ -1082,6 +1082,5 @@ public class Dispute extends ApiResource
     }
     trySetResponseGetter(evidence, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
-    trySetResponseGetter(treasury, responseGetter);
   }
 }

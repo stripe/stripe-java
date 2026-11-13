@@ -208,7 +208,7 @@ public class Settings extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject implements StripeActiveObject {
+  public static class StatusDetails extends StripeObject {
     @SerializedName("active")
     Active active;
 
@@ -241,19 +241,11 @@ public class Settings extends ApiResource {
       @SerializedName("missing_fields")
       List<String> missingFields;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(active, responseGetter);
-      trySetResponseGetter(pending, responseGetter);
-    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(defaults, responseGetter);
     trySetResponseGetter(headOffice, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
   }
 }

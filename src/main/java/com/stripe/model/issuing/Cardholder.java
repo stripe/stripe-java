@@ -374,7 +374,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CardIssuing extends StripeObject implements StripeActiveObject {
+    public static class CardIssuing extends StripeObject {
       /**
        * Information about cardholder acceptance of Celtic <a
        * href="https://docs.stripe.com/issuing/compliance-us#issuing-terms">Authorized User
@@ -405,11 +405,6 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
          */
         @SerializedName("user_agent")
         String userAgent;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(userTermsAcceptance, responseGetter);
       }
     }
 
@@ -525,8 +520,6 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(cardIssuing, responseGetter);
-      trySetResponseGetter(dob, responseGetter);
       trySetResponseGetter(verification, responseGetter);
     }
   }
@@ -563,7 +556,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SpendingControls extends StripeObject implements StripeActiveObject {
+  public static class SpendingControls extends StripeObject {
     /**
      * Array of card presence statuses from which authorizations will be allowed. Possible options
      * are {@code present}, {@code not_present}. All other statuses will be blocked. Cannot be set
@@ -655,22 +648,12 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @SerializedName("interval")
       String interval;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (spendingLimits != null) {
-        spendingLimits.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(billing, responseGetter);
-    trySetResponseGetter(company, responseGetter);
     trySetResponseGetter(individual, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
-    trySetResponseGetter(spendingControls, responseGetter);
   }
 }

@@ -487,7 +487,6 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(location, responseGetter);
       trySetResponseGetter(supplier, responseGetter);
     }
   }
@@ -495,7 +494,6 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(beneficiary, responseGetter);
     if (deliveryDetails != null) {
       deliveryDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
     }

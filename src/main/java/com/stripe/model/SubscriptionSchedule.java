@@ -571,7 +571,7 @@ public class SubscriptionSchedule extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingMode extends StripeObject implements StripeActiveObject {
+  public static class BillingMode extends StripeObject {
     /** Configure behavior for flexible billing mode. */
     @SerializedName("flexible")
     Flexible flexible;
@@ -603,11 +603,6 @@ public class SubscriptionSchedule extends ApiResource
        */
       @SerializedName("proration_discounts")
       String prorationDiscounts;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(flexible, responseGetter);
     }
   }
 
@@ -1004,9 +999,6 @@ public class SubscriptionSchedule extends ApiResource
         if (accountTaxIds != null) {
           accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
-        if (customFields != null) {
-          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
         trySetResponseGetter(issuer, responseGetter);
       }
     }
@@ -1060,7 +1052,6 @@ public class SubscriptionSchedule extends ApiResource
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(automaticTax, responseGetter);
-      trySetResponseGetter(billingThresholds, responseGetter);
       trySetResponseGetter(defaultPaymentMethod, responseGetter);
       trySetResponseGetter(invoiceSettings, responseGetter);
       trySetResponseGetter(onBehalfOf, responseGetter);
@@ -1075,7 +1066,7 @@ public class SubscriptionSchedule extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PauseSchedule extends StripeObject implements StripeActiveObject {
+  public static class PauseSchedule extends StripeObject {
     /** A unique identifier for this pause schedule. */
     @SerializedName("key")
     String key;
@@ -1094,7 +1085,7 @@ public class SubscriptionSchedule extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pause extends StripeObject implements StripeActiveObject {
+    public static class Pause extends StripeObject {
       /** Time at which the subscription pauses. */
       @SerializedName("pause_at")
       Long pauseAt;
@@ -1113,7 +1104,7 @@ public class SubscriptionSchedule extends ApiResource
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Settings extends StripeObject implements StripeActiveObject {
+      public static class Settings extends StripeObject {
         @SerializedName("bill_for")
         BillFor billFor;
 
@@ -1140,7 +1131,7 @@ public class SubscriptionSchedule extends ApiResource
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class BillFor extends StripeObject implements StripeActiveObject {
+        public static class BillFor extends StripeObject {
           @SerializedName("outstanding_usage_through")
           OutstandingUsageThrough outstandingUsageThrough;
 
@@ -1180,17 +1171,6 @@ public class SubscriptionSchedule extends ApiResource
             @SerializedName("type")
             String type;
           }
-
-          @Override
-          public void setResponseGetter(StripeResponseGetter responseGetter) {
-            trySetResponseGetter(outstandingUsageThrough, responseGetter);
-            trySetResponseGetter(unusedTimeFrom, responseGetter);
-          }
-        }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(billFor, responseGetter);
         }
       }
 
@@ -1201,7 +1181,7 @@ public class SubscriptionSchedule extends ApiResource
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Status extends StripeObject implements StripeActiveObject {
+      public static class Status extends StripeObject {
         @SerializedName("error")
         Errors error;
 
@@ -1229,17 +1209,6 @@ public class SubscriptionSchedule extends ApiResource
           @SerializedName("message")
           String message;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(error, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(settings, responseGetter);
-        trySetResponseGetter(status, responseGetter);
       }
     }
 
@@ -1250,7 +1219,7 @@ public class SubscriptionSchedule extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Resume extends StripeObject implements StripeActiveObject {
+    public static class Resume extends StripeObject {
       /** Time at which the subscription resumes. */
       @SerializedName("resume_at")
       Long resumeAt;
@@ -1303,7 +1272,7 @@ public class SubscriptionSchedule extends ApiResource
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Status extends StripeObject implements StripeActiveObject {
+      public static class Status extends StripeObject {
         @SerializedName("error")
         Errors error;
 
@@ -1332,24 +1301,7 @@ public class SubscriptionSchedule extends ApiResource
           @SerializedName("message")
           String message;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(error, responseGetter);
-        }
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(settings, responseGetter);
-        trySetResponseGetter(status, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(pause, responseGetter);
-      trySetResponseGetter(resume, responseGetter);
     }
   }
 
@@ -1714,7 +1666,7 @@ public class SubscriptionSchedule extends ApiResource
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Period extends StripeObject implements StripeActiveObject {
+      public static class Period extends StripeObject {
         @SerializedName("end")
         End end;
 
@@ -1768,12 +1720,6 @@ public class SubscriptionSchedule extends ApiResource
           @SerializedName("type")
           String type;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(end, responseGetter);
-          trySetResponseGetter(start, responseGetter);
-        }
       }
 
       @Override
@@ -1781,7 +1727,6 @@ public class SubscriptionSchedule extends ApiResource
         if (discounts != null) {
           discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
-        trySetResponseGetter(period, responseGetter);
         trySetResponseGetter(price, responseGetter);
         if (taxRates != null) {
           taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
@@ -2137,9 +2082,6 @@ public class SubscriptionSchedule extends ApiResource
         if (accountTaxIds != null) {
           accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
-        if (customFields != null) {
-          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
         trySetResponseGetter(issuer, responseGetter);
       }
     }
@@ -2336,7 +2278,6 @@ public class SubscriptionSchedule extends ApiResource
 
       @Override
       public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(billingThresholds, responseGetter);
         if (discounts != null) {
           discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
@@ -2400,7 +2341,6 @@ public class SubscriptionSchedule extends ApiResource
         addInvoiceItems.forEach(x -> trySetResponseGetter(x, responseGetter));
       }
       trySetResponseGetter(automaticTax, responseGetter);
-      trySetResponseGetter(billingThresholds, responseGetter);
       trySetResponseGetter(defaultPaymentMethod, responseGetter);
       if (defaultTaxRates != null) {
         defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
@@ -2421,13 +2361,8 @@ public class SubscriptionSchedule extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(billingMode, responseGetter);
-    trySetResponseGetter(currentPhase, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);
-    if (pauseSchedules != null) {
-      pauseSchedules.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
     if (phases != null) {
       phases.forEach(x -> trySetResponseGetter(x, responseGetter));
     }

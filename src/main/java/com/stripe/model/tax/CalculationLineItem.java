@@ -3,9 +3,7 @@ package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
-import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -16,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CalculationLineItem extends StripeObject implements HasId, StripeActiveObject {
+public class CalculationLineItem extends StripeObject implements HasId {
   /**
    * The line item amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
    * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
@@ -110,7 +108,7 @@ public class CalculationLineItem extends StripeObject implements HasId, StripeAc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxBreakdown extends StripeObject implements StripeActiveObject {
+  public static class TaxBreakdown extends StripeObject {
     /**
      * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>.
@@ -229,19 +227,6 @@ public class CalculationLineItem extends StripeObject implements HasId, StripeAc
        */
       @SerializedName("tax_type")
       String taxType;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(jurisdiction, responseGetter);
-      trySetResponseGetter(taxRateDetails, responseGetter);
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    if (taxBreakdown != null) {
-      taxBreakdown.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
   }
 }

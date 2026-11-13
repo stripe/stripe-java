@@ -249,7 +249,7 @@ public class TrialOffer extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Duration extends StripeObject implements StripeActiveObject {
+  public static class Duration extends StripeObject {
     @SerializedName("relative")
     Relative relative;
 
@@ -272,11 +272,6 @@ public class TrialOffer extends ApiResource implements HasId {
       /** The number of iterations of the price's interval for this trial offer. */
       @SerializedName("iterations")
       Long iterations;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(relative, responseGetter);
     }
   }
 
@@ -346,7 +341,6 @@ public class TrialOffer extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(duration, responseGetter);
     trySetResponseGetter(endBehavior, responseGetter);
     trySetResponseGetter(price, responseGetter);
   }

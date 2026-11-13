@@ -460,7 +460,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class LifecycleControls extends StripeObject implements StripeActiveObject {
+  public static class LifecycleControls extends StripeObject {
     @SerializedName("cancel_after")
     CancelAfter cancelAfter;
 
@@ -479,11 +479,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("payment_count")
       Long paymentCount;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(cancelAfter, responseGetter);
     }
   }
 
@@ -653,7 +648,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(address, responseGetter);
       trySetResponseGetter(addressValidation, responseGetter);
-      trySetResponseGetter(customs, responseGetter);
     }
   }
 
@@ -664,7 +658,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SpendingControls extends StripeObject implements StripeActiveObject {
+  public static class SpendingControls extends StripeObject {
     /**
      * Array of card presence statuses from which authorizations will be allowed. Possible options
      * are {@code present}, {@code not_present}. All other statuses will be blocked. Cannot be set
@@ -763,13 +757,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       @SerializedName("interval")
       String interval;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (spendingLimits != null) {
-        spendingLimits.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /**
@@ -779,7 +766,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Wallets extends StripeObject implements StripeActiveObject {
+  public static class Wallets extends StripeObject {
     @SerializedName("apple_pay")
     ApplePay applePay;
 
@@ -832,12 +819,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("ineligible_reason")
       String ineligibleReason;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(applePay, responseGetter);
-      trySetResponseGetter(googlePay, responseGetter);
     }
   }
 
@@ -1177,13 +1158,9 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
-    trySetResponseGetter(latestFraudWarning, responseGetter);
-    trySetResponseGetter(lifecycleControls, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
-    trySetResponseGetter(spendingControls, responseGetter);
-    trySetResponseGetter(wallets, responseGetter);
   }
 }

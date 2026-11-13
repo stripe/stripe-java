@@ -4,14 +4,12 @@ package com.stripe.model.forwarding;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.forwarding.RequestCreateParams;
 import com.stripe.param.forwarding.RequestListParams;
 import com.stripe.param.forwarding.RequestRetrieveParams;
@@ -223,7 +221,7 @@ public class Request extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RequestDetails extends StripeObject implements StripeActiveObject {
+  public static class RequestDetails extends StripeObject {
     /** The body payload to send to the destination endpoint. */
     @SerializedName("body")
     String body;
@@ -256,20 +254,13 @@ public class Request extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (headers != null) {
-        headers.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /** Details about the response from the destination endpoint. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ResponseDetails extends StripeObject implements StripeActiveObject {
+  public static class ResponseDetails extends StripeObject {
     /** The response body from the destination endpoint to Stripe. */
     @SerializedName("body")
     String body;
@@ -295,20 +286,5 @@ public class Request extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (headers != null) {
-        headers.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(requestContext, responseGetter);
-    trySetResponseGetter(requestDetails, responseGetter);
-    trySetResponseGetter(responseDetails, responseGetter);
   }
 }

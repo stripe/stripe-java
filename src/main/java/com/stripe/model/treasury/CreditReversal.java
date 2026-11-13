@@ -274,7 +274,6 @@ public class CreditReversal extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

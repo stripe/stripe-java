@@ -960,8 +960,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(annualRevenue, responseGetter);
-      trySetResponseGetter(monthlyEstimatedRevenue, responseGetter);
       trySetResponseGetter(supportAddress, responseGetter);
     }
   }
@@ -2057,15 +2055,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(address, responseGetter);
-      trySetResponseGetter(addressKana, responseGetter);
-      trySetResponseGetter(addressKanji, responseGetter);
       trySetResponseGetter(administrativeAddress, responseGetter);
-      trySetResponseGetter(directorshipDeclaration, responseGetter);
-      trySetResponseGetter(ownershipDeclaration, responseGetter);
       trySetResponseGetter(physicalAddress, responseGetter);
       trySetResponseGetter(principalPlaceOfBusiness, responseGetter);
-      trySetResponseGetter(registrationDate, responseGetter);
-      trySetResponseGetter(representativeDeclaration, responseGetter);
       trySetResponseGetter(verification, responseGetter);
     }
   }
@@ -2077,7 +2069,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Controller extends StripeObject implements StripeActiveObject {
+  public static class Controller extends StripeObject {
     @SerializedName("fees")
     Fees fees;
 
@@ -2168,13 +2160,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("type")
       String type;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(fees, responseGetter);
-      trySetResponseGetter(losses, responseGetter);
-      trySetResponseGetter(stripeDashboard, responseGetter);
-    }
   }
 
   /**
@@ -2184,7 +2169,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FutureRequirements extends StripeObject implements StripeActiveObject {
+  public static class FutureRequirements extends StripeObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -2365,16 +2350,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("requirement")
       String requirement;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (alternatives != null) {
-        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-      if (errors != null) {
-        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /**
@@ -2401,7 +2376,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Requirements extends StripeObject implements StripeActiveObject {
+  public static class Requirements extends StripeObject {
     /**
      * Fields that are due and can be resolved by providing the corresponding alternative fields
      * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
@@ -2582,16 +2557,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("requirement")
       String requirement;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (alternatives != null) {
-        alternatives.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-      if (errors != null) {
-        errors.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
-    }
   }
 
   /**
@@ -2748,7 +2713,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CardIssuing extends StripeObject implements StripeActiveObject {
+    public static class CardIssuing extends StripeObject {
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
@@ -2778,11 +2743,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         @SerializedName("user_agent")
         String userAgent;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(tosAcceptance, responseGetter);
-      }
     }
 
     /**
@@ -2792,7 +2752,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CardPayments extends StripeObject implements StripeActiveObject {
+    public static class CardPayments extends StripeObject {
       @SerializedName("decline_on")
       DeclineOn declineOn;
 
@@ -2847,11 +2807,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
          */
         @SerializedName("cvc_failure")
         Boolean cvcFailure;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(declineOn, responseGetter);
       }
     }
 
@@ -3017,7 +2972,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payouts extends StripeObject implements StripeActiveObject {
+    public static class Payouts extends StripeObject {
       /**
        * A Boolean indicating if Stripe should try to reclaim negative balances from an attached
        * bank account. See <a href="https://stripe.com/connect/account-balances">Understanding
@@ -3087,11 +3042,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         @SerializedName("weekly_payout_days")
         List<String> weeklyPayoutDays;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(schedule, responseGetter);
-      }
     }
 
     /**
@@ -3101,7 +3051,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaypayPayments extends StripeObject implements StripeActiveObject {
+    public static class PaypayPayments extends StripeObject {
       /** Additional files that are required to support the onboarding process of your business. */
       @SerializedName("additional_files")
       List<String> additionalFiles;
@@ -3125,7 +3075,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Site extends StripeObject implements StripeActiveObject {
+      public static class Site extends StripeObject {
         @SerializedName("accessible")
         Accessible accessible;
 
@@ -3181,18 +3131,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
           @SerializedName("payment_flow_file")
           String paymentFlowFile;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(accessible, responseGetter);
-          trySetResponseGetter(inDevelopment, responseGetter);
-          trySetResponseGetter(restricted, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(site, responseGetter);
       }
     }
 
@@ -3216,7 +3154,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Treasury extends StripeObject implements StripeActiveObject {
+    public static class Treasury extends StripeObject {
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
@@ -3246,26 +3184,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         @SerializedName("user_agent")
         String userAgent;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(tosAcceptance, responseGetter);
-      }
     }
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(bacsDebitPayments, responseGetter);
       trySetResponseGetter(branding, responseGetter);
-      trySetResponseGetter(cardIssuing, responseGetter);
-      trySetResponseGetter(cardPayments, responseGetter);
-      trySetResponseGetter(dashboard, responseGetter);
       trySetResponseGetter(invoices, responseGetter);
-      trySetResponseGetter(payments, responseGetter);
-      trySetResponseGetter(payouts, responseGetter);
-      trySetResponseGetter(paypayPayments, responseGetter);
-      trySetResponseGetter(sepaDebitPayments, responseGetter);
-      trySetResponseGetter(treasury, responseGetter);
     }
   }
 
@@ -3303,15 +3227,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(businessProfile, responseGetter);
-    trySetResponseGetter(capabilities, responseGetter);
     trySetResponseGetter(company, responseGetter);
-    trySetResponseGetter(controller, responseGetter);
     trySetResponseGetter(externalAccounts, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
-    trySetResponseGetter(groups, responseGetter);
     trySetResponseGetter(individual, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
     trySetResponseGetter(settings, responseGetter);
-    trySetResponseGetter(tosAcceptance, responseGetter);
   }
 }

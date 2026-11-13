@@ -419,6 +419,5 @@ public class TaxId extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(owner, responseGetter);
-    trySetResponseGetter(verification, responseGetter);
   }
 }

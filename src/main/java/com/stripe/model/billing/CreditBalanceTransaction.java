@@ -229,7 +229,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject implements StripeActiveObject {
+    public static class Amount extends StripeObject {
       /** The monetary amount. */
       @SerializedName("monetary")
       Monetary monetary;
@@ -261,11 +261,6 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
         /** A positive integer representing the amount. */
         @SerializedName("value")
         Long value;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(monetary, responseGetter);
       }
     }
 
@@ -314,7 +309,6 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(amount, responseGetter);
       trySetResponseGetter(creditsApplicationInvoiceVoided, responseGetter);
     }
   }
@@ -352,7 +346,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject implements StripeActiveObject {
+    public static class Amount extends StripeObject {
       /** The monetary amount. */
       @SerializedName("monetary")
       Monetary monetary;
@@ -384,11 +378,6 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
         /** A positive integer representing the amount. */
         @SerializedName("value")
         Long value;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(monetary, responseGetter);
       }
     }
 
@@ -436,7 +425,6 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(amount, responseGetter);
       trySetResponseGetter(creditsApplied, responseGetter);
     }
   }

@@ -934,7 +934,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AfterExpiration extends StripeObject implements StripeActiveObject {
+  public static class AfterExpiration extends StripeObject {
     /** When set, configuration used to recover the Checkout Session on expiry. */
     @SerializedName("recovery")
     Recovery recovery;
@@ -972,11 +972,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("url")
       String url;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(recovery, responseGetter);
     }
   }
 
@@ -1071,7 +1066,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BrandingSettings extends StripeObject implements StripeActiveObject {
+  public static class BrandingSettings extends StripeObject {
     /**
      * A hex color value starting with {@code #} representing the background color for the Checkout
      * Session.
@@ -1162,12 +1157,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("url")
       String url;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(icon, responseGetter);
-      trySetResponseGetter(logo, responseGetter);
-    }
   }
 
   /**
@@ -1251,7 +1240,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ConsentCollection extends StripeObject implements StripeActiveObject {
+  public static class ConsentCollection extends StripeObject {
     /**
      * If set to {@code hidden}, it will hide legal text related to the reuse of a payment method.
      */
@@ -1298,11 +1287,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("position")
       String position;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(paymentMethodReuseAgreement, responseGetter);
-    }
   }
 
   /**
@@ -1337,7 +1321,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomField extends StripeObject implements StripeActiveObject {
+  public static class CustomField extends StripeObject {
     @SerializedName("dropdown")
     Dropdown dropdown;
 
@@ -1379,7 +1363,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Dropdown extends StripeObject implements StripeActiveObject {
+    public static class Dropdown extends StripeObject {
       /** The value that pre-fills on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
@@ -1411,13 +1395,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("value")
         String value;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        if (options != null) {
-          options.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
       }
     }
 
@@ -1491,14 +1468,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("value")
       String value;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(dropdown, responseGetter);
-      trySetResponseGetter(label, responseGetter);
-      trySetResponseGetter(numeric, responseGetter);
-      trySetResponseGetter(text, responseGetter);
-    }
   }
 
   /**
@@ -1508,7 +1477,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomText extends StripeObject implements StripeActiveObject {
+  public static class CustomText extends StripeObject {
     /** Custom text that should be displayed after the payment confirmation button. */
     @SerializedName("after_submit")
     AfterSubmit afterSubmit;
@@ -1577,14 +1546,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(afterSubmit, responseGetter);
-      trySetResponseGetter(shippingAddress, responseGetter);
-      trySetResponseGetter(submit, responseGetter);
-      trySetResponseGetter(termsOfServiceAcceptance, responseGetter);
     }
   }
 
@@ -1690,9 +1651,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
       trySetResponseGetter(address, responseGetter);
-      if (taxIds != null) {
-        taxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
     }
   }
 
@@ -1949,11 +1907,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         if (accountTaxIds != null) {
           accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
         }
-        if (customFields != null) {
-          customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-        }
         trySetResponseGetter(issuer, responseGetter);
-        trySetResponseGetter(renderingOptions, responseGetter);
       }
     }
 
@@ -1987,7 +1941,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NameCollection extends StripeObject implements StripeActiveObject {
+  public static class NameCollection extends StripeObject {
     @SerializedName("business")
     Business business;
 
@@ -2033,12 +1987,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("optional")
       Boolean optional;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(business, responseGetter);
-      trySetResponseGetter(individual, responseGetter);
-    }
   }
 
   /**
@@ -2048,7 +1996,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class OptionalItem extends StripeObject implements StripeActiveObject {
+  public static class OptionalItem extends StripeObject {
     @SerializedName("adjustable_quantity")
     AdjustableQuantity adjustableQuantity;
 
@@ -2086,11 +2034,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("minimum")
       Long minimum;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(adjustableQuantity, responseGetter);
-    }
   }
 
   /**
@@ -2118,7 +2061,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject implements StripeActiveObject {
+  public static class PaymentMethodOptions extends StripeObject {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
@@ -2267,7 +2210,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AcssDebit extends StripeObject implements StripeActiveObject {
+    public static class AcssDebit extends StripeObject {
       /**
        * Currency supported by the bank account. Returned when the Session is in {@code setup} mode.
        *
@@ -2360,11 +2303,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("transaction_type")
         String transactionType;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
       }
     }
 
@@ -2589,7 +2527,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BacsDebit extends StripeObject implements StripeActiveObject {
+    public static class BacsDebit extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -2640,11 +2578,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("reference_prefix")
         String referencePrefix;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
       }
     }
 
@@ -2746,7 +2679,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject implements StripeActiveObject {
+    public static class Card extends StripeObject {
       /**
        * Controls when the funds will be captured from the customer's account.
        *
@@ -2893,12 +2826,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("funding_types_blocked")
         List<String> fundingTypesBlocked;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(installments, responseGetter);
-        trySetResponseGetter(restrictions, responseGetter);
-      }
     }
 
     /**
@@ -2949,7 +2876,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CustomerBalance extends StripeObject implements StripeActiveObject {
+    public static class CustomerBalance extends StripeObject {
       @SerializedName("bank_transfer")
       BankTransfer bankTransfer;
 
@@ -2993,7 +2920,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class BankTransfer extends StripeObject implements StripeActiveObject {
+      public static class BankTransfer extends StripeObject {
         @SerializedName("eu_bank_transfer")
         EuBankTransfer euBankTransfer;
 
@@ -3035,16 +2962,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
           @SerializedName("country")
           String country;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(euBankTransfer, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(bankTransfer, responseGetter);
       }
     }
 
@@ -3742,7 +3659,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payto extends StripeObject implements StripeActiveObject {
+    public static class Payto extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -3836,11 +3753,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("start_date")
         String startDate;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -3850,7 +3762,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pix extends StripeObject implements StripeActiveObject {
+    public static class Pix extends StripeObject {
       /**
        * Determines if the amount includes the IOF tax.
        *
@@ -3948,11 +3860,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         /** Start date of the mandate, in {@code YYYY-MM-DD}. */
         @SerializedName("start_date")
         String startDate;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
       }
     }
 
@@ -4079,7 +3986,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SepaDebit extends StripeObject implements StripeActiveObject {
+    public static class SepaDebit extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -4130,11 +4037,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("reference_prefix")
         String referencePrefix;
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
       }
     }
 
@@ -4285,7 +4187,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Upi extends StripeObject implements StripeActiveObject {
+    public static class Upi extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
@@ -4344,11 +4246,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("end_date")
         Long endDate;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(mandateOptions, responseGetter);
-      }
     }
 
     /**
@@ -4358,7 +4255,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject implements StripeActiveObject {
+    public static class UsBankAccount extends StripeObject {
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
 
@@ -4409,7 +4306,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class FinancialConnections extends StripeObject implements StripeActiveObject {
+      public static class FinancialConnections extends StripeObject {
         @SerializedName("filters")
         Filters filters;
 
@@ -4446,16 +4343,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
           @SerializedName("account_subcategories")
           List<String> accountSubcategories;
         }
-
-        @Override
-        public void setResponseGetter(StripeResponseGetter responseGetter) {
-          trySetResponseGetter(filters, responseGetter);
-        }
-      }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(financialConnections, responseGetter);
       }
     }
 
@@ -4502,57 +4389,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(acssDebit, responseGetter);
-      trySetResponseGetter(affirm, responseGetter);
-      trySetResponseGetter(afterpayClearpay, responseGetter);
-      trySetResponseGetter(alipay, responseGetter);
-      trySetResponseGetter(alma, responseGetter);
-      trySetResponseGetter(amazonPay, responseGetter);
-      trySetResponseGetter(auBecsDebit, responseGetter);
-      trySetResponseGetter(bacsDebit, responseGetter);
-      trySetResponseGetter(bancontact, responseGetter);
-      trySetResponseGetter(billie, responseGetter);
-      trySetResponseGetter(boleto, responseGetter);
-      trySetResponseGetter(card, responseGetter);
-      trySetResponseGetter(cashapp, responseGetter);
-      trySetResponseGetter(customerBalance, responseGetter);
-      trySetResponseGetter(eps, responseGetter);
-      trySetResponseGetter(fpx, responseGetter);
-      trySetResponseGetter(giropay, responseGetter);
-      trySetResponseGetter(grabpay, responseGetter);
-      trySetResponseGetter(ideal, responseGetter);
-      trySetResponseGetter(kakaoPay, responseGetter);
-      trySetResponseGetter(klarna, responseGetter);
-      trySetResponseGetter(konbini, responseGetter);
-      trySetResponseGetter(krCard, responseGetter);
-      trySetResponseGetter(link, responseGetter);
-      trySetResponseGetter(mobilepay, responseGetter);
-      trySetResponseGetter(multibanco, responseGetter);
-      trySetResponseGetter(naverPay, responseGetter);
-      trySetResponseGetter(oxxo, responseGetter);
-      trySetResponseGetter(p24, responseGetter);
-      trySetResponseGetter(payco, responseGetter);
-      trySetResponseGetter(paynow, responseGetter);
-      trySetResponseGetter(paypal, responseGetter);
-      trySetResponseGetter(payto, responseGetter);
-      trySetResponseGetter(pix, responseGetter);
-      trySetResponseGetter(revolutPay, responseGetter);
-      trySetResponseGetter(samsungPay, responseGetter);
-      trySetResponseGetter(satispay, responseGetter);
-      trySetResponseGetter(scalapay, responseGetter);
-      trySetResponseGetter(sepaDebit, responseGetter);
-      trySetResponseGetter(sequra, responseGetter);
-      trySetResponseGetter(sofort, responseGetter);
-      trySetResponseGetter(sunbit, responseGetter);
-      trySetResponseGetter(swish, responseGetter);
-      trySetResponseGetter(twint, responseGetter);
-      trySetResponseGetter(upi, responseGetter);
-      trySetResponseGetter(usBankAccount, responseGetter);
-      trySetResponseGetter(wechatPay, responseGetter);
     }
   }
 
@@ -4973,7 +4809,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class WalletOptions extends StripeObject implements StripeActiveObject {
+  public static class WalletOptions extends StripeObject {
     @SerializedName("link")
     Link link;
 
@@ -4993,28 +4829,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("display")
       String display;
     }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(link, responseGetter);
-    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(adaptivePricing, responseGetter);
-    trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
-    trySetResponseGetter(brandingSettings, responseGetter);
     trySetResponseGetter(collectedInformation, responseGetter);
-    trySetResponseGetter(consent, responseGetter);
-    trySetResponseGetter(consentCollection, responseGetter);
-    trySetResponseGetter(currencyConversion, responseGetter);
-    if (customFields != null) {
-      customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
-    trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
     if (discounts != null) {
@@ -5023,28 +4844,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
-    trySetResponseGetter(managedPayments, responseGetter);
-    trySetResponseGetter(nameCollection, responseGetter);
-    if (optionalItems != null) {
-      optionalItems.forEach(x -> trySetResponseGetter(x, responseGetter));
-    }
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentLink, responseGetter);
-    trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
-    trySetResponseGetter(permissions, responseGetter);
-    trySetResponseGetter(phoneNumberCollection, responseGetter);
-    trySetResponseGetter(presentmentDetails, responseGetter);
-    trySetResponseGetter(savedPaymentMethodOptions, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);
-    trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     if (shippingOptions != null) {
       shippingOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
     trySetResponseGetter(subscription, responseGetter);
-    trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
-    trySetResponseGetter(walletOptions, responseGetter);
   }
 }

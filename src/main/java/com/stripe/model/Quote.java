@@ -1517,9 +1517,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
-      if (customFields != null) {
-        customFields.forEach(x -> trySetResponseGetter(x, responseGetter));
-      }
       trySetResponseGetter(issuer, responseGetter);
     }
   }
@@ -1552,7 +1549,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SubscriptionData extends StripeObject implements StripeActiveObject {
+  public static class SubscriptionData extends StripeObject {
     /** The billing mode of the quote. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
@@ -1596,7 +1593,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingMode extends StripeObject implements StripeActiveObject {
+    public static class BillingMode extends StripeObject {
       @SerializedName("flexible")
       Flexible flexible;
 
@@ -1624,16 +1621,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @SerializedName("proration_discounts")
         String prorationDiscounts;
       }
-
-      @Override
-      public void setResponseGetter(StripeResponseGetter responseGetter) {
-        trySetResponseGetter(flexible, responseGetter);
-      }
-    }
-
-    @Override
-    public void setResponseGetter(StripeResponseGetter responseGetter) {
-      trySetResponseGetter(billingMode, responseGetter);
     }
   }
 
@@ -1842,9 +1829,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
-    trySetResponseGetter(subscriptionData, responseGetter);
     trySetResponseGetter(subscriptionSchedule, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
