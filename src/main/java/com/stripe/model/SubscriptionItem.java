@@ -429,9 +429,13 @@ public class SubscriptionItem extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(billingThresholds, responseGetter);
-    trySetResponseGetter(currentTrial, responseGetter);
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(plan, responseGetter);
     trySetResponseGetter(price, responseGetter);
+    if (taxRates != null) {
+      taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

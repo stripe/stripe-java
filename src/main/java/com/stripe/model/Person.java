@@ -905,7 +905,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Verification extends StripeObject {
+  public static class Verification extends StripeObject implements StripeActiveObject {
     /**
      * A document showing address, either a passport, local ID card, or utility bill from a
      * well-known utility company.
@@ -949,7 +949,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AdditionalDocument extends StripeObject {
+    public static class AdditionalDocument extends StripeObject implements StripeActiveObject {
       /**
        * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
@@ -1023,6 +1023,12 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
       public void setFrontObject(File expandableObject) {
         this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(back, responseGetter);
+        trySetResponseGetter(front, responseGetter);
       }
     }
 
@@ -1033,7 +1039,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Document extends StripeObject {
+    public static class Document extends StripeObject implements StripeActiveObject {
       /**
        * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
@@ -1108,22 +1114,26 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       public void setFrontObject(File expandableObject) {
         this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(back, responseGetter);
+        trySetResponseGetter(front, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(additionalDocument, responseGetter);
+      trySetResponseGetter(document, responseGetter);
     }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(additionalTosAcceptances, responseGetter);
     trySetResponseGetter(address, responseGetter);
-    trySetResponseGetter(addressKana, responseGetter);
-    trySetResponseGetter(addressKanji, responseGetter);
-    trySetResponseGetter(dob, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
     trySetResponseGetter(registeredAddress, responseGetter);
-    trySetResponseGetter(relationship, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
-    trySetResponseGetter(usCfpbData, responseGetter);
     trySetResponseGetter(verification, responseGetter);
   }
 }

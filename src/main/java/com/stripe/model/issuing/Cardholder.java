@@ -8,6 +8,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -307,9 +308,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Billing extends StripeObject {
+  public static class Billing extends StripeObject implements StripeActiveObject {
     @SerializedName("address")
     Address address;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   /**
@@ -332,7 +338,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Individual extends StripeObject {
+  public static class Individual extends StripeObject implements StripeActiveObject {
     /** Information related to the card_issuing program for this cardholder. */
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
@@ -430,7 +436,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Verification extends StripeObject {
+    public static class Verification extends StripeObject implements StripeActiveObject {
       /** An identifying document, either a passport or local ID card. */
       @SerializedName("document")
       Document document;
@@ -442,7 +448,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Document extends StripeObject {
+      public static class Document extends StripeObject implements StripeActiveObject {
         /**
          * The back of a document returned by a <a
          * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
@@ -498,7 +504,23 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         public void setFrontObject(File expandableObject) {
           this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(back, responseGetter);
+          trySetResponseGetter(front, responseGetter);
+        }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(document, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(verification, responseGetter);
     }
   }
 
@@ -632,9 +654,6 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(billing, responseGetter);
-    trySetResponseGetter(company, responseGetter);
     trySetResponseGetter(individual, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
-    trySetResponseGetter(spendingControls, responseGetter);
   }
 }

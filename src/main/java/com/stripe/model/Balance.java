@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.BalanceRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -595,12 +594,5 @@ public class Balance extends ApiResource {
         Long fpx;
       }
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(issuing, responseGetter);
-    trySetResponseGetter(refundAndDisputePrefunding, responseGetter);
   }
 }

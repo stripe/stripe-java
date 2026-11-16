@@ -2,6 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class StripeError extends StripeObject {
+public class StripeError extends StripeObject implements StripeActiveObject {
   /**
    * For card errors resulting from a card issuer decline, a short string indicating <a
    * href="https://docs.stripe.com/declines/card#retrying-issuer-declines">how to proceed with an
@@ -261,4 +262,12 @@ public class StripeError extends StripeObject {
   /** The user message associated with the error. */
   @SerializedName("user_message")
   String userMessage;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(paymentIntent, responseGetter);
+    trySetResponseGetter(paymentMethod, responseGetter);
+    trySetResponseGetter(setupIntent, responseGetter);
+    trySetResponseGetter(source, responseGetter);
+  }
 }

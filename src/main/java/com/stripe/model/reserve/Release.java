@@ -6,8 +6,10 @@ import com.stripe.model.Dispute;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Refund;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
+import com.stripe.net.StripeResponseGetter;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Release extends StripeObject implements HasId {
+public class Release extends StripeObject implements HasId, StripeActiveObject {
   /**
    * Amount released. A positive integer representing how much is released in the <a
    * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
@@ -155,7 +157,7 @@ public class Release extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SourceTransaction extends StripeObject {
+  public static class SourceTransaction extends StripeObject implements StripeActiveObject {
     /** The ID of the dispute. */
     @SerializedName("dispute")
     @Getter(lombok.AccessLevel.NONE)
@@ -211,5 +213,18 @@ public class Release extends StripeObject implements HasId {
     public void setRefundObject(Refund expandableObject) {
       this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(dispute, responseGetter);
+      trySetResponseGetter(refund, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(reserveHold, responseGetter);
+    trySetResponseGetter(reservePlan, responseGetter);
+    trySetResponseGetter(sourceTransaction, responseGetter);
   }
 }

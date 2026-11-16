@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.TaxRateCreateParams;
 import com.stripe.param.TaxRateListParams;
 import com.stripe.param.TaxRateRetrieveParams;
@@ -338,11 +337,5 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
     /** Three-letter ISO currency code, in lowercase. */
     @SerializedName("currency")
     String currency;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(flatAmount, responseGetter);
   }
 }

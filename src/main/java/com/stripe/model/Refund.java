@@ -1435,12 +1435,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(destinationDetails, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(sourceTransferReversal, responseGetter);
     trySetResponseGetter(transferReversal, responseGetter);
   }

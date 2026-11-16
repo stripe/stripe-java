@@ -294,7 +294,7 @@ public class TaxId extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Owner extends StripeObject {
+  public static class Owner extends StripeObject implements StripeActiveObject {
     /** The account being referenced when {@code type} is {@code account}. */
     @SerializedName("account")
     @Getter(lombok.AccessLevel.NONE)
@@ -381,6 +381,13 @@ public class TaxId extends ApiResource implements HasId {
     public void setCustomerObject(Customer expandableObject) {
       this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(account, responseGetter);
+      trySetResponseGetter(application, responseGetter);
+      trySetResponseGetter(customer, responseGetter);
+    }
   }
 
   /**
@@ -412,6 +419,5 @@ public class TaxId extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(owner, responseGetter);
-    trySetResponseGetter(verification, responseGetter);
   }
 }

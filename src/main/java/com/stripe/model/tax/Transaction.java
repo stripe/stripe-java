@@ -655,10 +655,6 @@ public class Transaction extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
-    trySetResponseGetter(reversal, responseGetter);
-    trySetResponseGetter(shipFromDetails, responseGetter);
-    trySetResponseGetter(shippingCost, responseGetter);
   }
 }

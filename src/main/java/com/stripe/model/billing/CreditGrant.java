@@ -500,8 +500,6 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amount, responseGetter);
-    trySetResponseGetter(applicabilityConfig, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }

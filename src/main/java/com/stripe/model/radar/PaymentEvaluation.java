@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.PaymentMethod;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -503,7 +504,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentDetails extends StripeObject {
+  public static class PaymentDetails extends StripeObject implements StripeActiveObject {
     /**
      * Amount intended to be collected by this payment. A positive integer representing how much to
      * charge in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
@@ -589,7 +590,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentMethodDetails extends StripeObject {
+    public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
       /** Billing information associated with the payment evaluation. */
       @SerializedName("billing_details")
       BillingDetails billingDetails;
@@ -623,7 +624,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class BillingDetails extends StripeObject {
+      public static class BillingDetails extends StripeObject implements StripeActiveObject {
         /** Address data. */
         @SerializedName("address")
         Address address;
@@ -639,6 +640,17 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         /** Billing phone number (including extension). */
         @SerializedName("phone")
         String phone;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(address, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(billingDetails, responseGetter);
+        trySetResponseGetter(paymentMethod, responseGetter);
       }
     }
 
@@ -646,7 +658,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ShippingDetails extends StripeObject {
+    public static class ShippingDetails extends StripeObject implements StripeActiveObject {
       /** Address data. */
       @SerializedName("address")
       Address address;
@@ -658,6 +670,17 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       /** Shipping phone number. */
       @SerializedName("phone")
       String phone;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paymentMethodDetails, responseGetter);
+      trySetResponseGetter(shippingDetails, responseGetter);
     }
   }
 
@@ -766,10 +789,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(clientDeviceMetadataDetails, responseGetter);
-    trySetResponseGetter(customerDetails, responseGetter);
-    trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);
-    trySetResponseGetter(signals, responseGetter);
   }
 }

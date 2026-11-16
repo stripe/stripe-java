@@ -5,8 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.Charge;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
+import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Hold extends StripeObject implements HasId {
+public class Hold extends StripeObject implements HasId, StripeActiveObject {
   /**
    * Amount reserved. A positive integer representing how much is reserved in the <a
    * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
@@ -201,5 +203,11 @@ public class Hold extends StripeObject implements HasId {
      */
     @SerializedName("scheduled_release")
     Long scheduledRelease;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(reservePlan, responseGetter);
+    trySetResponseGetter(sourceCharge, responseGetter);
   }
 }

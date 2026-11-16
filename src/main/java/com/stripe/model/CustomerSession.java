@@ -459,7 +459,6 @@ public class CustomerSession extends ApiResource {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(components, responseGetter);
     trySetResponseGetter(customer, responseGetter);
   }
 }

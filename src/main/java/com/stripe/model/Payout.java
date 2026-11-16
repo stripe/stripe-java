@@ -739,6 +739,5 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(originalPayout, responseGetter);
     trySetResponseGetter(reversedBy, responseGetter);
-    trySetResponseGetter(traceId, responseGetter);
   }
 }

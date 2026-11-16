@@ -272,7 +272,6 @@ public class ReportRun extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(parameters, responseGetter);
     trySetResponseGetter(result, responseGetter);
   }
 }

@@ -596,9 +596,6 @@ public class PersonalizationDesign extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardLogo, responseGetter);
-    trySetResponseGetter(carrierText, responseGetter);
     trySetResponseGetter(physicalBundle, responseGetter);
-    trySetResponseGetter(preferences, responseGetter);
-    trySetResponseGetter(rejectionReasons, responseGetter);
   }
 }
