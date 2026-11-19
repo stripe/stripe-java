@@ -31,8 +31,7 @@ public class StripeExceptionTest extends BaseStripeTest {
 
     assertEquals("parameter_unknown", exception.getCode());
     assertEquals(
-        "[1234] Received unknown parameter: foo; code: parameter_unknown",
-        exception.getMessage());
+        "[1234] Received unknown parameter: foo; code: parameter_unknown", exception.getMessage());
     assertEquals(error.getMessage(), exception.getUserMessage());
   }
 
