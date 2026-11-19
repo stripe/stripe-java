@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CouponCreateParams;
 import com.stripe.param.CouponListParams;
 import com.stripe.param.CouponRetrieveParams;
@@ -68,6 +67,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   @SerializedName("currency_options")
   Map<String, Coupon.CurrencyOption> currencyOptions;
+
+  @SerializedName("custom")
+  Custom custom;
 
   /** Always true for a deleted object. */
   @SerializedName("deleted")
@@ -157,7 +159,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /**
    * The type of coupon logic used to calculate the discount.
    *
-   * <p>One of {@code amount_off}, {@code percent_off}, or {@code script}.
+   * <p>One of {@code amount_off}, {@code custom}, {@code percent_off}, or {@code script}.
    */
   @SerializedName("type")
   String type;
@@ -429,6 +431,40 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   }
 
   /**
+   * For more details about Custom, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Custom extends StripeObject {
+    /** The configuration supplied to the extension. */
+    @SerializedName("configuration")
+    Map<String, Object> configuration;
+
+    @SerializedName("extension")
+    Extension extension;
+
+    /**
+     * For more details about Extension, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Extension extends StripeObject implements HasId {
+      /** The Extension Prototype ID. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /** The semantic version of the extension. */
+      @SerializedName("version")
+      String version;
+    }
+  }
+
+  /**
    * For more details about Script, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -497,13 +533,5 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
       @SerializedName("type")
       String type;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(appliesTo, responseGetter);
-    trySetResponseGetter(script, responseGetter);
-    trySetResponseGetter(servicePeriod, responseGetter);
   }
 }

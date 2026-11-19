@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.ReaderCollectedDataRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -107,11 +106,5 @@ public class ReaderCollectedData extends ApiResource implements HasId {
     /** The raw magstripe data collected by the reader. */
     @SerializedName("data")
     String data;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(magstripe, responseGetter);
   }
 }

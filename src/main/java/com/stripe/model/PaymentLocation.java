@@ -291,7 +291,5 @@ public class PaymentLocation extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(address, responseGetter);
-    trySetResponseGetter(businessRegistration, responseGetter);
-    trySetResponseGetter(capabilitySettings, responseGetter);
   }
 }

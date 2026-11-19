@@ -509,6 +509,15 @@ public class FinancialAccount extends StripeObject implements HasId {
     List<FinancialAccount.Storage.DepositInsuranceEligibility> depositInsuranceEligibility;
 
     /**
+     * How funds in this FinancialAccount are held. Defaults to {@code for_benefit_of} if not
+     * specified.
+     *
+     * <p>One of {@code demand_deposit_account}, or {@code for_benefit_of}.
+     */
+    @SerializedName("funds_holding_structure")
+    String fundsHoldingStructure;
+
+    /**
      * The usage type for funds in this FinancialAccount. Can be used to specify that the funds are
      * for Consumer activity.
      */

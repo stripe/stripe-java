@@ -13,6 +13,7 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentMethod;
 import com.stripe.model.Refund;
 import com.stripe.model.SetupIntent;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
@@ -64,22 +65,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @SerializedName("deleted")
   Boolean deleted;
 
-  /**
-   * The overall device health of the reader: {@code healthy} or {@code unhealthy}. Renamed to
-   * {@code no_issues_detected} and {@code needs_attention} respectively; see {@code
-   * device_health_details} for the specific conditions.
-   *
-   * <p>One of {@code healthy}, or {@code unhealthy}.
-   */
-  @SerializedName("device_health")
-  String deviceHealth;
-
-  /**
-   * The set of conditions affecting the reader's device health. Empty when there are no conditions.
-   */
-  @SerializedName("device_health_details")
-  List<Reader.DeviceHealthDetail> deviceHealthDetails;
-
   /** The current software version of the reader. */
   @SerializedName("device_sw_version")
   String deviceSwVersion;
@@ -91,9 +76,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
    * mobile_phone_reader}, {@code simulated_stripe_s700}, {@code simulated_stripe_s710}, {@code
    * simulated_stripe_t600}, {@code simulated_verifone_m425}, {@code simulated_verifone_p630},
    * {@code simulated_verifone_ux700}, {@code simulated_verifone_v660p}, {@code
-   * simulated_wisepos_e}, {@code stripe_m2}, {@code stripe_s700}, {@code stripe_s710}, {@code
-   * stripe_t600}, {@code verifone_P400}, {@code verifone_m425}, {@code verifone_p630}, {@code
-   * verifone_ux700}, or {@code verifone_v660p}.
+   * simulated_wisepos_e}, {@code stripe_m2}, {@code stripe_s700}, {@code stripe_s700_devkit},
+   * {@code stripe_s710}, {@code stripe_s710_devkit}, {@code stripe_t600}, {@code
+   * stripe_t600_devkit}, {@code verifone_P400}, {@code verifone_m425}, {@code verifone_p630},
+   * {@code verifone_ux700}, {@code verifone_ux700_devkit}, {@code verifone_v660p}, or {@code
+   * verifone_v660p_devkit}.
    */
   @SerializedName("device_type")
   String deviceType;
@@ -995,7 +982,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Action extends StripeObject {
+  public static class Action extends StripeObject implements StripeActiveObject {
     /** Represents a reader action to activate a gift card. */
     @SerializedName("activate_gift_card")
     ActivateGiftCard activateGiftCard;
@@ -1092,7 +1079,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ActivateGiftCard extends StripeObject {
+    public static class ActivateGiftCard extends StripeObject implements StripeActiveObject {
       /** The gift card used in this reader action. */
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
@@ -1140,6 +1127,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
         this.giftCardOperation =
             new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(giftCard, responseGetter);
+        trySetResponseGetter(giftCardOperation, responseGetter);
       }
     }
 
@@ -1147,7 +1140,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CashoutGiftCard extends StripeObject {
+    public static class CashoutGiftCard extends StripeObject implements StripeActiveObject {
       /** The gift card used in this reader action. */
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
@@ -1195,6 +1188,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
         this.giftCardOperation =
             new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(giftCard, responseGetter);
+        trySetResponseGetter(giftCardOperation, responseGetter);
       }
     }
 
@@ -1202,7 +1201,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CheckGiftCardBalance extends StripeObject {
+    public static class CheckGiftCardBalance extends StripeObject implements StripeActiveObject {
       /** The gift card used in this reader action. */
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
@@ -1250,6 +1249,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
         this.giftCardOperation =
             new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(giftCard, responseGetter);
+        trySetResponseGetter(giftCardOperation, responseGetter);
       }
     }
 
@@ -1462,7 +1467,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CollectPaymentMethod extends StripeObject {
+    public static class CollectPaymentMethod extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1539,13 +1544,19 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           Long amountEligible;
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(paymentIntent, responseGetter);
+        trySetResponseGetter(paymentMethod, responseGetter);
+      }
     }
 
     /** Represents a reader action to confirm a payment. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ConfirmPaymentIntent extends StripeObject {
+    public static class ConfirmPaymentIntent extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1591,13 +1602,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("return_url")
         String returnUrl;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(paymentIntent, responseGetter);
+      }
     }
 
     /** Represents a reader action to deactivate a gift card. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DeactivateGiftCard extends StripeObject {
+    public static class DeactivateGiftCard extends StripeObject implements StripeActiveObject {
       /** The gift card used in this reader action. */
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
@@ -1646,6 +1662,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         this.giftCardOperation =
             new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(giftCard, responseGetter);
+        trySetResponseGetter(giftCardOperation, responseGetter);
+      }
     }
 
     /** Represents a reader action to print content. */
@@ -1692,7 +1714,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ProcessPaymentIntent extends StripeObject {
+    public static class ProcessPaymentIntent extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1764,13 +1786,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           Long amountEligible;
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(paymentIntent, responseGetter);
+      }
     }
 
     /** Represents a reader action to process a setup intent. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ProcessSetupIntent extends StripeObject {
+    public static class ProcessSetupIntent extends StripeObject implements StripeActiveObject {
       /**
        * ID of a card PaymentMethod generated from the card_present PaymentMethod that may be
        * attached to a Customer for future transactions. Only present if it was possible to generate
@@ -1817,13 +1844,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(setupIntent, responseGetter);
+      }
     }
 
     /** Represents a reader action to refund a payment. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RefundPayment extends StripeObject {
+    public static class RefundPayment extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1953,13 +1985,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(charge, responseGetter);
+        trySetResponseGetter(paymentIntent, responseGetter);
+        trySetResponseGetter(refund, responseGetter);
+      }
     }
 
     /** Represents a reader action to reload a gift card. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ReloadGiftCard extends StripeObject {
+    public static class ReloadGiftCard extends StripeObject implements StripeActiveObject {
       /** The gift card used in this reader action. */
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
@@ -2007,6 +2046,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
         this.giftCardOperation =
             new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(giftCard, responseGetter);
+        trySetResponseGetter(giftCardOperation, responseGetter);
       }
     }
 
@@ -2081,23 +2126,21 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         }
       }
     }
-  }
 
-  /**
-   * For more details about DeviceHealthDetail, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class DeviceHealthDetail extends StripeObject {
-    /**
-     * The type of condition affecting the reader's device health.
-     *
-     * <p>Equal to {@code unrecoverable_tamper}.
-     */
-    @SerializedName("type")
-    String type;
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(activateGiftCard, responseGetter);
+      trySetResponseGetter(apiError, responseGetter);
+      trySetResponseGetter(cashoutGiftCard, responseGetter);
+      trySetResponseGetter(checkGiftCardBalance, responseGetter);
+      trySetResponseGetter(collectPaymentMethod, responseGetter);
+      trySetResponseGetter(confirmPaymentIntent, responseGetter);
+      trySetResponseGetter(deactivateGiftCard, responseGetter);
+      trySetResponseGetter(processPaymentIntent, responseGetter);
+      trySetResponseGetter(processSetupIntent, responseGetter);
+      trySetResponseGetter(refundPayment, responseGetter);
+      trySetResponseGetter(reloadGiftCard, responseGetter);
+    }
   }
 
   public TestHelpers getTestHelpers() {

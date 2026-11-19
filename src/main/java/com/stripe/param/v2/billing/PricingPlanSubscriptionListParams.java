@@ -14,11 +14,11 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   /**
-   * Filter by Billing Cadence ID. Mutually exclusive with {@code payer}, {@code pricing_plan}, and
+   * Filter by Billing Group ID. Mutually exclusive with {@code payer}, {@code pricing_plan}, and
    * {@code pricing_plan_version}.
    */
-  @SerializedName("billing_cadence")
-  String billingCadence;
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -30,8 +30,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Expand to include additional data such as discount_details, billing_cadence_details, or
-   * pricing_plan_component_details.
+   * Expand to include additional data such as discount_details or pricing_plan_component_details.
    */
   @SerializedName("include")
   List<PricingPlanSubscriptionListParams.Include> include;
@@ -41,21 +40,21 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * Filter by payer. Mutually exclusive with {@code billing_cadence}, {@code pricing_plan}, and
+   * Filter by payer. Mutually exclusive with {@code billing_group}, {@code pricing_plan}, and
    * {@code pricing_plan_version}.
    */
   @SerializedName("payer")
   Payer payer;
 
   /**
-   * Filter by PricingPlan ID. Mutually exclusive with {@code billing_cadence}, {@code payer}, and
+   * Filter by PricingPlan ID. Mutually exclusive with {@code billing_group}, {@code payer}, and
    * {@code pricing_plan_version}.
    */
   @SerializedName("pricing_plan")
   String pricingPlan;
 
   /**
-   * Filter by Pricing Plan Version ID. Mutually exclusive with {@code billing_cadence}, {@code
+   * Filter by Pricing Plan Version ID. Mutually exclusive with {@code billing_group}, {@code
    * payer}, and {@code pricing_plan}.
    */
   @SerializedName("pricing_plan_version")
@@ -66,7 +65,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   ServicingStatus servicingStatus;
 
   private PricingPlanSubscriptionListParams(
-      String billingCadence,
+      String billingGroup,
       Map<String, Object> extraParams,
       List<PricingPlanSubscriptionListParams.Include> include,
       Long limit,
@@ -74,7 +73,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
       String pricingPlan,
       String pricingPlanVersion,
       ServicingStatus servicingStatus) {
-    this.billingCadence = billingCadence;
+    this.billingGroup = billingGroup;
     this.extraParams = extraParams;
     this.include = include;
     this.limit = limit;
@@ -89,7 +88,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String billingCadence;
+    private String billingGroup;
 
     private Map<String, Object> extraParams;
 
@@ -108,7 +107,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PricingPlanSubscriptionListParams build() {
       return new PricingPlanSubscriptionListParams(
-          this.billingCadence,
+          this.billingGroup,
           this.extraParams,
           this.include,
           this.limit,
@@ -119,11 +118,11 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by Billing Cadence ID. Mutually exclusive with {@code payer}, {@code pricing_plan},
-     * and {@code pricing_plan_version}.
+     * Filter by Billing Group ID. Mutually exclusive with {@code payer}, {@code pricing_plan}, and
+     * {@code pricing_plan_version}.
      */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 
@@ -186,7 +185,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by payer. Mutually exclusive with {@code billing_cadence}, {@code pricing_plan}, and
+     * Filter by payer. Mutually exclusive with {@code billing_group}, {@code pricing_plan}, and
      * {@code pricing_plan_version}.
      */
     public Builder setPayer(PricingPlanSubscriptionListParams.Payer payer) {
@@ -195,7 +194,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by PricingPlan ID. Mutually exclusive with {@code billing_cadence}, {@code payer}, and
+     * Filter by PricingPlan ID. Mutually exclusive with {@code billing_group}, {@code payer}, and
      * {@code pricing_plan_version}.
      */
     public Builder setPricingPlan(String pricingPlan) {
@@ -204,7 +203,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by Pricing Plan Version ID. Mutually exclusive with {@code billing_cadence}, {@code
+     * Filter by Pricing Plan Version ID. Mutually exclusive with {@code billing_group}, {@code
      * payer}, and {@code pricing_plan}.
      */
     public Builder setPricingPlanVersion(String pricingPlanVersion) {
@@ -225,7 +224,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   public static class Payer {
     /**
      * The ID of the Customer object. If provided, only Pricing Plan Subscriptions that are
-     * subscribed on the cadences with the specified payer will be returned.
+     * subscribed on the Billing Groups with the specified payer will be returned.
      */
     @SerializedName("customer")
     String customer;
@@ -271,7 +270,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
 
       /**
        * The ID of the Customer object. If provided, only Pricing Plan Subscriptions that are
-       * subscribed on the cadences with the specified payer will be returned.
+       * subscribed on the Billing Groups with the specified payer will be returned.
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;

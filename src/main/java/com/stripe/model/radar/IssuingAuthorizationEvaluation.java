@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.IssuingAuthorizationEvaluationCreateParams;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -396,18 +395,5 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
      */
     @SerializedName("three_d_secure_result")
     String threeDSecureResult;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(authorizationDetails, responseGetter);
-    trySetResponseGetter(cardDetails, responseGetter);
-    trySetResponseGetter(cardholderDetails, responseGetter);
-    trySetResponseGetter(merchantDetails, responseGetter);
-    trySetResponseGetter(networkDetails, responseGetter);
-    trySetResponseGetter(signals, responseGetter);
-    trySetResponseGetter(tokenDetails, responseGetter);
-    trySetResponseGetter(verificationDetails, responseGetter);
   }
 }

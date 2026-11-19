@@ -263,6 +263,9 @@ public class AlertListParams extends ApiRequestParams {
     @SerializedName("authorization_rate_drop")
     AUTHORIZATION_RATE_DROP("authorization_rate_drop"),
 
+    @SerializedName("custom_payment_method_adapter_degraded")
+    CUSTOM_PAYMENT_METHOD_ADAPTER_DEGRADED("custom_payment_method_adapter_degraded"),
+
     @SerializedName("elements_error")
     ELEMENTS_ERROR("elements_error"),
 

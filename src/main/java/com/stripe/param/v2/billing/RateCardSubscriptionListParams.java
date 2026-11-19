@@ -12,11 +12,11 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class RateCardSubscriptionListParams extends ApiRequestParams {
   /**
-   * Optionally filter by a BillingCadence. Mutually exclusive with {@code payers}, {@code
-   * rate_card}, and {@code rate_card_version}.
+   * Optionally filter by a BillingGroup. Mutually exclusive with {@code payers}, {@code rate_card},
+   * and {@code rate_card_version}.
    */
-  @SerializedName("billing_cadence")
-  String billingCadence;
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -32,23 +32,23 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * Optionally filter by the payer associated with Billing Cadences which the Rate Card
-   * Subscriptions are subscribed to. Mutually exclusive with {@code billing_cadence}, {@code
-   * rate_card}, and {@code rate_card_version}.
+   * Optionally filter by the payer associated with Billing Groups which the Rate Card Subscriptions
+   * are subscribed to. Mutually exclusive with {@code billing_group}, {@code rate_card}, and {@code
+   * rate_card_version}.
    */
   @SerializedName("payer")
   Payer payer;
 
   /**
-   * Optionally filter by a RateCard. Mutually exclusive with {@code billing_cadence}, {@code
-   * payers}, and {@code rate_card_version}.
+   * Optionally filter by a RateCard. Mutually exclusive with {@code billing_group}, {@code payers},
+   * and {@code rate_card_version}.
    */
   @SerializedName("rate_card")
   String rateCard;
 
   /**
-   * Optionally filter by a RateCard version. Mutually exclusive with {@code billing_cadence},
-   * {@code payers}, and {@code rate_card}.
+   * Optionally filter by a RateCard version. Mutually exclusive with {@code billing_group}, {@code
+   * payers}, and {@code rate_card}.
    */
   @SerializedName("rate_card_version")
   String rateCardVersion;
@@ -58,14 +58,14 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   ServicingStatus servicingStatus;
 
   private RateCardSubscriptionListParams(
-      String billingCadence,
+      String billingGroup,
       Map<String, Object> extraParams,
       Long limit,
       Payer payer,
       String rateCard,
       String rateCardVersion,
       ServicingStatus servicingStatus) {
-    this.billingCadence = billingCadence;
+    this.billingGroup = billingGroup;
     this.extraParams = extraParams;
     this.limit = limit;
     this.payer = payer;
@@ -79,7 +79,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String billingCadence;
+    private String billingGroup;
 
     private Map<String, Object> extraParams;
 
@@ -96,7 +96,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public RateCardSubscriptionListParams build() {
       return new RateCardSubscriptionListParams(
-          this.billingCadence,
+          this.billingGroup,
           this.extraParams,
           this.limit,
           this.payer,
@@ -106,11 +106,11 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Optionally filter by a BillingCadence. Mutually exclusive with {@code payers}, {@code
+     * Optionally filter by a BillingGroup. Mutually exclusive with {@code payers}, {@code
      * rate_card}, and {@code rate_card_version}.
      */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 
@@ -147,8 +147,8 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Optionally filter by the payer associated with Billing Cadences which the Rate Card
-     * Subscriptions are subscribed to. Mutually exclusive with {@code billing_cadence}, {@code
+     * Optionally filter by the payer associated with Billing Groups which the Rate Card
+     * Subscriptions are subscribed to. Mutually exclusive with {@code billing_group}, {@code
      * rate_card}, and {@code rate_card_version}.
      */
     public Builder setPayer(RateCardSubscriptionListParams.Payer payer) {
@@ -157,7 +157,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Optionally filter by a RateCard. Mutually exclusive with {@code billing_cadence}, {@code
+     * Optionally filter by a RateCard. Mutually exclusive with {@code billing_group}, {@code
      * payers}, and {@code rate_card_version}.
      */
     public Builder setRateCard(String rateCard) {
@@ -166,7 +166,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Optionally filter by a RateCard version. Mutually exclusive with {@code billing_cadence},
+     * Optionally filter by a RateCard version. Mutually exclusive with {@code billing_group},
      * {@code payers}, and {@code rate_card}.
      */
     public Builder setRateCardVersion(String rateCardVersion) {
@@ -187,7 +187,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   public static class Payer {
     /**
      * The ID of the Customer object. If provided, only the Rate Card Subscriptions that are
-     * subscribed on the Billing Cadences with the specified payer will be returned.
+     * subscribed on the Billing Groups with the specified payer will be returned.
      */
     @SerializedName("customer")
     String customer;
@@ -232,7 +232,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
 
       /**
        * The ID of the Customer object. If provided, only the Rate Card Subscriptions that are
-       * subscribed on the Billing Cadences with the specified payer will be returned.
+       * subscribed on the Billing Groups with the specified payer will be returned.
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;

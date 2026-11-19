@@ -27,6 +27,15 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   Boolean active;
 
   /**
+   * AEON Pay is a single-use payment method that requires customers to authenticate their payment.
+   * Customers pay by being redirected from your website or app, authorizing the payment with AEON
+   * Pay, then returning to your website or app. You get immediate notification of whether the
+   * payment succeeded or failed.
+   */
+  @SerializedName("aeon_pay")
+  AeonPay aeonPay;
+
+  /**
    * <a href="https://www.affirm.com/">Affirm</a> gives your customers a way to split purchases over
    * a series of payments. Depending on the purchase, they can pay with four interest-free payments
    * (Split Pay) or pay over a longer term (Installments), which might include interest. Check this
@@ -93,6 +102,15 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
    */
   @SerializedName("au_becs_debit")
   AuBecsDebit auBecsDebit;
+
+  /**
+   * au PAY is a single-use payment method that requires customers to authenticate their payment.
+   * Customers pay by being redirected from your website or app, authorizing the payment with au
+   * PAY, then returning to your website or app. You get immediate notification of whether the
+   * payment succeeded or failed.
+   */
+  @SerializedName("au_pay")
+  AuPay auPay;
 
   /**
    * Stripe users in the UK can accept Bacs Direct Debit payments from customers with a UK bank
@@ -185,6 +203,15 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
    */
   @SerializedName("customer_balance")
   CustomerBalance customerBalance;
+
+  /**
+   * d-Barai is a single-use payment method that requires customers to authenticate their payment.
+   * Customers pay by being redirected from your website or app, authorizing the payment with
+   * d-Barai, then returning to your website or app. You get immediate notification of whether the
+   * payment succeeded or failed.
+   */
+  @SerializedName("dbarai")
+  Dbarai dbarai;
 
   /**
    * EPS is an Austria-based payment method that allows customers to complete transactions online
@@ -338,6 +365,15 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
    */
   @SerializedName("mb_way")
   MbWay mbWay;
+
+  /**
+   * Merpay is a single-use payment method that requires customers to authenticate their payment.
+   * Customers pay by being redirected from your website or app, authorizing the payment with
+   * Merpay, then returning to your website or app. You get immediate notification of whether the
+   * payment succeeded or failed.
+   */
+  @SerializedName("merpay")
+  Merpay merpay;
 
   /**
    * MobilePay is a <a href="https://docs.stripe.com/payments/payment-methods#usage">single-use</a>
@@ -629,6 +665,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   private PaymentMethodConfigurationUpdateParams(
       AcssDebit acssDebit,
       Boolean active,
+      AeonPay aeonPay,
       Affirm affirm,
       AfterpayClearpay afterpayClearpay,
       Alipay alipay,
@@ -637,6 +674,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       ApplePay applePay,
       ApplePayLater applePayLater,
       AuBecsDebit auBecsDebit,
+      AuPay auPay,
       BacsDebit bacsDebit,
       Bancontact bancontact,
       Billie billie,
@@ -648,6 +686,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       Cashapp cashapp,
       Crypto crypto,
       CustomerBalance customerBalance,
+      Dbarai dbarai,
       Eps eps,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -666,6 +705,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       KrCard krCard,
       Link link,
       MbWay mbWay,
+      Merpay merpay,
       Mobilepay mobilepay,
       Multibanco multibanco,
       Object name,
@@ -702,6 +742,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       Zip zip) {
     this.acssDebit = acssDebit;
     this.active = active;
+    this.aeonPay = aeonPay;
     this.affirm = affirm;
     this.afterpayClearpay = afterpayClearpay;
     this.alipay = alipay;
@@ -710,6 +751,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.applePay = applePay;
     this.applePayLater = applePayLater;
     this.auBecsDebit = auBecsDebit;
+    this.auPay = auPay;
     this.bacsDebit = bacsDebit;
     this.bancontact = bancontact;
     this.billie = billie;
@@ -721,6 +763,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.cashapp = cashapp;
     this.crypto = crypto;
     this.customerBalance = customerBalance;
+    this.dbarai = dbarai;
     this.eps = eps;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -739,6 +782,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.krCard = krCard;
     this.link = link;
     this.mbWay = mbWay;
+    this.merpay = merpay;
     this.mobilepay = mobilepay;
     this.multibanco = multibanco;
     this.name = name;
@@ -784,6 +828,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
 
     private Boolean active;
 
+    private AeonPay aeonPay;
+
     private Affirm affirm;
 
     private AfterpayClearpay afterpayClearpay;
@@ -799,6 +845,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     private ApplePayLater applePayLater;
 
     private AuBecsDebit auBecsDebit;
+
+    private AuPay auPay;
 
     private BacsDebit bacsDebit;
 
@@ -821,6 +869,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     private Crypto crypto;
 
     private CustomerBalance customerBalance;
+
+    private Dbarai dbarai;
 
     private Eps eps;
 
@@ -857,6 +907,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     private Link link;
 
     private MbWay mbWay;
+
+    private Merpay merpay;
 
     private Mobilepay mobilepay;
 
@@ -931,6 +983,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       return new PaymentMethodConfigurationUpdateParams(
           this.acssDebit,
           this.active,
+          this.aeonPay,
           this.affirm,
           this.afterpayClearpay,
           this.alipay,
@@ -939,6 +992,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.applePay,
           this.applePayLater,
           this.auBecsDebit,
+          this.auPay,
           this.bacsDebit,
           this.bancontact,
           this.billie,
@@ -950,6 +1004,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.cashapp,
           this.crypto,
           this.customerBalance,
+          this.dbarai,
           this.eps,
           this.expand,
           this.extraParams,
@@ -968,6 +1023,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.krCard,
           this.link,
           this.mbWay,
+          this.merpay,
           this.mobilepay,
           this.multibanco,
           this.name,
@@ -1017,6 +1073,17 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     /** Whether the configuration can be used for new payments. */
     public Builder setActive(Boolean active) {
       this.active = active;
+      return this;
+    }
+
+    /**
+     * AEON Pay is a single-use payment method that requires customers to authenticate their
+     * payment. Customers pay by being redirected from your website or app, authorizing the payment
+     * with AEON Pay, then returning to your website or app. You get immediate notification of
+     * whether the payment succeeded or failed.
+     */
+    public Builder setAeonPay(PaymentMethodConfigurationUpdateParams.AeonPay aeonPay) {
+      this.aeonPay = aeonPay;
       return this;
     }
 
@@ -1103,6 +1170,17 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setAuBecsDebit(PaymentMethodConfigurationUpdateParams.AuBecsDebit auBecsDebit) {
       this.auBecsDebit = auBecsDebit;
+      return this;
+    }
+
+    /**
+     * au PAY is a single-use payment method that requires customers to authenticate their payment.
+     * Customers pay by being redirected from your website or app, authorizing the payment with au
+     * PAY, then returning to your website or app. You get immediate notification of whether the
+     * payment succeeded or failed.
+     */
+    public Builder setAuPay(PaymentMethodConfigurationUpdateParams.AuPay auPay) {
+      this.auPay = auPay;
       return this;
     }
 
@@ -1220,6 +1298,17 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     public Builder setCustomerBalance(
         PaymentMethodConfigurationUpdateParams.CustomerBalance customerBalance) {
       this.customerBalance = customerBalance;
+      return this;
+    }
+
+    /**
+     * d-Barai is a single-use payment method that requires customers to authenticate their payment.
+     * Customers pay by being redirected from your website or app, authorizing the payment with
+     * d-Barai, then returning to your website or app. You get immediate notification of whether the
+     * payment succeeded or failed.
+     */
+    public Builder setDbarai(PaymentMethodConfigurationUpdateParams.Dbarai dbarai) {
+      this.dbarai = dbarai;
       return this;
     }
 
@@ -1446,6 +1535,17 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setMbWay(PaymentMethodConfigurationUpdateParams.MbWay mbWay) {
       this.mbWay = mbWay;
+      return this;
+    }
+
+    /**
+     * Merpay is a single-use payment method that requires customers to authenticate their payment.
+     * Customers pay by being redirected from your website or app, authorizing the payment with
+     * Merpay, then returning to your website or app. You get immediate notification of whether the
+     * payment succeeded or failed.
+     */
+    public Builder setMerpay(PaymentMethodConfigurationUpdateParams.Merpay merpay) {
+      this.merpay = merpay;
       return this;
     }
 
@@ -1958,6 +2058,172 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.AcssDebit.DisplayPreference.Preference
+                preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AeonPay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AeonPay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.AeonPay build() {
+        return new PaymentMethodConfigurationUpdateParams.AeonPay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.AeonPay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.AeonPay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.AeonPay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.AeonPay.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.AeonPay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.AeonPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.AeonPay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.AeonPay.DisplayPreference.Preference
                 preference) {
           this.preference = preference;
           return this;
@@ -3289,6 +3555,171 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.AuBecsDebit.DisplayPreference.Preference
                 preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AuPay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AuPay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.AuPay build() {
+        return new PaymentMethodConfigurationUpdateParams.AuPay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.AuPay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.AuPay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.AuPay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.AuPay.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.AuPay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.AuPay.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.AuPay.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.AuPay.DisplayPreference.Preference preference) {
           this.preference = preference;
           return this;
         }
@@ -5113,6 +5544,171 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.CustomerBalance.DisplayPreference.Preference
                 preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Dbarai {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Dbarai(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.Dbarai build() {
+        return new PaymentMethodConfigurationUpdateParams.Dbarai(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.Dbarai.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.Dbarai#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.Dbarai#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.Dbarai.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.Dbarai.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Dbarai.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Dbarai.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.Dbarai.DisplayPreference.Preference preference) {
           this.preference = preference;
           return this;
         }
@@ -7760,6 +8356,171 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.MbWay.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Merpay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Merpay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.Merpay build() {
+        return new PaymentMethodConfigurationUpdateParams.Merpay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.Merpay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.Merpay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.Merpay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.Merpay.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.Merpay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Merpay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Merpay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.Merpay.DisplayPreference.Preference preference) {
           this.preference = preference;
           return this;
         }

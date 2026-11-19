@@ -10,44 +10,49 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A claimable sandbox represents a Stripe sandbox that is anonymous. When it is created, it can be
- * prefilled with specific metadata, such as email, name, or country. Claimable sandboxes can be
- * claimed through a URL. When a user claims a sandbox through this URL, it will prompt them to
- * create a new Stripe account. Or, it will allow them to claim this sandbox in their existing
- * Stripe account. Claimable sandboxes have 60 days to be claimed. After this expiration time has
- * passed, if the sandbox is not claimed, it will be deleted.
+ * A claimable sandbox is a Stripe sandbox that a user can claim into a new or existing Stripe
+ * account through an onboarding link. You can prefill it with an email address, sandbox name, and
+ * country. Claimable sandboxes have 60 days to be claimed. After this expiration time has passed,
+ * if the sandbox is not claimed, it will be deleted.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ClaimableSandbox extends StripeObject implements HasId {
   /**
-   * The app channel that will be used when pre-installing your app on the claimable sandbox.
+   * The distribution channel used to pre-install your Stripe App on the claimable sandbox. Use
+   * {@code testing} to install your app's external test version or {@code public} to install its
+   * published version.
    *
    * <p>One of {@code public}, or {@code testing}.
    */
-  @SerializedName("app_channel")
-  String appChannel;
+  @SerializedName("channel")
+  String channel;
 
   /**
-   * The timestamp the sandbox was claimed. The value will be null if the sandbox status is not
-   * {@code claimed}.
+   * Time at which the sandbox was claimed. Set when the status is {@code claimed} or {@code live}.
+   * Represented as an RFC 3339 timestamp in UTC with millisecond precision, for example {@code
+   * 2022-09-18T13:22:18.123Z}.
    */
   @SerializedName("claimed_at")
   Instant claimedAt;
 
-  /** When the sandbox is created. */
+  /**
+   * Time at which the sandbox was created. Represented as an RFC 3339 timestamp in UTC with
+   * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+   */
   @SerializedName("created")
   Instant created;
 
   /**
-   * The timestamp the sandbox will expire. The value will be null if the sandbox is {@code
-   * claimed}.
+   * Time at which the unclaimed sandbox expires. Null when the status is {@code claimed} or {@code
+   * live}. Represented as an RFC 3339 timestamp in UTC with millisecond precision, for example
+   * {@code 2022-09-18T13:22:18.123Z}.
    */
   @SerializedName("expires_at")
   Instant expiresAt;
 
-  /** Unique identifier for the Claimable sandbox. */
+  /** Unique identifier for the claimable sandbox. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -68,13 +73,16 @@ public class ClaimableSandbox extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Details about the onboarding link. */
+  /**
+   * Details about the onboarding link. Null when the sandbox status is {@code live} or {@code
+   * expired}.
+   */
   @SerializedName("onboarding_link_details")
   OnboardingLinkDetails onboardingLinkDetails;
 
   /**
-   * Details about the livemode owner account of the sandbox. This will be null until the sandbox is
-   * claimed.
+   * Details about the live mode owner account of the sandbox. This will be null until the sandbox
+   * is claimed.
    */
   @SerializedName("owner_details")
   OwnerDetails ownerDetails;
@@ -98,12 +106,18 @@ public class ClaimableSandbox extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Details about the onboarding link. */
+  /**
+   * Details about the onboarding link. Null when the sandbox status is {@code live} or {@code
+   * expired}.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OnboardingLinkDetails extends StripeObject {
-    /** The timestamp the onboarding link expires. */
+    /**
+     * Time at which the onboarding link expires. Represented as an RFC 3339 timestamp in UTC with
+     * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+     */
     @SerializedName("expires_at")
     Instant expiresAt;
 
@@ -115,31 +129,35 @@ public class ClaimableSandbox extends StripeObject implements HasId {
     @SerializedName("refresh_url")
     String refreshUrl;
 
+    /** The URL offered to the user as a way back to your app after they claim the sandbox. */
+    @SerializedName("return_url")
+    String returnUrl;
+
     /**
-     * URL that will redirect the user to either claim or onboard the claimable sandbox depending on
-     * its status.
+     * The URL that lets a user claim the sandbox or continue onboarding their Stripe account,
+     * depending on the sandbox's status.
      */
     @SerializedName("url")
     String url;
   }
 
   /**
-   * Details about the livemode owner account of the sandbox. This will be null until the sandbox is
-   * claimed.
+   * Details about the live mode owner account of the sandbox. This will be null until the sandbox
+   * is claimed.
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OwnerDetails extends StripeObject {
     /**
-     * The ID of the livemode Stripe account that owns the sandbox. This field is only set when
-     * owner_details.app_install_status is {@code installed}.
+     * The ID of the live mode Stripe account that owns the sandbox. This field is only set when
+     * {@code owner_details.app_install_status} is {@code installed}.
      */
     @SerializedName("account")
     String account;
 
     /**
-     * Indicates whether the platform app is installed on the sandbox’s livemode owner account.
+     * Indicates whether the platform app is installed on the sandbox’s live mode owner account.
      *
      * <p>One of {@code installed}, {@code pending_install}, or {@code pending_onboarding}.
      */
@@ -164,8 +182,8 @@ public class ClaimableSandbox extends StripeObject implements HasId {
     String country;
 
     /**
-     * Email that this sandbox is meant to be claimed by. Stripe will send an email to this email
-     * address before the sandbox expires.
+     * Email address of the user who will claim the sandbox. Stripe sends this address an invitation
+     * to claim the sandbox and a reminder before the unclaimed sandbox expires.
      */
     @SerializedName("email")
     String email;
@@ -186,35 +204,221 @@ public class ClaimableSandbox extends StripeObject implements HasId {
 
     /**
      * Keys that can be used to set up an integration for this sandbox and operate on the account.
-     * This will be present only in the create response, and will be null in subsequent retrieve
-     * responses.
+     * Present in the create response. To fetch this field in the retrieve response, pass {@code
+     * sandbox_details.api_keys} in the {@code include} parameter.
      */
     @SerializedName("api_keys")
     ApiKeys apiKeys;
 
     /**
      * Keys that can be used to set up an integration for this sandbox and operate on the account.
-     * This will be present only in the create response, and will be null in subsequent retrieve
-     * responses.
+     * Present in the create response. To fetch this field in the retrieve response, pass {@code
+     * sandbox_details.api_keys} in the {@code include} parameter.
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ApiKeys extends StripeObject {
       /**
-       * Used to communicate with <a href="https://docs.stripe.com/mcp">Stripe's MCP server</a>.
-       * This allows LLM agents to securely operate on a Stripe account.
+       * Object hash for the sandbox's MCP key. Null unless {@code enable_mcp_access: true} was
+       * passed in the creation request.
        */
       @SerializedName("mcp")
-      String mcp;
+      Mcp mcp;
 
-      /** Publicly accessible in a web or mobile app client-side code. */
+      /** Object hash for the sandbox's publishable key. */
       @SerializedName("publishable")
-      String publishable;
+      Publishable publishable;
 
-      /** Should be stored securely in server-side code (such as an environment variable). */
+      /** Object hash for the sandbox's secret key. */
       @SerializedName("secret")
-      String secret;
+      Secret secret;
+
+      /**
+       * Object hash for the sandbox's MCP key. Null unless {@code enable_mcp_access: true} was
+       * passed in the creation request.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Mcp extends StripeObject implements HasId {
+        /**
+         * Time at which the API key was created. Represented as an RFC 3339 timestamp in UTC with
+         * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+         */
+        @SerializedName("created")
+        Instant created;
+
+        /**
+         * Time at which the API key expires. Represented as an RFC 3339 timestamp in UTC with
+         * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+         */
+        @SerializedName("expires_at")
+        Instant expiresAt;
+
+        /** Unique identifier of the API key. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /**
+         * Token for the secret key. Present only in the create response; null in subsequent
+         * retrieve responses.
+         */
+        @SerializedName("secret_key")
+        SecretKey secretKey;
+
+        /**
+         * Current status of the API key.
+         *
+         * <p>One of {@code active}, or {@code expired}.
+         */
+        @SerializedName("status")
+        String status;
+
+        /**
+         * Type of the API key.
+         *
+         * <p>Equal to {@code secret_key}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * Token for the secret key. Present only in the create response; null in subsequent
+         * retrieve responses.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SecretKey extends StripeObject {
+          /** The plaintext token for the API key. */
+          @SerializedName("token")
+          String token;
+        }
+      }
+
+      /** Object hash for the sandbox's publishable key. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Publishable extends StripeObject implements HasId {
+        /**
+         * Time at which the API key was created. Represented as an RFC 3339 timestamp in UTC with
+         * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+         */
+        @SerializedName("created")
+        Instant created;
+
+        /**
+         * Time at which the API key expires. Represented as an RFC 3339 timestamp in UTC with
+         * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+         */
+        @SerializedName("expires_at")
+        Instant expiresAt;
+
+        /** Unique identifier of the API key. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /**
+         * Token for the publishable key. Present only in the create response; null in subsequent
+         * retrieve responses.
+         */
+        @SerializedName("publishable_key")
+        PublishableKey publishableKey;
+
+        /**
+         * Current status of the API key.
+         *
+         * <p>One of {@code active}, or {@code expired}.
+         */
+        @SerializedName("status")
+        String status;
+
+        /**
+         * Type of the API key.
+         *
+         * <p>Equal to {@code publishable_key}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * Token for the publishable key. Present only in the create response; null in subsequent
+         * retrieve responses.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PublishableKey extends StripeObject {
+          /** The plaintext token for the API key. */
+          @SerializedName("token")
+          String token;
+        }
+      }
+
+      /** Object hash for the sandbox's secret key. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Secret extends StripeObject implements HasId {
+        /**
+         * Time at which the API key was created. Represented as an RFC 3339 timestamp in UTC with
+         * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+         */
+        @SerializedName("created")
+        Instant created;
+
+        /**
+         * Time at which the API key expires. Represented as an RFC 3339 timestamp in UTC with
+         * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+         */
+        @SerializedName("expires_at")
+        Instant expiresAt;
+
+        /** Unique identifier of the API key. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /**
+         * Token for the secret key. Present only in the create response; null in subsequent
+         * retrieve responses.
+         */
+        @SerializedName("secret_key")
+        SecretKey secretKey;
+
+        /**
+         * Current status of the API key.
+         *
+         * <p>One of {@code active}, or {@code expired}.
+         */
+        @SerializedName("status")
+        String status;
+
+        /**
+         * Type of the API key.
+         *
+         * <p>Equal to {@code secret_key}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * Token for the secret key. Present only in the create response; null in subsequent
+         * retrieve responses.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SecretKey extends StripeObject {
+          /** The plaintext token for the API key. */
+          @SerializedName("token")
+          String token;
+        }
+      }
     }
   }
 }

@@ -1391,10 +1391,6 @@ public class AlertCreateParams extends ApiRequestParams {
       @SerializedName("billable_items")
       List<String> billableItems;
 
-      /** Filter by billing cadence ID. */
-      @SerializedName("billing_cadence")
-      String billingCadence;
-
       /** Filter by billing group ID. */
       @SerializedName("billing_group")
       String billingGroup;
@@ -1418,13 +1414,11 @@ public class AlertCreateParams extends ApiRequestParams {
 
       private Filters(
           List<String> billableItems,
-          String billingCadence,
           String billingGroup,
           Map<String, Object> extraParams,
           String pricingPlan,
           String pricingPlanSubscription) {
         this.billableItems = billableItems;
-        this.billingCadence = billingCadence;
         this.billingGroup = billingGroup;
         this.extraParams = extraParams;
         this.pricingPlan = pricingPlan;
@@ -1438,8 +1432,6 @@ public class AlertCreateParams extends ApiRequestParams {
       public static class Builder {
         private List<String> billableItems;
 
-        private String billingCadence;
-
         private String billingGroup;
 
         private Map<String, Object> extraParams;
@@ -1452,7 +1444,6 @@ public class AlertCreateParams extends ApiRequestParams {
         public AlertCreateParams.SpendThreshold.Filters build() {
           return new AlertCreateParams.SpendThreshold.Filters(
               this.billableItems,
-              this.billingCadence,
               this.billingGroup,
               this.extraParams,
               this.pricingPlan,
@@ -1483,12 +1474,6 @@ public class AlertCreateParams extends ApiRequestParams {
             this.billableItems = new ArrayList<>();
           }
           this.billableItems.addAll(elements);
-          return this;
-        }
-
-        /** Filter by billing cadence ID. */
-        public Builder setBillingCadence(String billingCadence) {
-          this.billingCadence = billingCadence;
           return this;
         }
 
@@ -1864,8 +1849,8 @@ public class AlertCreateParams extends ApiRequestParams {
     }
 
     public enum GroupBy implements ApiRequestParams.EnumParam {
-      @SerializedName("billing_cadence")
-      BILLING_CADENCE("billing_cadence"),
+      @SerializedName("billing_group")
+      BILLING_GROUP("billing_group"),
 
       @SerializedName("pricing_plan_subscription")
       PRICING_PLAN_SUBSCRIPTION("pricing_plan_subscription");

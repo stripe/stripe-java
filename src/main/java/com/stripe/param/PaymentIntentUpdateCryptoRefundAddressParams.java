@@ -150,7 +150,10 @@ public class PaymentIntentUpdateCryptoRefundAddressParams extends ApiRequestPara
     SUI("sui"),
 
     @SerializedName("tempo")
-    TEMPO("tempo");
+    TEMPO("tempo"),
+
+    @SerializedName("tron")
+    TRON("tron");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

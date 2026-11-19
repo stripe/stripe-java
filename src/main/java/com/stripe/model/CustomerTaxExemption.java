@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CustomerTaxExemptionCreateParams;
 import com.stripe.param.CustomerTaxExemptionListParams;
 import com.stripe.param.CustomerTaxExemptionRetrieveParams;
@@ -315,14 +314,5 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
      */
     @SerializedName("tax_code_group")
     String taxCodeGroup;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(ca, responseGetter);
-    trySetResponseGetter(es, responseGetter);
-    trySetResponseGetter(reasonDetails, responseGetter);
-    trySetResponseGetter(us, responseGetter);
   }
 }

@@ -12,8 +12,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The Report resource represents a customizable report template that provides insights into various
- * aspects of your Stripe integration.
+ * The <a href="https://stripe.com/data/api/reports">Queries and Reports API</a> replaces this API.
+ * For new integrations, use {@code /v2/data/reports} instead. The Report resource represents a
+ * customizable report template that provides insights into various aspects of your Stripe
+ * integration.
  */
 @Getter
 @Setter

@@ -3,7 +3,9 @@ package com.stripe.model.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.time.Instant;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -18,7 +20,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class RateCardCustomPricingUnitOverageRate extends StripeObject implements HasId {
+public class RateCardCustomPricingUnitOverageRate extends StripeObject
+    implements HasId, StripeActiveObject {
   /** Timestamp of when the object was created. */
   @SerializedName("created")
   Instant created;
@@ -77,4 +80,9 @@ public class RateCardCustomPricingUnitOverageRate extends StripeObject implement
    */
   @SerializedName("unit_amount")
   String unitAmount;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(oneTimeItem, responseGetter);
+  }
 }

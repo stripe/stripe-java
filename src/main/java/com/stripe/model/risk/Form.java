@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.risk.FormRetrieveParams;
 import com.stripe.param.risk.FormUpdateParams;
 import java.util.List;
@@ -492,18 +491,5 @@ public class Form extends ApiResource implements HasId {
       @SerializedName("files")
       List<String> files;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(appeal, responseGetter);
-    trySetResponseGetter(authorizationDocuments, responseGetter);
-    trySetResponseGetter(paymentProcessing, responseGetter);
-    trySetResponseGetter(productRemoval, responseGetter);
-    trySetResponseGetter(reviewedFields, responseGetter);
-    trySetResponseGetter(selfFundingContext, responseGetter);
-    trySetResponseGetter(subject, responseGetter);
-    trySetResponseGetter(transactionContext, responseGetter);
   }
 }

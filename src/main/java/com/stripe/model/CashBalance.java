@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CashBalanceRetrieveParams;
 import com.stripe.param.CashBalanceUpdateParams;
 import java.util.Map;
@@ -153,11 +152,5 @@ public class CashBalance extends ApiResource {
      */
     @SerializedName("using_merchant_default")
     Boolean usingMerchantDefault;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(settings, responseGetter);
   }
 }

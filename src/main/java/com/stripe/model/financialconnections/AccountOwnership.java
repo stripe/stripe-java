@@ -3,7 +3,9 @@ package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class AccountOwnership extends StripeObject implements HasId {
+public class AccountOwnership extends StripeObject implements HasId, StripeActiveObject {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -33,4 +35,9 @@ public class AccountOwnership extends StripeObject implements HasId {
   /** A paginated list of owners for this account. */
   @SerializedName("owners")
   AccountOwnerCollection owners;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(owners, responseGetter);
+  }
 }

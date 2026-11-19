@@ -379,8 +379,6 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(deliveryEstimate, responseGetter);
-    trySetResponseGetter(fixedAmount, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
   }
 }

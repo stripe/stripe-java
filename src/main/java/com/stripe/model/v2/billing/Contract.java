@@ -3,7 +3,9 @@ package com.stripe.model.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.v2.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Contract extends StripeObject implements HasId {
+public class Contract extends StripeObject implements HasId, StripeActiveObject {
   /** The billing cycle anchor. */
   @SerializedName("billing_cycle_anchor")
   BillingCycleAnchor billingCycleAnchor;
@@ -663,9 +665,21 @@ public class Contract extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Terms extends StripeObject {
+  public static class Terms extends StripeObject implements StripeActiveObject {
     /** All terms in display order. */
     @SerializedName("data")
     List<ContractTerm> data;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (data != null) {
+        data.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(terms, responseGetter);
   }
 }

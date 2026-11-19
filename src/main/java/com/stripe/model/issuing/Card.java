@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -109,7 +110,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /**
    * Stripe’s assessment of whether this card’s details have been compromised. If this property
-   * isn't null, cancel and reissue the card to prevent fraudulent activity risk.
+   * isn’t null, cancel and reissue the card to reduce the risk of fraudulent activity. Stripe may
+   * remove a fraud warning if the cardholder confirms that the activity on the card is legitimate.
    */
   @SerializedName("latest_fraud_warning")
   LatestFraudWarning latestFraudWarning;
@@ -581,7 +583,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Shipping extends StripeObject {
+  public static class Shipping extends StripeObject implements StripeActiveObject {
     @SerializedName("address")
     Address address;
 
@@ -689,7 +691,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AddressValidation extends StripeObject {
+    public static class AddressValidation extends StripeObject implements StripeActiveObject {
       /**
        * The address validation capabilities to use.
        *
@@ -711,6 +713,11 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("result")
       String result;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(normalizedAddress, responseGetter);
+      }
     }
 
     /**
@@ -729,6 +736,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("eori_number")
       String eoriNumber;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(addressValidation, responseGetter);
     }
   }
 
@@ -1247,16 +1260,9 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
-    trySetResponseGetter(cryptoWallet, responseGetter);
-    trySetResponseGetter(latestFraudWarning, responseGetter);
-    trySetResponseGetter(lifecycleControls, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);
-    trySetResponseGetter(productGraduationState, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
-    trySetResponseGetter(spendingControls, responseGetter);
-    trySetResponseGetter(wallets, responseGetter);
   }
 }

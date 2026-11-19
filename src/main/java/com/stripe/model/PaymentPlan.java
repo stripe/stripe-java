@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentPlanCreateParams;
 import com.stripe.param.PaymentPlanListParams;
 import com.stripe.param.PaymentPlanRetrieveParams;
@@ -432,11 +431,5 @@ public class PaymentPlan extends ApiResource implements HasId, MetadataStore<Pay
         }
       }
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(schedule, responseGetter);
   }
 }

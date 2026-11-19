@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.financialconnections.InstitutionListParams;
 import com.stripe.param.financialconnections.InstitutionRetrieveParams;
 import java.util.List;
@@ -227,11 +226,5 @@ public class Institution extends ApiResource implements HasId {
       @SerializedName("supported")
       Boolean supported;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(features, responseGetter);
   }
 }

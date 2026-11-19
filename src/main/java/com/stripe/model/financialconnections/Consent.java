@@ -7,6 +7,7 @@ import com.stripe.model.Account;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -142,7 +143,7 @@ public class Consent extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AccountHolder extends StripeObject {
+  public static class AccountHolder extends StripeObject implements StripeActiveObject {
     /**
      * The ID of the Stripe account that this account belongs to. Only available when {@code
      * account_holder.type} is {@code account}.
@@ -206,6 +207,12 @@ public class Consent extends ApiResource implements HasId {
 
     public void setCustomerObject(Customer expandableObject) {
       this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(account, responseGetter);
+      trySetResponseGetter(customer, responseGetter);
     }
   }
 

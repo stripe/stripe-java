@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -563,7 +564,7 @@ public class Account extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AccountHolder extends StripeObject {
+  public static class AccountHolder extends StripeObject implements StripeActiveObject {
     /**
      * The ID of the Stripe account that this account belongs to. Only available when {@code
      * account_holder.type} is {@code account}.
@@ -628,6 +629,12 @@ public class Account extends ApiResource implements HasId {
 
     public void setCustomerObject(Customer expandableObject) {
       this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(account, responseGetter);
+      trySetResponseGetter(customer, responseGetter);
     }
   }
 
@@ -995,14 +1002,7 @@ public class Account extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(accountHolder, responseGetter);
-    trySetResponseGetter(balance, responseGetter);
-    trySetResponseGetter(balanceRefresh, responseGetter);
-    trySetResponseGetter(enrichmentState, responseGetter);
-    trySetResponseGetter(inferredBalancesRefresh, responseGetter);
     trySetResponseGetter(institution, responseGetter);
     trySetResponseGetter(ownership, responseGetter);
-    trySetResponseGetter(ownershipRefresh, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
-    trySetResponseGetter(transactionRefresh, responseGetter);
   }
 }

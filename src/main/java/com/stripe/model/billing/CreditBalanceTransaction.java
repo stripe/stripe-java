@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Invoice;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiRequest;
@@ -203,7 +204,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Credit extends StripeObject {
+  public static class Credit extends StripeObject implements StripeActiveObject {
     @SerializedName("amount")
     Amount amount;
 
@@ -335,7 +336,8 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CreditsApplicationInvoiceVoided extends StripeObject {
+    public static class CreditsApplicationInvoiceVoided extends StripeObject
+        implements StripeActiveObject {
       /** The invoice to which the reinstated billing credits were originally applied. */
       @SerializedName("invoice")
       @Getter(lombok.AccessLevel.NONE)
@@ -363,6 +365,16 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       public void setInvoiceObject(Invoice expandableObject) {
         this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(invoice, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditsApplicationInvoiceVoided, responseGetter);
     }
   }
 
@@ -373,7 +385,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Debit extends StripeObject {
+  public static class Debit extends StripeObject implements StripeActiveObject {
     @SerializedName("amount")
     Amount amount;
 
@@ -505,7 +517,7 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CreditsApplied extends StripeObject {
+    public static class CreditsApplied extends StripeObject implements StripeActiveObject {
       /** The invoice to which the billing credits were applied. */
       @SerializedName("invoice")
       @Getter(lombok.AccessLevel.NONE)
@@ -533,6 +545,16 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       public void setInvoiceObject(Invoice expandableObject) {
         this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(invoice, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditsApplied, responseGetter);
     }
   }
 

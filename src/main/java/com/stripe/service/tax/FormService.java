@@ -90,28 +90,44 @@ public final class FormService extends ApiService {
   }
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(String id, FormCreateParams params) throws StripeException {
     return create(id, params, (RequestOptions) null);
   }
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(String id, RequestOptions options) throws StripeException {
     return create(id, (FormCreateParams) null, options);
   }
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(String id) throws StripeException {
     return create(id, (FormCreateParams) null, (RequestOptions) null);
   }
   /**
    * Creates a correction for a filed tax form. Supply either payee details or numerical values for
-   * the tax form type. Created correction forms are not filed automatically.
+   * the tax form type.
+   *
+   * <p><strong>Private preview.</strong> API access is invite-only. Contact Stripe to request
+   * access. Creating a correction doesn’t file it; review, attestation, and filing remain in the
+   * Dashboard.
    */
   public FormCorrection create(String id, FormCreateParams params, RequestOptions options)
       throws StripeException {

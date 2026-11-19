@@ -431,10 +431,6 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("phone_number_collection")
   PhoneNumberCollection phoneNumberCollection;
 
-  /** Token used to resolve the presentment currency for this Checkout Session. */
-  @SerializedName("pricing_token")
-  String pricingToken;
-
   /**
    * This parameter applies to {@code ui_mode: embedded_page}. Learn more about the <a
    * href="https://docs.stripe.com/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
@@ -565,7 +561,6 @@ public class SessionCreateParams extends ApiRequestParams {
       PaymentSettings paymentSettings,
       Permissions permissions,
       PhoneNumberCollection phoneNumberCollection,
-      String pricingToken,
       RedirectOnCompletion redirectOnCompletion,
       String returnUrl,
       SavedPaymentMethodOptions savedPaymentMethodOptions,
@@ -628,7 +623,6 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentSettings = paymentSettings;
     this.permissions = permissions;
     this.phoneNumberCollection = phoneNumberCollection;
-    this.pricingToken = pricingToken;
     this.redirectOnCompletion = redirectOnCompletion;
     this.returnUrl = returnUrl;
     this.savedPaymentMethodOptions = savedPaymentMethodOptions;
@@ -748,8 +742,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PhoneNumberCollection phoneNumberCollection;
 
-    private String pricingToken;
-
     private RedirectOnCompletion redirectOnCompletion;
 
     private String returnUrl;
@@ -827,7 +819,6 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentSettings,
           this.permissions,
           this.phoneNumberCollection,
-          this.pricingToken,
           this.redirectOnCompletion,
           this.returnUrl,
           this.savedPaymentMethodOptions,
@@ -1581,12 +1572,6 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setPhoneNumberCollection(
         SessionCreateParams.PhoneNumberCollection phoneNumberCollection) {
       this.phoneNumberCollection = phoneNumberCollection;
-      return this;
-    }
-
-    /** Token used to resolve the presentment currency for this Checkout Session. */
-    public Builder setPricingToken(String pricingToken) {
-      this.pricingToken = pricingToken;
       return this;
     }
 

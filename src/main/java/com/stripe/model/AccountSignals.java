@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.AccountSignalsRetrieveParams;
 import java.math.BigDecimal;
 import java.util.List;
@@ -226,12 +225,5 @@ public class AccountSignals extends ApiResource {
       @SerializedName("indicator")
       String indicator;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(delinquency, responseGetter);
-    trySetResponseGetter(fraudIntent, responseGetter);
   }
 }

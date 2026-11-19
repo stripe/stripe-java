@@ -2,7 +2,9 @@
 package com.stripe.model.billing;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class AlertTriggered extends StripeObject {
+public class AlertTriggered extends StripeObject implements StripeActiveObject {
   /** The aggregation period for which this alert triggered. */
   @SerializedName("aggregation_period")
   AggregationPeriod aggregationPeriod;
@@ -99,10 +101,6 @@ public class AlertTriggered extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class GroupBy extends StripeObject {
-    /** The billing cadence ID, populated when type is {@code billing_cadence}. */
-    @SerializedName("billing_cadence")
-    String billingCadence;
-
     /** The billing group ID, populated when type is {@code billing_group}. */
     @SerializedName("billing_group")
     String billingGroup;
@@ -116,9 +114,14 @@ public class AlertTriggered extends StripeObject {
     /**
      * The type of grouping used for this alert notification
      *
-     * <p>One of {@code billing_cadence}, or {@code pricing_plan_subscription}.
+     * <p>One of {@code billing_group}, or {@code pricing_plan_subscription}.
      */
     @SerializedName("type")
     String type;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(alert, responseGetter);
   }
 }

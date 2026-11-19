@@ -21,8 +21,8 @@ public class ClaimableSandboxRenewOnboardingLinkParams extends ApiRequestParams 
   Map<String, Object> extraParams;
 
   /**
-   * Details about the onboarding link. If omitted, the existing onboarding link details will be
-   * reused.
+   * Details about the onboarding link. If omitted, existing details are reused. Omitted URL fields
+   * retain their existing values.
    */
   @SerializedName("onboarding_link_details")
   OnboardingLinkDetails onboardingLinkDetails;
@@ -76,8 +76,8 @@ public class ClaimableSandboxRenewOnboardingLinkParams extends ApiRequestParams 
     }
 
     /**
-     * Details about the onboarding link. If omitted, the existing onboarding link details will be
-     * reused.
+     * Details about the onboarding link. If omitted, existing details are reused. Omitted URL
+     * fields retain their existing values.
      */
     public Builder setOnboardingLinkDetails(
         ClaimableSandboxRenewOnboardingLinkParams.OnboardingLinkDetails onboardingLinkDetails) {
@@ -99,17 +99,25 @@ public class ClaimableSandboxRenewOnboardingLinkParams extends ApiRequestParams 
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> The URL the user will be redirected to if the onboarding link is
-     * expired or invalid. The URL specified should attempt to generate a new onboarding link, and
-     * re-direct the user to this new onboarding link so that they can proceed with the onboarding
-     * flow.
+     * The URL the user will be redirected to if the onboarding link is expired or invalid. If
+     * omitted, the existing refresh URL is retained. The URL should generate a new onboarding link
+     * and redirect the user to it.
      */
     @SerializedName("refresh_url")
     String refreshUrl;
 
-    private OnboardingLinkDetails(Map<String, Object> extraParams, String refreshUrl) {
+    /**
+     * The URL offered to the user as a way back to your app after they claim the sandbox. If
+     * omitted, the existing return URL is retained. Set to null to clear it.
+     */
+    @SerializedName("return_url")
+    String returnUrl;
+
+    private OnboardingLinkDetails(
+        Map<String, Object> extraParams, String refreshUrl, String returnUrl) {
       this.extraParams = extraParams;
       this.refreshUrl = refreshUrl;
+      this.returnUrl = returnUrl;
     }
 
     public static Builder builder() {
@@ -121,10 +129,12 @@ public class ClaimableSandboxRenewOnboardingLinkParams extends ApiRequestParams 
 
       private String refreshUrl;
 
+      private String returnUrl;
+
       /** Finalize and obtain parameter instance from this builder. */
       public ClaimableSandboxRenewOnboardingLinkParams.OnboardingLinkDetails build() {
         return new ClaimableSandboxRenewOnboardingLinkParams.OnboardingLinkDetails(
-            this.extraParams, this.refreshUrl);
+            this.extraParams, this.refreshUrl, this.returnUrl);
       }
 
       /**
@@ -156,13 +166,21 @@ public class ClaimableSandboxRenewOnboardingLinkParams extends ApiRequestParams 
       }
 
       /**
-       * <strong>Required.</strong> The URL the user will be redirected to if the onboarding link is
-       * expired or invalid. The URL specified should attempt to generate a new onboarding link, and
-       * re-direct the user to this new onboarding link so that they can proceed with the onboarding
-       * flow.
+       * The URL the user will be redirected to if the onboarding link is expired or invalid. If
+       * omitted, the existing refresh URL is retained. The URL should generate a new onboarding
+       * link and redirect the user to it.
        */
       public Builder setRefreshUrl(String refreshUrl) {
         this.refreshUrl = refreshUrl;
+        return this;
+      }
+
+      /**
+       * The URL offered to the user as a way back to your app after they claim the sandbox. If
+       * omitted, the existing return URL is retained. Set to null to clear it.
+       */
+      public Builder setReturnUrl(String returnUrl) {
+        this.returnUrl = returnUrl;
         return this;
       }
     }

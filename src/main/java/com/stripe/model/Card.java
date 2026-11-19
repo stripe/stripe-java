@@ -585,9 +585,6 @@ public class Card extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(account, responseGetter);
-    trySetResponseGetter(benefits, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(networks, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
   }
 }

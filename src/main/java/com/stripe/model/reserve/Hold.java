@@ -298,7 +298,6 @@ public class Hold extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(releaseSchedule, responseGetter);
     trySetResponseGetter(reservePlan, responseGetter);
     trySetResponseGetter(sourceCharge, responseGetter);
   }

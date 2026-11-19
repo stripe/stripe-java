@@ -274,6 +274,13 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * How funds in this FinancialAccount are held. Defaults to {@code for_benefit_of} if not
+     * specified.
+     */
+    @SerializedName("funds_holding_structure")
+    FundsHoldingStructure fundsHoldingStructure;
+
     /** The usage type for funds in this FinancialAccount. Defaults to BUSINESS if not specified. */
     @SerializedName("funds_usage_type")
     FundsUsageType fundsUsageType;
@@ -289,10 +296,12 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     private Storage(
         Crypto crypto,
         Map<String, Object> extraParams,
+        FundsHoldingStructure fundsHoldingStructure,
         FundsUsageType fundsUsageType,
         List<String> holdsCurrencies) {
       this.crypto = crypto;
       this.extraParams = extraParams;
+      this.fundsHoldingStructure = fundsHoldingStructure;
       this.fundsUsageType = fundsUsageType;
       this.holdsCurrencies = holdsCurrencies;
     }
@@ -306,6 +315,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private FundsHoldingStructure fundsHoldingStructure;
+
       private FundsUsageType fundsUsageType;
 
       private List<String> holdsCurrencies;
@@ -313,7 +324,11 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public FinancialAccountCreateParams.Storage build() {
         return new FinancialAccountCreateParams.Storage(
-            this.crypto, this.extraParams, this.fundsUsageType, this.holdsCurrencies);
+            this.crypto,
+            this.extraParams,
+            this.fundsHoldingStructure,
+            this.fundsUsageType,
+            this.holdsCurrencies);
       }
 
       /**
@@ -348,6 +363,16 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * How funds in this FinancialAccount are held. Defaults to {@code for_benefit_of} if not
+       * specified.
+       */
+      public Builder setFundsHoldingStructure(
+          FinancialAccountCreateParams.Storage.FundsHoldingStructure fundsHoldingStructure) {
+        this.fundsHoldingStructure = fundsHoldingStructure;
         return this;
       }
 
@@ -534,6 +559,21 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         CustodyModel(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum FundsHoldingStructure implements ApiRequestParams.EnumParam {
+      @SerializedName("demand_deposit_account")
+      DEMAND_DEPOSIT_ACCOUNT("demand_deposit_account"),
+
+      @SerializedName("for_benefit_of")
+      FOR_BENEFIT_OF("for_benefit_of");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      FundsHoldingStructure(String value) {
+        this.value = value;
       }
     }
 

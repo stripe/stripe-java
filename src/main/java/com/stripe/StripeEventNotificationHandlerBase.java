@@ -271,9 +271,6 @@ import com.stripe.events.V1TopupSucceededEventNotification;
 import com.stripe.events.V1TransferCreatedEventNotification;
 import com.stripe.events.V1TransferReversedEventNotification;
 import com.stripe.events.V1TransferUpdatedEventNotification;
-import com.stripe.events.V2BillingCadenceBilledEventNotification;
-import com.stripe.events.V2BillingCadenceCanceledEventNotification;
-import com.stripe.events.V2BillingCadenceCreatedEventNotification;
 import com.stripe.events.V2BillingContractActivatedEventNotification;
 import com.stripe.events.V2BillingContractCanceledEventNotification;
 import com.stripe.events.V2BillingContractCollectionBlockedEventNotification;
@@ -284,6 +281,12 @@ import com.stripe.events.V2BillingContractCreatedEventNotification;
 import com.stripe.events.V2BillingContractEndedEventNotification;
 import com.stripe.events.V2BillingContractTermCreatedEventNotification;
 import com.stripe.events.V2BillingContractTermDeletedEventNotification;
+import com.stripe.events.V2BillingContractTermPricingOverrideEndedEventNotification;
+import com.stripe.events.V2BillingContractTermPricingOverrideStartedEventNotification;
+import com.stripe.events.V2BillingContractTermRecurringPriceEndedEventNotification;
+import com.stripe.events.V2BillingContractTermRecurringPriceStartedEventNotification;
+import com.stripe.events.V2BillingContractTermScheduledFeeServicePeriodEndedEventNotification;
+import com.stripe.events.V2BillingContractTermScheduledFeeServicePeriodStartedEventNotification;
 import com.stripe.events.V2BillingContractTermUpdatedEventNotification;
 import com.stripe.events.V2BillingContractUpdatedEventNotification;
 import com.stripe.events.V2BillingLicenseFeeCreatedEventNotification;
@@ -376,6 +379,8 @@ import com.stripe.events.V2CoreHealthApiLatencyFiringEventNotification;
 import com.stripe.events.V2CoreHealthApiLatencyResolvedEventNotification;
 import com.stripe.events.V2CoreHealthAuthorizationRateDropFiringEventNotification;
 import com.stripe.events.V2CoreHealthAuthorizationRateDropResolvedEventNotification;
+import com.stripe.events.V2CoreHealthCustomPaymentMethodAdapterDegradedFiringEventNotification;
+import com.stripe.events.V2CoreHealthCustomPaymentMethodAdapterDegradedResolvedEventNotification;
 import com.stripe.events.V2CoreHealthElementsErrorFiringEventNotification;
 import com.stripe.events.V2CoreHealthElementsErrorResolvedEventNotification;
 import com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification;
@@ -557,6 +562,11 @@ import com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotif
 import com.stripe.events.V2SignalsAccountSignalFraudulentWebsiteReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification;
+import com.stripe.events.V2SignalsPaymentRetryEvaluationCanceledEventNotification;
+import com.stripe.events.V2SignalsPaymentRetryEvaluationCompletedEventNotification;
+import com.stripe.events.V2SignalsPaymentRetryEvaluationCreatedEventNotification;
+import com.stripe.events.V2SignalsPaymentRetryEvaluationExpiredEventNotification;
+import com.stripe.events.V2SignalsPaymentRetryEvaluationUpdatedEventNotification;
 import com.stripe.events.V2SignalsPaymentRetryEvaluationsRetryRecommendedEventNotification;
 import com.stripe.model.v2.core.EventNotification;
 import java.util.ArrayList;
@@ -2294,24 +2304,6 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
-  public T onV2BillingCadenceBilled(
-      EventNotificationCallback<V2BillingCadenceBilledEventNotification> callback) {
-    this.register("v2.billing.cadence.billed", callback);
-    return self();
-  }
-
-  public T onV2BillingCadenceCanceled(
-      EventNotificationCallback<V2BillingCadenceCanceledEventNotification> callback) {
-    this.register("v2.billing.cadence.canceled", callback);
-    return self();
-  }
-
-  public T onV2BillingCadenceCreated(
-      EventNotificationCallback<V2BillingCadenceCreatedEventNotification> callback) {
-    this.register("v2.billing.cadence.created", callback);
-    return self();
-  }
-
   public T onV2BillingContractActivated(
       EventNotificationCallback<V2BillingContractActivatedEventNotification> callback) {
     this.register("v2.billing.contract.activated", callback);
@@ -2375,6 +2367,50 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2BillingContractTermDeleted(
       EventNotificationCallback<V2BillingContractTermDeletedEventNotification> callback) {
     this.register("v2.billing.contract_term.deleted", callback);
+    return self();
+  }
+
+  public T onV2BillingContractTermPricingOverrideEnded(
+      EventNotificationCallback<V2BillingContractTermPricingOverrideEndedEventNotification>
+          callback) {
+    this.register("v2.billing.contract_term.pricing_override_ended", callback);
+    return self();
+  }
+
+  public T onV2BillingContractTermPricingOverrideStarted(
+      EventNotificationCallback<V2BillingContractTermPricingOverrideStartedEventNotification>
+          callback) {
+    this.register("v2.billing.contract_term.pricing_override_started", callback);
+    return self();
+  }
+
+  public T onV2BillingContractTermRecurringPriceEnded(
+      EventNotificationCallback<V2BillingContractTermRecurringPriceEndedEventNotification>
+          callback) {
+    this.register("v2.billing.contract_term.recurring_price_ended", callback);
+    return self();
+  }
+
+  public T onV2BillingContractTermRecurringPriceStarted(
+      EventNotificationCallback<V2BillingContractTermRecurringPriceStartedEventNotification>
+          callback) {
+    this.register("v2.billing.contract_term.recurring_price_started", callback);
+    return self();
+  }
+
+  public T onV2BillingContractTermScheduledFeeServicePeriodEnded(
+      EventNotificationCallback<
+              V2BillingContractTermScheduledFeeServicePeriodEndedEventNotification>
+          callback) {
+    this.register("v2.billing.contract_term.scheduled_fee_service_period_ended", callback);
+    return self();
+  }
+
+  public T onV2BillingContractTermScheduledFeeServicePeriodStarted(
+      EventNotificationCallback<
+              V2BillingContractTermScheduledFeeServicePeriodStartedEventNotification>
+          callback) {
+    this.register("v2.billing.contract_term.scheduled_fee_service_period_started", callback);
     return self();
   }
 
@@ -2971,6 +3007,22 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V2CoreHealthAuthorizationRateDropResolvedEventNotification>
           callback) {
     this.register("v2.core.health.authorization_rate_drop.resolved", callback);
+    return self();
+  }
+
+  public T onV2CoreHealthCustomPaymentMethodAdapterDegradedFiring(
+      EventNotificationCallback<
+              V2CoreHealthCustomPaymentMethodAdapterDegradedFiringEventNotification>
+          callback) {
+    this.register("v2.core.health.custom_payment_method_adapter_degraded.firing", callback);
+    return self();
+  }
+
+  public T onV2CoreHealthCustomPaymentMethodAdapterDegradedResolved(
+      EventNotificationCallback<
+              V2CoreHealthCustomPaymentMethodAdapterDegradedResolvedEventNotification>
+          callback) {
+    this.register("v2.core.health.custom_payment_method_adapter_degraded.resolved", callback);
     return self();
   }
 
@@ -4165,6 +4217,38 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
               V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification>
           callback) {
     this.register("v2.signals.account_signal.payment_delinquency_exposure_ready", callback);
+    return self();
+  }
+
+  public T onV2SignalsPaymentRetryEvaluationCanceled(
+      EventNotificationCallback<V2SignalsPaymentRetryEvaluationCanceledEventNotification>
+          callback) {
+    this.register("v2.signals.payment_retry_evaluation.canceled", callback);
+    return self();
+  }
+
+  public T onV2SignalsPaymentRetryEvaluationCompleted(
+      EventNotificationCallback<V2SignalsPaymentRetryEvaluationCompletedEventNotification>
+          callback) {
+    this.register("v2.signals.payment_retry_evaluation.completed", callback);
+    return self();
+  }
+
+  public T onV2SignalsPaymentRetryEvaluationCreated(
+      EventNotificationCallback<V2SignalsPaymentRetryEvaluationCreatedEventNotification> callback) {
+    this.register("v2.signals.payment_retry_evaluation.created", callback);
+    return self();
+  }
+
+  public T onV2SignalsPaymentRetryEvaluationExpired(
+      EventNotificationCallback<V2SignalsPaymentRetryEvaluationExpiredEventNotification> callback) {
+    this.register("v2.signals.payment_retry_evaluation.expired", callback);
+    return self();
+  }
+
+  public T onV2SignalsPaymentRetryEvaluationUpdated(
+      EventNotificationCallback<V2SignalsPaymentRetryEvaluationUpdatedEventNotification> callback) {
+    this.register("v2.signals.payment_retry_evaluation.updated", callback);
     return self();
   }
 

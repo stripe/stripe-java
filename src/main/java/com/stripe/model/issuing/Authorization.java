@@ -2556,6 +2556,10 @@ public class Authorization extends ApiResource
          */
         @SerializedName("token_risk_score")
         String tokenRiskScore;
+
+        /** The ID of the token service provider, specific to Visa. */
+        @SerializedName("token_service_provider_id")
+        String tokenServiceProviderId;
       }
 
       /**
@@ -3078,24 +3082,14 @@ public class Authorization extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amountDetails, responseGetter);
-    trySetResponseGetter(balanceResponse, responseGetter);
+    if (balanceTransactions != null) {
+      balanceTransactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
-    trySetResponseGetter(enrichedMerchantData, responseGetter);
-    trySetResponseGetter(fleet, responseGetter);
-    trySetResponseGetter(flexibleCredential, responseGetter);
-    trySetResponseGetter(fuel, responseGetter);
-    trySetResponseGetter(healthcare, responseGetter);
-    trySetResponseGetter(merchantData, responseGetter);
-    trySetResponseGetter(networkData, responseGetter);
-    trySetResponseGetter(pendingRequest, responseGetter);
-    trySetResponseGetter(productEligibilityInquiry, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
-    trySetResponseGetter(terminalData, responseGetter);
     trySetResponseGetter(token, responseGetter);
-    trySetResponseGetter(tokenDetails, responseGetter);
-    trySetResponseGetter(treasury, responseGetter);
-    trySetResponseGetter(verificationData, responseGetter);
+    if (transactions != null) {
+      transactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

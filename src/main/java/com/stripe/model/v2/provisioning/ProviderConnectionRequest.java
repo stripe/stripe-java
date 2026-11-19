@@ -3,7 +3,9 @@ package com.stripe.model.v2.provisioning;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ProviderConnectionRequest extends StripeObject implements HasId {
+public class ProviderConnectionRequest extends StripeObject implements HasId, StripeActiveObject {
   /** Time at which the provider connection request was created. */
   @SerializedName("created")
   Instant created;
@@ -96,5 +98,10 @@ public class ProviderConnectionRequest extends StripeObject implements HasId {
     /** Human-readable error message. */
     @SerializedName("message")
     String message;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(providerConnection, responseGetter);
   }
 }

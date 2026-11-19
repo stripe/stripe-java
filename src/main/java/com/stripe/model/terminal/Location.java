@@ -11,7 +11,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.LocationCreateParams;
 import com.stripe.param.terminal.LocationListParams;
 import com.stripe.param.terminal.LocationRetrieveParams;
@@ -400,13 +399,5 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
     /** Town/cho-me. */
     @SerializedName("town")
     String town;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(address, responseGetter);
-    trySetResponseGetter(addressKana, responseGetter);
-    trySetResponseGetter(addressKanji, responseGetter);
   }
 }

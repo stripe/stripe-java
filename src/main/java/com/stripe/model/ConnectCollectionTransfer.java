@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiResource;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ConnectCollectionTransfer extends StripeObject implements BalanceTransactionSource {
+public class ConnectCollectionTransfer extends StripeObject
+    implements BalanceTransactionSource, StripeActiveObject {
   /** Amount transferred, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
@@ -64,5 +66,10 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
 
   public void setDestinationObject(Account expandableObject) {
     this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(destination, responseGetter);
   }
 }

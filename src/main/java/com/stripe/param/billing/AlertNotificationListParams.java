@@ -21,10 +21,6 @@ public class AlertNotificationListParams extends ApiRequestParams {
   @SerializedName("billing_group")
   String billingGroup;
 
-  /** Filter results to only include notifications for the given cadence. */
-  @SerializedName("cadence")
-  String cadence;
-
   /** <strong>Required.</strong> The customer to list notifications for. */
   @SerializedName("customer")
   String customer;
@@ -82,7 +78,6 @@ public class AlertNotificationListParams extends ApiRequestParams {
   private AlertNotificationListParams(
       Action action,
       String billingGroup,
-      String cadence,
       String customer,
       String endingBefore,
       List<String> expand,
@@ -94,7 +89,6 @@ public class AlertNotificationListParams extends ApiRequestParams {
       String subscription) {
     this.action = action;
     this.billingGroup = billingGroup;
-    this.cadence = cadence;
     this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -114,8 +108,6 @@ public class AlertNotificationListParams extends ApiRequestParams {
     private Action action;
 
     private String billingGroup;
-
-    private String cadence;
 
     private String customer;
 
@@ -140,7 +132,6 @@ public class AlertNotificationListParams extends ApiRequestParams {
       return new AlertNotificationListParams(
           this.action,
           this.billingGroup,
-          this.cadence,
           this.customer,
           this.endingBefore,
           this.expand,
@@ -161,12 +152,6 @@ public class AlertNotificationListParams extends ApiRequestParams {
     /** Filter results to only include notifications for the given billing group. */
     public Builder setBillingGroup(String billingGroup) {
       this.billingGroup = billingGroup;
-      return this;
-    }
-
-    /** Filter results to only include notifications for the given cadence. */
-    public Builder setCadence(String cadence) {
-      this.cadence = cadence;
       return this;
     }
 

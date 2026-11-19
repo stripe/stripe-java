@@ -224,11 +224,7 @@ public class FxQuoteCreateParams extends ApiRequestParams {
     @SerializedName("transfer")
     Transfer transfer;
 
-    /**
-     * <strong>Required.</strong> Which transaction the FX Quote will be used for
-     *
-     * <p>Can be “payment” | “transfer”
-     */
+    /** <strong>Required.</strong> Which transaction the FX Quote will be used for */
     @SerializedName("type")
     Type type;
 
@@ -296,11 +292,7 @@ public class FxQuoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> Which transaction the FX Quote will be used for
-       *
-       * <p>Can be “payment” | “transfer”
-       */
+      /** <strong>Required.</strong> Which transaction the FX Quote will be used for */
       public Builder setType(FxQuoteCreateParams.Usage.Type type) {
         this.type = type;
         return this;

@@ -159,9 +159,9 @@ public class IntentAction extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class InvoiceDiscountRule extends StripeObject {
       /**
-       * The entity that the discount rule applies to, for example, the Billing Cadence.
+       * The entity that the discount rule applies to, for example, the Billing Group.
        *
-       * <p>Equal to {@code cadence}.
+       * <p>One of {@code cadence}, or {@code group}.
        */
       @SerializedName("applies_to")
       String appliesTo;
@@ -190,7 +190,7 @@ public class IntentAction extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class PercentOff extends StripeObject {
-        /** The maximum number of times this discount can be applied for this Billing Cadence. */
+        /** The maximum number of times this discount can be applied for this billing group. */
         @SerializedName("maximum_applications")
         MaximumApplications maximumApplications;
 
@@ -201,7 +201,7 @@ public class IntentAction extends StripeObject implements HasId {
         @SerializedName("percent_off")
         BigDecimal percentOff;
 
-        /** The maximum number of times this discount can be applied for this Billing Cadence. */
+        /** The maximum number of times this discount can be applied for this billing group. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)

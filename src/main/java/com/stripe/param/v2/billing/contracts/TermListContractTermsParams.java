@@ -90,14 +90,14 @@ public class TermListContractTermsParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("ad_hoc_product")
-    AD_HOC_PRODUCT("ad_hoc_product"),
-
     @SerializedName("pricing_override")
     PRICING_OVERRIDE("pricing_override"),
 
     @SerializedName("recurring_price")
-    RECURRING_PRICE("recurring_price");
+    RECURRING_PRICE("recurring_price"),
+
+    @SerializedName("scheduled_fee")
+    SCHEDULED_FEE("scheduled_fee");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

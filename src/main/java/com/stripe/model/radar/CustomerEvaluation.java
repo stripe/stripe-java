@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.CustomerEvaluationCreateParams;
 import com.stripe.param.radar.CustomerEvaluationRetrieveParams;
 import com.stripe.param.radar.CustomerEvaluationUpdateParams;
@@ -292,11 +291,5 @@ public class CustomerEvaluation extends ApiResource implements HasId {
       @SerializedName("score")
       BigDecimal score;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(signals, responseGetter);
   }
 }

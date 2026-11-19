@@ -30,7 +30,8 @@ public final class InstallService extends ApiService {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public StripeCollection<Install> list(InstallListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -42,7 +43,8 @@ public final class InstallService extends ApiService {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public StripeCollection<Install> list(RequestOptions options) throws StripeException {
     return list((InstallListParams) null, options);
@@ -54,7 +56,8 @@ public final class InstallService extends ApiService {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public StripeCollection<Install> list() throws StripeException {
     return list((InstallListParams) null, (RequestOptions) null);
@@ -66,7 +69,8 @@ public final class InstallService extends ApiService {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public StripeCollection<Install> list(InstallListParams params, RequestOptions options)
       throws StripeException {

@@ -878,7 +878,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingDetails extends StripeObject {
+  public static class BillingDetails extends StripeObject implements StripeActiveObject {
     /** Billing address. */
     @SerializedName("address")
     com.stripe.model.Address address;
@@ -901,6 +901,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
      */
     @SerializedName("tax_id")
     String taxId;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   /**
@@ -984,7 +989,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Outcome extends StripeObject {
+  public static class Outcome extends StripeObject implements StripeActiveObject {
     /**
      * An enumerated value providing a more detailed explanation on <a
      * href="https://docs.stripe.com/declines#retrying-issuer-declines">how to proceed with an
@@ -1089,6 +1094,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public void setRuleObject(Rule expandableObject) {
       this.rule = new ExpandableField<Rule>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(rule, responseGetter);
+    }
   }
 
   /**
@@ -1098,7 +1108,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodDetails extends StripeObject {
+  public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("ach_credit_transfer")
     AchCreditTransfer achCreditTransfer;
 
@@ -1735,7 +1745,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Bancontact extends StripeObject {
+    public static class Bancontact extends StripeObject implements StripeActiveObject {
       /** Bank code of bank associated with the bank account. */
       @SerializedName("bank_code")
       String bankCode;
@@ -1820,6 +1830,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
+      }
     }
 
     /**
@@ -1888,7 +1904,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
+    public static class Card extends StripeObject implements StripeActiveObject {
       @SerializedName("account_funding")
       AccountFunding accountFunding;
 
@@ -2482,7 +2498,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Wallet extends StripeObject {
+      public static class Wallet extends StripeObject implements StripeActiveObject {
         @SerializedName("amex_express_checkout")
         AmexExpressCheckout amexExpressCheckout;
 
@@ -2864,7 +2880,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Masterpass extends StripeObject {
+        public static class Masterpass extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -2894,6 +2910,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            */
           @SerializedName("shipping_address")
           com.stripe.model.Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
 
         /**
@@ -2912,7 +2934,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class VisaCheckout extends StripeObject {
+        public static class VisaCheckout extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -2942,7 +2964,25 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            */
           @SerializedName("shipping_address")
           com.stripe.model.Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(masterpass, responseGetter);
+          trySetResponseGetter(visaCheckout, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mandate, responseGetter);
+        trySetResponseGetter(wallet, responseGetter);
       }
     }
 
@@ -3420,8 +3460,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
-       * {@code tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui},
+       * {@code tempo}, or {@code tron}.
        */
       @SerializedName("network")
       String network;
@@ -3702,7 +3742,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ideal extends StripeObject {
+    public static class Ideal extends StripeObject implements StripeActiveObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code adyen}, {@code asn_bank},
        * {@code bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code
@@ -3793,6 +3833,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       public void setGeneratedSepaDebitMandateObject(Mandate expandableObject) {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
       }
     }
 
@@ -4592,7 +4638,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public static class NzBankAccount extends StripeObject {
       /**
        * The name on the bank account. Only present if the account holder name is different from the
-       * name of the authorized signatory collected in the PaymentMethod’s billing details.
+       * name of the authorized signatory collected in the PaymentMethod's billing details.
        */
       @SerializedName("account_holder_name")
       String accountHolderName;
@@ -4731,7 +4777,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypal extends StripeObject {
+    public static class Paypal extends StripeObject implements StripeActiveObject {
       /**
        * Two-letter ISO code representing the buyer's country. Values are provided by PayPal
        * directly (if supported) at the time of authorization or settlement. They cannot be set or
@@ -4818,6 +4864,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("status")
         String status;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(shipping, responseGetter);
+        trySetResponseGetter(verifiedAddress, responseGetter);
       }
     }
 
@@ -5170,7 +5222,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Sofort extends StripeObject {
+    public static class Sofort extends StripeObject implements StripeActiveObject {
       /** Bank code of bank associated with the bank account. */
       @SerializedName("bank_code")
       String bankCode;
@@ -5259,6 +5311,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       public void setGeneratedSepaDebitMandateObject(Mandate expandableObject) {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
       }
     }
 
@@ -5394,7 +5452,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
+    public static class UsBankAccount extends StripeObject implements StripeActiveObject {
       /**
        * Account holder type: individual or company.
        *
@@ -5463,6 +5521,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mandate, responseGetter);
+      }
     }
 
     /**
@@ -5516,6 +5579,16 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(bancontact, responseGetter);
+      trySetResponseGetter(card, responseGetter);
+      trySetResponseGetter(ideal, responseGetter);
+      trySetResponseGetter(paypal, responseGetter);
+      trySetResponseGetter(sofort, responseGetter);
+      trySetResponseGetter(usBankAccount, responseGetter);
+    }
   }
 
   /**
@@ -5578,7 +5651,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
+  public static class TransferData extends StripeObject implements StripeActiveObject {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire
      * charge amount is transferred to the destination account.
@@ -5612,6 +5685,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(destination, responseGetter);
+    }
   }
 
   @Override
@@ -5624,15 +5702,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     trySetResponseGetter(billingDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
-    trySetResponseGetter(fraudDetails, responseGetter);
-    trySetResponseGetter(level3, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
-    trySetResponseGetter(presentmentDetails, responseGetter);
-    trySetResponseGetter(radarOptions, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
     trySetResponseGetter(review, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
