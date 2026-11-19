@@ -3,4 +3,5 @@ title: Fixes expanded objects nested inside non-resource types (e.g. Customer.In
 semver_level: patch
 jira_tickets_closed:
 - RUN_DEVSDK-3696
+released_in_version: 34.2.0
 ---

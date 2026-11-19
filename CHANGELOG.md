@@ -5,6 +5,39 @@ Instead, edit a corresponding `.change.md` file and run `hark build`.
 
 # Changelog
 
+## <a id="34-2-0"></a>34.2.0 - 2026-11-18
+This release changes the pinned API version to `2026-11-18.endive`.
+
+* Improve webhook signature verification error messages
+  - When diagnostic metadata is present in the `Stripe-Signature` header, error messages help identify an incorrect signing secret or altered request body.
+* Preserve event context and clear inherited account scoping when fetching and mutating related objects
+* Fixes expanded objects nested inside non-resource types (e.g. Customer.InvoiceSettings.defaultPaymentMethod) falling back to the process-global client instead of the client that retrieved them
+* [#2333](https://github.com/stripe/stripe-java/pull/2333) Update generated code
+  * Add support for new resource `v2.core.ClaimableSandbox`
+  * Add support for `create`, `renew_onboarding_link`, and `retrieve` methods on resource `v2.core.ClaimableSandbox`
+  * Add support for `fundingSources` on `Charge.payment_method_details.card.wallet.link` and `Charge.payment_method_details.link`
+  * Add support for `fingerprint` on `Charge.payment_method_details.paypay`, `PaymentAttemptRecord.payment_method_details.paypay`, and `PaymentRecord.payment_method_details.paypay`
+  * Add support for `addressCollectionPrecision` on `checkout.Session.automatic_tax` and `checkout.SessionCreateParams.automatic_tax`
+  * Add support for `carRentalData` and `lodgingData` on `PaymentIntent.payment_details`, `PaymentIntentCaptureParams.payment_details`, `PaymentIntentConfirmParams.payment_details`, `PaymentIntentCreateParams.payment_details`, and `PaymentIntentUpdateParams.payment_details`
+  * Add support for `captureMethod` on `PaymentLinkUpdateParams.payment_intent_data`
+  * Add support for `lossMessage` on `Product.marketing_features[]`, `ProductCreateParams.marketing_features[]`, and `ProductUpdateParams.marketing_features[]`
+  * Add support for `application` on `Refund`
+  * Add support for `bizum` and `upi` on `Refund.destination_details`
+  * Add support for `taxInvoiceMonth` on `reporting.ReportRun.parameters` and `reporting.ReportRunCreateParams.parameters`
+  * Add support for `igic` on `tax.Registration.country_options.es` and `tax.RegistrationCreateParams.country_options.es`
+  * Add support for new value `igic` on enum `tax.RegistrationCreateParams.country_options.es.type`
+  * Add support for new values `stripe_s700_devkit`, `stripe_s710_devkit`, `stripe_t600_devkit`, `verifone_ux700_devkit`, and `verifone_v660p_devkit` on enum `terminal.ReaderListParams.deviceType`
+  * Add support for `networkDetails` on `treasury.InboundTransfer.failure_details`, `treasury.InboundTransferFailParams.failure_details`, `treasury.OutboundPayment.returned_details`, and `treasury.OutboundTransfer.returned_details`
+  * Add support for `failureDetails` on `treasury.InboundTransferReturnInboundTransferParams`
+  * Add support for new value `2026-11-18.endive` on enum `WebhookEndpointCreateParams.apiVersion`
+  * Add support for `accountDashboard` on `v2.core.AccountLink.use_case` and `v2.core.AccountLinkCreateParams.use_case`
+  * Add support for `paypayPayments` on `v2.core.Account.configuration.merchant.capabilities`, `v2.core.Account.configuration.merchant`, `v2.core.AccountCreateParams.configuration.merchant.capabilities`, `v2.core.AccountCreateParams.configuration.merchant`, `v2.core.AccountUpdateParams.configuration.merchant.capabilities`, and `v2.core.AccountUpdateParams.configuration.merchant`
+  * Add support for `billiePayments`, `mbWayPayments`, `nzBankAccountBecsDebitPayments`, and `pixPayments` on `v2.core.Account.configuration.merchant.capabilities`, `v2.core.AccountCreateParams.configuration.merchant.capabilities`, and `v2.core.AccountUpdateParams.configuration.merchant.capabilities`
+  * Add support for `additionalMaterial` on `v2.core.Account.configuration.merchant.konbini_payments`, `v2.core.AccountCreateParams.configuration.merchant.konbini_payments`, and `v2.core.AccountUpdateParams.configuration.merchant.konbini_payments`
+  * Add support for new value `account_dashboard` on enum `v2.core.AccountLinkCreateParams.use_case.type`
+  * Add support for new values `billie_payments`, `mb_way_payments`, `nz_bank_account_becs_debit_payments`, `paypay_payments`, and `pix_payments` on enum `EventsV2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEvent.updatedCapability`
+  * Add support for event notifications `V2CoreClaimableSandboxClaimedEvent`, `V2CoreClaimableSandboxCreatedEvent`, `V2CoreClaimableSandboxExpiredEvent`, `V2CoreClaimableSandboxExpiringEvent`, and `V2CoreClaimableSandboxUpdatedEvent` with related object `v2.core.ClaimableSandbox`
+
 ## <a id="34-1-0"></a>34.1.0 - 2026-10-29
 This release changes the pinned API version to `2026-10-28.endive`.
 
