@@ -134,6 +134,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
    * added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions
    * other than the specified subscription will ignore the invoice item. Use this when you want to
    * express that an invoice item has been accrued within the context of a particular subscription.
+   * You can use this parameter with either {@code customer} or {@code customer_account}. The
+   * subscription must belong to the customer you specify.
    */
   @SerializedName("subscription")
   String subscription;
@@ -550,7 +552,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
      * added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions
      * other than the specified subscription will ignore the invoice item. Use this when you want to
      * express that an invoice item has been accrued within the context of a particular
-     * subscription.
+     * subscription. You can use this parameter with either {@code customer} or {@code
+     * customer_account}. The subscription must belong to the customer you specify.
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;

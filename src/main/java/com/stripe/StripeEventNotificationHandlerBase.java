@@ -294,6 +294,11 @@ import com.stripe.events.V2CoreAccountPersonCreatedEventNotification;
 import com.stripe.events.V2CoreAccountPersonDeletedEventNotification;
 import com.stripe.events.V2CoreAccountPersonUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountUpdatedEventNotification;
+import com.stripe.events.V2CoreClaimableSandboxClaimedEventNotification;
+import com.stripe.events.V2CoreClaimableSandboxCreatedEventNotification;
+import com.stripe.events.V2CoreClaimableSandboxExpiredEventNotification;
+import com.stripe.events.V2CoreClaimableSandboxExpiringEventNotification;
+import com.stripe.events.V2CoreClaimableSandboxUpdatedEventNotification;
 import com.stripe.events.V2CoreEventDestinationPingEventNotification;
 import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
@@ -2215,6 +2220,36 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2CoreAccountPersonUpdated(
       EventNotificationCallback<V2CoreAccountPersonUpdatedEventNotification> callback) {
     this.register("v2.core.account_person.updated", callback);
+    return self();
+  }
+
+  public T onV2CoreClaimableSandboxClaimed(
+      EventNotificationCallback<V2CoreClaimableSandboxClaimedEventNotification> callback) {
+    this.register("v2.core.claimable_sandbox.claimed", callback);
+    return self();
+  }
+
+  public T onV2CoreClaimableSandboxCreated(
+      EventNotificationCallback<V2CoreClaimableSandboxCreatedEventNotification> callback) {
+    this.register("v2.core.claimable_sandbox.created", callback);
+    return self();
+  }
+
+  public T onV2CoreClaimableSandboxExpired(
+      EventNotificationCallback<V2CoreClaimableSandboxExpiredEventNotification> callback) {
+    this.register("v2.core.claimable_sandbox.expired", callback);
+    return self();
+  }
+
+  public T onV2CoreClaimableSandboxExpiring(
+      EventNotificationCallback<V2CoreClaimableSandboxExpiringEventNotification> callback) {
+    this.register("v2.core.claimable_sandbox.expiring", callback);
+    return self();
+  }
+
+  public T onV2CoreClaimableSandboxUpdated(
+      EventNotificationCallback<V2CoreClaimableSandboxUpdatedEventNotification> callback) {
+    this.register("v2.core.claimable_sandbox.updated", callback);
     return self();
   }
 

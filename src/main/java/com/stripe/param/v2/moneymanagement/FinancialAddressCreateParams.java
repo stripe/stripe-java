@@ -122,14 +122,16 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class BankAccount {
-    /** The country for the bank account. Used to select the appropriate rails (e.g. for SEPA). */
+    /**
+     * The country where Stripe provisions the bank account. Each currency supports the country
+     * listed in its description. If omitted, Stripe selects that country.
+     */
     @SerializedName("country")
     String country;
 
     /**
-     * <strong>Required.</strong> The currency of the bank account to provision. Available
-     * currencies depend on your account's enabled features and rollout access; {@code eur} requires
-     * the Financial Address Global Payouts EU preview.
+     * <strong>Required.</strong> The currency of the bank account to provision. Some currencies
+     * require preview or rollout access, as configured for your account.
      */
     @SerializedName("currency")
     Currency currency;
@@ -166,16 +168,18 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
             this.country, this.currency, this.extraParams);
       }
 
-      /** The country for the bank account. Used to select the appropriate rails (e.g. for SEPA). */
+      /**
+       * The country where Stripe provisions the bank account. Each currency supports the country
+       * listed in its description. If omitted, Stripe selects that country.
+       */
       public Builder setCountry(String country) {
         this.country = country;
         return this;
       }
 
       /**
-       * <strong>Required.</strong> The currency of the bank account to provision. Available
-       * currencies depend on your account's enabled features and rollout access; {@code eur}
-       * requires the Financial Address Global Payouts EU preview.
+       * <strong>Required.</strong> The currency of the bank account to provision. Some currencies
+       * require preview or rollout access, as configured for your account.
        */
       public Builder setCurrency(FinancialAddressCreateParams.BankAccount.Currency currency) {
         this.currency = currency;

@@ -1626,7 +1626,7 @@ public class PaymentRecord extends ApiResource implements HasId {
         String addressLine1Check;
 
         /**
-         * If you provide a address postal code, the check result is one of {@code pass}, {@code
+         * If you provide an address postal code, the check result is one of {@code pass}, {@code
          * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
@@ -2168,8 +2168,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
-       * {@code tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui},
+       * {@code tempo}, or {@code tron}.
        */
       @SerializedName("network")
       String network;
@@ -3149,7 +3149,14 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypay extends StripeObject {}
+    public static class Paypay extends StripeObject {
+      /**
+       * Uniquely identifies this particular PayPay account. You can use this attribute to check
+       * whether two PayPay accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+    }
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API

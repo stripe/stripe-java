@@ -88,7 +88,10 @@ public class Event extends ApiResource implements HasId {
 
   /**
    * Number of webhooks that haven't been successfully delivered (for example, to return a 20x
-   * response) to the URLs you specify.
+   * response). This count can include deliveries to endpoints that belong to Connect platforms or
+   * apps with access to your account. These endpoints don't appear when you list your account's
+   * webhook endpoints or event destinations. To see the delivery status for each endpoint, view the
+   * event in <a href="https://docs.stripe.com/workbench/overview#events">Workbench</a>.
    */
   @SerializedName("pending_webhooks")
   Long pendingWebhooks;
@@ -236,7 +239,11 @@ public class Event extends ApiResource implements HasId {
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
    * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
-   * (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * (not according to your current Stripe API version or {@code Stripe-Version} header). The list
+   * includes only events for the account that makes the request. A platform’s list doesn’t include
+   * events from its connected accounts. To list a connected account’s events, make the request <a
+   * href="https://docs.stripe.com/connect/authentication">as the connected account</a> using the
+   * {@code Stripe-Account} header.
    */
   public static EventCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -246,7 +253,11 @@ public class Event extends ApiResource implements HasId {
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
    * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
-   * (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * (not according to your current Stripe API version or {@code Stripe-Version} header). The list
+   * includes only events for the account that makes the request. A platform’s list doesn’t include
+   * events from its connected accounts. To list a connected account’s events, make the request <a
+   * href="https://docs.stripe.com/connect/authentication">as the connected account</a> using the
+   * {@code Stripe-Account} header.
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -260,7 +271,11 @@ public class Event extends ApiResource implements HasId {
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
    * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
-   * (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * (not according to your current Stripe API version or {@code Stripe-Version} header). The list
+   * includes only events for the account that makes the request. A platform’s list doesn’t include
+   * events from its connected accounts. To list a connected account’s events, make the request <a
+   * href="https://docs.stripe.com/connect/authentication">as the connected account</a> using the
+   * {@code Stripe-Account} header.
    */
   public static EventCollection list(EventListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -270,7 +285,11 @@ public class Event extends ApiResource implements HasId {
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
    * href="https://docs.stripe.com/api/events/object">event object</a> {@code api_version} attribute
-   * (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * (not according to your current Stripe API version or {@code Stripe-Version} header). The list
+   * includes only events for the account that makes the request. A platform’s list doesn’t include
+   * events from its connected accounts. To list a connected account’s events, make the request <a
+   * href="https://docs.stripe.com/connect/authentication">as the connected account</a> using the
+   * {@code Stripe-Account} header.
    */
   public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {

@@ -2755,7 +2755,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
-      /** The timestamp when the microdeposits are expected to land. */
+      /**
+       * The timestamp when the microdeposits are expected to land. Null for instant microdeposits.
+       */
       @SerializedName("arrival_date")
       Long arrivalDate;
 
@@ -2881,7 +2883,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentDetails extends StripeObject {
+  public static class PaymentDetails extends StripeObject implements StripeActiveObject {
+    @SerializedName("car_rental_data")
+    List<PaymentIntent.PaymentDetails.CarRentalDatum> carRentalData;
+
     /**
      * A unique value to identify the customer. This field is available only for card payments.
      *
@@ -2890,6 +2895,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("customer_reference")
     String customerReference;
+
+    @SerializedName("lodging_data")
+    List<PaymentIntent.PaymentDetails.LodgingDatum> lodgingData;
 
     /**
      * A unique value assigned by the business to identify the transaction. Required for L2 and L3
@@ -2901,6 +2909,743 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("order_reference")
     String orderReference;
+
+    /**
+     * For more details about CarRentalDatum, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CarRentalDatum extends StripeObject implements StripeActiveObject {
+      @SerializedName("affiliate")
+      Affiliate affiliate;
+
+      /** The booking number associated with the car rental. */
+      @SerializedName("booking_number")
+      String bookingNumber;
+
+      /** The name of the car rental company. */
+      @SerializedName("carrier_name")
+      String carrierName;
+
+      /** The customer service phone number of the car rental company. */
+      @SerializedName("customer_service_phone_number")
+      String customerServicePhoneNumber;
+
+      /** Number of days the car is being rented. */
+      @SerializedName("days_rented")
+      Long daysRented;
+
+      @SerializedName("distance")
+      Distance distance;
+
+      /** The details of the drivers associated with the rental. */
+      @SerializedName("drivers")
+      List<PaymentIntent.PaymentDetails.CarRentalDatum.Driver> drivers;
+
+      @SerializedName("drop_off")
+      DropOff dropOff;
+
+      /** Insurance details for the car rental. */
+      @SerializedName("insurances")
+      List<PaymentIntent.PaymentDetails.CarRentalDatum.Insurance> insurances;
+
+      /** Indicates if the customer did not keep nor cancel their booking. */
+      @SerializedName("no_show_indicator")
+      Boolean noShowIndicator;
+
+      @SerializedName("pickup")
+      Pickup pickup;
+
+      /** Name of the person renting the vehicle. */
+      @SerializedName("renter_name")
+      String renterName;
+
+      @SerializedName("total")
+      Total total;
+
+      @SerializedName("vehicle")
+      Vehicle vehicle;
+
+      /**
+       * For more details about Affiliate, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Affiliate extends StripeObject {
+        /** Affiliate code. */
+        @SerializedName("code")
+        String code;
+
+        /** Affiliate name. */
+        @SerializedName("name")
+        String name;
+      }
+
+      /**
+       * For more details about Distance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Distance extends StripeObject {
+        /** Distance amount. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Unit for the distance.
+         *
+         * <p>One of {@code kilometers}, or {@code miles}.
+         */
+        @SerializedName("unit")
+        String unit;
+      }
+
+      /**
+       * For more details about Driver, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Driver extends StripeObject {
+        @SerializedName("date_of_birth")
+        DateOfBirth dateOfBirth;
+
+        /** Driver's identification number. */
+        @SerializedName("driver_identification_number")
+        String driverIdentificationNumber;
+
+        /** Driver's tax number. */
+        @SerializedName("driver_tax_number")
+        String driverTaxNumber;
+
+        /** Full name of the driver. */
+        @SerializedName("name")
+        String name;
+
+        /**
+         * For more details about DateOfBirth, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DateOfBirth extends StripeObject {
+          /** Day of birth. */
+          @SerializedName("day")
+          Long day;
+
+          /** Month of birth. */
+          @SerializedName("month")
+          Long month;
+
+          /** Year of birth. */
+          @SerializedName("year")
+          Long year;
+        }
+      }
+
+      /**
+       * For more details about DropOff, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DropOff extends StripeObject implements StripeActiveObject {
+        @SerializedName("address")
+        Address address;
+
+        /** Name of the location. */
+        @SerializedName("location_name")
+        String locationName;
+
+        /** Time associated with the location. */
+        @SerializedName("time")
+        Long time;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(address, responseGetter);
+        }
+      }
+
+      /**
+       * For more details about Insurance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Insurance extends StripeObject {
+        /** Amount of the insurance. */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Currency for the insurance price. */
+        @SerializedName("currency")
+        String currency;
+
+        /** Name of the insurance company. */
+        @SerializedName("insurance_company_name")
+        String insuranceCompanyName;
+
+        /**
+         * Type of insurance.
+         *
+         * <p>One of {@code liability_supplement}, {@code loss_damage_waiver}, {@code other}, {@code
+         * partial_damage_waiver}, {@code personal_accident}, or {@code personal_effects}.
+         */
+        @SerializedName("insurance_type")
+        String insuranceType;
+      }
+
+      /**
+       * For more details about Pickup, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pickup extends StripeObject implements StripeActiveObject {
+        @SerializedName("address")
+        Address address;
+
+        /** Name of the location. */
+        @SerializedName("location_name")
+        String locationName;
+
+        /** Time associated with the location. */
+        @SerializedName("time")
+        Long time;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(address, responseGetter);
+        }
+      }
+
+      /**
+       * For more details about Total, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Total extends StripeObject {
+        /** Total amount. */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Currency for the total amount. */
+        @SerializedName("currency")
+        String currency;
+
+        @SerializedName("discounts")
+        Discounts discounts;
+
+        /** Additional charges for the rental. */
+        @SerializedName("extra_charges")
+        List<PaymentIntent.PaymentDetails.CarRentalDatum.Total.ExtraCharge> extraCharges;
+
+        /** Rate per unit. */
+        @SerializedName("rate_per_unit")
+        Long ratePerUnit;
+
+        /**
+         * Unit for the rate.
+         *
+         * <p>One of {@code kilometers}, or {@code miles}.
+         */
+        @SerializedName("rate_unit")
+        String rateUnit;
+
+        @SerializedName("tax")
+        Tax tax;
+
+        /**
+         * For more details about Discounts, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Discounts extends StripeObject {
+          /** Corporate client discount code. */
+          @SerializedName("corporate_client_code")
+          String corporateClientCode;
+
+          /** Coupon code applied. */
+          @SerializedName("coupon")
+          String coupon;
+
+          /** Maximum free miles or kilometers included. */
+          @SerializedName("maximum_free_miles_or_kilometers")
+          Long maximumFreeMilesOrKilometers;
+        }
+
+        /**
+         * For more details about ExtraCharge, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ExtraCharge extends StripeObject {
+          /** Amount of the extra charge. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Type of extra charge.
+           *
+           * <p>One of {@code extra_mileage}, {@code gas}, {@code gps}, {@code late_charge}, {@code
+           * one_way_drop_off}, {@code other}, {@code parking}, {@code phone}, {@code
+           * regular_mileage}, or {@code towing}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /**
+         * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+         * Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Tax extends StripeObject {
+          /** Indicates whether the rental is tax-exempt. */
+          @SerializedName("tax_exempt_indicator")
+          Boolean taxExemptIndicator;
+
+          /** Tax details. */
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.CarRentalDatum.Total.Tax.TaxItem> taxItems;
+
+          /**
+           * For more details about TaxItem, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class TaxItem extends StripeObject {
+            /** Tax amount. */
+            @SerializedName("amount")
+            Long amount;
+
+            /** Tax rate. */
+            @SerializedName("rate")
+            Long rate;
+
+            /** Type of tax. */
+            @SerializedName("type")
+            String type;
+          }
+        }
+      }
+
+      /**
+       * For more details about Vehicle, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Vehicle extends StripeObject {
+        /** Make of the vehicle. */
+        @SerializedName("make")
+        String make;
+
+        /** Model of the vehicle. */
+        @SerializedName("model")
+        String model;
+
+        /** Odometer reading. */
+        @SerializedName("odometer")
+        Long odometer;
+
+        /**
+         * Type of the vehicle.
+         *
+         * <p>One of {@code cargo_van}, {@code compact}, {@code economy}, {@code exotic}, {@code
+         * exotic_suv}, {@code fifteen_passenger_van}, {@code four_wheel_drive}, {@code full_size},
+         * {@code intermediate}, {@code large_suv}, {@code large_truck}, {@code luxury}, {@code
+         * medium_suv}, {@code midsize}, {@code mini}, {@code minivan}, {@code miscellaneous},
+         * {@code moped}, {@code moving_van}, {@code premium}, {@code regular}, {@code
+         * small_medium_truck}, {@code small_suv}, {@code special}, {@code standard}, {@code
+         * stretch}, {@code subcompact}, {@code taxi}, {@code twelve_foot_truck}, {@code
+         * twelve_passenger_van}, {@code twenty_foot_truck}, {@code twenty_four_foot_truck}, {@code
+         * twenty_six_foot_truck}, or {@code unique}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * Class of the vehicle.
+         *
+         * <p>One of {@code business}, {@code economy}, {@code first_class}, or {@code
+         * premium_economy}.
+         */
+        @SerializedName("vehicle_class")
+        String vehicleClass;
+
+        /** Vehicle identification number. */
+        @SerializedName("vehicle_identification_number")
+        String vehicleIdentificationNumber;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(dropOff, responseGetter);
+        trySetResponseGetter(pickup, responseGetter);
+      }
+    }
+
+    /**
+     * For more details about LodgingDatum, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LodgingDatum extends StripeObject implements StripeActiveObject {
+      @SerializedName("accommodation")
+      Accommodation accommodation;
+
+      @SerializedName("affiliate")
+      Affiliate affiliate;
+
+      /** Booking confirmation number for the lodging. */
+      @SerializedName("booking_number")
+      String bookingNumber;
+
+      /** Check-in date. */
+      @SerializedName("checkin_at")
+      Long checkinAt;
+
+      /** Check-out date. */
+      @SerializedName("checkout_at")
+      Long checkoutAt;
+
+      /** Customer service phone number for the lodging company. */
+      @SerializedName("customer_service_phone_number")
+      String customerServicePhoneNumber;
+
+      /** Whether the lodging is compliant with any hotel fire safety regulations. */
+      @SerializedName("fire_safety_act_compliance_indicator")
+      Boolean fireSafetyActComplianceIndicator;
+
+      /** List of guests for the lodging. */
+      @SerializedName("guests")
+      List<PaymentIntent.PaymentDetails.LodgingDatum.Guest> guests;
+
+      @SerializedName("host")
+      Host host;
+
+      /** List of insurances for the lodging. */
+      @SerializedName("insurances")
+      List<PaymentIntent.PaymentDetails.LodgingDatum.Insurance> insurances;
+
+      /** Whether the renter is a no-show. */
+      @SerializedName("no_show_indicator")
+      Boolean noShowIndicator;
+
+      /** Renter ID number for the lodging. */
+      @SerializedName("renter_id_number")
+      String renterIdNumber;
+
+      /** Renter name for the lodging. */
+      @SerializedName("renter_name")
+      String renterName;
+
+      @SerializedName("total")
+      Total total;
+
+      /**
+       * For more details about Accommodation, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Accommodation extends StripeObject {
+        /**
+         * Type of accommodation.
+         *
+         * <p>One of {@code apartment}, {@code cabana}, {@code house}, {@code penthouse}, {@code
+         * room}, {@code standard}, {@code suite}, or {@code villa}.
+         */
+        @SerializedName("accommodation_type")
+        String accommodationType;
+
+        /** Bed type. */
+        @SerializedName("bed_type")
+        String bedType;
+
+        /** Daily accommodation rate in cents. */
+        @SerializedName("daily_rate_amount")
+        Long dailyRateAmount;
+
+        /** Number of nights. */
+        @SerializedName("nights")
+        Long nights;
+
+        /** Number of rooms, cabanas, apartments, and so on. */
+        @SerializedName("number_of_rooms")
+        Long numberOfRooms;
+
+        /** Rate type. */
+        @SerializedName("rate_type")
+        String rateType;
+
+        /** Whether smoking is allowed. */
+        @SerializedName("smoking_indicator")
+        Boolean smokingIndicator;
+      }
+
+      /**
+       * For more details about Affiliate, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Affiliate extends StripeObject {
+        /** Affiliate partner code. */
+        @SerializedName("code")
+        String code;
+
+        /** Affiliate partner name. */
+        @SerializedName("name")
+        String name;
+      }
+
+      /**
+       * For more details about Guest, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Guest extends StripeObject {
+        /** Guest's full name. */
+        @SerializedName("name")
+        String name;
+      }
+
+      /**
+       * For more details about Host, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Host extends StripeObject implements StripeActiveObject {
+        @SerializedName("address")
+        Address address;
+
+        /** Host's country of domicile. */
+        @SerializedName("country_of_domicile")
+        String countryOfDomicile;
+
+        /** Reference number for the host. */
+        @SerializedName("host_reference")
+        String hostReference;
+
+        /**
+         * Type of host.
+         *
+         * <p>One of {@code hostel}, {@code hotel}, {@code owner}, or {@code rental_agency}.
+         */
+        @SerializedName("host_type")
+        String hostType;
+
+        /** Name of the lodging property or host. */
+        @SerializedName("name")
+        String name;
+
+        /** Total number of reservations for the host. */
+        @SerializedName("number_of_reservations")
+        Long numberOfReservations;
+
+        /** Property phone number. */
+        @SerializedName("property_phone_number")
+        String propertyPhoneNumber;
+
+        /** Host's registration date. */
+        @SerializedName("registered_at")
+        Long registeredAt;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(address, responseGetter);
+        }
+      }
+
+      /**
+       * For more details about Insurance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Insurance extends StripeObject {
+        /** Price of the insurance coverage in cents. */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Currency of the insurance amount. */
+        @SerializedName("currency")
+        String currency;
+
+        /** Name of the insurance company. */
+        @SerializedName("insurance_company_name")
+        String insuranceCompanyName;
+
+        /**
+         * Type of insurance coverage.
+         *
+         * <p>One of {@code bankruptcy}, {@code cancelation}, {@code emergency}, or {@code medical}.
+         */
+        @SerializedName("insurance_type")
+        String insuranceType;
+      }
+
+      /**
+       * For more details about Total, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Total extends StripeObject {
+        /** Total price of the lodging reservation in cents. */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Cash advances in cents. */
+        @SerializedName("cash_advances")
+        Long cashAdvances;
+
+        /** Currency of the total amount. */
+        @SerializedName("currency")
+        String currency;
+
+        @SerializedName("discounts")
+        Discounts discounts;
+
+        /** Additional charges for the lodging. */
+        @SerializedName("extra_charges")
+        List<PaymentIntent.PaymentDetails.LodgingDatum.Total.ExtraCharge> extraCharges;
+
+        /** Prepaid amount in cents. */
+        @SerializedName("prepaid_amount")
+        Long prepaidAmount;
+
+        @SerializedName("tax")
+        Tax tax;
+
+        /**
+         * For more details about Discounts, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Discounts extends StripeObject {
+          /** Corporate client discount code. */
+          @SerializedName("corporate_client_code")
+          String corporateClientCode;
+
+          /** Coupon code. */
+          @SerializedName("coupon")
+          String coupon;
+        }
+
+        /**
+         * For more details about ExtraCharge, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ExtraCharge extends StripeObject {
+          /** Amount of the extra charge in cents. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Type of extra charge.
+           *
+           * <p>One of {@code gift_shop}, {@code laundry}, {@code mini_bar}, {@code other}, {@code
+           * phone}, or {@code restaurant}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /**
+         * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+         * Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Tax extends StripeObject {
+          /** Indicates whether the transaction is tax exempt. */
+          @SerializedName("tax_exempt_indicator")
+          Boolean taxExemptIndicator;
+
+          /** Tax details. */
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.LodgingDatum.Total.Tax.TaxItem> taxItems;
+
+          /**
+           * For more details about TaxItem, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class TaxItem extends StripeObject {
+            /** Tax amount in cents. */
+            @SerializedName("amount")
+            Long amount;
+
+            /** Tax rate. */
+            @SerializedName("rate")
+            Long rate;
+
+            /** Type of tax applied. */
+            @SerializedName("type")
+            String type;
+          }
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(host, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (carRentalData != null) {
+        carRentalData.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (lodgingData != null) {
+        lodgingData.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /**
@@ -6124,6 +6869,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(latestCharge, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
+    trySetResponseGetter(paymentDetails, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentRecord, responseGetter);
     trySetResponseGetter(review, responseGetter);

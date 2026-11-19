@@ -1709,7 +1709,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
       /**
        * Determines how to handle prorations resulting from subscription updates. Valid values are
-       * {@code none}, {@code create_prorations}, and {@code always_invoice}.
+       * {@code none}, {@code create_prorations}, and {@code always_invoice}. Defaults to {@code
+       * none}.
        */
       @SerializedName("proration_behavior")
       ProrationBehavior prorationBehavior;
@@ -1940,7 +1941,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
         /**
          * Determines how to handle prorations resulting from subscription updates. Valid values are
-         * {@code none}, {@code create_prorations}, and {@code always_invoice}.
+         * {@code none}, {@code create_prorations}, and {@code always_invoice}. Defaults to {@code
+         * none}.
          */
         public Builder setProrationBehavior(
             ConfigurationCreateParams.Features.SubscriptionUpdate.ProrationBehavior

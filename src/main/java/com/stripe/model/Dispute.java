@@ -39,8 +39,8 @@ public class Dispute extends ApiResource
   Long amount;
 
   /**
-   * List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your
-   * Stripe account as a result of this dispute.
+   * List of balance transactions that show funds withdrawn and reinstated to your Stripe account as
+   * a result of this dispute.
    */
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
