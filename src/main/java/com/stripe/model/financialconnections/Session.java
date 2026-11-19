@@ -7,6 +7,7 @@ import com.stripe.model.Account;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Token;
 import com.stripe.net.ApiRequest;
@@ -239,7 +240,7 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AccountHolder extends StripeObject {
+  public static class AccountHolder extends StripeObject implements StripeActiveObject {
     /**
      * The ID of the Stripe account that this account belongs to. Only available when {@code
      * account_holder.type} is {@code account}.
@@ -303,6 +304,12 @@ public class Session extends ApiResource implements HasId {
 
     public void setCustomerObject(Customer expandableObject) {
       this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(account, responseGetter);
+      trySetResponseGetter(customer, responseGetter);
     }
   }
 
@@ -494,13 +501,5 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(accountHolder, responseGetter);
     trySetResponseGetter(accounts, responseGetter);
     trySetResponseGetter(bankAccountToken, responseGetter);
-    trySetResponseGetter(filters, responseGetter);
-    trySetResponseGetter(hosted, responseGetter);
-    trySetResponseGetter(limits, responseGetter);
-    trySetResponseGetter(manualEntry, responseGetter);
-    trySetResponseGetter(preCollectedConsent, responseGetter);
-    trySetResponseGetter(relinkOptions, responseGetter);
-    trySetResponseGetter(relinkResult, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
   }
 }

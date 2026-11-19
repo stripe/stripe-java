@@ -2,7 +2,9 @@
 package com.stripe.model.billing;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class AlertRecovered extends StripeObject {
+public class AlertRecovered extends StripeObject implements StripeActiveObject {
   /** The aggregation period for which this alert recovered. */
   @SerializedName("aggregation_period")
   AggregationPeriod aggregationPeriod;
@@ -78,5 +80,10 @@ public class AlertRecovered extends StripeObject {
     /** Start time of the aggregation period. */
     @SerializedName("starts_at")
     Long startsAt;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(alert, responseGetter);
   }
 }

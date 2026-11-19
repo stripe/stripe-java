@@ -49,12 +49,12 @@ public final class RateCardSubscriptionService extends ApiService {
     return this.request(
         request, new TypeToken<StripeCollection<RateCardSubscription>>() {}.getType());
   }
-  /** Create a Rate Card Subscription to bill a Rate Card on a specified Billing Cadence. */
+  /** Create a Rate Card Subscription to bill a Rate Card on a specified Billing Group. */
   public RateCardSubscription create(RateCardSubscriptionCreateParams params)
       throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a Rate Card Subscription to bill a Rate Card on a specified Billing Cadence. */
+  /** Create a Rate Card Subscription to bill a Rate Card on a specified Billing Group. */
   public RateCardSubscription create(
       RateCardSubscriptionCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v2/billing/rate_card_subscriptions";

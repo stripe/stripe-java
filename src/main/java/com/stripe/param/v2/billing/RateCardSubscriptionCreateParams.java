@@ -11,9 +11,9 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class RateCardSubscriptionCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The ID of the Billing Cadence. */
-  @SerializedName("billing_cadence")
-  String billingCadence;
+  /** <strong>Required.</strong> The ID of the Billing Group. */
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -44,12 +44,12 @@ public class RateCardSubscriptionCreateParams extends ApiRequestParams {
   String rateCardVersion;
 
   private RateCardSubscriptionCreateParams(
-      String billingCadence,
+      String billingGroup,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       String rateCard,
       String rateCardVersion) {
-    this.billingCadence = billingCadence;
+    this.billingGroup = billingGroup;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.rateCard = rateCard;
@@ -61,7 +61,7 @@ public class RateCardSubscriptionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String billingCadence;
+    private String billingGroup;
 
     private Map<String, Object> extraParams;
 
@@ -74,16 +74,12 @@ public class RateCardSubscriptionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public RateCardSubscriptionCreateParams build() {
       return new RateCardSubscriptionCreateParams(
-          this.billingCadence,
-          this.extraParams,
-          this.metadata,
-          this.rateCard,
-          this.rateCardVersion);
+          this.billingGroup, this.extraParams, this.metadata, this.rateCard, this.rateCardVersion);
     }
 
-    /** <strong>Required.</strong> The ID of the Billing Cadence. */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
+    /** <strong>Required.</strong> The ID of the Billing Group. */
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 

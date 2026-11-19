@@ -5,7 +5,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StringInt64TypeAdapter;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -23,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class RateCardRate extends StripeObject implements HasId {
+public class RateCardRate extends StripeObject implements HasId, StripeActiveObject {
   /** Timestamp of when the object was created. */
   @SerializedName("created")
   Instant created;
@@ -108,7 +110,8 @@ public class RateCardRate extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CustomPricingUnitAmount extends StripeObject implements HasId {
+  public static class CustomPricingUnitAmount extends StripeObject
+      implements HasId, StripeActiveObject {
     /** The Custom Pricing Unit object. */
     @SerializedName("custom_pricing_unit_details")
     CustomPricingUnit customPricingUnitDetails;
@@ -121,6 +124,11 @@ public class RateCardRate extends StripeObject implements HasId {
     /** The unit value for the custom pricing unit, as a string. */
     @SerializedName("value")
     String value;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(customPricingUnitDetails, responseGetter);
+    }
   }
 
   /**
@@ -180,5 +188,11 @@ public class RateCardRate extends StripeObject implements HasId {
      */
     @SerializedName("round")
     String round;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(customPricingUnitAmount, responseGetter);
+    trySetResponseGetter(meteredItem, responseGetter);
   }
 }

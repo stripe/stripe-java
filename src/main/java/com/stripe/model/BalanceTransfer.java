@@ -153,7 +153,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DestinationBalance extends StripeObject {
+  public static class DestinationBalance extends StripeObject implements StripeActiveObject {
     @SerializedName("issuing")
     Issuing issuing;
 
@@ -174,7 +174,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Issuing extends StripeObject {
+    public static class Issuing extends StripeObject implements StripeActiveObject {
       /** Identifier for the balance_transaction that increased the destination balance. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
@@ -198,6 +198,11 @@ public class BalanceTransfer extends ApiResource implements HasId {
       public void setBalanceTransactionObject(BalanceTransaction expandableObject) {
         this.balanceTransaction =
             new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(balanceTransaction, responseGetter);
       }
     }
 
@@ -208,7 +213,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payments extends StripeObject {
+    public static class Payments extends StripeObject implements StripeActiveObject {
       /** Identifier for the balance_transaction that increased the destination balance. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
@@ -233,6 +238,17 @@ public class BalanceTransfer extends ApiResource implements HasId {
         this.balanceTransaction =
             new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(balanceTransaction, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(issuing, responseGetter);
+      trySetResponseGetter(payments, responseGetter);
     }
   }
 
@@ -243,7 +259,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SourceBalance extends StripeObject {
+  public static class SourceBalance extends StripeObject implements StripeActiveObject {
     @SerializedName("issuing")
     Issuing issuing;
 
@@ -264,7 +280,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Issuing extends StripeObject {
+    public static class Issuing extends StripeObject implements StripeActiveObject {
       /** Identifier for the balance_transaction that decreased the source balance. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
@@ -289,6 +305,11 @@ public class BalanceTransfer extends ApiResource implements HasId {
         this.balanceTransaction =
             new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(balanceTransaction, responseGetter);
+      }
     }
 
     /**
@@ -298,7 +319,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Payments extends StripeObject {
+    public static class Payments extends StripeObject implements StripeActiveObject {
       /** Identifier for the balance_transaction that decreased the source balance. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
@@ -330,6 +351,17 @@ public class BalanceTransfer extends ApiResource implements HasId {
         this.balanceTransaction =
             new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(balanceTransaction, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(issuing, responseGetter);
+      trySetResponseGetter(payments, responseGetter);
     }
   }
 

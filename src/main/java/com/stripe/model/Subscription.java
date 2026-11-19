@@ -57,15 +57,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   AutomaticTax automaticTax;
 
   /**
-   * The Billing Cadence which controls the timing of recurring invoice generation for this
-   * subscription. If unset, the subscription will bill according to its own configured schedule and
-   * create its own invoices. If set, this subscription will be billed by the cadence instead,
-   * potentially sharing invoices with the other subscriptions linked to that Cadence.
-   */
-  @SerializedName("billing_cadence")
-  String billingCadence;
-
-  /**
    * The reference point that aligns future <a
    * href="https://docs.stripe.com/subscriptions/billing-cycle">billing cycle</a> dates. It sets the
    * day of week for {@code week} intervals, the day of month for {@code month} and {@code year}
@@ -1529,7 +1520,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticTax extends StripeObject {
+  public static class AutomaticTax extends StripeObject implements StripeActiveObject {
     /**
      * If Stripe disabled automatic tax, this enum describes why.
      *
@@ -1606,7 +1597,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Liability extends StripeObject {
+    public static class Liability extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -1638,6 +1629,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(liability, responseGetter);
     }
   }
 
@@ -1713,7 +1714,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingSchedule extends StripeObject {
+  public static class BillingSchedule extends StripeObject implements StripeActiveObject {
     /** Specifies which subscription items the billing schedule applies to. */
     @SerializedName("applies_to")
     List<Subscription.BillingSchedule.AppliesTo> appliesTo;
@@ -1730,7 +1731,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AppliesTo extends StripeObject {
+    public static class AppliesTo extends StripeObject implements StripeActiveObject {
       /** The billing schedule will apply to the subscription item with the given price ID. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -1761,6 +1762,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(price, responseGetter);
       }
     }
 
@@ -1812,6 +1818,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         Long intervalCount;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (appliesTo != null) {
+        appliesTo.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /**
@@ -1843,7 +1856,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CancellationDetails extends StripeObject {
+  public static class CancellationDetails extends StripeObject implements StripeActiveObject {
     /**
      * Additional comments about why the user canceled the subscription, if the subscription was
      * canceled explicitly by the user.
@@ -1898,6 +1911,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       this.feedbackOption =
           new ExpandableField<FeedbackOption>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(feedbackOption, responseGetter);
+    }
   }
 
   /**
@@ -1907,7 +1925,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InvoiceSettings extends StripeObject {
+  public static class InvoiceSettings extends StripeObject implements StripeActiveObject {
     /**
      * The account tax IDs associated with the subscription. Will be set on invoices generated by
      * the subscription.
@@ -1998,7 +2016,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Issuer extends StripeObject {
+    public static class Issuer extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -2030,6 +2048,19 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (accountTaxIds != null) {
+        accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      trySetResponseGetter(issuer, responseGetter);
     }
   }
 
@@ -2495,6 +2526,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Card extends StripeObject {
+        /**
+         * Controls early collection for eligible recurring payments on India-issued cards.
+         * Target-date billing aims to debit on the billing-cycle date but does not guarantee that
+         * date.
+         */
+        @SerializedName("debit_behavior")
+        String debitBehavior;
+
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2690,6 +2729,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Pix extends StripeObject {
+        /** Timing configuration for collecting funds from the customer's account. */
+        @SerializedName("debit_behavior")
+        String debitBehavior;
+
         /**
          * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
          * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
@@ -2759,6 +2802,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Upi extends StripeObject {
+        /**
+         * Controls when the funds will be captured from the customer's account. Defaults to {@code
+         * not_specified}. Omitting this parameter on an update preserves the saved value; passing
+         * {@code not_specified} clears it. Early collection is best effort and doesn't guarantee an
+         * exact debit date.
+         */
+        @SerializedName("debit_behavior")
+        String debitBehavior;
+
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
@@ -2917,7 +2969,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PendingUpdate extends StripeObject {
+  public static class PendingUpdate extends StripeObject implements StripeActiveObject {
     /**
      * If the update is applied, determines the date of the first full invoice, and, for plans with
      * {@code month} or {@code year} intervals, the day of the month for subsequent invoices. The
@@ -2965,6 +3017,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /** The number of iterations of prebilling to apply. */
     @SerializedName("prebilling_iterations")
     Long prebillingIterations;
+
+    @SerializedName("presentment_details")
+    PresentmentDetails presentmentDetails;
 
     /**
      * List of subscription items, each with an attached plan, that will be set if the update is
@@ -3030,13 +3085,37 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
                   .collect(Collectors.toList())
               : null;
     }
+
+    /**
+     * For more details about PresentmentDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PresentmentDetails extends StripeObject {
+      /** Currency used for customer payments. */
+      @SerializedName("presentment_currency")
+      String presentmentCurrency;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(discount, responseGetter);
+      if (discounts != null) {
+        discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (subscriptionItems != null) {
+        subscriptionItems.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /** Prebilling stores the time period and invoice for a Subscription billed in advance. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Prebilling extends StripeObject {
+  public static class Prebilling extends StripeObject implements StripeActiveObject {
     /** ID of the prebilling invoice. */
     @SerializedName("invoice")
     @Getter(lombok.AccessLevel.NONE)
@@ -3076,6 +3155,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
     public void setInvoiceObject(Invoice expandableObject) {
       this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(invoice, responseGetter);
     }
   }
 
@@ -3148,7 +3232,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
+  public static class TransferData extends StripeObject implements StripeActiveObject {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
      * the percentage of the subscription invoice total that will be transferred to the destination
@@ -3179,6 +3263,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(destination, responseGetter);
     }
   }
 
@@ -3221,30 +3310,28 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
-    trySetResponseGetter(billingCycleAnchorConfig, responseGetter);
-    trySetResponseGetter(billingMode, responseGetter);
-    trySetResponseGetter(billingThresholds, responseGetter);
+    if (billingSchedules != null) {
+      billingSchedules.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(cancellationDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
+    if (defaultTaxRates != null) {
+      defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(items, responseGetter);
-    trySetResponseGetter(lastPriceMigrationError, responseGetter);
     trySetResponseGetter(latestInvoice, responseGetter);
-    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
-    trySetResponseGetter(pauseCollection, responseGetter);
-    trySetResponseGetter(paymentSettings, responseGetter);
-    trySetResponseGetter(pendingInvoiceItemInterval, responseGetter);
     trySetResponseGetter(pendingSetupIntent, responseGetter);
     trySetResponseGetter(pendingUpdate, responseGetter);
     trySetResponseGetter(prebilling, responseGetter);
-    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(schedule, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
-    trySetResponseGetter(trialSettings, responseGetter);
   }
 }

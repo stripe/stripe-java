@@ -18,6 +18,12 @@ public final class V2PaymentsOffSessionPaymentAttemptFailedEvent extends Event {
   @Getter
   @Setter
   public static final class EventData {
+    /** The ID of the Charge associated with this attempt. */
+    @SerializedName("charge")
+    String charge;
+    /** The payment error from the failed attempt. */
+    @SerializedName("last_attempt_error")
+    String lastAttemptError;
     /** The ID of the payment attempt record associated with this failed attempt. */
     @SerializedName("payment_attempt_record")
     String paymentAttemptRecord;

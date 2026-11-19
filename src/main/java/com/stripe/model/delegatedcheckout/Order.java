@@ -249,6 +249,5 @@ public class Order extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(latestOrderEvent, responseGetter);
-    trySetResponseGetter(totals, responseGetter);
   }
 }

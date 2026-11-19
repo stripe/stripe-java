@@ -3,7 +3,9 @@ package com.stripe.model.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -18,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ServiceAction extends StripeObject implements HasId {
+public class ServiceAction extends StripeObject implements HasId, StripeActiveObject {
   /** Timestamp of when the object was created. */
   @SerializedName("created")
   Instant created;
@@ -83,7 +85,7 @@ public class ServiceAction extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CreditGrant extends StripeObject {
+  public static class CreditGrant extends StripeObject implements StripeActiveObject {
     /** The amount of the credit grant. */
     @SerializedName("amount")
     com.stripe.model.v2.billing.ServiceAction.CreditGrant.Amount amount;
@@ -119,7 +121,7 @@ public class ServiceAction extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject {
+    public static class Amount extends StripeObject implements StripeActiveObject {
       /**
        * The custom pricing unit amount of the credit grant. Required if {@code type} is {@code
        * custom_pricing_unit}.
@@ -148,7 +150,8 @@ public class ServiceAction extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CustomPricingUnit extends StripeObject implements HasId {
+      public static class CustomPricingUnit extends StripeObject
+          implements HasId, StripeActiveObject {
         /** The Custom Pricing Unit object. */
         @SerializedName("custom_pricing_unit_details")
         com.stripe.model.v2.billing.CustomPricingUnit customPricingUnitDetails;
@@ -161,6 +164,16 @@ public class ServiceAction extends StripeObject implements HasId {
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
         BigDecimal value;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(customPricingUnitDetails, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(customPricingUnit, responseGetter);
       }
     }
 
@@ -207,6 +220,11 @@ public class ServiceAction extends StripeObject implements HasId {
       @SerializedName("type")
       String type;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(amount, responseGetter);
+    }
   }
 
   /**
@@ -216,7 +234,7 @@ public class ServiceAction extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CreditGrantPerTenant extends StripeObject {
+  public static class CreditGrantPerTenant extends StripeObject implements StripeActiveObject {
     /** The amount of the credit grant. */
     @SerializedName("amount")
     com.stripe.model.v2.billing.ServiceAction.CreditGrantPerTenant.Amount amount;
@@ -252,7 +270,7 @@ public class ServiceAction extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject {
+    public static class Amount extends StripeObject implements StripeActiveObject {
       /**
        * The custom pricing unit amount of the credit grant. Required if {@code type} is {@code
        * custom_pricing_unit}.
@@ -281,7 +299,8 @@ public class ServiceAction extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CustomPricingUnit extends StripeObject implements HasId {
+      public static class CustomPricingUnit extends StripeObject
+          implements HasId, StripeActiveObject {
         /** The Custom Pricing Unit object. */
         @SerializedName("custom_pricing_unit_details")
         com.stripe.model.v2.billing.CustomPricingUnit customPricingUnitDetails;
@@ -294,6 +313,16 @@ public class ServiceAction extends StripeObject implements HasId {
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
         BigDecimal value;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(customPricingUnitDetails, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(customPricingUnit, responseGetter);
       }
     }
 
@@ -340,5 +369,16 @@ public class ServiceAction extends StripeObject implements HasId {
       @SerializedName("type")
       String type;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(amount, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(creditGrant, responseGetter);
+    trySetResponseGetter(creditGrantPerTenant, responseGetter);
   }
 }

@@ -20,12 +20,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
+   * The identifier of the billing group for which you’d like to retrieve the upcoming invoice.
    * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details} or
    * {@code schedule_details} are provided.
    */
-  @SerializedName("billing_cadence")
-  String billingCadence;
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
@@ -148,7 +148,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
   private InvoiceCreatePreviewParams(
       AutomaticTax automaticTax,
-      String billingCadence,
+      String billingGroup,
       String currency,
       String customer,
       String customerAccount,
@@ -166,7 +166,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String subscription,
       SubscriptionDetails subscriptionDetails) {
     this.automaticTax = automaticTax;
-    this.billingCadence = billingCadence;
+    this.billingGroup = billingGroup;
     this.currency = currency;
     this.customer = customer;
     this.customerAccount = customerAccount;
@@ -192,7 +192,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   public static class Builder {
     private AutomaticTax automaticTax;
 
-    private String billingCadence;
+    private String billingGroup;
 
     private String currency;
 
@@ -230,7 +230,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     public InvoiceCreatePreviewParams build() {
       return new InvoiceCreatePreviewParams(
           this.automaticTax,
-          this.billingCadence,
+          this.billingGroup,
           this.currency,
           this.customer,
           this.customerAccount,
@@ -256,12 +256,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
+     * The identifier of the billing group for which you’d like to retrieve the upcoming invoice.
      * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details}
      * or {@code schedule_details} are provided.
      */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
       return this;
     }
 

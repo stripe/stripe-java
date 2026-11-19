@@ -67,13 +67,6 @@ public class AlertNotification extends ApiResource implements HasId {
   String billingGroup;
 
   /**
-   * The cadence associated with this notification. Only present for spend threshold alerts grouped
-   * by cadence.
-   */
-  @SerializedName("cadence")
-  String cadence;
-
-  /**
    * Three-letter ISO currency code for the value, in lowercase. Only present for spend and credit
    * balance threshold alerts.
    */

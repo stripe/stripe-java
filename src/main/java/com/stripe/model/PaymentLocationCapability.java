@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentLocationCapabilityListParams;
 import com.stripe.param.PaymentLocationCapabilityRetrieveParams;
 import com.stripe.param.PaymentLocationCapabilityUpdateParams;
@@ -266,11 +265,5 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
       @SerializedName("requirement")
       String requirement;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
   }
 }

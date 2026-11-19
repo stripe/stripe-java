@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.sharedpayment.IssuedTokenCreateParams;
 import com.stripe.param.sharedpayment.IssuedTokenRetrieveParams;
 import com.stripe.param.sharedpayment.IssuedTokenRevokeParams;
@@ -563,16 +562,5 @@ public class IssuedToken extends ApiResource implements HasId {
       @SerializedName("interval_count")
       Long intervalCount;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
-    trySetResponseGetter(referralFeeDetails, responseGetter);
-    trySetResponseGetter(riskDetails, responseGetter);
-    trySetResponseGetter(sellerDetails, responseGetter);
-    trySetResponseGetter(usageDetails, responseGetter);
-    trySetResponseGetter(usageLimits, responseGetter);
   }
 }

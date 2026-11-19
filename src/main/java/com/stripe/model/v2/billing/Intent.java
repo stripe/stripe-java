@@ -1,10 +1,13 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,13 +26,13 @@ public class Intent extends StripeObject implements HasId {
   @SerializedName("amount_details")
   AmountDetails amountDetails;
 
-  /** ID of an existing Cadence to use. */
-  @SerializedName("cadence")
-  String cadence;
+  /** ID of an existing Billing Group to use. */
+  @SerializedName("billing_group")
+  String billingGroup;
 
-  /** Data for creating a new Cadence. */
-  @SerializedName("cadence_data")
-  CadenceData cadenceData;
+  /** Data for creating a new Billing Group. */
+  @SerializedName("billing_group_data")
+  BillingGroupData billingGroupData;
 
   /** Time at which the object was created. */
   @SerializedName("created")
@@ -110,323 +113,624 @@ public class Intent extends StripeObject implements HasId {
     String total;
   }
 
-  /** Data for creating a new Cadence. */
+  /** Data for creating a new Billing Group. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CadenceData extends StripeObject {
-    /** The billing cycle configuration for this Cadence. */
-    @SerializedName("billing_cycle")
-    BillingCycle billingCycle;
+  public static class BillingGroupData extends StripeObject {
+    /** Billing setting overrides for the group. If omitted, the applicable defaults are used. */
+    @SerializedName("billing_settings")
+    BillingSettings billingSettings;
 
-    /** Information about the payer for this Cadence. */
-    @SerializedName("payer")
-    Payer payer;
+    /** The ID of the Customer object whose invoices are grouped. */
+    @SerializedName("customer")
+    String customer;
 
-    /** Settings for creating the Cadence. */
-    @SerializedName("settings")
-    Settings settings;
+    /**
+     * The ID of the PaymentMethod object used by default. If unset, the customer's default payment
+     * method is used.
+     */
+    @SerializedName("default_payment_method")
+    String defaultPaymentMethod;
 
-    /** The billing cycle configuration for this Cadence. */
+    /** The strategy used to group member invoices. */
+    @SerializedName("grouping_behavior")
+    GroupingBehavior groupingBehavior;
+
+    /**
+     * An internal key you can use to find a particular billing group. Maximum length of 200
+     * characters.
+     */
+    @SerializedName("lookup_key")
+    String lookupKey;
+
+    /** Billing setting overrides for the group. If omitted, the applicable defaults are used. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingCycle extends StripeObject {
-      /** Specific configuration for determining billing dates when type=day. */
-      @SerializedName("day")
-      Day day;
-
+    public static class BillingSettings extends StripeObject {
       /**
-       * The number of intervals (specified in the interval attribute) between cadence billings. For
-       * example, type=month and interval_count=3 bills every 3 months.
-       */
-      @SerializedName("interval_count")
-      Long intervalCount;
-
-      /** Specific configuration for determining billing dates when type=month. */
-      @SerializedName("month")
-      Month month;
-
-      /**
-       * The frequency at which a cadence bills.
+       * How Stripe collects payment.
        *
-       * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+       * <p>One of {@code charge_automatically}, or {@code send_invoice}.
+       */
+      @SerializedName("collection_method")
+      String collectionMethod;
+
+      /** Email delivery setting. */
+      @SerializedName("email_delivery")
+      EmailDelivery emailDelivery;
+
+      /** Settings for invoice presentation. */
+      @SerializedName("invoice_presentation")
+      InvoicePresentation invoicePresentation;
+
+      /** The amount of time until the invoice is overdue for payment. */
+      @SerializedName("invoice_time_until_due")
+      InvoiceTimeUntilDue invoiceTimeUntilDue;
+
+      /**
+       * The ID of the payment method configuration, which controls which payment methods are
+       * displayed to your customers.
+       */
+      @SerializedName("payment_method_configuration")
+      String paymentMethodConfiguration;
+
+      /** Payment Method specific configuration to be stored on the object. */
+      @SerializedName("payment_method_options")
+      PaymentMethodOptions paymentMethodOptions;
+
+      /** Settings for calculating tax. */
+      @SerializedName("tax")
+      Tax tax;
+
+      /** Email delivery setting. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EmailDelivery extends StripeObject {
+        /** Controls emails for when the payment is due. */
+        @SerializedName("payment_due")
+        PaymentDue paymentDue;
+
+        /** Controls emails for when the payment is due. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PaymentDue extends StripeObject {
+          /** If true an email for the invoice would be generated and sent out. */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /**
+           * If true the payment link to hosted invoice page would be included in email and PDF of
+           * the invoice.
+           */
+          @SerializedName("include_payment_link")
+          Boolean includePaymentLink;
+        }
+      }
+
+      /** Settings for invoice presentation. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InvoicePresentation extends StripeObject {
+        /** The ID of the invoice rendering template to be used when generating invoices. */
+        @SerializedName("invoice_rendering_template")
+        String invoiceRenderingTemplate;
+      }
+
+      /** The amount of time until the invoice is overdue for payment. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InvoiceTimeUntilDue extends StripeObject {
+        /**
+         * The interval unit for the time until due.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /**
+         * The number of interval units. For example, if interval=day and interval_count=30, the
+         * invoice is due in 30 days.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+      }
+
+      /** Payment Method specific configuration to be stored on the object. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentMethodOptions extends StripeObject {
+        /**
+         * This sub-hash contains details about the Canadian pre-authorized debit payment method
+         * options.
+         */
+        @SerializedName("acss_debit")
+        AcssDebit acssDebit;
+
+        /** This sub-hash contains details about the Bancontact payment method. */
+        @SerializedName("bancontact")
+        Bancontact bancontact;
+
+        /** This sub-hash contains details about the Card payment method options. */
+        @SerializedName("card")
+        Card card;
+
+        /** This sub-hash contains details about the Bank transfer payment method options. */
+        @SerializedName("customer_balance")
+        CustomerBalance customerBalance;
+
+        /** This sub-hash contains details about the Konbini payment method options. */
+        @SerializedName("konbini")
+        Konbini konbini;
+
+        /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
+        @SerializedName("sepa_debit")
+        SepaDebit sepaDebit;
+
+        /** This sub-hash contains details about the ACH direct debit payment method options. */
+        @SerializedName("us_bank_account")
+        UsBankAccount usBankAccount;
+
+        /**
+         * This sub-hash contains details about the Canadian pre-authorized debit payment method
+         * options.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AcssDebit extends StripeObject {
+          /** Additional fields for Mandate creation. */
+          @SerializedName("mandate_options")
+          MandateOptions mandateOptions;
+
+          /**
+           * Verification method.
+           *
+           * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+           */
+          @SerializedName("verification_method")
+          String verificationMethod;
+
+          /** Additional fields for Mandate creation. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class MandateOptions extends StripeObject {
+            /**
+             * Transaction type of the mandate.
+             *
+             * <p>One of {@code business}, or {@code personal}.
+             */
+            @SerializedName("transaction_type")
+            String transactionType;
+          }
+        }
+
+        /** This sub-hash contains details about the Bancontact payment method. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Bancontact extends StripeObject {
+          /**
+           * Preferred language of the Bancontact authorization page that the customer is redirected
+           * to.
+           *
+           * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
+           */
+          @SerializedName("preferred_language")
+          String preferredLanguage;
+        }
+
+        /** This sub-hash contains details about the Card payment method options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Card extends StripeObject {
+          /** Configuration options for setting up an eMandate for cards issued in India. */
+          @SerializedName("mandate_options")
+          MandateOptions mandateOptions;
+
+          /**
+           * Selected network to process the payment on. Depends on the available networks of the
+           * card.
+           */
+          @SerializedName("network")
+          String network;
+
+          /**
+           * An advanced option 3D Secure. We strongly recommend that you rely on our SCA Engine to
+           * automatically prompt your customers for authentication based on risk level and <a
+           * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
+           * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+           * provide this option. Read our guide on <a
+           * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
+           * requesting 3D Secure</a> for more information on how this configuration interacts with
+           * Radar and our SCA Engine.
+           *
+           * <p>One of {@code any}, {@code automatic}, or {@code challenge}.
+           */
+          @SerializedName("request_three_d_secure")
+          String requestThreeDSecure;
+
+          /** Configuration options for setting up an eMandate for cards issued in India. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class MandateOptions extends StripeObject {
+            /** Amount to be charged for future payments. */
+            @SerializedName("amount")
+            @JsonAdapter(StringInt64TypeAdapter.class)
+            Long amount;
+
+            /** The AmountType for the mandate. One of {@code fixed} or {@code maximum}. */
+            @SerializedName("amount_type")
+            String amountType;
+
+            /** A description of the mandate that is meant to be displayed to the customer. */
+            @SerializedName("description")
+            String description;
+          }
+        }
+
+        /** This sub-hash contains details about the Bank transfer payment method options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomerBalance extends StripeObject {
+          /**
+           * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
+           * {@code bank_transfer}.
+           */
+          @SerializedName("bank_transfer")
+          BankTransfer bankTransfer;
+
+          /**
+           * The funding method type to be used when there are not enough funds in the customer
+           * balance. Currently the only supported value is {@code bank_transfer}.
+           *
+           * <p>Equal to {@code bank_transfer}.
+           */
+          @SerializedName("funding_type")
+          String fundingType;
+
+          /**
+           * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
+           * {@code bank_transfer}.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankTransfer extends StripeObject {
+            /**
+             * Configuration for {@code eu_bank_transfer} funding type. Required if {@code type} is
+             * {@code eu_bank_transfer}.
+             */
+            @SerializedName("eu_bank_transfer")
+            EuBankTransfer euBankTransfer;
+
+            /**
+             * The bank transfer type that can be used for funding.
+             *
+             * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
+             * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+             */
+            @SerializedName("type")
+            String type;
+
+            /**
+             * Configuration for {@code eu_bank_transfer} funding type. Required if {@code type} is
+             * {@code eu_bank_transfer}.
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class EuBankTransfer extends StripeObject {
+              /**
+               * The desired country code of the bank account information.
+               *
+               * <p>One of {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code
+               * NL}.
+               */
+              @SerializedName("country")
+              String country;
+            }
+          }
+        }
+
+        /** This sub-hash contains details about the Konbini payment method options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Konbini extends StripeObject {}
+
+        /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SepaDebit extends StripeObject {}
+
+        /** This sub-hash contains details about the ACH direct debit payment method options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class UsBankAccount extends StripeObject {
+          /** Additional fields for Financial Connections Session creation. */
+          @SerializedName("financial_connections")
+          FinancialConnections financialConnections;
+
+          /**
+           * Verification method.
+           *
+           * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+           */
+          @SerializedName("verification_method")
+          String verificationMethod;
+
+          /** Additional fields for Financial Connections Session creation. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FinancialConnections extends StripeObject {
+            /**
+             * Provide filters for the linked accounts that the customer can select for the payment
+             * method.
+             */
+            @SerializedName("filters")
+            Filters filters;
+
+            /**
+             * The list of permissions to request. If this parameter is passed, the {@code
+             * payment_method} permission must be included.
+             */
+            @SerializedName("permissions")
+            List<String> permissions;
+
+            /** List of data features that you would like to retrieve upon account creation. */
+            @SerializedName("prefetch")
+            List<String> prefetch;
+
+            /**
+             * Provide filters for the linked accounts that the customer can select for the payment
+             * method.
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Filters extends StripeObject {
+              /** The account subcategories to use to filter for selectable accounts. */
+              @SerializedName("account_subcategories")
+              List<String> accountSubcategories;
+            }
+          }
+        }
+      }
+
+      /** Settings for calculating tax. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /**
+         * Determines if tax is calculated automatically based on a product tax code or manually
+         * based on rules defined by the business.
+         *
+         * <p>One of {@code automatic}, or {@code manual}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+    }
+
+    /** The strategy used to group member invoices. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GroupingBehavior extends StripeObject {
+      /** The cadence configuration when type is {@code by_cadence}. */
+      @SerializedName("by_cadence")
+      ByCadence byCadence;
+
+      /**
+       * The grouping strategy.
+       *
+       * <p>Equal to {@code by_cadence}.
        */
       @SerializedName("type")
       String type;
 
-      /** Specific configuration for determining billing dates when type=week. */
-      @SerializedName("week")
-      Week week;
-
-      /** Specific configuration for determining billing dates when type=year. */
-      @SerializedName("year")
-      Year year;
-
-      /** Specific configuration for determining billing dates when type=day. */
+      /** The cadence configuration when type is {@code by_cadence}. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Day extends StripeObject {
-        /** The time at which the billing cycle ends. */
-        @SerializedName("time")
-        Time time;
+      public static class ByCadence extends StripeObject {
+        /** Timestamp that anchors the recurring grouping cadence. */
+        @SerializedName("billing_cycle_anchor")
+        Instant billingCycleAnchor;
 
-        /** The time at which the billing cycle ends. */
+        /** Daily cadence details. */
+        @SerializedName("day")
+        Day day;
+
+        /** The number of interval units between groups. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /** Monthly cadence details. */
+        @SerializedName("month")
+        Month month;
+
+        /**
+         * The interval unit for the cadence.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Weekly cadence details. */
+        @SerializedName("week")
+        Week week;
+
+        /** Yearly cadence details. */
+        @SerializedName("year")
+        Year year;
+
+        /** Daily cadence details. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Time extends StripeObject {
-          /**
-           * The hour at which the billing cycle ends. This must be an integer between 0 and 23,
-           * inclusive. 0 represents midnight, and 23 represents 11 PM.
-           */
-          @SerializedName("hour")
-          Long hour;
+        public static class Day extends StripeObject {
+          /** The time at which the daily grouping interval begins. */
+          @SerializedName("time")
+          Time time;
 
-          /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
-           */
-          @SerializedName("minute")
-          Long minute;
+          /** The time at which the daily grouping interval begins. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Time extends StripeObject {
+            /** The hour, from 0 through 23. */
+            @SerializedName("hour")
+            Long hour;
 
-          /**
-           * The second at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
-           */
-          @SerializedName("second")
-          Long second;
+            /** The minute, from 0 through 59. */
+            @SerializedName("minute")
+            Long minute;
+
+            /** The second, from 0 through 59. Defaults to 0. */
+            @SerializedName("second")
+            Long second;
+          }
         }
-      }
 
-      /** Specific configuration for determining billing dates when type=month. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Month extends StripeObject {
-        /**
-         * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-         * this number is greater than the number of days in the month being billed, this anchors to
-         * the last day of the month.
-         */
-        @SerializedName("day_of_month")
-        Long dayOfMonth;
-
-        /**
-         * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
-         * Occurrences are calculated from the month anchor.
-         */
-        @SerializedName("month_of_year")
-        Long monthOfYear;
-
-        /** The time at which the billing cycle ends. */
-        @SerializedName("time")
-        Time time;
-
-        /** The time at which the billing cycle ends. */
+        /** Monthly cadence details. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Time extends StripeObject {
+        public static class Month extends StripeObject {
           /**
-           * The hour at which the billing cycle ends. This must be an integer between 0 and 23,
-           * inclusive. 0 represents midnight, and 23 represents 11 PM.
+           * The day of month, from 1 through 31. For shorter months, the cadence anchors to the
+           * month's last day.
            */
-          @SerializedName("hour")
-          Long hour;
+          @SerializedName("day_of_month")
+          Long dayOfMonth;
+
+          /** The month of year, from 1 through 12, from which occurrences are calculated. */
+          @SerializedName("month_of_year")
+          Long monthOfYear;
 
           /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
+           * The time at which the monthly grouping interval begins. Defaults to the time the
+           * billing group was created, in UTC.
            */
-          @SerializedName("minute")
-          Long minute;
+          @SerializedName("time")
+          Time time;
 
           /**
-           * The second at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
+           * The time at which the monthly grouping interval begins. Defaults to the time the
+           * billing group was created, in UTC.
            */
-          @SerializedName("second")
-          Long second;
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Time extends StripeObject {
+            /** The hour, from 0 through 23. */
+            @SerializedName("hour")
+            Long hour;
+
+            /** The minute, from 0 through 59. */
+            @SerializedName("minute")
+            Long minute;
+
+            /** The second, from 0 through 59. Defaults to 0. */
+            @SerializedName("second")
+            Long second;
+          }
         }
-      }
 
-      /** Specific configuration for determining billing dates when type=week. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Week extends StripeObject {
-        /**
-         * The day of the week to bill the type=week billing cycle on. Numbered from 1-7 for Monday
-         * to Sunday respectively, based on the ISO-8601 week day numbering.
-         */
-        @SerializedName("day_of_week")
-        Long dayOfWeek;
-
-        /** The time at which the billing cycle ends. */
-        @SerializedName("time")
-        Time time;
-
-        /** The time at which the billing cycle ends. */
+        /** Weekly cadence details. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Time extends StripeObject {
-          /**
-           * The hour at which the billing cycle ends. This must be an integer between 0 and 23,
-           * inclusive. 0 represents midnight, and 23 represents 11 PM.
-           */
-          @SerializedName("hour")
-          Long hour;
+        public static class Week extends StripeObject {
+          /** The ISO-8601 day of week, from 1 for Monday through 7 for Sunday. */
+          @SerializedName("day_of_week")
+          Long dayOfWeek;
 
-          /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
-           */
-          @SerializedName("minute")
-          Long minute;
+          /** The time at which the weekly grouping interval begins. */
+          @SerializedName("time")
+          Time time;
 
-          /**
-           * The second at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
-           */
-          @SerializedName("second")
-          Long second;
+          /** The time at which the weekly grouping interval begins. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Time extends StripeObject {
+            /** The hour, from 0 through 23. */
+            @SerializedName("hour")
+            Long hour;
+
+            /** The minute, from 0 through 59. */
+            @SerializedName("minute")
+            Long minute;
+
+            /** The second, from 0 through 59. Defaults to 0. */
+            @SerializedName("second")
+            Long second;
+          }
         }
-      }
 
-      /** Specific configuration for determining billing dates when type=year. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Year extends StripeObject {
-        /**
-         * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-         * this number is greater than the number of days in the month being billed, this anchors to
-         * the last day of the month.
-         */
-        @SerializedName("day_of_month")
-        Long dayOfMonth;
-
-        /**
-         * The month to bill on from 1-12. If not provided, this defaults to the month the cadence
-         * was created.
-         */
-        @SerializedName("month_of_year")
-        Long monthOfYear;
-
-        /** The time at which the billing cycle ends. */
-        @SerializedName("time")
-        Time time;
-
-        /** The time at which the billing cycle ends. */
+        /** Yearly cadence details. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Time extends StripeObject {
+        public static class Year extends StripeObject {
           /**
-           * The hour at which the billing cycle ends. This must be an integer between 0 and 23,
-           * inclusive. 0 represents midnight, and 23 represents 11 PM.
+           * The day of month, from 1 through 31. For shorter months, the cadence anchors to the
+           * month's last day.
            */
-          @SerializedName("hour")
-          Long hour;
+          @SerializedName("day_of_month")
+          Long dayOfMonth;
+
+          /** The month of year, from 1 through 12. */
+          @SerializedName("month_of_year")
+          Long monthOfYear;
 
           /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
+           * The time at which the yearly grouping interval begins. Defaults to the time the billing
+           * group was created, in UTC.
            */
-          @SerializedName("minute")
-          Long minute;
+          @SerializedName("time")
+          Time time;
 
           /**
-           * The second at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive.
+           * The time at which the yearly grouping interval begins. Defaults to the time the billing
+           * group was created, in UTC.
            */
-          @SerializedName("second")
-          Long second;
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Time extends StripeObject {
+            /** The hour, from 0 through 23. */
+            @SerializedName("hour")
+            Long hour;
+
+            /** The minute, from 0 through 59. */
+            @SerializedName("minute")
+            Long minute;
+
+            /** The second, from 0 through 59. Defaults to 0. */
+            @SerializedName("second")
+            Long second;
+          }
         }
-      }
-    }
-
-    /** Information about the payer for this Cadence. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Payer extends StripeObject {
-      /** The ID of the Billing Profile object which determines how a bill is paid. */
-      @SerializedName("billing_profile")
-      String billingProfile;
-
-      /** Data for creating a new profile. */
-      @SerializedName("billing_profile_data")
-      BillingProfileData billingProfileData;
-
-      /** Data for creating a new profile. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillingProfileData extends StripeObject {
-        /** The customer to associate with the profile. */
-        @SerializedName("customer")
-        String customer;
-
-        /**
-         * The default payment method to use when billing this profile. If none is provided, the
-         * customer {@code default_payment_method} is used.
-         */
-        @SerializedName("default_payment_method")
-        String defaultPaymentMethod;
-      }
-    }
-
-    /** Settings for creating the Cadence. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Settings extends StripeObject {
-      /**
-       * Settings that configure bills generation, which includes calculating totals, tax, and
-       * presenting invoices.
-       */
-      @SerializedName("bill")
-      Bill bill;
-
-      /** Settings that configure and manage the behavior of collecting payments. */
-      @SerializedName("collection")
-      Collection collection;
-
-      /**
-       * Settings that configure bills generation, which includes calculating totals, tax, and
-       * presenting invoices.
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Bill extends StripeObject implements HasId {
-        /** The ID of the referenced settings object. */
-        @Getter(onMethod_ = {@Override})
-        @SerializedName("id")
-        String id;
-
-        /** Returns the Settings Version when the cadence is pinned to a specific version. */
-        @SerializedName("version")
-        String version;
-      }
-
-      /** Settings that configure and manage the behavior of collecting payments. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Collection extends StripeObject implements HasId {
-        /** The ID of the referenced settings object. */
-        @Getter(onMethod_ = {@Override})
-        @SerializedName("id")
-        String id;
-
-        /** Returns the Settings Version when the cadence is pinned to a specific version. */
-        @SerializedName("version")
-        String version;
       }
     }
   }

@@ -51,7 +51,11 @@ public class CertificateListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** <strong>Required.</strong> The ID of an existing tax exemption. */
+  /**
+   * <strong>Required.</strong> The ID of the <a
+   * href="https://stripe.com/api/tax/exemptions/object">customer tax exemption</a> whose
+   * certificates to list. The tax exemption must not be deleted.
+   */
   @SerializedName("tax_exemption")
   String taxExemption;
 
@@ -181,7 +185,11 @@ public class CertificateListParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of an existing tax exemption. */
+    /**
+     * <strong>Required.</strong> The ID of the <a
+     * href="https://stripe.com/api/tax/exemptions/object">customer tax exemption</a> whose
+     * certificates to list. The tax exemption must not be deleted.
+     */
     public Builder setTaxExemption(String taxExemption) {
       this.taxExemption = taxExemption;
       return this;

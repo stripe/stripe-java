@@ -34,6 +34,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("amount")
   Long amount;
 
+  /**
+   * ID of the Connect application that created the refund. This can differ from the application on
+   * the associated Charge or PaymentIntent. A null value does not necessarily mean the refund was
+   * created without a Connect application.
+   */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /** Balance transaction that describes the impact on your account balance. */
   @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
@@ -194,6 +204,24 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TransferReversal> transferReversal;
+
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
@@ -700,6 +728,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("gb_bank_transfer")
     GbBankTransfer gbBankTransfer;
 
+    @SerializedName("gift_card")
+    GiftCard giftCard;
+
     @SerializedName("giropay")
     Giropay giropay;
 
@@ -1019,6 +1050,19 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
        */
       @SerializedName("reference_status")
       String referenceStatus;
+    }
+
+    /**
+     * For more details about GiftCard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GiftCard extends StripeObject {
+      /** ID of the reload or activation GiftCardOperation created for this refund. */
+      @SerializedName("gift_card_operation")
+      String giftCardOperation;
     }
 
     /**
@@ -1505,15 +1549,13 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(destinationDetails, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(sourceTransferReversal, responseGetter);
     trySetResponseGetter(transferReversal, responseGetter);
   }

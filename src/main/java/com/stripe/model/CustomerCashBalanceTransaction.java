@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiResource;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CustomerCashBalanceTransaction extends StripeObject
-    implements BalanceTransactionSource {
+    implements BalanceTransactionSource, StripeActiveObject {
   @SerializedName("adjusted_for_overdraft")
   AdjustedForOverdraft adjustedForOverdraft;
 
@@ -134,7 +135,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AdjustedForOverdraft extends StripeObject {
+  public static class AdjustedForOverdraft extends StripeObject implements StripeActiveObject {
     /**
      * The <a href="https://docs.stripe.com/api/balance_transactions/object">Balance Transaction</a>
      * that corresponds to funds taken out of your Stripe balance.
@@ -191,6 +192,12 @@ public class CustomerCashBalanceTransaction extends StripeObject
           new ExpandableField<CustomerCashBalanceTransaction>(
               expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(balanceTransaction, responseGetter);
+      trySetResponseGetter(linkedTransaction, responseGetter);
+    }
   }
 
   /**
@@ -200,7 +207,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AppliedToPayment extends StripeObject {
+  public static class AppliedToPayment extends StripeObject implements StripeActiveObject {
     /**
      * The <a href="https://docs.stripe.com/api/payment_intents/object">Payment Intent</a> that
      * funds were applied to.
@@ -227,6 +234,11 @@ public class CustomerCashBalanceTransaction extends StripeObject
     public void setPaymentIntentObject(PaymentIntent expandableObject) {
       this.paymentIntent =
           new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paymentIntent, responseGetter);
     }
   }
 
@@ -386,7 +398,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RefundedFromPayment extends StripeObject {
+  public static class RefundedFromPayment extends StripeObject implements StripeActiveObject {
     /**
      * The <a href="https://docs.stripe.com/api/refunds/object">Refund</a> that moved these funds
      * into the customer's cash balance.
@@ -413,6 +425,11 @@ public class CustomerCashBalanceTransaction extends StripeObject
     public void setRefundObject(Refund expandableObject) {
       this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(refund, responseGetter);
+    }
   }
 
   /**
@@ -422,7 +439,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferredToBalance extends StripeObject {
+  public static class TransferredToBalance extends StripeObject implements StripeActiveObject {
     /**
      * The <a href="https://docs.stripe.com/api/balance_transactions/object">Balance Transaction</a>
      * that corresponds to funds transferred to your Stripe balance.
@@ -450,6 +467,11 @@ public class CustomerCashBalanceTransaction extends StripeObject
       this.balanceTransaction =
           new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(balanceTransaction, responseGetter);
+    }
   }
 
   /**
@@ -459,7 +481,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UnappliedFromPayment extends StripeObject {
+  public static class UnappliedFromPayment extends StripeObject implements StripeActiveObject {
     /**
      * The <a href="https://docs.stripe.com/api/payment_intents/object">Payment Intent</a> that
      * funds were unapplied from.
@@ -487,5 +509,20 @@ public class CustomerCashBalanceTransaction extends StripeObject
       this.paymentIntent =
           new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paymentIntent, responseGetter);
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(adjustedForOverdraft, responseGetter);
+    trySetResponseGetter(appliedToPayment, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(refundedFromPayment, responseGetter);
+    trySetResponseGetter(transferredToBalance, responseGetter);
+    trySetResponseGetter(unappliedFromPayment, responseGetter);
   }
 }

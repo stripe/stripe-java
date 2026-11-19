@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.apps.InstallCreateParams;
 import com.stripe.param.apps.InstallListParams;
 import com.stripe.param.apps.InstallRetrieveParams;
@@ -197,7 +196,8 @@ public class Install extends ApiResource implements HasId {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public static InstallCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -210,7 +210,8 @@ public class Install extends ApiResource implements HasId {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public static InstallCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -227,7 +228,8 @@ public class Install extends ApiResource implements HasId {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public static InstallCollection list(InstallListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -240,7 +242,8 @@ public class Install extends ApiResource implements HasId {
    * installs of the app, and an embedding platform acting on a connected account sees only the
    * installs it created there. Other callers see the installs on their own account. A live key
    * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
-   * filtering by {@code app} lists that app’s installs across every sandbox.
+   * filtering by {@code app} lists that app’s installs across every sandbox, and also that app’s
+   * legacy test mode installs when the developer has no legacy test mode.
    */
   public static InstallCollection list(InstallListParams params, RequestOptions options)
       throws StripeException {
@@ -452,12 +455,5 @@ public class Install extends ApiResource implements HasId {
     /** The URLs that the app can load images from. */
     @SerializedName("image_src")
     List<String> imageSrc;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(contentSecurityPolicyGranted, responseGetter);
-    trySetResponseGetter(contentSecurityPolicyPending, responseGetter);
   }
 }

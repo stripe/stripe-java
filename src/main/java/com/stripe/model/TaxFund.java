@@ -177,7 +177,7 @@ public class TaxFund extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Destination extends StripeObject {
+  public static class Destination extends StripeObject implements StripeActiveObject {
     /** Details about the payments balance side of the sweep. */
     @SerializedName("payments_balance")
     PaymentsBalance paymentsBalance;
@@ -197,7 +197,7 @@ public class TaxFund extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentsBalance extends StripeObject {
+    public static class PaymentsBalance extends StripeObject implements StripeActiveObject {
       /** The balance transaction on the payments balance side of the sweep. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
@@ -222,6 +222,11 @@ public class TaxFund extends ApiResource implements HasId {
         this.balanceTransaction =
             new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(balanceTransaction, responseGetter);
+      }
     }
 
     /** Details about the tax fund financial account side of the sweep. */
@@ -236,6 +241,11 @@ public class TaxFund extends ApiResource implements HasId {
       /** The financial account transaction on the tax fund account side of the sweep. */
       @SerializedName("transaction")
       String transaction;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paymentsBalance, responseGetter);
     }
   }
 
@@ -243,7 +253,7 @@ public class TaxFund extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Source extends StripeObject {
+  public static class Source extends StripeObject implements StripeActiveObject {
     /** Details about the payments balance side of the sweep. */
     @SerializedName("payments_balance")
     PaymentsBalance paymentsBalance;
@@ -263,7 +273,7 @@ public class TaxFund extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PaymentsBalance extends StripeObject {
+    public static class PaymentsBalance extends StripeObject implements StripeActiveObject {
       /** The balance transaction on the payments balance side of the sweep. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
@@ -288,6 +298,11 @@ public class TaxFund extends ApiResource implements HasId {
         this.balanceTransaction =
             new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(balanceTransaction, responseGetter);
+      }
     }
 
     /** Details about the tax fund financial account side of the sweep. */
@@ -303,13 +318,18 @@ public class TaxFund extends ApiResource implements HasId {
       @SerializedName("transaction")
       String transaction;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(paymentsBalance, responseGetter);
+    }
   }
 
   /** What caused the sweep. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Trigger extends StripeObject {
+  public static class Trigger extends StripeObject implements StripeActiveObject {
     /** The balance transaction on the payments balance that triggered the sweep. */
     @SerializedName("balance_transaction")
     @Getter(lombok.AccessLevel.NONE)
@@ -338,12 +358,16 @@ public class TaxFund extends ApiResource implements HasId {
       this.balanceTransaction =
           new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(balanceTransaction, responseGetter);
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(context, responseGetter);
     trySetResponseGetter(destination, responseGetter);
     trySetResponseGetter(source, responseGetter);
     trySetResponseGetter(trigger, responseGetter);

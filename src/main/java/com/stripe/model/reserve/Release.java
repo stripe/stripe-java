@@ -7,6 +7,7 @@ import com.stripe.model.Dispute;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Refund;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -247,7 +248,7 @@ public class Release extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SourceTransaction extends StripeObject {
+  public static class SourceTransaction extends StripeObject implements StripeActiveObject {
     /** The ID of the dispute. */
     @SerializedName("dispute")
     @Getter(lombok.AccessLevel.NONE)
@@ -302,6 +303,12 @@ public class Release extends ApiResource implements HasId {
 
     public void setRefundObject(Refund expandableObject) {
       this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(dispute, responseGetter);
+      trySetResponseGetter(refund, responseGetter);
     }
   }
 

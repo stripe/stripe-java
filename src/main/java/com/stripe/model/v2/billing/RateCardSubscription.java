@@ -14,15 +14,15 @@ import lombok.Setter;
  * A Rate Card Subscription represents a customer's subscription to a Rate Card's usage-based
  * pricing. It tracks the servicing status (whether usage is being measured) and collection status
  * (whether payments are current). Subscriptions bill according to the service interval defined in
- * the Rate Card and are collected on the associated Billing Cadence.
+ * the Rate Card and are collected on the associated Billing Group.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class RateCardSubscription extends StripeObject implements HasId {
-  /** The ID of the Billing Cadence. */
-  @SerializedName("billing_cadence")
-  String billingCadence;
+  /** The ID of the Billing Group. */
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * The payment status of a Rate Card Subscription.

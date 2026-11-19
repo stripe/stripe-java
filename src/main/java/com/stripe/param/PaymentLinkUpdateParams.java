@@ -4509,6 +4509,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentIntentData {
+    /** Controls when the funds will be captured from the customer's account. */
+    @SerializedName("capture_method")
+    ApiRequestParams.EnumParam captureMethod;
+
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
     Object description;
@@ -4587,6 +4591,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     Object transferGroup;
 
     private PaymentIntentData(
+        ApiRequestParams.EnumParam captureMethod,
         Object description,
         Map<String, Object> extraParams,
         Object metadata,
@@ -4594,6 +4599,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         Object statementDescriptor,
         Object statementDescriptorSuffix,
         Object transferGroup) {
+      this.captureMethod = captureMethod;
       this.description = description;
       this.extraParams = extraParams;
       this.metadata = metadata;
@@ -4608,6 +4614,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private ApiRequestParams.EnumParam captureMethod;
+
       private Object description;
 
       private Map<String, Object> extraParams;
@@ -4625,6 +4633,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkUpdateParams.PaymentIntentData build() {
         return new PaymentLinkUpdateParams.PaymentIntentData(
+            this.captureMethod,
             this.description,
             this.extraParams,
             this.metadata,
@@ -4632,6 +4641,19 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
             this.statementDescriptor,
             this.statementDescriptorSuffix,
             this.transferGroup);
+      }
+
+      /** Controls when the funds will be captured from the customer's account. */
+      public Builder setCaptureMethod(
+          PaymentLinkUpdateParams.PaymentIntentData.CaptureMethod captureMethod) {
+        this.captureMethod = captureMethod;
+        return this;
+      }
+
+      /** Controls when the funds will be captured from the customer's account. */
+      public Builder setCaptureMethod(EmptyParam captureMethod) {
+        this.captureMethod = captureMethod;
+        return this;
       }
 
       /** An arbitrary string attached to the object. Often useful for displaying to users. */
@@ -4850,6 +4872,24 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       public Builder setTransferGroup(EmptyParam transferGroup) {
         this.transferGroup = transferGroup;
         return this;
+      }
+    }
+
+    public enum CaptureMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("automatic_async")
+      AUTOMATIC_ASYNC("automatic_async"),
+
+      @SerializedName("manual")
+      MANUAL("manual");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CaptureMethod(String value) {
+        this.value = value;
       }
     }
 

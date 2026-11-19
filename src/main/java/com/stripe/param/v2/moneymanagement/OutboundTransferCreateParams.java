@@ -905,7 +905,10 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           SEPA_INSTANT("sepa_instant"),
 
           @SerializedName("swift")
-          SWIFT("swift");
+          SWIFT("swift"),
+
+          @SerializedName("tips")
+          TIPS("tips");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

@@ -26,11 +26,20 @@ public class CertificateCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The ID of a file uploaded with purpose {@code tax_certificate}. */
+  /**
+   * <strong>Required.</strong> The ID of a <a href="https://stripe.com/api/files/object">file</a>
+   * uploaded with purpose {@code tax_certificate}. The file must belong to the same account and
+   * mode as the tax exemption. You can't use a deleted file or a file attached to another
+   * certificate that hasn't been deleted.
+   */
   @SerializedName("file")
   String file;
 
-  /** <strong>Required.</strong> The ID of an existing tax exemption. */
+  /**
+   * <strong>Required.</strong> The ID of an existing <a
+   * href="https://stripe.com/api/tax/exemptions/object">customer tax exemption</a> that hasn't been
+   * deleted.
+   */
   @SerializedName("tax_exemption")
   String taxExemption;
 
@@ -114,14 +123,21 @@ public class CertificateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The ID of a file uploaded with purpose {@code tax_certificate}.
+     * <strong>Required.</strong> The ID of a <a href="https://stripe.com/api/files/object">file</a>
+     * uploaded with purpose {@code tax_certificate}. The file must belong to the same account and
+     * mode as the tax exemption. You can't use a deleted file or a file attached to another
+     * certificate that hasn't been deleted.
      */
     public Builder setFile(String file) {
       this.file = file;
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of an existing tax exemption. */
+    /**
+     * <strong>Required.</strong> The ID of an existing <a
+     * href="https://stripe.com/api/tax/exemptions/object">customer tax exemption</a> that hasn't
+     * been deleted.
+     */
     public Builder setTaxExemption(String taxExemption) {
       this.taxExemption = taxExemption;
       return this;

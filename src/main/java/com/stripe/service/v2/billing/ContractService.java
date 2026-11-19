@@ -191,11 +191,6 @@ public final class ContractService extends ApiService {
     return this.request(request, Contract.class);
   }
 
-  public com.stripe.service.v2.billing.contracts.PricingLinesService pricingLines() {
-    return new com.stripe.service.v2.billing.contracts.PricingLinesService(
-        this.getResponseGetter());
-  }
-
   public com.stripe.service.v2.billing.contracts.TermService terms() {
     return new com.stripe.service.v2.billing.contracts.TermService(this.getResponseGetter());
   }

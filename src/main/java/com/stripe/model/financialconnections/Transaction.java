@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.financialconnections.TransactionListParams;
 import com.stripe.param.financialconnections.TransactionRetrieveParams;
 import java.util.List;
@@ -288,12 +287,5 @@ public class Transaction extends ApiResource implements HasId {
     /** Time at which this transaction was voided. Measured in seconds since the Unix epoch. */
     @SerializedName("void_at")
     Long voidAt;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(enrichments, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

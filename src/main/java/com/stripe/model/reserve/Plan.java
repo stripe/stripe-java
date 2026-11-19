@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.reserve.PlanListParams;
 import com.stripe.param.reserve.PlanRetrieveParams;
 import java.util.Map;
@@ -239,16 +238,15 @@ public class Plan extends ApiResource implements HasId {
     @SerializedName("days_after_charge")
     Long daysAfterCharge;
 
+    /**
+     * The number of days after the PaymentIntent's {@code fulfillment_date} to reserve funds before
+     * releasing. Charges without a {@code fulfillment_date} use {@code days_after_charge}.
+     */
+    @SerializedName("days_after_fulfillment")
+    Long daysAfterFulfillment;
+
     /** The time at which the ReservePlan expires. */
     @SerializedName("expires_on")
     Long expiresOn;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(fixedRelease, responseGetter);
-    trySetResponseGetter(manualRelease, responseGetter);
-    trySetResponseGetter(rollingRelease, responseGetter);
   }
 }

@@ -5,7 +5,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StringInt64TypeAdapter;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -23,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class LicenseFee extends StripeObject implements HasId {
+public class LicenseFee extends StripeObject implements HasId, StripeActiveObject {
   /**
    * Whether this License Fee is active. Inactive License Fees cannot be used in new activations or
    * be modified.
@@ -215,5 +217,10 @@ public class LicenseFee extends StripeObject implements HasId {
      */
     @SerializedName("round")
     String round;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(licensedItem, responseGetter);
   }
 }

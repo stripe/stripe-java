@@ -24,23 +24,26 @@ public final class V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStat
      *
      * <p>One of {@code business_custodial_storage.inbound.ousd}, {@code
      * business_custodial_storage.inbound.usdc}, {@code business_custodial_storage.outbound.ousd},
-     * {@code business_custodial_storage.outbound.usdc}, {@code business_storage.inbound.cad},
-     * {@code business_storage.inbound.czk}, {@code business_storage.inbound.eur}, {@code
-     * business_storage.inbound.gbp}, {@code business_storage.inbound.nok}, {@code
-     * business_storage.inbound.ousd}, {@code business_storage.inbound.pln}, {@code
-     * business_storage.inbound.sek}, {@code business_storage.inbound.usd}, {@code
-     * business_storage.inbound.usdc}, {@code business_storage.outbound.cad}, {@code
-     * business_storage.outbound.czk}, {@code business_storage.outbound.eur}, {@code
-     * business_storage.outbound.gbp}, {@code business_storage.outbound.nok}, {@code
-     * business_storage.outbound.ousd}, {@code business_storage.outbound.pln}, {@code
-     * business_storage.outbound.sek}, {@code business_storage.outbound.usd}, {@code
-     * business_storage.outbound.usdc}, {@code consumer_storage.inbound.usd}, {@code
-     * consumer_storage.inbound.usdc}, {@code consumer_storage.outbound.usd}, {@code
-     * consumer_storage.outbound.usdc}, {@code inbound_fundings.paper_checks}, {@code
-     * inbound_transfers.bank_accounts}, {@code outbound_payments.bank_accounts}, {@code
-     * outbound_payments.cards}, {@code outbound_payments.crypto_wallets}, {@code
-     * outbound_payments.financial_accounts}, {@code outbound_payments.offramp.bank_accounts.brl},
-     * {@code outbound_payments.offramp.bank_accounts.cop}, {@code
+     * {@code business_custodial_storage.outbound.usdc}, {@code
+     * business_demand_deposit_account_fifth_third_storage.inbound.usd}, {@code
+     * business_demand_deposit_account_fifth_third_storage.outbound.usd}, {@code
+     * business_storage.inbound.cad}, {@code business_storage.inbound.czk}, {@code
+     * business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
+     * business_storage.inbound.nok}, {@code business_storage.inbound.ousd}, {@code
+     * business_storage.inbound.pln}, {@code business_storage.inbound.sek}, {@code
+     * business_storage.inbound.usd}, {@code business_storage.inbound.usdc}, {@code
+     * business_storage.outbound.cad}, {@code business_storage.outbound.czk}, {@code
+     * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
+     * business_storage.outbound.nok}, {@code business_storage.outbound.ousd}, {@code
+     * business_storage.outbound.pln}, {@code business_storage.outbound.sek}, {@code
+     * business_storage.outbound.usd}, {@code business_storage.outbound.usdc}, {@code
+     * consumer_storage.inbound.usd}, {@code consumer_storage.inbound.usdc}, {@code
+     * consumer_storage.outbound.usd}, {@code consumer_storage.outbound.usdc}, {@code
+     * inbound_fundings.paper_checks}, {@code inbound_transfers.bank_accounts}, {@code
+     * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
+     * outbound_payments.crypto_wallets}, {@code outbound_payments.financial_accounts}, {@code
+     * outbound_payments.offramp.bank_accounts.brl}, {@code
+     * outbound_payments.offramp.bank_accounts.cop}, {@code
      * outbound_payments.offramp.bank_accounts.eur}, {@code
      * outbound_payments.offramp.bank_accounts.gbp}, {@code
      * outbound_payments.offramp.bank_accounts.mxn}, {@code

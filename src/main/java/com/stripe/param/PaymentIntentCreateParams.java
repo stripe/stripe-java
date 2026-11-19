@@ -342,7 +342,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * Provides information about a card charge. Concatenated to the account's <a
    * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
    * descriptor prefix</a> to form the complete statement descriptor that appears on the customer's
-   * statement.
+   * statement. A suffix longer than 22 characters returns an error. If a valid suffix makes the
+   * complete statement descriptor longer than 22 characters, Stripe truncates the descriptor
+   * instead of returning an error. Learn how to <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors#suffix-length">fit the
+   * suffix in the complete descriptor</a>.
    */
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
@@ -1121,7 +1125,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * Provides information about a card charge. Concatenated to the account's <a
      * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
      * descriptor prefix</a> to form the complete statement descriptor that appears on the
-     * customer's statement.
+     * customer's statement. A suffix longer than 22 characters returns an error. If a valid suffix
+     * makes the complete statement descriptor longer than 22 characters, Stripe truncates the
+     * descriptor instead of returning an error. Learn how to <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#suffix-length">fit
+     * the suffix in the complete descriptor</a>.
      */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;
@@ -35267,20 +35275,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The canonical string that was signed by the e-invoicing provider to produce {@code
-         * signed_mark}, formatted per Appendix A of A.1155/2023. Required when {@code mode} is
-         * {@code standard}.
+         * <strong>Required.</strong> The e-invoicing mode under which the provider signature was
+         * generated.
          */
-        @SerializedName("mark_data")
-        String markData;
-
-        /** <strong>Required.</strong> The e-invoicing mode under which the mark was generated. */
         @SerializedName("mode")
         Mode mode;
 
         /**
-         * The AADE-assigned approval number of the e-invoicing provider that generated the mark.
-         * Required when {@code mode} is {@code standard}.
+         * The AADE-assigned approval number of the e-invoicing provider that generated the provider
+         * signature. Required when {@code mode} is {@code standard}.
          */
         @SerializedName("provider_id")
         Long providerId;
@@ -35289,8 +35292,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * The cryptographic signature returned by the e-invoicing provider for this transaction,
          * hex-encoded. Required when {@code mode} is {@code standard}.
          */
-        @SerializedName("signed_mark")
-        String signedMark;
+        @SerializedName("provider_signature")
+        String providerSignature;
+
+        /**
+         * The canonical string that was signed by the e-invoicing provider to produce {@code
+         * provider_signature}, formatted per Appendix A of A.1155/2023. Required when {@code mode}
+         * is {@code standard}.
+         */
+        @SerializedName("provider_signature_data")
+        String providerSignatureData;
 
         /**
          * The reason for entering autonomous mode. Required when {@code mode} is {@code
@@ -35301,16 +35312,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private AadeData(
             Map<String, Object> extraParams,
-            String markData,
             Mode mode,
             Long providerId,
-            String signedMark,
+            String providerSignature,
+            String providerSignatureData,
             UnboundPos unboundPos) {
           this.extraParams = extraParams;
-          this.markData = markData;
           this.mode = mode;
           this.providerId = providerId;
-          this.signedMark = signedMark;
+          this.providerSignature = providerSignature;
+          this.providerSignatureData = providerSignatureData;
           this.unboundPos = unboundPos;
         }
 
@@ -35321,13 +35332,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private String markData;
-
           private Mode mode;
 
           private Long providerId;
 
-          private String signedMark;
+          private String providerSignature;
+
+          private String providerSignatureData;
 
           private UnboundPos unboundPos;
 
@@ -35335,10 +35346,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           public PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.AadeData build() {
             return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.AadeData(
                 this.extraParams,
-                this.markData,
                 this.mode,
                 this.providerId,
-                this.signedMark,
+                this.providerSignature,
+                this.providerSignatureData,
                 this.unboundPos);
           }
 
@@ -35373,16 +35384,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The canonical string that was signed by the e-invoicing provider to produce {@code
-           * signed_mark}, formatted per Appendix A of A.1155/2023. Required when {@code mode} is
-           * {@code standard}.
+           * <strong>Required.</strong> The e-invoicing mode under which the provider signature was
+           * generated.
            */
-          public Builder setMarkData(String markData) {
-            this.markData = markData;
-            return this;
-          }
-
-          /** <strong>Required.</strong> The e-invoicing mode under which the mark was generated. */
           public Builder setMode(
               PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.AadeData.Mode mode) {
             this.mode = mode;
@@ -35390,8 +35394,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The AADE-assigned approval number of the e-invoicing provider that generated the mark.
-           * Required when {@code mode} is {@code standard}.
+           * The AADE-assigned approval number of the e-invoicing provider that generated the
+           * provider signature. Required when {@code mode} is {@code standard}.
            */
           public Builder setProviderId(Long providerId) {
             this.providerId = providerId;
@@ -35402,8 +35406,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
            * The cryptographic signature returned by the e-invoicing provider for this transaction,
            * hex-encoded. Required when {@code mode} is {@code standard}.
            */
-          public Builder setSignedMark(String signedMark) {
-            this.signedMark = signedMark;
+          public Builder setProviderSignature(String providerSignature) {
+            this.providerSignature = providerSignature;
+            return this;
+          }
+
+          /**
+           * The canonical string that was signed by the e-invoicing provider to produce {@code
+           * provider_signature}, formatted per Appendix A of A.1155/2023. Required when {@code
+           * mode} is {@code standard}.
+           */
+          public Builder setProviderSignatureData(String providerSignatureData) {
+            this.providerSignatureData = providerSignatureData;
             return this;
           }
 
@@ -55435,6 +55449,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       PaymentDetails paymentDetails;
 
       /**
+       * Request ability to make <a href="https://docs.stripe.com/payments/multicapture">multiple
+       * captures</a> for this PaymentIntent.
+       */
+      @SerializedName("request_multicapture")
+      RequestMulticapture requestMulticapture;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -55464,10 +55485,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           PaymentDetails paymentDetails,
+          RequestMulticapture requestMulticapture,
           SetupFutureUsage setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.paymentDetails = paymentDetails;
+        this.requestMulticapture = requestMulticapture;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -55482,12 +55505,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private PaymentDetails paymentDetails;
 
+        private RequestMulticapture requestMulticapture;
+
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.Vipps build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.Vipps(
-              this.captureMethod, this.extraParams, this.paymentDetails, this.setupFutureUsage);
+              this.captureMethod,
+              this.extraParams,
+              this.paymentDetails,
+              this.requestMulticapture,
+              this.setupFutureUsage);
         }
 
         /**
@@ -55553,6 +55582,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public Builder setPaymentDetails(
             PaymentIntentCreateParams.PaymentMethodOptions.Vipps.PaymentDetails paymentDetails) {
           this.paymentDetails = paymentDetails;
+          return this;
+        }
+
+        /**
+         * Request ability to make <a href="https://docs.stripe.com/payments/multicapture">multiple
+         * captures</a> for this PaymentIntent.
+         */
+        public Builder setRequestMulticapture(
+            PaymentIntentCreateParams.PaymentMethodOptions.Vipps.RequestMulticapture
+                requestMulticapture) {
+          this.requestMulticapture = requestMulticapture;
           return this;
         }
 
@@ -55860,6 +55900,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestMulticapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestMulticapture(String value) {
           this.value = value;
         }
       }
@@ -56315,6 +56370,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Whether this transaction starts a free trial. Set to {@code true} for a free trial or {@code
+     * false} otherwise. If omitted, retains the previously set value. If never set, Stripe uses
+     * Billing or metadata to determine trial status.
+     */
+    @SerializedName("is_free_trial_transaction")
+    Boolean isFreeTrialTransaction;
+
+    /**
      * The referrer URL of the current checkout session. You can use this to supply session-level
      * referrer data when a Radar Session isn't available or doesn't contain a referrer.
      */
@@ -56329,8 +56392,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("session")
     String session;
 
-    private RadarOptions(Map<String, Object> extraParams, Object referrer, String session) {
+    private RadarOptions(
+        Map<String, Object> extraParams,
+        Boolean isFreeTrialTransaction,
+        Object referrer,
+        String session) {
       this.extraParams = extraParams;
+      this.isFreeTrialTransaction = isFreeTrialTransaction;
       this.referrer = referrer;
       this.session = session;
     }
@@ -56342,6 +56410,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private Boolean isFreeTrialTransaction;
+
       private Object referrer;
 
       private String session;
@@ -56349,7 +56419,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentCreateParams.RadarOptions build() {
         return new PaymentIntentCreateParams.RadarOptions(
-            this.extraParams, this.referrer, this.session);
+            this.extraParams, this.isFreeTrialTransaction, this.referrer, this.session);
       }
 
       /**
@@ -56375,6 +56445,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Whether this transaction starts a free trial. Set to {@code true} for a free trial or
+       * {@code false} otherwise. If omitted, retains the previously set value. If never set, Stripe
+       * uses Billing or metadata to determine trial status.
+       */
+      public Builder setIsFreeTrialTransaction(Boolean isFreeTrialTransaction) {
+        this.isFreeTrialTransaction = isFreeTrialTransaction;
         return this;
       }
 

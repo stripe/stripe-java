@@ -9,7 +9,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.capital.FinancingSummaryRetrieveParams;
 import java.math.BigDecimal;
 import java.util.List;
@@ -219,11 +218,5 @@ public class FinancingSummary extends ApiResource {
       @SerializedName("starts_at")
       Long startsAt;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(details, responseGetter);
   }
 }

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -193,7 +194,7 @@ public class VerificationReport extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Document extends StripeObject {
+  public static class Document extends StripeObject implements StripeActiveObject {
     /** Address as it appears in the document. */
     @SerializedName("address")
     Address address;
@@ -374,6 +375,12 @@ public class VerificationReport extends ApiResource implements HasId {
       /** The four-digit year. */
       @SerializedName("year")
       Long year;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(blockedByEntry, responseGetter);
     }
   }
 
@@ -706,7 +713,7 @@ public class VerificationReport extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Selfie extends StripeObject {
+  public static class Selfie extends StripeObject implements StripeActiveObject {
     /**
      * If selfie was not verified due to being on the blocklist, this is the token of the
      * BlocklistEntry that blocked it.
@@ -784,6 +791,11 @@ public class VerificationReport extends ApiResource implements HasId {
        */
       @SerializedName("reason")
       String reason;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(blockedByEntry, responseGetter);
     }
   }
 
@@ -1097,11 +1109,6 @@ public class VerificationReport extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(document, responseGetter);
-    trySetResponseGetter(email, responseGetter);
-    trySetResponseGetter(idNumber, responseGetter);
-    trySetResponseGetter(options, responseGetter);
-    trySetResponseGetter(phone, responseGetter);
     trySetResponseGetter(selfie, responseGetter);
-    trySetResponseGetter(signals, responseGetter);
   }
 }

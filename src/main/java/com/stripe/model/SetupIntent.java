@@ -2029,20 +2029,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(lastSetupError, responseGetter);
     trySetResponseGetter(latestAttempt, responseGetter);
-    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(mandate, responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
-    trySetResponseGetter(radarOptions, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
-    trySetResponseGetter(setupDetails, responseGetter);
     trySetResponseGetter(singleUseMandate, responseGetter);
   }
 }

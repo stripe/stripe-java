@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.File;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -351,7 +352,7 @@ public class FinancingOffer extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FinancingDocuments extends StripeObject {
+  public static class FinancingDocuments extends StripeObject implements StripeActiveObject {
     /**
      * The primary contract that defines the financing provided to the connected account, including
      * the funded amount, repayment terms, fees, and each party’s obligations. Only available once
@@ -465,6 +466,15 @@ public class FinancingOffer extends ApiResource implements HasId {
                   .map(x -> new ExpandableField<File>(x.getId(), x))
                   .collect(Collectors.toList())
               : null;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(financingAgreement, responseGetter);
+      trySetResponseGetter(stateSalesBasedFinancingAgreement, responseGetter);
+      if (transferAgreements != null) {
+        transferAgreements.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -602,8 +612,6 @@ public class FinancingOffer extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(acceptedTerms, responseGetter);
     trySetResponseGetter(financingDocuments, responseGetter);
-    trySetResponseGetter(offeredTerms, responseGetter);
   }
 }

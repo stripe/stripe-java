@@ -1072,7 +1072,7 @@ public class AccountSession extends StripeObject implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class Scopes extends StripeObject {
         /**
-         * Whether to disable Stripe user authentication in the enabled components.
+         * Whether to disable Stripe user authentication in this component.
          *
          * <p>One of {@code disabled}, or {@code enabled}.
          */

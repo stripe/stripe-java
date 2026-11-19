@@ -451,6 +451,5 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(product, responseGetter);
-    trySetResponseGetter(transformUsage, responseGetter);
   }
 }

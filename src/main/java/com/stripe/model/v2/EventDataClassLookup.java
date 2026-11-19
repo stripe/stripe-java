@@ -100,25 +100,22 @@ public final class EventDataClassLookup {
     classLookup.put("v2.billing.bill_setting", com.stripe.model.v2.billing.BillSetting.class);
     classLookup.put(
         "v2.billing.bill_setting_version", com.stripe.model.v2.billing.BillSettingVersion.class);
-    classLookup.put("v2.billing.cadence", com.stripe.model.v2.billing.Cadence.class);
-    classLookup.put(
-        "v2.billing.cadence_spend_modifier",
-        com.stripe.model.v2.billing.CadenceSpendModifier.class);
     classLookup.put(
         "v2.billing.collection_setting", com.stripe.model.v2.billing.CollectionSetting.class);
     classLookup.put(
         "v2.billing.collection_setting_version",
         com.stripe.model.v2.billing.CollectionSettingVersion.class);
     classLookup.put("v2.billing.contract", com.stripe.model.v2.billing.Contract.class);
-    classLookup.put(
-        "v2.billing.contract_pricing_line_quantity_change",
-        com.stripe.model.v2.billing.ContractPricingLineQuantityChange.class);
     classLookup.put("v2.billing.contract_term", com.stripe.model.v2.billing.ContractTerm.class);
     classLookup.put(
         "v2.billing.contract_term_quantity_change",
         com.stripe.model.v2.billing.ContractTermQuantityChange.class);
     classLookup.put(
         "v2.billing.custom_pricing_unit", com.stripe.model.v2.billing.CustomPricingUnit.class);
+    classLookup.put("v2.billing.group", com.stripe.model.v2.billing.Group.class);
+    classLookup.put("v2.billing.group_invoice", com.stripe.model.v2.billing.GroupInvoice.class);
+    classLookup.put(
+        "v2.billing.group_spend_modifier", com.stripe.model.v2.billing.GroupSpendModifier.class);
     classLookup.put("v2.billing.intent", com.stripe.model.v2.billing.Intent.class);
     classLookup.put("v2.billing.intent_action", com.stripe.model.v2.billing.IntentAction.class);
     classLookup.put("v2.billing.license_fee", com.stripe.model.v2.billing.LicenseFee.class);
@@ -966,12 +963,6 @@ public final class EventDataClassLookup {
     eventClassLookup.put("v1.transfer.reversed", com.stripe.events.V1TransferReversedEvent.class);
     eventClassLookup.put("v1.transfer.updated", com.stripe.events.V1TransferUpdatedEvent.class);
     eventClassLookup.put(
-        "v2.billing.cadence.billed", com.stripe.events.V2BillingCadenceBilledEvent.class);
-    eventClassLookup.put(
-        "v2.billing.cadence.canceled", com.stripe.events.V2BillingCadenceCanceledEvent.class);
-    eventClassLookup.put(
-        "v2.billing.cadence.created", com.stripe.events.V2BillingCadenceCreatedEvent.class);
-    eventClassLookup.put(
         "v2.billing.contract.activated", com.stripe.events.V2BillingContractActivatedEvent.class);
     eventClassLookup.put(
         "v2.billing.contract.canceled", com.stripe.events.V2BillingContractCanceledEvent.class);
@@ -999,6 +990,24 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.billing.contract_term.deleted",
         com.stripe.events.V2BillingContractTermDeletedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract_term.pricing_override_ended",
+        com.stripe.events.V2BillingContractTermPricingOverrideEndedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract_term.pricing_override_started",
+        com.stripe.events.V2BillingContractTermPricingOverrideStartedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract_term.recurring_price_ended",
+        com.stripe.events.V2BillingContractTermRecurringPriceEndedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract_term.recurring_price_started",
+        com.stripe.events.V2BillingContractTermRecurringPriceStartedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract_term.scheduled_fee_service_period_ended",
+        com.stripe.events.V2BillingContractTermScheduledFeeServicePeriodEndedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract_term.scheduled_fee_service_period_started",
+        com.stripe.events.V2BillingContractTermScheduledFeeServicePeriodStartedEvent.class);
     eventClassLookup.put(
         "v2.billing.contract_term.updated",
         com.stripe.events.V2BillingContractTermUpdatedEvent.class);
@@ -1258,6 +1267,12 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.health.authorization_rate_drop.resolved",
         com.stripe.events.V2CoreHealthAuthorizationRateDropResolvedEvent.class);
+    eventClassLookup.put(
+        "v2.core.health.custom_payment_method_adapter_degraded.firing",
+        com.stripe.events.V2CoreHealthCustomPaymentMethodAdapterDegradedFiringEvent.class);
+    eventClassLookup.put(
+        "v2.core.health.custom_payment_method_adapter_degraded.resolved",
+        com.stripe.events.V2CoreHealthCustomPaymentMethodAdapterDegradedResolvedEvent.class);
     eventClassLookup.put(
         "v2.core.health.elements_error.firing",
         com.stripe.events.V2CoreHealthElementsErrorFiringEvent.class);
@@ -1781,6 +1796,21 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.signals.account_signal.payment_delinquency_exposure_ready",
         com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEvent.class);
+    eventClassLookup.put(
+        "v2.signals.payment_retry_evaluation.canceled",
+        com.stripe.events.V2SignalsPaymentRetryEvaluationCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.signals.payment_retry_evaluation.completed",
+        com.stripe.events.V2SignalsPaymentRetryEvaluationCompletedEvent.class);
+    eventClassLookup.put(
+        "v2.signals.payment_retry_evaluation.created",
+        com.stripe.events.V2SignalsPaymentRetryEvaluationCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.signals.payment_retry_evaluation.expired",
+        com.stripe.events.V2SignalsPaymentRetryEvaluationExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.signals.payment_retry_evaluation.updated",
+        com.stripe.events.V2SignalsPaymentRetryEvaluationUpdatedEvent.class);
     eventClassLookup.put(
         "v2.signals.payment_retry_evaluations.retry_recommended",
         com.stripe.events.V2SignalsPaymentRetryEvaluationsRetryRecommendedEvent.class);

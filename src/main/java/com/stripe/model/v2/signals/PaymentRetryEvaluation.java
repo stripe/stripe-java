@@ -3,7 +3,9 @@ package com.stripe.model.v2.signals;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRetryEvaluation extends StripeObject implements HasId {
+public class PaymentRetryEvaluation extends StripeObject implements HasId, StripeActiveObject {
   /** When the evaluation was canceled, if applicable. */
   @SerializedName("canceled_at")
   Instant canceledAt;
@@ -72,4 +74,9 @@ public class PaymentRetryEvaluation extends StripeObject implements HasId {
    */
   @SerializedName("status")
   String status;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(latestSignal, responseGetter);
+  }
 }

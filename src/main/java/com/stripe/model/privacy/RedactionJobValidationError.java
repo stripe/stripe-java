@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.privacy.RedactionJobValidationErrorListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -115,11 +114,5 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
     /** Erroring object type. */
     @SerializedName("object_type")
     String objectType;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(erroringObject, responseGetter);
   }
 }

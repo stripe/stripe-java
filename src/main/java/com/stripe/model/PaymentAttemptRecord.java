@@ -854,7 +854,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodDetails extends StripeObject {
+  public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("ach_credit_transfer")
     AchCreditTransfer achCreditTransfer;
 
@@ -1507,7 +1507,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Bancontact extends StripeObject {
+    public static class Bancontact extends StripeObject implements StripeActiveObject {
       /** Bank code of bank associated with the bank account. */
       @SerializedName("bank_code")
       String bankCode;
@@ -1592,6 +1592,12 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
+      }
     }
 
     /**
@@ -1611,7 +1617,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingDetails extends StripeObject {
+    public static class BillingDetails extends StripeObject implements StripeActiveObject {
       /** A representation of a physical address. */
       @SerializedName("address")
       com.stripe.model.Address address;
@@ -1627,6 +1633,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** The billing phone number associated with the method of payment. */
       @SerializedName("phone")
       String phone;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
     }
 
     /**
@@ -2508,8 +2519,8 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
-       * {@code tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui},
+       * {@code tempo}, or {@code tron}.
        */
       @SerializedName("network")
       String network;
@@ -2811,7 +2822,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ideal extends StripeObject {
+    public static class Ideal extends StripeObject implements StripeActiveObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code adyen}, {@code asn_bank},
        * {@code bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code
@@ -2902,6 +2913,12 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       public void setGeneratedSepaDebitMandateObject(Mandate expandableObject) {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
       }
     }
 
@@ -3569,7 +3586,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypal extends StripeObject {
+    public static class Paypal extends StripeObject implements StripeActiveObject {
       /**
        * Two-letter ISO code representing the buyer's country. Values are provided by PayPal
        * directly (if supported) at the time of authorization or settlement. They cannot be set or
@@ -3656,6 +3673,12 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
          */
         @SerializedName("status")
         String status;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(shipping, responseGetter);
+        trySetResponseGetter(verifiedAddress, responseGetter);
       }
     }
 
@@ -4001,7 +4024,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Sofort extends StripeObject {
+    public static class Sofort extends StripeObject implements StripeActiveObject {
       /** Bank code of bank associated with the bank account. */
       @SerializedName("bank_code")
       String bankCode;
@@ -4090,6 +4113,12 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       public void setGeneratedSepaDebitMandateObject(Mandate expandableObject) {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
       }
     }
 
@@ -4225,7 +4254,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
+    public static class UsBankAccount extends StripeObject implements StripeActiveObject {
       /**
        * The type of entity that holds the account. This can be either 'individual' or 'company'.
        *
@@ -4298,6 +4327,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mandate, responseGetter);
+      }
     }
 
     /**
@@ -4351,6 +4385,16 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(bancontact, responseGetter);
+      trySetResponseGetter(billingDetails, responseGetter);
+      trySetResponseGetter(ideal, responseGetter);
+      trySetResponseGetter(paypal, responseGetter);
+      trySetResponseGetter(sofort, responseGetter);
+      trySetResponseGetter(usBankAccount, responseGetter);
+    }
   }
 
   /** Processor information associated with this payment. */
@@ -4445,7 +4489,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShippingDetails extends StripeObject {
+  public static class ShippingDetails extends StripeObject implements StripeActiveObject {
     /** A representation of a physical address. */
     @SerializedName("address")
     com.stripe.model.Address address;
@@ -4457,22 +4501,17 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     /** The shipping recipient's phone number. */
     @SerializedName("phone")
     String phone;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amount, responseGetter);
-    trySetResponseGetter(amountAuthorized, responseGetter);
-    trySetResponseGetter(amountCanceled, responseGetter);
-    trySetResponseGetter(amountFailed, responseGetter);
-    trySetResponseGetter(amountGuaranteed, responseGetter);
-    trySetResponseGetter(amountRefunded, responseGetter);
-    trySetResponseGetter(amountRequested, responseGetter);
-    trySetResponseGetter(customerDetails, responseGetter);
-    trySetResponseGetter(disputeDetails, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
-    trySetResponseGetter(processorDetails, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
   }
 }

@@ -17,15 +17,6 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
-  /**
-   * The Billing Cadence which controls the timing of recurring invoice generation for this
-   * subscription. If unset, the subscription will bill according to its own configured schedule and
-   * create its own invoices. If set, this subscription will be billed by the cadence instead,
-   * potentially sharing invoices with the other subscriptions linked to that Cadence.
-   */
-  @SerializedName("billing_cadence")
-  String billingCadence;
-
   /** Filter for subscriptions that have the specified billing group. */
   @SerializedName("billing_group")
   String billingGroup;
@@ -129,7 +120,6 @@ public class SubscriptionListParams extends ApiRequestParams {
 
   private SubscriptionListParams(
       AutomaticTax automaticTax,
-      String billingCadence,
       String billingGroup,
       CollectionMethod collectionMethod,
       Object created,
@@ -147,7 +137,6 @@ public class SubscriptionListParams extends ApiRequestParams {
       Status status,
       String testClock) {
     this.automaticTax = automaticTax;
-    this.billingCadence = billingCadence;
     this.billingGroup = billingGroup;
     this.collectionMethod = collectionMethod;
     this.created = created;
@@ -172,8 +161,6 @@ public class SubscriptionListParams extends ApiRequestParams {
 
   public static class Builder {
     private AutomaticTax automaticTax;
-
-    private String billingCadence;
 
     private String billingGroup;
 
@@ -211,7 +198,6 @@ public class SubscriptionListParams extends ApiRequestParams {
     public SubscriptionListParams build() {
       return new SubscriptionListParams(
           this.automaticTax,
-          this.billingCadence,
           this.billingGroup,
           this.collectionMethod,
           this.created,
@@ -233,17 +219,6 @@ public class SubscriptionListParams extends ApiRequestParams {
     /** Filter subscriptions by their automatic tax settings. */
     public Builder setAutomaticTax(SubscriptionListParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /**
-     * The Billing Cadence which controls the timing of recurring invoice generation for this
-     * subscription. If unset, the subscription will bill according to its own configured schedule
-     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
-     * potentially sharing invoices with the other subscriptions linked to that Cadence.
-     */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
       return this;
     }
 

@@ -18,10 +18,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ContractTerm extends StripeObject implements HasId {
-  /** Present when type is ad_hoc_product. */
-  @SerializedName("ad_hoc_product")
-  AdHocProduct adHocProduct;
-
   /** The stable ID of the term. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -59,116 +55,17 @@ public class ContractTerm extends StripeObject implements HasId {
   @SerializedName("recurring_price")
   RecurringPrice recurringPrice;
 
+  /** Present when type is scheduled_fee. */
+  @SerializedName("scheduled_fee")
+  ScheduledFee scheduledFee;
+
   /**
    * The type of this term.
    *
-   * <p>One of {@code ad_hoc_product}, {@code pricing_override}, or {@code recurring_price}.
+   * <p>One of {@code pricing_override}, {@code recurring_price}, or {@code scheduled_fee}.
    */
   @SerializedName("type")
   String type;
-
-  /** Present when type is ad_hoc_product. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AdHocProduct extends StripeObject {
-    /** Explicit bill dates and amounts, including billed history. */
-    @SerializedName("bill_schedule")
-    BillSchedule billSchedule;
-
-    /** The V1 Product being billed. */
-    @SerializedName("product")
-    String product;
-
-    /**
-     * Informational invoice and revenue-recognition period with timestamp objects; does not affect
-     * billing or proration.
-     */
-    @SerializedName("service_period")
-    ServicePeriod servicePeriod;
-
-    /** Explicit bill dates and amounts, including billed history. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillSchedule extends StripeObject {
-      /** Scheduled installments and billed history. */
-      @SerializedName("custom")
-      List<ContractTerm.AdHocProduct.BillSchedule.Custom> custom;
-
-      /**
-       * The type of billing schedule.
-       *
-       * <p>Equal to {@code custom}.
-       */
-      @SerializedName("type")
-      String type;
-
-      /**
-       * For more details about Custom, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Custom extends StripeObject {
-        /** Amount in the contract's currency. */
-        @SerializedName("amount")
-        Amount amount;
-
-        /** The resolved bill date. */
-        @SerializedName("bill_at")
-        BillAt billAt;
-
-        /** The resolved bill date. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class BillAt extends StripeObject {
-          /** The timestamp at which the fee will be billed. */
-          @SerializedName("timestamp")
-          Instant timestamp;
-        }
-      }
-    }
-
-    /**
-     * Informational invoice and revenue-recognition period with timestamp objects; does not affect
-     * billing or proration.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class ServicePeriod extends StripeObject {
-      /** The exclusive end of the service period. */
-      @SerializedName("ends_at")
-      EndsAt endsAt;
-
-      /** The inclusive start of the service period. */
-      @SerializedName("starts_at")
-      StartsAt startsAt;
-
-      /** The exclusive end of the service period. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class EndsAt extends StripeObject {
-        /** The timestamp when the item ends. */
-        @SerializedName("timestamp")
-        Instant timestamp;
-      }
-
-      /** The inclusive start of the service period. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class StartsAt extends StripeObject {
-        /** The timestamp when the item starts. */
-        @SerializedName("timestamp")
-        Instant timestamp;
-      }
-    }
-  }
 
   /** Present when type is pricing_override. */
   @Getter
@@ -176,8 +73,8 @@ public class ContractTerm extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class PricingOverride extends StripeObject {
     /**
-     * Recurring or ad_hoc_product terms selected by this override. An override without criteria
-     * applies to all recurring and ad_hoc_product terms.
+     * Recurring or scheduled_fee terms selected by this override. An override without criteria
+     * applies to all recurring and scheduled_fee terms.
      */
     @SerializedName("criteria")
     List<ContractTerm.PricingOverride.Criterion> criteria;
@@ -218,14 +115,12 @@ public class ContractTerm extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Criterion extends StripeObject {
-      /**
-       * Resolved IDs of recurring or ad_hoc_product terms. Override terms are not valid targets.
-       */
+      /** Resolved IDs of recurring or scheduled_fee terms. Override terms are not valid targets. */
       @SerializedName("terms")
       List<String> terms;
 
       /**
-       * Whether to include or exclude the selected recurring or ad_hoc_product terms.
+       * Whether to include or exclude the selected recurring or scheduled_fee terms.
        *
        * <p>One of {@code exclude}, or {@code include}.
        */
@@ -313,6 +208,109 @@ public class ContractTerm extends StripeObject implements HasId {
       /** The timestamp when the item starts. */
       @SerializedName("timestamp")
       Instant timestamp;
+    }
+  }
+
+  /** Present when type is scheduled_fee. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ScheduledFee extends StripeObject {
+    /** Explicit bill dates and amounts, including billed history. */
+    @SerializedName("bill_schedule")
+    BillSchedule billSchedule;
+
+    /** The V1 Product being billed. */
+    @SerializedName("product")
+    String product;
+
+    /**
+     * Informational invoice and revenue-recognition period with timestamp objects; does not affect
+     * billing or proration.
+     */
+    @SerializedName("service_period")
+    ServicePeriod servicePeriod;
+
+    /** Explicit bill dates and amounts, including billed history. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillSchedule extends StripeObject {
+      /** Scheduled installments and billed history. */
+      @SerializedName("custom")
+      List<ContractTerm.ScheduledFee.BillSchedule.Custom> custom;
+
+      /**
+       * The type of billing schedule.
+       *
+       * <p>Equal to {@code custom}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * For more details about Custom, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Custom extends StripeObject {
+        /** Amount in the contract's currency. */
+        @SerializedName("amount")
+        Amount amount;
+
+        /** The resolved bill date. */
+        @SerializedName("bill_at")
+        BillAt billAt;
+
+        /** The resolved bill date. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BillAt extends StripeObject {
+          /** The timestamp at which the fee will be billed. */
+          @SerializedName("timestamp")
+          Instant timestamp;
+        }
+      }
+    }
+
+    /**
+     * Informational invoice and revenue-recognition period with timestamp objects; does not affect
+     * billing or proration.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ServicePeriod extends StripeObject {
+      /** The exclusive end of the service period. */
+      @SerializedName("ends_at")
+      EndsAt endsAt;
+
+      /** The inclusive start of the service period. */
+      @SerializedName("starts_at")
+      StartsAt startsAt;
+
+      /** The exclusive end of the service period. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EndsAt extends StripeObject {
+        /** The timestamp when the item ends. */
+        @SerializedName("timestamp")
+        Instant timestamp;
+      }
+
+      /** The inclusive start of the service period. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StartsAt extends StripeObject {
+        /** The timestamp when the item starts. */
+        @SerializedName("timestamp")
+        Instant timestamp;
+      }
     }
   }
 }

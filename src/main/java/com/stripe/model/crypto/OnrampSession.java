@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.crypto.OnrampSessionCheckoutParams;
 import com.stripe.param.crypto.OnrampSessionCreateParams;
 import com.stripe.param.crypto.OnrampSessionListParams;
@@ -569,11 +568,5 @@ public class OnrampSession extends ApiResource implements HasId {
         String stellar;
       }
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(transactionDetails, responseGetter);
   }
 }

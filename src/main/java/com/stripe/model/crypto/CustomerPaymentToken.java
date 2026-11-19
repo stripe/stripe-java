@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.crypto.CustomerPaymentTokenListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -168,12 +167,5 @@ public class CustomerPaymentToken extends ApiResource implements HasId {
     /** Last four digits of the bank account number. */
     @SerializedName("last4")
     String last4;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(usBankAccount, responseGetter);
   }
 }

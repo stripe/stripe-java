@@ -593,8 +593,5 @@ public class Capability extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(account, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
-    trySetResponseGetter(protections, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
   }
 }

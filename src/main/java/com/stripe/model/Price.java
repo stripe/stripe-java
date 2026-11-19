@@ -718,10 +718,6 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(customUnitAmount, responseGetter);
-    trySetResponseGetter(migrateTo, responseGetter);
     trySetResponseGetter(product, responseGetter);
-    trySetResponseGetter(recurring, responseGetter);
-    trySetResponseGetter(transformQuantity, responseGetter);
   }
 }

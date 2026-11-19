@@ -383,13 +383,6 @@ public class GiftCardOperation extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(activation, responseGetter);
-    trySetResponseGetter(activationVoid, responseGetter);
-    trySetResponseGetter(balanceCheck, responseGetter);
-    trySetResponseGetter(cashout, responseGetter);
-    trySetResponseGetter(cashoutVoid, responseGetter);
     trySetResponseGetter(giftCard, responseGetter);
-    trySetResponseGetter(reload, responseGetter);
-    trySetResponseGetter(reloadVoid, responseGetter);
   }
 }

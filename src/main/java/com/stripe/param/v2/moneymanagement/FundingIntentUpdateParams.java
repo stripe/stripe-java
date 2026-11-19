@@ -42,19 +42,25 @@ public class FundingIntentUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, Object> metadata;
 
+  /** The updated settlement timing. Omit to retain the existing timing. */
+  @SerializedName("settlement_timing")
+  SettlementTiming settlementTiming;
+
   private FundingIntentUpdateParams(
       Amount amount,
       Check check,
       ConfirmationMethod confirmationMethod,
       Object description,
       Map<String, Object> extraParams,
-      Map<String, Object> metadata) {
+      Map<String, Object> metadata,
+      SettlementTiming settlementTiming) {
     this.amount = amount;
     this.check = check;
     this.confirmationMethod = confirmationMethod;
     this.description = description;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.settlementTiming = settlementTiming;
   }
 
   public static Builder builder() {
@@ -74,6 +80,8 @@ public class FundingIntentUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> metadata;
 
+    private SettlementTiming settlementTiming;
+
     /** Finalize and obtain parameter instance from this builder. */
     public FundingIntentUpdateParams build() {
       return new FundingIntentUpdateParams(
@@ -82,7 +90,8 @@ public class FundingIntentUpdateParams extends ApiRequestParams {
           this.confirmationMethod,
           this.description,
           this.extraParams,
-          this.metadata);
+          this.metadata,
+          this.settlementTiming);
     }
 
     /** The updated amount to add to the destination. */
@@ -185,6 +194,13 @@ public class FundingIntentUpdateParams extends ApiRequestParams {
       this.metadata.putAll(map);
       return this;
     }
+
+    /** The updated settlement timing. Omit to retain the existing timing. */
+    public Builder setSettlementTiming(
+        FundingIntentUpdateParams.SettlementTiming settlementTiming) {
+      this.settlementTiming = settlementTiming;
+      return this;
+    }
   }
 
   @Getter
@@ -277,6 +293,77 @@ public class FundingIntentUpdateParams extends ApiRequestParams {
       /** The ID of a File containing the front image of the check. */
       public Builder setFrontImage(EmptyParam frontImage) {
         this.frontImage = frontImage;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettlementTiming {
+    /** The number of days to delay the availability of funds after processing completes. */
+    @SerializedName("delay_days_override")
+    Long delayDaysOverride;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private SettlementTiming(Long delayDaysOverride, Map<String, Object> extraParams) {
+      this.delayDaysOverride = delayDaysOverride;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long delayDaysOverride;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public FundingIntentUpdateParams.SettlementTiming build() {
+        return new FundingIntentUpdateParams.SettlementTiming(
+            this.delayDaysOverride, this.extraParams);
+      }
+
+      /** The number of days to delay the availability of funds after processing completes. */
+      public Builder setDelayDaysOverride(Long delayDaysOverride) {
+        this.delayDaysOverride = delayDaysOverride;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FundingIntentUpdateParams.SettlementTiming#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FundingIntentUpdateParams.SettlementTiming#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }

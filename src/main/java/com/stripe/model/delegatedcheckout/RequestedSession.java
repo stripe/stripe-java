@@ -7,6 +7,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.Profile;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.model.sharedpayment.IssuedToken;
 import com.stripe.net.ApiRequest;
@@ -1320,7 +1321,7 @@ public class RequestedSession extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SellerDetails extends StripeObject {
+  public static class SellerDetails extends StripeObject implements StripeActiveObject {
     /** The card brands supported by the seller. */
     @SerializedName("card_brands")
     List<String> cardBrands;
@@ -1388,6 +1389,11 @@ public class RequestedSession extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class MarketplaceSellerDetails extends StripeObject {}
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(networkProfile, responseGetter);
+    }
   }
 
   /**
@@ -1491,15 +1497,7 @@ public class RequestedSession extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(buyerConsents, responseGetter);
-    trySetResponseGetter(discounts, responseGetter);
-    trySetResponseGetter(fulfillmentDetails, responseGetter);
-    trySetResponseGetter(orderDetails, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
-    trySetResponseGetter(paymentMethodPreview, responseGetter);
-    trySetResponseGetter(riskDetails, responseGetter);
     trySetResponseGetter(sellerDetails, responseGetter);
     trySetResponseGetter(sharedPaymentIssuedToken, responseGetter);
-    trySetResponseGetter(totalDetails, responseGetter);
   }
 }

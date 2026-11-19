@@ -141,7 +141,8 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
        * The network associated with the fee.
        *
        * <p>One of {@code ach}, {@code becs}, {@code eft}, {@code fedwire}, {@code fps}, {@code
-       * local}, {@code npp}, {@code rtp}, {@code sepa}, {@code sepa_instant}, or {@code swift}.
+       * local}, {@code npp}, {@code rtp}, {@code sepa}, {@code sepa_instant}, {@code swift}, or
+       * {@code tips}.
        */
       @SerializedName("network")
       String network;

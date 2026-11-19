@@ -21,7 +21,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Tax exemption and resale certificates associated with tax exemptions. */
+/**
+ * A Tax Certificate associates an uploaded exemption or resale certificate file with a customer's
+ * tax exemption. A tax exemption can have multiple certificates. Deleting a tax exemption also
+ * deletes its certificates, but retains their uploaded files.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -30,11 +34,13 @@ public class Certificate extends ApiResource implements HasId {
   @SerializedName("created")
   Long created;
 
-  /** Whether the certificate has been deleted. */
+  /**
+   * If {@code true}, the certificate has been deleted. If {@code false}, it hasn't been deleted.
+   */
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** The uploaded certificate file. */
+  /** The ID of the uploaded certificate <a href="https://stripe.com/api/files/object">file</a>. */
   @SerializedName("file")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -60,7 +66,10 @@ public class Certificate extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The tax exemption associated with this certificate. */
+  /**
+   * The ID of the <a href="https://stripe.com/api/tax/exemptions/object">customer tax exemption</a>
+   * associated with this certificate.
+   */
   @SerializedName("tax_exemption")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -103,12 +112,20 @@ public class Certificate extends ApiResource implements HasId {
         new ExpandableField<CustomerTaxExemption>(expandableObject.getId(), expandableObject);
   }
 
-  /** Create a tax certificate associated with a tax exemption. */
+  /**
+   * Creates a Tax Certificate associated with a tax exemption. Before creating the certificate, <a
+   * href="https://stripe.com/api/files/create">upload a file</a> with purpose {@code
+   * tax_certificate}.
+   */
   public static Certificate create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create a tax certificate associated with a tax exemption. */
+  /**
+   * Creates a Tax Certificate associated with a tax exemption. Before creating the certificate, <a
+   * href="https://stripe.com/api/files/create">upload a file</a> with purpose {@code
+   * tax_certificate}.
+   */
   public static Certificate create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/certificates";
@@ -117,12 +134,20 @@ public class Certificate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Certificate.class);
   }
 
-  /** Create a tax certificate associated with a tax exemption. */
+  /**
+   * Creates a Tax Certificate associated with a tax exemption. Before creating the certificate, <a
+   * href="https://stripe.com/api/files/create">upload a file</a> with purpose {@code
+   * tax_certificate}.
+   */
   public static Certificate create(CertificateCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create a tax certificate associated with a tax exemption. */
+  /**
+   * Creates a Tax Certificate associated with a tax exemption. Before creating the certificate, <a
+   * href="https://stripe.com/api/files/create">upload a file</a> with purpose {@code
+   * tax_certificate}.
+   */
   public static Certificate create(CertificateCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/certificates";
@@ -137,22 +162,34 @@ public class Certificate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Certificate.class);
   }
 
-  /** Delete a tax certificate associated with a tax exemption. */
+  /**
+   * Deletes a Tax Certificate without deleting its uploaded file. You can reuse the file to create
+   * another certificate, and you can still retrieve the deleted certificate.
+   */
   public Certificate delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Delete a tax certificate associated with a tax exemption. */
+  /**
+   * Deletes a Tax Certificate without deleting its uploaded file. You can reuse the file to create
+   * another certificate, and you can still retrieve the deleted certificate.
+   */
   public Certificate delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Delete a tax certificate associated with a tax exemption. */
+  /**
+   * Deletes a Tax Certificate without deleting its uploaded file. You can reuse the file to create
+   * another certificate, and you can still retrieve the deleted certificate.
+   */
   public Certificate delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Delete a tax certificate associated with a tax exemption. */
+  /**
+   * Deletes a Tax Certificate without deleting its uploaded file. You can reuse the file to create
+   * another certificate, and you can still retrieve the deleted certificate.
+   */
   public Certificate delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/certificates/%s", ApiResource.urlEncodeId(this.getId()));
@@ -161,12 +198,18 @@ public class Certificate extends ApiResource implements HasId {
     return getResponseGetter().request(request, Certificate.class);
   }
 
-  /** List certificates for an existing tax exemption. */
+  /**
+   * Lists a tax exemption’s certificates, ordered from newest to oldest. The list excludes deleted
+   * certificates.
+   */
   public static CertificateCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List certificates for an existing tax exemption. */
+  /**
+   * Lists a tax exemption’s certificates, ordered from newest to oldest. The list excludes deleted
+   * certificates.
+   */
   public static CertificateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/certificates";
@@ -175,12 +218,18 @@ public class Certificate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, CertificateCollection.class);
   }
 
-  /** List certificates for an existing tax exemption. */
+  /**
+   * Lists a tax exemption’s certificates, ordered from newest to oldest. The list excludes deleted
+   * certificates.
+   */
   public static CertificateCollection list(CertificateListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List certificates for an existing tax exemption. */
+  /**
+   * Lists a tax exemption’s certificates, ordered from newest to oldest. The list excludes deleted
+   * certificates.
+   */
   public static CertificateCollection list(CertificateListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/tax/certificates";
@@ -195,17 +244,26 @@ public class Certificate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, CertificateCollection.class);
   }
 
-  /** Retrieve a tax certificate associated with a tax exemption. */
+  /**
+   * Retrieves a Tax Certificate. Deleted certificates remain retrievable with all their fields and
+   * {@code deleted} set to {@code true}.
+   */
   public static Certificate retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve a tax certificate associated with a tax exemption. */
+  /**
+   * Retrieves a Tax Certificate. Deleted certificates remain retrievable with all their fields and
+   * {@code deleted} set to {@code true}.
+   */
   public static Certificate retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieve a tax certificate associated with a tax exemption. */
+  /**
+   * Retrieves a Tax Certificate. Deleted certificates remain retrievable with all their fields and
+   * {@code deleted} set to {@code true}.
+   */
   public static Certificate retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/tax/certificates/%s", ApiResource.urlEncodeId(id));
@@ -214,7 +272,10 @@ public class Certificate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Certificate.class);
   }
 
-  /** Retrieve a tax certificate associated with a tax exemption. */
+  /**
+   * Retrieves a Tax Certificate. Deleted certificates remain retrievable with all their fields and
+   * {@code deleted} set to {@code true}.
+   */
   public static Certificate retrieve(
       String id, CertificateRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/tax/certificates/%s", ApiResource.urlEncodeId(id));

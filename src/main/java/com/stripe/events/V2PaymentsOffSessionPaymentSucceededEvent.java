@@ -7,9 +7,25 @@ import com.stripe.model.v2.core.Event;
 import com.stripe.model.v2.core.Event.RelatedObject;
 import com.stripe.model.v2.payments.OffSessionPayment;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public final class V2PaymentsOffSessionPaymentSucceededEvent extends Event {
+  /** Data for the v2.payments.off_session_payment.succeeded event. */
+  @SerializedName("data")
+  V2PaymentsOffSessionPaymentSucceededEvent.EventData data;
+
+  @Getter
+  @Setter
+  public static final class EventData {
+    /** The ID of the Charge associated with this attempt. */
+    @SerializedName("charge")
+    String charge;
+    /** The ID of the payment attempt record associated with this successful attempt. */
+    @SerializedName("payment_attempt_record")
+    String paymentAttemptRecord;
+  }
+
   @SerializedName("related_object")
 
   /** Object containing the reference to API resource relevant to the event. */

@@ -5,7 +5,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StringInt64TypeAdapter;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -18,15 +20,15 @@ import lombok.Setter;
  * A Pricing Plan Subscription represents a customer's active subscription to a Pricing Plan. It
  * tracks both the servicing status (whether the customer is receiving service) and collection
  * status (whether payments are current). Subscriptions are created through Billing Intents and bill
- * according to the associated Billing Cadence.
+ * according to the associated Billing Group.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PricingPlanSubscription extends StripeObject implements HasId {
-  /** The ID of the Billing Cadence this subscription is billed on. */
-  @SerializedName("billing_cadence")
-  String billingCadence;
+public class PricingPlanSubscription extends StripeObject implements HasId, StripeActiveObject {
+  /** The ID of the Billing Group this subscription is billed on. */
+  @SerializedName("billing_group")
+  String billingGroup;
 
   /**
    * Details about why the subscription was canceled, if applicable. Includes system-generated
@@ -112,7 +114,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   @SerializedName("servicing_status_transitions")
   ServicingStatusTransitions servicingStatusTransitions;
 
-  /** The ID of the Test Clock of the associated Billing Cadence, if any. */
+  /** The ID of the Test Clock of the associated Billing Group, if any. */
   @SerializedName("test_clock")
   String testClock;
 
@@ -231,7 +233,8 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PricingPlanComponentDetail extends StripeObject {
+  public static class PricingPlanComponentDetail extends StripeObject
+      implements StripeActiveObject {
     /** License fee details, present when type is license_fee_details. */
     @SerializedName("license_fee_details")
     LicenseFeeDetails licenseFeeDetails;
@@ -459,7 +462,8 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RecurringCreditGrantDetails extends StripeObject {
+    public static class RecurringCreditGrantDetails extends StripeObject
+        implements StripeActiveObject {
       /** Credit grant details, present when type is CREDIT_GRANT. */
       @SerializedName("credit_grant_details")
       CreditGrantDetails creditGrantDetails;
@@ -488,7 +492,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CreditGrantDetails extends StripeObject {
+      public static class CreditGrantDetails extends StripeObject implements StripeActiveObject {
         /** The amount of the credit grant. */
         @SerializedName("amount")
         com.stripe.model.v2.billing.PricingPlanSubscription.PricingPlanComponentDetail
@@ -507,7 +511,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
+        public static class Amount extends StripeObject implements StripeActiveObject {
           /**
            * The custom pricing unit amount of the credit grant. Required if {@code type} is {@code
            * custom_pricing_unit}.
@@ -539,7 +543,8 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class CustomPricingUnit extends StripeObject implements HasId {
+          public static class CustomPricingUnit extends StripeObject
+              implements HasId, StripeActiveObject {
             /** The Custom Pricing Unit object. */
             @SerializedName("custom_pricing_unit_details")
             com.stripe.model.v2.billing.CustomPricingUnit customPricingUnitDetails;
@@ -552,6 +557,16 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
             /** The value of the credit grant, decimal value represented as a string. */
             @SerializedName("value")
             BigDecimal value;
+
+            @Override
+            public void setResponseGetter(StripeResponseGetter responseGetter) {
+              trySetResponseGetter(customPricingUnitDetails, responseGetter);
+            }
+          }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(customPricingUnit, responseGetter);
           }
         }
 
@@ -599,13 +614,19 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
           @SerializedName("type")
           String type;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(amount, responseGetter);
+        }
       }
 
       /** Credit grant per tenant details, present when type is CREDIT_GRANT_PER_TENANT. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CreditGrantPerTenantDetails extends StripeObject {
+      public static class CreditGrantPerTenantDetails extends StripeObject
+          implements StripeActiveObject {
         /** The amount of the credit grant. */
         @SerializedName("amount")
         com.stripe.model.v2.billing.PricingPlanSubscription.PricingPlanComponentDetail
@@ -624,7 +645,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
+        public static class Amount extends StripeObject implements StripeActiveObject {
           /**
            * The custom pricing unit amount of the credit grant. Required if {@code type} is {@code
            * custom_pricing_unit}.
@@ -656,7 +677,8 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class CustomPricingUnit extends StripeObject implements HasId {
+          public static class CustomPricingUnit extends StripeObject
+              implements HasId, StripeActiveObject {
             /** The Custom Pricing Unit object. */
             @SerializedName("custom_pricing_unit_details")
             com.stripe.model.v2.billing.CustomPricingUnit customPricingUnitDetails;
@@ -669,6 +691,16 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
             /** The value of the credit grant, decimal value represented as a string. */
             @SerializedName("value")
             BigDecimal value;
+
+            @Override
+            public void setResponseGetter(StripeResponseGetter responseGetter) {
+              trySetResponseGetter(customPricingUnitDetails, responseGetter);
+            }
+          }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(customPricingUnit, responseGetter);
           }
         }
 
@@ -716,6 +748,11 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
           @SerializedName("type")
           String type;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(amount, responseGetter);
+        }
       }
 
       /** The service cycle configuration. */
@@ -738,6 +775,17 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
         @SerializedName("interval_count")
         Long intervalCount;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(creditGrantDetails, responseGetter);
+        trySetResponseGetter(creditGrantPerTenantDetails, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(recurringCreditGrantDetails, responseGetter);
     }
   }
 
@@ -765,5 +813,12 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
     /** When the servicing is scheduled to cancel. */
     @SerializedName("will_cancel_at")
     String willCancelAt;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    if (pricingPlanComponentDetails != null) {
+      pricingPlanComponentDetails.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

@@ -14,9 +14,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The {@code ReportRun} object represents an instance of a {@code Report} generated with specific
- * run parameters. Once the object is created, Stripe begins processing the report. When the report
- * has finished running, it will give you a reference to the results.
+ * The <a href="https://stripe.com/data/api/reports">Queries and Reports API</a> replaces this API.
+ * For new integrations, use {@code /v2/data/report_runs} instead. The {@code ReportRun} object
+ * represents an instance of a {@code Report} generated with specific run parameters. Once the
+ * object is created, Stripe begins processing the report. When the report has finished running, it
+ * will give you a reference to the results.
  */
 @Getter
 @Setter

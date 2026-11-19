@@ -12,11 +12,12 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class ClaimableSandboxCreateParams extends ApiRequestParams {
   /**
-   * The app channel that will be used when pre-installing your app on the claimable sandbox. This
-   * field defaults to {@code public} if omitted.
+   * The distribution channel used to pre-install your Stripe App on the claimable sandbox. Use
+   * {@code testing} to install your app's external test version or {@code public} to install its
+   * published version. This field defaults to {@code public} if omitted.
    */
-  @SerializedName("app_channel")
-  AppChannel appChannel;
+  @SerializedName("channel")
+  Channel channel;
 
   /**
    * <strong>Required.</strong> If true, returns a key that can be used with <a
@@ -46,12 +47,12 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
   Prefill prefill;
 
   private ClaimableSandboxCreateParams(
-      AppChannel appChannel,
+      Channel channel,
       Boolean enableMcpAccess,
       Map<String, Object> extraParams,
       OnboardingLinkDetails onboardingLinkDetails,
       Prefill prefill) {
-    this.appChannel = appChannel;
+    this.channel = channel;
     this.enableMcpAccess = enableMcpAccess;
     this.extraParams = extraParams;
     this.onboardingLinkDetails = onboardingLinkDetails;
@@ -63,7 +64,7 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private AppChannel appChannel;
+    private Channel channel;
 
     private Boolean enableMcpAccess;
 
@@ -76,7 +77,7 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ClaimableSandboxCreateParams build() {
       return new ClaimableSandboxCreateParams(
-          this.appChannel,
+          this.channel,
           this.enableMcpAccess,
           this.extraParams,
           this.onboardingLinkDetails,
@@ -84,11 +85,12 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The app channel that will be used when pre-installing your app on the claimable sandbox. This
-     * field defaults to {@code public} if omitted.
+     * The distribution channel used to pre-install your Stripe App on the claimable sandbox. Use
+     * {@code testing} to install your app's external test version or {@code public} to install its
+     * published version. This field defaults to {@code public} if omitted.
      */
-    public Builder setAppChannel(ClaimableSandboxCreateParams.AppChannel appChannel) {
-      this.appChannel = appChannel;
+    public Builder setChannel(ClaimableSandboxCreateParams.Channel channel) {
+      this.channel = channel;
       return this;
     }
 
@@ -165,9 +167,15 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     @SerializedName("refresh_url")
     String refreshUrl;
 
-    private OnboardingLinkDetails(Map<String, Object> extraParams, String refreshUrl) {
+    /** The URL offered to the user as a way back to your app after they claim the sandbox. */
+    @SerializedName("return_url")
+    String returnUrl;
+
+    private OnboardingLinkDetails(
+        Map<String, Object> extraParams, String refreshUrl, String returnUrl) {
       this.extraParams = extraParams;
       this.refreshUrl = refreshUrl;
+      this.returnUrl = returnUrl;
     }
 
     public static Builder builder() {
@@ -179,10 +187,12 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
 
       private String refreshUrl;
 
+      private String returnUrl;
+
       /** Finalize and obtain parameter instance from this builder. */
       public ClaimableSandboxCreateParams.OnboardingLinkDetails build() {
         return new ClaimableSandboxCreateParams.OnboardingLinkDetails(
-            this.extraParams, this.refreshUrl);
+            this.extraParams, this.refreshUrl, this.returnUrl);
       }
 
       /**
@@ -223,6 +233,12 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
         this.refreshUrl = refreshUrl;
         return this;
       }
+
+      /** The URL offered to the user as a way back to your app after they claim the sandbox. */
+      public Builder setReturnUrl(String returnUrl) {
+        this.returnUrl = returnUrl;
+        return this;
+      }
     }
   }
 
@@ -238,8 +254,9 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     String country;
 
     /**
-     * <strong>Required.</strong> Email that this sandbox is meant to be claimed by. Stripe will
-     * notify this email address before the sandbox expires.
+     * <strong>Required.</strong> Email address of the user who will claim the sandbox. Stripe sends
+     * this address an invitation to claim the sandbox and a reminder before the unclaimed sandbox
+     * expires.
      */
     @SerializedName("email")
     String email;
@@ -294,8 +311,9 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Email that this sandbox is meant to be claimed by. Stripe will
-       * notify this email address before the sandbox expires.
+       * <strong>Required.</strong> Email address of the user who will claim the sandbox. Stripe
+       * sends this address an invitation to claim the sandbox and a reminder before the unclaimed
+       * sandbox expires.
        */
       public Builder setEmail(String email) {
         this.email = email;
@@ -336,7 +354,7 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum AppChannel implements ApiRequestParams.EnumParam {
+  public enum Channel implements ApiRequestParams.EnumParam {
     @SerializedName("public")
     PUBLIC("public"),
 
@@ -346,7 +364,7 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     @Getter(onMethod_ = {@Override})
     private final String value;
 
-    AppChannel(String value) {
+    Channel(String value) {
       this.value = value;
     }
   }

@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.forwarding.RequestCreateParams;
 import com.stripe.param.forwarding.RequestListParams;
 import com.stripe.param.forwarding.RequestRetrieveParams;
@@ -287,13 +286,5 @@ public class Request extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(requestContext, responseGetter);
-    trySetResponseGetter(requestDetails, responseGetter);
-    trySetResponseGetter(responseDetails, responseGetter);
   }
 }

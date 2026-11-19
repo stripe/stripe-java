@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -334,7 +335,7 @@ public class Alert extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CreditBalanceThreshold extends StripeObject {
+  public static class CreditBalanceThreshold extends StripeObject implements StripeActiveObject {
     /**
      * The filters allow limiting the scope of this credit balance alert. You must specify only a
      * customer filter at this time.
@@ -352,7 +353,7 @@ public class Alert extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Filter extends StripeObject {
+    public static class Filter extends StripeObject implements StripeActiveObject {
       /** Limit the scope of the alert to this customer ID. */
       @SerializedName("customer")
       @Getter(lombok.AccessLevel.NONE)
@@ -378,6 +379,11 @@ public class Alert extends ApiResource implements HasId {
 
       public void setCustomerObject(Customer expandableObject) {
         this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(customer, responseGetter);
       }
     }
 
@@ -486,6 +492,13 @@ public class Alert extends ApiResource implements HasId {
         Long value;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (filters != null) {
+        filters.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+    }
   }
 
   /**
@@ -511,7 +524,7 @@ public class Alert extends ApiResource implements HasId {
     /**
      * Defines the granularity of spend aggregation.
      *
-     * <p>One of {@code billing_cadence}, or {@code pricing_plan_subscription}.
+     * <p>One of {@code billing_group}, or {@code pricing_plan_subscription}.
      */
     @SerializedName("group_by")
     String groupBy;
@@ -525,10 +538,6 @@ public class Alert extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Filters extends StripeObject {
-      /** Filter by billing cadence ID. */
-      @SerializedName("billing_cadence")
-      String billingCadence;
-
       /** Filter by billing group ID. */
       @SerializedName("billing_group")
       String billingGroup;
@@ -653,7 +662,7 @@ public class Alert extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class UsageThreshold extends StripeObject {
+  public static class UsageThreshold extends StripeObject implements StripeActiveObject {
     /**
      * The filters allow limiting the scope of this usage alert. You can only specify up to one
      * filter at this time.
@@ -707,7 +716,7 @@ public class Alert extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Filter extends StripeObject {
+    public static class Filter extends StripeObject implements StripeActiveObject {
       /** Limit the scope of the alert to this customer ID. */
       @SerializedName("customer")
       @Getter(lombok.AccessLevel.NONE)
@@ -734,6 +743,19 @@ public class Alert extends ApiResource implements HasId {
       public void setCustomerObject(Customer expandableObject) {
         this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(customer, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      if (filters != null) {
+        filters.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      trySetResponseGetter(meter, responseGetter);
     }
   }
 
@@ -741,7 +763,6 @@ public class Alert extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(creditBalanceThreshold, responseGetter);
-    trySetResponseGetter(spendThreshold, responseGetter);
     trySetResponseGetter(usageThreshold, responseGetter);
   }
 }

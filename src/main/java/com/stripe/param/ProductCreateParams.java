@@ -1781,12 +1781,25 @@ public class ProductCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * Optional text that describes what a customer loses by canceling, shown for this marketing
+     * feature in the Customer Portal cancellation flow. Up to 80 characters long. If you omit it
+     * when you update {@code marketing_features}, Stripe keeps the message stored for the feature
+     * with the same name. Duplicate names are matched in order. Set it to an empty string to remove
+     * the override. When no override is stored, eligible cancellation flows use the marketing
+     * feature name. A renamed feature is treated as a new feature, so send the message again to
+     * keep it.
+     */
+    @SerializedName("loss_message")
+    Object lossMessage;
+
     /** <strong>Required.</strong> The marketing feature name. Up to 80 characters long. */
     @SerializedName("name")
     String name;
 
-    private MarketingFeature(Map<String, Object> extraParams, String name) {
+    private MarketingFeature(Map<String, Object> extraParams, Object lossMessage, String name) {
       this.extraParams = extraParams;
+      this.lossMessage = lossMessage;
       this.name = name;
     }
 
@@ -1797,11 +1810,14 @@ public class ProductCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private Object lossMessage;
+
       private String name;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ProductCreateParams.MarketingFeature build() {
-        return new ProductCreateParams.MarketingFeature(this.extraParams, this.name);
+        return new ProductCreateParams.MarketingFeature(
+            this.extraParams, this.lossMessage, this.name);
       }
 
       /**
@@ -1827,6 +1843,34 @@ public class ProductCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Optional text that describes what a customer loses by canceling, shown for this marketing
+       * feature in the Customer Portal cancellation flow. Up to 80 characters long. If you omit it
+       * when you update {@code marketing_features}, Stripe keeps the message stored for the feature
+       * with the same name. Duplicate names are matched in order. Set it to an empty string to
+       * remove the override. When no override is stored, eligible cancellation flows use the
+       * marketing feature name. A renamed feature is treated as a new feature, so send the message
+       * again to keep it.
+       */
+      public Builder setLossMessage(String lossMessage) {
+        this.lossMessage = lossMessage;
+        return this;
+      }
+
+      /**
+       * Optional text that describes what a customer loses by canceling, shown for this marketing
+       * feature in the Customer Portal cancellation flow. Up to 80 characters long. If you omit it
+       * when you update {@code marketing_features}, Stripe keeps the message stored for the feature
+       * with the same name. Duplicate names are matched in order. Set it to an empty string to
+       * remove the override. When no override is stored, eligible cancellation flows use the
+       * marketing feature name. A renamed feature is treated as a new feature, so send the message
+       * again to keep it.
+       */
+      public Builder setLossMessage(EmptyParam lossMessage) {
+        this.lossMessage = lossMessage;
         return this;
       }
 

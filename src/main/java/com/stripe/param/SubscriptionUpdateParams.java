@@ -41,15 +41,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The Billing Cadence which controls the timing of recurring invoice generation for this
-   * subscription. If unset, the subscription will bill according to its own configured schedule and
-   * create its own invoices. If set, this subscription will be billed by the cadence instead,
-   * potentially sharing invoices with the other subscriptions linked to that Cadence.
-   */
-  @SerializedName("billing_cadence")
-  Object billingCadence;
-
-  /**
    * Controls how the subscription's billing cycle anchor changes. Set {@code type} to {@code now}
    * to reset the billing cycle anchor to the current time (in UTC), or {@code unchanged} to
    * preserve it. For more information, see the billing cycle <a
@@ -306,7 +297,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       List<SubscriptionUpdateParams.AddInvoiceItem> addInvoiceItems,
       Object applicationFeePercent,
       AutomaticTax automaticTax,
-      Object billingCadence,
       BillingCycleAnchor billingCycleAnchor,
       Object billingGroup,
       Object billingSchedules,
@@ -343,7 +333,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.addInvoiceItems = addInvoiceItems;
     this.applicationFeePercent = applicationFeePercent;
     this.automaticTax = automaticTax;
-    this.billingCadence = billingCadence;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingGroup = billingGroup;
     this.billingSchedules = billingSchedules;
@@ -389,8 +378,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private Object applicationFeePercent;
 
     private AutomaticTax automaticTax;
-
-    private Object billingCadence;
 
     private BillingCycleAnchor billingCycleAnchor;
 
@@ -464,7 +451,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.addInvoiceItems,
           this.applicationFeePercent,
           this.automaticTax,
-          this.billingCadence,
           this.billingCycleAnchor,
           this.billingGroup,
           this.billingSchedules,
@@ -558,28 +544,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setAutomaticTax(SubscriptionUpdateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /**
-     * The Billing Cadence which controls the timing of recurring invoice generation for this
-     * subscription. If unset, the subscription will bill according to its own configured schedule
-     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
-     * potentially sharing invoices with the other subscriptions linked to that Cadence.
-     */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
-      return this;
-    }
-
-    /**
-     * The Billing Cadence which controls the timing of recurring invoice generation for this
-     * subscription. If unset, the subscription will bill according to its own configured schedule
-     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
-     * potentially sharing invoices with the other subscriptions linked to that Cadence.
-     */
-    public Builder setBillingCadence(EmptyParam billingCadence) {
-      this.billingCadence = billingCadence;
       return this;
     }
 
@@ -8751,6 +8715,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Card {
         /**
+         * Controls early collection for eligible recurring payments on India-issued cards.
+         * Target-date billing aims to debit on the billing-cycle date but does not guarantee that
+         * date.
+         */
+        @SerializedName("debit_behavior")
+        Object debitBehavior;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -8785,10 +8757,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         RequestThreeDSecure requestThreeDSecure;
 
         private Card(
+            Object debitBehavior,
             Map<String, Object> extraParams,
             MandateOptions mandateOptions,
             Network network,
             RequestThreeDSecure requestThreeDSecure) {
+          this.debitBehavior = debitBehavior;
           this.extraParams = extraParams;
           this.mandateOptions = mandateOptions;
           this.network = network;
@@ -8800,6 +8774,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object debitBehavior;
+
           private Map<String, Object> extraParams;
 
           private MandateOptions mandateOptions;
@@ -8811,7 +8787,31 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card build() {
             return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card(
-                this.extraParams, this.mandateOptions, this.network, this.requestThreeDSecure);
+                this.debitBehavior,
+                this.extraParams,
+                this.mandateOptions,
+                this.network,
+                this.requestThreeDSecure);
+          }
+
+          /**
+           * Controls early collection for eligible recurring payments on India-issued cards.
+           * Target-date billing aims to debit on the billing-cycle date but does not guarantee that
+           * date.
+           */
+          public Builder setDebitBehavior(String debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
+          }
+
+          /**
+           * Controls early collection for eligible recurring payments on India-issued cards.
+           * Target-date billing aims to debit on the billing-cycle date but does not guarantee that
+           * date.
+           */
+          public Builder setDebitBehavior(EmptyParam debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
           }
 
           /**
@@ -9828,6 +9828,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Pix {
+        /** Timing configuration for collecting funds from the customer's account. */
+        @SerializedName("debit_behavior")
+        Object debitBehavior;
+
         /**
          * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
          * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
@@ -9850,9 +9854,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         MandateOptions mandateOptions;
 
         private Pix(
+            Object debitBehavior,
             Long expiresAfterSeconds,
             Map<String, Object> extraParams,
             MandateOptions mandateOptions) {
+          this.debitBehavior = debitBehavior;
           this.expiresAfterSeconds = expiresAfterSeconds;
           this.extraParams = extraParams;
           this.mandateOptions = mandateOptions;
@@ -9863,6 +9869,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object debitBehavior;
+
           private Long expiresAfterSeconds;
 
           private Map<String, Object> extraParams;
@@ -9872,7 +9880,22 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Pix build() {
             return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Pix(
-                this.expiresAfterSeconds, this.extraParams, this.mandateOptions);
+                this.debitBehavior,
+                this.expiresAfterSeconds,
+                this.extraParams,
+                this.mandateOptions);
+          }
+
+          /** Timing configuration for collecting funds from the customer's account. */
+          public Builder setDebitBehavior(String debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
+          }
+
+          /** Timing configuration for collecting funds from the customer's account. */
+          public Builder setDebitBehavior(EmptyParam debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
           }
 
           /**
@@ -10200,6 +10223,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Upi {
         /**
+         * Controls when the funds will be captured from the customer's account. Defaults to {@code
+         * not_specified}. Omit this parameter on an update to preserve the saved value; pass {@code
+         * not_specified} to clear it. Early collection is best effort and doesn't guarantee an
+         * exact debit date.
+         */
+        @SerializedName("debit_behavior")
+        Object debitBehavior;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -10213,7 +10245,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
-        private Upi(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        private Upi(
+            Object debitBehavior, Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.debitBehavior = debitBehavior;
           this.extraParams = extraParams;
           this.mandateOptions = mandateOptions;
         }
@@ -10223,6 +10257,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object debitBehavior;
+
           private Map<String, Object> extraParams;
 
           private MandateOptions mandateOptions;
@@ -10230,7 +10266,29 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Upi build() {
             return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Upi(
-                this.extraParams, this.mandateOptions);
+                this.debitBehavior, this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Controls when the funds will be captured from the customer's account. Defaults to
+           * {@code not_specified}. Omit this parameter on an update to preserve the saved value;
+           * pass {@code not_specified} to clear it. Early collection is best effort and doesn't
+           * guarantee an exact debit date.
+           */
+          public Builder setDebitBehavior(String debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
+          }
+
+          /**
+           * Controls when the funds will be captured from the customer's account. Defaults to
+           * {@code not_specified}. Omit this parameter on an update to preserve the saved value;
+           * pass {@code not_specified} to clear it. Early collection is best effort and doesn't
+           * guarantee an exact debit date.
+           */
+          public Builder setDebitBehavior(EmptyParam debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
           }
 
           /**

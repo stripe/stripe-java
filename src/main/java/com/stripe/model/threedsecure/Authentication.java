@@ -956,12 +956,6 @@ public class Authentication extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(acquirerDetails, responseGetter);
-    trySetResponseGetter(channel, responseGetter);
-    trySetResponseGetter(flowPreference, responseGetter);
-    trySetResponseGetter(futureUsage, responseGetter);
-    trySetResponseGetter(outcomeDetails, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(shippingAddress, responseGetter);
   }
 }

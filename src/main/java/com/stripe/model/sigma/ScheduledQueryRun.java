@@ -176,7 +176,6 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(error, responseGetter);
     trySetResponseGetter(file, responseGetter);
   }
 }

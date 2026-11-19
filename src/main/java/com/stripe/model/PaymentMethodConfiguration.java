@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentMethodConfigurationCreateParams;
 import com.stripe.param.PaymentMethodConfigurationListParams;
 import com.stripe.param.PaymentMethodConfigurationRetrieveParams;
@@ -59,6 +58,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @SerializedName("active")
   Boolean active;
 
+  @SerializedName("aeon_pay")
+  AeonPay aeonPay;
+
   @SerializedName("affirm")
   Affirm affirm;
 
@@ -83,6 +85,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
 
   @SerializedName("au_becs_debit")
   AuBecsDebit auBecsDebit;
+
+  @SerializedName("au_pay")
+  AuPay auPay;
 
   @SerializedName("bacs_debit")
   BacsDebit bacsDebit;
@@ -116,6 +121,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
 
   @SerializedName("customer_balance")
   CustomerBalance customerBalance;
+
+  @SerializedName("dbarai")
+  Dbarai dbarai;
 
   @SerializedName("eps")
   Eps eps;
@@ -177,6 +185,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
 
   @SerializedName("mb_way")
   MbWay mbWay;
+
+  @SerializedName("merpay")
+  Merpay merpay;
 
   @SerializedName("mobilepay")
   Mobilepay mobilepay;
@@ -455,6 +466,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AcssDebit extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
+   * For more details about AeonPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AeonPay extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -812,6 +874,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AuBecsDebit extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
+   * For more details about AuPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AuPay extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -1373,6 +1486,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerBalance extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
+   * For more details about Dbarai, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Dbarai extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -2138,6 +2302,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class MbWay extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
+   * For more details about Merpay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Merpay extends StripeObject {
     /**
      * Whether this payment method may be offered at checkout. True if {@code display_preference} is
      * {@code on} and the payment method's capability is active.
@@ -3862,77 +4077,5 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
       @SerializedName("value")
       String value;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(acssDebit, responseGetter);
-    trySetResponseGetter(affirm, responseGetter);
-    trySetResponseGetter(afterpayClearpay, responseGetter);
-    trySetResponseGetter(alipay, responseGetter);
-    trySetResponseGetter(alma, responseGetter);
-    trySetResponseGetter(amazonPay, responseGetter);
-    trySetResponseGetter(applePay, responseGetter);
-    trySetResponseGetter(auBecsDebit, responseGetter);
-    trySetResponseGetter(bacsDebit, responseGetter);
-    trySetResponseGetter(bancontact, responseGetter);
-    trySetResponseGetter(billie, responseGetter);
-    trySetResponseGetter(bizum, responseGetter);
-    trySetResponseGetter(blik, responseGetter);
-    trySetResponseGetter(boleto, responseGetter);
-    trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(cartesBancaires, responseGetter);
-    trySetResponseGetter(cashapp, responseGetter);
-    trySetResponseGetter(crypto, responseGetter);
-    trySetResponseGetter(customerBalance, responseGetter);
-    trySetResponseGetter(eps, responseGetter);
-    trySetResponseGetter(fpx, responseGetter);
-    trySetResponseGetter(giropay, responseGetter);
-    trySetResponseGetter(googlePay, responseGetter);
-    trySetResponseGetter(gopay, responseGetter);
-    trySetResponseGetter(grabpay, responseGetter);
-    trySetResponseGetter(idBankTransfer, responseGetter);
-    trySetResponseGetter(ideal, responseGetter);
-    trySetResponseGetter(jcb, responseGetter);
-    trySetResponseGetter(kakaoPay, responseGetter);
-    trySetResponseGetter(klarna, responseGetter);
-    trySetResponseGetter(konbini, responseGetter);
-    trySetResponseGetter(krCard, responseGetter);
-    trySetResponseGetter(link, responseGetter);
-    trySetResponseGetter(mbWay, responseGetter);
-    trySetResponseGetter(mobilepay, responseGetter);
-    trySetResponseGetter(multibanco, responseGetter);
-    trySetResponseGetter(naverPay, responseGetter);
-    trySetResponseGetter(nzBankAccount, responseGetter);
-    trySetResponseGetter(oxxo, responseGetter);
-    trySetResponseGetter(p24, responseGetter);
-    trySetResponseGetter(payByBank, responseGetter);
-    trySetResponseGetter(payco, responseGetter);
-    trySetResponseGetter(paynow, responseGetter);
-    trySetResponseGetter(paypal, responseGetter);
-    trySetResponseGetter(paypay, responseGetter);
-    trySetResponseGetter(payto, responseGetter);
-    trySetResponseGetter(pix, responseGetter);
-    trySetResponseGetter(promptpay, responseGetter);
-    trySetResponseGetter(qris, responseGetter);
-    trySetResponseGetter(rakutenPay, responseGetter);
-    trySetResponseGetter(revolutPay, responseGetter);
-    trySetResponseGetter(samsungPay, responseGetter);
-    trySetResponseGetter(satispay, responseGetter);
-    trySetResponseGetter(scalapay, responseGetter);
-    trySetResponseGetter(sepaDebit, responseGetter);
-    trySetResponseGetter(sequra, responseGetter);
-    trySetResponseGetter(shopeepay, responseGetter);
-    trySetResponseGetter(sofort, responseGetter);
-    trySetResponseGetter(sunbit, responseGetter);
-    trySetResponseGetter(swish, responseGetter);
-    trySetResponseGetter(tossPay, responseGetter);
-    trySetResponseGetter(twint, responseGetter);
-    trySetResponseGetter(upi, responseGetter);
-    trySetResponseGetter(usBankAccount, responseGetter);
-    trySetResponseGetter(vipps, responseGetter);
-    trySetResponseGetter(wechatPay, responseGetter);
-    trySetResponseGetter(zip, responseGetter);
   }
 }

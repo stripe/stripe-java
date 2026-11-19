@@ -563,7 +563,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /**
      * The surcharge provider used for this payment link.
      *
-     * <p>One of {@code daikin}, {@code interpayments}, {@code proserv}, or {@code yeeld}.
+     * <p>One of {@code daikin}, {@code dealerfx}, {@code interpayments}, {@code proserv}, or {@code
+     * yeeld}.
      */
     @SerializedName("provider")
     String provider;
@@ -584,7 +585,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticTax extends StripeObject {
+  public static class AutomaticTax extends StripeObject implements StripeActiveObject {
     /** If {@code true}, tax will be calculated automatically using the customer's location. */
     @SerializedName("enabled")
     Boolean enabled;
@@ -604,7 +605,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Liability extends StripeObject {
+    public static class Liability extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -636,6 +637,16 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(liability, responseGetter);
     }
   }
 
@@ -922,7 +933,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InvoiceCreation extends StripeObject {
+  public static class InvoiceCreation extends StripeObject implements StripeActiveObject {
     /** Enable creating an invoice on successful payment. */
     @SerializedName("enabled")
     Boolean enabled;
@@ -938,7 +949,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class InvoiceData extends StripeObject {
+    public static class InvoiceData extends StripeObject implements StripeActiveObject {
       /** The account tax IDs associated with the invoice. */
       @SerializedName("account_tax_ids")
       List<ExpandableField<TaxId>> accountTaxIds;
@@ -1042,7 +1053,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Issuer extends StripeObject {
+      public static class Issuer extends StripeObject implements StripeActiveObject {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
         @Getter(lombok.AccessLevel.NONE)
@@ -1074,6 +1085,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         public void setAccountObject(Account expandableObject) {
           this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(account, responseGetter);
+        }
       }
 
       /**
@@ -1094,6 +1110,19 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         @SerializedName("template")
         String template;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        trySetResponseGetter(issuer, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(invoiceData, responseGetter);
     }
   }
 
@@ -1393,7 +1422,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShippingOption extends StripeObject {
+  public static class ShippingOption extends StripeObject implements StripeActiveObject {
     /** A non-negative integer in cents representing how much to charge. */
     @SerializedName("shipping_amount")
     Long shippingAmount;
@@ -1422,6 +1451,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       this.shippingRate =
           new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(shippingRate, responseGetter);
+    }
   }
 
   /**
@@ -1431,7 +1465,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SubscriptionData extends StripeObject {
+  public static class SubscriptionData extends StripeObject implements StripeActiveObject {
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
      * optionally store an explanation of the subscription for rendering in Stripe surfaces and
@@ -1469,7 +1503,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class InvoiceSettings extends StripeObject {
+    public static class InvoiceSettings extends StripeObject implements StripeActiveObject {
       /**
        * The account tax IDs associated with the subscription. Will be set on invoices generated by
        * the subscription.
@@ -1560,7 +1594,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Issuer extends StripeObject {
+      public static class Issuer extends StripeObject implements StripeActiveObject {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
         @Getter(lombok.AccessLevel.NONE)
@@ -1592,6 +1626,19 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         public void setAccountObject(Account expandableObject) {
           this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(account, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (accountTaxIds != null) {
+          accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        trySetResponseGetter(issuer, responseGetter);
       }
     }
 
@@ -1628,6 +1675,11 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         String missingPaymentMethod;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(invoiceSettings, responseGetter);
+    }
   }
 
   /**
@@ -1653,7 +1705,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
+  public static class TransferData extends StripeObject implements StripeActiveObject {
     /**
      * The amount in cents (or local equivalent) that will be transferred to the destination
      * account. By default, the entire amount is transferred to the destination.
@@ -1684,29 +1736,25 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(destination, responseGetter);
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(afterCompletion, responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(automaticSurcharge, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
-    trySetResponseGetter(consentCollection, responseGetter);
-    trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
-    trySetResponseGetter(managedPayments, responseGetter);
-    trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
-    trySetResponseGetter(paymentIntentData, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
-    trySetResponseGetter(phoneNumberCollection, responseGetter);
-    trySetResponseGetter(restrictions, responseGetter);
-    trySetResponseGetter(shippingAddressCollection, responseGetter);
+    if (shippingOptions != null) {
+      shippingOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(subscriptionData, responseGetter);
-    trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
   }
 }
