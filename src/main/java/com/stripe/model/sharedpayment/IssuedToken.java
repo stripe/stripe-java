@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.sharedpayment.IssuedTokenCreateParams;
 import com.stripe.param.sharedpayment.IssuedTokenRetrieveParams;
 import com.stripe.param.sharedpayment.IssuedTokenRevokeParams;
@@ -505,15 +504,5 @@ public class IssuedToken extends ApiResource implements HasId {
     /** Max amount that can be captured using this SharedPaymentToken. */
     @SerializedName("max_amount")
     Long maxAmount;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
-    trySetResponseGetter(riskDetails, responseGetter);
-    trySetResponseGetter(sellerDetails, responseGetter);
-    trySetResponseGetter(usageDetails, responseGetter);
-    trySetResponseGetter(usageLimits, responseGetter);
   }
 }

@@ -841,7 +841,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BusinessProfile extends StripeObject {
+  public static class BusinessProfile extends StripeObject implements StripeActiveObject {
     /** The applicant's gross annual revenue for its preceding fiscal year. */
     @SerializedName("annual_revenue")
     AnnualRevenue annualRevenue;
@@ -959,6 +959,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("currency")
       String currency;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(supportAddress, responseGetter);
     }
   }
 
@@ -1707,7 +1712,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Company extends StripeObject {
+  public static class Company extends StripeObject implements StripeActiveObject {
     @SerializedName("address")
     Address address;
 
@@ -2054,7 +2059,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Verification extends StripeObject {
+    public static class Verification extends StripeObject implements StripeActiveObject {
       @SerializedName("document")
       Document document;
 
@@ -2065,7 +2070,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Document extends StripeObject {
+      public static class Document extends StripeObject implements StripeActiveObject {
         /**
          * The back of a document returned by a <a
          * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
@@ -2139,7 +2144,27 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         public void setFrontObject(File expandableObject) {
           this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(back, responseGetter);
+          trySetResponseGetter(front, responseGetter);
+        }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(document, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+      trySetResponseGetter(administrativeAddress, responseGetter);
+      trySetResponseGetter(physicalAddress, responseGetter);
+      trySetResponseGetter(principalPlaceOfBusiness, responseGetter);
+      trySetResponseGetter(verification, responseGetter);
     }
   }
 
@@ -2751,7 +2776,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Settings extends StripeObject {
+  public static class Settings extends StripeObject implements StripeActiveObject {
     @SerializedName("bacs_debit_payments")
     BacsDebitPayments bacsDebitPayments;
 
@@ -2846,7 +2871,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Branding extends StripeObject {
+    public static class Branding extends StripeObject implements StripeActiveObject {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) An icon for
        * the account. Must be square and at least 128px x 128px.
@@ -2908,6 +2933,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
       public void setLogoObject(File expandableObject) {
         this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(icon, responseGetter);
+        trySetResponseGetter(logo, responseGetter);
       }
     }
 
@@ -3046,7 +3077,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Invoices extends StripeObject {
+    public static class Invoices extends StripeObject implements StripeActiveObject {
       /**
        * The list of default Account Tax IDs to automatically include on invoices. Account Tax IDs
        * get added when an invoice is finalized.
@@ -3108,6 +3139,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
                     .map(x -> new ExpandableField<TaxId>(x.getId(), x))
                     .collect(Collectors.toList())
                 : null;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (defaultAccountTaxIds != null) {
+          defaultAccountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
       }
     }
 
@@ -3432,6 +3470,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String userAgent;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(branding, responseGetter);
+      trySetResponseGetter(invoices, responseGetter);
+    }
   }
 
   /**
@@ -3468,16 +3512,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(businessProfile, responseGetter);
-    trySetResponseGetter(capabilities, responseGetter);
     trySetResponseGetter(company, responseGetter);
-    trySetResponseGetter(controller, responseGetter);
     trySetResponseGetter(externalAccounts, responseGetter);
-    trySetResponseGetter(futureRequirements, responseGetter);
-    trySetResponseGetter(groups, responseGetter);
     trySetResponseGetter(individual, responseGetter);
-    trySetResponseGetter(requirements, responseGetter);
-    trySetResponseGetter(riskControls, responseGetter);
     trySetResponseGetter(settings, responseGetter);
-    trySetResponseGetter(tosAcceptance, responseGetter);
   }
 }

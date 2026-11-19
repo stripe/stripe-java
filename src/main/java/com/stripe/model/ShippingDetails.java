@@ -2,6 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ShippingDetails extends StripeObject {
+public class ShippingDetails extends StripeObject implements StripeActiveObject {
   @SerializedName("address")
   Address address;
 
@@ -31,4 +32,9 @@ public class ShippingDetails extends StripeObject {
    */
   @SerializedName("tracking_number")
   String trackingNumber;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(address, responseGetter);
+  }
 }

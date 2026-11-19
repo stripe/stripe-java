@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.billing.MeterCreateParams;
 import com.stripe.param.billing.MeterDeactivateParams;
 import com.stripe.param.billing.MeterEventSummariesParams;
@@ -466,14 +465,5 @@ public class Meter extends ApiResource implements HasId {
     /** The key in the meter event payload to use as the value for this meter. */
     @SerializedName("event_payload_key")
     String eventPayloadKey;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(customerMapping, responseGetter);
-    trySetResponseGetter(defaultAggregation, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
-    trySetResponseGetter(valueSettings, responseGetter);
   }
 }

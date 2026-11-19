@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.apps.SecretCreateParams;
 import com.stripe.param.apps.SecretDeleteWhereParams;
 import com.stripe.param.apps.SecretFindParams;
@@ -240,11 +239,5 @@ public class Secret extends ApiResource implements HasId {
     /** The user ID, if type is set to &quot;user&quot;. */
     @SerializedName("user")
     String user;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(scope, responseGetter);
   }
 }

@@ -1217,7 +1217,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticTax extends StripeObject {
+  public static class AutomaticTax extends StripeObject implements StripeActiveObject {
     /** Automatically calculate taxes. */
     @SerializedName("enabled")
     Boolean enabled;
@@ -1249,7 +1249,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Liability extends StripeObject {
+    public static class Liability extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -1281,6 +1281,16 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(liability, responseGetter);
     }
   }
 
@@ -1291,7 +1301,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Computed extends StripeObject {
+  public static class Computed extends StripeObject implements StripeActiveObject {
     /**
      * Details of the most recent reestimate of the quote's preview schedules and upcoming invoices,
      * including the status of Stripe's calculation.
@@ -1380,7 +1390,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Recurring extends StripeObject {
+    public static class Recurring extends StripeObject implements StripeActiveObject {
       /** Total before any discounts or taxes are applied. */
       @SerializedName("amount_subtotal")
       Long amountSubtotal;
@@ -1414,7 +1424,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class TotalDetails extends StripeObject {
+      public static class TotalDetails extends StripeObject implements StripeActiveObject {
         /** This is the sum of all the discounts. */
         @SerializedName("amount_discount")
         Long amountDiscount;
@@ -1437,7 +1447,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Breakdown extends StripeObject {
+        public static class Breakdown extends StripeObject implements StripeActiveObject {
           /** The aggregated discounts. */
           @SerializedName("discounts")
           List<Quote.Computed.Recurring.TotalDetails.Breakdown.Discount> discounts;
@@ -1453,7 +1463,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class Discount extends StripeObject {
+          public static class Discount extends StripeObject implements StripeActiveObject {
             /** The amount discounted. */
             @SerializedName("amount")
             Long amount;
@@ -1471,6 +1481,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
              */
             @SerializedName("discount")
             com.stripe.model.Discount discount;
+
+            @Override
+            public void setResponseGetter(StripeResponseGetter responseGetter) {
+              trySetResponseGetter(discount, responseGetter);
+            }
           }
 
           /**
@@ -1480,7 +1495,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class Tax extends StripeObject {
+          public static class Tax extends StripeObject implements StripeActiveObject {
             /** Amount of tax applied for this rate. */
             @SerializedName("amount")
             Long amount;
@@ -1514,8 +1529,33 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             /** The amount on which tax is calculated, in cents (or local equivalent). */
             @SerializedName("taxable_amount")
             Long taxableAmount;
+
+            @Override
+            public void setResponseGetter(StripeResponseGetter responseGetter) {
+              trySetResponseGetter(rate, responseGetter);
+            }
+          }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            if (discounts != null) {
+              discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
+            if (taxes != null) {
+              taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
           }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(breakdown, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(totalDetails, responseGetter);
       }
     }
 
@@ -1526,7 +1566,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Upfront extends StripeObject {
+    public static class Upfront extends StripeObject implements StripeActiveObject {
       /** Total before any discounts or taxes are applied. */
       @SerializedName("amount_subtotal")
       Long amountSubtotal;
@@ -1553,7 +1593,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class TotalDetails extends StripeObject {
+      public static class TotalDetails extends StripeObject implements StripeActiveObject {
         /** This is the sum of all the discounts. */
         @SerializedName("amount_discount")
         Long amountDiscount;
@@ -1576,7 +1616,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Breakdown extends StripeObject {
+        public static class Breakdown extends StripeObject implements StripeActiveObject {
           /** The aggregated discounts. */
           @SerializedName("discounts")
           List<Quote.Computed.Upfront.TotalDetails.Breakdown.Discount> discounts;
@@ -1592,7 +1632,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class Discount extends StripeObject {
+          public static class Discount extends StripeObject implements StripeActiveObject {
             /** The amount discounted. */
             @SerializedName("amount")
             Long amount;
@@ -1610,6 +1650,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
              */
             @SerializedName("discount")
             com.stripe.model.Discount discount;
+
+            @Override
+            public void setResponseGetter(StripeResponseGetter responseGetter) {
+              trySetResponseGetter(discount, responseGetter);
+            }
           }
 
           /**
@@ -1619,7 +1664,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class Tax extends StripeObject {
+          public static class Tax extends StripeObject implements StripeActiveObject {
             /** Amount of tax applied for this rate. */
             @SerializedName("amount")
             Long amount;
@@ -1653,9 +1698,41 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             /** The amount on which tax is calculated, in cents (or local equivalent). */
             @SerializedName("taxable_amount")
             Long taxableAmount;
+
+            @Override
+            public void setResponseGetter(StripeResponseGetter responseGetter) {
+              trySetResponseGetter(rate, responseGetter);
+            }
+          }
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            if (discounts != null) {
+              discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
+            if (taxes != null) {
+              taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+            }
           }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(breakdown, responseGetter);
+        }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(lineItems, responseGetter);
+        trySetResponseGetter(totalDetails, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(recurring, responseGetter);
+      trySetResponseGetter(upfront, responseGetter);
     }
   }
 
@@ -1666,7 +1743,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FromQuote extends StripeObject {
+  public static class FromQuote extends StripeObject implements StripeActiveObject {
     /** Whether this quote is a revision of a different quote. */
     @SerializedName("is_revision")
     Boolean isRevision;
@@ -1694,6 +1771,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     public void setQuoteObject(Quote expandableObject) {
       this.quote = new ExpandableField<Quote>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(quote, responseGetter);
+    }
   }
 
   /**
@@ -1703,7 +1785,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InvoiceSettings extends StripeObject {
+  public static class InvoiceSettings extends StripeObject implements StripeActiveObject {
     /** A list of up to 4 custom fields to be displayed on the invoice. */
     @SerializedName("custom_fields")
     List<Quote.InvoiceSettings.CustomField> customFields;
@@ -1750,7 +1832,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Issuer extends StripeObject {
+    public static class Issuer extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -1782,6 +1864,16 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(issuer, responseGetter);
     }
   }
 
@@ -1792,7 +1884,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
+  public static class StatusDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("canceled")
     Canceled canceled;
 
@@ -1830,7 +1922,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Stale extends StripeObject {
+    public static class Stale extends StripeObject implements StripeActiveObject {
       /** Time at which the quote expires. Measured in seconds since the Unix epoch. */
       @SerializedName("expires_at")
       Long expiresAt;
@@ -1854,7 +1946,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class LastReason extends StripeObject {
+      public static class LastReason extends StripeObject implements StripeActiveObject {
         /** The ID of the line that is invalid if the stale reason type is {@code line_invalid}. */
         @SerializedName("line_invalid")
         String lineInvalid;
@@ -1927,10 +2019,15 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class SubscriptionChanged extends StripeObject {
+        public static class SubscriptionChanged extends StripeObject implements StripeActiveObject {
           /** The subscription's state before the quote was marked as stale. */
           @SerializedName("previous_subscription")
           Subscription previousSubscription;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(previousSubscription, responseGetter);
+          }
         }
 
         /**
@@ -1940,12 +2037,34 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class SubscriptionScheduleChanged extends StripeObject {
+        public static class SubscriptionScheduleChanged extends StripeObject
+            implements StripeActiveObject {
           /** The subscription schedule's state before the quote was marked as stale. */
           @SerializedName("previous_subscription_schedule")
           com.stripe.model.SubscriptionSchedule previousSubscriptionSchedule;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(previousSubscriptionSchedule, responseGetter);
+          }
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(subscriptionChanged, responseGetter);
+          trySetResponseGetter(subscriptionScheduleChanged, responseGetter);
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(lastReason, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(stale, responseGetter);
     }
   }
 
@@ -1977,7 +2096,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SubscriptionData extends StripeObject {
+  public static class SubscriptionData extends StripeObject implements StripeActiveObject {
     /** Describes the period to bill for upon accepting the quote. */
     @SerializedName("bill_on_acceptance")
     BillOnAcceptance billOnAcceptance;
@@ -2270,6 +2389,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @SerializedName("iterations")
       Long iterations;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(fromSubscription, responseGetter);
+    }
   }
 
   /**
@@ -2548,7 +2672,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TotalDetails extends StripeObject {
+  public static class TotalDetails extends StripeObject implements StripeActiveObject {
     /** This is the sum of all the discounts. */
     @SerializedName("amount_discount")
     Long amountDiscount;
@@ -2571,7 +2695,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Breakdown extends StripeObject {
+    public static class Breakdown extends StripeObject implements StripeActiveObject {
       /** The aggregated discounts. */
       @SerializedName("discounts")
       List<Quote.TotalDetails.Breakdown.Discount> discounts;
@@ -2587,7 +2711,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Discount extends StripeObject {
+      public static class Discount extends StripeObject implements StripeActiveObject {
         /** The amount discounted. */
         @SerializedName("amount")
         Long amount;
@@ -2604,6 +2728,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
          */
         @SerializedName("discount")
         com.stripe.model.Discount discount;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(discount, responseGetter);
+        }
       }
 
       /**
@@ -2613,7 +2742,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Tax extends StripeObject {
+      public static class Tax extends StripeObject implements StripeActiveObject {
         /** Amount of tax applied for this rate. */
         @SerializedName("amount")
         Long amount;
@@ -2646,7 +2775,27 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         /** The amount on which tax is calculated, in cents (or local equivalent). */
         @SerializedName("taxable_amount")
         Long taxableAmount;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(rate, responseGetter);
+        }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        if (taxes != null) {
+          taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(breakdown, responseGetter);
     }
   }
 
@@ -2657,7 +2806,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
+  public static class TransferData extends StripeObject implements StripeActiveObject {
     /**
      * The amount in cents (or local equivalent) that will be transferred to the destination account
      * when the invoice is paid. By default, the entire amount is transferred to the destination.
@@ -2696,6 +2845,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(destination, responseGetter);
+    }
   }
 
   @Override
@@ -2705,13 +2859,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(computed, responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    if (defaultTaxRates != null) {
+      defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(fromQuote, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(statusDetails, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(subscriptionData, responseGetter);
     trySetResponseGetter(subscriptionSchedule, responseGetter);

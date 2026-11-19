@@ -101,7 +101,6 @@ public final class EventDataClassLookup {
     classLookup.put("v2.billing.bill_setting", com.stripe.model.v2.billing.BillSetting.class);
     classLookup.put(
         "v2.billing.bill_setting_version", com.stripe.model.v2.billing.BillSettingVersion.class);
-    classLookup.put("v2.billing.cadence", com.stripe.model.v2.billing.Cadence.class);
     classLookup.put(
         "v2.billing.collection_setting", com.stripe.model.v2.billing.CollectionSetting.class);
     classLookup.put(
@@ -127,6 +126,7 @@ public final class EventDataClassLookup {
     classLookup.put("v2.core.account_token", com.stripe.model.v2.core.AccountToken.class);
     classLookup.put("v2.core.approval_request", com.stripe.model.v2.core.ApprovalRequest.class);
     classLookup.put("v2.core.batch_job", com.stripe.model.v2.core.BatchJob.class);
+    classLookup.put("v2.core.claimable_sandbox", com.stripe.model.v2.core.ClaimableSandbox.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
 
@@ -914,6 +914,21 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.batch_job.validation_failed",
         com.stripe.events.V2CoreBatchJobValidationFailedEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.claimed",
+        com.stripe.events.V2CoreClaimableSandboxClaimedEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.created",
+        com.stripe.events.V2CoreClaimableSandboxCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expired",
+        com.stripe.events.V2CoreClaimableSandboxExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expiring",
+        com.stripe.events.V2CoreClaimableSandboxExpiringEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.updated",
+        com.stripe.events.V2CoreClaimableSandboxUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
     eventClassLookup.put(

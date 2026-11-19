@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.FxQuoteCreateParams;
 import com.stripe.param.FxQuoteListParams;
 import com.stripe.param.FxQuoteRetrieveParams;
@@ -279,7 +278,7 @@ public class FxQuote extends ApiResource implements HasId {
     /**
      * The transaction type for which the FX Quote will be used.
      *
-     * <p>Can be 'payment' or 'transfer'.
+     * <p>One of {@code payment}, or {@code transfer}.
      */
     @SerializedName("type")
     String type;
@@ -328,11 +327,5 @@ public class FxQuote extends ApiResource implements HasId {
       @SerializedName("destination")
       String destination;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(usage, responseGetter);
   }
 }

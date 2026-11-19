@@ -315,7 +315,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Promotion extends StripeObject {
+  public static class Promotion extends StripeObject implements StripeActiveObject {
     /** If promotion {@code type} is {@code coupon}, the coupon for this promotion. */
     @SerializedName("coupon")
     @Getter(lombok.AccessLevel.NONE)
@@ -346,6 +346,11 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
 
     public void setCouponObject(Coupon expandableObject) {
       this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(coupon, responseGetter);
     }
   }
 
@@ -405,6 +410,5 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(promotion, responseGetter);
-    trySetResponseGetter(restrictions, responseGetter);
   }
 }

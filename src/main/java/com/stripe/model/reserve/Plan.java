@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.reserve.PlanListParams;
 import com.stripe.param.reserve.PlanRetrieveParams;
 import java.util.Map;
@@ -119,16 +118,16 @@ public class Plan extends ApiResource implements HasId {
   String type;
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -139,16 +138,16 @@ public class Plan extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(PlanListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
-   * order, with the most recent ReservePlans appearing first.
+   * Returns a list of ReservePlans on your account or on one of your connected accounts. The
+   * ReservePlans are returned in sorted order, with the most recent ReservePlans appearing first.
    */
   public static PlanCollection list(PlanListParams params, RequestOptions options)
       throws StripeException {
@@ -164,17 +163,17 @@ public class Plan extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, PlanCollection.class);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/plans/%s", ApiResource.urlEncodeId(id));
@@ -183,7 +182,7 @@ public class Plan extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Plan.class);
   }
 
-  /** Retrieve a ReservePlan. */
+  /** Retrieve a ReservePlan on your account or on one of your connected accounts. */
   public static Plan retrieve(String id, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/plans/%s", ApiResource.urlEncodeId(id));
@@ -242,13 +241,5 @@ public class Plan extends ApiResource implements HasId {
     /** The time at which the ReservePlan expires. */
     @SerializedName("expires_on")
     Long expiresOn;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(fixedRelease, responseGetter);
-    trySetResponseGetter(manualRelease, responseGetter);
-    trySetResponseGetter(rollingRelease, responseGetter);
   }
 }

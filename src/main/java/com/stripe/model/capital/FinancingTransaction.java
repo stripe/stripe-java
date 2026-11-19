@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.capital.FinancingTransactionListParams;
 import com.stripe.param.capital.FinancingTransactionRetrieveParams;
 import java.util.Map;
@@ -231,11 +230,5 @@ public class FinancingTransaction extends ApiResource implements HasId {
       @SerializedName("treasury_transaction")
       String treasuryTransaction;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(details, responseGetter);
   }
 }

@@ -11,6 +11,7 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentMethod;
 import com.stripe.model.Refund;
 import com.stripe.model.SetupIntent;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
@@ -69,9 +70,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
    * mobile_phone_reader}, {@code simulated_stripe_s700}, {@code simulated_stripe_s710}, {@code
    * simulated_stripe_t600}, {@code simulated_verifone_m425}, {@code simulated_verifone_p630},
    * {@code simulated_verifone_ux700}, {@code simulated_verifone_v660p}, {@code
-   * simulated_wisepos_e}, {@code stripe_m2}, {@code stripe_s700}, {@code stripe_s710}, {@code
-   * stripe_t600}, {@code verifone_P400}, {@code verifone_m425}, {@code verifone_p630}, {@code
-   * verifone_ux700}, or {@code verifone_v660p}.
+   * simulated_wisepos_e}, {@code stripe_m2}, {@code stripe_s700}, {@code stripe_s700_devkit},
+   * {@code stripe_s710}, {@code stripe_s710_devkit}, {@code stripe_t600}, {@code
+   * stripe_t600_devkit}, {@code verifone_P400}, {@code verifone_m425}, {@code verifone_p630},
+   * {@code verifone_ux700}, {@code verifone_ux700_devkit}, {@code verifone_v660p}, or {@code
+   * verifone_v660p_devkit}.
    */
   @SerializedName("device_type")
   String deviceType;
@@ -810,7 +813,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Action extends StripeObject {
+  public static class Action extends StripeObject implements StripeActiveObject {
     /**
      * The reader action failed due to an <a href="https://docs.stripe.com/api/errors">API
      * error</a>. Only present when {@code status} is {@code failed} and the underlying failure was
@@ -1090,7 +1093,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CollectPaymentMethod extends StripeObject {
+    public static class CollectPaymentMethod extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1167,13 +1170,19 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           Long amountEligible;
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(paymentIntent, responseGetter);
+        trySetResponseGetter(paymentMethod, responseGetter);
+      }
     }
 
     /** Represents a reader action to confirm a payment. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ConfirmPaymentIntent extends StripeObject {
+    public static class ConfirmPaymentIntent extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1218,6 +1227,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
          */
         @SerializedName("return_url")
         String returnUrl;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(paymentIntent, responseGetter);
       }
     }
 
@@ -1265,7 +1279,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ProcessPaymentIntent extends StripeObject {
+    public static class ProcessPaymentIntent extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1337,13 +1351,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           Long amountEligible;
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(paymentIntent, responseGetter);
+      }
     }
 
     /** Represents a reader action to process a setup intent. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ProcessSetupIntent extends StripeObject {
+    public static class ProcessSetupIntent extends StripeObject implements StripeActiveObject {
       /**
        * ID of a card PaymentMethod generated from the card_present PaymentMethod that may be
        * attached to a Customer for future transactions. Only present if it was possible to generate
@@ -1390,13 +1409,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(setupIntent, responseGetter);
+      }
     }
 
     /** Represents a reader action to refund a payment. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RefundPayment extends StripeObject {
+    public static class RefundPayment extends StripeObject implements StripeActiveObject {
       /** Account the payment intent belongs to. */
       @SerializedName("account")
       String account;
@@ -1526,6 +1550,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(charge, responseGetter);
+        trySetResponseGetter(paymentIntent, responseGetter);
+        trySetResponseGetter(refund, responseGetter);
+      }
     }
 
     /** Represents a reader action to set the reader display. */
@@ -1598,6 +1629,16 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           Long quantity;
         }
       }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(apiError, responseGetter);
+      trySetResponseGetter(collectPaymentMethod, responseGetter);
+      trySetResponseGetter(confirmPaymentIntent, responseGetter);
+      trySetResponseGetter(processPaymentIntent, responseGetter);
+      trySetResponseGetter(processSetupIntent, responseGetter);
+      trySetResponseGetter(refundPayment, responseGetter);
     }
   }
 

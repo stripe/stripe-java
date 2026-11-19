@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.billing.CreditBalanceTransaction;
 import com.stripe.net.ApiResource;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CreditNoteLineItem extends StripeObject implements HasId {
+public class CreditNoteLineItem extends StripeObject implements HasId, StripeActiveObject {
   /**
    * The integer amount in cents (or local equivalent) representing the gross amount being credited
    * for this line item, excluding (exclusive) tax and discounts.
@@ -114,7 +115,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DiscountAmount extends StripeObject {
+  public static class DiscountAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the discount. */
     @SerializedName("amount")
     Long amount;
@@ -142,6 +143,11 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -151,7 +157,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PretaxCreditAmount extends StripeObject {
+  public static class PretaxCreditAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the pretax credit amount. */
     @SerializedName("amount")
     Long amount;
@@ -215,6 +221,12 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditBalanceTransaction, responseGetter);
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -224,7 +236,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Tax extends StripeObject {
+  public static class Tax extends StripeObject implements StripeActiveObject {
     /** The amount of the tax, in cents (or local equivalent). */
     @SerializedName("amount")
     Long amount;
@@ -277,7 +289,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxRateDetails extends StripeObject {
+    public static class TaxRateDetails extends StripeObject implements StripeActiveObject {
       /** ID of the tax rate. */
       @SerializedName("tax_rate")
       @Getter(lombok.AccessLevel.NONE)
@@ -301,6 +313,16 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
       public void setTaxRateObject(TaxRate expandableObject) {
         this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(taxRate, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(taxRateDetails, responseGetter);
     }
   }
 
@@ -319,5 +341,21 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     /** The calculation identifier for tax calculation response line item. */
     @SerializedName("calculation_item_id")
     String calculationItemId;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    if (discountAmounts != null) {
+      discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (pretaxCreditAmounts != null) {
+      pretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (taxRates != null) {
+      taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (taxes != null) {
+      taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

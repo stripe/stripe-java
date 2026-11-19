@@ -13,10 +13,6 @@ public final class BillingService extends ApiService {
     return new com.stripe.service.v2.billing.BillSettingService(this.getResponseGetter());
   }
 
-  public com.stripe.service.v2.billing.CadenceService cadences() {
-    return new com.stripe.service.v2.billing.CadenceService(this.getResponseGetter());
-  }
-
   public com.stripe.service.v2.billing.CollectionSettingService collectionSettings() {
     return new com.stripe.service.v2.billing.CollectionSettingService(this.getResponseGetter());
   }

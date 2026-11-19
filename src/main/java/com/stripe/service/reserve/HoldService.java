@@ -21,29 +21,29 @@ public final class HoldService extends ApiService {
   }
 
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public StripeCollection<Hold> list(HoldListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public StripeCollection<Hold> list(RequestOptions options) throws StripeException {
     return list((HoldListParams) null, options);
   }
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public StripeCollection<Hold> list() throws StripeException {
     return list((HoldListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of ReserveHolds previously created. The ReserveHolds are returned in sorted
-   * order, with the most recent ReserveHolds appearing first.
+   * Returns a list of ReserveHolds on your account or on one of your connected accounts. The
+   * ReserveHolds are returned in sorted order, with the most recent ReserveHolds appearing first.
    */
   public StripeCollection<Hold> list(HoldListParams params, RequestOptions options)
       throws StripeException {
@@ -57,19 +57,19 @@ public final class HoldService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Hold>>() {}.getType());
   }
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public Hold retrieve(String id, HoldRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public Hold retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (HoldRetrieveParams) null, options);
   }
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public Hold retrieve(String id) throws StripeException {
     return retrieve(id, (HoldRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieve a ReserveHold. */
+  /** Retrieve a ReserveHold on your account or on one of your connected accounts. */
   public Hold retrieve(String id, HoldRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/holds/%s", ApiResource.urlEncodeId(id));

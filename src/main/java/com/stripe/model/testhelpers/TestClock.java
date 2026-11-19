@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.testhelpers.TestClockAdvanceParams;
 import com.stripe.param.testhelpers.TestClockCreateParams;
 import com.stripe.param.testhelpers.TestClockListParams;
@@ -286,11 +285,5 @@ public class TestClock extends ApiResource implements HasId {
       @SerializedName("target_frozen_time")
       Long targetFrozenTime;
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
   }
 }

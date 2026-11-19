@@ -7,6 +7,7 @@ import com.stripe.model.Application;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.model.billing.FeedbackOption;
 import com.stripe.net.ApiRequest;
@@ -308,7 +309,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Features extends StripeObject {
+  public static class Features extends StripeObject implements StripeActiveObject {
     @SerializedName("customer_update")
     CustomerUpdate customerUpdate;
 
@@ -388,7 +389,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SubscriptionCancel extends StripeObject {
+    public static class SubscriptionCancel extends StripeObject implements StripeActiveObject {
       @SerializedName("cancellation_reason")
       CancellationReason cancellationReason;
 
@@ -420,7 +421,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CancellationReason extends StripeObject {
+      public static class CancellationReason extends StripeObject implements StripeActiveObject {
         /** Whether the feature is enabled. */
         @SerializedName("enabled")
         Boolean enabled;
@@ -476,6 +477,18 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
                       .collect(Collectors.toList())
                   : null;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          if (feedbackOptions != null) {
+            feedbackOptions.forEach(x -> trySetResponseGetter(x, responseGetter));
+          }
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(cancellationReason, responseGetter);
       }
     }
 
@@ -673,6 +686,11 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
         }
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(subscriptionCancel, responseGetter);
+    }
   }
 
   /**
@@ -705,8 +723,6 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(businessProfile, responseGetter);
     trySetResponseGetter(features, responseGetter);
-    trySetResponseGetter(loginPage, responseGetter);
   }
 }

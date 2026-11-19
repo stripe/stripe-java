@@ -7,6 +7,7 @@ import com.stripe.model.Dispute;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Refund;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -157,16 +158,18 @@ public class Release extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -177,16 +180,18 @@ public class Release extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(ReleaseListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of ReserveReleases previously created. The ReserveReleases are returned in
-   * sorted order, with the most recent ReserveReleases appearing first.
+   * Returns a list of ReserveReleases on your account or on one of your connected accounts. The
+   * ReserveReleases are returned in sorted order, with the most recent ReserveReleases appearing
+   * first.
    */
   public static ReleaseCollection list(ReleaseListParams params, RequestOptions options)
       throws StripeException {
@@ -202,17 +207,17 @@ public class Release extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, ReleaseCollection.class);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/releases/%s", ApiResource.urlEncodeId(id));
@@ -221,7 +226,7 @@ public class Release extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Release.class);
   }
 
-  /** Retrieve a ReserveRelease. */
+  /** Retrieve a ReserveRelease on your account or on one of your connected accounts. */
   public static Release retrieve(String id, ReleaseRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/reserve/releases/%s", ApiResource.urlEncodeId(id));
@@ -243,7 +248,7 @@ public class Release extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SourceTransaction extends StripeObject {
+  public static class SourceTransaction extends StripeObject implements StripeActiveObject {
     /** The ID of the dispute. */
     @SerializedName("dispute")
     @Getter(lombok.AccessLevel.NONE)
@@ -298,6 +303,12 @@ public class Release extends ApiResource implements HasId {
 
     public void setRefundObject(Refund expandableObject) {
       this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(dispute, responseGetter);
+      trySetResponseGetter(refund, responseGetter);
     }
   }
 

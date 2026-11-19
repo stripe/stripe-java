@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiResource;
+import com.stripe.net.StripeResponseGetter;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class QuoteLine extends StripeObject implements HasId {
+public class QuoteLine extends StripeObject implements HasId, StripeActiveObject {
   /** A list of items the customer is being quoted for. */
   @SerializedName("actions")
   List<QuoteLine.Action> actions;
@@ -105,7 +106,7 @@ public class QuoteLine extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Action extends StripeObject {
+  public static class Action extends StripeObject implements StripeActiveObject {
     /** Details for the {@code add_discount} type. */
     @SerializedName("add_discount")
     AddDiscount addDiscount;
@@ -159,7 +160,7 @@ public class QuoteLine extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AddDiscount extends StripeObject {
+    public static class AddDiscount extends StripeObject implements StripeActiveObject {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
       @Getter(lombok.AccessLevel.NONE)
@@ -262,6 +263,13 @@ public class QuoteLine extends StripeObject implements HasId {
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(coupon, responseGetter);
+        trySetResponseGetter(discount, responseGetter);
+        trySetResponseGetter(promotionCode, responseGetter);
+      }
     }
 
     /**
@@ -271,7 +279,7 @@ public class QuoteLine extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AddItem extends StripeObject {
+    public static class AddItem extends StripeObject implements StripeActiveObject {
       /**
        * The discounts applied to the subscription item. Subscription item discounts are applied
        * before subscription discounts. Use {@code expand[]=discounts} to expand each discount.
@@ -337,7 +345,7 @@ public class QuoteLine extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Discount extends StripeObject {
+      public static class Discount extends StripeObject implements StripeActiveObject {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
         @Getter(lombok.AccessLevel.NONE)
@@ -437,6 +445,13 @@ public class QuoteLine extends StripeObject implements HasId {
           @SerializedName("type")
           String type;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(coupon, responseGetter);
+          trySetResponseGetter(discount, responseGetter);
+          trySetResponseGetter(promotionCode, responseGetter);
+        }
       }
 
       /**
@@ -462,6 +477,17 @@ public class QuoteLine extends StripeObject implements HasId {
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        trySetResponseGetter(price, responseGetter);
+        if (taxRates != null) {
+          taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
     }
 
     /**
@@ -471,7 +497,7 @@ public class QuoteLine extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RemoveDiscount extends StripeObject {
+    public static class RemoveDiscount extends StripeObject implements StripeActiveObject {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
       @Getter(lombok.AccessLevel.NONE)
@@ -571,6 +597,13 @@ public class QuoteLine extends StripeObject implements HasId {
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(coupon, responseGetter);
+        trySetResponseGetter(discount, responseGetter);
+        trySetResponseGetter(promotionCode, responseGetter);
+      }
     }
 
     /**
@@ -580,7 +613,7 @@ public class QuoteLine extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RemoveItem extends StripeObject {
+    public static class RemoveItem extends StripeObject implements StripeActiveObject {
       /** ID of a price to remove. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -604,6 +637,11 @@ public class QuoteLine extends StripeObject implements HasId {
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(price, responseGetter);
+      }
     }
 
     /**
@@ -613,7 +651,7 @@ public class QuoteLine extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SetDiscount extends StripeObject {
+    public static class SetDiscount extends StripeObject implements StripeActiveObject {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
       @Getter(lombok.AccessLevel.NONE)
@@ -713,6 +751,13 @@ public class QuoteLine extends StripeObject implements HasId {
         @SerializedName("type")
         String type;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(coupon, responseGetter);
+        trySetResponseGetter(discount, responseGetter);
+        trySetResponseGetter(promotionCode, responseGetter);
+      }
     }
 
     /**
@@ -722,7 +767,7 @@ public class QuoteLine extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SetItem extends StripeObject {
+    public static class SetItem extends StripeObject implements StripeActiveObject {
       /**
        * The discounts applied to the subscription item. Subscription item discounts are applied
        * before subscription discounts. Use {@code expand[]=discounts} to expand each discount.
@@ -788,7 +833,7 @@ public class QuoteLine extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Discount extends StripeObject {
+      public static class Discount extends StripeObject implements StripeActiveObject {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
         @Getter(lombok.AccessLevel.NONE)
@@ -888,6 +933,13 @@ public class QuoteLine extends StripeObject implements HasId {
           @SerializedName("type")
           String type;
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(coupon, responseGetter);
+          trySetResponseGetter(discount, responseGetter);
+          trySetResponseGetter(promotionCode, responseGetter);
+        }
       }
 
       /**
@@ -912,6 +964,31 @@ public class QuoteLine extends StripeObject implements HasId {
          */
         @SerializedName("type")
         String type;
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (discounts != null) {
+          discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+        trySetResponseGetter(price, responseGetter);
+        if (taxRates != null) {
+          taxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(addDiscount, responseGetter);
+      trySetResponseGetter(addItem, responseGetter);
+      trySetResponseGetter(removeDiscount, responseGetter);
+      trySetResponseGetter(removeItem, responseGetter);
+      if (setDiscounts != null) {
+        setDiscounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
+      if (setItems != null) {
+        setItems.forEach(x -> trySetResponseGetter(x, responseGetter));
       }
     }
   }
@@ -1184,6 +1261,13 @@ public class QuoteLine extends StripeObject implements HasId {
        */
       @SerializedName("prorate_up_front")
       String prorateUpFront;
+    }
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    if (actions != null) {
+      actions.forEach(x -> trySetResponseGetter(x, responseGetter));
     }
   }
 }

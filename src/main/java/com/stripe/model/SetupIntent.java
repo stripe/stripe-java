@@ -1097,7 +1097,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
-      /** The timestamp when the microdeposits are expected to land. */
+      /**
+       * The timestamp when the microdeposits are expected to land. Null for instant microdeposits.
+       */
       @SerializedName("arrival_date")
       Long arrivalDate;
 
@@ -1885,18 +1887,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(lastSetupError, responseGetter);
     trySetResponseGetter(latestAttempt, responseGetter);
-    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(mandate, responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
-    trySetResponseGetter(paymentMethodOptions, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(singleUseMandate, responseGetter);
   }
 }

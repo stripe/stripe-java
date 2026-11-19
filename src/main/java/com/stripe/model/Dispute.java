@@ -39,8 +39,8 @@ public class Dispute extends ApiResource
   Long amount;
 
   /**
-   * List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your
-   * Stripe account as a result of this dispute.
+   * List of balance transactions that show funds withdrawn and reinstated to your Stripe account as
+   * a result of this dispute.
    */
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
@@ -418,7 +418,7 @@ public class Dispute extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Evidence extends StripeObject {
+  public static class Evidence extends StripeObject implements StripeActiveObject {
     /**
      * Any server or activity logs showing proof that the customer accessed or downloaded the
      * purchased digital product. This information should include IP addresses, corresponding
@@ -1080,6 +1080,19 @@ public class Dispute extends ApiResource
         Boolean feeAcknowledged;
       }
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(cancellationPolicy, responseGetter);
+      trySetResponseGetter(customerCommunication, responseGetter);
+      trySetResponseGetter(customerSignature, responseGetter);
+      trySetResponseGetter(duplicateChargeDocumentation, responseGetter);
+      trySetResponseGetter(receipt, responseGetter);
+      trySetResponseGetter(refundPolicy, responseGetter);
+      trySetResponseGetter(serviceDocumentation, responseGetter);
+      trySetResponseGetter(shippingDocumentation, responseGetter);
+      trySetResponseGetter(uncategorizedFile, responseGetter);
+    }
   }
 
   /**
@@ -1355,11 +1368,11 @@ public class Dispute extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (balanceTransactions != null) {
+      balanceTransactions.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(charge, responseGetter);
     trySetResponseGetter(evidence, responseGetter);
-    trySetResponseGetter(evidenceDetails, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
-    trySetResponseGetter(paymentMethodDetails, responseGetter);
-    trySetResponseGetter(smartDisputes, responseGetter);
   }
 }

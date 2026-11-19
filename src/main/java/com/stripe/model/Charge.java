@@ -873,7 +873,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingDetails extends StripeObject {
+  public static class BillingDetails extends StripeObject implements StripeActiveObject {
     /** Billing address. */
     @SerializedName("address")
     com.stripe.model.Address address;
@@ -896,6 +896,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
      */
     @SerializedName("tax_id")
     String taxId;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   /**
@@ -979,7 +984,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Outcome extends StripeObject {
+  public static class Outcome extends StripeObject implements StripeActiveObject {
     /**
      * An enumerated value providing a more detailed explanation on <a
      * href="https://docs.stripe.com/declines#retrying-issuer-declines">how to proceed with an
@@ -1106,6 +1111,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("predicate")
       String predicate;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(rule, responseGetter);
+    }
   }
 
   /**
@@ -1115,7 +1125,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodDetails extends StripeObject {
+  public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("ach_credit_transfer")
     AchCreditTransfer achCreditTransfer;
 
@@ -1700,7 +1710,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Bancontact extends StripeObject {
+    public static class Bancontact extends StripeObject implements StripeActiveObject {
       /** Bank code of bank associated with the bank account. */
       @SerializedName("bank_code")
       String bankCode;
@@ -1785,6 +1795,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
+      }
     }
 
     /**
@@ -1853,7 +1869,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
+    public static class Card extends StripeObject implements StripeActiveObject {
       /** The authorized amount. */
       @SerializedName("amount_authorized")
       Long amountAuthorized;
@@ -2084,14 +2100,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
         /**
-         * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
-         * {@code unavailable}, or {@code unchecked}.
+         * If an address line1 was provided, results of the check, one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
         /**
-         * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+         * If an address postal code was provided, results of the check, one of {@code pass}, {@code
          * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
@@ -2356,7 +2372,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Wallet extends StripeObject {
+      public static class Wallet extends StripeObject implements StripeActiveObject {
         @SerializedName("amex_express_checkout")
         AmexExpressCheckout amexExpressCheckout;
 
@@ -2432,6 +2448,303 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            */
           @SerializedName("funding_source_group")
           String fundingSourceGroup;
+
+          /** Details about the funding sources used for this Link payment. */
+          @SerializedName("funding_sources")
+          List<Charge.PaymentMethodDetails.Card.Wallet.Link.FundingSource> fundingSources;
+
+          /**
+           * For more details about FundingSource, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FundingSource extends StripeObject {
+            @SerializedName("card")
+            InnerCard card;
+
+            /**
+             * The type of funding source used for this Link payment.
+             *
+             * <p>Equal to {@code card}.
+             */
+            @SerializedName("type")
+            String type;
+
+            /**
+             * For more details about InnerCard, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class InnerCard extends StripeObject {
+              /** The authorized amount. */
+              @SerializedName("amount_authorized")
+              Long amountAuthorized;
+
+              /** Authorization code on the charge. */
+              @SerializedName("authorization_code")
+              String authorizationCode;
+
+              /**
+               * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+               * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+               * unionpay}, {@code visa} or {@code unknown}.
+               */
+              @SerializedName("brand")
+              String brand;
+
+              /** Check results by Card networks on Card address and CVC at time of payment. */
+              @SerializedName("checks")
+              Checks checks;
+
+              /**
+               * Two-letter ISO code representing the country of the card. You could use this
+               * attribute to get a sense of the international breakdown of cards you've collected.
+               */
+              @SerializedName("country")
+              String country;
+
+              /**
+               * A high-level description of the type of cards issued in this range. (For internal
+               * use only and not typically available in standard API requests.)
+               */
+              @SerializedName("description")
+              String description;
+
+              /**
+               * The Electronic Commerce Indicator (ECI) returned by the card network in the
+               * authorization response. Indicates the level of authentication used. Only populated
+               * for Visa and Mastercard transactions. This is the network's final ECI and can
+               * differ from the request value. An authenticated ECI alone doesn't determine
+               * liability shift.
+               */
+              @SerializedName("electronic_commerce_indicator")
+              String electronicCommerceIndicator;
+
+              /** Two-digit number representing the card's expiration month. */
+              @SerializedName("exp_month")
+              Long expMonth;
+
+              /** Four-digit number representing the card's expiration year. */
+              @SerializedName("exp_year")
+              Long expYear;
+
+              /**
+               * Uniquely identifies this particular card number. You can use this attribute to
+               * check whether two customers who’ve signed up with you are using the same card
+               * number, for example. For payment methods that tokenize card information (Apple Pay,
+               * Google Pay), the tokenized number might be provided instead of the underlying card
+               * number.
+               *
+               * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow
+               * two fingerprints for the same card---one for India and one for the rest of the
+               * world.</em>
+               */
+              @SerializedName("fingerprint")
+              String fingerprint;
+
+              /**
+               * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+               * unknown}.
+               */
+              @SerializedName("funding")
+              String funding;
+
+              /**
+               * Issuer identification number of the card. (For internal use only and not typically
+               * available in standard API requests.)
+               */
+              @SerializedName("iin")
+              String iin;
+
+              /**
+               * The name of the card's issuing bank. (For internal use only and not typically
+               * available in standard API requests.)
+               */
+              @SerializedName("issuer")
+              String issuer;
+
+              /** The last four digits of the card. */
+              @SerializedName("last4")
+              String last4;
+
+              /**
+               * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+               * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
+               * interac}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
+               * visa}, or {@code unknown}.
+               */
+              @SerializedName("network")
+              String network;
+
+              /**
+               * If this card has network token credentials, this contains the details of the
+               * network token credentials.
+               */
+              @SerializedName("network_token")
+              NetworkToken networkToken;
+
+              /**
+               * This is used by the financial networks to identify a transaction. Visa calls this
+               * the Transaction ID, Mastercard calls this the Trace ID, and American Express calls
+               * this the Acquirer Reference Data. This value will be present if it is returned by
+               * the financial network in the authorization response, and null otherwise.
+               */
+              @SerializedName("network_transaction_id")
+              String networkTransactionId;
+
+              /**
+               * Status of a card based on the card issuer.
+               *
+               * <p>One of {@code regulated}, or {@code unregulated}.
+               */
+              @SerializedName("regulated_status")
+              String regulatedStatus;
+
+              /** Populated if this transaction used 3D Secure authentication. */
+              @SerializedName("three_d_secure")
+              ThreeDSecure threeDSecure;
+
+              /**
+               * Transaction Link ID (TLID) is a unique identifier for a transaction. This is used
+               * by some card networks, such as Mastercard, for transaction linking, in addition to
+               * Network Transaction IDs. This value will be present if it is returned by the
+               * financial network in the authorization response, and null otherwise.
+               */
+              @SerializedName("transaction_link_id")
+              String transactionLinkId;
+
+              /**
+               * For more details about Checks, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Checks extends StripeObject {
+                /**
+                 * If an address line1 was provided, results of the check, one of {@code pass},
+                 * {@code fail}, {@code unavailable}, or {@code unchecked}.
+                 */
+                @SerializedName("address_line1_check")
+                String addressLine1Check;
+
+                /**
+                 * If an address postal code was provided, results of the check, one of {@code
+                 * pass}, {@code fail}, {@code unavailable}, or {@code unchecked}.
+                 */
+                @SerializedName("address_postal_code_check")
+                String addressPostalCodeCheck;
+
+                /**
+                 * If a CVC was provided, results of the check, one of {@code pass}, {@code fail},
+                 * {@code unavailable}, or {@code unchecked}.
+                 */
+                @SerializedName("cvc_check")
+                String cvcCheck;
+              }
+
+              /**
+               * For more details about NetworkToken, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class NetworkToken extends StripeObject {
+                /**
+                 * Indicates if Stripe used a network token, either user provided or Stripe managed
+                 * when processing the transaction.
+                 */
+                @SerializedName("used")
+                Boolean used;
+              }
+
+              /**
+               * For more details about ThreeDSecure, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ThreeDSecure extends StripeObject {
+                /**
+                 * For authenticated transactions: how the customer was authenticated by the issuing
+                 * bank.
+                 *
+                 * <p>One of {@code challenge}, or {@code frictionless}.
+                 */
+                @SerializedName("authentication_flow")
+                String authenticationFlow;
+
+                /**
+                 * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what
+                 * degree of authentication was performed.
+                 *
+                 * <p>One of {@code 01}, {@code 02}, {@code 05}, {@code 06}, or {@code 07}.
+                 */
+                @SerializedName("electronic_commerce_indicator")
+                String electronicCommerceIndicator;
+
+                /**
+                 * The exemption requested via 3DS and accepted by the issuer at authentication
+                 * time.
+                 *
+                 * <p>One of {@code low_risk}, or {@code none}.
+                 */
+                @SerializedName("exemption_indicator")
+                String exemptionIndicator;
+
+                /**
+                 * Whether Stripe requested the value of {@code exemption_indicator} in the
+                 * transaction. This will depend on the outcome of Stripe's internal risk
+                 * assessment.
+                 */
+                @SerializedName("exemption_indicator_applied")
+                Boolean exemptionIndicatorApplied;
+
+                /**
+                 * Indicates the outcome of 3D Secure authentication.
+                 *
+                 * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code
+                 * data_share_only}, {@code exempted}, {@code failed}, {@code not_supported}, or
+                 * {@code processing_error}.
+                 */
+                @SerializedName("result")
+                String result;
+
+                /**
+                 * Additional information about why 3D Secure succeeded or failed based on the
+                 * {@code result}.
+                 *
+                 * <p>One of {@code abandoned}, {@code bypassed}, {@code canceled}, {@code
+                 * card_not_enrolled}, {@code network_not_supported}, {@code protocol_error}, or
+                 * {@code rejected}.
+                 */
+                @SerializedName("result_reason")
+                String resultReason;
+
+                /**
+                 * The 3D Secure 1 XID or 3D Secure 2 Directory Server Transaction ID (dsTransId)
+                 * for this payment.
+                 */
+                @SerializedName("transaction_id")
+                String transactionId;
+
+                /**
+                 * The version of 3D Secure that was used.
+                 *
+                 * <p>One of {@code 1.0.2}, {@code 2.1.0}, {@code 2.2.0}, {@code 2.3.0}, or {@code
+                 * 2.3.1}.
+                 */
+                @SerializedName("version")
+                String version;
+              }
+            }
+          }
         }
 
         /**
@@ -2441,7 +2754,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Masterpass extends StripeObject {
+        public static class Masterpass extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -2471,6 +2784,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            */
           @SerializedName("shipping_address")
           com.stripe.model.Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
 
         /**
@@ -2489,7 +2808,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class VisaCheckout extends StripeObject {
+        public static class VisaCheckout extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -2519,7 +2838,25 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            */
           @SerializedName("shipping_address")
           com.stripe.model.Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(masterpass, responseGetter);
+          trySetResponseGetter(visaCheckout, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mandate, responseGetter);
+        trySetResponseGetter(wallet, responseGetter);
       }
     }
 
@@ -2857,8 +3194,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
-       * {@code tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui},
+       * {@code tempo}, or {@code tron}.
        */
       @SerializedName("network")
       String network;
@@ -3043,7 +3380,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Ideal extends StripeObject {
+    public static class Ideal extends StripeObject implements StripeActiveObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code adyen}, {@code asn_bank},
        * {@code bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code
@@ -3134,6 +3471,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       public void setGeneratedSepaDebitMandateObject(Mandate expandableObject) {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
       }
     }
 
@@ -3535,6 +3878,298 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("funding_source_group")
       String fundingSourceGroup;
+
+      /** Details about the funding sources used for this Link payment. */
+      @SerializedName("funding_sources")
+      List<Charge.PaymentMethodDetails.Link.FundingSource> fundingSources;
+
+      /**
+       * For more details about FundingSource, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FundingSource extends StripeObject {
+        @SerializedName("card")
+        Card card;
+
+        /**
+         * The type of funding source used for this Link payment.
+         *
+         * <p>Equal to {@code card}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Card, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Card extends StripeObject {
+          /** The authorized amount. */
+          @SerializedName("amount_authorized")
+          Long amountAuthorized;
+
+          /** Authorization code on the charge. */
+          @SerializedName("authorization_code")
+          String authorizationCode;
+
+          /**
+           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+           * unionpay}, {@code visa} or {@code unknown}.
+           */
+          @SerializedName("brand")
+          String brand;
+
+          /** Check results by Card networks on Card address and CVC at time of payment. */
+          @SerializedName("checks")
+          Checks checks;
+
+          /**
+           * Two-letter ISO code representing the country of the card. You could use this attribute
+           * to get a sense of the international breakdown of cards you've collected.
+           */
+          @SerializedName("country")
+          String country;
+
+          /**
+           * A high-level description of the type of cards issued in this range. (For internal use
+           * only and not typically available in standard API requests.)
+           */
+          @SerializedName("description")
+          String description;
+
+          /**
+           * The Electronic Commerce Indicator (ECI) returned by the card network in the
+           * authorization response. Indicates the level of authentication used. Only populated for
+           * Visa and Mastercard transactions. This is the network's final ECI and can differ from
+           * the request value. An authenticated ECI alone doesn't determine liability shift.
+           */
+          @SerializedName("electronic_commerce_indicator")
+          String electronicCommerceIndicator;
+
+          /** Two-digit number representing the card's expiration month. */
+          @SerializedName("exp_month")
+          Long expMonth;
+
+          /** Four-digit number representing the card's expiration year. */
+          @SerializedName("exp_year")
+          Long expYear;
+
+          /**
+           * Uniquely identifies this particular card number. You can use this attribute to check
+           * whether two customers who’ve signed up with you are using the same card number, for
+           * example. For payment methods that tokenize card information (Apple Pay, Google Pay),
+           * the tokenized number might be provided instead of the underlying card number.
+           *
+           * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+           * fingerprints for the same card---one for India and one for the rest of the world.</em>
+           */
+          @SerializedName("fingerprint")
+          String fingerprint;
+
+          /**
+           * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+           * unknown}.
+           */
+          @SerializedName("funding")
+          String funding;
+
+          /**
+           * Issuer identification number of the card. (For internal use only and not typically
+           * available in standard API requests.)
+           */
+          @SerializedName("iin")
+          String iin;
+
+          /**
+           * The name of the card's issuing bank. (For internal use only and not typically available
+           * in standard API requests.)
+           */
+          @SerializedName("issuer")
+          String issuer;
+
+          /** The last four digits of the card. */
+          @SerializedName("last4")
+          String last4;
+
+          /**
+           * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+           * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
+           * interac}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
+           * visa}, or {@code unknown}.
+           */
+          @SerializedName("network")
+          String network;
+
+          /**
+           * If this card has network token credentials, this contains the details of the network
+           * token credentials.
+           */
+          @SerializedName("network_token")
+          NetworkToken networkToken;
+
+          /**
+           * This is used by the financial networks to identify a transaction. Visa calls this the
+           * Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the
+           * Acquirer Reference Data. This value will be present if it is returned by the financial
+           * network in the authorization response, and null otherwise.
+           */
+          @SerializedName("network_transaction_id")
+          String networkTransactionId;
+
+          /**
+           * Status of a card based on the card issuer.
+           *
+           * <p>One of {@code regulated}, or {@code unregulated}.
+           */
+          @SerializedName("regulated_status")
+          String regulatedStatus;
+
+          /** Populated if this transaction used 3D Secure authentication. */
+          @SerializedName("three_d_secure")
+          ThreeDSecure threeDSecure;
+
+          /**
+           * Transaction Link ID (TLID) is a unique identifier for a transaction. This is used by
+           * some card networks, such as Mastercard, for transaction linking, in addition to Network
+           * Transaction IDs. This value will be present if it is returned by the financial network
+           * in the authorization response, and null otherwise.
+           */
+          @SerializedName("transaction_link_id")
+          String transactionLinkId;
+
+          /**
+           * For more details about Checks, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Checks extends StripeObject {
+            /**
+             * If an address line1 was provided, results of the check, one of {@code pass}, {@code
+             * fail}, {@code unavailable}, or {@code unchecked}.
+             */
+            @SerializedName("address_line1_check")
+            String addressLine1Check;
+
+            /**
+             * If an address postal code was provided, results of the check, one of {@code pass},
+             * {@code fail}, {@code unavailable}, or {@code unchecked}.
+             */
+            @SerializedName("address_postal_code_check")
+            String addressPostalCodeCheck;
+
+            /**
+             * If a CVC was provided, results of the check, one of {@code pass}, {@code fail},
+             * {@code unavailable}, or {@code unchecked}.
+             */
+            @SerializedName("cvc_check")
+            String cvcCheck;
+          }
+
+          /**
+           * For more details about NetworkToken, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class NetworkToken extends StripeObject {
+            /**
+             * Indicates if Stripe used a network token, either user provided or Stripe managed when
+             * processing the transaction.
+             */
+            @SerializedName("used")
+            Boolean used;
+          }
+
+          /**
+           * For more details about ThreeDSecure, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ThreeDSecure extends StripeObject {
+            /**
+             * For authenticated transactions: how the customer was authenticated by the issuing
+             * bank.
+             *
+             * <p>One of {@code challenge}, or {@code frictionless}.
+             */
+            @SerializedName("authentication_flow")
+            String authenticationFlow;
+
+            /**
+             * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what
+             * degree of authentication was performed.
+             *
+             * <p>One of {@code 01}, {@code 02}, {@code 05}, {@code 06}, or {@code 07}.
+             */
+            @SerializedName("electronic_commerce_indicator")
+            String electronicCommerceIndicator;
+
+            /**
+             * The exemption requested via 3DS and accepted by the issuer at authentication time.
+             *
+             * <p>One of {@code low_risk}, or {@code none}.
+             */
+            @SerializedName("exemption_indicator")
+            String exemptionIndicator;
+
+            /**
+             * Whether Stripe requested the value of {@code exemption_indicator} in the transaction.
+             * This will depend on the outcome of Stripe's internal risk assessment.
+             */
+            @SerializedName("exemption_indicator_applied")
+            Boolean exemptionIndicatorApplied;
+
+            /**
+             * Indicates the outcome of 3D Secure authentication.
+             *
+             * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code
+             * data_share_only}, {@code exempted}, {@code failed}, {@code not_supported}, or {@code
+             * processing_error}.
+             */
+            @SerializedName("result")
+            String result;
+
+            /**
+             * Additional information about why 3D Secure succeeded or failed based on the {@code
+             * result}.
+             *
+             * <p>One of {@code abandoned}, {@code bypassed}, {@code canceled}, {@code
+             * card_not_enrolled}, {@code network_not_supported}, {@code protocol_error}, or {@code
+             * rejected}.
+             */
+            @SerializedName("result_reason")
+            String resultReason;
+
+            /**
+             * The 3D Secure 1 XID or 3D Secure 2 Directory Server Transaction ID (dsTransId) for
+             * this payment.
+             */
+            @SerializedName("transaction_id")
+            String transactionId;
+
+            /**
+             * The version of 3D Secure that was used.
+             *
+             * <p>One of {@code 1.0.2}, {@code 2.1.0}, {@code 2.2.0}, {@code 2.3.0}, or {@code
+             * 2.3.1}.
+             */
+            @SerializedName("version")
+            String version;
+          }
+        }
+      }
     }
 
     /**
@@ -3632,7 +4267,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public static class NzBankAccount extends StripeObject {
       /**
        * The name on the bank account. Only present if the account holder name is different from the
-       * name of the authorized signatory collected in the PaymentMethod’s billing details.
+       * name of the authorized signatory collected in the PaymentMethod's billing details.
        */
       @SerializedName("account_holder_name")
       String accountHolderName;
@@ -3771,7 +4406,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypal extends StripeObject {
+    public static class Paypal extends StripeObject implements StripeActiveObject {
       /**
        * Two-letter ISO code representing the buyer's country. Values are provided by PayPal
        * directly (if supported) at the time of authorization or settlement. They cannot be set or
@@ -3859,6 +4494,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("status")
         String status;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(shipping, responseGetter);
+        trySetResponseGetter(verifiedAddress, responseGetter);
+      }
     }
 
     /**
@@ -3868,7 +4509,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypay extends StripeObject {}
+    public static class Paypay extends StripeObject {
+      /**
+       * Uniquely identifies this particular PayPay account. You can use this attribute to check
+       * whether two PayPay accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+    }
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
@@ -4181,7 +4829,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Sofort extends StripeObject {
+    public static class Sofort extends StripeObject implements StripeActiveObject {
       /** Bank code of bank associated with the bank account. */
       @SerializedName("bank_code")
       String bankCode;
@@ -4270,6 +4918,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       public void setGeneratedSepaDebitMandateObject(Mandate expandableObject) {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(generatedSepaDebit, responseGetter);
+        trySetResponseGetter(generatedSepaDebitMandate, responseGetter);
       }
     }
 
@@ -4365,7 +5019,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
+    public static class UsBankAccount extends StripeObject implements StripeActiveObject {
       /**
        * Account holder type: individual or company.
        *
@@ -4434,6 +5088,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(mandate, responseGetter);
+      }
     }
 
     /**
@@ -4496,6 +5155,16 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(bancontact, responseGetter);
+      trySetResponseGetter(card, responseGetter);
+      trySetResponseGetter(ideal, responseGetter);
+      trySetResponseGetter(paypal, responseGetter);
+      trySetResponseGetter(sofort, responseGetter);
+      trySetResponseGetter(usBankAccount, responseGetter);
+    }
   }
 
   /**
@@ -4558,7 +5227,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
+  public static class TransferData extends StripeObject implements StripeActiveObject {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire
      * charge amount is transferred to the destination account.
@@ -4592,6 +5261,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(destination, responseGetter);
+    }
   }
 
   @Override
@@ -4603,15 +5277,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     trySetResponseGetter(billingDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
-    trySetResponseGetter(fraudDetails, responseGetter);
-    trySetResponseGetter(level3, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
-    trySetResponseGetter(presentmentDetails, responseGetter);
-    trySetResponseGetter(radarOptions, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
     trySetResponseGetter(review, responseGetter);
     trySetResponseGetter(shipping, responseGetter);

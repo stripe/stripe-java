@@ -189,6 +189,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("customer_address")
   Address customerAddress;
 
+  /** The customer balance amounts applied to this invoice. */
+  @SerializedName("customer_balance")
+  CustomerBalance customerBalance;
+
   /**
    * The customer's email. Until the invoice is finalized, this field will equal {@code
    * customer.email}. Once the invoice is finalized, this field will no longer be updated.
@@ -924,7 +928,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticTax extends StripeObject {
+  public static class AutomaticTax extends StripeObject implements StripeActiveObject {
     /**
      * If Stripe disabled automatic tax, this enum describes why.
      *
@@ -970,7 +974,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Liability extends StripeObject {
+    public static class Liability extends StripeObject implements StripeActiveObject {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
       @Getter(lombok.AccessLevel.NONE)
@@ -1002,6 +1006,16 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(account, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(liability, responseGetter);
     }
   }
 
@@ -1040,6 +1054,27 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     /** The value of the custom field. */
     @SerializedName("value")
     String value;
+  }
+
+  /**
+   * For more details about CustomerBalance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomerBalance extends StripeObject {
+    /** The total amount of customer balance applied to this invoice (automatically + manually). */
+    @SerializedName("applied_balance")
+    Long appliedBalance;
+
+    /** The amount of customer balance automatically applied during invoice finalization. */
+    @SerializedName("automatically_applied_balance")
+    Long automaticallyAppliedBalance;
+
+    /** The total amount of customer balance manually applied after finalization. */
+    @SerializedName("manually_applied_balance")
+    Long manuallyAppliedBalance;
   }
 
   /**
@@ -1092,7 +1127,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FromInvoice extends StripeObject {
+  public static class FromInvoice extends StripeObject implements StripeActiveObject {
     /** The relation between this invoice and the cloned invoice. */
     @SerializedName("action")
     String action;
@@ -1120,6 +1155,11 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     public void setInvoiceObject(Invoice expandableObject) {
       this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(invoice, responseGetter);
+    }
   }
 
   /**
@@ -1129,7 +1169,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Issuer extends StripeObject {
+  public static class Issuer extends StripeObject implements StripeActiveObject {
     /** The connected account being referenced when {@code type} is {@code account}. */
     @SerializedName("account")
     @Getter(lombok.AccessLevel.NONE)
@@ -1161,6 +1201,11 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     public void setAccountObject(Account expandableObject) {
       this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(account, responseGetter);
+    }
   }
 
   /**
@@ -1170,7 +1215,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Parent extends StripeObject {
+  public static class Parent extends StripeObject implements StripeActiveObject {
     /** Details about the quote that generated this invoice. */
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
@@ -1207,7 +1252,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SubscriptionDetails extends StripeObject {
+    public static class SubscriptionDetails extends StripeObject implements StripeActiveObject {
       /**
        * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> defined as
        * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
@@ -1278,6 +1323,16 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
         @SerializedName("resumes_at")
         Long resumesAt;
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(subscription, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(subscriptionDetails, responseGetter);
     }
   }
 
@@ -1913,7 +1968,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ShippingCost extends StripeObject {
+  public static class ShippingCost extends StripeObject implements StripeActiveObject {
     /** Total shipping cost before any taxes are applied. */
     @SerializedName("amount_subtotal")
     Long amountSubtotal;
@@ -1962,7 +2017,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Tax extends StripeObject {
+    public static class Tax extends StripeObject implements StripeActiveObject {
       /** Amount of tax applied for this rate. */
       @SerializedName("amount")
       Long amount;
@@ -1995,6 +2050,19 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       /** The amount on which tax is calculated, in cents (or local equivalent). */
       @SerializedName("taxable_amount")
       Long taxableAmount;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(rate, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(shippingRate, responseGetter);
+      if (taxes != null) {
+        taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+      }
     }
   }
 
@@ -2094,7 +2162,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TotalDiscountAmount extends StripeObject {
+  public static class TotalDiscountAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the discount. */
     @SerializedName("amount")
     Long amount;
@@ -2122,6 +2190,11 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -2131,7 +2204,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TotalMarginAmount extends StripeObject {
+  public static class TotalMarginAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the reduction in line item amount. */
     @SerializedName("amount")
     Long amount;
@@ -2159,6 +2232,11 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     public void setMarginObject(Margin expandableObject) {
       this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(margin, responseGetter);
+    }
   }
 
   /**
@@ -2168,7 +2246,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TotalPretaxCreditAmount extends StripeObject {
+  public static class TotalPretaxCreditAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the pretax credit amount. */
     @SerializedName("amount")
     Long amount;
@@ -2256,6 +2334,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     public void setMarginObject(Margin expandableObject) {
       this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditBalanceTransaction, responseGetter);
+      trySetResponseGetter(discount, responseGetter);
+      trySetResponseGetter(margin, responseGetter);
+    }
   }
 
   /**
@@ -2265,7 +2350,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TotalTax extends StripeObject {
+  public static class TotalTax extends StripeObject implements StripeActiveObject {
     /** The amount of the tax, in cents (or local equivalent). */
     @SerializedName("amount")
     Long amount;
@@ -2318,7 +2403,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxRateDetails extends StripeObject {
+    public static class TaxRateDetails extends StripeObject implements StripeActiveObject {
       /** ID of the tax rate. */
       @SerializedName("tax_rate")
       @Getter(lombok.AccessLevel.NONE)
@@ -2342,20 +2427,40 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       public void setTaxRateObject(TaxRate expandableObject) {
         this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(taxRate, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(taxRateDetails, responseGetter);
     }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    if (accountTaxIds != null) {
+      accountTaxIds.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(appliesTo, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
-    trySetResponseGetter(confirmationSecret, responseGetter);
     trySetResponseGetter(customerAddress, responseGetter);
     trySetResponseGetter(customerShipping, responseGetter);
+    if (defaultMargins != null) {
+      defaultMargins.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
+    if (defaultTaxRates != null) {
+      defaultTaxRates.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(fromInvoice, responseGetter);
     trySetResponseGetter(issuer, responseGetter);
     trySetResponseGetter(lastFinalizationError, responseGetter);
@@ -2363,15 +2468,22 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(lines, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(parent, responseGetter);
-    trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(payments, responseGetter);
-    trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
-    trySetResponseGetter(thresholdReason, responseGetter);
+    if (totalDiscountAmounts != null) {
+      totalDiscountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (totalMarginAmounts != null) {
+      totalMarginAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (totalPretaxCreditAmounts != null) {
+      totalPretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (totalTaxes != null) {
+      totalTaxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

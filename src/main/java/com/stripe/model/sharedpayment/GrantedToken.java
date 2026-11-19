@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -155,7 +156,7 @@ public class GrantedToken extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodDetails extends StripeObject {
+  public static class PaymentMethodDetails extends StripeObject implements StripeActiveObject {
     @SerializedName("affirm")
     Affirm affirm;
 
@@ -201,7 +202,7 @@ public class GrantedToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingDetails extends StripeObject {
+    public static class BillingDetails extends StripeObject implements StripeActiveObject {
       /** Billing address. */
       @SerializedName("address")
       Address address;
@@ -224,6 +225,11 @@ public class GrantedToken extends ApiResource implements HasId {
        */
       @SerializedName("tax_id")
       String taxId;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
     }
 
     /**
@@ -233,7 +239,7 @@ public class GrantedToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
+    public static class Card extends StripeObject implements StripeActiveObject {
       /**
        * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
        * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
@@ -332,14 +338,14 @@ public class GrantedToken extends ApiResource implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
         /**
-         * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
-         * {@code unavailable}, or {@code unchecked}.
+         * If an address line1 was provided, results of the check, one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
         /**
-         * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+         * If an address postal code was provided, results of the check, one of {@code pass}, {@code
          * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
@@ -384,7 +390,7 @@ public class GrantedToken extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Wallet extends StripeObject {
+      public static class Wallet extends StripeObject implements StripeActiveObject {
         @SerializedName("amex_express_checkout")
         AmexExpressCheckout amexExpressCheckout;
 
@@ -462,7 +468,7 @@ public class GrantedToken extends ApiResource implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Masterpass extends StripeObject {
+        public static class Masterpass extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -492,6 +498,12 @@ public class GrantedToken extends ApiResource implements HasId {
            */
           @SerializedName("shipping_address")
           Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
 
         /**
@@ -510,7 +522,7 @@ public class GrantedToken extends ApiResource implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class VisaCheckout extends StripeObject {
+        public static class VisaCheckout extends StripeObject implements StripeActiveObject {
           /**
            * Owner's verified billing address. Values are verified or provided by the wallet
            * directly (if supported) at the time of authorization or settlement. They cannot be set
@@ -540,7 +552,24 @@ public class GrantedToken extends ApiResource implements HasId {
            */
           @SerializedName("shipping_address")
           Address shippingAddress;
+
+          @Override
+          public void setResponseGetter(StripeResponseGetter responseGetter) {
+            trySetResponseGetter(billingAddress, responseGetter);
+            trySetResponseGetter(shippingAddress, responseGetter);
+          }
         }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(masterpass, responseGetter);
+          trySetResponseGetter(visaCheckout, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(wallet, responseGetter);
       }
     }
 
@@ -594,6 +623,12 @@ public class GrantedToken extends ApiResource implements HasId {
       @SerializedName("persistent_token")
       @Deprecated
       String persistentToken;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(billingDetails, responseGetter);
+      trySetResponseGetter(card, responseGetter);
     }
   }
 
@@ -889,10 +924,6 @@ public class GrantedToken extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(agentDetails, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
-    trySetResponseGetter(riskDetails, responseGetter);
-    trySetResponseGetter(usageDetails, responseGetter);
-    trySetResponseGetter(usageLimits, responseGetter);
   }
 }

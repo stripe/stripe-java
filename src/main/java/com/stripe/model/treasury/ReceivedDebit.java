@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -242,7 +243,8 @@ public class ReceivedDebit extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InitiatingPaymentMethodDetails extends StripeObject {
+  public static class InitiatingPaymentMethodDetails extends StripeObject
+      implements StripeActiveObject {
     /**
      * Set when {@code type} is {@code balance}.
      *
@@ -284,7 +286,7 @@ public class ReceivedDebit extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingDetails extends StripeObject {
+    public static class BillingDetails extends StripeObject implements StripeActiveObject {
       @SerializedName("address")
       Address address;
 
@@ -295,6 +297,11 @@ public class ReceivedDebit extends ApiResource implements HasId {
       /** Full name. */
       @SerializedName("name")
       String name;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
     }
 
     /**
@@ -339,6 +346,11 @@ public class ReceivedDebit extends ApiResource implements HasId {
       /** The routing number for the bank account. */
       @SerializedName("routing_number")
       String routingNumber;
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(billingDetails, responseGetter);
     }
   }
 
@@ -451,16 +463,16 @@ public class ReceivedDebit extends ApiResource implements HasId {
     private TestHelpers() {}
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(Map<String, Object> params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -471,16 +483,16 @@ public class ReceivedDebit extends ApiResource implements HasId {
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(ReceivedDebitCreateParams params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedDebit} objects initiated by third parties.
      */
     public static ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
         throws StripeException {
@@ -501,9 +513,6 @@ public class ReceivedDebit extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(initiatingPaymentMethodDetails, responseGetter);
-    trySetResponseGetter(linkedFlows, responseGetter);
-    trySetResponseGetter(networkDetails, responseGetter);
-    trySetResponseGetter(reversalDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

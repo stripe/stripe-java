@@ -104,6 +104,13 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class UseCase {
     /**
+     * Hash containing configuration options for an Account Link that provides access to the
+     * account's Stripe-hosted Dashboard.
+     */
+    @SerializedName("account_dashboard")
+    AccountDashboard accountDashboard;
+
+    /**
      * Hash containing configuration options for an Account Link object that onboards a new account.
      */
     @SerializedName("account_onboarding")
@@ -129,10 +136,12 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     Type type;
 
     private UseCase(
+        AccountDashboard accountDashboard,
         AccountOnboarding accountOnboarding,
         AccountUpdate accountUpdate,
         Map<String, Object> extraParams,
         Type type) {
+      this.accountDashboard = accountDashboard;
       this.accountOnboarding = accountOnboarding;
       this.accountUpdate = accountUpdate;
       this.extraParams = extraParams;
@@ -144,6 +153,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AccountDashboard accountDashboard;
+
       private AccountOnboarding accountOnboarding;
 
       private AccountUpdate accountUpdate;
@@ -155,7 +166,21 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountLinkCreateParams.UseCase build() {
         return new AccountLinkCreateParams.UseCase(
-            this.accountOnboarding, this.accountUpdate, this.extraParams, this.type);
+            this.accountDashboard,
+            this.accountOnboarding,
+            this.accountUpdate,
+            this.extraParams,
+            this.type);
+      }
+
+      /**
+       * Hash containing configuration options for an Account Link that provides access to the
+       * account's Stripe-hosted Dashboard.
+       */
+      public Builder setAccountDashboard(
+          AccountLinkCreateParams.UseCase.AccountDashboard accountDashboard) {
+        this.accountDashboard = accountDashboard;
+        return this;
       }
 
       /**
@@ -206,6 +231,84 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       public Builder setType(AccountLinkCreateParams.UseCase.Type type) {
         this.type = type;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AccountDashboard {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The URL to redirect to if the Account Link has expired or has
+       * already been used. Authenticate the user before generating a replacement link.
+       */
+      @SerializedName("refresh_url")
+      String refreshUrl;
+
+      private AccountDashboard(Map<String, Object> extraParams, String refreshUrl) {
+        this.extraParams = extraParams;
+        this.refreshUrl = refreshUrl;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String refreshUrl;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountLinkCreateParams.UseCase.AccountDashboard build() {
+          return new AccountLinkCreateParams.UseCase.AccountDashboard(
+              this.extraParams, this.refreshUrl);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountLinkCreateParams.UseCase.AccountDashboard#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountLinkCreateParams.UseCase.AccountDashboard#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The URL to redirect to if the Account Link has expired or has
+         * already been used. Authenticate the user before generating a replacement link.
+         */
+        public Builder setRefreshUrl(String refreshUrl) {
+          this.refreshUrl = refreshUrl;
+          return this;
+        }
       }
     }
 
@@ -734,6 +837,9 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("account_dashboard")
+      ACCOUNT_DASHBOARD("account_dashboard"),
+
       @SerializedName("account_onboarding")
       ACCOUNT_ONBOARDING("account_onboarding"),
 

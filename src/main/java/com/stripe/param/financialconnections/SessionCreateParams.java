@@ -462,7 +462,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("account_subcategories")
     List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories;
 
-    /** Country from which to collect accounts. */
+    /** Country from which to collect accounts. Supported values are {@code US} and {@code CA}. */
     @SerializedName("country")
     String country;
 
@@ -551,7 +551,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Country from which to collect accounts. */
+      /** Country from which to collect accounts. Supported values are {@code US} and {@code CA}. */
       public Builder setCountry(String country) {
         this.country = country;
         return this;

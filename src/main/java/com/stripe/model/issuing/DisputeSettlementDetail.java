@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.DisputeSettlementDetailListParams;
 import com.stripe.param.issuing.DisputeSettlementDetailRetrieveParams;
 import java.util.Map;
@@ -207,11 +206,5 @@ public class DisputeSettlementDetail extends ApiResource implements HasId {
      */
     @SerializedName("processing_date")
     String processingDate;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(networkData, responseGetter);
   }
 }

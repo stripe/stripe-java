@@ -13,8 +13,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The {@code QueryRun} object represents an ad-hoc SQL execution. Once created, Stripe processes
- * the query. When the query has finished running, the object provides a reference to the results.
+ * The <a href="https://stripe.com/data/api/query-runs">Queries and Reports API</a> replaces this
+ * API. For new integrations, use {@code /v2/data/query_runs} instead. The {@code QueryRun} object
+ * represents an ad-hoc SQL execution. Once created, Stripe processes the query. When the query has
+ * finished running, the object provides a reference to the results.
  */
 @Getter
 @Setter

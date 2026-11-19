@@ -923,7 +923,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingDetails extends StripeObject {
+  public static class BillingDetails extends StripeObject implements StripeActiveObject {
     /** Billing address. */
     @SerializedName("address")
     Address address;
@@ -946,6 +946,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("tax_id")
     String taxId;
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   /**
@@ -994,7 +999,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Card extends StripeObject {
+  public static class Card extends StripeObject implements StripeActiveObject {
     /**
      * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code discover},
      * {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
@@ -1108,14 +1113,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Checks extends StripeObject {
       /**
-       * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
+       * If an address line1 was provided, results of the check, one of {@code pass}, {@code fail},
        * {@code unavailable}, or {@code unchecked}.
        */
       @SerializedName("address_line1_check")
       String addressLine1Check;
 
       /**
-       * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+       * If an address postal code was provided, results of the check, one of {@code pass}, {@code
        * fail}, {@code unavailable}, or {@code unchecked}.
        */
       @SerializedName("address_postal_code_check")
@@ -1136,7 +1141,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class GeneratedFrom extends StripeObject {
+    public static class GeneratedFrom extends StripeObject implements StripeActiveObject {
       /** The charge that created this object. */
       @SerializedName("charge")
       String charge;
@@ -1488,6 +1493,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
           }
         }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(setupAttempt, responseGetter);
+      }
     }
 
     /**
@@ -1534,7 +1544,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Wallet extends StripeObject {
+    public static class Wallet extends StripeObject implements StripeActiveObject {
       @SerializedName("amex_express_checkout")
       AmexExpressCheckout amexExpressCheckout;
 
@@ -1612,7 +1622,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Masterpass extends StripeObject {
+      public static class Masterpass extends StripeObject implements StripeActiveObject {
         /**
          * Owner's verified billing address. Values are verified or provided by the wallet directly
          * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -1640,6 +1650,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("shipping_address")
         Address shippingAddress;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(billingAddress, responseGetter);
+          trySetResponseGetter(shippingAddress, responseGetter);
+        }
       }
 
       /**
@@ -1658,7 +1674,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class VisaCheckout extends StripeObject {
+      public static class VisaCheckout extends StripeObject implements StripeActiveObject {
         /**
          * Owner's verified billing address. Values are verified or provided by the wallet directly
          * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -1686,7 +1702,25 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("shipping_address")
         Address shippingAddress;
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(billingAddress, responseGetter);
+          trySetResponseGetter(shippingAddress, responseGetter);
+        }
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(masterpass, responseGetter);
+        trySetResponseGetter(visaCheckout, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(generatedFrom, responseGetter);
+      trySetResponseGetter(wallet, responseGetter);
     }
   }
 
@@ -2647,7 +2681,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SepaDebit extends StripeObject {
+  public static class SepaDebit extends StripeObject implements StripeActiveObject {
     /** Bank code of bank associated with the bank account. */
     @SerializedName("bank_code")
     String bankCode;
@@ -2682,7 +2716,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class GeneratedFrom extends StripeObject {
+    public static class GeneratedFrom extends StripeObject implements StripeActiveObject {
       /** The ID of the Charge that generated this PaymentMethod, if any. */
       @SerializedName("charge")
       @Getter(lombok.AccessLevel.NONE)
@@ -2731,6 +2765,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         this.setupAttempt =
             new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(charge, responseGetter);
+        trySetResponseGetter(setupAttempt, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(generatedFrom, responseGetter);
     }
   }
 
@@ -2966,76 +3011,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(acssDebit, responseGetter);
-    trySetResponseGetter(affirm, responseGetter);
-    trySetResponseGetter(afterpayClearpay, responseGetter);
-    trySetResponseGetter(alipay, responseGetter);
-    trySetResponseGetter(alma, responseGetter);
-    trySetResponseGetter(amazonPay, responseGetter);
-    trySetResponseGetter(auBecsDebit, responseGetter);
-    trySetResponseGetter(bacsDebit, responseGetter);
-    trySetResponseGetter(bancontact, responseGetter);
-    trySetResponseGetter(billie, responseGetter);
     trySetResponseGetter(billingDetails, responseGetter);
-    trySetResponseGetter(bizum, responseGetter);
-    trySetResponseGetter(blik, responseGetter);
-    trySetResponseGetter(boleto, responseGetter);
     trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(cardPresent, responseGetter);
-    trySetResponseGetter(cashapp, responseGetter);
-    trySetResponseGetter(crypto, responseGetter);
-    trySetResponseGetter(custom, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(customerBalance, responseGetter);
-    trySetResponseGetter(eps, responseGetter);
-    trySetResponseGetter(fpx, responseGetter);
-    trySetResponseGetter(giropay, responseGetter);
-    trySetResponseGetter(gopay, responseGetter);
-    trySetResponseGetter(grabpay, responseGetter);
-    trySetResponseGetter(idBankTransfer, responseGetter);
-    trySetResponseGetter(ideal, responseGetter);
-    trySetResponseGetter(interacPresent, responseGetter);
-    trySetResponseGetter(kakaoPay, responseGetter);
-    trySetResponseGetter(klarna, responseGetter);
-    trySetResponseGetter(konbini, responseGetter);
-    trySetResponseGetter(krCard, responseGetter);
     trySetResponseGetter(latestActiveMandate, responseGetter);
-    trySetResponseGetter(link, responseGetter);
-    trySetResponseGetter(mbWay, responseGetter);
-    trySetResponseGetter(mobilepay, responseGetter);
-    trySetResponseGetter(multibanco, responseGetter);
-    trySetResponseGetter(naverPay, responseGetter);
-    trySetResponseGetter(nzBankAccount, responseGetter);
-    trySetResponseGetter(oxxo, responseGetter);
-    trySetResponseGetter(p24, responseGetter);
-    trySetResponseGetter(payByBank, responseGetter);
-    trySetResponseGetter(payco, responseGetter);
-    trySetResponseGetter(paynow, responseGetter);
-    trySetResponseGetter(paypal, responseGetter);
-    trySetResponseGetter(paypay, responseGetter);
-    trySetResponseGetter(payto, responseGetter);
-    trySetResponseGetter(pix, responseGetter);
-    trySetResponseGetter(promptpay, responseGetter);
-    trySetResponseGetter(qris, responseGetter);
-    trySetResponseGetter(radarOptions, responseGetter);
-    trySetResponseGetter(rechnung, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
-    trySetResponseGetter(revolutPay, responseGetter);
-    trySetResponseGetter(samsungPay, responseGetter);
-    trySetResponseGetter(satispay, responseGetter);
-    trySetResponseGetter(scalapay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
-    trySetResponseGetter(sequra, responseGetter);
-    trySetResponseGetter(shopeepay, responseGetter);
-    trySetResponseGetter(sofort, responseGetter);
-    trySetResponseGetter(stripeBalance, responseGetter);
-    trySetResponseGetter(sunbit, responseGetter);
-    trySetResponseGetter(swish, responseGetter);
-    trySetResponseGetter(twint, responseGetter);
-    trySetResponseGetter(upi, responseGetter);
-    trySetResponseGetter(usBankAccount, responseGetter);
-    trySetResponseGetter(wechatPay, responseGetter);
-    trySetResponseGetter(wero, responseGetter);
-    trySetResponseGetter(zip, responseGetter);
   }
 }
