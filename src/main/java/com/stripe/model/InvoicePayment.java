@@ -211,7 +211,7 @@ public class InvoicePayment extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Payment extends StripeObject {
+  public static class Payment extends StripeObject implements StripeActiveObject {
     /**
      * ID of the successful charge for this payment when {@code type} is {@code charge}. Note:
      * charge is only surfaced if the charge object is not associated with a payment intent. If the
@@ -305,6 +305,13 @@ public class InvoicePayment extends ApiResource implements HasId {
       this.paymentRecord =
           new ExpandableField<PaymentRecord>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(charge, responseGetter);
+      trySetResponseGetter(paymentIntent, responseGetter);
+      trySetResponseGetter(paymentRecord, responseGetter);
+    }
   }
 
   /**
@@ -329,6 +336,5 @@ public class InvoicePayment extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(payment, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

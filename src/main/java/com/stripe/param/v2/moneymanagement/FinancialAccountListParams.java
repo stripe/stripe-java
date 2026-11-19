@@ -26,7 +26,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
   @SerializedName("include")
   List<FinancialAccountListParams.Include> include;
 
-  /** The page limit. */
+  /** Maximum number of results to return. Default: 10. Valid range: 1-20. */
   @SerializedName("limit")
   Long limit;
 
@@ -119,7 +119,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The page limit. */
+    /** Maximum number of results to return. Default: 10. Valid range: 1-20. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;

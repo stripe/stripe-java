@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -890,7 +891,7 @@ public class VerificationSession extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerifiedOutputs extends StripeObject {
+  public static class VerifiedOutputs extends StripeObject implements StripeActiveObject {
     /** The user's verified address. */
     @SerializedName("address")
     Address address;
@@ -960,17 +961,17 @@ public class VerificationSession extends ApiResource
       @SerializedName("year")
       Long year;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(address, responseGetter);
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(lastError, responseGetter);
     trySetResponseGetter(lastVerificationReport, responseGetter);
-    trySetResponseGetter(options, responseGetter);
-    trySetResponseGetter(providedDetails, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
-    trySetResponseGetter(relatedPerson, responseGetter);
     trySetResponseGetter(verifiedOutputs, responseGetter);
   }
 }

@@ -334,7 +334,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DiscountAmount extends StripeObject {
+  public static class DiscountAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the discount. */
     @SerializedName("amount")
     Long amount;
@@ -362,6 +362,11 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(discount, responseGetter);
+    }
   }
 
   /**
@@ -371,7 +376,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class MarginAmount extends StripeObject {
+  public static class MarginAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the reduction in line item amount. */
     @SerializedName("amount")
     Long amount;
@@ -398,6 +403,11 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
 
     public void setMarginObject(Margin expandableObject) {
       this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(margin, responseGetter);
     }
   }
 
@@ -573,7 +583,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PretaxCreditAmount extends StripeObject {
+  public static class PretaxCreditAmount extends StripeObject implements StripeActiveObject {
     /** The amount, in cents (or local equivalent), of the pretax credit amount. */
     @SerializedName("amount")
     Long amount;
@@ -661,6 +671,13 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     public void setMarginObject(Margin expandableObject) {
       this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(creditBalanceTransaction, responseGetter);
+      trySetResponseGetter(discount, responseGetter);
+      trySetResponseGetter(margin, responseGetter);
+    }
   }
 
   /**
@@ -670,7 +687,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Pricing extends StripeObject {
+  public static class Pricing extends StripeObject implements StripeActiveObject {
     @SerializedName("price_details")
     PriceDetails priceDetails;
 
@@ -696,7 +713,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class PriceDetails extends StripeObject {
+    public static class PriceDetails extends StripeObject implements StripeActiveObject {
       /** The ID of the price this item is associated with. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -724,6 +741,16 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(price, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(priceDetails, responseGetter);
     }
   }
 
@@ -734,7 +761,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Tax extends StripeObject {
+  public static class Tax extends StripeObject implements StripeActiveObject {
     /** The amount of the tax, in cents (or local equivalent). */
     @SerializedName("amount")
     Long amount;
@@ -787,7 +814,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxRateDetails extends StripeObject {
+    public static class TaxRateDetails extends StripeObject implements StripeActiveObject {
       /** ID of the tax rate. */
       @SerializedName("tax_rate")
       @Getter(lombok.AccessLevel.NONE)
@@ -811,6 +838,16 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       public void setTaxRateObject(TaxRate expandableObject) {
         this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
       }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(taxRate, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(taxRateDetails, responseGetter);
     }
   }
 
@@ -834,10 +871,25 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(parent, responseGetter);
-    trySetResponseGetter(period, responseGetter);
+    if (discountAmounts != null) {
+      discountAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (discounts != null) {
+      discounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (marginAmounts != null) {
+      marginAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (margins != null) {
+      margins.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
+    if (pretaxCreditAmounts != null) {
+      pretaxCreditAmounts.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
     trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
-    trySetResponseGetter(taxCalculationReference, responseGetter);
+    if (taxes != null) {
+      taxes.forEach(x -> trySetResponseGetter(x, responseGetter));
+    }
   }
 }

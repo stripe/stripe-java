@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -408,7 +409,7 @@ public class Form extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Payee extends StripeObject {
+  public static class Payee extends StripeObject implements StripeActiveObject {
     /** The ID of the payee's Stripe account. */
     @SerializedName("account")
     @Getter(lombok.AccessLevel.NONE)
@@ -443,6 +444,11 @@ public class Form extends ApiResource implements HasId {
 
     public void setAccountObject(Account expandableObject) {
       this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(account, responseGetter);
     }
   }
 
@@ -488,15 +494,7 @@ public class Form extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(auSerr, responseGetter);
-    trySetResponseGetter(caMrdp, responseGetter);
     trySetResponseGetter(correctedBy, responseGetter);
-    trySetResponseGetter(euDac7, responseGetter);
-    trySetResponseGetter(gbMrdp, responseGetter);
-    trySetResponseGetter(nzMrdp, responseGetter);
     trySetResponseGetter(payee, responseGetter);
-    trySetResponseGetter(us1099K, responseGetter);
-    trySetResponseGetter(us1099Misc, responseGetter);
-    trySetResponseGetter(us1099Nec, responseGetter);
   }
 }

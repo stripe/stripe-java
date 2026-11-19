@@ -7,6 +7,7 @@ import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Payout;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -243,7 +244,8 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class InitiatingPaymentMethodDetails extends StripeObject {
+  public static class InitiatingPaymentMethodDetails extends StripeObject
+      implements StripeActiveObject {
     /**
      * Set when {@code type} is {@code balance}.
      *
@@ -285,7 +287,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillingDetails extends StripeObject {
+    public static class BillingDetails extends StripeObject implements StripeActiveObject {
       @SerializedName("address")
       Address address;
 
@@ -296,6 +298,11 @@ public class ReceivedCredit extends ApiResource implements HasId {
       /** Full name. */
       @SerializedName("name")
       String name;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(address, responseGetter);
+      }
     }
 
     /**
@@ -341,6 +348,11 @@ public class ReceivedCredit extends ApiResource implements HasId {
       @SerializedName("routing_number")
       String routingNumber;
     }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(billingDetails, responseGetter);
+    }
   }
 
   /**
@@ -350,7 +362,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class LinkedFlows extends StripeObject {
+  public static class LinkedFlows extends StripeObject implements StripeActiveObject {
     /** The CreditReversal created as a result of this ReceivedCredit being reversed. */
     @SerializedName("credit_reversal")
     String creditReversal;
@@ -394,7 +406,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SourceFlowDetails extends StripeObject {
+    public static class SourceFlowDetails extends StripeObject implements StripeActiveObject {
       /**
        * Legacy CreditReversals are part of the v1 version of Treasury for platforms and do not
        * support many of the features introduced in <a
@@ -483,6 +495,19 @@ public class ReceivedCredit extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        trySetResponseGetter(creditReversal, responseGetter);
+        trySetResponseGetter(outboundPayment, responseGetter);
+        trySetResponseGetter(outboundTransfer, responseGetter);
+        trySetResponseGetter(payout, responseGetter);
+      }
+    }
+
+    @Override
+    public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(sourceFlowDetails, responseGetter);
     }
   }
 
@@ -546,16 +571,16 @@ public class ReceivedCredit extends ApiResource implements HasId {
     private TestHelpers() {}
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(Map<String, Object> params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -566,16 +591,16 @@ public class ReceivedCredit extends ApiResource implements HasId {
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(ReceivedCreditCreateParams params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * Simulates a test {@code ReceivedCredit} initiated by a third party. In live mode, you can’t
+     * directly create {@code ReceivedCredit} objects initiated by third parties.
      */
     public static ReceivedCredit create(ReceivedCreditCreateParams params, RequestOptions options)
         throws StripeException {
@@ -597,8 +622,6 @@ public class ReceivedCredit extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(initiatingPaymentMethodDetails, responseGetter);
     trySetResponseGetter(linkedFlows, responseGetter);
-    trySetResponseGetter(networkDetails, responseGetter);
-    trySetResponseGetter(reversalDetails, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
   }
 }

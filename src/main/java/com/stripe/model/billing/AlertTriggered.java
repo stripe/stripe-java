@@ -2,7 +2,9 @@
 package com.stripe.model.billing;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import java.math.BigDecimal;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class AlertTriggered extends StripeObject {
+public class AlertTriggered extends StripeObject implements StripeActiveObject {
   /**
    * A billing alert is a resource that notifies you when a certain usage threshold on a meter is
    * crossed. For example, you might create a billing alert to notify you when a certain user made
@@ -46,4 +48,9 @@ public class AlertTriggered extends StripeObject {
   /** The value triggering the alert. */
   @SerializedName("value")
   BigDecimal value;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(alert, responseGetter);
+  }
 }

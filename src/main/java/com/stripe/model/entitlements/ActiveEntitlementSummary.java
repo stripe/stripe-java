@@ -2,7 +2,9 @@
 package com.stripe.model.entitlements;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
+import com.stripe.net.StripeResponseGetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ActiveEntitlementSummary extends StripeObject {
+public class ActiveEntitlementSummary extends StripeObject implements StripeActiveObject {
   /** The customer that is entitled to this feature. */
   @SerializedName("customer")
   String customer;
@@ -34,4 +36,9 @@ public class ActiveEntitlementSummary extends StripeObject {
    */
   @SerializedName("object")
   String object;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    trySetResponseGetter(entitlements, responseGetter);
+  }
 }

@@ -224,6 +224,5 @@ public class Token extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bankAccount, responseGetter);
     trySetResponseGetter(card, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
   }
 }

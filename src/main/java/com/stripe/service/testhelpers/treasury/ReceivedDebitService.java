@@ -18,15 +18,15 @@ public final class ReceivedDebitService extends ApiService {
   }
 
   /**
-   * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-   * mode, you can’t directly create ReceivedDebits initiated by third parties.
+   * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+   * directly create {@code ReceivedDebit} objects initiated by third parties.
    */
   public ReceivedDebit create(ReceivedDebitCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
-   * mode, you can’t directly create ReceivedDebits initiated by third parties.
+   * Simulates a test {@code ReceivedDebit} initiated by a third party. In live mode, you can’t
+   * directly create {@code ReceivedDebit} objects initiated by third parties.
    */
   public ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
       throws StripeException {

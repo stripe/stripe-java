@@ -795,10 +795,6 @@ public class Mandate extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(customerAcceptance, responseGetter);
-    trySetResponseGetter(multiUse, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(paymentMethodDetails, responseGetter);
-    trySetResponseGetter(singleUse, responseGetter);
   }
 }

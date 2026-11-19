@@ -10,7 +10,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.CreditUnderwritingRecordCorrectParams;
 import com.stripe.param.issuing.CreditUnderwritingRecordCreateFromApplicationParams;
 import com.stripe.param.issuing.CreditUnderwritingRecordCreateFromProactiveReviewParams;
@@ -611,14 +610,5 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
      */
     @SerializedName("original_decision_type")
     String originalDecisionType;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(creditUser, responseGetter);
-    trySetResponseGetter(decision, responseGetter);
-    trySetResponseGetter(underwritingException, responseGetter);
   }
 }

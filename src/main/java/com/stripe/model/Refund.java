@@ -34,6 +34,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("amount")
   Long amount;
 
+  /**
+   * ID of the Connect application that created the refund. This can differ from the application on
+   * the associated Charge or PaymentIntent. A null value does not necessarily mean the refund was
+   * created without a Connect application.
+   */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /** Balance transaction that describes the impact on your account balance. */
   @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
@@ -190,6 +200,24 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TransferReversal> transferReversal;
+
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
@@ -666,6 +694,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("au_bank_transfer")
     AuBankTransfer auBankTransfer;
 
+    @SerializedName("bizum")
+    Bizum bizum;
+
     @SerializedName("blik")
     Blik blik;
 
@@ -758,6 +789,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("type")
     String type;
 
+    @SerializedName("upi")
+    Upi upi;
+
     @SerializedName("us_bank_transfer")
     UsBankTransfer usBankTransfer;
 
@@ -831,6 +865,26 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AuBankTransfer extends StripeObject {}
+
+    /**
+     * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -1287,6 +1341,26 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     public static class Twint extends StripeObject {}
 
     /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    /**
      * For more details about UsBankTransfer, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1455,15 +1529,13 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(destinationDetails, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
-    trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
-    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(sourceTransferReversal, responseGetter);
     trySetResponseGetter(transferReversal, responseGetter);
   }

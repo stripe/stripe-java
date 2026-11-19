@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.BalanceSettingsRetrieveParams;
 import com.stripe.param.BalanceSettingsUpdateParams;
 import java.util.List;
@@ -337,11 +336,5 @@ public class BalanceSettings extends ApiResource {
         String timezone;
       }
     }
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(payments, responseGetter);
   }
 }

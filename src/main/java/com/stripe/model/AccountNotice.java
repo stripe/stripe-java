@@ -8,7 +8,6 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.AccountNoticeListParams;
 import com.stripe.param.AccountNoticeRetrieveParams;
 import com.stripe.param.AccountNoticeUpdateParams;
@@ -269,12 +268,5 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
     /** Associated <a href="https://docs.stripe.com/api/issuing/disputes">Issuing Dispute.</a> */
     @SerializedName("issuing_dispute")
     String issuingDispute;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(email, responseGetter);
-    trySetResponseGetter(linkedObjects, responseGetter);
   }
 }

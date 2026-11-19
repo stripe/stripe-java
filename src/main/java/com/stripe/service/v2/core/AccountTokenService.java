@@ -21,9 +21,9 @@ public final class AccountTokenService extends ApiService {
   /**
    * Create an account token with a publishable key and pass it to the Accounts v2 API to create or
    * update an account without its data touching your server. Learn more about <a
-   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you can
-   * only create account tokens with your application's publishable key. In test mode, you can
-   * create account tokens with your secret key or publishable key.
+   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you
+   * must create account tokens using a live publishable key. In a sandbox, you can create account
+   * tokens with secret or publishable keys.
    */
   public AccountToken create(AccountTokenCreateParams params)
       throws StripeException, RateLimitException {
@@ -32,9 +32,9 @@ public final class AccountTokenService extends ApiService {
   /**
    * Create an account token with a publishable key and pass it to the Accounts v2 API to create or
    * update an account without its data touching your server. Learn more about <a
-   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you can
-   * only create account tokens with your application's publishable key. In test mode, you can
-   * create account tokens with your secret key or publishable key.
+   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you
+   * must create account tokens using a live publishable key. In a sandbox, you can create account
+   * tokens with secret or publishable keys.
    */
   public AccountToken create(RequestOptions options) throws StripeException, RateLimitException {
     return create((AccountTokenCreateParams) null, options);
@@ -42,9 +42,9 @@ public final class AccountTokenService extends ApiService {
   /**
    * Create an account token with a publishable key and pass it to the Accounts v2 API to create or
    * update an account without its data touching your server. Learn more about <a
-   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you can
-   * only create account tokens with your application's publishable key. In test mode, you can
-   * create account tokens with your secret key or publishable key.
+   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you
+   * must create account tokens using a live publishable key. In a sandbox, you can create account
+   * tokens with secret or publishable keys.
    */
   public AccountToken create() throws StripeException, RateLimitException {
     return create((AccountTokenCreateParams) null, (RequestOptions) null);
@@ -52,9 +52,9 @@ public final class AccountTokenService extends ApiService {
   /**
    * Create an account token with a publishable key and pass it to the Accounts v2 API to create or
    * update an account without its data touching your server. Learn more about <a
-   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you can
-   * only create account tokens with your application's publishable key. In test mode, you can
-   * create account tokens with your secret key or publishable key.
+   * href="https://docs.stripe.com/connect/account-tokens">account tokens</a>. In live mode, you
+   * must create account tokens using a live publishable key. In a sandbox, you can create account
+   * tokens with secret or publishable keys.
    */
   public AccountToken create(AccountTokenCreateParams params, RequestOptions options)
       throws StripeException, RateLimitException {

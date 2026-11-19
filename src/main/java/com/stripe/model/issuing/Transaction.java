@@ -1075,18 +1075,12 @@ public class Transaction extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(authorization, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
     trySetResponseGetter(dispute, responseGetter);
-    trySetResponseGetter(merchantData, responseGetter);
-    trySetResponseGetter(networkData, responseGetter);
-    trySetResponseGetter(purchaseDetails, responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(settlement, responseGetter);
     trySetResponseGetter(token, responseGetter);
-    trySetResponseGetter(treasury, responseGetter);
   }
 }

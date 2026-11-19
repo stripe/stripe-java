@@ -57,8 +57,10 @@ public class Account extends StripeObject implements HasId {
   Instant created;
 
   /**
-   * A value indicating the Stripe dashboard this Account has access to. This will depend on which
-   * configurations are enabled for this account.
+   * Specifies the account's Stripe-hosted Dashboard access. Available values depend on the
+   * configurations enabled for the account. Learn more about <a
+   * href="https://docs.stripe.com/connect/accounts-v2/connected-account-configuration#set-dashboard-access">configuring
+   * Dashboard access</a>.
    *
    * <p>One of {@code express}, {@code full}, or {@code none}.
    */
@@ -532,6 +534,10 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("mcc")
       String mcc;
 
+      /** Settings for PayPay payments. */
+      @SerializedName("paypay_payments")
+      PaypayPayments paypayPayments;
+
       /** Settings for the default text that appears on statements for language variations. */
       @SerializedName("script_statement_descriptor")
       ScriptStatementDescriptor scriptStatementDescriptor;
@@ -639,6 +645,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("bancontact_payments")
         BancontactPayments bancontactPayments;
 
+        /** Allow the merchant to process Billie payments. */
+        @SerializedName("billie_payments")
+        BilliePayments billiePayments;
+
         /** Allow the merchant to process BLIK payments. */
         @SerializedName("blik_payments")
         BlikPayments blikPayments;
@@ -711,6 +721,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("link_payments")
         LinkPayments linkPayments;
 
+        /** Allow the merchant to process MB WAY payments. */
+        @SerializedName("mb_way_payments")
+        MbWayPayments mbWayPayments;
+
         /** Allow the merchant to process MobilePay payments. */
         @SerializedName("mobilepay_payments")
         MobilepayPayments mobilepayPayments;
@@ -726,6 +740,10 @@ public class Account extends StripeObject implements HasId {
         /** Allow the merchant to process Naver Pay payments. */
         @SerializedName("naver_pay_payments")
         NaverPayPayments naverPayPayments;
+
+        /** Allow the merchant to process New Zealand BECS Direct Debit payments. */
+        @SerializedName("nz_bank_account_becs_debit_payments")
+        NzBankAccountBecsDebitPayments nzBankAccountBecsDebitPayments;
 
         /** Allow the merchant to process OXXO payments. */
         @SerializedName("oxxo_payments")
@@ -746,6 +764,14 @@ public class Account extends StripeObject implements HasId {
         /** Allow the merchant to process PayNow payments. */
         @SerializedName("paynow_payments")
         PaynowPayments paynowPayments;
+
+        /** Allow the merchant to process PayPay payments. */
+        @SerializedName("paypay_payments")
+        PaypayPayments paypayPayments;
+
+        /** Allow the merchant to process Pix payments. */
+        @SerializedName("pix_payments")
+        PixPayments pixPayments;
 
         /** Allow the merchant to process PromptPay payments. */
         @SerializedName("promptpay_payments")
@@ -1258,6 +1284,61 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.BancontactPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process Billie payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BilliePayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.BilliePayments.StatusDetail>
               statusDetails;
 
           /**
@@ -2277,6 +2358,61 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
+        /** Allow the merchant to process MB WAY payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MbWayPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.MbWayPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
         /** Allow the merchant to process MobilePay payments. */
         @Getter
         @Setter
@@ -2462,6 +2598,63 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.NaverPayPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process New Zealand BECS Direct Debit payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class NzBankAccountBecsDebitPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<
+                  Account.Configuration.Merchant.Capabilities.NzBankAccountBecsDebitPayments
+                      .StatusDetail>
               statusDetails;
 
           /**
@@ -2736,6 +2929,115 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.PaynowPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process PayPay payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PaypayPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.PaypayPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process Pix payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PixPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.PixPayments.StatusDetail> statusDetails;
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3537,6 +3839,10 @@ public class Account extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class KonbiniPayments extends StripeObject {
+        /** Information provided to support the onboarding process for Konbini payments. */
+        @SerializedName("additional_material")
+        String additionalMaterial;
+
         /** Support for Konbini payments. */
         @SerializedName("support")
         Support support;
@@ -3570,6 +3876,88 @@ public class Account extends StripeObject implements HasId {
             /** Support hours start time (JST time of day) for in {@code HH:MM} format. */
             @SerializedName("start_time")
             String startTime;
+          }
+        }
+      }
+
+      /** Settings for PayPay payments. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaypayPayments extends StripeObject {
+        /** Additional files supporting PayPay payments configuration. */
+        @SerializedName("additional_files")
+        List<String> additionalFiles;
+
+        /**
+         * The type of goods sold by the merchant for PayPay payments.
+         *
+         * <p>One of {@code digital_content}, or {@code other}.
+         */
+        @SerializedName("goods_type")
+        String goodsType;
+
+        /** The business's website for PayPay payments. */
+        @SerializedName("site")
+        Site site;
+
+        /** URL to the Specified Commercial Transactions Act page for PayPay payments. */
+        @SerializedName("specified_commercial_transactions_act_url")
+        String specifiedCommercialTransactionsActUrl;
+
+        /** The business's website for PayPay payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Site extends StripeObject {
+          /** Additional information about the business's website when it's accessible. */
+          @SerializedName("accessible")
+          Accessible accessible;
+
+          /** Additional information about the business's website when it's in development. */
+          @SerializedName("in_development")
+          InDevelopment inDevelopment;
+
+          /** Additional information about the business's website when it has restricted access. */
+          @SerializedName("restricted")
+          Restricted restricted;
+
+          /**
+           * The status of the business's website.
+           *
+           * <p>One of {@code accessible}, {@code in_development}, or {@code restricted}.
+           */
+          @SerializedName("type")
+          String type;
+
+          /** Additional information about the business's website when it's accessible. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Accessible extends StripeObject {}
+
+          /** Additional information about the business's website when it's in development. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class InDevelopment extends StripeObject {
+            /** Whether a password needed to access the business's website has been provided. */
+            @SerializedName("password_provided")
+            Boolean passwordProvided;
+
+            /** The username needed to access the business's website. */
+            @SerializedName("username")
+            String username;
+          }
+
+          /** Additional information about the business's website when it has restricted access. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Restricted extends StripeObject {
+            /** The file explaining the payment flow for the business. */
+            @SerializedName("payment_flow_file")
+            String paymentFlowFile;
           }
         }
       }
@@ -5864,8 +6252,13 @@ public class Account extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Responsibilities extends StripeObject {
       /**
-       * Indicates whether the platform or connected account is responsible for paying Stripe fees
-       * for pricing-control-eligible products.
+       * Controls who pays Stripe fees for direct charges and other pricing-control-eligible Stripe
+       * products. For new integrations, setting {@code losses_collector=application} requires
+       * {@code fees_collector=application}; legacy Custom and Express accounts can also use {@code
+       * application_custom} or {@code application_express}. For destination charges and separate
+       * charges and transfers, Stripe bills the platform regardless of this setting. Learn more
+       * about <a href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee
+       * behavior on connected accounts</a>, including application fees and pricing considerations.
        *
        * <p>One of {@code application}, {@code application_custom}, {@code application_express}, or
        * {@code stripe}.
@@ -5874,7 +6267,11 @@ public class Account extends StripeObject implements HasId {
       String feesCollector;
 
       /**
-       * A value indicating the responsibility for losses on this account.
+       * Controls who is responsible for payment-related negative balances on this account. The
+       * platform remains liable for negative balances on its own account. To use Stripe negative
+       * balance liability, your integration must meet <a
+       * href="https://docs.stripe.com/connect/risk-management/managed-risk">Managed Risk
+       * requirements</a>.
        *
        * <p>One of {@code application}, or {@code stripe}.
        */
@@ -6298,30 +6695,32 @@ public class Account extends StripeObject implements HasId {
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
            * {@code bank_accounts.fedwire}, {@code bank_accounts.fps}, {@code bank_accounts.local},
            * {@code bank_accounts.rtp}, {@code bank_accounts.sepa}, {@code bank_accounts.swift},
-           * {@code bank_accounts.wire}, {@code blik_payments}, {@code blik_recurring_payments},
-           * {@code boleto_payments}, {@code business_storage.inbound.eur}, {@code
-           * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
-           * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
-           * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
-           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code crypto_wallets}, {@code
-           * eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
+           * {@code bank_accounts.wire}, {@code billie_payments}, {@code blik_payments}, {@code
+           * blik_recurring_payments}, {@code boleto_payments}, {@code
+           * business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
+           * business_storage.inbound.usd}, {@code business_storage.outbound.eur}, {@code
+           * business_storage.outbound.gbp}, {@code business_storage.outbound.usd}, {@code cards},
+           * {@code card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments},
+           * {@code crypto_wallets}, {@code eps_payments}, {@code
+           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
            * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
            * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
            * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
            * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
            * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
-           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
+           * mb_way_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
+           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
+           * nz_bank_account_becs_debit_payments}, {@code outbound_payments.bank_accounts}, {@code
            * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
            * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
            * {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code
-           * paynow_payments}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
-           * received_credits.bank_accounts}, {@code received_debits.bank_accounts}, {@code
-           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code satispay_payments}, {@code
-           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
-           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
-           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
-           * zip_payments}.
+           * paynow_payments}, {@code paypay_payments}, {@code pay_by_bank_payments}, {@code
+           * pix_payments}, {@code promptpay_payments}, {@code received_credits.bank_accounts},
+           * {@code received_debits.bank_accounts}, {@code revolut_pay_payments}, {@code
+           * samsung_pay_payments}, {@code satispay_payments}, {@code sepa_bank_transfer_payments},
+           * {@code sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
+           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
+           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
            */
           @SerializedName("capability")
           String capability;
@@ -8590,30 +8989,32 @@ public class Account extends StripeObject implements HasId {
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
            * {@code bank_accounts.fedwire}, {@code bank_accounts.fps}, {@code bank_accounts.local},
            * {@code bank_accounts.rtp}, {@code bank_accounts.sepa}, {@code bank_accounts.swift},
-           * {@code bank_accounts.wire}, {@code blik_payments}, {@code blik_recurring_payments},
-           * {@code boleto_payments}, {@code business_storage.inbound.eur}, {@code
-           * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
-           * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
-           * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
-           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code crypto_wallets}, {@code
-           * eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
+           * {@code bank_accounts.wire}, {@code billie_payments}, {@code blik_payments}, {@code
+           * blik_recurring_payments}, {@code boleto_payments}, {@code
+           * business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
+           * business_storage.inbound.usd}, {@code business_storage.outbound.eur}, {@code
+           * business_storage.outbound.gbp}, {@code business_storage.outbound.usd}, {@code cards},
+           * {@code card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments},
+           * {@code crypto_wallets}, {@code eps_payments}, {@code
+           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
            * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
            * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
            * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
            * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
            * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
-           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
+           * mb_way_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
+           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
+           * nz_bank_account_becs_debit_payments}, {@code outbound_payments.bank_accounts}, {@code
            * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
            * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
            * {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code
-           * paynow_payments}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
-           * received_credits.bank_accounts}, {@code received_debits.bank_accounts}, {@code
-           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code satispay_payments}, {@code
-           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
-           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
-           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
-           * zip_payments}.
+           * paynow_payments}, {@code paypay_payments}, {@code pay_by_bank_payments}, {@code
+           * pix_payments}, {@code promptpay_payments}, {@code received_credits.bank_accounts},
+           * {@code received_debits.bank_accounts}, {@code revolut_pay_payments}, {@code
+           * samsung_pay_payments}, {@code satispay_payments}, {@code sepa_bank_transfer_payments},
+           * {@code sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
+           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
+           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
            */
           @SerializedName("capability")
           String capability;

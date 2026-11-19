@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.billing;
+package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class CadenceRetrieveParams extends ApiRequestParams {
+public class ClaimableSandboxRetrieveParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -22,12 +22,12 @@ public class CadenceRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Additional resource to include in the response. */
+  /** Additional fields to include in the response. */
   @SerializedName("include")
-  List<CadenceRetrieveParams.Include> include;
+  List<ClaimableSandboxRetrieveParams.Include> include;
 
-  private CadenceRetrieveParams(
-      Map<String, Object> extraParams, List<CadenceRetrieveParams.Include> include) {
+  private ClaimableSandboxRetrieveParams(
+      Map<String, Object> extraParams, List<ClaimableSandboxRetrieveParams.Include> include) {
     this.extraParams = extraParams;
     this.include = include;
   }
@@ -39,17 +39,17 @@ public class CadenceRetrieveParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private List<CadenceRetrieveParams.Include> include;
+    private List<ClaimableSandboxRetrieveParams.Include> include;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CadenceRetrieveParams build() {
-      return new CadenceRetrieveParams(this.extraParams, this.include);
+    public ClaimableSandboxRetrieveParams build() {
+      return new ClaimableSandboxRetrieveParams(this.extraParams, this.include);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CadenceRetrieveParams#extraParams} for the field documentation.
+     * ClaimableSandboxRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -62,7 +62,7 @@ public class CadenceRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CadenceRetrieveParams#extraParams} for the field documentation.
+     * See {@link ClaimableSandboxRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -75,9 +75,9 @@ public class CadenceRetrieveParams extends ApiRequestParams {
     /**
      * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CadenceRetrieveParams#include} for the field documentation.
+     * ClaimableSandboxRetrieveParams#include} for the field documentation.
      */
-    public Builder addInclude(CadenceRetrieveParams.Include element) {
+    public Builder addInclude(ClaimableSandboxRetrieveParams.Include element) {
       if (this.include == null) {
         this.include = new ArrayList<>();
       }
@@ -88,9 +88,9 @@ public class CadenceRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * CadenceRetrieveParams#include} for the field documentation.
+     * ClaimableSandboxRetrieveParams#include} for the field documentation.
      */
-    public Builder addAllInclude(List<CadenceRetrieveParams.Include> elements) {
+    public Builder addAllInclude(List<ClaimableSandboxRetrieveParams.Include> elements) {
       if (this.include == null) {
         this.include = new ArrayList<>();
       }
@@ -100,8 +100,8 @@ public class CadenceRetrieveParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
-    @SerializedName("settings_data")
-    SETTINGS_DATA("settings_data");
+    @SerializedName("sandbox_details.api_keys")
+    SANDBOX_DETAILS__API_KEYS("sandbox_details.api_keys");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

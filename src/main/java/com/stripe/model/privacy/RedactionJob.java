@@ -585,7 +585,6 @@ public class RedactionJob extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(objects, responseGetter);
     trySetResponseGetter(validationErrors, responseGetter);
   }
 }
