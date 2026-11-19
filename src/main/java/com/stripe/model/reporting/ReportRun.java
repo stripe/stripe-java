@@ -260,6 +260,10 @@ public class ReportRun extends ApiResource implements HasId {
     @SerializedName("reporting_category")
     String reportingCategory;
 
+    /** The tax invoice month in YYYY-MM format. */
+    @SerializedName("tax_invoice_month")
+    String taxInvoiceMonth;
+
     /**
      * Defaults to {@code Etc/UTC}. The output timezone for all timestamps in the report. A list of
      * possible time zone values is maintained at the <a href="http://www.iana.org/time-zones">IANA

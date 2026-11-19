@@ -352,6 +352,40 @@ public class InboundTransfer extends ApiResource implements HasId {
      */
     @SerializedName("code")
     String code;
+
+    /** Money movement network-specific details regarding the failure. */
+    @SerializedName("network_details")
+    NetworkDetails networkDetails;
+
+    /**
+     * For more details about NetworkDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkDetails extends StripeObject {
+      /** ACH return details. */
+      @SerializedName("ach")
+      Ach ach;
+
+      /**
+       * For more details about Ach, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ach extends StripeObject {
+        /** NACHA ACH return code. */
+        @SerializedName("return_code")
+        String returnCode;
+
+        /** NACHA ACH return reason. */
+        @SerializedName("return_reason")
+        String returnReason;
+      }
+    }
   }
 
   /**
@@ -541,32 +575,32 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code failed} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code failed} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer fail() throws StripeException {
       return fail((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code failed} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code failed} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer fail(RequestOptions options) throws StripeException {
       return fail((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code failed} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code failed} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer fail(Map<String, Object> params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code failed} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code failed} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer fail(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -580,16 +614,16 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code failed} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code failed} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer fail(InboundTransferFailParams params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code failed} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code failed} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer fail(InboundTransferFailParams params, RequestOptions options)
         throws StripeException {
@@ -609,24 +643,27 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the {@code succeeded} state.
+     * Marks the test {@code InboundTransfer} object as returned and links the {@code
+     * InboundTransfer} to a {@code ReceivedDebit}. The {@code InboundTransfer} must already be in
+     * the {@code succeeded} state.
      */
     public InboundTransfer returnInboundTransfer() throws StripeException {
       return returnInboundTransfer((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the {@code succeeded} state.
+     * Marks the test {@code InboundTransfer} object as returned and links the {@code
+     * InboundTransfer} to a {@code ReceivedDebit}. The {@code InboundTransfer} must already be in
+     * the {@code succeeded} state.
      */
     public InboundTransfer returnInboundTransfer(RequestOptions options) throws StripeException {
       return returnInboundTransfer((Map<String, Object>) null, options);
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the {@code succeeded} state.
+     * Marks the test {@code InboundTransfer} object as returned and links the {@code
+     * InboundTransfer} to a {@code ReceivedDebit}. The {@code InboundTransfer} must already be in
+     * the {@code succeeded} state.
      */
     public InboundTransfer returnInboundTransfer(Map<String, Object> params)
         throws StripeException {
@@ -634,8 +671,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the {@code succeeded} state.
+     * Marks the test {@code InboundTransfer} object as returned and links the {@code
+     * InboundTransfer} to a {@code ReceivedDebit}. The {@code InboundTransfer} must already be in
+     * the {@code succeeded} state.
      */
     public InboundTransfer returnInboundTransfer(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -649,8 +687,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the {@code succeeded} state.
+     * Marks the test {@code InboundTransfer} object as returned and links the {@code
+     * InboundTransfer} to a {@code ReceivedDebit}. The {@code InboundTransfer} must already be in
+     * the {@code succeeded} state.
      */
     public InboundTransfer returnInboundTransfer(InboundTransferReturnInboundTransferParams params)
         throws StripeException {
@@ -658,8 +697,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the {@code succeeded} state.
+     * Marks the test {@code InboundTransfer} object as returned and links the {@code
+     * InboundTransfer} to a {@code ReceivedDebit}. The {@code InboundTransfer} must already be in
+     * the {@code succeeded} state.
      */
     public InboundTransfer returnInboundTransfer(
         InboundTransferReturnInboundTransferParams params, RequestOptions options)
@@ -680,32 +720,32 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code succeeded} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer succeed() throws StripeException {
       return succeed((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code succeeded} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer succeed(RequestOptions options) throws StripeException {
       return succeed((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code succeeded} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer succeed(Map<String, Object> params) throws StripeException {
       return succeed(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code succeeded} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer succeed(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -719,16 +759,16 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code succeeded} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer succeed(InboundTransferSucceedParams params) throws StripeException {
       return succeed(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the {@code succeeded} status. The
-     * InboundTransfer must already be in the {@code processing} state.
+     * Transitions a test {@code InboundTransfer} to the {@code succeeded} status. The {@code
+     * InboundTransfer} must already be in the {@code processing} state.
      */
     public InboundTransfer succeed(InboundTransferSucceedParams params, RequestOptions options)
         throws StripeException {

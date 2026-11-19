@@ -809,6 +809,21 @@ public final class EventNotificationClassLookup {
         "v2.core.account_person.updated",
         com.stripe.events.V2CoreAccountPersonUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.claimable_sandbox.claimed",
+        com.stripe.events.V2CoreClaimableSandboxClaimedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.created",
+        com.stripe.events.V2CoreClaimableSandboxCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expired",
+        com.stripe.events.V2CoreClaimableSandboxExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expiring",
+        com.stripe.events.V2CoreClaimableSandboxExpiringEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.updated",
+        com.stripe.events.V2CoreClaimableSandboxUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.core.event_destination.ping",
         com.stripe.events.V2CoreEventDestinationPingEventNotification.class);
     eventClassLookup.put(
