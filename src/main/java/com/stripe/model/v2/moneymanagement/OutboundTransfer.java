@@ -85,14 +85,6 @@ public class OutboundTransfer extends StripeObject implements HasId {
   String object;
 
   /**
-   * A link to the Stripe-hosted receipt for this OutboundTransfer. The receipt link remains active
-   * for 60 days from the OutboundTransfer creation date. After this period, the link will expire
-   * and the receipt url value will be null.
-   */
-  @SerializedName("receipt_url")
-  String receiptUrl;
-
-  /**
    * The description that appears on the receiving end for an OutboundTransfer (for example, bank
    * statement for external bank transfer). It will default to {@code STRIPE} if not set on the
    * account settings.
@@ -195,8 +187,9 @@ public class OutboundTransfer extends StripeObject implements HasId {
        * <p>One of {@code fx_rate_drift_exceeded_after_review}, {@code
        * payout_method_amount_limit_exceeded}, {@code payout_method_declined}, {@code
        * payout_method_does_not_exist}, {@code payout_method_expired}, {@code
-       * payout_method_unsupported}, {@code payout_method_usage_frequency_limit_exceeded}, {@code
-       * review_rejected}, or {@code unknown_failure}.
+       * payout_method_invalid_account_number}, {@code payout_method_unsupported}, {@code
+       * payout_method_usage_frequency_limit_exceeded}, {@code review_rejected}, or {@code
+       * unknown_failure}.
        */
       @SerializedName("reason")
       String reason;
@@ -224,7 +217,8 @@ public class OutboundTransfer extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code returned} status reason.
        *
-       * <p>One of {@code payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
+       * <p>One of {@code payout_method_account_type_incorrect}, {@code
+       * payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
        * payout_method_currency_unsupported}, {@code payout_method_does_not_exist}, {@code
        * payout_method_holder_address_incorrect}, {@code payout_method_holder_details_incorrect},
        * {@code payout_method_holder_name_incorrect}, {@code payout_method_invalid_account_number},

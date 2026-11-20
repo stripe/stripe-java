@@ -80,13 +80,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
   String object;
 
   /**
-   * A hosted transaction receipt URL that is provided when money movement is considered regulated
-   * under Stripe’s money transmission licenses.
-   */
-  @SerializedName("receipt_url")
-  String receiptUrl;
-
-  /**
    * Open Enum. The status of the ReceivedCredit.
    *
    * <p>One of {@code failed}, {@code pending}, {@code returned}, or {@code succeeded}.

@@ -65,10 +65,6 @@ public class ReceivedDebit extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** A link to the Stripe-hosted receipt for this ReceivedDebit. */
-  @SerializedName("receipt_url")
-  String receiptUrl;
-
   /**
    * Open Enum. The status of the ReceivedDebit.
    *

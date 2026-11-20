@@ -13,6 +13,9 @@ import com.stripe.events.V1AccountUpdatedEventNotification;
 import com.stripe.events.V1ApplicationFeeCreatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundUpdatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundedEventNotification;
+import com.stripe.events.V1AppsInstallCreatedEventNotification;
+import com.stripe.events.V1AppsInstallDeletedEventNotification;
+import com.stripe.events.V1AppsInstallUpdatedEventNotification;
 import com.stripe.events.V1BalanceAvailableEventNotification;
 import com.stripe.events.V1BalanceSettingsUpdatedEventNotification;
 import com.stripe.events.V1BillingAlertTriggeredEventNotification;
@@ -156,7 +159,6 @@ import com.stripe.events.V1InvoiceitemDeletedEventNotification;
 import com.stripe.events.V1InvoiceitemDiscountAddedEventNotification;
 import com.stripe.events.V1InvoiceitemDiscountRemovedEventNotification;
 import com.stripe.events.V1IssuingAuthorizationCreatedEventNotification;
-import com.stripe.events.V1IssuingAuthorizationRequestEventNotification;
 import com.stripe.events.V1IssuingAuthorizationUpdatedEventNotification;
 import com.stripe.events.V1IssuingCardCreatedEventNotification;
 import com.stripe.events.V1IssuingCardUpdatedEventNotification;
@@ -386,6 +388,14 @@ import com.stripe.events.V2OrchestratedCommerceAgreementConfirmedEventNotificati
 import com.stripe.events.V2OrchestratedCommerceAgreementCreatedEventNotification;
 import com.stripe.events.V2OrchestratedCommerceAgreementPartiallyConfirmedEventNotification;
 import com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentAttemptFailedEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentAttemptStartedEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentCanceledEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentCreatedEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentPausedEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentResumedEventNotification;
+import com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification;
 import com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification;
 import com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalFraudulentWebsiteReadyEventNotification;
@@ -555,6 +565,24 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1ApplicationFeeRefunded(
       EventNotificationCallback<V1ApplicationFeeRefundedEventNotification> callback) {
     this.register("v1.application_fee.refunded", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallCreated(
+      EventNotificationCallback<V1AppsInstallCreatedEventNotification> callback) {
+    this.register("v1.apps.install.created", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallDeleted(
+      EventNotificationCallback<V1AppsInstallDeletedEventNotification> callback) {
+    this.register("v1.apps.install.deleted", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallUpdated(
+      EventNotificationCallback<V1AppsInstallUpdatedEventNotification> callback) {
+    this.register("v1.apps.install.updated", callback);
     return self();
   }
 
@@ -1451,12 +1479,6 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1IssuingAuthorizationCreated(
       EventNotificationCallback<V1IssuingAuthorizationCreatedEventNotification> callback) {
     this.register("v1.issuing_authorization.created", callback);
-    return self();
-  }
-
-  public T onV1IssuingAuthorizationRequest(
-      EventNotificationCallback<V1IssuingAuthorizationRequestEventNotification> callback) {
-    this.register("v1.issuing_authorization.request", callback);
     return self();
   }
 
@@ -2866,6 +2888,56 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V2OrchestratedCommerceAgreementTerminatedEventNotification>
           callback) {
     this.register("v2.orchestrated_commerce.agreement.terminated", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentAttemptFailed(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentAttemptFailedEventNotification>
+          callback) {
+    this.register("v2.payments.off_session_payment.attempt_failed", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentAttemptStarted(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentAttemptStartedEventNotification>
+          callback) {
+    this.register("v2.payments.off_session_payment.attempt_started", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentCanceled(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentCanceledEventNotification> callback) {
+    this.register("v2.payments.off_session_payment.canceled", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentCreated(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentCreatedEventNotification> callback) {
+    this.register("v2.payments.off_session_payment.created", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentFailed(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentFailedEventNotification> callback) {
+    this.register("v2.payments.off_session_payment.failed", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentPaused(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentPausedEventNotification> callback) {
+    this.register("v2.payments.off_session_payment.paused", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentResumed(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentResumedEventNotification> callback) {
+    this.register("v2.payments.off_session_payment.resumed", callback);
+    return self();
+  }
+
+  public T onV2PaymentsOffSessionPaymentSucceeded(
+      EventNotificationCallback<V2PaymentsOffSessionPaymentSucceededEventNotification> callback) {
+    this.register("v2.payments.off_session_payment.succeeded", callback);
     return self();
   }
 

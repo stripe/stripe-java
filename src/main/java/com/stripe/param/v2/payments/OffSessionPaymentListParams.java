@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.billing.billsettings;
+package com.stripe.param.v2.payments;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class VersionListParams extends ApiRequestParams {
+public class OffSessionPaymentListParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -20,11 +20,11 @@ public class VersionListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Optionally set the maximum number of results per page. Defaults to 20. */
+  /** The page size limit. If not provided, the default is 20. */
   @SerializedName("limit")
   Long limit;
 
-  private VersionListParams(Map<String, Object> extraParams, Long limit) {
+  private OffSessionPaymentListParams(Map<String, Object> extraParams, Long limit) {
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -39,14 +39,14 @@ public class VersionListParams extends ApiRequestParams {
     private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public VersionListParams build() {
-      return new VersionListParams(this.extraParams, this.limit);
+    public OffSessionPaymentListParams build() {
+      return new OffSessionPaymentListParams(this.extraParams, this.limit);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * VersionListParams#extraParams} for the field documentation.
+     * OffSessionPaymentListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -59,7 +59,7 @@ public class VersionListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link VersionListParams#extraParams} for the field documentation.
+     * See {@link OffSessionPaymentListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -69,7 +69,7 @@ public class VersionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Optionally set the maximum number of results per page. Defaults to 20. */
+    /** The page size limit. If not provided, the default is 20. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;

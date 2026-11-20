@@ -23367,6 +23367,9 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public enum Locale implements ApiRequestParams.EnumParam {
+    @SerializedName("ar")
+    AR("ar"),
+
     @SerializedName("auto")
     AUTO("auto"),
 
@@ -23411,6 +23414,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("fr-CA")
     FR_CA("fr-CA"),
+
+    @SerializedName("he")
+    HE("he"),
 
     @SerializedName("hi-IN")
     HI_IN("hi-IN"),

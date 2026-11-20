@@ -43,6 +43,12 @@ public final class EventNotificationClassLookup {
         "v1.application_fee.refunded",
         com.stripe.events.V1ApplicationFeeRefundedEventNotification.class);
     eventClassLookup.put(
+        "v1.apps.install.created", com.stripe.events.V1AppsInstallCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.apps.install.deleted", com.stripe.events.V1AppsInstallDeletedEventNotification.class);
+    eventClassLookup.put(
+        "v1.apps.install.updated", com.stripe.events.V1AppsInstallUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v1.balance.available", com.stripe.events.V1BalanceAvailableEventNotification.class);
     eventClassLookup.put(
         "v1.balance_settings.updated",
@@ -445,9 +451,6 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.issuing_authorization.created",
         com.stripe.events.V1IssuingAuthorizationCreatedEventNotification.class);
-    eventClassLookup.put(
-        "v1.issuing_authorization.request",
-        com.stripe.events.V1IssuingAuthorizationRequestEventNotification.class);
     eventClassLookup.put(
         "v1.issuing_authorization.updated",
         com.stripe.events.V1IssuingAuthorizationUpdatedEventNotification.class);
@@ -1088,6 +1091,30 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.orchestrated_commerce.agreement.terminated",
         com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.attempt_failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentAttemptFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.attempt_started",
+        com.stripe.events.V2PaymentsOffSessionPaymentAttemptStartedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.canceled",
+        com.stripe.events.V2PaymentsOffSessionPaymentCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.created",
+        com.stripe.events.V2PaymentsOffSessionPaymentCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.paused",
+        com.stripe.events.V2PaymentsOffSessionPaymentPausedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.resumed",
+        com.stripe.events.V2PaymentsOffSessionPaymentResumedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.succeeded",
+        com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification.class);
     eventClassLookup.put(
         "v2.signals.account_evaluation.complete",
         com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification.class);

@@ -80,12 +80,22 @@ public class QueryRun extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Result extends StripeObject {
+    /** The number of columns in the file. */
+    @SerializedName("col_count")
+    @JsonAdapter(StringInt64TypeAdapter.class)
+    Long colCount;
+
     /**
      * Contains metadata about the file produced by the {@code ReportRun} or {@code QueryRun},
      * including its content type, size, and a URL to download its contents.
      */
     @SerializedName("file")
     File file;
+
+    /** The number of data rows in the file, excluding the column header row. */
+    @SerializedName("row_count")
+    @JsonAdapter(StringInt64TypeAdapter.class)
+    Long rowCount;
 
     /**
      * The type of the {@code ReportRun} or {@code QueryRun} result.

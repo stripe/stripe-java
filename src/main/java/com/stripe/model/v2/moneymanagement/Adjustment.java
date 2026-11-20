@@ -68,14 +68,6 @@ public class Adjustment extends StripeObject implements HasId {
   String object;
 
   /**
-   * A link to the Stripe-hosted receipt provided when money movement is regulated under Stripe's
-   * money transmission licenses. You can use this link to view the receipt for 60 days after the
-   * Adjustment is created. After that, the link expires and {@code receipt_url} is {@code null}.
-   */
-  @SerializedName("receipt_url")
-  String receiptUrl;
-
-  /**
    * Details about the original flow object linked to this Adjustment, if applicable. {@code
    * adjusted_flow.type} identifies the kind of object. The corresponding field contains its ID: for
    * an InboundTransfer, {@code adjusted_flow.inbound_transfer} contains the InboundTransfer's ID.

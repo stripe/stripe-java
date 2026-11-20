@@ -140,6 +140,9 @@ public abstract class StripeException extends Exception {
       case "fx_quote_needs_refresh":
         return com.stripe.exception.FxQuoteNeedsRefreshException.parse(
             body, statusCode, requestId, responseGetter);
+      case "inactive_api_operation_confirmation_required":
+        return com.stripe.exception.InactiveApiOperationConfirmationRequiredException.parse(
+            body, statusCode, requestId, responseGetter);
       case "insufficient_funds":
         return com.stripe.exception.InsufficientFundsException.parse(
             body, statusCode, requestId, responseGetter);

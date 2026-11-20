@@ -83,16 +83,16 @@ public class ActivityLog extends StripeObject implements HasId {
    * radar_rule_updated}, {@code scim_group_deleted}, {@code scim_group_member_added}, {@code
    * scim_group_member_removed}, {@code scim_group_roles_updated}, {@code scim_group_updated},
    * {@code sso_domain_verified}, {@code sso_settings_created}, {@code sso_settings_deleted}, {@code
-   * sso_settings_updated}, {@code two_step_authentication_mandate_disabled}, {@code
-   * two_step_authentication_mandate_enabled}, {@code user_access_started}, {@code
-   * user_auth_challenge_failed}, {@code user_email_changed}, {@code user_email_verified}, {@code
-   * user_express_phone_number_changed}, {@code user_google_account_connected}, {@code
-   * user_google_account_disconnected}, {@code user_invite_accepted}, {@code user_invite_created},
-   * {@code user_invite_deleted}, {@code user_passkey_added}, {@code user_passkey_removed}, {@code
-   * user_passkey_updated}, {@code user_passkey_upgraded}, {@code user_password_changed}, {@code
-   * user_password_initialized}, {@code user_password_reset_failed}, {@code
-   * user_password_reset_requested}, {@code user_password_reset_succeeded}, {@code
-   * user_roles_deleted}, {@code user_roles_updated}, {@code
+   * sso_settings_updated}, {@code stripe_access_started}, {@code
+   * two_step_authentication_mandate_disabled}, {@code two_step_authentication_mandate_enabled},
+   * {@code user_access_started}, {@code user_auth_challenge_failed}, {@code user_email_changed},
+   * {@code user_email_verified}, {@code user_express_phone_number_changed}, {@code
+   * user_google_account_connected}, {@code user_google_account_disconnected}, {@code
+   * user_invite_accepted}, {@code user_invite_created}, {@code user_invite_deleted}, {@code
+   * user_passkey_added}, {@code user_passkey_removed}, {@code user_passkey_updated}, {@code
+   * user_passkey_upgraded}, {@code user_password_changed}, {@code user_password_initialized},
+   * {@code user_password_reset_failed}, {@code user_password_reset_requested}, {@code
+   * user_password_reset_succeeded}, {@code user_roles_deleted}, {@code user_roles_updated}, {@code
    * user_two_step_authentication_backup_code_used}, {@code
    * user_two_step_authentication_method_added}, {@code
    * user_two_step_authentication_method_removed}, {@code
@@ -111,6 +111,10 @@ public class ActivityLog extends StripeObject implements HasId {
     /** Set when the actor is an API key. */
     @SerializedName("api_key")
     ApiKey apiKey;
+
+    /** Set when a display name is available for an action performed by Stripe. */
+    @SerializedName("stripe_action")
+    StripeAction stripeAction;
 
     /**
      * The type of actor.
@@ -133,6 +137,16 @@ public class ActivityLog extends StripeObject implements HasId {
       @Getter(onMethod_ = {@Override})
       @SerializedName("id")
       String id;
+    }
+
+    /** Set when a display name is available for an action performed by Stripe. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeAction extends StripeObject {
+      /** Public display name captured when the action occurs. */
+      @SerializedName("display_name")
+      String displayName;
     }
 
     /** Set when the actor is a user. */
@@ -187,13 +201,17 @@ public class ActivityLog extends StripeObject implements HasId {
     @SerializedName("sso")
     Sso sso;
 
+    /** Details of a Stripe access action. */
+    @SerializedName("stripe_access")
+    StripeAccess stripeAccess;
+
     /**
      * The action group type of the activity log entry.
      *
      * <p>One of {@code account_security}, {@code api_key}, {@code app}, {@code authentication},
      * {@code connect}, {@code data_export}, {@code event_destination}, {@code issuing}, {@code
-     * payout}, {@code radar}, {@code scim}, {@code sso}, {@code user_access}, {@code user_invite},
-     * {@code user_profile}, or {@code user_roles}.
+     * payout}, {@code radar}, {@code scim}, {@code sso}, {@code stripe_access}, {@code
+     * user_access}, {@code user_invite}, {@code user_profile}, or {@code user_roles}.
      */
     @SerializedName("type")
     String type;
@@ -1006,6 +1024,92 @@ public class ActivityLog extends StripeObject implements HasId {
       String mandate;
     }
 
+    /** Details of a Stripe access action. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeAccess extends StripeObject {
+      /**
+       * The level of Dashboard access granted.
+       *
+       * <p>One of {@code dashboard_read_only}, or {@code dashboard_read_write}.
+       */
+      @SerializedName("access_type")
+      String accessType;
+
+      /** The reason for granting Stripe access. */
+      @SerializedName("reason")
+      Reason reason;
+
+      /** The reason for granting Stripe access. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Reason extends StripeObject {
+        /** Set when access is granted through an access request. */
+        @SerializedName("access_request")
+        AccessRequest accessRequest;
+
+        /** Set when access is granted through a support relationship. */
+        @SerializedName("support_relationship")
+        SupportRelationship supportRelationship;
+
+        /** Set when access is granted through a support ticket. */
+        @SerializedName("support_ticket")
+        SupportTicket supportTicket;
+
+        /**
+         * The type of reason for granting access.
+         *
+         * <p>One of {@code access_request}, {@code support_relationship}, or {@code
+         * support_ticket}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Set when access is granted through an access request. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AccessRequest extends StripeObject implements HasId {
+          /** Identifier of the access request. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+        }
+
+        /** Set when access is granted through a support relationship. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SupportRelationship extends StripeObject implements HasId {
+          /** Identifier of the support relationship. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+
+          /** Name of the support contact, when available. */
+          @SerializedName("name")
+          String name;
+
+          /** Role of the support contact, when available. */
+          @SerializedName("role")
+          String role;
+        }
+
+        /** Set when access is granted through a support ticket. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SupportTicket extends StripeObject implements HasId {
+          /** Identifier of the support ticket. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+        }
+      }
+    }
+
     /** Details of a user access action. */
     @Getter
     @Setter
@@ -1034,7 +1138,7 @@ public class ActivityLog extends StripeObject implements HasId {
       /**
        * Surface where the user access action started.
        *
-       * <p>One of {@code dashboard}, or {@code express}.
+       * <p>One of {@code dashboard}, {@code embedded}, or {@code express}.
        */
       @SerializedName("surface")
       String surface;

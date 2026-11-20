@@ -103,14 +103,6 @@ public class OutboundPayment extends StripeObject implements HasId {
   @SerializedName("purpose")
   String purpose;
 
-  /**
-   * A link to the Stripe-hosted receipt for this OutboundPayment. The receipt link remains active
-   * for 60 days from the OutboundPayment creation date. After this period, the link will expire and
-   * the receipt url value will be null.
-   */
-  @SerializedName("receipt_url")
-  String receiptUrl;
-
   /** Details about the OutboundPayment notification settings for recipient. */
   @SerializedName("recipient_notification")
   RecipientNotification recipientNotification;
@@ -270,7 +262,8 @@ public class OutboundPayment extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code returned} status reason.
        *
-       * <p>One of {@code payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
+       * <p>One of {@code payout_method_account_type_incorrect}, {@code
+       * payout_method_canceled_by_customer}, {@code payout_method_closed}, {@code
        * payout_method_currency_unsupported}, {@code payout_method_does_not_exist}, {@code
        * payout_method_holder_address_incorrect}, {@code payout_method_holder_details_incorrect},
        * {@code payout_method_holder_name_incorrect}, {@code payout_method_invalid_account_number},

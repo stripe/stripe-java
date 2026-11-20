@@ -37,6 +37,13 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   From from;
 
   /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
+  /**
    * <strong>Required.</strong> The FinancialAccount and currency to credit with the transferred
    * funds.
    */
@@ -44,11 +51,17 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   To to;
 
   private InboundTransferCreateParams(
-      Amount amount, String description, Map<String, Object> extraParams, From from, To to) {
+      Amount amount,
+      String description,
+      Map<String, Object> extraParams,
+      From from,
+      Map<String, String> metadata,
+      To to) {
     this.amount = amount;
     this.description = description;
     this.extraParams = extraParams;
     this.from = from;
+    this.metadata = metadata;
     this.to = to;
   }
 
@@ -65,12 +78,14 @@ public class InboundTransferCreateParams extends ApiRequestParams {
 
     private From from;
 
+    private Map<String, String> metadata;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InboundTransferCreateParams build() {
       return new InboundTransferCreateParams(
-          this.amount, this.description, this.extraParams, this.from, this.to);
+          this.amount, this.description, this.extraParams, this.from, this.metadata, this.to);
     }
 
     /** <strong>Required.</strong> The amount and currency to credit to the FinancialAccount. */
@@ -117,6 +132,32 @@ public class InboundTransferCreateParams extends ApiRequestParams {
      */
     public Builder setFrom(InboundTransferCreateParams.From from) {
       this.from = from;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * InboundTransferCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link InboundTransferCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 

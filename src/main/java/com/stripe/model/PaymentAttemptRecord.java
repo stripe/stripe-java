@@ -3586,10 +3586,14 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("custom")
     Custom custom;
 
+    /** Represents the Stripe processor. This resource consists of details specific to Stripe. */
+    @SerializedName("stripe")
+    com.stripe.model.PaymentAttemptRecord.ProcessorDetails.Stripe stripe;
+
     /**
      * The processor used for this payment attempt.
      *
-     * <p>Equal to {@code custom}.
+     * <p>One of {@code custom}, or {@code stripe}.
      */
     @SerializedName("type")
     String type;
@@ -3608,6 +3612,20 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("payment_reference")
       String paymentReference;
+    }
+
+    /** Represents the Stripe processor. This resource consists of details specific to Stripe. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Stripe extends StripeObject {
+      /**
+       * Stripe balance transactions associated with this attempt, in no guaranteed order.
+       * References can appear at submission or after success. On a PaymentRecord, these references
+       * follow the latest attempt.
+       */
+      @SerializedName("derived_balance_transactions")
+      List<String> derivedBalanceTransactions;
     }
   }
 

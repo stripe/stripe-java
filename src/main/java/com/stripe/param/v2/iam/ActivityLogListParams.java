@@ -357,6 +357,9 @@ public class ActivityLogListParams extends ApiRequestParams {
     @SerializedName("sso_settings_updated")
     SSO_SETTINGS_UPDATED("sso_settings_updated"),
 
+    @SerializedName("stripe_access_started")
+    STRIPE_ACCESS_STARTED("stripe_access_started"),
+
     @SerializedName("two_step_authentication_mandate_disabled")
     TWO_STEP_AUTHENTICATION_MANDATE_DISABLED("two_step_authentication_mandate_disabled"),
 
@@ -488,6 +491,9 @@ public class ActivityLogListParams extends ApiRequestParams {
 
     @SerializedName("sso")
     SSO("sso"),
+
+    @SerializedName("stripe_access")
+    STRIPE_ACCESS("stripe_access"),
 
     @SerializedName("user_access")
     USER_ACCESS("user_access"),
