@@ -265,12 +265,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    * The IETF language tag of the locale Checkout is displayed in. If blank or {@code auto}, the
    * browser's locale is used.
    *
-   * <p>One of {@code auto}, {@code bg}, {@code cs}, {@code da}, {@code de}, {@code el}, {@code en},
-   * {@code en-GB}, {@code es}, {@code es-419}, {@code et}, {@code fi}, {@code fil}, {@code fr},
-   * {@code fr-CA}, {@code hi-IN}, {@code hr}, {@code hu}, {@code id}, {@code it}, {@code ja},
-   * {@code ko}, {@code lt}, {@code lv}, {@code ms}, {@code mt}, {@code nb}, {@code nl}, {@code pl},
-   * {@code pt}, {@code pt-BR}, {@code ro}, {@code ru}, {@code sk}, {@code sl}, {@code sv}, {@code
-   * th}, {@code tr}, {@code vi}, {@code zh}, {@code zh-HK}, or {@code zh-TW}.
+   * <p>One of {@code ar}, {@code auto}, {@code bg}, {@code cs}, {@code da}, {@code de}, {@code el},
+   * {@code en}, {@code en-GB}, {@code es}, {@code es-419}, {@code et}, {@code fi}, {@code fil},
+   * {@code fr}, {@code fr-CA}, {@code he}, {@code hi-IN}, {@code hr}, {@code hu}, {@code id},
+   * {@code it}, {@code ja}, {@code ko}, {@code lt}, {@code lv}, {@code ms}, {@code mt}, {@code nb},
+   * {@code nl}, {@code pl}, {@code pt}, {@code pt-BR}, {@code ro}, {@code ru}, {@code sk}, {@code
+   * sl}, {@code sv}, {@code th}, {@code tr}, {@code vi}, {@code zh}, {@code zh-HK}, or {@code
+   * zh-TW}.
    */
   @SerializedName("locale")
   String locale;

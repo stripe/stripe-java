@@ -13,6 +13,9 @@ import com.stripe.events.V1AccountUpdatedEventNotification;
 import com.stripe.events.V1ApplicationFeeCreatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundUpdatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundedEventNotification;
+import com.stripe.events.V1AppsInstallCreatedEventNotification;
+import com.stripe.events.V1AppsInstallDeletedEventNotification;
+import com.stripe.events.V1AppsInstallUpdatedEventNotification;
 import com.stripe.events.V1BalanceAvailableEventNotification;
 import com.stripe.events.V1BalanceSettingsUpdatedEventNotification;
 import com.stripe.events.V1BillingAlertTriggeredEventNotification;
@@ -156,7 +159,6 @@ import com.stripe.events.V1InvoiceitemDeletedEventNotification;
 import com.stripe.events.V1InvoiceitemDiscountAddedEventNotification;
 import com.stripe.events.V1InvoiceitemDiscountRemovedEventNotification;
 import com.stripe.events.V1IssuingAuthorizationCreatedEventNotification;
-import com.stripe.events.V1IssuingAuthorizationRequestEventNotification;
 import com.stripe.events.V1IssuingAuthorizationUpdatedEventNotification;
 import com.stripe.events.V1IssuingCardCreatedEventNotification;
 import com.stripe.events.V1IssuingCardUpdatedEventNotification;
@@ -501,6 +503,24 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1ApplicationFeeRefunded(
       EventNotificationCallback<V1ApplicationFeeRefundedEventNotification> callback) {
     this.register("v1.application_fee.refunded", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallCreated(
+      EventNotificationCallback<V1AppsInstallCreatedEventNotification> callback) {
+    this.register("v1.apps.install.created", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallDeleted(
+      EventNotificationCallback<V1AppsInstallDeletedEventNotification> callback) {
+    this.register("v1.apps.install.deleted", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallUpdated(
+      EventNotificationCallback<V1AppsInstallUpdatedEventNotification> callback) {
+    this.register("v1.apps.install.updated", callback);
     return self();
   }
 
@@ -1397,12 +1417,6 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1IssuingAuthorizationCreated(
       EventNotificationCallback<V1IssuingAuthorizationCreatedEventNotification> callback) {
     this.register("v1.issuing_authorization.created", callback);
-    return self();
-  }
-
-  public T onV1IssuingAuthorizationRequest(
-      EventNotificationCallback<V1IssuingAuthorizationRequestEventNotification> callback) {
-    this.register("v1.issuing_authorization.request", callback);
     return self();
   }
 
