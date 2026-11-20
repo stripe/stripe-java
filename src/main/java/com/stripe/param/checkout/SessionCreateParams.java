@@ -6316,13 +6316,23 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName("template")
         String template;
 
+        /**
+         * The specific version of the invoice rendering template to use for this invoice. If not
+         * specified, the latest version of the template will be used. Only available in unified
+         * mode.
+         */
+        @SerializedName("template_version")
+        Long templateVersion;
+
         private RenderingOptions(
             ApiRequestParams.EnumParam amountTaxDisplay,
             Map<String, Object> extraParams,
-            String template) {
+            String template,
+            Long templateVersion) {
           this.amountTaxDisplay = amountTaxDisplay;
           this.extraParams = extraParams;
           this.template = template;
+          this.templateVersion = templateVersion;
         }
 
         public static Builder builder() {
@@ -6336,10 +6346,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
           private String template;
 
+          private Long templateVersion;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions build() {
             return new SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions(
-                this.amountTaxDisplay, this.extraParams, this.template);
+                this.amountTaxDisplay, this.extraParams, this.template, this.templateVersion);
           }
 
           /**
@@ -6403,6 +6415,16 @@ public class SessionCreateParams extends ApiRequestParams {
             this.template = template;
             return this;
           }
+
+          /**
+           * The specific version of the invoice rendering template to use for this invoice. If not
+           * specified, the latest version of the template will be used. Only available in unified
+           * mode.
+           */
+          public Builder setTemplateVersion(Long templateVersion) {
+            this.templateVersion = templateVersion;
+            return this;
+          }
         }
 
         public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
@@ -6439,6 +6461,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("metronome_commit")
     MetronomeCommit metronomeCommit;
 
+    /** Configuration for the one-time price item. */
+    @SerializedName("one_time_price")
+    OneTimePrice oneTimePrice;
+
     /** Configuration for the subscription item. */
     @SerializedName("subscription")
     Subscription subscription;
@@ -6450,10 +6476,12 @@ public class SessionCreateParams extends ApiRequestParams {
     private Item(
         Map<String, Object> extraParams,
         MetronomeCommit metronomeCommit,
+        OneTimePrice oneTimePrice,
         Subscription subscription,
         Type type) {
       this.extraParams = extraParams;
       this.metronomeCommit = metronomeCommit;
+      this.oneTimePrice = oneTimePrice;
       this.subscription = subscription;
       this.type = type;
     }
@@ -6467,6 +6495,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private MetronomeCommit metronomeCommit;
 
+      private OneTimePrice oneTimePrice;
+
       private Subscription subscription;
 
       private Type type;
@@ -6474,7 +6504,11 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Item build() {
         return new SessionCreateParams.Item(
-            this.extraParams, this.metronomeCommit, this.subscription, this.type);
+            this.extraParams,
+            this.metronomeCommit,
+            this.oneTimePrice,
+            this.subscription,
+            this.type);
       }
 
       /**
@@ -6506,6 +6540,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Configuration for the Metronome commit item. */
       public Builder setMetronomeCommit(SessionCreateParams.Item.MetronomeCommit metronomeCommit) {
         this.metronomeCommit = metronomeCommit;
+        return this;
+      }
+
+      /** Configuration for the one-time price item. */
+      public Builder setOneTimePrice(SessionCreateParams.Item.OneTimePrice oneTimePrice) {
+        this.oneTimePrice = oneTimePrice;
         return this;
       }
 
@@ -8314,6 +8354,1039 @@ public class SessionCreateParams extends ApiRequestParams {
 
           TaxBehavior(String value) {
             this.value = value;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OneTimePrice {
+      /** The one-time price's description, meant to be displayable to the customer. */
+      @SerializedName("description")
+      String description;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The list of items for the one-time price. */
+      @SerializedName("items")
+      List<SessionCreateParams.Item.OneTimePrice.InnerItem> items;
+
+      /**
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      private OneTimePrice(
+          String description,
+          Map<String, Object> extraParams,
+          List<SessionCreateParams.Item.OneTimePrice.InnerItem> items,
+          Map<String, String> metadata) {
+        this.description = description;
+        this.extraParams = extraParams;
+        this.items = items;
+        this.metadata = metadata;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String description;
+
+        private Map<String, Object> extraParams;
+
+        private List<SessionCreateParams.Item.OneTimePrice.InnerItem> items;
+
+        private Map<String, String> metadata;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.Item.OneTimePrice build() {
+          return new SessionCreateParams.Item.OneTimePrice(
+              this.description, this.extraParams, this.items, this.metadata);
+        }
+
+        /** The one-time price's description, meant to be displayable to the customer. */
+        public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Item.OneTimePrice#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Item.OneTimePrice#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `items` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.Item.OneTimePrice#items} for the field documentation.
+         */
+        public Builder addItem(SessionCreateParams.Item.OneTimePrice.InnerItem element) {
+          if (this.items == null) {
+            this.items = new ArrayList<>();
+          }
+          this.items.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.Item.OneTimePrice#items} for the field documentation.
+         */
+        public Builder addAllItem(List<SessionCreateParams.Item.OneTimePrice.InnerItem> elements) {
+          if (this.items == null) {
+            this.items = new ArrayList<>();
+          }
+          this.items.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SessionCreateParams.Item.OneTimePrice#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Item.OneTimePrice#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InnerItem {
+        /**
+         * When set, provides configuration for this item’s quantity to be adjusted by the customer
+         * during Checkout.
+         */
+        @SerializedName("adjustable_quantity")
+        AdjustableQuantity adjustableQuantity;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code
+         * price} or {@code price_data} is required.
+         */
+        @SerializedName("price")
+        String price;
+
+        /**
+         * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
+         * inline. One of {@code price} or {@code price_data} is required.
+         */
+        @SerializedName("price_data")
+        PriceData priceData;
+
+        /** <strong>Required.</strong> Quantity for this item. */
+        @SerializedName("quantity")
+        Long quantity;
+
+        /**
+         * The <a href="https://docs.stripe.com/api/tax_rates">tax rates</a> which apply to this
+         * line item.
+         */
+        @SerializedName("tax_rates")
+        List<String> taxRates;
+
+        private InnerItem(
+            AdjustableQuantity adjustableQuantity,
+            Map<String, Object> extraParams,
+            String price,
+            PriceData priceData,
+            Long quantity,
+            List<String> taxRates) {
+          this.adjustableQuantity = adjustableQuantity;
+          this.extraParams = extraParams;
+          this.price = price;
+          this.priceData = priceData;
+          this.quantity = quantity;
+          this.taxRates = taxRates;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AdjustableQuantity adjustableQuantity;
+
+          private Map<String, Object> extraParams;
+
+          private String price;
+
+          private PriceData priceData;
+
+          private Long quantity;
+
+          private List<String> taxRates;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.Item.OneTimePrice.InnerItem build() {
+            return new SessionCreateParams.Item.OneTimePrice.InnerItem(
+                this.adjustableQuantity,
+                this.extraParams,
+                this.price,
+                this.priceData,
+                this.quantity,
+                this.taxRates);
+          }
+
+          /**
+           * When set, provides configuration for this item’s quantity to be adjusted by the
+           * customer during Checkout.
+           */
+          public Builder setAdjustableQuantity(
+              SessionCreateParams.Item.OneTimePrice.InnerItem.AdjustableQuantity
+                  adjustableQuantity) {
+            this.adjustableQuantity = adjustableQuantity;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.Item.OneTimePrice.InnerItem#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.Item.OneTimePrice.InnerItem#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code
+           * price} or {@code price_data} is required.
+           */
+          public Builder setPrice(String price) {
+            this.price = price;
+            return this;
+          }
+
+          /**
+           * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a>
+           * object inline. One of {@code price} or {@code price_data} is required.
+           */
+          public Builder setPriceData(
+              SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData priceData) {
+            this.priceData = priceData;
+            return this;
+          }
+
+          /** <strong>Required.</strong> Quantity for this item. */
+          public Builder setQuantity(Long quantity) {
+            this.quantity = quantity;
+            return this;
+          }
+
+          /**
+           * Add an element to `taxRates` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.Item.OneTimePrice.InnerItem#taxRates} for the field documentation.
+           */
+          public Builder addTaxRate(String element) {
+            if (this.taxRates == null) {
+              this.taxRates = new ArrayList<>();
+            }
+            this.taxRates.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.Item.OneTimePrice.InnerItem#taxRates} for the field documentation.
+           */
+          public Builder addAllTaxRate(List<String> elements) {
+            if (this.taxRates == null) {
+              this.taxRates = new ArrayList<>();
+            }
+            this.taxRates.addAll(elements);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AdjustableQuantity {
+          /**
+           * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+           * non-negative integer.
+           */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The maximum quantity the customer can purchase for the Checkout Session. By default
+           * this value is 99. You can specify a value up to 999999.
+           */
+          @SerializedName("maximum")
+          Long maximum;
+
+          /**
+           * The minimum quantity the customer must purchase for the Checkout Session. By default
+           * this value is 0.
+           */
+          @SerializedName("minimum")
+          Long minimum;
+
+          private AdjustableQuantity(
+              Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+            this.enabled = enabled;
+            this.extraParams = extraParams;
+            this.maximum = maximum;
+            this.minimum = minimum;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Boolean enabled;
+
+            private Map<String, Object> extraParams;
+
+            private Long maximum;
+
+            private Long minimum;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.Item.OneTimePrice.InnerItem.AdjustableQuantity build() {
+              return new SessionCreateParams.Item.OneTimePrice.InnerItem.AdjustableQuantity(
+                  this.enabled, this.extraParams, this.maximum, this.minimum);
+            }
+
+            /**
+             * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+             * non-negative integer.
+             */
+            public Builder setEnabled(Boolean enabled) {
+              this.enabled = enabled;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.OneTimePrice.InnerItem.AdjustableQuantity#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.OneTimePrice.InnerItem.AdjustableQuantity#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The maximum quantity the customer can purchase for the Checkout Session. By default
+             * this value is 99. You can specify a value up to 999999.
+             */
+            public Builder setMaximum(Long maximum) {
+              this.maximum = maximum;
+              return this;
+            }
+
+            /**
+             * The minimum quantity the customer must purchase for the Checkout Session. By default
+             * this value is 0.
+             */
+            public Builder setMinimum(Long minimum) {
+              this.minimum = minimum;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PriceData {
+          /**
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
+           */
+          @SerializedName("currency")
+          String currency;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+           * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code
+           * product} or {@code product_data} is required.
+           */
+          @SerializedName("product")
+          String product;
+
+          /**
+           * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+           * object inline. One of {@code product} or {@code product_data} is required.
+           */
+          @SerializedName("product_data")
+          ProductData productData;
+
+          /**
+           * Only required if a <a
+           * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
+           * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
+           * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}
+           * or {@code exclusive}, it cannot be changed.
+           */
+          @SerializedName("tax_behavior")
+          TaxBehavior taxBehavior;
+
+          /**
+           * A non-negative integer in cents (or local equivalent) representing how much to charge.
+           * One of {@code unit_amount} or {@code unit_amount_decimal} is required.
+           */
+          @SerializedName("unit_amount")
+          Long unitAmount;
+
+          /**
+           * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+           * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+           * unit_amount_decimal} can be set.
+           */
+          @SerializedName("unit_amount_decimal")
+          BigDecimal unitAmountDecimal;
+
+          private PriceData(
+              String currency,
+              Map<String, Object> extraParams,
+              String product,
+              ProductData productData,
+              TaxBehavior taxBehavior,
+              Long unitAmount,
+              BigDecimal unitAmountDecimal) {
+            this.currency = currency;
+            this.extraParams = extraParams;
+            this.product = product;
+            this.productData = productData;
+            this.taxBehavior = taxBehavior;
+            this.unitAmount = unitAmount;
+            this.unitAmountDecimal = unitAmountDecimal;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private String currency;
+
+            private Map<String, Object> extraParams;
+
+            private String product;
+
+            private ProductData productData;
+
+            private TaxBehavior taxBehavior;
+
+            private Long unitAmount;
+
+            private BigDecimal unitAmountDecimal;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData build() {
+              return new SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData(
+                  this.currency,
+                  this.extraParams,
+                  this.product,
+                  this.productData,
+                  this.taxBehavior,
+                  this.unitAmount,
+                  this.unitAmountDecimal);
+            }
+
+            /**
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
+             */
+            public Builder setCurrency(String currency) {
+              this.currency = currency;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+             * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code
+             * product} or {@code product_data} is required.
+             */
+            public Builder setProduct(String product) {
+              this.product = product;
+              return this;
+            }
+
+            /**
+             * Data used to generate a new <a
+             * href="https://docs.stripe.com/api/products">Product</a> object inline. One of {@code
+             * product} or {@code product_data} is required.
+             */
+            public Builder setProductData(
+                SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData productData) {
+              this.productData = productData;
+              return this;
+            }
+
+            /**
+             * Only required if a <a
+             * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+             * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
+             * price is considered inclusive of taxes or exclusive of taxes. One of {@code
+             * inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+             * {@code inclusive} or {@code exclusive}, it cannot be changed.
+             */
+            public Builder setTaxBehavior(
+                SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.TaxBehavior taxBehavior) {
+              this.taxBehavior = taxBehavior;
+              return this;
+            }
+
+            /**
+             * A non-negative integer in cents (or local equivalent) representing how much to
+             * charge. One of {@code unit_amount} or {@code unit_amount_decimal} is required.
+             */
+            public Builder setUnitAmount(Long unitAmount) {
+              this.unitAmount = unitAmount;
+              return this;
+            }
+
+            /**
+             * Same as {@code unit_amount}, but accepts a decimal value in cents (or local
+             * equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and
+             * {@code unit_amount_decimal} can be set.
+             */
+            public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+              this.unitAmountDecimal = unitAmountDecimal;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ProductData {
+            /**
+             * The product's description, meant to be displayable to the customer. Use this field to
+             * optionally store a long form explanation of the product being sold for your own
+             * rendering purposes.
+             */
+            @SerializedName("description")
+            String description;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * A list of up to 8 URLs of images for this product, meant to be displayable to the
+             * customer.
+             */
+            @SerializedName("images")
+            List<String> images;
+
+            /**
+             * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you
+             * can attach to an object. This can be useful for storing additional information about
+             * the object in a structured format. Individual keys can be unset by posting an empty
+             * value to them. All keys can be unset by posting an empty value to {@code metadata}.
+             */
+            @SerializedName("metadata")
+            Map<String, String> metadata;
+
+            /**
+             * <strong>Required.</strong> The product's name, meant to be displayable to the
+             * customer.
+             */
+            @SerializedName("name")
+            String name;
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            @SerializedName("tax_code")
+            String taxCode;
+
+            /**
+             * Tax details for this product, including the <a
+             * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+             * location.
+             */
+            @SerializedName("tax_details")
+            TaxDetails taxDetails;
+
+            /**
+             * A label that represents units of this product. When set, this will be included in
+             * customers' receipts, invoices, Checkout, and the customer portal.
+             */
+            @SerializedName("unit_label")
+            String unitLabel;
+
+            private ProductData(
+                String description,
+                Map<String, Object> extraParams,
+                List<String> images,
+                Map<String, String> metadata,
+                String name,
+                String taxCode,
+                TaxDetails taxDetails,
+                String unitLabel) {
+              this.description = description;
+              this.extraParams = extraParams;
+              this.images = images;
+              this.metadata = metadata;
+              this.name = name;
+              this.taxCode = taxCode;
+              this.taxDetails = taxDetails;
+              this.unitLabel = unitLabel;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private String description;
+
+              private Map<String, Object> extraParams;
+
+              private List<String> images;
+
+              private Map<String, String> metadata;
+
+              private String name;
+
+              private String taxCode;
+
+              private TaxDetails taxDetails;
+
+              private String unitLabel;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData build() {
+                return new SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData(
+                    this.description,
+                    this.extraParams,
+                    this.images,
+                    this.metadata,
+                    this.name,
+                    this.taxCode,
+                    this.taxDetails,
+                    this.unitLabel);
+              }
+
+              /**
+               * The product's description, meant to be displayable to the customer. Use this field
+               * to optionally store a long form explanation of the product being sold for your own
+               * rendering purposes.
+               */
+              public Builder setDescription(String description) {
+                this.description = description;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * Add an element to `images` list. A list is initialized for the first `add/addAll`
+               * call, and subsequent calls adds additional elements to the original list. See
+               * {@link
+               * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData#images} for
+               * the field documentation.
+               */
+              public Builder addImage(String element) {
+                if (this.images == null) {
+                  this.images = new ArrayList<>();
+                }
+                this.images.add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `images` list. A list is initialized for the first `add/addAll`
+               * call, and subsequent calls adds additional elements to the original list. See
+               * {@link
+               * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData#images} for
+               * the field documentation.
+               */
+              public Builder addAllImage(List<String> elements) {
+                if (this.images == null) {
+                  this.images = new ArrayList<>();
+                }
+                this.images.addAll(elements);
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `metadata` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData#metadata} for
+               * the field documentation.
+               */
+              public Builder putMetadata(String key, String value) {
+                if (this.metadata == null) {
+                  this.metadata = new HashMap<>();
+                }
+                this.metadata.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData#metadata} for
+               * the field documentation.
+               */
+              public Builder putAllMetadata(Map<String, String> map) {
+                if (this.metadata == null) {
+                  this.metadata = new HashMap<>();
+                }
+                this.metadata.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The product's name, meant to be displayable to the
+               * customer.
+               */
+              public Builder setName(String name) {
+                this.name = name;
+                return this;
+              }
+
+              /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+              public Builder setTaxCode(String taxCode) {
+                this.taxCode = taxCode;
+                return this;
+              }
+
+              /**
+               * Tax details for this product, including the <a
+               * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+               * location.
+               */
+              public Builder setTaxDetails(
+                  SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData.TaxDetails
+                      taxDetails) {
+                this.taxDetails = taxDetails;
+                return this;
+              }
+
+              /**
+               * A label that represents units of this product. When set, this will be included in
+               * customers' receipts, invoices, Checkout, and the customer portal.
+               */
+              public Builder setUnitLabel(String unitLabel) {
+                this.unitLabel = unitLabel;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class TaxDetails {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * A tax location ID. Depending on the <a
+               * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+               * code</a>, this is required, optional, or not supported.
+               */
+              @SerializedName("performance_location")
+              String performanceLocation;
+
+              /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+              @SerializedName("tax_code")
+              Object taxCode;
+
+              private TaxDetails(
+                  Map<String, Object> extraParams, String performanceLocation, Object taxCode) {
+                this.extraParams = extraParams;
+                this.performanceLocation = performanceLocation;
+                this.taxCode = taxCode;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private String performanceLocation;
+
+                private Object taxCode;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData
+                        .TaxDetails
+                    build() {
+                  return new SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData
+                      .TaxDetails(this.extraParams, this.performanceLocation, this.taxCode);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData.TaxDetails#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * SessionCreateParams.Item.OneTimePrice.InnerItem.PriceData.ProductData.TaxDetails#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * A tax location ID. Depending on the <a
+                 * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+                 * code</a>, this is required, optional, or not supported.
+                 */
+                public Builder setPerformanceLocation(String performanceLocation) {
+                  this.performanceLocation = performanceLocation;
+                  return this;
+                }
+
+                /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+                public Builder setTaxCode(String taxCode) {
+                  this.taxCode = taxCode;
+                  return this;
+                }
+
+                /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+                public Builder setTaxCode(EmptyParam taxCode) {
+                  this.taxCode = taxCode;
+                  return this;
+                }
+              }
+            }
+          }
+
+          public enum TaxBehavior implements ApiRequestParams.EnumParam {
+            @SerializedName("exclusive")
+            EXCLUSIVE("exclusive"),
+
+            @SerializedName("inclusive")
+            INCLUSIVE("inclusive"),
+
+            @SerializedName("unspecified")
+            UNSPECIFIED("unspecified");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            TaxBehavior(String value) {
+              this.value = value;
+            }
           }
         }
       }
@@ -10436,6 +11509,9 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("metronome_commit")
       METRONOME_COMMIT("metronome_commit"),
 
+      @SerializedName("one_time_price")
+      ONE_TIME_PRICE("one_time_price"),
+
       @SerializedName("subscription")
       SUBSCRIPTION("subscription");
 
@@ -11791,9 +12867,23 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private AdConversion(Boolean consentCollected, Map<String, Object> extraParams) {
+      /** The URL of the web page where the customer converted. */
+      @SerializedName("source_url")
+      String sourceUrl;
+
+      /** The user agent of the browser where the customer converted. */
+      @SerializedName("user_agent")
+      String userAgent;
+
+      private AdConversion(
+          Boolean consentCollected,
+          Map<String, Object> extraParams,
+          String sourceUrl,
+          String userAgent) {
         this.consentCollected = consentCollected;
         this.extraParams = extraParams;
+        this.sourceUrl = sourceUrl;
+        this.userAgent = userAgent;
       }
 
       public static Builder builder() {
@@ -11805,10 +12895,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String sourceUrl;
+
+        private String userAgent;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.MarketingAttribution.AdConversion build() {
           return new SessionCreateParams.MarketingAttribution.AdConversion(
-              this.consentCollected, this.extraParams);
+              this.consentCollected, this.extraParams, this.sourceUrl, this.userAgent);
         }
 
         /**
@@ -11845,6 +12939,18 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The URL of the web page where the customer converted. */
+        public Builder setSourceUrl(String sourceUrl) {
+          this.sourceUrl = sourceUrl;
+          return this;
+        }
+
+        /** The user agent of the browser where the customer converted. */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
           return this;
         }
       }
@@ -16135,6 +17241,25 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
       @SerializedName("setup_future_usage")
       ApiRequestParams.EnumParam setupFutureUsage;
 
@@ -16199,12 +17324,52 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
         public Builder setSetupFutureUsage(
             SessionCreateParams.PaymentMethodOptions.Blik.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
 
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;

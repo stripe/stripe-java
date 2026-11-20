@@ -2722,7 +2722,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             /**
              * The supported token currency.
              *
-             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+             * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, or {@code
+             * usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -2770,7 +2771,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             /**
              * The supported token currency.
              *
-             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+             * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, or {@code
+             * usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -2818,7 +2820,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             /**
              * The supported token currency.
              *
-             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+             * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, or {@code
+             * usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -2864,7 +2867,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             /**
              * The supported token currency.
              *
-             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+             * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, or {@code
+             * usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -2910,7 +2914,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             /**
              * The supported token currency.
              *
-             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+             * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, or {@code
+             * usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -10003,8 +10008,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class RadarOptions extends StripeObject {
     /**
-     * The value you provided for whether this transaction starts a free trial. This is null if you
-     * haven't explicitly set it.
+     * The value you provided for whether this transaction starts a free trial. This field is
+     * omitted if you haven't explicitly set it.
      */
     @SerializedName("is_free_trial_transaction")
     Boolean isFreeTrialTransaction;

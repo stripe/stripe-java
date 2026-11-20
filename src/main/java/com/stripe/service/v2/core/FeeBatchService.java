@@ -19,19 +19,35 @@ public final class FeeBatchService extends ApiService {
     super(responseGetter);
   }
 
-  /** List FeeBatches optionally filtered by collection_record. */
+  /**
+   * Lists FeeBatches, optionally filtered by {@code collection_record}, {@code statuses}, or
+   * creation time. If {@code statuses} is omitted or empty, only pending and billed FeeBatches are
+   * returned. Canceled FeeBatches are returned only when explicitly requested.
+   */
   public StripeCollection<FeeBatch> list(FeeBatchListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List FeeBatches optionally filtered by collection_record. */
+  /**
+   * Lists FeeBatches, optionally filtered by {@code collection_record}, {@code statuses}, or
+   * creation time. If {@code statuses} is omitted or empty, only pending and billed FeeBatches are
+   * returned. Canceled FeeBatches are returned only when explicitly requested.
+   */
   public StripeCollection<FeeBatch> list(RequestOptions options) throws StripeException {
     return list((FeeBatchListParams) null, options);
   }
-  /** List FeeBatches optionally filtered by collection_record. */
+  /**
+   * Lists FeeBatches, optionally filtered by {@code collection_record}, {@code statuses}, or
+   * creation time. If {@code statuses} is omitted or empty, only pending and billed FeeBatches are
+   * returned. Canceled FeeBatches are returned only when explicitly requested.
+   */
   public StripeCollection<FeeBatch> list() throws StripeException {
     return list((FeeBatchListParams) null, (RequestOptions) null);
   }
-  /** List FeeBatches optionally filtered by collection_record. */
+  /**
+   * Lists FeeBatches, optionally filtered by {@code collection_record}, {@code statuses}, or
+   * creation time. If {@code statuses} is omitted or empty, only pending and billed FeeBatches are
+   * returned. Canceled FeeBatches are returned only when explicitly requested.
+   */
   public StripeCollection<FeeBatch> list(FeeBatchListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/core/fee_batches";

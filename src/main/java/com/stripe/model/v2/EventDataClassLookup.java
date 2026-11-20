@@ -218,6 +218,11 @@ public final class EventDataClassLookup {
         "v2.money_management.debit_dispute",
         com.stripe.model.v2.moneymanagement.DebitDispute.class);
     classLookup.put(
+        "v2.money_management.dispute", com.stripe.model.v2.moneymanagement.Dispute.class);
+    classLookup.put(
+        "v2.money_management.dispute_adjustment",
+        com.stripe.model.v2.moneymanagement.DisputeAdjustment.class);
+    classLookup.put(
         "v2.money_management.earned_credit",
         com.stripe.model.v2.moneymanagement.EarnedCredit.class);
     classLookup.put(
@@ -355,6 +360,7 @@ public final class EventDataClassLookup {
     classLookup.put("v2.reporting.report", com.stripe.model.v2.reporting.Report.class);
     classLookup.put("v2.reporting.report_run", com.stripe.model.v2.reporting.ReportRun.class);
 
+    classLookup.put("v2.risk.evaluation_outcome", com.stripe.model.v2.risk.EvaluationOutcome.class);
     classLookup.put("v2.risk.form", com.stripe.model.v2.risk.Form.class);
 
     classLookup.put(
@@ -1438,6 +1444,21 @@ public final class EventDataClassLookup {
         "v2.money_management.debit_dispute.succeeded",
         com.stripe.events.V2MoneyManagementDebitDisputeSucceededEvent.class);
     eventClassLookup.put(
+        "v2.money_management.dispute.created",
+        com.stripe.events.V2MoneyManagementDisputeCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute.lost",
+        com.stripe.events.V2MoneyManagementDisputeLostEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute.updated",
+        com.stripe.events.V2MoneyManagementDisputeUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute.won",
+        com.stripe.events.V2MoneyManagementDisputeWonEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute_adjustment.created",
+        com.stripe.events.V2MoneyManagementDisputeAdjustmentCreatedEvent.class);
+    eventClassLookup.put(
         "v2.money_management.earned_credit.succeeded",
         com.stripe.events.V2MoneyManagementEarnedCreditSucceededEvent.class);
     eventClassLookup.put(
@@ -1778,6 +1799,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.reporting.report_run.updated",
         com.stripe.events.V2ReportingReportRunUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.risk.evaluation_outcome.delinquency_ready",
+        com.stripe.events.V2RiskEvaluationOutcomeDelinquencyReadyEvent.class);
     eventClassLookup.put(
         "v2.signals.account_evaluation.complete",
         com.stripe.events.V2SignalsAccountEvaluationCompleteEvent.class);

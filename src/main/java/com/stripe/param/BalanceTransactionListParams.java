@@ -56,12 +56,15 @@ public class BalanceTransactionListParams extends ApiRequestParams {
 
   /**
    * For automatic Stripe payouts only, only returns transactions that were paid out on the
-   * specified payout ID.
+   * specified payout ID. You can't combine this parameter with {@code source}.
    */
   @SerializedName("payout")
   String payout;
 
-  /** Only returns transactions associated with the given object. */
+  /**
+   * Only returns transactions associated with the given object. You can't combine this parameter
+   * with {@code payout}.
+   */
   @SerializedName("source")
   String source;
 
@@ -256,14 +259,17 @@ public class BalanceTransactionListParams extends ApiRequestParams {
 
     /**
      * For automatic Stripe payouts only, only returns transactions that were paid out on the
-     * specified payout ID.
+     * specified payout ID. You can't combine this parameter with {@code source}.
      */
     public Builder setPayout(String payout) {
       this.payout = payout;
       return this;
     }
 
-    /** Only returns transactions associated with the given object. */
+    /**
+     * Only returns transactions associated with the given object. You can't combine this parameter
+     * with {@code payout}.
+     */
     public Builder setSource(String source) {
       this.source = source;
       return this;

@@ -45,11 +45,17 @@ public final class DebitDisputeService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<DebitDispute>>() {}.getType());
   }
-  /** Creates a new DebitDispute for a ReceivedDebit. */
+  /**
+   * Deprecated: Use CreateDispute to create a Dispute instead. Creates a new DebitDispute for a
+   * ReceivedDebit.
+   */
   public DebitDispute create(DebitDisputeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Creates a new DebitDispute for a ReceivedDebit. */
+  /**
+   * Deprecated: Use CreateDispute to create a Dispute instead. Creates a new DebitDispute for a
+   * ReceivedDebit.
+   */
   public DebitDispute create(DebitDisputeCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/money_management/debit_disputes";

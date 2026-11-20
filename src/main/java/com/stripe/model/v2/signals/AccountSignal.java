@@ -88,7 +88,8 @@ public class AccountSignal extends StripeObject implements HasId {
    *
    * <p>One of {@code account_takeover}, {@code customer_risk}, {@code fraudulent_merchant}, {@code
    * fraudulent_website}, {@code merchant_delinquency}, {@code payment_delinquency_exposure}, {@code
-   * user_account_sharing}, {@code user_affinity}, or {@code user_multi_accounting}.
+   * user_account_sharing}, {@code user_affinity}, {@code user_buyer_classification}, or {@code
+   * user_multi_accounting}.
    */
   @SerializedName("type")
   String type;
@@ -100,6 +101,13 @@ public class AccountSignal extends StripeObject implements HasId {
   /** Data for the user affinity signal. Present only when type is user_affinity. */
   @SerializedName("user_affinity")
   UserAffinity userAffinity;
+
+  /**
+   * Data for the user buyer classification signal. Present only when type is
+   * user_buyer_classification.
+   */
+  @SerializedName("user_buyer_classification")
+  UserBuyerClassification userBuyerClassification;
 
   /** Data for the user multi-accounting signal. Present only when type is user_multi_accounting. */
   @SerializedName("user_multi_accounting")
@@ -470,6 +478,30 @@ public class AccountSignal extends StripeObject implements HasId {
      */
     @SerializedName("score")
     BigDecimal score;
+  }
+
+  /**
+   * Data for the user buyer classification signal. Present only when type is
+   * user_buyer_classification.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UserBuyerClassification extends StripeObject {
+    /**
+     * Predicted type of buyer behind the user.
+     *
+     * <p>One of {@code business}, or {@code unknown}.
+     */
+    @SerializedName("buyer_type")
+    String buyerType;
+
+    /**
+     * The score for the predicted buyer type, between 0.00 and 100.00. Absent when buyer_type is
+     * unknown.
+     */
+    @SerializedName("buyer_type_score")
+    BigDecimal buyerTypeScore;
   }
 
   /** Data for the user multi-accounting signal. Present only when type is user_multi_accounting. */

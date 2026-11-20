@@ -30,6 +30,10 @@ public class SpendingMandateListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** Filter by bank transfer network. If omitted, returns mandates for all networks. */
+  @SerializedName("network")
+  Network network;
+
   /** Filter by mandate status. */
   @SerializedName("statuses")
   List<SpendingMandateListParams.Status> statuses;
@@ -42,11 +46,13 @@ public class SpendingMandateListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String financialAccount,
       Long limit,
+      Network network,
       List<SpendingMandateListParams.Status> statuses,
       Type type) {
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.limit = limit;
+    this.network = network;
     this.statuses = statuses;
     this.type = type;
   }
@@ -62,6 +68,8 @@ public class SpendingMandateListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private Network network;
+
     private List<SpendingMandateListParams.Status> statuses;
 
     private Type type;
@@ -69,7 +77,12 @@ public class SpendingMandateListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SpendingMandateListParams build() {
       return new SpendingMandateListParams(
-          this.extraParams, this.financialAccount, this.limit, this.statuses, this.type);
+          this.extraParams,
+          this.financialAccount,
+          this.limit,
+          this.network,
+          this.statuses,
+          this.type);
     }
 
     /**
@@ -110,6 +123,12 @@ public class SpendingMandateListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Filter by bank transfer network. If omitted, returns mandates for all networks. */
+    public Builder setNetwork(SpendingMandateListParams.Network network) {
+      this.network = network;
+      return this;
+    }
+
     /**
      * Add an element to `statuses` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
@@ -140,6 +159,21 @@ public class SpendingMandateListParams extends ApiRequestParams {
     public Builder setType(SpendingMandateListParams.Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  public enum Network implements ApiRequestParams.EnumParam {
+    @SerializedName("ach")
+    ACH("ach"),
+
+    @SerializedName("bacs")
+    BACS("bacs");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Network(String value) {
+      this.value = value;
     }
   }
 

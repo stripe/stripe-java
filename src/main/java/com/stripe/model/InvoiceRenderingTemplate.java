@@ -439,6 +439,9 @@ public class InvoiceRenderingTemplate extends ApiResource
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Block extends StripeObject {
+        @SerializedName("custom_plain_text")
+        CustomPlainText customPlainText;
+
         @SerializedName("custom_plain_text_cel")
         CustomPlainTextCel customPlainTextCel;
 
@@ -449,12 +452,26 @@ public class InvoiceRenderingTemplate extends ApiResource
         /**
          * The type of content block
          *
-         * <p>One of {@code custom_plain_text_cel}, {@code footer_content}, {@code invoice_details},
-         * {@code line_items}, {@code parties}, {@code payment_remittance_instructions}, {@code
-         * status_and_memo}, {@code tax_footnotes}, or {@code title_and_logo}.
+         * <p>One of {@code custom_plain_text}, {@code custom_plain_text_cel}, {@code
+         * footer_content}, {@code invoice_details}, {@code line_items}, {@code parties}, {@code
+         * payment_remittance_instructions}, {@code status_and_memo}, {@code tax_footnotes}, or
+         * {@code title_and_logo}.
          */
         @SerializedName("type")
         String type;
+
+        /**
+         * For more details about CustomPlainText, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomPlainText extends StripeObject {
+          /** Literal text to render, preserving whitespace and newlines. */
+          @SerializedName("plain_text")
+          String plainText;
+        }
 
         /**
          * For more details about CustomPlainTextCel, please refer to the <a

@@ -243,6 +243,9 @@ public class AccountSignalListParams extends ApiRequestParams {
     @SerializedName("user_affinity")
     USER_AFFINITY("user_affinity"),
 
+    @SerializedName("user_buyer_classification")
+    USER_BUYER_CLASSIFICATION("user_buyer_classification"),
+
     @SerializedName("user_multi_accounting")
     USER_MULTI_ACCOUNTING("user_multi_accounting");
 

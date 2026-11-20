@@ -1112,6 +1112,16 @@ public class Dispute extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class EvidenceDetails extends StripeObject {
     /**
+     * If the dispute was eligible for appeal, whether the appeal was submitted manually, with Smart
+     * Disputes, or not submitted.
+     *
+     * <p>One of {@code manual}, {@code not_applicable}, {@code not_submitted}, or {@code
+     * smart_disputes}.
+     */
+    @SerializedName("appeal_method")
+    String appealMethod;
+
+    /**
      * Date by which evidence must be submitted in order to successfully challenge dispute. Will be
      * 0 if the customer's bank or credit card company doesn't allow a response for this particular
      * dispute.

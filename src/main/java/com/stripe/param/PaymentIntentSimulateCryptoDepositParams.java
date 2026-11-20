@@ -200,6 +200,12 @@ public class PaymentIntentSimulateCryptoDepositParams extends ApiRequestParams {
   }
 
   public enum TokenCurrency implements ApiRequestParams.EnumParam {
+    @SerializedName("ousd")
+    OUSD("ousd"),
+
+    @SerializedName("phantom_cash")
+    PHANTOM_CASH("phantom_cash"),
+
     @SerializedName("usdc")
     USDC("usdc"),
 

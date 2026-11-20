@@ -63,6 +63,10 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("display_name")
   String displayName;
 
+  /** Settings that control behavior for money movement flows. */
+  @SerializedName("flow_settings")
+  FlowSettings flowSettings;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -236,6 +240,52 @@ public class FinancialAccount extends StripeObject implements HasId {
         /** The platform FinancialAccount used to fund this credit FinancialAccount. */
         @SerializedName("financial_account")
         String financialAccount;
+      }
+    }
+  }
+
+  /** Settings that control behavior for money movement flows. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FlowSettings extends StripeObject {
+    /** Settings for received debit flows. */
+    @SerializedName("received_debits")
+    ReceivedDebits receivedDebits;
+
+    /** Settings for received debit flows. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ReceivedDebits extends StripeObject {
+      /** Settings for ACH received debits. */
+      @SerializedName("ach")
+      Ach ach;
+
+      /** Settings for ACH received debits. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ach extends StripeObject {
+        /**
+         * Whether ACH received debits are enabled. Defaults to true. Other restrictions still
+         * apply.
+         */
+        @SerializedName("enabled")
+        Boolean enabled;
+
+        /**
+         * Controls whether ACH debits without a matching active SpendingMandate are allowed or
+         * rejected Defaults to {@code optional}. Other restrictions still apply.
+         *
+         * <p>One of {@code optional}, or {@code required}.
+         */
+        @SerializedName("mandate_behavior")
+        String mandateBehavior;
+
+        /** Account-level per-debit limit. Set to null to clear the limit. */
+        @SerializedName("transaction_limit")
+        Amount transactionLimit;
       }
     }
   }

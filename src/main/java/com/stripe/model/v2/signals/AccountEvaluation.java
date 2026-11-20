@@ -176,6 +176,10 @@ public class AccountEvaluation extends StripeObject implements HasId {
     @SerializedName("user_affinity")
     UserAffinity userAffinity;
 
+    /** User buyer classification result for the evaluation, when available. */
+    @SerializedName("user_buyer_classification")
+    UserBuyerClassification userBuyerClassification;
+
     /** User multi-accounting result for the evaluation, when available. */
     @SerializedName("user_multi_accounting")
     UserMultiAccounting userMultiAccounting;
@@ -282,6 +286,35 @@ public class AccountEvaluation extends StripeObject implements HasId {
       BigDecimal score;
 
       /** The account signal ID containing the full user affinity signal result. */
+      @SerializedName("signal")
+      String signal;
+    }
+
+    /** User buyer classification result for the evaluation, when available. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UserBuyerClassification extends StripeObject {
+      /**
+       * Predicted type of buyer behind the user.
+       *
+       * <p>One of {@code business}, or {@code unknown}.
+       */
+      @SerializedName("buyer_type")
+      String buyerType;
+
+      /**
+       * The score for the predicted buyer type, between 0.00 and 100.00. Absent when buyer_type is
+       * unknown.
+       */
+      @SerializedName("buyer_type_score")
+      BigDecimal buyerTypeScore;
+
+      /** Timestamp at which the signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Instant evaluatedAt;
+
+      /** The account signal ID containing the full user buyer classification signal result. */
       @SerializedName("signal")
       String signal;
     }

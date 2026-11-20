@@ -228,7 +228,7 @@ public class DepositAddress extends ApiResource implements HasId {
     /**
      * The supported token currency. Supported token currencies include: {@code usdc}.
      *
-     * <p>Equal to {@code usdc}.
+     * <p>One of {@code ousd}, {@code phantom_cash}, or {@code usdc}.
      */
     @SerializedName("token_currency")
     String tokenCurrency;

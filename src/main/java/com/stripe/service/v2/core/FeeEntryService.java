@@ -20,29 +20,33 @@ public final class FeeEntryService extends ApiService {
   }
 
   /**
-   * List FeeEntries optionally filtered by incurred_by, fee_batch, or collection_record (at most
-   * one filter at a time).
+   * Lists FeeEntries, optionally filtered by {@code incurred_by}, {@code fee_batch}, or {@code
+   * collection_record}. When filtering by {@code fee_batch}, results reflect current membership;
+   * historical membership is unavailable.
    */
   public StripeCollection<FeeEntry> list(FeeEntryListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * List FeeEntries optionally filtered by incurred_by, fee_batch, or collection_record (at most
-   * one filter at a time).
+   * Lists FeeEntries, optionally filtered by {@code incurred_by}, {@code fee_batch}, or {@code
+   * collection_record}. When filtering by {@code fee_batch}, results reflect current membership;
+   * historical membership is unavailable.
    */
   public StripeCollection<FeeEntry> list(RequestOptions options) throws StripeException {
     return list((FeeEntryListParams) null, options);
   }
   /**
-   * List FeeEntries optionally filtered by incurred_by, fee_batch, or collection_record (at most
-   * one filter at a time).
+   * Lists FeeEntries, optionally filtered by {@code incurred_by}, {@code fee_batch}, or {@code
+   * collection_record}. When filtering by {@code fee_batch}, results reflect current membership;
+   * historical membership is unavailable.
    */
   public StripeCollection<FeeEntry> list() throws StripeException {
     return list((FeeEntryListParams) null, (RequestOptions) null);
   }
   /**
-   * List FeeEntries optionally filtered by incurred_by, fee_batch, or collection_record (at most
-   * one filter at a time).
+   * Lists FeeEntries, optionally filtered by {@code incurred_by}, {@code fee_batch}, or {@code
+   * collection_record}. When filtering by {@code fee_batch}, results reflect current membership;
+   * historical membership is unavailable.
    */
   public StripeCollection<FeeEntry> list(FeeEntryListParams params, RequestOptions options)
       throws StripeException {

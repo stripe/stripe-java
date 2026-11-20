@@ -565,6 +565,15 @@ public class Form extends ApiResource implements HasId {
     StateIncomeTaxWithheld stateIncomeTaxWithheld;
 
     /**
+     * The Treasury Tipped Occupation Code stored on the form's payee identity, returned when
+     * present regardless of reporting year. Contains one three-digit code or two codes separated by
+     * {@code |}, preserving leading zeros. Uses the selected identity for draft forms and the
+     * identity snapshot for finalized forms. Omitted when no code is recorded.
+     */
+    @SerializedName("treasury_tipped_occupation_code")
+    String treasuryTippedOccupationCode;
+
+    /**
      * For more details about CardNotPresentTransactions, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -756,6 +765,15 @@ public class Form extends ApiResource implements HasId {
 
     @SerializedName("substitute_payments")
     SubstitutePayments substitutePayments;
+
+    /**
+     * The Treasury Tipped Occupation Code stored on the form's payee identity, returned when
+     * present regardless of reporting year. Contains one three-digit code or two codes separated by
+     * {@code |}, preserving leading zeros. Uses the selected identity for draft forms and the
+     * identity snapshot for finalized forms. Omitted when no code is recorded.
+     */
+    @SerializedName("treasury_tipped_occupation_code")
+    String treasuryTippedOccupationCode;
 
     /**
      * For more details about CashTips, please refer to the <a
@@ -1139,6 +1157,15 @@ public class Form extends ApiResource implements HasId {
 
     @SerializedName("state_tax_withheld")
     StateTaxWithheld stateTaxWithheld;
+
+    /**
+     * The Treasury Tipped Occupation Code stored on the form's payee identity, returned when
+     * present regardless of reporting year. Contains one three-digit code or two codes separated by
+     * {@code |}, preserving leading zeros. Uses the selected identity for draft forms and the
+     * identity snapshot for finalized forms. Omitted when no code is recorded.
+     */
+    @SerializedName("treasury_tipped_occupation_code")
+    String treasuryTippedOccupationCode;
 
     /**
      * For more details about CashTips, please refer to the <a

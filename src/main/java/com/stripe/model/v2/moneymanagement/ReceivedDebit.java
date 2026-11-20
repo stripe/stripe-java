@@ -59,6 +59,13 @@ public class ReceivedDebit extends StripeObject implements HasId {
   @SerializedName("dispute_details")
   DisputeDetails disputeDetails;
 
+  /**
+   * Has the value {@code true} if the object has an associated Dispute otherwise or the value
+   * {@code false}. Use the Disputes List API with {@code target} to see details.
+   */
+  @SerializedName("disputed")
+  Boolean disputed;
+
   /** The amount and currency of the original/external debit request. */
   @SerializedName("external_amount")
   Amount externalAmount;
@@ -511,8 +518,9 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /**
        * Open Enum. The reason for the failure of the ReceivedDebit.
        *
-       * <p>One of {@code capability_inactive}, {@code financial_address_inactive}, {@code
-       * insufficient_funds}, {@code no_mandate}, or {@code stripe_rejected}.
+       * <p>One of {@code capability_inactive}, {@code debits_disabled}, {@code
+       * financial_address_inactive}, {@code insufficient_funds}, {@code no_mandate}, {@code
+       * stripe_rejected}, or {@code transaction_limit_exceeded}.
        */
       @SerializedName("reason")
       String reason;
@@ -529,7 +537,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /**
        * Open Enum. The reason the ReceivedDebit was returned.
        *
-       * <p>Equal to {@code originator_initiated}.
+       * <p>One of {@code dispute_won}, or {@code originator_initiated}.
        */
       @SerializedName("reason")
       String reason;

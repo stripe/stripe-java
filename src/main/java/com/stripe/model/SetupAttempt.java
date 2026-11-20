@@ -306,6 +306,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    @SerializedName("getflex")
+    Getflex getflex;
+
     @SerializedName("id_bank_transfer")
     IdBankTransfer idBankTransfer;
 
@@ -341,6 +344,9 @@ public class SetupAttempt extends ApiResource implements HasId {
 
     @SerializedName("pix")
     Pix pix;
+
+    @SerializedName("rakuten_pay")
+    RakutenPay rakutenPay;
 
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
@@ -845,6 +851,15 @@ public class SetupAttempt extends ApiResource implements HasId {
     public static class Cashapp extends StripeObject {}
 
     /**
+     * For more details about Getflex, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Getflex extends StripeObject {}
+
+    /**
      * For more details about IdBankTransfer, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1093,6 +1108,15 @@ public class SetupAttempt extends ApiResource implements HasId {
       @SerializedName("fingerprint")
       String fingerprint;
     }
+
+    /**
+     * For more details about RakutenPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RakutenPay extends StripeObject {}
 
     /**
      * For more details about RevolutPay, please refer to the <a

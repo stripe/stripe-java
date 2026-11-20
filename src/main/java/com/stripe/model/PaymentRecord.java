@@ -2131,6 +2131,9 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("amount_authorized")
       Long amountAuthorized;
 
+      @SerializedName("benefits")
+      Benefits benefits;
+
       /**
        * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
        * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
@@ -2329,6 +2332,35 @@ public class PaymentRecord extends ApiResource implements HasId {
 
       @SerializedName("wallet")
       Wallet wallet;
+
+      /**
+       * For more details about Benefits, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Benefits extends StripeObject {
+        @SerializedName("fr_meal_voucher")
+        FrMealVoucher frMealVoucher;
+
+        /** Issuer of the benefit card utilized on this payment. */
+        @SerializedName("issuer")
+        String issuer;
+
+        /**
+         * For more details about FrMealVoucher, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class FrMealVoucher extends StripeObject {
+          /** The 14-digit SIRET of the meal voucher acceptor used for this charge. */
+          @SerializedName("siret")
+          String siret;
+        }
+      }
 
       /**
        * For more details about Fleet, please refer to the <a href="https://docs.stripe.com/api">API
@@ -4490,6 +4522,10 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("givex")
     Givex givex;
 
+    /** Represents the Stripe processor. This resource consists of details specific to Stripe. */
+    @SerializedName("stripe")
+    com.stripe.model.PaymentRecord.ProcessorDetails.Stripe stripe;
+
     /** Represents the SVS gift card processor. */
     @SerializedName("svs")
     Svs svs;
@@ -4497,7 +4533,8 @@ public class PaymentRecord extends ApiResource implements HasId {
     /**
      * The processor used for this payment attempt.
      *
-     * <p>One of {@code custom}, {@code fiserv_valuelink}, {@code givex}, or {@code svs}.
+     * <p>One of {@code custom}, {@code fiserv_valuelink}, {@code givex}, {@code stripe}, or {@code
+     * svs}.
      */
     @SerializedName("type")
     String type;
@@ -4542,6 +4579,20 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("payment_reference")
       String paymentReference;
+    }
+
+    /** Represents the Stripe processor. This resource consists of details specific to Stripe. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Stripe extends StripeObject {
+      /**
+       * Stripe balance transactions associated with this attempt, in no guaranteed order.
+       * References can appear at submission or after success. On a PaymentRecord, these references
+       * follow the latest attempt.
+       */
+      @SerializedName("derived_balance_transactions")
+      List<String> derivedBalanceTransactions;
     }
 
     /** Represents the SVS gift card processor. */

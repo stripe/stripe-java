@@ -1944,8 +1944,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @EqualsAndHashCode(callSuper = false)
   public static class RadarOptions extends StripeObject {
     /**
-     * The value you provided for whether this transaction starts a free trial. This is null if you
-     * haven't explicitly set it.
+     * The value you provided for whether this transaction starts a free trial. This field is
+     * omitted if you haven't explicitly set it.
      */
     @SerializedName("is_free_trial_transaction")
     Boolean isFreeTrialTransaction;
