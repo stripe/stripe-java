@@ -28,6 +28,8 @@ public class OriginRelativePathTest extends BaseStripeTest {
     "/v1/customers?email=a..b%40example.com",
     // A double-encoded dot reaches the API as the literal "%2E".
     "/v1/customers/%252E",
+    // An encoded slash is fine as long as no piece around it is a dot segment.
+    "/v1/coupons/summer%2F2017",
   };
 
   private static final String[] DOT_SEGMENT_PATHS = {
@@ -43,6 +45,11 @@ public class OriginRelativePathTest extends BaseStripeTest {
     "/v1/checkout/sessions/%2E",
     "/v1/checkout/sessions/%2e%2E",
     "/v1/checkout/sessions/.%2E",
+    // A proxy that decodes "%2F" before removing dot segments turns these into real path
+    // separators.
+    "/v1/coupons/x%2F..%2F..%2Fcustomers%2Fcus_B",
+    "/v1/customers/cus_123/sources/..%2F..%2Fcus_B",
+    "/v1/coupons/..%2fsummer",
   };
 
   private static final String[] HOSTILE_PATHS = {
@@ -157,6 +164,15 @@ public class OriginRelativePathTest extends BaseStripeTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> mockClient.v1().customers().paymentMethods().retrieve("..", "pm_123"));
+
+    Mockito.verifyNoInteractions(httpClientSpy);
+  }
+
+  @Test
+  public void testServiceRetrieveRejectsIdWithEncodedDotSegmentsWithoutSendingRequest() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> mockClient.v1().coupons().retrieve("x/../../customers/cus_B"));
 
     Mockito.verifyNoInteractions(httpClientSpy);
   }

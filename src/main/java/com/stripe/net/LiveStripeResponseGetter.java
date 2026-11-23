@@ -521,7 +521,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    * ".."} produces because {@link ApiResource#urlEncodeId} leaves dots alone. {@link
    * HttpURLConnectionClient} sends these segments literally, but a custom {@link HttpClient}, a
    * proxy, or a server may remove them, some after decoding {@code "%2E"}, so the request would
-   * reach a different endpoint.
+   * reach a different endpoint. An encoded slash ({@code "%2F"}) also counts as a separator for
+   * this check, because a proxy that decodes the path before normalizing it (nginx's {@code
+   * proxy_pass}, for example) turns it into a real one.
    */
   static void validatePath(String path) {
     if (path == null || !path.startsWith("/") || path.startsWith("//")) {
@@ -530,7 +532,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     String pathOnly = path.split("[?#]", 2)[0];
-    for (String segment : pathOnly.split("/", -1)) {
+    for (String segment : pathOnly.split("/|%2[fF]", -1)) {
       String decoded = segment.toLowerCase(Locale.ROOT).replace("%2e", ".");
       if (decoded.equals(".") || decoded.equals("..")) {
         // The message leaves out the query string, which can carry secrets such as a
