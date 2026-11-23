@@ -530,11 +530,14 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
           "Request path must begin with a single \"/\", got: " + path);
     }
 
-    for (String segment : path.split("[?#]", 2)[0].split("/", -1)) {
+    String pathOnly = path.split("[?#]", 2)[0];
+    for (String segment : pathOnly.split("/", -1)) {
       String decoded = segment.toLowerCase(Locale.ROOT).replace("%2e", ".");
       if (decoded.equals(".") || decoded.equals("..")) {
+        // The message leaves out the query string, which can carry secrets such as a
+        // client_secret.
         throw new InvalidRequestException(
-            "Request path may not contain a \".\" or \"..\" segment, got: " + path,
+            "Request path may not contain a \".\" or \"..\" segment, got: " + pathOnly,
             null,
             null,
             null,

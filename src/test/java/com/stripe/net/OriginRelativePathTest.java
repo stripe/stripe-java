@@ -99,8 +99,22 @@ public class OriginRelativePathTest extends BaseStripeTest {
               () -> LiveStripeResponseGetter.validatePath(path),
               "expected to reject: " + path);
       assertEquals(
-          "Request path may not contain a \".\" or \"..\" segment, got: " + path, e.getMessage());
+          "Request path may not contain a \".\" or \"..\" segment, got: "
+              + path.split("[?#]", 2)[0],
+          e.getMessage());
     }
+  }
+
+  @Test
+  public void testDotSegmentErrorOmitsQueryString() {
+    InvalidRequestException e =
+        assertThrows(
+            InvalidRequestException.class,
+            () ->
+                LiveStripeResponseGetter.validatePath(
+                    "/v1/payment_intents/..?client_secret=pi_123_secret_456"));
+    assertTrue(e.getMessage().contains("/v1/payment_intents/.."));
+    assertFalse(e.getMessage().contains("pi_123_secret_456"));
   }
 
   @Test
