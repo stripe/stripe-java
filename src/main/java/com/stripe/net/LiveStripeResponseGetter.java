@@ -521,10 +521,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    * ".."} produces because {@link ApiResource#urlEncodeId} leaves dots alone. {@link
    * HttpURLConnectionClient} sends these segments literally, but a custom {@link HttpClient}, a
    * proxy, or a server may remove them, some after decoding {@code "%2E"}, so the request would
-   * reach a different endpoint. It throws {@link InvalidRequestException} so that callers' existing
-   * handling of API errors keeps working.
+   * reach a different endpoint.
    */
-  static void validatePath(String path) throws InvalidRequestException {
+  static void validatePath(String path) {
     if (path == null || !path.startsWith("/") || path.startsWith("//")) {
       throw new IllegalArgumentException(
           "Request path must begin with a single \"/\", got: " + path);
@@ -536,18 +535,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       if (decoded.equals(".") || decoded.equals("..")) {
         // The message leaves out the query string, which can carry secrets such as a
         // client_secret.
-        throw new InvalidRequestException(
-            "Request path may not contain a \".\" or \"..\" segment, got: " + pathOnly,
-            null,
-            null,
-            null,
-            0,
-            null);
+        throw new IllegalArgumentException(
+            "Request path may not contain a \".\" or \"..\" segment, got: " + pathOnly);
       }
     }
   }
 
-  private String fullUrl(BaseApiRequest apiRequest) throws InvalidRequestException {
+  private String fullUrl(BaseApiRequest apiRequest) {
     BaseAddress baseAddress = apiRequest.getBaseAddress();
     RequestOptions options = apiRequest.getOptions();
     String relativeUrl = apiRequest.getPath();

@@ -3,7 +3,6 @@ package com.stripe.net;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Customer;
 import com.stripe.model.checkout.Session;
 import org.junit.jupiter.api.Test;
@@ -93,9 +92,9 @@ public class OriginRelativePathTest extends BaseStripeTest {
   @Test
   public void testRejectsDotSegmentPaths() {
     for (String path : DOT_SEGMENT_PATHS) {
-      InvalidRequestException e =
+      IllegalArgumentException e =
           assertThrows(
-              InvalidRequestException.class,
+              IllegalArgumentException.class,
               () -> LiveStripeResponseGetter.validatePath(path),
               "expected to reject: " + path);
       assertEquals(
@@ -107,9 +106,9 @@ public class OriginRelativePathTest extends BaseStripeTest {
 
   @Test
   public void testDotSegmentErrorOmitsQueryString() {
-    InvalidRequestException e =
+    IllegalArgumentException e =
         assertThrows(
-            InvalidRequestException.class,
+            IllegalArgumentException.class,
             () ->
                 LiveStripeResponseGetter.validatePath(
                     "/v1/payment_intents/..?client_secret=pi_123_secret_456"));
@@ -123,7 +122,7 @@ public class OriginRelativePathTest extends BaseStripeTest {
       ApiRequest request =
           new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, null);
       assertThrows(
-          InvalidRequestException.class,
+          IllegalArgumentException.class,
           () -> networkSpy.request(request, Customer.class),
           "expected to reject: " + path);
     }
@@ -135,7 +134,7 @@ public class OriginRelativePathTest extends BaseStripeTest {
   public void testRawRequestRejectsDotSegmentPathsWithoutSendingRequest() {
     for (String path : DOT_SEGMENT_PATHS) {
       assertThrows(
-          InvalidRequestException.class,
+          IllegalArgumentException.class,
           () -> mockClient.rawRequest(ApiResource.RequestMethod.GET, path, null),
           "expected to reject: " + path);
     }
@@ -147,7 +146,7 @@ public class OriginRelativePathTest extends BaseStripeTest {
   public void testServiceRetrieveRejectsDotIdWithoutSendingRequest() {
     for (String id : new String[] {".", ".."}) {
       assertThrows(
-          InvalidRequestException.class, () -> mockClient.v1().checkout().sessions().retrieve(id));
+          IllegalArgumentException.class, () -> mockClient.v1().checkout().sessions().retrieve(id));
     }
 
     Mockito.verifyNoInteractions(httpClientSpy);
@@ -156,7 +155,7 @@ public class OriginRelativePathTest extends BaseStripeTest {
   @Test
   public void testNestedServiceRetrieveRejectsDotParentIdWithoutSendingRequest() {
     assertThrows(
-        InvalidRequestException.class,
+        IllegalArgumentException.class,
         () -> mockClient.v1().customers().paymentMethods().retrieve("..", "pm_123"));
 
     Mockito.verifyNoInteractions(httpClientSpy);
@@ -165,7 +164,7 @@ public class OriginRelativePathTest extends BaseStripeTest {
   @Test
   public void testLegacyRetrieveRejectsDotIdWithoutSendingRequest() {
     for (String id : new String[] {".", ".."}) {
-      assertThrows(InvalidRequestException.class, () -> Session.retrieve(id));
+      assertThrows(IllegalArgumentException.class, () -> Session.retrieve(id));
     }
 
     Mockito.verifyNoInteractions(httpClientSpy);
