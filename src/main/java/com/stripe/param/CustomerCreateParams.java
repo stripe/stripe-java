@@ -1572,9 +1572,23 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private AdConversion(Boolean consentCollected, Map<String, Object> extraParams) {
+      /** The URL of the web page where the customer converted. */
+      @SerializedName("source_url")
+      String sourceUrl;
+
+      /** The user agent of the browser where the customer converted. */
+      @SerializedName("user_agent")
+      String userAgent;
+
+      private AdConversion(
+          Boolean consentCollected,
+          Map<String, Object> extraParams,
+          String sourceUrl,
+          String userAgent) {
         this.consentCollected = consentCollected;
         this.extraParams = extraParams;
+        this.sourceUrl = sourceUrl;
+        this.userAgent = userAgent;
       }
 
       public static Builder builder() {
@@ -1586,10 +1600,14 @@ public class CustomerCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String sourceUrl;
+
+        private String userAgent;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CustomerCreateParams.MarketingAttribution.AdConversion build() {
           return new CustomerCreateParams.MarketingAttribution.AdConversion(
-              this.consentCollected, this.extraParams);
+              this.consentCollected, this.extraParams, this.sourceUrl, this.userAgent);
         }
 
         /**
@@ -1626,6 +1644,18 @@ public class CustomerCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The URL of the web page where the customer converted. */
+        public Builder setSourceUrl(String sourceUrl) {
+          this.sourceUrl = sourceUrl;
+          return this;
+        }
+
+        /** The user agent of the browser where the customer converted. */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
           return this;
         }
       }

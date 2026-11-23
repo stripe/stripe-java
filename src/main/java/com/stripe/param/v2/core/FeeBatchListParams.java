@@ -4,7 +4,9 @@ package com.stripe.param.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,6 +51,14 @@ public class FeeBatchListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /**
+   * Filters FeeBatches by status. Multiple values use OR semantics. When omitted or empty, returns
+   * {@code pending} and {@code billed} FeeBatches. To return canceled FeeBatches, include {@code
+   * canceled}.
+   */
+  @SerializedName("statuses")
+  List<FeeBatchListParams.Status> statuses;
+
   private FeeBatchListParams(
       String collectionRecord,
       Instant created,
@@ -57,7 +67,8 @@ public class FeeBatchListParams extends ApiRequestParams {
       Instant createdLt,
       Instant createdLte,
       Map<String, Object> extraParams,
-      Long limit) {
+      Long limit,
+      List<FeeBatchListParams.Status> statuses) {
     this.collectionRecord = collectionRecord;
     this.created = created;
     this.createdGt = createdGt;
@@ -66,6 +77,7 @@ public class FeeBatchListParams extends ApiRequestParams {
     this.createdLte = createdLte;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.statuses = statuses;
   }
 
   public static Builder builder() {
@@ -89,6 +101,8 @@ public class FeeBatchListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private List<FeeBatchListParams.Status> statuses;
+
     /** Finalize and obtain parameter instance from this builder. */
     public FeeBatchListParams build() {
       return new FeeBatchListParams(
@@ -99,7 +113,8 @@ public class FeeBatchListParams extends ApiRequestParams {
           this.createdLt,
           this.createdLte,
           this.extraParams,
-          this.limit);
+          this.limit,
+          this.statuses);
     }
 
     /** Filter to return only FeeBatches associated with this collection record ID. */
@@ -168,6 +183,50 @@ public class FeeBatchListParams extends ApiRequestParams {
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
+    }
+
+    /**
+     * Add an element to `statuses` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FeeBatchListParams#statuses} for the field documentation.
+     */
+    public Builder addStatus(FeeBatchListParams.Status element) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `statuses` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * FeeBatchListParams#statuses} for the field documentation.
+     */
+    public Builder addAllStatus(List<FeeBatchListParams.Status> elements) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.addAll(elements);
+      return this;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("billed")
+    BILLED("billed"),
+
+    @SerializedName("canceled")
+    CANCELED("canceled"),
+
+    @SerializedName("pending")
+    PENDING("pending");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 }

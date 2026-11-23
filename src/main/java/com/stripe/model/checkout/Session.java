@@ -1040,7 +1040,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   @Override
@@ -1051,7 +1051,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   @Override
@@ -1065,7 +1065,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   public Session update(SessionUpdateParams params) throws StripeException {
@@ -1075,7 +1075,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   public Session update(SessionUpdateParams params, RequestOptions options) throws StripeException {
@@ -2722,6 +2722,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         /** ID of the invoice rendering template to be used for the generated invoice. */
         @SerializedName("template")
         String template;
+
+        /**
+         * The version of the invoice rendering template to be used for the generated invoice. If
+         * null, the latest version of the template will be used. Only available in unified mode.
+         */
+        @SerializedName("template_version")
+        Long templateVersion;
       }
 
       @Override
@@ -2754,13 +2761,16 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("metronome_commit")
     MetronomeCommit metronomeCommit;
 
+    @SerializedName("one_time_price")
+    OneTimePrice oneTimePrice;
+
     @SerializedName("subscription")
     com.stripe.model.checkout.Session.Item.Subscription subscription;
 
     /**
      * The type of the item.
      *
-     * <p>One of {@code metronome_commit}, or {@code subscription}.
+     * <p>One of {@code metronome_commit}, {@code one_time_price}, or {@code subscription}.
      */
     @SerializedName("type")
     String type;
@@ -3115,6 +3125,108 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about OneTimePrice, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OneTimePrice extends StripeObject implements StripeActiveObject {
+      /** The description for the one-time price. */
+      @SerializedName("description")
+      String description;
+
+      /** The items in the one-time price configuration. */
+      @SerializedName("items")
+      List<Session.Item.OneTimePrice.InnerItem> items;
+
+      /** Set of key-value pairs attached to the one-time price. */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /**
+       * For more details about InnerItem, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InnerItem extends StripeObject implements StripeActiveObject {
+        /** The adjustable quantity settings for this one-time price item. */
+        @SerializedName("adjustable_quantity")
+        AdjustableQuantity adjustableQuantity;
+
+        /** The price for this one-time price item. */
+        @SerializedName("price")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<Price> price;
+
+        /** The quantity for this one-time price item. */
+        @SerializedName("quantity")
+        Long quantity;
+
+        /**
+         * The <a href="https://docs.stripe.com/api/tax_rates">tax rates</a> which apply to this
+         * line item.
+         */
+        @SerializedName("tax_rates")
+        List<String> taxRates;
+
+        /** Get ID of expandable {@code price} object. */
+        public String getPrice() {
+          return (this.price != null) ? this.price.getId() : null;
+        }
+
+        public void setPrice(String id) {
+          this.price = ApiResource.setExpandableFieldId(id, this.price);
+        }
+
+        /** Get expanded {@code price}. */
+        public Price getPriceObject() {
+          return (this.price != null) ? this.price.getExpanded() : null;
+        }
+
+        public void setPriceObject(Price expandableObject) {
+          this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+        }
+
+        /**
+         * For more details about AdjustableQuantity, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AdjustableQuantity extends StripeObject {
+          /** Whether the quantity is adjustable. */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /** The maximum quantity the customer can purchase. */
+          @SerializedName("maximum")
+          Long maximum;
+
+          /** The minimum quantity the customer can purchase. */
+          @SerializedName("minimum")
+          Long minimum;
+        }
+
+        @Override
+        public void setResponseGetter(StripeResponseGetter responseGetter) {
+          trySetResponseGetter(price, responseGetter);
+        }
+      }
+
+      @Override
+      public void setResponseGetter(StripeResponseGetter responseGetter) {
+        if (items != null) {
+          items.forEach(x -> trySetResponseGetter(x, responseGetter));
+        }
+      }
+    }
+
+    /**
      * For more details about Subscription, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -3343,6 +3455,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     @Override
     public void setResponseGetter(StripeResponseGetter responseGetter) {
+      trySetResponseGetter(oneTimePrice, responseGetter);
       trySetResponseGetter(subscription, responseGetter);
     }
   }
@@ -3418,6 +3531,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /** Whether the customer consented to sending conversion data to an advertising platform. */
       @SerializedName("consent_collected")
       Boolean consentCollected;
+
+      /** The URL of the web page where the customer converted. */
+      @SerializedName("source_url")
+      String sourceUrl;
+
+      /** The user agent of the browser where the customer converted. */
+      @SerializedName("user_agent")
+      String userAgent;
     }
   }
 

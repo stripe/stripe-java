@@ -22,6 +22,15 @@ public final class MoneyManagementService extends ApiService {
     return new com.stripe.service.v2.moneymanagement.DebitDisputeService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.DisputeAdjustmentService disputeAdjustments() {
+    return new com.stripe.service.v2.moneymanagement.DisputeAdjustmentService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.DisputeService disputes() {
+    return new com.stripe.service.v2.moneymanagement.DisputeService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.EarnedCreditService earnedCredits() {
     return new com.stripe.service.v2.moneymanagement.EarnedCreditService(this.getResponseGetter());
   }

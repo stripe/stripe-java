@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.param.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import com.stripe.v2.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -1199,6 +1200,10 @@ public class ContractUpdateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class Overwrite {
+          /** Whether the replacement pricing is per unit or tiered. */
+          @SerializedName("billing_scheme")
+          BillingScheme billingScheme;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1209,12 +1214,28 @@ public class ContractUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** Replacement pricing tiers. */
+          @SerializedName("tiers")
+          List<ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier> tiers;
+
+          /** How the pricing tiers are applied. */
+          @SerializedName("tiers_mode")
+          TiersMode tiersMode;
+
           /** The replacement per-unit amount in minor currency units. */
           @SerializedName("unit_amount_decimal")
           Object unitAmountDecimal;
 
-          private Overwrite(Map<String, Object> extraParams, Object unitAmountDecimal) {
+          private Overwrite(
+              BillingScheme billingScheme,
+              Map<String, Object> extraParams,
+              List<ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier> tiers,
+              TiersMode tiersMode,
+              Object unitAmountDecimal) {
+            this.billingScheme = billingScheme;
             this.extraParams = extraParams;
+            this.tiers = tiers;
+            this.tiersMode = tiersMode;
             this.unitAmountDecimal = unitAmountDecimal;
           }
 
@@ -1223,14 +1244,32 @@ public class ContractUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
+            private BillingScheme billingScheme;
+
             private Map<String, Object> extraParams;
+
+            private List<ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier> tiers;
+
+            private TiersMode tiersMode;
 
             private Object unitAmountDecimal;
 
             /** Finalize and obtain parameter instance from this builder. */
             public ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite build() {
               return new ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite(
-                  this.extraParams, this.unitAmountDecimal);
+                  this.billingScheme,
+                  this.extraParams,
+                  this.tiers,
+                  this.tiersMode,
+                  this.unitAmountDecimal);
+            }
+
+            /** Whether the replacement pricing is per unit or tiered. */
+            public Builder setBillingScheme(
+                ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.BillingScheme
+                    billingScheme) {
+              this.billingScheme = billingScheme;
+              return this;
             }
 
             /**
@@ -1263,6 +1302,43 @@ public class ContractUpdateParams extends ApiRequestParams {
               return this;
             }
 
+            /**
+             * Add an element to `tiers` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite#tiers} for the field
+             * documentation.
+             */
+            public Builder addTier(
+                ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier element) {
+              if (this.tiers == null) {
+                this.tiers = new ArrayList<>();
+              }
+              this.tiers.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `tiers` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite#tiers} for the field
+             * documentation.
+             */
+            public Builder addAllTier(
+                List<ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier> elements) {
+              if (this.tiers == null) {
+                this.tiers = new ArrayList<>();
+              }
+              this.tiers.addAll(elements);
+              return this;
+            }
+
+            /** How the pricing tiers are applied. */
+            public Builder setTiersMode(
+                ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.TiersMode tiersMode) {
+              this.tiersMode = tiersMode;
+              return this;
+            }
+
             /** The replacement per-unit amount in minor currency units. */
             public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
               this.unitAmountDecimal = unitAmountDecimal;
@@ -1273,6 +1349,154 @@ public class ContractUpdateParams extends ApiRequestParams {
             public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
               this.unitAmountDecimal = unitAmountDecimal;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Tier {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Flat amount in minor currency units. */
+            @SerializedName("flat_amount_decimal")
+            Object flatAmountDecimal;
+
+            /** Per-unit amount in minor currency units. */
+            @SerializedName("unit_amount_decimal")
+            Object unitAmountDecimal;
+
+            /** Inclusive whole-number upper bound. Omitted for an unbounded final tier. */
+            @SerializedName("up_to")
+            @JsonAdapter(StringInt64TypeAdapter.class)
+            Long upTo;
+
+            private Tier(
+                Map<String, Object> extraParams,
+                Object flatAmountDecimal,
+                Object unitAmountDecimal,
+                Long upTo) {
+              this.extraParams = extraParams;
+              this.flatAmountDecimal = flatAmountDecimal;
+              this.unitAmountDecimal = unitAmountDecimal;
+              this.upTo = upTo;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Object flatAmountDecimal;
+
+              private Object unitAmountDecimal;
+
+              private Long upTo;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier build() {
+                return new ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier(
+                    this.extraParams, this.flatAmountDecimal, this.unitAmountDecimal, this.upTo);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier#extraParams} for
+               * the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.Action.AddTerm.PricingOverride.Overwrite.Tier#extraParams} for
+               * the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Flat amount in minor currency units. */
+              public Builder setFlatAmountDecimal(BigDecimal flatAmountDecimal) {
+                this.flatAmountDecimal = flatAmountDecimal;
+                return this;
+              }
+
+              /** Flat amount in minor currency units. */
+              public Builder setFlatAmountDecimal(EmptyParam flatAmountDecimal) {
+                this.flatAmountDecimal = flatAmountDecimal;
+                return this;
+              }
+
+              /** Per-unit amount in minor currency units. */
+              public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+                this.unitAmountDecimal = unitAmountDecimal;
+                return this;
+              }
+
+              /** Per-unit amount in minor currency units. */
+              public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
+                this.unitAmountDecimal = unitAmountDecimal;
+                return this;
+              }
+
+              /** Inclusive whole-number upper bound. Omitted for an unbounded final tier. */
+              public Builder setUpTo(Long upTo) {
+                this.upTo = upTo;
+                return this;
+              }
+            }
+          }
+
+          public enum BillingScheme implements ApiRequestParams.EnumParam {
+            @SerializedName("per_unit")
+            PER_UNIT("per_unit"),
+
+            @SerializedName("tiered")
+            TIERED("tiered");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            BillingScheme(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum TiersMode implements ApiRequestParams.EnumParam {
+            @SerializedName("graduated")
+            GRADUATED("graduated"),
+
+            @SerializedName("volume")
+            VOLUME("volume");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            TiersMode(String value) {
+              this.value = value;
             }
           }
         }
@@ -1974,13 +2198,6 @@ public class ContractUpdateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class Custom {
             /**
-             * <strong>Required.</strong> Non-negative amount with an explicit currency that must
-             * match the contract's currency.
-             */
-            @SerializedName("amount")
-            Amount amount;
-
-            /**
              * <strong>Required.</strong> A finite bill date. Resolved once per request, including
              * on idempotent retries.
              */
@@ -1997,10 +2214,26 @@ public class ContractUpdateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            private Custom(Amount amount, BillAt billAt, Map<String, Object> extraParams) {
-              this.amount = amount;
+            /** Positive installment quantity. Defaults to 1 when omitted. */
+            @SerializedName("quantity")
+            Object quantity;
+
+            /**
+             * <strong>Required.</strong> Positive unit price in minor units of the contract's
+             * currency, before multiplying by quantity.
+             */
+            @SerializedName("unit_amount_decimal")
+            Object unitAmountDecimal;
+
+            private Custom(
+                BillAt billAt,
+                Map<String, Object> extraParams,
+                Object quantity,
+                Object unitAmountDecimal) {
               this.billAt = billAt;
               this.extraParams = extraParams;
+              this.quantity = quantity;
+              this.unitAmountDecimal = unitAmountDecimal;
             }
 
             public static Builder builder() {
@@ -2008,25 +2241,18 @@ public class ContractUpdateParams extends ApiRequestParams {
             }
 
             public static class Builder {
-              private Amount amount;
-
               private BillAt billAt;
 
               private Map<String, Object> extraParams;
 
+              private Object quantity;
+
+              private Object unitAmountDecimal;
+
               /** Finalize and obtain parameter instance from this builder. */
               public ContractUpdateParams.Action.AddTerm.ScheduledFee.BillSchedule.Custom build() {
                 return new ContractUpdateParams.Action.AddTerm.ScheduledFee.BillSchedule.Custom(
-                    this.amount, this.billAt, this.extraParams);
-              }
-
-              /**
-               * <strong>Required.</strong> Non-negative amount with an explicit currency that must
-               * match the contract's currency.
-               */
-              public Builder setAmount(Amount amount) {
-                this.amount = amount;
-                return this;
+                    this.billAt, this.extraParams, this.quantity, this.unitAmountDecimal);
               }
 
               /**
@@ -2067,6 +2293,36 @@ public class ContractUpdateParams extends ApiRequestParams {
                   this.extraParams = new HashMap<>();
                 }
                 this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Positive installment quantity. Defaults to 1 when omitted. */
+              public Builder setQuantity(BigDecimal quantity) {
+                this.quantity = quantity;
+                return this;
+              }
+
+              /** Positive installment quantity. Defaults to 1 when omitted. */
+              public Builder setQuantity(EmptyParam quantity) {
+                this.quantity = quantity;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Positive unit price in minor units of the contract's
+               * currency, before multiplying by quantity.
+               */
+              public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+                this.unitAmountDecimal = unitAmountDecimal;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Positive unit price in minor units of the contract's
+               * currency, before multiplying by quantity.
+               */
+              public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
+                this.unitAmountDecimal = unitAmountDecimal;
                 return this;
               }
             }
@@ -3751,13 +4007,6 @@ public class ContractUpdateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class Custom {
             /**
-             * <strong>Required.</strong> Non-negative amount with an explicit currency that must
-             * match the contract's currency.
-             */
-            @SerializedName("amount")
-            Amount amount;
-
-            /**
              * <strong>Required.</strong> A finite bill date. Resolved once per request, including
              * on idempotent retries.
              */
@@ -3774,10 +4023,26 @@ public class ContractUpdateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            private Custom(Amount amount, BillAt billAt, Map<String, Object> extraParams) {
-              this.amount = amount;
+            /** Positive installment quantity. Defaults to 1 when omitted. */
+            @SerializedName("quantity")
+            Object quantity;
+
+            /**
+             * <strong>Required.</strong> Positive unit price in minor units of the contract's
+             * currency, before multiplying by quantity.
+             */
+            @SerializedName("unit_amount_decimal")
+            Object unitAmountDecimal;
+
+            private Custom(
+                BillAt billAt,
+                Map<String, Object> extraParams,
+                Object quantity,
+                Object unitAmountDecimal) {
               this.billAt = billAt;
               this.extraParams = extraParams;
+              this.quantity = quantity;
+              this.unitAmountDecimal = unitAmountDecimal;
             }
 
             public static Builder builder() {
@@ -3785,26 +4050,19 @@ public class ContractUpdateParams extends ApiRequestParams {
             }
 
             public static class Builder {
-              private Amount amount;
-
               private BillAt billAt;
 
               private Map<String, Object> extraParams;
+
+              private Object quantity;
+
+              private Object unitAmountDecimal;
 
               /** Finalize and obtain parameter instance from this builder. */
               public ContractUpdateParams.Action.UpdateTerm.ScheduledFee.BillSchedule.Custom
                   build() {
                 return new ContractUpdateParams.Action.UpdateTerm.ScheduledFee.BillSchedule.Custom(
-                    this.amount, this.billAt, this.extraParams);
-              }
-
-              /**
-               * <strong>Required.</strong> Non-negative amount with an explicit currency that must
-               * match the contract's currency.
-               */
-              public Builder setAmount(Amount amount) {
-                this.amount = amount;
-                return this;
+                    this.billAt, this.extraParams, this.quantity, this.unitAmountDecimal);
               }
 
               /**
@@ -3845,6 +4103,36 @@ public class ContractUpdateParams extends ApiRequestParams {
                   this.extraParams = new HashMap<>();
                 }
                 this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Positive installment quantity. Defaults to 1 when omitted. */
+              public Builder setQuantity(BigDecimal quantity) {
+                this.quantity = quantity;
+                return this;
+              }
+
+              /** Positive installment quantity. Defaults to 1 when omitted. */
+              public Builder setQuantity(EmptyParam quantity) {
+                this.quantity = quantity;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Positive unit price in minor units of the contract's
+               * currency, before multiplying by quantity.
+               */
+              public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+                this.unitAmountDecimal = unitAmountDecimal;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Positive unit price in minor units of the contract's
+               * currency, before multiplying by quantity.
+               */
+              public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
+                this.unitAmountDecimal = unitAmountDecimal;
                 return this;
               }
             }

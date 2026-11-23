@@ -453,7 +453,12 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class InvoicePdf {
-      /** Ordered invoice PDF blocks. A maximum of 20 blocks is allowed. */
+      /**
+       * The complete replacement order of at most 20 invoice PDF blocks. Keys retain saved
+       * configuration when its hash is omitted. Omitted custom blocks are removed; include every
+       * default type exactly once. Omit blocks to preserve settings, or supply an empty string to
+       * reset to defaults.
+       */
       @SerializedName("blocks")
       Object blocks;
 
@@ -527,13 +532,23 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Ordered invoice PDF blocks. A maximum of 20 blocks is allowed. */
+        /**
+         * The complete replacement order of at most 20 invoice PDF blocks. Keys retain saved
+         * configuration when its hash is omitted. Omitted custom blocks are removed; include every
+         * default type exactly once. Omit blocks to preserve settings, or supply an empty string to
+         * reset to defaults.
+         */
         public Builder setBlocks(EmptyParam blocks) {
           this.blocks = blocks;
           return this;
         }
 
-        /** Ordered invoice PDF blocks. A maximum of 20 blocks is allowed. */
+        /**
+         * The complete replacement order of at most 20 invoice PDF blocks. Keys retain saved
+         * configuration when its hash is omitted. Omitted custom blocks are removed; include every
+         * default type exactly once. Omit blocks to preserve settings, or supply an empty string to
+         * reset to defaults.
+         */
         public Builder setBlocks(
             List<InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block> blocks) {
           this.blocks = blocks;
@@ -574,6 +589,13 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Block {
+        /**
+         * Configuration for a repeatable literal text block. Omit this hash on a keyed update to
+         * retain saved text; supply it to replace the text.
+         */
+        @SerializedName("custom_plain_text")
+        CustomPlainText customPlainText;
+
         /** Configuration for a custom CEL text block. */
         @SerializedName("custom_plain_text_cel")
         CustomPlainTextCel customPlainTextCel;
@@ -601,10 +623,12 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
         Type type;
 
         private Block(
+            CustomPlainText customPlainText,
             CustomPlainTextCel customPlainTextCel,
             Map<String, Object> extraParams,
             Object key,
             Type type) {
+          this.customPlainText = customPlainText;
           this.customPlainTextCel = customPlainTextCel;
           this.extraParams = extraParams;
           this.key = key;
@@ -616,6 +640,8 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private CustomPlainText customPlainText;
+
           private CustomPlainTextCel customPlainTextCel;
 
           private Map<String, Object> extraParams;
@@ -627,7 +653,23 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block build() {
             return new InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block(
-                this.customPlainTextCel, this.extraParams, this.key, this.type);
+                this.customPlainText,
+                this.customPlainTextCel,
+                this.extraParams,
+                this.key,
+                this.type);
+          }
+
+          /**
+           * Configuration for a repeatable literal text block. Omit this hash on a keyed update to
+           * retain saved text; supply it to replace the text.
+           */
+          public Builder setCustomPlainText(
+              InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block
+                      .CustomPlainText
+                  customPlainText) {
+            this.customPlainText = customPlainText;
+            return this;
           }
 
           /** Configuration for a custom CEL text block. */
@@ -690,6 +732,98 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
               InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block.Type type) {
             this.type = type;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomPlainText {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> Literal text to render, preserving whitespace and newlines.
+           * Required, at most 10,000 characters; an empty string renders no text.
+           */
+          @SerializedName("plain_text")
+          Object plainText;
+
+          private CustomPlainText(Map<String, Object> extraParams, Object plainText) {
+            this.extraParams = extraParams;
+            this.plainText = plainText;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Object plainText;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block
+                    .CustomPlainText
+                build() {
+              return new InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block
+                  .CustomPlainText(this.extraParams, this.plainText);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block.CustomPlainText#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceRenderingTemplateUpdateParams.RenderingSettings.InvoicePdf.Block.CustomPlainText#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Literal text to render, preserving whitespace and
+             * newlines. Required, at most 10,000 characters; an empty string renders no text.
+             */
+            public Builder setPlainText(String plainText) {
+              this.plainText = plainText;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Literal text to render, preserving whitespace and
+             * newlines. Required, at most 10,000 characters; an empty string renders no text.
+             */
+            public Builder setPlainText(EmptyParam plainText) {
+              this.plainText = plainText;
+              return this;
+            }
           }
         }
 
@@ -786,6 +920,9 @@ public class InvoiceRenderingTemplateUpdateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("custom_plain_text")
+          CUSTOM_PLAIN_TEXT("custom_plain_text"),
+
           @SerializedName("custom_plain_text_cel")
           CUSTOM_PLAIN_TEXT_CEL("custom_plain_text_cel"),
 

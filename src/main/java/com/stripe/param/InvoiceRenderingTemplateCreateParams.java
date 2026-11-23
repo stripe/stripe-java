@@ -383,7 +383,10 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class InvoicePdf {
-      /** Ordered invoice PDF blocks. A maximum of 20 blocks is allowed. */
+      /**
+       * Ordered invoice PDF blocks, at most 20. Include every default type exactly once; custom
+       * text blocks may repeat.
+       */
       @SerializedName("blocks")
       Object blocks;
 
@@ -457,13 +460,19 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Ordered invoice PDF blocks. A maximum of 20 blocks is allowed. */
+        /**
+         * Ordered invoice PDF blocks, at most 20. Include every default type exactly once; custom
+         * text blocks may repeat.
+         */
         public Builder setBlocks(EmptyParam blocks) {
           this.blocks = blocks;
           return this;
         }
 
-        /** Ordered invoice PDF blocks. A maximum of 20 blocks is allowed. */
+        /**
+         * Ordered invoice PDF blocks, at most 20. Include every default type exactly once; custom
+         * text blocks may repeat.
+         */
         public Builder setBlocks(
             List<InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block> blocks) {
           this.blocks = blocks;
@@ -504,6 +513,13 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Block {
+        /**
+         * Configuration for a repeatable literal text block. Omit this hash on a keyed update to
+         * retain saved text; supply it to replace the text.
+         */
+        @SerializedName("custom_plain_text")
+        CustomPlainText customPlainText;
+
         /** Configuration for a custom CEL text block. */
         @SerializedName("custom_plain_text_cel")
         CustomPlainTextCel customPlainTextCel;
@@ -527,10 +543,12 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
         Type type;
 
         private Block(
+            CustomPlainText customPlainText,
             CustomPlainTextCel customPlainTextCel,
             Map<String, Object> extraParams,
             String key,
             Type type) {
+          this.customPlainText = customPlainText;
           this.customPlainTextCel = customPlainTextCel;
           this.extraParams = extraParams;
           this.key = key;
@@ -542,6 +560,8 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private CustomPlainText customPlainText;
+
           private CustomPlainTextCel customPlainTextCel;
 
           private Map<String, Object> extraParams;
@@ -553,7 +573,23 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block build() {
             return new InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block(
-                this.customPlainTextCel, this.extraParams, this.key, this.type);
+                this.customPlainText,
+                this.customPlainTextCel,
+                this.extraParams,
+                this.key,
+                this.type);
+          }
+
+          /**
+           * Configuration for a repeatable literal text block. Omit this hash on a keyed update to
+           * retain saved text; supply it to replace the text.
+           */
+          public Builder setCustomPlainText(
+              InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block
+                      .CustomPlainText
+                  customPlainText) {
+            this.customPlainText = customPlainText;
+            return this;
           }
 
           /** Configuration for a custom CEL text block. */
@@ -606,6 +642,89 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
               InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block.Type type) {
             this.type = type;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomPlainText {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> Literal text to render, preserving whitespace and newlines.
+           * Required, at most 10,000 characters; an empty string renders no text.
+           */
+          @SerializedName("plain_text")
+          String plainText;
+
+          private CustomPlainText(Map<String, Object> extraParams, String plainText) {
+            this.extraParams = extraParams;
+            this.plainText = plainText;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private String plainText;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block
+                    .CustomPlainText
+                build() {
+              return new InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block
+                  .CustomPlainText(this.extraParams, this.plainText);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block.CustomPlainText#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceRenderingTemplateCreateParams.RenderingSettings.InvoicePdf.Block.CustomPlainText#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Literal text to render, preserving whitespace and
+             * newlines. Required, at most 10,000 characters; an empty string renders no text.
+             */
+            public Builder setPlainText(String plainText) {
+              this.plainText = plainText;
+              return this;
+            }
           }
         }
 
@@ -693,6 +812,9 @@ public class InvoiceRenderingTemplateCreateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("custom_plain_text")
+          CUSTOM_PLAIN_TEXT("custom_plain_text"),
+
           @SerializedName("custom_plain_text_cel")
           CUSTOM_PLAIN_TEXT_CEL("custom_plain_text_cel"),
 

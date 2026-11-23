@@ -9,7 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A FeeEntry is the atomic, append-only record of an assessed fee. */
+/**
+ * A FeeEntry is an atomic record of an assessed fee. Its assessment attributes are immutable, while
+ * its FeeBatch association and derived status can change as the fee progresses through billing.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -26,7 +29,11 @@ public class FeeEntry extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The ID of the FeeBatch that collected this fee, if any. */
+  /**
+   * The ID of the FeeBatch currently assigned to collect this fee, if any. If Stripe cancels the
+   * assigned FeeBatch before billing, Stripe reassigns the FeeEntry to a replacement FeeBatch.
+   * During reassociation, this field can temporarily continue to reference the canceled FeeBatch.
+   */
   @SerializedName("fee_batch")
   String feeBatch;
 
@@ -62,6 +69,17 @@ public class FeeEntry extends StripeObject implements HasId {
    */
   @SerializedName("reason")
   String reason;
+
+  /**
+   * The current billing status of the fee. Every FeeEntry eventually transitions from {@code
+   * assessed} to {@code billed} when its associated FeeBatch is billed. While {@code assessed}, its
+   * FeeBatch association can change if the assigned batch is canceled. Once {@code billed}, the
+   * status and FeeBatch association are terminal.
+   *
+   * <p>One of {@code assessed}, or {@code billed}.
+   */
+  @SerializedName("status")
+  String status;
 
   /** The tax portion of the fee, if applicable. */
   @SerializedName("tax")

@@ -99,6 +99,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("financial_account")
   String financialAccount;
 
+  /**
+   * Details about the flexible credential configuration for this card. This is only populated when
+   * enrolled to flex credentials, and is omitted unless you explicitly request it with {@code
+   * include[]=flexible_credential}.
+   */
+  @SerializedName("flexible_credential")
+  FlexibleCredential flexibleCredential;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -482,6 +490,36 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /**
+   * For more details about FlexibleCredential, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FlexibleCredential extends StripeObject {
+    /** Details about the secondary credentials for this card. */
+    @SerializedName("secondary_credentials")
+    List<Card.FlexibleCredential.SecondaryCredential> secondaryCredentials;
+
+    /**
+     * For more details about SecondaryCredential, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SecondaryCredential extends StripeObject {
+      /**
+       * The funding source that this credential can support.
+       *
+       * <p>Equal to {@code credit}.
+       */
+      @SerializedName("funding")
+      String funding;
+    }
   }
 
   /**

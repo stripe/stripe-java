@@ -1029,6 +1029,14 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       /** Whether the customer consented to sending conversion data to an advertising platform. */
       @SerializedName("consent_collected")
       Boolean consentCollected;
+
+      /** The URL of the web page where the customer converted. */
+      @SerializedName("source_url")
+      String sourceUrl;
+
+      /** The user agent of the browser where the customer converted. */
+      @SerializedName("user_agent")
+      String userAgent;
     }
   }
 

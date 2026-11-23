@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
@@ -489,11 +491,93 @@ public class Contract extends StripeObject implements HasId, StripeActiveObject 
               @EqualsAndHashCode(callSuper = false)
               public static class OverwritePrice extends StripeObject {
                 /**
+                 * Defines whether the price override is billed per unit or by tiers.
+                 *
+                 * <p>One of {@code per_unit}, or {@code tiered}.
+                 */
+                @SerializedName("billing_scheme")
+                String billingScheme;
+
+                /**
+                 * Defines whether the tiered price should be graduated or volume-based.
+                 *
+                 * <p>One of {@code graduated}, or {@code volume}.
+                 */
+                @SerializedName("tiering_mode")
+                String tieringMode;
+
+                /** Each element represents a pricing tier. */
+                @SerializedName("tiers")
+                List<
+                        Contract.PricingLines.Data.Pricing.PriceDetails.PricingOverrides.InnerData
+                            .OverwritePrice.Tier>
+                    tiers;
+
+                /**
+                 * Defines whether the tiered price should be graduated or volume-based.
+                 *
+                 * <p>One of {@code graduated}, or {@code volume}.
+                 */
+                @SerializedName("tiers_mode")
+                String tiersMode;
+
+                /**
                  * The per-unit amount to be charged, represented as a decimal string in minor
                  * currency units.
                  */
                 @SerializedName("unit_amount")
                 String unitAmount;
+
+                /**
+                 * For more details about Tier, please refer to the <a
+                 * href="https://docs.stripe.com/api">API Reference.</a>
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Tier extends StripeObject {
+                  /**
+                   * Price for the entire tier, represented as a decimal string in minor currency
+                   * units.
+                   */
+                  @SerializedName("flat_amount")
+                  String flatAmount;
+
+                  /** Price for the entire tier in minor currency units. */
+                  @SerializedName("flat_amount_decimal")
+                  BigDecimal flatAmountDecimal;
+
+                  /**
+                   * Per-unit price for units included in this tier, represented as a decimal string
+                   * in minor currency units.
+                   */
+                  @SerializedName("unit_amount")
+                  String unitAmount;
+
+                  /** Per-unit price for units included in this tier in minor currency units. */
+                  @SerializedName("unit_amount_decimal")
+                  BigDecimal unitAmountDecimal;
+
+                  /**
+                   * Up to and including this whole-number quantity is contained in the tier. If
+                   * omitted, the tier has no upper bound.
+                   */
+                  @SerializedName("up_to")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long upTo;
+
+                  /** Up to and including this quantity will be contained in the tier. */
+                  @SerializedName("up_to_decimal")
+                  BigDecimal upToDecimal;
+
+                  /**
+                   * No upper bound to this tier.
+                   *
+                   * <p>Equal to {@code inf}.
+                   */
+                  @SerializedName("up_to_inf")
+                  String upToInf;
+                }
               }
 
               /** Timestamp when this override starts. */

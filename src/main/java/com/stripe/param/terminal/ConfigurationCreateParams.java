@@ -5073,7 +5073,11 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class EnterpriseEapPeap {
-      /** A File ID representing a PEM file containing the server certificate. */
+      /**
+       * A File ID representing a PEM file containing the server certificate. The certificate is not
+       * currently used to validate the identity of the server, but will be used in a future device
+       * update.
+       */
       @SerializedName("ca_certificate_file")
       String caCertificateFile;
 
@@ -5132,7 +5136,11 @@ public class ConfigurationCreateParams extends ApiRequestParams {
               this.caCertificateFile, this.extraParams, this.password, this.ssid, this.username);
         }
 
-        /** A File ID representing a PEM file containing the server certificate. */
+        /**
+         * A File ID representing a PEM file containing the server certificate. The certificate is
+         * not currently used to validate the identity of the server, but will be used in a future
+         * device update.
+         */
         public Builder setCaCertificateFile(String caCertificateFile) {
           this.caCertificateFile = caCertificateFile;
           return this;

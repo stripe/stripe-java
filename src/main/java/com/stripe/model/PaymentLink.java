@@ -1109,6 +1109,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         /** ID of the invoice rendering template to be used for the generated invoice. */
         @SerializedName("template")
         String template;
+
+        /**
+         * The version of the invoice rendering template to be used for the generated invoice. If
+         * null, the latest version of the template will be used. Only available in unified mode.
+         */
+        @SerializedName("template_version")
+        Long templateVersion;
       }
 
       @Override

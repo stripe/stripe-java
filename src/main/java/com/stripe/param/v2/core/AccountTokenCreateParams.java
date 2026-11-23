@@ -7596,7 +7596,13 @@ public class AccountTokenCreateParams extends ApiRequestParams {
       @SerializedName("nationalities")
       List<String> nationalities;
 
-      /** The individual's phone number. */
+      /**
+       * The individual's phone number. You can include a country calling code prefixed with {@code
+       * +}, for example {@code +12025550123}, or omit it, for example {@code 2025550123}. Spaces,
+       * hyphens, periods, and parentheses are optional and accepted. Numbers beginning with {@code
+       * +} are checked against the numbering rules for their country calling code, including valid
+       * prefixes and number lengths.
+       */
       @SerializedName("phone")
       String phone;
 
@@ -7958,7 +7964,13 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The individual's phone number. */
+        /**
+         * The individual's phone number. You can include a country calling code prefixed with
+         * {@code +}, for example {@code +12025550123}, or omit it, for example {@code 2025550123}.
+         * Spaces, hyphens, periods, and parentheses are optional and accepted. Numbers beginning
+         * with {@code +} are checked against the numbering rules for their country calling code,
+         * including valid prefixes and number lengths.
+         */
         public Builder setPhone(String phone) {
           this.phone = phone;
           return this;

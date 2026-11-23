@@ -9,6 +9,10 @@ public final class RiskService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.v2.risk.EvaluationOutcomeService evaluationOutcomes() {
+    return new com.stripe.service.v2.risk.EvaluationOutcomeService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.risk.FormService forms() {
     return new com.stripe.service.v2.risk.FormService(this.getResponseGetter());
   }

@@ -59,6 +59,13 @@ public class ReceivedDebit extends StripeObject implements HasId {
   @SerializedName("dispute_details")
   DisputeDetails disputeDetails;
 
+  /**
+   * Has the value {@code true} if the object has an associated Dispute otherwise or the value
+   * {@code false}. Use the Disputes List API with {@code target} to see details.
+   */
+  @SerializedName("disputed")
+  Boolean disputed;
+
   /** The amount and currency of the original/external debit request. */
   @SerializedName("external_amount")
   Amount externalAmount;
@@ -180,7 +187,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
     /**
      * The bank network the debit was originated on.
      *
-     * <p>One of {@code ach}, or {@code bacs}.
+     * <p>One of {@code ach}, {@code bacs}, or {@code sepa}.
      */
     @SerializedName("network")
     String network;
@@ -193,7 +200,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
      * Deprecated: Use {@code bank_transfer.originating_bank_account.type} instead. Open Enum.
      * Indicates the origin type through which this debit was initiated.
      *
-     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code gb_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("origin_type")
     String originType;
@@ -206,7 +213,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
      * Deprecated: Use {@code bank_transfer.originating_bank_account.type} instead. Open Enum. The
      * type of the payment method used to originate the debit.
      *
-     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code gb_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("payment_method_type")
     String paymentMethodType;
@@ -330,6 +337,10 @@ public class ReceivedDebit extends StripeObject implements HasId {
       @SerializedName("aba")
       Aba aba;
 
+      /** Creditor details. Present when type is {@code iban}. */
+      @SerializedName("iban")
+      Iban iban;
+
       /** Details of the originating account. Present when type is {@code sort_code}. */
       @SerializedName("sort_code")
       SortCode sortCode;
@@ -337,7 +348,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /**
        * The credential type identifying the originating bank account.
        *
-       * <p>One of {@code aba}, or {@code sort_code}.
+       * <p>One of {@code aba}, {@code iban}, or {@code sort_code}.
        */
       @SerializedName("type")
       String type;
@@ -360,6 +371,34 @@ public class ReceivedDebit extends StripeObject implements HasId {
         /** The routing number of the bank that originated the debit. */
         @SerializedName("routing_number")
         String routingNumber;
+      }
+
+      /** Creditor details. Present when type is {@code iban}. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Iban extends StripeObject {
+        /** The creditor's name. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The name of the creditor's bank. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The Bank Identifier Code (BIC) of the creditor's bank. */
+        @SerializedName("bic")
+        String bic;
+
+        /** Uppercase ISO 3166-1 alpha-2 country code of the creditor's bank account. */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * The creditor's IBAN, masked with X except for the country code and last four characters.
+         */
+        @SerializedName("iban")
+        String iban;
       }
 
       /** Details of the originating account. Present when type is {@code sort_code}. */
@@ -511,8 +550,9 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /**
        * Open Enum. The reason for the failure of the ReceivedDebit.
        *
-       * <p>One of {@code capability_inactive}, {@code financial_address_inactive}, {@code
-       * insufficient_funds}, {@code no_mandate}, or {@code stripe_rejected}.
+       * <p>One of {@code capability_inactive}, {@code debits_disabled}, {@code
+       * financial_address_inactive}, {@code insufficient_funds}, {@code no_mandate}, {@code
+       * stripe_rejected}, or {@code transaction_limit_exceeded}.
        */
       @SerializedName("reason")
       String reason;
@@ -529,7 +569,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /**
        * Open Enum. The reason the ReceivedDebit was returned.
        *
-       * <p>Equal to {@code originator_initiated}.
+       * <p>One of {@code dispute_won}, or {@code originator_initiated}.
        */
       @SerializedName("reason")
       String reason;

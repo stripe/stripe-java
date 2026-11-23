@@ -92,9 +92,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
 
-  @SerializedName("applied_credit_memos")
-  AppliedCreditMemos appliedCreditMemos;
-
   @SerializedName("applies_to")
   AppliesTo appliesTo;
 
@@ -896,44 +893,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     /** The status of the payment, one of {@code open}, {@code paid}, or {@code past_due}. */
     @SerializedName("status")
     String status;
-  }
-
-  /**
-   * For more details about AppliedCreditMemos, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AppliedCreditMemos extends StripeObject {
-    /**
-     * The Credit Memos with credit currently applied to this invoice, with one entry per Credit
-     * Memo. An invoice can have credit applied from at most 10 Credit Memos, so the list is
-     * returned in full.
-     */
-    @SerializedName("data")
-    List<QuotePreviewInvoice.AppliedCreditMemos.Data> data;
-
-    /**
-     * For more details about Data, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Data extends StripeObject {
-      /**
-       * The credit currently applied to this invoice from the Credit Memo, in cents (or local
-       * equivalent). Applying credit reduces {@code amount_due} and {@code amount_remaining}
-       * without changing {@code amount_paid}.
-       */
-      @SerializedName("applied_amount")
-      Long appliedAmount;
-
-      /** The ID of the Credit Memo whose credit is applied to this invoice. */
-      @SerializedName("credit_memo")
-      String creditMemo;
-    }
   }
 
   /**

@@ -442,6 +442,11 @@ import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeFailedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeSubmittedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification;
+import com.stripe.events.V2MoneyManagementDisputeAdjustmentCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementDisputeCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementDisputeLostEventNotification;
+import com.stripe.events.V2MoneyManagementDisputeUpdatedEventNotification;
+import com.stripe.events.V2MoneyManagementDisputeWonEventNotification;
 import com.stripe.events.V2MoneyManagementEarnedCreditSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification;
@@ -556,6 +561,7 @@ import com.stripe.events.V2ReportingReportRunCreatedEventNotification;
 import com.stripe.events.V2ReportingReportRunFailedEventNotification;
 import com.stripe.events.V2ReportingReportRunSucceededEventNotification;
 import com.stripe.events.V2ReportingReportRunUpdatedEventNotification;
+import com.stripe.events.V2RiskEvaluationOutcomeDelinquencyReadyEventNotification;
 import com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification;
 import com.stripe.events.V2SignalsAccountSignalCustomerRiskReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification;
@@ -3408,6 +3414,37 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2MoneyManagementDisputeCreated(
+      EventNotificationCallback<V2MoneyManagementDisputeCreatedEventNotification> callback) {
+    this.register("v2.money_management.dispute.created", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementDisputeLost(
+      EventNotificationCallback<V2MoneyManagementDisputeLostEventNotification> callback) {
+    this.register("v2.money_management.dispute.lost", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementDisputeUpdated(
+      EventNotificationCallback<V2MoneyManagementDisputeUpdatedEventNotification> callback) {
+    this.register("v2.money_management.dispute.updated", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementDisputeWon(
+      EventNotificationCallback<V2MoneyManagementDisputeWonEventNotification> callback) {
+    this.register("v2.money_management.dispute.won", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementDisputeAdjustmentCreated(
+      EventNotificationCallback<V2MoneyManagementDisputeAdjustmentCreatedEventNotification>
+          callback) {
+    this.register("v2.money_management.dispute_adjustment.created", callback);
+    return self();
+  }
+
   public T onV2MoneyManagementEarnedCreditSucceeded(
       EventNotificationCallback<V2MoneyManagementEarnedCreditSucceededEventNotification> callback) {
     this.register("v2.money_management.earned_credit.succeeded", callback);
@@ -4175,6 +4212,13 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2ReportingReportRunUpdated(
       EventNotificationCallback<V2ReportingReportRunUpdatedEventNotification> callback) {
     this.register("v2.reporting.report_run.updated", callback);
+    return self();
+  }
+
+  public T onV2RiskEvaluationOutcomeDelinquencyReady(
+      EventNotificationCallback<V2RiskEvaluationOutcomeDelinquencyReadyEventNotification>
+          callback) {
+    this.register("v2.risk.evaluation_outcome.delinquency_ready", callback);
     return self();
   }
 

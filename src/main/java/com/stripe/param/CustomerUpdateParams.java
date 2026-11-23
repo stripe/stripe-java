@@ -1732,9 +1732,23 @@ public class CustomerUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private AdConversion(Boolean consentCollected, Map<String, Object> extraParams) {
+      /** The URL of the web page where the customer converted. */
+      @SerializedName("source_url")
+      Object sourceUrl;
+
+      /** The user agent of the browser where the customer converted. */
+      @SerializedName("user_agent")
+      Object userAgent;
+
+      private AdConversion(
+          Boolean consentCollected,
+          Map<String, Object> extraParams,
+          Object sourceUrl,
+          Object userAgent) {
         this.consentCollected = consentCollected;
         this.extraParams = extraParams;
+        this.sourceUrl = sourceUrl;
+        this.userAgent = userAgent;
       }
 
       public static Builder builder() {
@@ -1746,10 +1760,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Object sourceUrl;
+
+        private Object userAgent;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CustomerUpdateParams.MarketingAttribution.AdConversion build() {
           return new CustomerUpdateParams.MarketingAttribution.AdConversion(
-              this.consentCollected, this.extraParams);
+              this.consentCollected, this.extraParams, this.sourceUrl, this.userAgent);
         }
 
         /**
@@ -1786,6 +1804,30 @@ public class CustomerUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The URL of the web page where the customer converted. */
+        public Builder setSourceUrl(String sourceUrl) {
+          this.sourceUrl = sourceUrl;
+          return this;
+        }
+
+        /** The URL of the web page where the customer converted. */
+        public Builder setSourceUrl(EmptyParam sourceUrl) {
+          this.sourceUrl = sourceUrl;
+          return this;
+        }
+
+        /** The user agent of the browser where the customer converted. */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
+
+        /** The user agent of the browser where the customer converted. */
+        public Builder setUserAgent(EmptyParam userAgent) {
+          this.userAgent = userAgent;
           return this;
         }
       }

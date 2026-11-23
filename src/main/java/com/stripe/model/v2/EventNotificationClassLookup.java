@@ -1268,6 +1268,21 @@ public final class EventNotificationClassLookup {
         "v2.money_management.debit_dispute.succeeded",
         com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.dispute.created",
+        com.stripe.events.V2MoneyManagementDisputeCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute.lost",
+        com.stripe.events.V2MoneyManagementDisputeLostEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute.updated",
+        com.stripe.events.V2MoneyManagementDisputeUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute.won",
+        com.stripe.events.V2MoneyManagementDisputeWonEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.dispute_adjustment.created",
+        com.stripe.events.V2MoneyManagementDisputeAdjustmentCreatedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.earned_credit.succeeded",
         com.stripe.events.V2MoneyManagementEarnedCreditSucceededEventNotification.class);
     eventClassLookup.put(
@@ -1619,6 +1634,9 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.reporting.report_run.updated",
         com.stripe.events.V2ReportingReportRunUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.risk.evaluation_outcome.delinquency_ready",
+        com.stripe.events.V2RiskEvaluationOutcomeDelinquencyReadyEventNotification.class);
     eventClassLookup.put(
         "v2.signals.account_evaluation.complete",
         com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification.class);

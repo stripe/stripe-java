@@ -41,9 +41,11 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
   Type type;
 
   /**
-   * Optional acceptance evidence collected from the merchant. Direct account calls can omit details
-   * that are derived from request metadata. Platform calls creating a mandate for a connected
-   * account must provide accepted_at, online.ip_address, and online.user_agent.
+   * Acceptance evidence collected from the account holder. Required when a platform creates a
+   * mandate for a connected account. Include that account's ID in the <a
+   * href="https://stripe.com/context">Stripe-Context header</a>, and provide accepted_at,
+   * online.ip_address, and online.user_agent. Direct account calls can omit details that Stripe
+   * derives from request metadata.
    */
   @SerializedName("user_accepted_details")
   UserAcceptedDetails userAcceptedDetails;
@@ -145,9 +147,11 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Optional acceptance evidence collected from the merchant. Direct account calls can omit
-     * details that are derived from request metadata. Platform calls creating a mandate for a
-     * connected account must provide accepted_at, online.ip_address, and online.user_agent.
+     * Acceptance evidence collected from the account holder. Required when a platform creates a
+     * mandate for a connected account. Include that account's ID in the <a
+     * href="https://stripe.com/context">Stripe-Context header</a>, and provide accepted_at,
+     * online.ip_address, and online.user_agent. Direct account calls can omit details that Stripe
+     * derives from request metadata.
      */
     public Builder setUserAcceptedDetails(
         InboundTransferMandateCreateParams.UserAcceptedDetails userAcceptedDetails) {
@@ -245,7 +249,20 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Optional prefix for the generated mandate reference (max 10 chars). */
+    /**
+     * Optional prefix for the generated mandate reference. When nonempty, it must contain at most
+     * 10 letters, digits, or underscores. In live mode, Stripe uppercases the prefix. Prefixes
+     * beginning with DDIC or STRIPE are reserved regardless of case. In a Sandbox or test mode, set
+     * this parameter to one of the following exact, case-sensitive values to simulate a Bacs
+     * mandate outcome: - {@code ACTIVE}: Creates an active mandate immediately. - {@code PENDING}:
+     * Creates a pending mandate that does not automatically activate. - {@code FAIL}: Creates a
+     * canceled mandate with {@code status_details.canceled.reason} set to {@code
+     * refused_by_network}. - {@code EXPIRE}: Creates an expired mandate. - {@code VALIDATION_FAIL}:
+     * Returns an {@code inbound_mandate_cop_failed} error without creating a mandate. This
+     * test-only value is exempt from the normal 10-character prefix limit. If omitted, empty, or
+     * set to another valid prefix, creates an active mandate. These simulation values do not select
+     * test outcomes in live mode.
+     */
     @SerializedName("reference_prefix")
     String referencePrefix;
 
@@ -295,7 +312,20 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Optional prefix for the generated mandate reference (max 10 chars). */
+      /**
+       * Optional prefix for the generated mandate reference. When nonempty, it must contain at most
+       * 10 letters, digits, or underscores. In live mode, Stripe uppercases the prefix. Prefixes
+       * beginning with DDIC or STRIPE are reserved regardless of case. In a Sandbox or test mode,
+       * set this parameter to one of the following exact, case-sensitive values to simulate a Bacs
+       * mandate outcome: - {@code ACTIVE}: Creates an active mandate immediately. - {@code
+       * PENDING}: Creates a pending mandate that does not automatically activate. - {@code FAIL}:
+       * Creates a canceled mandate with {@code status_details.canceled.reason} set to {@code
+       * refused_by_network}. - {@code EXPIRE}: Creates an expired mandate. - {@code
+       * VALIDATION_FAIL}: Returns an {@code inbound_mandate_cop_failed} error without creating a
+       * mandate. This test-only value is exempt from the normal 10-character prefix limit. If
+       * omitted, empty, or set to another valid prefix, creates an active mandate. These simulation
+       * values do not select test outcomes in live mode.
+       */
       public Builder setReferencePrefix(String referencePrefix) {
         this.referencePrefix = referencePrefix;
         return this;
@@ -307,7 +337,7 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class UserAcceptedDetails {
     /**
-     * When the merchant accepted the mandate. Must be a past timestamp. For direct account
+     * When the account holder accepted the mandate. Must be in the past. For direct account
      * requests, defaults to the mandate's creation time when not supplied.
      */
     @SerializedName("accepted_at")
@@ -358,7 +388,7 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
       }
 
       /**
-       * When the merchant accepted the mandate. Must be a past timestamp. For direct account
+       * When the account holder accepted the mandate. Must be in the past. For direct account
        * requests, defaults to the mandate's creation time when not supplied.
        */
       public Builder setAcceptedAt(Instant acceptedAt) {
@@ -421,8 +451,10 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The IP address from which the merchant accepted the mandate. For direct account requests,
-       * derived from the request when not supplied; rejected if obtainable from neither.
+       * The IP address from which the merchant accepted the mandate. For connected account
+       * requests, you must provide a valid IPv4 or IPv6 address. For direct account requests,
+       * Stripe derives the address from the request when you don't supply it and rejects the
+       * request if it can't obtain one.
        */
       @SerializedName("ip_address")
       String ipAddress;
@@ -488,8 +520,10 @@ public class InboundTransferMandateCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The IP address from which the merchant accepted the mandate. For direct account requests,
-         * derived from the request when not supplied; rejected if obtainable from neither.
+         * The IP address from which the merchant accepted the mandate. For connected account
+         * requests, you must provide a valid IPv4 or IPv6 address. For direct account requests,
+         * Stripe derives the address from the request when you don't supply it and rejects the
+         * request if it can't obtain one.
          */
         public Builder setIpAddress(String ipAddress) {
           this.ipAddress = ipAddress;

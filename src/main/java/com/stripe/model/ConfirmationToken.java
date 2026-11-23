@@ -1046,6 +1046,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
             @SerializedName("amount_authorized")
             Long amountAuthorized;
 
+            @SerializedName("benefits")
+            Benefits benefits;
+
             /**
              * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
              * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
@@ -1247,6 +1250,35 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
             @SerializedName("wallet")
             Wallet wallet;
+
+            /**
+             * For more details about Benefits, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Benefits extends StripeObject {
+              @SerializedName("fr_meal_voucher")
+              FrMealVoucher frMealVoucher;
+
+              /** Issuer of the benefit card utilized on this payment. */
+              @SerializedName("issuer")
+              String issuer;
+
+              /**
+               * For more details about FrMealVoucher, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class FrMealVoucher extends StripeObject {
+                /** The 14-digit SIRET of the meal voucher acceptor used for this charge. */
+                @SerializedName("siret")
+                String siret;
+              }
+            }
 
             /**
              * For more details about Fleet, please refer to the <a
@@ -1711,6 +1743,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
+      @SerializedName("benefits")
+      Benefits benefits;
+
       /**
        * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
        * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
@@ -1822,6 +1857,23 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
       @SerializedName("wallet")
       Wallet wallet;
+
+      /**
+       * For more details about Benefits, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Benefits extends StripeObject {
+        /** Issuer of this benefit card. */
+        @SerializedName("issuer")
+        String issuer;
+
+        /** Available benefit programs for this card. */
+        @SerializedName("programs")
+        List<String> programs;
+      }
 
       /**
        * For more details about Networks, please refer to the <a

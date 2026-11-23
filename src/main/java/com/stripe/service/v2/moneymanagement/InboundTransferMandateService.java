@@ -52,8 +52,11 @@ public final class InboundTransferMandateService extends ApiService {
   }
   /**
    * Create an InboundTransferMandate for a v2 credential. If a pending or active mandate already
-   * exists for the same user and credential, that mandate is returned instead of creating a new
-   * one.
+   * exists for the same user and credential, return that mandate instead of creating another one.
+   * The existing mandate's reference and acceptance evidence are preserved. Retry with the same
+   * idempotency key to replay a successful creation. In a Sandbox or test mode, use
+   * bacs.reference_prefix to simulate Bacs mandate outcomes. See the parameter description for
+   * supported values.
    */
   public InboundTransferMandate create(InboundTransferMandateCreateParams params)
       throws StripeException, AlreadyExistsException, ServiceUnavailableException {
@@ -61,8 +64,11 @@ public final class InboundTransferMandateService extends ApiService {
   }
   /**
    * Create an InboundTransferMandate for a v2 credential. If a pending or active mandate already
-   * exists for the same user and credential, that mandate is returned instead of creating a new
-   * one.
+   * exists for the same user and credential, return that mandate instead of creating another one.
+   * The existing mandate's reference and acceptance evidence are preserved. Retry with the same
+   * idempotency key to replay a successful creation. In a Sandbox or test mode, use
+   * bacs.reference_prefix to simulate Bacs mandate outcomes. See the parameter description for
+   * supported values.
    */
   public InboundTransferMandate create(
       InboundTransferMandateCreateParams params, RequestOptions options)

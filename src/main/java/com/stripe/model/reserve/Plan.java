@@ -239,8 +239,9 @@ public class Plan extends ApiResource implements HasId {
     Long daysAfterCharge;
 
     /**
-     * The number of days after the PaymentIntent's {@code fulfillment_date} to reserve funds before
-     * releasing. Charges without a {@code fulfillment_date} use {@code days_after_charge}.
+     * The number of days after a payment's {@code fulfillment_date} to reserve funds before
+     * releasing them. The hold releases at midnight UTC that many days after the fulfillment date.
+     * Charges without a {@code fulfillment_date} use {@code days_after_charge}.
      */
     @SerializedName("days_after_fulfillment")
     Long daysAfterFulfillment;

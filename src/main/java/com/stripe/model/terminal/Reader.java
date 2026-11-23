@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.ExpandableField;
-import com.stripe.model.GiftCard;
 import com.stripe.model.GiftCardOperation;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
@@ -1084,7 +1083,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
-      ExpandableField<GiftCard> giftCard;
+      ExpandableField<com.stripe.model.GiftCard> giftCard;
 
       /** The GiftCardOperation created for this reader action. */
       @SerializedName("gift_card_operation")
@@ -1102,12 +1101,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
 
       /** Get expanded {@code giftCard}. */
-      public GiftCard getGiftCardObject() {
+      public com.stripe.model.GiftCard getGiftCardObject() {
         return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
       }
 
-      public void setGiftCardObject(GiftCard expandableObject) {
-        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      public void setGiftCardObject(com.stripe.model.GiftCard expandableObject) {
+        this.giftCard =
+            new ExpandableField<com.stripe.model.GiftCard>(
+                expandableObject.getId(), expandableObject);
       }
 
       /** Get ID of expandable {@code giftCardOperation} object. */
@@ -1145,7 +1146,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
-      ExpandableField<GiftCard> giftCard;
+      ExpandableField<com.stripe.model.GiftCard> giftCard;
 
       /** The GiftCardOperation created for this reader action. */
       @SerializedName("gift_card_operation")
@@ -1163,12 +1164,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
 
       /** Get expanded {@code giftCard}. */
-      public GiftCard getGiftCardObject() {
+      public com.stripe.model.GiftCard getGiftCardObject() {
         return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
       }
 
-      public void setGiftCardObject(GiftCard expandableObject) {
-        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      public void setGiftCardObject(com.stripe.model.GiftCard expandableObject) {
+        this.giftCard =
+            new ExpandableField<com.stripe.model.GiftCard>(
+                expandableObject.getId(), expandableObject);
       }
 
       /** Get ID of expandable {@code giftCardOperation} object. */
@@ -1206,7 +1209,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
-      ExpandableField<GiftCard> giftCard;
+      ExpandableField<com.stripe.model.GiftCard> giftCard;
 
       /** The GiftCardOperation created for this reader action. */
       @SerializedName("gift_card_operation")
@@ -1224,12 +1227,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
 
       /** Get expanded {@code giftCard}. */
-      public GiftCard getGiftCardObject() {
+      public com.stripe.model.GiftCard getGiftCardObject() {
         return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
       }
 
-      public void setGiftCardObject(GiftCard expandableObject) {
-        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      public void setGiftCardObject(com.stripe.model.GiftCard expandableObject) {
+        this.giftCard =
+            new ExpandableField<com.stripe.model.GiftCard>(
+                expandableObject.getId(), expandableObject);
       }
 
       /** Get ID of expandable {@code giftCardOperation} object. */
@@ -1618,7 +1623,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
-      ExpandableField<GiftCard> giftCard;
+      ExpandableField<com.stripe.model.GiftCard> giftCard;
 
       /** The GiftCardOperation created for this reader action. */
       @SerializedName("gift_card_operation")
@@ -1636,12 +1641,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
 
       /** Get expanded {@code giftCard}. */
-      public GiftCard getGiftCardObject() {
+      public com.stripe.model.GiftCard getGiftCardObject() {
         return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
       }
 
-      public void setGiftCardObject(GiftCard expandableObject) {
-        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      public void setGiftCardObject(com.stripe.model.GiftCard expandableObject) {
+        this.giftCard =
+            new ExpandableField<com.stripe.model.GiftCard>(
+                expandableObject.getId(), expandableObject);
       }
 
       /** Get ID of expandable {@code giftCardOperation} object. */
@@ -1984,6 +1991,32 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /** Enable customer-initiated cancellation when refunding this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
+
+        /** Represents the destination gift card configuration for a refund. */
+        @SerializedName("gift_card")
+        com.stripe.model.terminal.Reader.Action.RefundPayment.RefundPaymentConfig.GiftCard giftCard;
+
+        /** Represents the destination gift card configuration for a refund. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class GiftCard extends StripeObject {
+          /**
+           * The brand of the destination gift card collected on the reader.
+           *
+           * <p>Equal to {@code svs}.
+           */
+          @SerializedName("brand")
+          String brand;
+
+          /**
+           * The gift card operation to perform with the refund amount.
+           *
+           * <p>One of {@code activation}, or {@code reload}.
+           */
+          @SerializedName("operation_type")
+          String operationType;
+        }
       }
 
       @Override
@@ -2003,7 +2036,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("gift_card")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
-      ExpandableField<GiftCard> giftCard;
+      ExpandableField<com.stripe.model.GiftCard> giftCard;
 
       /** The GiftCardOperation created for this reader action. */
       @SerializedName("gift_card_operation")
@@ -2021,12 +2054,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
 
       /** Get expanded {@code giftCard}. */
-      public GiftCard getGiftCardObject() {
+      public com.stripe.model.GiftCard getGiftCardObject() {
         return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
       }
 
-      public void setGiftCardObject(GiftCard expandableObject) {
-        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      public void setGiftCardObject(com.stripe.model.GiftCard expandableObject) {
+        this.giftCard =
+            new ExpandableField<com.stripe.model.GiftCard>(
+                expandableObject.getId(), expandableObject);
       }
 
       /** Get ID of expandable {@code giftCardOperation} object. */

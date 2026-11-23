@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -153,9 +154,51 @@ public class ContractTerm extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Overwrite extends StripeObject {
+      /**
+       * Whether the replacement pricing is per unit or tiered.
+       *
+       * <p>One of {@code per_unit}, or {@code tiered}.
+       */
+      @SerializedName("billing_scheme")
+      String billingScheme;
+
+      /** Replacement pricing tiers. */
+      @SerializedName("tiers")
+      List<ContractTerm.PricingOverride.Overwrite.Tier> tiers;
+
+      /**
+       * How the pricing tiers are applied.
+       *
+       * <p>One of {@code graduated}, or {@code volume}.
+       */
+      @SerializedName("tiers_mode")
+      String tiersMode;
+
       /** The replacement per-unit amount in minor currency units. */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
+
+      /**
+       * For more details about Tier, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tier extends StripeObject {
+        /** Flat amount in minor currency units. */
+        @SerializedName("flat_amount_decimal")
+        BigDecimal flatAmountDecimal;
+
+        /** Per-unit amount in minor currency units. */
+        @SerializedName("unit_amount_decimal")
+        BigDecimal unitAmountDecimal;
+
+        /** Inclusive whole-number upper bound. Omitted for an unbounded final tier. */
+        @SerializedName("up_to")
+        @JsonAdapter(StringInt64TypeAdapter.class)
+        Long upTo;
+      }
     }
 
     /** The inclusive start of the override's validity window. */
@@ -256,13 +299,17 @@ public class ContractTerm extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Custom extends StripeObject {
-        /** Amount in the contract's currency. */
-        @SerializedName("amount")
-        Amount amount;
-
         /** The resolved bill date. */
         @SerializedName("bill_at")
         BillAt billAt;
+
+        /** Resolved installment quantity. Always present; defaults to 1 when omitted on input. */
+        @SerializedName("quantity")
+        BigDecimal quantity;
+
+        /** Unit price in minor units of the contract's currency, before multiplying by quantity. */
+        @SerializedName("unit_amount_decimal")
+        BigDecimal unitAmountDecimal;
 
         /** The resolved bill date. */
         @Getter

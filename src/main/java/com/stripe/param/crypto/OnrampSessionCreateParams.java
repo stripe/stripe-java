@@ -129,6 +129,13 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
+   * ID of a card PaymentMethod (pm_...) owned by the authenticated merchant. Only supported for
+   * headless sessions. Mutually exclusive with {@code payment_token}.
+   */
+  @SerializedName("payment_method")
+  String paymentMethod;
+
+  /**
    * Speed at which the cryptocurrency is delivered to the wallet One of: {@code instant} (default):
    * crypto is delivered when payment is confirmed {@code standard}: crypto is delivered when
    * payment settles.
@@ -180,6 +187,7 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
       KycDetails kycDetails,
       Boolean lockWalletAddress,
       Map<String, String> metadata,
+      String paymentMethod,
       SettlementSpeed settlementSpeed,
       String sourceAmount,
       SourceCurrency sourceCurrency,
@@ -195,6 +203,7 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
     this.kycDetails = kycDetails;
     this.lockWalletAddress = lockWalletAddress;
     this.metadata = metadata;
+    this.paymentMethod = paymentMethod;
     this.settlementSpeed = settlementSpeed;
     this.sourceAmount = sourceAmount;
     this.sourceCurrency = sourceCurrency;
@@ -228,6 +237,8 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String paymentMethod;
+
     private SettlementSpeed settlementSpeed;
 
     private String sourceAmount;
@@ -250,6 +261,7 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
           this.kycDetails,
           this.lockWalletAddress,
           this.metadata,
+          this.paymentMethod,
           this.settlementSpeed,
           this.sourceAmount,
           this.sourceCurrency,
@@ -469,6 +481,15 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * ID of a card PaymentMethod (pm_...) owned by the authenticated merchant. Only supported for
+     * headless sessions. Mutually exclusive with {@code payment_token}.
+     */
+    public Builder setPaymentMethod(String paymentMethod) {
+      this.paymentMethod = paymentMethod;
       return this;
     }
 

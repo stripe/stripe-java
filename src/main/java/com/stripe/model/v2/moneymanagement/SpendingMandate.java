@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -87,6 +88,10 @@ public class SpendingMandate extends StripeObject implements HasId {
     @SerializedName("account_holder_name")
     String accountHolderName;
 
+    /** ACH-specific authorization details. Present when {@code network} is {@code ach}. */
+    @SerializedName("ach")
+    Ach ach;
+
     /** The financial address associated with this mandate. */
     @SerializedName("financial_address")
     String financialAddress;
@@ -94,17 +99,34 @@ public class SpendingMandate extends StripeObject implements HasId {
     /**
      * The bank transfer network for this mandate.
      *
-     * <p>Equal to {@code bacs}.
+     * <p>One of {@code ach}, {@code bacs}, or {@code sepa}.
      */
     @SerializedName("network")
     String network;
 
     /**
-     * The bank transfer reference provided by the bank. Only present when {@code network} is {@code
-     * bacs}.
+     * The mandate reference provided by the bank for Bacs or the creditor's unique mandate
+     * reference (UMR) for SEPA.
      */
     @SerializedName("reference")
     String reference;
+
+    /** ACH-specific authorization details. Present when {@code network} is {@code ach}. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach extends StripeObject {
+      /** ACH Company ID used to identify the authorized originator. */
+      @SerializedName("originator_company_id")
+      String originatorCompanyId;
+
+      /**
+       * Maximum amount authorized for a single debit. If absent, the Financial Account limit
+       * applies.
+       */
+      @SerializedName("transaction_limit")
+      Amount transactionLimit;
+    }
   }
 
   /** Detailed information about the status of the SpendingMandate. */

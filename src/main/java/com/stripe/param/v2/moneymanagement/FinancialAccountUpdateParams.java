@@ -4,6 +4,7 @@ package com.stripe.param.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
+import com.stripe.v2.Amount;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,10 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Sparse flow setting updates. Omitting a field leaves its current value unchanged. */
+  @SerializedName("flow_settings")
+  FlowSettings flowSettings;
+
   /**
    * Forwarding settings for a closed FinancialAccount. Post-close forwarding updates are not yet
    * implemented.
@@ -51,11 +56,13 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   private FinancialAccountUpdateParams(
       Object displayName,
       Map<String, Object> extraParams,
+      FlowSettings flowSettings,
       ForwardingSettings forwardingSettings,
       Map<String, Object> metadata,
       Storage storage) {
     this.displayName = displayName;
     this.extraParams = extraParams;
+    this.flowSettings = flowSettings;
     this.forwardingSettings = forwardingSettings;
     this.metadata = metadata;
     this.storage = storage;
@@ -70,6 +77,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private FlowSettings flowSettings;
+
     private ForwardingSettings forwardingSettings;
 
     private Map<String, Object> metadata;
@@ -79,7 +88,12 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountUpdateParams build() {
       return new FinancialAccountUpdateParams(
-          this.displayName, this.extraParams, this.forwardingSettings, this.metadata, this.storage);
+          this.displayName,
+          this.extraParams,
+          this.flowSettings,
+          this.forwardingSettings,
+          this.metadata,
+          this.storage);
     }
 
     /**
@@ -123,6 +137,12 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Sparse flow setting updates. Omitting a field leaves its current value unchanged. */
+    public Builder setFlowSettings(FinancialAccountUpdateParams.FlowSettings flowSettings) {
+      this.flowSettings = flowSettings;
       return this;
     }
 
@@ -184,6 +204,281 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     public Builder setStorage(FinancialAccountUpdateParams.Storage storage) {
       this.storage = storage;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FlowSettings {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Settings for received debit flows. */
+    @SerializedName("received_debits")
+    ReceivedDebits receivedDebits;
+
+    private FlowSettings(Map<String, Object> extraParams, ReceivedDebits receivedDebits) {
+      this.extraParams = extraParams;
+      this.receivedDebits = receivedDebits;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private ReceivedDebits receivedDebits;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public FinancialAccountUpdateParams.FlowSettings build() {
+        return new FinancialAccountUpdateParams.FlowSettings(this.extraParams, this.receivedDebits);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FinancialAccountUpdateParams.FlowSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FinancialAccountUpdateParams.FlowSettings#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Settings for received debit flows. */
+      public Builder setReceivedDebits(
+          FinancialAccountUpdateParams.FlowSettings.ReceivedDebits receivedDebits) {
+        this.receivedDebits = receivedDebits;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ReceivedDebits {
+      /** Settings for ACH received debits. */
+      @SerializedName("ach")
+      Ach ach;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private ReceivedDebits(Ach ach, Map<String, Object> extraParams) {
+        this.ach = ach;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Ach ach;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public FinancialAccountUpdateParams.FlowSettings.ReceivedDebits build() {
+          return new FinancialAccountUpdateParams.FlowSettings.ReceivedDebits(
+              this.ach, this.extraParams);
+        }
+
+        /** Settings for ACH received debits. */
+        public Builder setAch(FinancialAccountUpdateParams.FlowSettings.ReceivedDebits.Ach ach) {
+          this.ach = ach;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountUpdateParams.FlowSettings.ReceivedDebits#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountUpdateParams.FlowSettings.ReceivedDebits#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ach {
+        /**
+         * Whether ACH received debits are enabled. Omit to preserve the current setting, which
+         * defaults to true. Other restrictions still apply.
+         */
+        @SerializedName("enabled")
+        Boolean enabled;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Controls whether ACH debits without a matching active mandate are allowed or rejected.
+         */
+        @SerializedName("mandate_behavior")
+        MandateBehavior mandateBehavior;
+
+        /** Account-level per-debit limit. Set to null to clear the limit. */
+        @SerializedName("transaction_limit")
+        Amount transactionLimit;
+
+        private Ach(
+            Boolean enabled,
+            Map<String, Object> extraParams,
+            MandateBehavior mandateBehavior,
+            Amount transactionLimit) {
+          this.enabled = enabled;
+          this.extraParams = extraParams;
+          this.mandateBehavior = mandateBehavior;
+          this.transactionLimit = transactionLimit;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean enabled;
+
+          private Map<String, Object> extraParams;
+
+          private MandateBehavior mandateBehavior;
+
+          private Amount transactionLimit;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public FinancialAccountUpdateParams.FlowSettings.ReceivedDebits.Ach build() {
+            return new FinancialAccountUpdateParams.FlowSettings.ReceivedDebits.Ach(
+                this.enabled, this.extraParams, this.mandateBehavior, this.transactionLimit);
+          }
+
+          /**
+           * Whether ACH received debits are enabled. Omit to preserve the current setting, which
+           * defaults to true. Other restrictions still apply.
+           */
+          public Builder setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * FinancialAccountUpdateParams.FlowSettings.ReceivedDebits.Ach#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * FinancialAccountUpdateParams.FlowSettings.ReceivedDebits.Ach#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls whether ACH debits without a matching active mandate are allowed or rejected.
+           */
+          public Builder setMandateBehavior(
+              FinancialAccountUpdateParams.FlowSettings.ReceivedDebits.Ach.MandateBehavior
+                  mandateBehavior) {
+            this.mandateBehavior = mandateBehavior;
+            return this;
+          }
+
+          /** Account-level per-debit limit. Set to null to clear the limit. */
+          public Builder setTransactionLimit(Amount transactionLimit) {
+            this.transactionLimit = transactionLimit;
+            return this;
+          }
+        }
+
+        public enum MandateBehavior implements ApiRequestParams.EnumParam {
+          @SerializedName("optional")
+          OPTIONAL("optional"),
+
+          @SerializedName("required")
+          REQUIRED("required");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          MandateBehavior(String value) {
+            this.value = value;
+          }
+        }
+      }
     }
   }
 

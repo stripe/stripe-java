@@ -252,11 +252,17 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("aeon_pay")
+    AeonPay aeonPay;
+
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
+
+    @SerializedName("au_pay")
+    AuPay auPay;
 
     @SerializedName("bacs_debit")
     BacsDebit bacsDebit;
@@ -270,6 +276,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    @SerializedName("dbarai")
+    Dbarai dbarai;
+
     @SerializedName("kakao_pay")
     KakaoPay kakaoPay;
 
@@ -281,6 +290,9 @@ public class Mandate extends ApiResource implements HasId {
 
     @SerializedName("link")
     Link link;
+
+    @SerializedName("merpay")
+    Merpay merpay;
 
     @SerializedName("naver_pay")
     NaverPay naverPay;
@@ -296,6 +308,9 @@ public class Mandate extends ApiResource implements HasId {
 
     @SerializedName("pix")
     Pix pix;
+
+    @SerializedName("rakuten_pay")
+    RakutenPay rakutenPay;
 
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
@@ -360,6 +375,15 @@ public class Mandate extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about AeonPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AeonPay extends StripeObject {}
+
+    /**
      * For more details about AmazonPay, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -383,6 +407,15 @@ public class Mandate extends ApiResource implements HasId {
       @SerializedName("url")
       String url;
     }
+
+    /**
+     * For more details about AuPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuPay extends StripeObject {}
 
     /**
      * For more details about BacsDebit, please refer to the <a
@@ -545,6 +578,15 @@ public class Mandate extends ApiResource implements HasId {
     public static class Cashapp extends StripeObject {}
 
     /**
+     * For more details about Dbarai, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dbarai extends StripeObject {}
+
+    /**
      * For more details about KakaoPay, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -579,6 +621,15 @@ public class Mandate extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {}
+
+    /**
+     * For more details about Merpay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merpay extends StripeObject {}
 
     /**
      * For more details about NaverPay, please refer to the <a
@@ -746,6 +797,15 @@ public class Mandate extends ApiResource implements HasId {
       @SerializedName("start_date")
       String startDate;
     }
+
+    /**
+     * For more details about RakutenPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RakutenPay extends StripeObject {}
 
     /**
      * For more details about RevolutPay, please refer to the <a

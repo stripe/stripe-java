@@ -61,7 +61,7 @@ public class FeeBatch extends StripeObject implements HasId {
   /**
    * The current state of this batch.
    *
-   * <p>One of {@code billed}, or {@code pending}.
+   * <p>One of {@code billed}, {@code canceled}, or {@code pending}.
    */
   @SerializedName("status")
   String status;
@@ -218,6 +218,13 @@ public class FeeBatch extends StripeObject implements HasId {
     /** Timestamp of when the batch transitioned to BILLED, if applicable. */
     @SerializedName("billed_at")
     Instant billedAt;
+
+    /**
+     * Present only when {@code status=canceled}; {@code billed_at} and {@code canceled_at} are
+     * mutually exclusive.
+     */
+    @SerializedName("canceled_at")
+    Instant canceledAt;
   }
 
   /** The tax amount included in this batch. */
