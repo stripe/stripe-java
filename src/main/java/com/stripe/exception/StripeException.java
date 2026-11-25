@@ -67,8 +67,8 @@ public abstract class StripeException extends Exception {
   }
 
   /**
-   * Returns a description of the exception, including the HTTP status code and request ID (if
-   * applicable).
+   * Returns a description of the exception, including the request ID prefix (if applicable) and
+   * error code.
    *
    * @return a string representation of the exception.
    */
@@ -78,14 +78,12 @@ public abstract class StripeException extends Exception {
     if (code != null) {
       additionalInfo += "; code: " + code;
     }
-    if (requestId != null) {
-      additionalInfo += "; request-id: " + requestId;
-    }
     // a separate user message is only available on v2 errors
     if (stripeErrorApiMode == ApiMode.V2 && this.getUserMessage() != null) {
       additionalInfo += "; user-message: " + this.getUserMessage();
     }
-    return super.getMessage() + additionalInfo;
+    String prefix = requestId != null ? "[" + requestId + "] " : "";
+    return prefix + super.getMessage() + additionalInfo;
   }
 
   /**
