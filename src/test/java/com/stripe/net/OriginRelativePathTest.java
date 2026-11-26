@@ -3,7 +3,10 @@ package com.stripe.net;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.stripe.BaseStripeTest;
+import com.stripe.model.Customer;
+import com.stripe.model.checkout.Session;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class OriginRelativePathTest extends BaseStripeTest {
 
@@ -17,6 +20,36 @@ public class OriginRelativePathTest extends BaseStripeTest {
     "/v1/invoices/in_123@456",
     // A backslash does not open an authority: the '/' already closed it.
     "/v1/\\evil.example",
+    // Dots are fine anywhere other than a whole "." or ".." segment.
+    "/v1/reporting/report_types/balance.summary.1",
+    "/v1/customers/...",
+    "/v1/customers/.cus_123",
+    "/v1/customers/cus_123..",
+    "/v1/customers?email=a..b%40example.com",
+    // A double-encoded dot reaches the API as the literal "%2E".
+    "/v1/customers/%252E",
+    // An encoded slash is fine as long as no piece around it is a dot segment.
+    "/v1/coupons/summer%2F2017",
+  };
+
+  private static final String[] DOT_SEGMENT_PATHS = {
+    // A client, proxy, or server that removes these segments would send each
+    // request to a different endpoint than the one the path was built for.
+    "/v1/checkout/sessions/.",
+    "/v1/checkout/sessions/..",
+    "/v1/customers/../payment_methods/pm_123",
+    "/v1/customers/./payment_methods/pm_123",
+    "/v1/customers/cus_123/sources/..?expand[]=customer",
+    "/v2/core/accounts/.",
+    // Some of them decode "%2E" to "." before removing dot segments.
+    "/v1/checkout/sessions/%2E",
+    "/v1/checkout/sessions/%2e%2E",
+    "/v1/checkout/sessions/.%2E",
+    // A proxy that decodes "%2F" before removing dot segments turns these into real path
+    // separators.
+    "/v1/coupons/x%2F..%2F..%2Fcustomers%2Fcus_B",
+    "/v1/customers/cus_123/sources/..%2F..%2Fcus_B",
+    "/v1/coupons/..%2fsummer",
   };
 
   private static final String[] HOSTILE_PATHS = {
@@ -61,5 +94,95 @@ public class OriginRelativePathTest extends BaseStripeTest {
             IllegalArgumentException.class,
             () -> LiveStripeResponseGetter.validatePath("@evil.example/v1/leak"));
     assertTrue(e.getMessage().contains("@evil.example/v1/leak"));
+  }
+
+  @Test
+  public void testRejectsDotSegmentPaths() {
+    for (String path : DOT_SEGMENT_PATHS) {
+      IllegalArgumentException e =
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> LiveStripeResponseGetter.validatePath(path),
+              "expected to reject: " + path);
+      assertEquals(
+          "Request path may not contain a \".\" or \"..\" segment, got: "
+              + path.split("[?#]", 2)[0],
+          e.getMessage());
+    }
+  }
+
+  @Test
+  public void testDotSegmentErrorOmitsQueryString() {
+    IllegalArgumentException e =
+        assertThrows(
+            IllegalArgumentException.class,
+            () ->
+                LiveStripeResponseGetter.validatePath(
+                    "/v1/payment_intents/..?client_secret=pi_123_secret_456"));
+    assertTrue(e.getMessage().contains("/v1/payment_intents/.."));
+    assertFalse(e.getMessage().contains("pi_123_secret_456"));
+  }
+
+  @Test
+  public void testRequestRejectsDotSegmentPathsWithoutSendingRequest() {
+    for (String path : DOT_SEGMENT_PATHS) {
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, null);
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> networkSpy.request(request, Customer.class),
+          "expected to reject: " + path);
+    }
+
+    Mockito.verifyNoInteractions(httpClientSpy);
+  }
+
+  @Test
+  public void testRawRequestRejectsDotSegmentPathsWithoutSendingRequest() {
+    for (String path : DOT_SEGMENT_PATHS) {
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> mockClient.rawRequest(ApiResource.RequestMethod.GET, path, null),
+          "expected to reject: " + path);
+    }
+
+    Mockito.verifyNoInteractions(httpClientSpy);
+  }
+
+  @Test
+  public void testServiceRetrieveRejectsDotIdWithoutSendingRequest() {
+    for (String id : new String[] {".", ".."}) {
+      assertThrows(
+          IllegalArgumentException.class, () -> mockClient.v1().checkout().sessions().retrieve(id));
+    }
+
+    Mockito.verifyNoInteractions(httpClientSpy);
+  }
+
+  @Test
+  public void testNestedServiceRetrieveRejectsDotParentIdWithoutSendingRequest() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> mockClient.v1().customers().paymentMethods().retrieve("..", "pm_123"));
+
+    Mockito.verifyNoInteractions(httpClientSpy);
+  }
+
+  @Test
+  public void testServiceRetrieveRejectsIdWithEncodedDotSegmentsWithoutSendingRequest() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> mockClient.v1().coupons().retrieve("x/../../customers/cus_B"));
+
+    Mockito.verifyNoInteractions(httpClientSpy);
+  }
+
+  @Test
+  public void testLegacyRetrieveRejectsDotIdWithoutSendingRequest() {
+    for (String id : new String[] {".", ".."}) {
+      assertThrows(IllegalArgumentException.class, () -> Session.retrieve(id));
+    }
+
+    Mockito.verifyNoInteractions(httpClientSpy);
   }
 }
