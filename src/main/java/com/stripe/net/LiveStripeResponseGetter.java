@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -514,11 +515,30 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    * <p>So, we require that a path starts with a leading slash. Deliberately not using {@link
    * java.net.URI} to parse -- it enforces RFC 2396 strictly and would reject paths containing
    * characters that callers have always been able to send.
+   *
+   * <p>We also reject {@code "."} and {@code ".."} segments, which an ID of {@code "."} or {@code
+   * ".."} produces because {@link ApiResource#urlEncodeId} leaves dots alone. {@link
+   * HttpURLConnectionClient} sends these segments literally, but a custom {@link HttpClient}, a
+   * proxy, or a server may remove them, some after decoding {@code "%2E"}, so the request would
+   * reach a different endpoint. An encoded slash ({@code "%2F"}) also counts as a separator for
+   * this check, because a proxy that decodes the path before normalizing it (nginx's {@code
+   * proxy_pass}, for example) turns it into a real one.
    */
   static void validatePath(String path) {
     if (path == null || !path.startsWith("/") || path.startsWith("//")) {
       throw new IllegalArgumentException(
           "Request path must begin with a single \"/\", got: " + path);
+    }
+
+    String pathOnly = path.split("[?#]", 2)[0];
+    for (String segment : pathOnly.split("/|%2[fF]", -1)) {
+      String decoded = segment.toLowerCase(Locale.ROOT).replace("%2e", ".");
+      if (decoded.equals(".") || decoded.equals("..")) {
+        // The message leaves out the query string, which can carry secrets such as a
+        // client_secret.
+        throw new IllegalArgumentException(
+            "Request path may not contain a \".\" or \"..\" segment, got: " + pathOnly);
+      }
     }
   }
 
