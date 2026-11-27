@@ -2725,12 +2725,12 @@ public class ConfirmationToken extends ApiResource implements HasId {
   public static class TestHelpers {
     private TestHelpers() {}
 
-    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    /** Creates a test Confirmation Token server side for your integration tests. */
     public static ConfirmationToken create(Map<String, Object> params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
-    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    /** Creates a test Confirmation Token server side for your integration tests. */
     public static ConfirmationToken create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path = "/v1/test_helpers/confirmation_tokens";
@@ -2739,13 +2739,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
       return getGlobalResponseGetter().request(request, ConfirmationToken.class);
     }
 
-    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    /** Creates a test Confirmation Token server side for your integration tests. */
     public static ConfirmationToken create(ConfirmationTokenCreateParams params)
         throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
-    /** Creates a test mode Confirmation Token server side for your integration tests. */
+    /** Creates a test Confirmation Token server side for your integration tests. */
     public static ConfirmationToken create(
         ConfirmationTokenCreateParams params, RequestOptions options) throws StripeException {
       String path = "/v1/test_helpers/confirmation_tokens";

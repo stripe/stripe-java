@@ -15,7 +15,8 @@ import lombok.Setter;
  * An automatically evaluated signal on an account. Each Account Signal object corresponds to
  * exactly one signal type, indicated by type. Only the type-specific field is populated; other
  * type-specific payload fields are null. If an account has multiple signals, Stripe creates
- * separate account signal objects.
+ * separate account signal objects. Account signals are available through the API for 180 days after
+ * creation.
  */
 @Getter
 @Setter
@@ -173,9 +174,9 @@ public class AccountSignal extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class FraudulentWebsite extends StripeObject {
-    /** Human-readable details about the fraudulent website evaluation. */
-    @SerializedName("details")
-    String details;
+    /** Additional information about the fraudulent website evaluation, when available. */
+    @SerializedName("additional_details")
+    AdditionalDetails additionalDetails;
 
     /**
      * Categorical assessment of the fraudulent website risk.
@@ -184,6 +185,16 @@ public class AccountSignal extends StripeObject implements HasId {
      */
     @SerializedName("risk_level")
     String riskLevel;
+
+    /** Additional information about the fraudulent website evaluation, when available. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdditionalDetails extends StripeObject {
+      /** Human-readable explanation of the fraudulent website evaluation. */
+      @SerializedName("explanation")
+      String explanation;
+    }
   }
 
   /** Data for the user account-sharing signal. Present only when type is user_account_sharing. */

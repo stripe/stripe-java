@@ -17,12 +17,20 @@ public class ApprovalRequest extends StripeObject implements HasId {
   /**
    * The action that was requested.
    *
-   * <p>One of {@code charge.create}, {@code dispute.close}, {@code
+   * <p>One of {@code api_key.create}, {@code api_key.delete}, {@code api_key.rotate}, {@code
+   * api_key.update}, {@code approval_rule.create}, {@code approval_rule.delete}, {@code
+   * approval_rule.update}, {@code charge.create}, {@code connected_account.create}, {@code
+   * credit_note.create}, {@code currency_conversions.money_management.create}, {@code
+   * customer_balance_transaction.create}, {@code dispute.close}, {@code
    * inbound_transfers.money_management.create}, {@code invoice.create}, {@code
    * outbound_payments.money_management.create}, {@code outbound_transfers.money_management.create},
    * {@code payment_intent.create}, {@code payment_intent.update}, {@code payout.create}, {@code
    * price.update}, {@code refund.create}, {@code setup_intent.create}, {@code subscription.create},
-   * {@code subscription.update}, {@code topup.create}, or {@code transfer.create}.
+   * {@code subscription.update}, {@code tax.customization.create}, {@code
+   * tax.customization.delete}, {@code tax.customization.update}, {@code
+   * tax.registration_application.submit}, {@code tax.registration.create}, {@code
+   * tax.registration.delete}, {@code tax.registration.update}, {@code topup.create}, or {@code
+   * transfer.create}.
    */
   @SerializedName("action")
   String action;

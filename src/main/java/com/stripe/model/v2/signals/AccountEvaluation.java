@@ -11,7 +11,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Account Evaluation resource for the Signals API. */
+/**
+ * Account Evaluation resource for the Signals API. Account evaluations are available through the
+ * API for 180 days after creation.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -177,9 +180,9 @@ public class AccountEvaluation extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class FraudulentWebsite extends StripeObject {
-      /** Human-readable details about the fraudulent website evaluation, when available. */
-      @SerializedName("details")
-      String details;
+      /** Additional information about the fraudulent website evaluation, when available. */
+      @SerializedName("additional_details")
+      AdditionalDetails additionalDetails;
 
       /** Timestamp at which the signal was evaluated. */
       @SerializedName("evaluated_at")
@@ -197,6 +200,16 @@ public class AccountEvaluation extends StripeObject implements HasId {
       /** The account signal ID containing the full fraudulent website signal result. */
       @SerializedName("signal")
       String signal;
+
+      /** Additional information about the fraudulent website evaluation, when available. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AdditionalDetails extends StripeObject {
+        /** Human-readable explanation of the fraudulent website evaluation. */
+        @SerializedName("explanation")
+        String explanation;
+      }
     }
 
     /** User account-sharing result for the evaluation, when available. */

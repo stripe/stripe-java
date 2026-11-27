@@ -7,6 +7,7 @@ import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,6 +52,13 @@ public class InboundTransfer extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
@@ -58,13 +66,6 @@ public class InboundTransfer extends StripeObject implements HasId {
    */
   @SerializedName("object")
   String object;
-
-  /**
-   * A hosted transaction receipt URL that is provided when money movement is considered regulated
-   * under Stripe's money transmission licenses.
-   */
-  @SerializedName("receipt_url")
-  String receiptUrl;
 
   /** A nested object containing information about the destination of the InboundTransfer. */
   @SerializedName("to")

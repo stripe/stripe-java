@@ -58,6 +58,8 @@ public final class EventDataClassLookup {
     classLookup.put("topup", com.stripe.model.Topup.class);
     classLookup.put("transfer", com.stripe.model.Transfer.class);
 
+    classLookup.put("apps.install", com.stripe.model.apps.Install.class);
+
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
     classLookup.put(
         "billing.credit_balance_transaction",
@@ -98,21 +100,12 @@ public final class EventDataClassLookup {
 
     classLookup.put("test_helpers.test_clock", com.stripe.model.testhelpers.TestClock.class);
 
-    classLookup.put("v2.billing.bill_setting", com.stripe.model.v2.billing.BillSetting.class);
-    classLookup.put(
-        "v2.billing.bill_setting_version", com.stripe.model.v2.billing.BillSettingVersion.class);
-    classLookup.put(
-        "v2.billing.collection_setting", com.stripe.model.v2.billing.CollectionSetting.class);
-    classLookup.put(
-        "v2.billing.collection_setting_version",
-        com.stripe.model.v2.billing.CollectionSettingVersion.class);
     classLookup.put("v2.billing.meter_event", com.stripe.model.v2.billing.MeterEvent.class);
     classLookup.put(
         "v2.billing.meter_event_adjustment",
         com.stripe.model.v2.billing.MeterEventAdjustment.class);
     classLookup.put(
         "v2.billing.meter_event_session", com.stripe.model.v2.billing.MeterEventSession.class);
-    classLookup.put("v2.billing.profile", com.stripe.model.v2.billing.Profile.class);
 
     classLookup.put(
         "v2.commerce.product_catalog_import",
@@ -209,6 +202,9 @@ public final class EventDataClassLookup {
         com.stripe.model.v2.orchestratedcommerce.Agreement.class);
 
     classLookup.put(
+        "v2.payments.off_session_payment", com.stripe.model.v2.payments.OffSessionPayment.class);
+
+    classLookup.put(
         "v2.signals.account_activity", com.stripe.model.v2.signals.AccountActivity.class);
     classLookup.put(
         "v2.signals.account_evaluation", com.stripe.model.v2.signals.AccountEvaluation.class);
@@ -237,6 +233,12 @@ public final class EventDataClassLookup {
         com.stripe.events.V1ApplicationFeeRefundUpdatedEvent.class);
     eventClassLookup.put(
         "v1.application_fee.refunded", com.stripe.events.V1ApplicationFeeRefundedEvent.class);
+    eventClassLookup.put(
+        "v1.apps.install.created", com.stripe.events.V1AppsInstallCreatedEvent.class);
+    eventClassLookup.put(
+        "v1.apps.install.deleted", com.stripe.events.V1AppsInstallDeletedEvent.class);
+    eventClassLookup.put(
+        "v1.apps.install.updated", com.stripe.events.V1AppsInstallUpdatedEvent.class);
     eventClassLookup.put("v1.balance.available", com.stripe.events.V1BalanceAvailableEvent.class);
     eventClassLookup.put(
         "v1.balance_settings.updated", com.stripe.events.V1BalanceSettingsUpdatedEvent.class);
@@ -572,9 +574,6 @@ public final class EventDataClassLookup {
         "v1.issuing_authorization.created",
         com.stripe.events.V1IssuingAuthorizationCreatedEvent.class);
     eventClassLookup.put(
-        "v1.issuing_authorization.request",
-        com.stripe.events.V1IssuingAuthorizationRequestEvent.class);
-    eventClassLookup.put(
         "v1.issuing_authorization.updated",
         com.stripe.events.V1IssuingAuthorizationUpdatedEvent.class);
     eventClassLookup.put(
@@ -819,7 +818,11 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEvent.class);
     eventClassLookup.put(
+        "v2.core.account.connected", com.stripe.events.V2CoreAccountConnectedEvent.class);
+    eventClassLookup.put(
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account.disconnected", com.stripe.events.V2CoreAccountDisconnectedEvent.class);
     eventClassLookup.put(
         "v2.core.account.updated", com.stripe.events.V2CoreAccountUpdatedEvent.class);
     eventClassLookup.put(
@@ -1122,6 +1125,30 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.orchestrated_commerce.agreement.terminated",
         com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.attempt_failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentAttemptFailedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.attempt_started",
+        com.stripe.events.V2PaymentsOffSessionPaymentAttemptStartedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.canceled",
+        com.stripe.events.V2PaymentsOffSessionPaymentCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.created",
+        com.stripe.events.V2PaymentsOffSessionPaymentCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentFailedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.paused",
+        com.stripe.events.V2PaymentsOffSessionPaymentPausedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.resumed",
+        com.stripe.events.V2PaymentsOffSessionPaymentResumedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.succeeded",
+        com.stripe.events.V2PaymentsOffSessionPaymentSucceededEvent.class);
     eventClassLookup.put(
         "v2.signals.account_evaluation.complete",
         com.stripe.events.V2SignalsAccountEvaluationCompleteEvent.class);

@@ -73,7 +73,8 @@ public class FundingInstructions extends StripeObject implements StripeActiveObj
     /**
      * The bank_transfer type
      *
-     * <p>One of {@code eu_bank_transfer}, or {@code jp_bank_transfer}.
+     * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer},
+     * {@code mx_bank_transfer}, or {@code us_bank_transfer}.
      */
     @SerializedName("type")
     String type;

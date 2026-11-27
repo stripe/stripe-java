@@ -20,16 +20,20 @@ public final class AccountSignalService extends ApiService {
   }
 
   /**
-   * Lists AccountSignals whose created timestamps are no more than 90 days old for a given account
-   * or customer. Returns only the latest AccountSignal for each requested signal type.
+   * Lists AccountSignals for a given account or customer, newest first. Signals more than 180 days
+   * old are omitted. By default, returns only the latest matching AccountSignal for each requested
+   * signal type. Set latest_per_type to false to include matching historical signals. Filtering and
+   * latest-per-type selection occur before pagination.
    */
   public StripeCollection<AccountSignal> list(AccountSignalListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Lists AccountSignals whose created timestamps are no more than 90 days old for a given account
-   * or customer. Returns only the latest AccountSignal for each requested signal type.
+   * Lists AccountSignals for a given account or customer, newest first. Signals more than 180 days
+   * old are omitted. By default, returns only the latest matching AccountSignal for each requested
+   * signal type. Set latest_per_type to false to include matching historical signals. Filtering and
+   * latest-per-type selection occur before pagination.
    */
   public StripeCollection<AccountSignal> list(
       AccountSignalListParams params, RequestOptions options) throws StripeException {
@@ -44,13 +48,15 @@ public final class AccountSignalService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<AccountSignal>>() {}.getType());
   }
   /**
-   * Retrieves an AccountSignal by its ID when its created timestamp is no more than 90 days old.
+   * Retrieves an AccountSignal by its ID for up to 180 days after creation. Signals more than 180
+   * days old are inaccessible.
    */
   public AccountSignal retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
   /**
-   * Retrieves an AccountSignal by its ID when its created timestamp is no more than 90 days old.
+   * Retrieves an AccountSignal by its ID for up to 180 days after creation. Signals more than 180
+   * days old are inaccessible.
    */
   public AccountSignal retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/signals/account_signals/%s", ApiResource.urlEncodeId(id));

@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.data;
 
+import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.data.ReportRun;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -11,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.data.ReportRunCreateParams;
+import com.stripe.param.v2.data.ReportRunListParams;
 import com.stripe.param.v2.data.ReportRunRetrieveParams;
 
 public final class ReportRunService extends ApiService {
@@ -18,6 +21,47 @@ public final class ReportRunService extends ApiService {
     super(responseGetter);
   }
 
+  /**
+   * Returns a list of {@code ReportRun} objects created through the API, most recent first. Listed
+   * {@code ReportRun} objects don't include {@code result} or {@code sql}. Retrieve a {@code
+   * ReportRun} to access them.
+   */
+  public StripeCollection<ReportRun> list(ReportRunListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of {@code ReportRun} objects created through the API, most recent first. Listed
+   * {@code ReportRun} objects don't include {@code result} or {@code sql}. Retrieve a {@code
+   * ReportRun} to access them.
+   */
+  public StripeCollection<ReportRun> list(RequestOptions options) throws StripeException {
+    return list((ReportRunListParams) null, options);
+  }
+  /**
+   * Returns a list of {@code ReportRun} objects created through the API, most recent first. Listed
+   * {@code ReportRun} objects don't include {@code result} or {@code sql}. Retrieve a {@code
+   * ReportRun} to access them.
+   */
+  public StripeCollection<ReportRun> list() throws StripeException {
+    return list((ReportRunListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of {@code ReportRun} objects created through the API, most recent first. Listed
+   * {@code ReportRun} objects don't include {@code result} or {@code sql}. Retrieve a {@code
+   * ReportRun} to access them.
+   */
+  public StripeCollection<ReportRun> list(ReportRunListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v2/data/report_runs";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<ReportRun>>() {}.getType());
+  }
   /**
    * Initiates the generation of a {@code ReportRun} based on the specified {@code Report} and
    * caller-provided parameters. Returns a {@code ReportRun} object which can be used to track the

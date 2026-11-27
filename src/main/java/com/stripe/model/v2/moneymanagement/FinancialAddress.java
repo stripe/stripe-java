@@ -50,6 +50,7 @@ public class FinancialAddress extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
   @SerializedName("settlement_currency")
   String settlementCurrency;
 

@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.data;
 
+import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.data.QueryRun;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -11,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.data.QueryRunCreateParams;
+import com.stripe.param.v2.data.QueryRunListParams;
 import com.stripe.param.v2.data.QueryRunRetrieveParams;
 
 public final class QueryRunService extends ApiService {
@@ -18,6 +21,47 @@ public final class QueryRunService extends ApiService {
     super(responseGetter);
   }
 
+  /**
+   * Returns a list of {@code QueryRun} objects created through the API, most recent first. Listed
+   * {@code QueryRun} objects don't include {@code result}. Retrieve a {@code QueryRun} to access
+   * its result.
+   */
+  public StripeCollection<QueryRun> list(QueryRunListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of {@code QueryRun} objects created through the API, most recent first. Listed
+   * {@code QueryRun} objects don't include {@code result}. Retrieve a {@code QueryRun} to access
+   * its result.
+   */
+  public StripeCollection<QueryRun> list(RequestOptions options) throws StripeException {
+    return list((QueryRunListParams) null, options);
+  }
+  /**
+   * Returns a list of {@code QueryRun} objects created through the API, most recent first. Listed
+   * {@code QueryRun} objects don't include {@code result}. Retrieve a {@code QueryRun} to access
+   * its result.
+   */
+  public StripeCollection<QueryRun> list() throws StripeException {
+    return list((QueryRunListParams) null, (RequestOptions) null);
+  }
+  /**
+   * Returns a list of {@code QueryRun} objects created through the API, most recent first. Listed
+   * {@code QueryRun} objects don't include {@code result}. Retrieve a {@code QueryRun} to access
+   * its result.
+   */
+  public StripeCollection<QueryRun> list(QueryRunListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v2/data/query_runs";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<QueryRun>>() {}.getType());
+  }
   /**
    * Submits a SQL query for execution against a dataset and returns a {@code QueryRun} object to
    * track progress and retrieve results.

@@ -850,7 +850,8 @@ public class Authentication extends ApiResource implements HasId {
     /**
      * The indicator provided to the issuer by Stripe in the AReq that indicates whether a challenge
      * is requested for this Authentication. This indicator should match the flow_preference you
-     * specified but may be overridden (for compliance reasons for example).
+     * specified but may be overridden (for compliance reasons or protocol version supportability
+     * for example).
      *
      * <p>One of {@code 01}, {@code 02}, {@code 03}, {@code 04}, {@code 05}, or {@code 06}.
      */

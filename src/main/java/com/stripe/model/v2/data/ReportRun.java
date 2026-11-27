@@ -97,6 +97,10 @@ public class ReportRun extends StripeObject implements HasId {
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
+  /** Timestamps of when the {@code ReportRun} entered each terminal status. */
+  @SerializedName("status_transitions")
+  StatusTransitions statusTransitions;
+
   /** The result of the {@code ReportRun}, populated when it has completed. */
   @Getter
   @Setter
@@ -306,5 +310,23 @@ public class ReportRun extends StripeObject implements HasId {
       @SerializedName("type")
       String type;
     }
+  }
+
+  /** Timestamps of when the {@code ReportRun} entered each terminal status. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    /** Time at which the run was canceled. */
+    @SerializedName("canceled_at")
+    Instant canceledAt;
+
+    /** Time at which the run failed. */
+    @SerializedName("failed_at")
+    Instant failedAt;
+
+    /** Time at which the run succeeded. */
+    @SerializedName("succeeded_at")
+    Instant succeededAt;
   }
 }

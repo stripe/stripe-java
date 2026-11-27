@@ -20563,6 +20563,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("routing_number")
       String routingNumber;
 
+      /**
+       * The ID of a bank account <a href="https://stripe.com/api/tokens/object">Token</a> to use as
+       * a payment method.
+       */
+      @SerializedName("token")
+      String token;
+
       private UsBankAccount(
           AccountHolderType accountHolderType,
           String accountNumber,
@@ -20570,7 +20577,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           ExternalToken externalToken,
           Map<String, Object> extraParams,
           String financialConnectionsAccount,
-          String routingNumber) {
+          String routingNumber,
+          String token) {
         this.accountHolderType = accountHolderType;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
@@ -20578,6 +20586,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.financialConnectionsAccount = financialConnectionsAccount;
         this.routingNumber = routingNumber;
+        this.token = token;
       }
 
       public static Builder builder() {
@@ -20599,6 +20608,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private String routingNumber;
 
+        private String token;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodData.UsBankAccount build() {
           return new PaymentIntentCreateParams.PaymentMethodData.UsBankAccount(
@@ -20608,7 +20619,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.externalToken,
               this.extraParams,
               this.financialConnectionsAccount,
-              this.routingNumber);
+              this.routingNumber,
+              this.token);
         }
 
         /** Account holder type: individual or company. */
@@ -20676,6 +20688,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Routing number of the bank account. */
         public Builder setRoutingNumber(String routingNumber) {
           this.routingNumber = routingNumber;
+          return this;
+        }
+
+        /**
+         * The ID of a bank account <a href="https://stripe.com/api/tokens/object">Token</a> to use
+         * as a payment method.
+         */
+        public Builder setToken(String token) {
+          this.token = token;
           return this;
         }
       }

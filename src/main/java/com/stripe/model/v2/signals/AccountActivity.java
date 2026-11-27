@@ -9,7 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Account Activity resource for the Signals API. */
+/**
+ * Account Activity resource for the Signals API. Account activities are available through the API
+ * for 180 days after creation.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
