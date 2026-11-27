@@ -32,8 +32,9 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   String financialAccount;
 
   /**
-   * <strong>Required.</strong> The type of FinancialAddress to create. Must agree with which branch
-   * of financial_address_type_properties is set.
+   * <strong>Required.</strong> The type of FinancialAddress to create: bank_account or
+   * crypto_wallet. Must agree with which branch of financial_address_type_properties is set. Cash
+   * FinancialAddresses are managed by FundingIntents and cannot be created through this endpoint.
    */
   @SerializedName("type")
   Type type;
@@ -110,8 +111,9 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The type of FinancialAddress to create. Must agree with which
-     * branch of financial_address_type_properties is set.
+     * <strong>Required.</strong> The type of FinancialAddress to create: bank_account or
+     * crypto_wallet. Must agree with which branch of financial_address_type_properties is set. Cash
+     * FinancialAddresses are managed by FundingIntents and cannot be created through this endpoint.
      */
     public Builder setType(FinancialAddressCreateParams.Type type) {
       this.type = type;

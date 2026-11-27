@@ -128,7 +128,7 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   public Session update(String session, SessionUpdateParams params) throws StripeException {
@@ -137,7 +137,7 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   public Session update(String session, RequestOptions options) throws StripeException {
@@ -146,7 +146,7 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   public Session update(String session) throws StripeException {
@@ -155,7 +155,7 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
   public Session update(String session, SessionUpdateParams params, RequestOptions options)

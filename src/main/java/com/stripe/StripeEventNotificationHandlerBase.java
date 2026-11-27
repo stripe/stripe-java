@@ -13,6 +13,9 @@ import com.stripe.events.V1AccountUpdatedEventNotification;
 import com.stripe.events.V1ApplicationFeeCreatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundUpdatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundedEventNotification;
+import com.stripe.events.V1AppsInstallCreatedEventNotification;
+import com.stripe.events.V1AppsInstallDeletedEventNotification;
+import com.stripe.events.V1AppsInstallUpdatedEventNotification;
 import com.stripe.events.V1BalanceAvailableEventNotification;
 import com.stripe.events.V1BalanceSettingsUpdatedEventNotification;
 import com.stripe.events.V1BillingAlertTriggeredEventNotification;
@@ -156,7 +159,6 @@ import com.stripe.events.V1InvoiceitemDeletedEventNotification;
 import com.stripe.events.V1InvoiceitemDiscountAddedEventNotification;
 import com.stripe.events.V1InvoiceitemDiscountRemovedEventNotification;
 import com.stripe.events.V1IssuingAuthorizationCreatedEventNotification;
-import com.stripe.events.V1IssuingAuthorizationRequestEventNotification;
 import com.stripe.events.V1IssuingAuthorizationUpdatedEventNotification;
 import com.stripe.events.V1IssuingCardCreatedEventNotification;
 import com.stripe.events.V1IssuingCardUpdatedEventNotification;
@@ -278,7 +280,9 @@ import com.stripe.events.V2CommerceProductCatalogImportsProcessingEventNotificat
 import com.stripe.events.V2CommerceProductCatalogImportsSucceededEventNotification;
 import com.stripe.events.V2CommerceProductCatalogImportsSucceededWithErrorsEventNotification;
 import com.stripe.events.V2CoreAccountClosedEventNotification;
+import com.stripe.events.V2CoreAccountConnectedEventNotification;
 import com.stripe.events.V2CoreAccountCreatedEventNotification;
+import com.stripe.events.V2CoreAccountDisconnectedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationCustomerCapabilityStatusUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationCustomerUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEventNotification;
@@ -501,6 +505,24 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1ApplicationFeeRefunded(
       EventNotificationCallback<V1ApplicationFeeRefundedEventNotification> callback) {
     this.register("v1.application_fee.refunded", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallCreated(
+      EventNotificationCallback<V1AppsInstallCreatedEventNotification> callback) {
+    this.register("v1.apps.install.created", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallDeleted(
+      EventNotificationCallback<V1AppsInstallDeletedEventNotification> callback) {
+    this.register("v1.apps.install.deleted", callback);
+    return self();
+  }
+
+  public T onV1AppsInstallUpdated(
+      EventNotificationCallback<V1AppsInstallUpdatedEventNotification> callback) {
+    this.register("v1.apps.install.updated", callback);
     return self();
   }
 
@@ -1400,12 +1422,6 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
-  public T onV1IssuingAuthorizationRequest(
-      EventNotificationCallback<V1IssuingAuthorizationRequestEventNotification> callback) {
-    this.register("v1.issuing_authorization.request", callback);
-    return self();
-  }
-
   public T onV1IssuingAuthorizationUpdated(
       EventNotificationCallback<V1IssuingAuthorizationUpdatedEventNotification> callback) {
     this.register("v1.issuing_authorization.updated", callback);
@@ -2115,9 +2131,21 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2CoreAccountConnected(
+      EventNotificationCallback<V2CoreAccountConnectedEventNotification> callback) {
+    this.register("v2.core.account.connected", callback);
+    return self();
+  }
+
   public T onV2CoreAccountCreated(
       EventNotificationCallback<V2CoreAccountCreatedEventNotification> callback) {
     this.register("v2.core.account.created", callback);
+    return self();
+  }
+
+  public T onV2CoreAccountDisconnected(
+      EventNotificationCallback<V2CoreAccountDisconnectedEventNotification> callback) {
+    this.register("v2.core.account.disconnected", callback);
     return self();
   }
 

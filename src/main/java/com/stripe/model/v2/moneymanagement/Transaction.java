@@ -33,11 +33,11 @@ public class Transaction extends StripeObject implements HasId {
   /**
    * Open Enum. A category used to classify the Transaction.
    *
-   * <p>One of {@code adjustment}, {@code currency_conversion}, {@code inbound_transfer}, {@code
-   * inbound_transfer_reversal}, {@code outbound_payment}, {@code outbound_payment_reversal}, {@code
-   * outbound_transfer}, {@code outbound_transfer_reversal}, {@code received_credit}, {@code
-   * received_credit_reversal}, {@code received_debit}, {@code received_debit_reversal}, {@code
-   * stripe_fee}, or {@code stripe_fee_tax}.
+   * <p>One of {@code adjustment}, {@code currency_conversion}, {@code hold}, {@code
+   * inbound_transfer}, {@code inbound_transfer_reversal}, {@code outbound_payment}, {@code
+   * outbound_payment_reversal}, {@code outbound_transfer}, {@code outbound_transfer_reversal},
+   * {@code received_credit}, {@code received_credit_reversal}, {@code received_debit}, {@code
+   * received_debit_reversal}, {@code stripe_fee}, or {@code stripe_fee_tax}.
    */
   @SerializedName("category")
   String category;
@@ -180,6 +180,10 @@ public class Transaction extends StripeObject implements HasId {
     @SerializedName("fee_batch")
     String feeBatch;
 
+    /** If applicable, the ID of the Hold that created this Transaction. */
+    @SerializedName("hold")
+    String hold;
+
     /** If applicable, the ID of the InboundTransfer that created this Transaction. */
     @SerializedName("inbound_transfer")
     String inboundTransfer;
@@ -204,8 +208,8 @@ public class Transaction extends StripeObject implements HasId {
      * Open Enum. The type of flow that created the Transaction. When available, the flow's ID is
      * provided in the corresponding field.
      *
-     * <p>One of {@code adjustment}, {@code currency_conversion}, {@code fee_batch}, {@code
-     * inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code
+     * <p>One of {@code adjustment}, {@code currency_conversion}, {@code fee_batch}, {@code hold},
+     * {@code inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code
      * received_credit}, or {@code received_debit}.
      */
     @SerializedName("type")

@@ -58,6 +58,8 @@ public final class EventDataClassLookup {
     classLookup.put("topup", com.stripe.model.Topup.class);
     classLookup.put("transfer", com.stripe.model.Transfer.class);
 
+    classLookup.put("apps.install", com.stripe.model.apps.Install.class);
+
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
     classLookup.put(
         "billing.credit_balance_transaction",
@@ -188,6 +190,12 @@ public final class EventDataClassLookup {
         com.stripe.events.V1ApplicationFeeRefundUpdatedEvent.class);
     eventClassLookup.put(
         "v1.application_fee.refunded", com.stripe.events.V1ApplicationFeeRefundedEvent.class);
+    eventClassLookup.put(
+        "v1.apps.install.created", com.stripe.events.V1AppsInstallCreatedEvent.class);
+    eventClassLookup.put(
+        "v1.apps.install.deleted", com.stripe.events.V1AppsInstallDeletedEvent.class);
+    eventClassLookup.put(
+        "v1.apps.install.updated", com.stripe.events.V1AppsInstallUpdatedEvent.class);
     eventClassLookup.put("v1.balance.available", com.stripe.events.V1BalanceAvailableEvent.class);
     eventClassLookup.put(
         "v1.balance_settings.updated", com.stripe.events.V1BalanceSettingsUpdatedEvent.class);
@@ -523,9 +531,6 @@ public final class EventDataClassLookup {
         "v1.issuing_authorization.created",
         com.stripe.events.V1IssuingAuthorizationCreatedEvent.class);
     eventClassLookup.put(
-        "v1.issuing_authorization.request",
-        com.stripe.events.V1IssuingAuthorizationRequestEvent.class);
-    eventClassLookup.put(
         "v1.issuing_authorization.updated",
         com.stripe.events.V1IssuingAuthorizationUpdatedEvent.class);
     eventClassLookup.put(
@@ -770,7 +775,11 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEvent.class);
     eventClassLookup.put(
+        "v2.core.account.connected", com.stripe.events.V2CoreAccountConnectedEvent.class);
+    eventClassLookup.put(
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account.disconnected", com.stripe.events.V2CoreAccountDisconnectedEvent.class);
     eventClassLookup.put(
         "v2.core.account.updated", com.stripe.events.V2CoreAccountUpdatedEvent.class);
     eventClassLookup.put(

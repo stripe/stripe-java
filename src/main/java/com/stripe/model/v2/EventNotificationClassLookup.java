@@ -43,6 +43,12 @@ public final class EventNotificationClassLookup {
         "v1.application_fee.refunded",
         com.stripe.events.V1ApplicationFeeRefundedEventNotification.class);
     eventClassLookup.put(
+        "v1.apps.install.created", com.stripe.events.V1AppsInstallCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.apps.install.deleted", com.stripe.events.V1AppsInstallDeletedEventNotification.class);
+    eventClassLookup.put(
+        "v1.apps.install.updated", com.stripe.events.V1AppsInstallUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v1.balance.available", com.stripe.events.V1BalanceAvailableEventNotification.class);
     eventClassLookup.put(
         "v1.balance_settings.updated",
@@ -446,9 +452,6 @@ public final class EventNotificationClassLookup {
         "v1.issuing_authorization.created",
         com.stripe.events.V1IssuingAuthorizationCreatedEventNotification.class);
     eventClassLookup.put(
-        "v1.issuing_authorization.request",
-        com.stripe.events.V1IssuingAuthorizationRequestEventNotification.class);
-    eventClassLookup.put(
         "v1.issuing_authorization.updated",
         com.stripe.events.V1IssuingAuthorizationUpdatedEventNotification.class);
     eventClassLookup.put(
@@ -754,7 +757,13 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.account.connected",
+        com.stripe.events.V2CoreAccountConnectedEventNotification.class);
+    eventClassLookup.put(
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.account.disconnected",
+        com.stripe.events.V2CoreAccountDisconnectedEventNotification.class);
     eventClassLookup.put(
         "v2.core.account.updated", com.stripe.events.V2CoreAccountUpdatedEventNotification.class);
     eventClassLookup.put(

@@ -6682,19 +6682,28 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("routing_number")
       Object routingNumber;
 
+      /**
+       * The ID of a bank account <a href="https://stripe.com/api/tokens/object">Token</a> to use as
+       * a payment method.
+       */
+      @SerializedName("token")
+      Object token;
+
       private UsBankAccount(
           AccountHolderType accountHolderType,
           Object accountNumber,
           AccountType accountType,
           Map<String, Object> extraParams,
           Object financialConnectionsAccount,
-          Object routingNumber) {
+          Object routingNumber,
+          Object token) {
         this.accountHolderType = accountHolderType;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.extraParams = extraParams;
         this.financialConnectionsAccount = financialConnectionsAccount;
         this.routingNumber = routingNumber;
+        this.token = token;
       }
 
       public static Builder builder() {
@@ -6714,6 +6723,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         private Object routingNumber;
 
+        private Object token;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentUpdateParams.PaymentMethodData.UsBankAccount build() {
           return new SetupIntentUpdateParams.PaymentMethodData.UsBankAccount(
@@ -6722,7 +6733,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
               this.accountType,
               this.extraParams,
               this.financialConnectionsAccount,
-              this.routingNumber);
+              this.routingNumber,
+              this.token);
         }
 
         /** Account holder type: individual or company. */
@@ -6801,6 +6813,24 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         /** Routing number of the bank account. */
         public Builder setRoutingNumber(EmptyParam routingNumber) {
           this.routingNumber = routingNumber;
+          return this;
+        }
+
+        /**
+         * The ID of a bank account <a href="https://stripe.com/api/tokens/object">Token</a> to use
+         * as a payment method.
+         */
+        public Builder setToken(String token) {
+          this.token = token;
+          return this;
+        }
+
+        /**
+         * The ID of a bank account <a href="https://stripe.com/api/tokens/object">Token</a> to use
+         * as a payment method.
+         */
+        public Builder setToken(EmptyParam token) {
+          this.token = token;
           return this;
         }
       }

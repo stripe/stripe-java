@@ -118,6 +118,13 @@ public class Account extends StripeObject implements HasId {
   String object;
 
   /**
+   * Information about the rejection of the Account. Null if the platform has not rejected the
+   * Account.
+   */
+  @SerializedName("rejection")
+  Rejection rejection;
+
+  /**
    * Information about the active requirements for the Account, including what information needs to
    * be collected, and by when.
    */
@@ -150,11 +157,7 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("merchant")
     Merchant merchant;
 
-    /**
-     * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
-     * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
-     * Transfers, or Destination Charges without on_behalf_of set.
-     */
+    /** The Recipient Configuration allows the Account to receive funds from you. */
     @SerializedName("recipient")
     Recipient recipient;
 
@@ -4142,11 +4145,7 @@ public class Account extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
-     * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
-     * Transfers, or Destination Charges without on_behalf_of set.
-     */
+    /** The Recipient Configuration allows the Account to receive funds from you. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4705,6 +4704,8 @@ public class Account extends StripeObject implements HasId {
 
           /**
            * Enables this Account to receive /v1/transfers into their Stripe Balance (/v1/balance).
+           * Use this capability if the Account will not be the Merchant of Record, like with
+           * Separate Charges &amp; Transfers, or Destination Charges without on_behalf_of set.
            */
           @SerializedName("stripe_transfers")
           StripeTransfers stripeTransfers;
@@ -4766,6 +4767,8 @@ public class Account extends StripeObject implements HasId {
 
           /**
            * Enables this Account to receive /v1/transfers into their Stripe Balance (/v1/balance).
+           * Use this capability if the Account will not be the Merchant of Record, like with
+           * Separate Charges &amp; Transfers, or Destination Charges without on_behalf_of set.
            */
           @Getter
           @Setter
@@ -5028,14 +5031,15 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code describing the error.
              *
              * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-             * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
-             * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
-             * {@code invalid_business_profile_name}, {@code
-             * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted},
-             * {@code invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
-             * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
-             * invalid_product_description_url_match}, {@code invalid_representative_country},
-             * {@code invalid_statement_descriptor_business_mismatch}, {@code
+             * invalid_address_cmra_address}, {@code invalid_address_crypto_regulated_state}, {@code
+             * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox},
+             * {@code invalid_address_registered_agent_address}, {@code
+             * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+             * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+             * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
+             * invalid_product_description_length}, {@code invalid_product_description_url_match},
+             * {@code invalid_representative_country}, {@code
+             * invalid_statement_descriptor_business_mismatch}, {@code
              * invalid_statement_descriptor_denylisted}, {@code
              * invalid_statement_descriptor_length}, {@code
              * invalid_statement_descriptor_prefix_denylisted}, {@code
@@ -5056,10 +5060,10 @@ public class Account extends StripeObject implements HasId {
              * invalid_url_website_incomplete_under_construction}, {@code
              * invalid_url_website_other}, {@code invalid_url_web_presence_detected}, {@code
              * invalid_value_other}, {@code unresolvable_ip_address}, {@code
-             * unresolvable_postal_code}, {@code verification_directors_mismatch}, {@code
-             * verification_document_address_mismatch}, {@code
-             * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
-             * verification_document_country_not_supported}, {@code
+             * unresolvable_postal_code}, {@code verification_data_not_found}, {@code
+             * verification_directors_mismatch}, {@code verification_document_address_mismatch},
+             * {@code verification_document_address_missing}, {@code verification_document_corrupt},
+             * {@code verification_document_country_not_supported}, {@code
              * verification_document_directors_mismatch}, {@code
              * verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
              * {@code verification_document_expired}, {@code verification_document_failed_copy},
@@ -5087,7 +5091,7 @@ public class Account extends StripeObject implements HasId {
              * verification_failed_residential_address}, {@code verification_failed_tax_id_match},
              * {@code verification_failed_tax_id_not_issued}, {@code
              * verification_missing_directors}, {@code verification_missing_executives}, {@code
-             * verification_missing_owners}, {@code
+             * verification_missing_owners}, {@code verification_relationships_not_found}, {@code
              * verification_requires_additional_memorandum_of_associations}, {@code
              * verification_requires_additional_proof_of_registration}, {@code
              * verification_selfie_document_missing_photo}, {@code
@@ -5230,13 +5234,13 @@ public class Account extends StripeObject implements HasId {
          * Machine-readable code describing the error.
          *
          * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-         * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
-         * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
-         * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
-         * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
-         * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
-         * invalid_product_description_length}, {@code invalid_product_description_url_match},
-         * {@code invalid_representative_country}, {@code
+         * invalid_address_cmra_address}, {@code invalid_address_crypto_regulated_state}, {@code
+         * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+         * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
+         * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted},
+         * {@code invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
+         * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
+         * invalid_product_description_url_match}, {@code invalid_representative_country}, {@code
          * invalid_statement_descriptor_business_mismatch}, {@code
          * invalid_statement_descriptor_denylisted}, {@code invalid_statement_descriptor_length},
          * {@code invalid_statement_descriptor_prefix_denylisted}, {@code
@@ -5257,8 +5261,9 @@ public class Account extends StripeObject implements HasId {
          * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
          * {@code invalid_url_web_presence_detected}, {@code invalid_value_other}, {@code
          * unresolvable_ip_address}, {@code unresolvable_postal_code}, {@code
-         * verification_directors_mismatch}, {@code verification_document_address_mismatch}, {@code
-         * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+         * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
+         * verification_document_address_mismatch}, {@code verification_document_address_missing},
+         * {@code verification_document_corrupt}, {@code
          * verification_document_country_not_supported}, {@code
          * verification_document_directors_mismatch}, {@code verification_document_dob_mismatch},
          * {@code verification_document_duplicate_type}, {@code verification_document_expired},
@@ -5284,6 +5289,7 @@ public class Account extends StripeObject implements HasId {
          * verification_failed_residential_address}, {@code verification_failed_tax_id_match},
          * {@code verification_failed_tax_id_not_issued}, {@code verification_missing_directors},
          * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
+         * verification_relationships_not_found}, {@code
          * verification_requires_additional_memorandum_of_associations}, {@code
          * verification_requires_additional_proof_of_registration}, {@code
          * verification_selfie_document_missing_photo}, {@code verification_selfie_face_mismatch},
@@ -5330,21 +5336,20 @@ public class Account extends StripeObject implements HasId {
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
            * {@code bank_accounts.fedwire}, {@code bank_accounts.fps}, {@code bank_accounts.local},
            * {@code bank_accounts.rtp}, {@code bank_accounts.sepa}, {@code bank_accounts.swift},
-           * {@code bank_accounts.wire}, {@code billie_payments}, {@code blik_payments}, {@code
-           * blik_recurring_payments}, {@code boleto_payments}, {@code cards}, {@code
-           * card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments}, {@code
-           * eps_payments}, {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code
-           * grabpay_payments}, {@code ideal_payments}, {@code jcb_payments}, {@code
-           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
-           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mb_way_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
-           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
-           * nz_bank_account_becs_debit_payments}, {@code oxxo_payments}, {@code p24_payments},
-           * {@code payco_payments}, {@code paynow_payments}, {@code paypay_payments}, {@code
-           * pay_by_bank_payments}, {@code pix_payments}, {@code promptpay_payments}, {@code
-           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code satispay_payments}, {@code
-           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
-           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
+           * {@code billie_payments}, {@code blik_payments}, {@code blik_recurring_payments}, {@code
+           * boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code eps_payments}, {@code
+           * fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * ideal_payments}, {@code jcb_payments}, {@code jp_bank_transfer_payments}, {@code
+           * kakao_pay_payments}, {@code klarna_payments}, {@code konbini_payments}, {@code
+           * kr_card_payments}, {@code link_payments}, {@code mb_way_payments}, {@code
+           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
+           * {@code naver_pay_payments}, {@code nz_bank_account_becs_debit_payments}, {@code
+           * oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code paynow_payments},
+           * {@code paypay_payments}, {@code pay_by_bank_payments}, {@code pix_payments}, {@code
+           * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
+           * satispay_payments}, {@code sepa_bank_transfer_payments}, {@code sepa_debit_payments},
+           * {@code stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
            * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
            * zip_payments}.
            */
@@ -6247,31 +6252,45 @@ public class Account extends StripeObject implements HasId {
         /**
          * Open Enum. The ID number type of a business entity.
          *
-         * <p>One of {@code ae_crn}, {@code ae_vat}, {@code ao_nif}, {@code ar_cuit}, {@code at_fn},
-         * {@code at_stn}, {@code at_vat}, {@code au_abn}, {@code au_acn}, {@code au_in}, {@code
-         * az_tin}, {@code bd_etin}, {@code be_cbe}, {@code be_vat}, {@code bg_uic}, {@code bg_vat},
-         * {@code br_cnpj}, {@code ca_cn}, {@code ca_crarr}, {@code ca_gst_hst}, {@code ca_neq},
-         * {@code ca_rid}, {@code ch_chid}, {@code ch_uid}, {@code cr_cpj}, {@code cr_nite}, {@code
-         * cy_he}, {@code cy_tic}, {@code cy_vat}, {@code cz_ico}, {@code cz_vat}, {@code de_hrn},
-         * {@code de_stn}, {@code de_vat}, {@code dk_cvr}, {@code dk_vat}, {@code do_rcn}, {@code
-         * ee_rk}, {@code ee_vat}, {@code es_cif}, {@code es_vat}, {@code fi_vat}, {@code fi_yt},
-         * {@code fr_rna}, {@code fr_siren}, {@code fr_vat}, {@code gb_crn}, {@code gb_vat}, {@code
-         * gi_crn}, {@code gr_afm}, {@code gr_gemi}, {@code gr_vat}, {@code gt_nit}, {@code hk_br},
-         * {@code hk_cr}, {@code hr_mbs}, {@code hr_oib}, {@code hr_vat}, {@code hu_cjs}, {@code
-         * hu_tin}, {@code hu_vat}, {@code ie_crn}, {@code ie_trn}, {@code ie_vat}, {@code it_rea},
-         * {@code it_vat}, {@code jp_cn}, {@code kz_bin}, {@code li_uid}, {@code lt_ccrn}, {@code
-         * lt_vat}, {@code lu_nif}, {@code lu_rcs}, {@code lu_vat}, {@code lv_urn}, {@code lv_vat},
-         * {@code mt_crn}, {@code mt_tin}, {@code mt_vat}, {@code mx_rfc}, {@code my_brn}, {@code
-         * my_coid}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code nl_kvk}, {@code
-         * nl_rsin}, {@code nl_vat}, {@code no_orgnr}, {@code nz_bn}, {@code nz_ird}, {@code
-         * pe_ruc}, {@code pk_ntn}, {@code pl_nip}, {@code pl_regon}, {@code pl_vat}, {@code
-         * pt_vat}, {@code ro_cui}, {@code ro_orc}, {@code ro_vat}, {@code sa_crn}, {@code sa_tin},
-         * {@code se_orgnr}, {@code se_vat}, {@code sg_uen}, {@code si_msp}, {@code si_tin}, {@code
-         * si_vat}, {@code sk_dic}, {@code sk_ico}, {@code sk_vat}, {@code th_crn}, {@code th_prn},
-         * {@code th_tin}, or {@code us_ein}.
+         * <p>One of {@code ae_crn}, {@code ae_vat}, {@code ag_tin}, {@code ao_nif}, {@code
+         * ar_cuit}, {@code at_fn}, {@code at_stn}, {@code at_vat}, {@code au_abn}, {@code au_acn},
+         * {@code au_in}, {@code au_wpn}, {@code az_tin}, {@code ba_pib}, {@code bd_etin}, {@code
+         * be_cbe}, {@code be_vat}, {@code bg_uic}, {@code bg_vat}, {@code bj_ifu}, {@code br_cnpj},
+         * {@code ca_cn}, {@code ca_crarr}, {@code ca_gst_hst}, {@code ca_neq}, {@code ca_qst},
+         * {@code ca_rid}, {@code ch_chid}, {@code ch_uid}, {@code cl_rut}, {@code cr_cpj}, {@code
+         * cr_nite}, {@code cy_he}, {@code cy_tic}, {@code cy_vat}, {@code cz_dic}, {@code cz_ico},
+         * {@code cz_vat}, {@code de_hrn}, {@code de_stn}, {@code de_vat}, {@code dk_cvr}, {@code
+         * dk_vat}, {@code do_rcn}, {@code dz_nif}, {@code ee_rk}, {@code ee_vat}, {@code es_cif},
+         * {@code es_vat}, {@code et_tin}, {@code fi_vat}, {@code fi_yt}, {@code fr_rna}, {@code
+         * fr_siren}, {@code fr_siret}, {@code fr_vat}, {@code gb_crn}, {@code gb_vat}, {@code
+         * ge_tin}, {@code gi_crn}, {@code gi_vat}, {@code gr_afm}, {@code gr_gemi}, {@code gr_vat},
+         * {@code gt_nit}, {@code hk_br}, {@code hk_cr}, {@code hr_mbs}, {@code hr_oib}, {@code
+         * hr_vat}, {@code hu_cjs}, {@code hu_tin}, {@code hu_vat}, {@code id_npwp}, {@code ie_crn},
+         * {@code ie_trn}, {@code ie_vat}, {@code il_tin}, {@code il_vat}, {@code in_gst}, {@code
+         * in_pan}, {@code is_kt}, {@code it_rea}, {@code it_vat}, {@code jp_cn}, {@code kh_tin},
+         * {@code kr_brn}, {@code kz_bin}, {@code la_tin}, {@code lc_tin}, {@code li_uid}, {@code
+         * li_vat}, {@code lt_ccrn}, {@code lt_vat}, {@code lu_nif}, {@code lu_rcs}, {@code lu_vat},
+         * {@code lv_urn}, {@code lv_vat}, {@code md_cf}, {@code mg_nif}, {@code mk_edb}, {@code
+         * mt_crn}, {@code mt_tin}, {@code mt_vat}, {@code mu_vat}, {@code mx_rfc}, {@code my_brn},
+         * {@code my_coid}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ne_tin}, {@code
+         * nl_kvk}, {@code nl_rsin}, {@code nl_vat}, {@code no_orgnr}, {@code nz_bn}, {@code
+         * nz_ird}, {@code om_tin}, {@code pe_ruc}, {@code pk_ntn}, {@code pl_nip}, {@code
+         * pl_regon}, {@code pl_vat}, {@code pt_vat}, {@code qa_tin}, {@code ro_cui}, {@code
+         * ro_orc}, {@code ro_vat}, {@code rw_tin}, {@code sa_crn}, {@code sa_tin}, {@code
+         * se_orgnr}, {@code se_vat}, {@code sg_uen}, {@code si_msp}, {@code si_tin}, {@code
+         * si_vat}, {@code sk_dic}, {@code sk_ico}, {@code sk_vat}, {@code sm_coe}, {@code th_crn},
+         * {@code th_prn}, {@code th_tin}, {@code tr_tin}, {@code tt_bir}, {@code tt_vat}, {@code
+         * us_ein}, or {@code vn_tin}.
          */
         @SerializedName("type")
         String type;
+
+        /**
+         * The value of the ID number. Returned only when the API key is authorized to read it;
+         * otherwise null.
+         */
+        @SerializedName("value")
+        String value;
       }
 
       /**
@@ -6950,24 +6969,54 @@ public class Account extends StripeObject implements HasId {
         /**
          * The ID number type of an individual.
          *
-         * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_cuil}, {@code ar_dni}, {@code
-         * at_stn}, {@code az_tin}, {@code bd_brc}, {@code bd_etin}, {@code bd_nid}, {@code be_nrn},
-         * {@code bg_ucn}, {@code bn_nric}, {@code br_cpf}, {@code ca_sin}, {@code ch_oasi}, {@code
-         * cl_rut}, {@code cn_pp}, {@code co_nuip}, {@code cr_ci}, {@code cr_cpf}, {@code cr_dimex},
-         * {@code cr_nite}, {@code cy_tic}, {@code cz_rc}, {@code de_stn}, {@code dk_cpr}, {@code
-         * do_cie}, {@code do_rcn}, {@code ec_ci}, {@code ee_ik}, {@code es_nif}, {@code fi_hetu},
-         * {@code fr_nir}, {@code gb_nino}, {@code gr_afm}, {@code gt_nit}, {@code hk_id}, {@code
-         * hr_oib}, {@code hu_ad}, {@code id_nik}, {@code ie_ppsn}, {@code is_kt}, {@code it_cf},
-         * {@code jp_inc}, {@code ke_pin}, {@code kz_iin}, {@code li_peid}, {@code lt_ak}, {@code
-         * lu_nif}, {@code lv_pk}, {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code ng_nin},
-         * {@code nl_bsn}, {@code no_nin}, {@code nz_ird}, {@code pe_dni}, {@code pk_cnic}, {@code
-         * pk_snic}, {@code pl_pesel}, {@code pt_nif}, {@code ro_cnp}, {@code sa_tin}, {@code
-         * se_pin}, {@code sg_fin}, {@code sg_nric}, {@code sk_dic}, {@code th_lc}, {@code th_pin},
-         * {@code tr_tin}, {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, {@code
-         * us_ssn_last_4}, {@code uy_dni}, or {@code za_id}.
+         * <p>One of {@code ae_eid}, {@code ae_pp}, {@code al_pp}, {@code am_pp}, {@code ao_nif},
+         * {@code ar_cuil}, {@code ar_dni}, {@code ar_pp}, {@code at_pp}, {@code at_stn}, {@code
+         * au_pp}, {@code az_pin}, {@code az_pp}, {@code az_tin}, {@code bd_brc}, {@code bd_etin},
+         * {@code bd_nid}, {@code bd_pp}, {@code be_nrn}, {@code be_pp}, {@code bg_pp}, {@code
+         * bg_ucn}, {@code bh_pp}, {@code bj_pp}, {@code bn_nric}, {@code bo_pp}, {@code br_cpf},
+         * {@code br_pp}, {@code br_rg}, {@code bs_pp}, {@code bs_tin}, {@code by_pp}, {@code
+         * ca_pp}, {@code ca_sin}, {@code ch_oasi}, {@code ch_pp}, {@code ci_pp}, {@code cl_pp},
+         * {@code cl_rut}, {@code cm_pp}, {@code cn_pp}, {@code co_nuip}, {@code co_pp}, {@code
+         * cr_ci}, {@code cr_cpf}, {@code cr_dimex}, {@code cr_nite}, {@code cr_pp}, {@code cy_pp},
+         * {@code cy_tic}, {@code cz_dic}, {@code cz_pp}, {@code cz_rc}, {@code de_pp}, {@code
+         * de_stn}, {@code dk_cpr}, {@code dk_pp}, {@code do_cie}, {@code do_pp}, {@code do_rcn},
+         * {@code dz_pp}, {@code ec_ci}, {@code ec_pp}, {@code ee_ik}, {@code ee_pp}, {@code eg_pp},
+         * {@code es_nif}, {@code es_pp}, {@code et_tin}, {@code fi_hetu}, {@code fi_pp}, {@code
+         * fr_nir}, {@code fr_pp}, {@code fr_spi}, {@code ga_nif}, {@code gb_nino}, {@code gb_pp},
+         * {@code ge_pp}, {@code gh_pp}, {@code gr_afm}, {@code gr_pp}, {@code gt_cui}, {@code
+         * gt_nit}, {@code gt_pp}, {@code hk_id}, {@code hk_pp}, {@code hn_dni}, {@code hn_pp},
+         * {@code hr_oib}, {@code hr_pp}, {@code ht_pp}, {@code hu_ad}, {@code hu_pp}, {@code
+         * id_nik}, {@code id_pp}, {@code ie_pp}, {@code ie_ppsn}, {@code il_pp}, {@code in_pan},
+         * {@code in_pp}, {@code iq_pp}, {@code is_kt}, {@code is_pp}, {@code it_cf}, {@code it_pp},
+         * {@code je_pp}, {@code jm_pp}, {@code jo_pp}, {@code jp_inc}, {@code jp_pp}, {@code
+         * ke_pin}, {@code ke_pp}, {@code kr_pp}, {@code kw_pp}, {@code kz_iin}, {@code kz_pp},
+         * {@code lb_pp}, {@code li_peid}, {@code li_pp}, {@code lk_pp}, {@code lt_ak}, {@code
+         * lt_pp}, {@code lu_nif}, {@code lu_pp}, {@code lv_pk}, {@code lv_pp}, {@code ma_pp},
+         * {@code md_cf}, {@code md_pp}, {@code mg_nif}, {@code mk_pin}, {@code mk_pp}, {@code
+         * mm_pp}, {@code mn_pp}, {@code mt_pp}, {@code mu_pp}, {@code mx_curp}, {@code mx_pp},
+         * {@code mx_rfc}, {@code my_nric}, {@code my_pp}, {@code mz_nuit}, {@code ng_nin}, {@code
+         * ng_pp}, {@code nl_bsn}, {@code nl_pp}, {@code no_nin}, {@code no_pp}, {@code np_pp},
+         * {@code nz_ird}, {@code nz_pp}, {@code pa_pp}, {@code pe_dni}, {@code pe_pp}, {@code
+         * ph_pp}, {@code pk_cnic}, {@code pk_pp}, {@code pk_snic}, {@code pl_pesel}, {@code pl_pp},
+         * {@code pr_pp}, {@code ps_pp}, {@code pt_nif}, {@code pt_pp}, {@code py_ci}, {@code
+         * py_pp}, {@code ro_cnp}, {@code ro_pp}, {@code rs_pp}, {@code ru_pp}, {@code rw_tin},
+         * {@code sa_pp}, {@code sa_ptin}, {@code sa_tin}, {@code se_pin}, {@code se_pp}, {@code
+         * sg_fin}, {@code sg_nric}, {@code sg_pp}, {@code si_pp}, {@code si_ptin}, {@code sk_dic},
+         * {@code sk_pp}, {@code sv_pp}, {@code th_lc}, {@code th_pin}, {@code th_pp}, {@code
+         * tn_pp}, {@code tr_pp}, {@code tr_tin}, {@code tt_bir}, {@code tw_pp}, {@code ua_pp},
+         * {@code ug_pp}, {@code us_itin}, {@code us_itin_last_4}, {@code us_pp}, {@code us_ssn},
+         * {@code us_ssn_last_4}, {@code uy_dni}, {@code uy_pp}, {@code uz_pp}, {@code uz_tin},
+         * {@code ve_pp}, {@code vn_pp}, {@code za_id}, or {@code za_pp}.
          */
         @SerializedName("type")
         String type;
+
+        /**
+         * The value of the ID number. Returned only when the API key is authorized to read it;
+         * otherwise null.
+         */
+        @SerializedName("value")
+        String value;
       }
 
       /** The relationship that this individual has with the Account's identity. */
@@ -7154,6 +7203,41 @@ public class Account extends StripeObject implements HasId {
   }
 
   /**
+   * Information about the rejection of the Account. Null if the platform has not rejected the
+   * Account.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Rejection extends StripeObject {
+    /**
+     * Details about the platform's rejection of the Account. Null if the platform hasn't rejected
+     * the Account.
+     */
+    @SerializedName("platform_rejection")
+    PlatformRejection platformRejection;
+
+    /**
+     * Details about the platform's rejection of the Account. Null if the platform hasn't rejected
+     * the Account.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PlatformRejection extends StripeObject {
+      /**
+       * The reason the platform rejected the Account.
+       *
+       * <p>One of {@code credit}, {@code fraud}, {@code fraud_no_intent_to_fulfill}, {@code
+       * fraud_other}, {@code fraud_payment_method_casher}, {@code fraud_payment_method_tester},
+       * {@code other}, or {@code terms_of_service}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+  }
+
+  /**
    * Information about the active requirements for the Account, including what information needs to
    * be collected, and by when.
    */
@@ -7254,14 +7338,15 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code describing the error.
              *
              * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-             * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
-             * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
-             * {@code invalid_business_profile_name}, {@code
-             * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted},
-             * {@code invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
-             * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
-             * invalid_product_description_url_match}, {@code invalid_representative_country},
-             * {@code invalid_statement_descriptor_business_mismatch}, {@code
+             * invalid_address_cmra_address}, {@code invalid_address_crypto_regulated_state}, {@code
+             * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox},
+             * {@code invalid_address_registered_agent_address}, {@code
+             * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+             * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+             * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
+             * invalid_product_description_length}, {@code invalid_product_description_url_match},
+             * {@code invalid_representative_country}, {@code
+             * invalid_statement_descriptor_business_mismatch}, {@code
              * invalid_statement_descriptor_denylisted}, {@code
              * invalid_statement_descriptor_length}, {@code
              * invalid_statement_descriptor_prefix_denylisted}, {@code
@@ -7282,10 +7367,10 @@ public class Account extends StripeObject implements HasId {
              * invalid_url_website_incomplete_under_construction}, {@code
              * invalid_url_website_other}, {@code invalid_url_web_presence_detected}, {@code
              * invalid_value_other}, {@code unresolvable_ip_address}, {@code
-             * unresolvable_postal_code}, {@code verification_directors_mismatch}, {@code
-             * verification_document_address_mismatch}, {@code
-             * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
-             * verification_document_country_not_supported}, {@code
+             * unresolvable_postal_code}, {@code verification_data_not_found}, {@code
+             * verification_directors_mismatch}, {@code verification_document_address_mismatch},
+             * {@code verification_document_address_missing}, {@code verification_document_corrupt},
+             * {@code verification_document_country_not_supported}, {@code
              * verification_document_directors_mismatch}, {@code
              * verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
              * {@code verification_document_expired}, {@code verification_document_failed_copy},
@@ -7313,7 +7398,7 @@ public class Account extends StripeObject implements HasId {
              * verification_failed_residential_address}, {@code verification_failed_tax_id_match},
              * {@code verification_failed_tax_id_not_issued}, {@code
              * verification_missing_directors}, {@code verification_missing_executives}, {@code
-             * verification_missing_owners}, {@code
+             * verification_missing_owners}, {@code verification_relationships_not_found}, {@code
              * verification_requires_additional_memorandum_of_associations}, {@code
              * verification_requires_additional_proof_of_registration}, {@code
              * verification_selfie_document_missing_photo}, {@code
@@ -7456,13 +7541,13 @@ public class Account extends StripeObject implements HasId {
          * Machine-readable code describing the error.
          *
          * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-         * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
-         * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
-         * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
-         * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
-         * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
-         * invalid_product_description_length}, {@code invalid_product_description_url_match},
-         * {@code invalid_representative_country}, {@code
+         * invalid_address_cmra_address}, {@code invalid_address_crypto_regulated_state}, {@code
+         * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+         * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
+         * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted},
+         * {@code invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
+         * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
+         * invalid_product_description_url_match}, {@code invalid_representative_country}, {@code
          * invalid_statement_descriptor_business_mismatch}, {@code
          * invalid_statement_descriptor_denylisted}, {@code invalid_statement_descriptor_length},
          * {@code invalid_statement_descriptor_prefix_denylisted}, {@code
@@ -7483,8 +7568,9 @@ public class Account extends StripeObject implements HasId {
          * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
          * {@code invalid_url_web_presence_detected}, {@code invalid_value_other}, {@code
          * unresolvable_ip_address}, {@code unresolvable_postal_code}, {@code
-         * verification_directors_mismatch}, {@code verification_document_address_mismatch}, {@code
-         * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+         * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
+         * verification_document_address_mismatch}, {@code verification_document_address_missing},
+         * {@code verification_document_corrupt}, {@code
          * verification_document_country_not_supported}, {@code
          * verification_document_directors_mismatch}, {@code verification_document_dob_mismatch},
          * {@code verification_document_duplicate_type}, {@code verification_document_expired},
@@ -7510,6 +7596,7 @@ public class Account extends StripeObject implements HasId {
          * verification_failed_residential_address}, {@code verification_failed_tax_id_match},
          * {@code verification_failed_tax_id_not_issued}, {@code verification_missing_directors},
          * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
+         * verification_relationships_not_found}, {@code
          * verification_requires_additional_memorandum_of_associations}, {@code
          * verification_requires_additional_proof_of_registration}, {@code
          * verification_selfie_document_missing_photo}, {@code verification_selfie_face_mismatch},
@@ -7556,21 +7643,20 @@ public class Account extends StripeObject implements HasId {
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
            * {@code bank_accounts.fedwire}, {@code bank_accounts.fps}, {@code bank_accounts.local},
            * {@code bank_accounts.rtp}, {@code bank_accounts.sepa}, {@code bank_accounts.swift},
-           * {@code bank_accounts.wire}, {@code billie_payments}, {@code blik_payments}, {@code
-           * blik_recurring_payments}, {@code boleto_payments}, {@code cards}, {@code
-           * card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments}, {@code
-           * eps_payments}, {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code
-           * grabpay_payments}, {@code ideal_payments}, {@code jcb_payments}, {@code
-           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
-           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mb_way_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
-           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
-           * nz_bank_account_becs_debit_payments}, {@code oxxo_payments}, {@code p24_payments},
-           * {@code payco_payments}, {@code paynow_payments}, {@code paypay_payments}, {@code
-           * pay_by_bank_payments}, {@code pix_payments}, {@code promptpay_payments}, {@code
-           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code satispay_payments}, {@code
-           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
-           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
+           * {@code billie_payments}, {@code blik_payments}, {@code blik_recurring_payments}, {@code
+           * boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code eps_payments}, {@code
+           * fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * ideal_payments}, {@code jcb_payments}, {@code jp_bank_transfer_payments}, {@code
+           * kakao_pay_payments}, {@code klarna_payments}, {@code konbini_payments}, {@code
+           * kr_card_payments}, {@code link_payments}, {@code mb_way_payments}, {@code
+           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
+           * {@code naver_pay_payments}, {@code nz_bank_account_becs_debit_payments}, {@code
+           * oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code paynow_payments},
+           * {@code paypay_payments}, {@code pay_by_bank_payments}, {@code pix_payments}, {@code
+           * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
+           * satispay_payments}, {@code sepa_bank_transfer_payments}, {@code sepa_debit_payments},
+           * {@code stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
            * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
            * zip_payments}.
            */

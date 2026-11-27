@@ -2,6 +2,7 @@
 package com.stripe.service.v2.core;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.InactiveApiOperationConfirmationRequiredException;
 import com.stripe.exception.RateLimitException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
@@ -16,7 +17,9 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.core.AccountCloseParams;
 import com.stripe.param.v2.core.AccountCreateParams;
 import com.stripe.param.v2.core.AccountListParams;
+import com.stripe.param.v2.core.AccountRejectParams;
 import com.stripe.param.v2.core.AccountRetrieveParams;
+import com.stripe.param.v2.core.AccountUnrejectParams;
 import com.stripe.param.v2.core.AccountUpdateParams;
 
 public final class AccountService extends ApiService {
@@ -57,7 +60,9 @@ public final class AccountService extends ApiService {
    * that store the features an account has access to. An account can be configured as any or all of
    * the following configurations: Customer, Merchant and/or Recipient.
    */
-  public Account create(AccountCreateParams params) throws StripeException, RateLimitException {
+  public Account create(AccountCreateParams params)
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return create(params, (RequestOptions) null);
   }
   /**
@@ -66,7 +71,9 @@ public final class AccountService extends ApiService {
    * that store the features an account has access to. An account can be configured as any or all of
    * the following configurations: Customer, Merchant and/or Recipient.
    */
-  public Account create(RequestOptions options) throws StripeException, RateLimitException {
+  public Account create(RequestOptions options)
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return create((AccountCreateParams) null, options);
   }
   /**
@@ -75,7 +82,9 @@ public final class AccountService extends ApiService {
    * that store the features an account has access to. An account can be configured as any or all of
    * the following configurations: Customer, Merchant and/or Recipient.
    */
-  public Account create() throws StripeException, RateLimitException {
+  public Account create()
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return create((AccountCreateParams) null, (RequestOptions) null);
   }
   /**
@@ -85,7 +94,8 @@ public final class AccountService extends ApiService {
    * the following configurations: Customer, Merchant and/or Recipient.
    */
   public Account create(AccountCreateParams params, RequestOptions options)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     String path = "/v2/core/accounts";
     ApiRequest request =
         new ApiRequest(
@@ -125,21 +135,26 @@ public final class AccountService extends ApiService {
   }
   /** Updates the details of an Account. */
   public Account update(String id, AccountUpdateParams params)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return update(id, params, (RequestOptions) null);
   }
   /** Updates the details of an Account. */
   public Account update(String id, RequestOptions options)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return update(id, (AccountUpdateParams) null, options);
   }
   /** Updates the details of an Account. */
-  public Account update(String id) throws StripeException, RateLimitException {
+  public Account update(String id)
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     return update(id, (AccountUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the details of an Account. */
   public Account update(String id, AccountUpdateParams params, RequestOptions options)
-      throws StripeException, RateLimitException {
+      throws StripeException, RateLimitException,
+          InactiveApiOperationConfirmationRequiredException {
     String path = String.format("/v2/core/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
@@ -184,6 +199,63 @@ public final class AccountService extends ApiService {
   public Account close(String id, AccountCloseParams params, RequestOptions options)
       throws StripeException, RateLimitException {
     String path = String.format("/v2/core/accounts/%s/close", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Account.class);
+  }
+  /** Rejects an Account and prevents it from operating across its configurations. */
+  public Account reject(String id, AccountRejectParams params)
+      throws StripeException, RateLimitException {
+    return reject(id, params, (RequestOptions) null);
+  }
+  /** Rejects an Account and prevents it from operating across its configurations. */
+  public Account reject(String id, AccountRejectParams params, RequestOptions options)
+      throws StripeException, RateLimitException {
+    String path = String.format("/v2/core/accounts/%s/reject", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Account.class);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id, AccountUnrejectParams params)
+      throws StripeException, RateLimitException {
+    return unreject(id, params, (RequestOptions) null);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id, RequestOptions options)
+      throws StripeException, RateLimitException {
+    return unreject(id, (AccountUnrejectParams) null, options);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id) throws StripeException, RateLimitException {
+    return unreject(id, (AccountUnrejectParams) null, (RequestOptions) null);
+  }
+  /**
+   * Reverses a platform rejection on an Account. Restrictions applied by Stripe or other risk
+   * controls remain in place.
+   */
+  public Account unreject(String id, AccountUnrejectParams params, RequestOptions options)
+      throws StripeException, RateLimitException {
+    String path = String.format("/v2/core/accounts/%s/unreject", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

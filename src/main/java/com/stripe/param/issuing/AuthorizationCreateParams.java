@@ -98,7 +98,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
   /**
    * Details about the seller (grocery store, e-commerce website, etc.) where the card authorization
-   * happened.
+   * happened. Provide {@code merchant_data.state} and {@code merchant_data.postal_code} only if
+   * {@code merchant_data.country} is {@code US} or {@code CA}, or they will be ignored.
    */
   @SerializedName("merchant_data")
   MerchantData merchantData;
@@ -379,7 +380,9 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     /**
      * Details about the seller (grocery store, e-commerce website, etc.) where the card
-     * authorization happened.
+     * authorization happened. Provide {@code merchant_data.state} and {@code
+     * merchant_data.postal_code} only if {@code merchant_data.country} is {@code US} or {@code CA},
+     * or they will be ignored.
      */
     public Builder setMerchantData(AuthorizationCreateParams.MerchantData merchantData) {
       this.merchantData = merchantData;

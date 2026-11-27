@@ -78,6 +78,14 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   String snapshotApiVersion;
 
   /**
+   * The initial status of the destination. Defaults to {@code enabled}. A destination created as
+   * {@code disabled} receives no delivery attempts until it is enabled. After creation, use the
+   * enable and disable actions to change the status.
+   */
+  @SerializedName("status")
+  Status status;
+
+  /**
    * <strong>Required.</strong> The delivery transport. Chosen when the destination is created and
    * cannot be changed by update.
    */
@@ -103,6 +111,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String name,
       String snapshotApiVersion,
+      Status status,
       Type type,
       WebhookEndpoint webhookEndpoint) {
     this.amazonEventbridge = amazonEventbridge;
@@ -116,6 +125,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.name = name;
     this.snapshotApiVersion = snapshotApiVersion;
+    this.status = status;
     this.type = type;
     this.webhookEndpoint = webhookEndpoint;
   }
@@ -147,6 +157,8 @@ public class EventDestinationCreateParams extends ApiRequestParams {
 
     private String snapshotApiVersion;
 
+    private Status status;
+
     private Type type;
 
     private WebhookEndpoint webhookEndpoint;
@@ -165,6 +177,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
           this.metadata,
           this.name,
           this.snapshotApiVersion,
+          this.status,
           this.type,
           this.webhookEndpoint);
     }
@@ -336,6 +349,16 @@ public class EventDestinationCreateParams extends ApiRequestParams {
      */
     public Builder setSnapshotApiVersion(String snapshotApiVersion) {
       this.snapshotApiVersion = snapshotApiVersion;
+      return this;
+    }
+
+    /**
+     * The initial status of the destination. Defaults to {@code enabled}. A destination created as
+     * {@code disabled} receives no delivery attempts until it is enabled. After creation, use the
+     * enable and disable actions to change the status.
+     */
+    public Builder setStatus(EventDestinationCreateParams.Status status) {
+      this.status = status;
       return this;
     }
 
@@ -662,6 +685,21 @@ public class EventDestinationCreateParams extends ApiRequestParams {
     private final String value;
 
     Include(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("disabled")
+    DISABLED("disabled"),
+
+    @SerializedName("enabled")
+    ENABLED("enabled");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
       this.value = value;
     }
   }

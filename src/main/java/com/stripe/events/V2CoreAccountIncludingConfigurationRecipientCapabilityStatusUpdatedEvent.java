@@ -24,8 +24,8 @@ public final class V2CoreAccountIncludingConfigurationRecipientCapabilityStatusU
      *
      * <p>One of {@code bank_accounts.ach}, {@code bank_accounts.fedwire}, {@code
      * bank_accounts.fps}, {@code bank_accounts.local}, {@code bank_accounts.rtp}, {@code
-     * bank_accounts.sepa}, {@code bank_accounts.swift}, {@code bank_accounts.wire}, {@code cards},
-     * {@code stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, or {@code
+     * bank_accounts.sepa}, {@code bank_accounts.swift}, {@code cards}, {@code
+     * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, or {@code
      * stripe.transfers}.
      */
     @SerializedName("updated_capability")
